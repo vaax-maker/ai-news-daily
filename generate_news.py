@@ -12,7 +12,7 @@ RSS_FEEDS = [
 MAX_ARTICLES = 10  # 하루에 요약할 기사 수 (원하는대로 변경)
 
 def summarize(text: str, title: str) -> str:
-    genai.configure(api_key=os.environ["AIzaSyBZ-xeEfA0mqOCInqh3ib7jqfiuVbIW-tQ"])
+    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
     model = genai.GenerativeModel("gemini-2.5-flash-preview-09-2025")
 
     prompt = f"""
