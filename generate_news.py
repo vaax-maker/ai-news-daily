@@ -76,11 +76,12 @@ def build_daily_page(articles, date_str: str, time_str: str) -> str:
     parts.append("  <hr/>")
     parts.append("  <ul>")
 
-    for art in articles:
-        parts.append("    <li style='margin-bottom:1.5rem;'>")
-        parts.append(f"      <h2><a href='{art['link']}' target='_blank'>{art['title']}</a></h2>")
-        parts.append(f"      <p>{art['summary'].replace('\n', '<br/>')}</p>")
-        parts.append("    </li>")
+for art in articles:
+    summary_html = art["summary"].replace("\n", "<br/>")
+    parts.append("    <li style='margin-bottom:1.5rem;'>")
+    parts.append(f"      <h2><a href='{art['link']}' target='_blank'>{art['title']}</a></h2>")
+    parts.append(f"      <p>{summary_html}</p>")
+    parts.append("    </li>")
 
     parts.append("  </ul>")
     parts.append("</body>")
