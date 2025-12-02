@@ -3,7 +3,8 @@ import time
 import datetime
 import feedparser
 import google.generativeai as genai
-import re  
+import re
+import random
 
 # --- 설정 ---
 RSS_FEEDS = [
@@ -17,15 +18,44 @@ RSS_FEEDS = [
     "https://news.ycombinator.com/rss",
 ]
 
-MAX_ARTICLES = 15          # 시간순 상위 N개 유지
+MAX_ARTICLES = 15          # 최종 노출할 기사 수 (상위 N개)
 ARCHIVE_DIR = "docs/daily"
 INDEX_PATH = "docs/index.html"
+
+# 기사 선택/정렬 방식: "time" 또는 "random"
+#  - "time"   : 모든 RSS를 합쳐 시간순(최신순) 상위 N개
+#  - "random" : 모든 RSS를 섞어서 랜덤 상위 N개
+DISPLAY_ORDER = "time"
+
+# Gemini 호출 간격 (무료 플랜이면 6~7초 이상 권장, 유료/여유 있으면 줄여도 됨)
+REQUEST_INTERVAL_SECONDS = 2
+
+
+# **텍스트** → 노란색 강조 span + 줄바꿈 처리
+def markdown_bold_to_highlight(html_text: str) -> str:
+    """
+    요약문 안의 **텍스트**를
+    <span style='background-color: yellow;'>텍스트</span>
+    로 바꾼 뒤, 줄바꿈(\n)을 <br/>로 변환
+    """
+
+    def repl(match: re.Match) -> str:
+        inner = match.group(1)
+        return f"<span style='background-color: yellow;'>{inner}</span>"
+
+    # **...** → <span ...>...</span>
+    converted = re.sub(r"\*\*(.+?)\*\*", repl, html_text)
+
+    # 줄바꿈을 <br/>로
+    converted = converted.replace("\n", "<br/>")
+    return converted
 
 
 # 1) Gemini 요약 함수
 def summarize(text: str, title: str) -> str:
     genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
+    # 사용 중인 모델 (필요시 다른 ID로 교체)
     model = genai.GenerativeModel("gemini-2.5-flash-preview-09-2025")
 
     prompt = f"""
@@ -43,7 +73,7 @@ def summarize(text: str, title: str) -> str:
     return res.text.strip()
 
 
-# 2) RSS → (여러 RSS 전체) → 시간순 정렬 → 상위 N개만 요약
+# 2) RSS → (여러 RSS 전체) → 시간/랜덤 정렬 → 상위 N개만 요약
 def fetch_and_summarize():
     raw_items = []
 
@@ -53,8 +83,9 @@ def fetch_and_summarize():
         for entry in d.entries:
             title = getattr(entry, "title", "")
             link = getattr(entry, "link", "")
-            # summary 없으면 description 사용
-            content = getattr(entry, "summary", "") or getattr(entry, "description", "")
+            content = getattr(entry, "summary", "") or getattr(
+                entry, "description", ""
+            )
 
             # 게시 시각(published) 또는 수정 시각(updated) 사용
             published = getattr(entry, "published_parsed", None) or getattr(
@@ -63,19 +94,25 @@ def fetch_and_summarize():
             if published:
                 ts = time.mktime(published)  # epoch time
             else:
-                ts = 0  # 날짜 정보 없으면 제일 뒤로 밀림
+                ts = 0  # 날짜 정보 없으면 가장 뒤로 밀림 (time 모드일 때)
 
             raw_items.append((ts, title, link, content))
 
-    # 최신 기사 순으로 정렬 (ts 내림차순)
-    raw_items.sort(key=lambda x: x[0], reverse=True)
+    # 기사 정렬/선택 방식
+    if DISPLAY_ORDER == "time":
+        # 최신 기사 순으로 정렬 (ts 내림차순)
+        raw_items.sort(key=lambda x: x[0], reverse=True)
+    elif DISPLAY_ORDER == "random":
+        random.shuffle(raw_items)
+    else:
+        # 잘못된 설정이면 기본은 time
+        raw_items.sort(key=lambda x: x[0], reverse=True)
 
     # 상위 N개만 선택
     selected = raw_items[:MAX_ARTICLES]
 
     summarized = []
     for idx, (ts, title, link, content) in enumerate(selected):
-        # 요약 대상 텍스트 끝에 URL도 포함 (프롬프트에서 활용)
         text_with_url = content + f"\n\n기사 URL: {link}"
 
         summary = summarize(text_with_url, title)
@@ -87,31 +124,13 @@ def fetch_and_summarize():
             }
         )
 
-        # 쿼터 보호용 딜레이 (무료 플랜이면 유지 추천)
-        time.sleep(2)
+        # 쿼터 보호용 딜레이
+        time.sleep(REQUEST_INTERVAL_SECONDS)
 
     return summarized
 
 
 # 3) 개별 실행(날짜+시간) 페이지 생성
-def markdown_bold_to_highlight(html_text: str) -> str:
-    """
-    요약문 안의 **텍스트**를
-    <span style='background-color: yellow;'>텍스트</span>
-    로 바꾼 뒤, 줄바꿈(\n)을 <br/>로 변환
-    """
-
-    def repl(match: re.Match) -> str:
-        inner = match.group(1)
-        return f"<span style='background-color: yellow;'>{inner}</span>"
-
-    # **...** → <span style='background-color: yellow;'>...</span>
-    converted = re.sub(r"\*\*(.+?)\*\*", repl, html_text)
-
-    # 줄바꿈을 <br/>로
-    converted = converted.replace("\n", "<br/>")
-    return converted
-
 def build_daily_page(articles, date_str: str, time_str: str) -> str:
     parts = []
     parts.append("<!DOCTYPE html>")
@@ -125,7 +144,7 @@ def build_daily_page(articles, date_str: str, time_str: str) -> str:
     parts.append("</head>")
     parts.append("<body>")
     parts.append(f"  <h1>{date_str} AI News</h1>")
-    parts.append(f"  <p>Updated at {time_str}</p>")
+    parts.append(f"  <p>Updated at {time_str} (KST)</p>")
     parts.append(
         "  <p><a href='../index.html'>← 전체 날짜/시간 목록으로 돌아가기</a></p>"
     )
@@ -140,7 +159,6 @@ def build_daily_page(articles, date_str: str, time_str: str) -> str:
         )
         parts.append(f"      <p>{summary_html}</p>")
         parts.append("    </li>")
-
 
     parts.append("  </ul>")
     parts.append("</body>")
@@ -190,7 +208,7 @@ def rebuild_index_html():
     parts.append("<body>")
     parts.append("  <h1>Daily AI News Archive</h1>")
     parts.append(
-        "  <p>실행 시점(날짜+시간)별로 저장된 AI 기사 요약 목록입니다.</p>"
+        "  <p>실행 시점(날짜+시간, KST)별로 저장된 AI 기사 요약 목록입니다.</p>"
     )
     parts.append("  <hr/>")
 
@@ -215,11 +233,14 @@ def rebuild_index_html():
 
 # 5) main 실행 함수
 def main():
-    now = datetime.datetime.now()
+    # GitHub Actions는 UTC이므로, UTC + 9시간 = KST
+    now_utc = datetime.datetime.utcnow()
+    now = now_utc + datetime.timedelta(hours=9)
+
     date_str = now.strftime("%Y-%m-%d")
     time_str = now.strftime("%H:%M:%S")
 
-    # 파일 이름용 ID (YYYY-MM-DD_HHMMSS) → 같은 날 여러 번 실행해도 매번 다른 파일
+    # 파일 이름용 ID (YYYY-MM-DD_HHMMSS, KST 기준)
     run_id = now.strftime("%Y-%m-%d_%H%M%S")
 
     articles = fetch_and_summarize()
