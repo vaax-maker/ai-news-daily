@@ -16,7 +16,7 @@ RSS_FEEDS = [
     "https://news.ycombinator.com/rss",
 ]
 
-MAX_ARTICLES = 15
+MAX_ARTICLES = 15          # 시간순 상위 N개 유지
 ARCHIVE_DIR = "docs/daily"
 INDEX_PATH = "docs/index.html"
 
@@ -25,13 +25,13 @@ INDEX_PATH = "docs/index.html"
 def summarize(text: str, title: str) -> str:
     genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
-    # 사용 가능한 모델 ID로 맞춰 사용 (예: gemini-1.5-flash)
     model = genai.GenerativeModel("gemini-2.5-flash-preview-09-2025")
 
     prompt = f"""
 아래 AI 관련 기사 내용을 5줄 이내 한국어로 핵심만 요약해줘.
-가능하면 수치, 회사명, 핵심 이슈 위주로 하고, 불릿"□"으로 시작하고 핵심내용은 강조처리해줘
-끝부분에는 기사 URL과 출처를 명시해줘
+가능하면 수치, 회사명, 핵심 이슈 위주로 하고, 각 줄은 불릿 기호 "□"으로 시작해줘.
+핵심 키워드는 강조(**굵게**) 처리해줘.
+마지막 줄에는 "URL: ... / 출처: ..." 형식으로 기사 URL과 출처를 명시해줘.
 
 제목: {title}
 내용:
@@ -42,23 +42,42 @@ def summarize(text: str, title: str) -> str:
     return res.text.strip()
 
 
-# 2) RSS → 요약 리스트 만들기
+# 2) RSS → (여러 RSS 전체) → 시간순 정렬 → 상위 N개만 요약
 def fetch_and_summarize():
-    items = []
+    raw_items = []
 
     for feed_url in RSS_FEEDS:
         d = feedparser.parse(feed_url)
-        for entry in d.entries[:MAX_ARTICLES]:
-            title = entry.title
-            link = entry.link
-            content = getattr(entry, "summary", "")
-            items.append((title, link, content))
 
-    items = items[:MAX_ARTICLES]
+        for entry in d.entries:
+            title = getattr(entry, "title", "")
+            link = getattr(entry, "link", "")
+            # summary 없으면 description 사용
+            content = getattr(entry, "summary", "") or getattr(entry, "description", "")
+
+            # 게시 시각(published) 또는 수정 시각(updated) 사용
+            published = getattr(entry, "published_parsed", None) or getattr(
+                entry, "updated_parsed", None
+            )
+            if published:
+                ts = time.mktime(published)  # epoch time
+            else:
+                ts = 0  # 날짜 정보 없으면 제일 뒤로 밀림
+
+            raw_items.append((ts, title, link, content))
+
+    # 최신 기사 순으로 정렬 (ts 내림차순)
+    raw_items.sort(key=lambda x: x[0], reverse=True)
+
+    # 상위 N개만 선택
+    selected = raw_items[:MAX_ARTICLES]
 
     summarized = []
-    for idx, (title, link, content) in enumerate(items):
-        summary = summarize(content, title)
+    for idx, (ts, title, link, content) in enumerate(selected):
+        # 요약 대상 텍스트 끝에 URL도 포함 (프롬프트에서 활용)
+        text_with_url = content + f"\n\n기사 URL: {link}"
+
+        summary = summarize(text_with_url, title)
         summarized.append(
             {
                 "title": title,
@@ -66,8 +85,9 @@ def fetch_and_summarize():
                 "summary": summary,
             }
         )
-        # 한도 보호용 딜레이 (필요시)
-        time.sleep(2)  # 2초씩 쉬면 20개 기준 40초 → 분당 호출 분산
+
+        # 쿼터 보호용 딜레이 (무료 플랜이면 유지 추천)
+        time.sleep(2)
 
     return summarized
 
@@ -119,14 +139,12 @@ def rebuild_index_html():
     run_entries = []
     for fname in files:
         base = fname.replace(".html", "")
-        # 기본값
         date_str = base
         time_str = ""
 
         if "_" in base:
             date_part, time_part = base.split("_", 1)
             date_str = date_part
-            # HHMMSS → HH:MM:SS 형태로
             if len(time_part) >= 6:
                 hh = time_part[0:2]
                 mm = time_part[2:4]
