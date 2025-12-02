@@ -3,7 +3,7 @@ name: Daily AI News
 on:
   workflow_dispatch:
   schedule:
-    - cron: "40 22 * * *"  # 매일 00:00 UTC (한국시간 오전 7시 40분)
+    - cron: "40 22 * * *"  # 매일 22:40 UTC (한국시간 오전 7시 40분)
 permissions:
   contents: write
 
