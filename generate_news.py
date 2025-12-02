@@ -25,7 +25,7 @@ INDEX_PATH = "docs/index.html"
 # 기사 선택/정렬 방식: "time" 또는 "random"
 #  - "time"   : 모든 RSS를 합쳐 시간순(최신순) 상위 N개
 #  - "random" : 모든 RSS를 섞어서 랜덤 상위 N개
-DISPLAY_ORDER = "time"
+DISPLAY_ORDER = "random"
 
 # Gemini 호출 간격 (무료 플랜이면 6~7초 이상 권장, 유료/여유 있으면 줄여도 됨)
 REQUEST_INTERVAL_SECONDS = 2
