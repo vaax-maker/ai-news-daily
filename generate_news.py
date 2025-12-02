@@ -18,7 +18,7 @@ INDEX_PATH = "docs/index.html"
 # 1) Gemini 요약 함수
 def summarize(text: str, title: str) -> str:
     genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-    model = genai.GenerativeModel("gemini-1.5-pro")
+    model = genai.GenerativeModel("gemini-2.5-flash-preview-09-2025")
 
     prompt = f"""
 아래 AI 관련 기사 내용을 5줄 이내 한국어로 핵심만 요약해줘.
