@@ -9,7 +9,8 @@ RSS_FEEDS = [
     "https://www.bloter.net/archives/category/ai/feed",
     "https://venturebeat.com/category/ai/feed/",
 ]
-MAX_ARTICLES = 5  # 하루에 요약할 기사 수
+
+MAX_ARTICLES = 5
 ARCHIVE_DIR = "docs/daily"
 INDEX_PATH = "docs/index.html"
 
@@ -32,7 +33,7 @@ def summarize(text: str, title: str) -> str:
     return res.text.strip()
 
 
-# 2) RSS에서 기사 가져와 요약 리스트 만들기
+# 2) RSS → 요약 리스트 만들기
 def fetch_and_summarize():
     items = []
 
@@ -44,7 +45,6 @@ def fetch_and_summarize():
             content = getattr(entry, "summary", "")
             items.append((title, link, content))
 
-    # 여러 RSS 합쳐서 앞에서 MAX_ARTICLES개만 사용
     items = items[:MAX_ARTICLES]
 
     summarized = []
@@ -59,7 +59,7 @@ def fetch_and_summarize():
     return summarized
 
 
-# 3) "하루치 기사 페이지" HTML 생성
+# 3) 개별 날짜 페이지 생성
 def build_daily_page(articles, date_str: str, time_str: str) -> str:
     parts = []
     parts.append("<!DOCTYPE html>")
@@ -76,12 +76,12 @@ def build_daily_page(articles, date_str: str, time_str: str) -> str:
     parts.append("  <hr/>")
     parts.append("  <ul>")
 
-for art in articles:
-    summary_html = art["summary"].replace("\n", "<br/>")
-    parts.append("    <li style='margin-bottom:1.5rem;'>")
-    parts.append(f"      <h2><a href='{art['link']}' target='_blank'>{art['title']}</a></h2>")
-    parts.append(f"      <p>{summary_html}</p>")
-    parts.append("    </li>")
+    for art in articles:
+        summary_html = art["summary"].replace("\n", "<br/>")
+        parts.append("    <li style='margin-bottom:1.5rem;'>")
+        parts.append(f"      <h2><a href='{art['link']}' target='_blank'>{art['title']}</a></h2>")
+        parts.append(f"      <p>{summary_html}</p>")
+        parts.append("    </li>")
 
     parts.append("  </ul>")
     parts.append("</body>")
@@ -90,20 +90,17 @@ for art in articles:
     return "\n".join(parts)
 
 
-# 4) index.html (목록 페이지) 생성/갱신
+# 4) index.html 날짜 목록 페이지 재생성
 def rebuild_index_html():
     os.makedirs(ARCHIVE_DIR, exist_ok=True)
 
-    # daily 폴더 내의 html 파일 목록
     files = [f for f in os.listdir(ARCHIVE_DIR) if f.endswith(".html")]
 
-    # 파일명에서 날짜 추출 (예: 2025-12-01.html → 2025-12-01)
     date_file_pairs = []
     for fname in files:
         date_str = fname.replace(".html", "")
         date_file_pairs.append((date_str, fname))
 
-    # 날짜 내림차순 정렬 (최신이 위로)
     date_file_pairs.sort(key=lambda x: x[0], reverse=True)
 
     parts = []
@@ -124,9 +121,7 @@ def rebuild_index_html():
     else:
         parts.append("  <ul>")
         for date_str, fname in date_file_pairs:
-            parts.append(
-                f"    <li><a href='daily/{fname}'>{date_str} AI News</a></li>"
-            )
+            parts.append(f"    <li><a href='daily/{fname}'>{date_str} AI News</a></li>")
         parts.append("  </ul>")
 
     parts.append("</body>")
@@ -136,7 +131,7 @@ def rebuild_index_html():
         f.write("\n".join(parts))
 
 
-# 5) 메인 실행
+# 5) main 실행 함수
 def main():
     today = datetime.date.today().strftime("%Y-%m-%d")
     now_time = datetime.datetime.now().strftime("%H:%M")
@@ -147,11 +142,9 @@ def main():
     os.makedirs(ARCHIVE_DIR, exist_ok=True)
     daily_path = os.path.join(ARCHIVE_DIR, f"{today}.html")
 
-    # 날짜별 페이지 저장 (같은 날 여러 번 실행되면 덮어씀)
     with open(daily_path, "w", encoding="utf-8") as f:
         f.write(daily_html)
 
-    # index.html 목록 페이지 재생성
     os.makedirs("docs", exist_ok=True)
     rebuild_index_html()
 
