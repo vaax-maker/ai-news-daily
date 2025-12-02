@@ -34,6 +34,15 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+          # 1) 원격 변경 먼저 가져오기 (rebase)
+          git pull --rebase origin main || true
+      
+          # 2) 이번에 생성한 파일 추가
           git add docs
+      
+          # 3) 커밋 (변경 없으면 스킵)
           git commit -m "Daily AI News Update" || echo "No changes"
-          git push
+      
+          # 4) 푸시
+          git push origin HEAD:main
