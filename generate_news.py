@@ -3,6 +3,7 @@ import time
 import datetime
 import feedparser
 import google.generativeai as genai
+import re  
 
 # --- 설정 ---
 RSS_FEEDS = [
@@ -93,6 +94,24 @@ def fetch_and_summarize():
 
 
 # 3) 개별 실행(날짜+시간) 페이지 생성
+def markdown_bold_to_highlight(html_text: str) -> str:
+    """
+    요약문 안의 **텍스트**를
+    <span style='background-color: yellow;'>텍스트</span>
+    로 바꾼 뒤, 줄바꿈(\n)을 <br/>로 변환
+    """
+
+    def repl(match: re.Match) -> str:
+        inner = match.group(1)
+        return f"<span style='background-color: yellow;'>{inner}</span>"
+
+    # **...** → <span style='background-color: yellow;'>...</span>
+    converted = re.sub(r"\*\*(.+?)\*\*", repl, html_text)
+
+    # 줄바꿈을 <br/>로
+    converted = converted.replace("\n", "<br/>")
+    return converted
+
 def build_daily_page(articles, date_str: str, time_str: str) -> str:
     parts = []
     parts.append("<!DOCTYPE html>")
@@ -114,13 +133,14 @@ def build_daily_page(articles, date_str: str, time_str: str) -> str:
     parts.append("  <ul>")
 
     for art in articles:
-        summary_html = art["summary"].replace("\n", "<br/>")
+        summary_html = markdown_bold_to_highlight(art["summary"])
         parts.append("    <li style='margin-bottom:1.5rem;'>")
         parts.append(
             f"      <h2><a href='{art['link']}' target='_blank'>{art['title']}</a></h2>"
         )
         parts.append(f"      <p>{summary_html}</p>")
         parts.append("    </li>")
+
 
     parts.append("  </ul>")
     parts.append("</body>")
