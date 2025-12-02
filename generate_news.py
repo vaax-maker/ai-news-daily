@@ -11,7 +11,7 @@ RSS_FEEDS = [
     "https://www.aitimes.com/rss/allArticle.xml",
     "https://www.bloter.net/archives/category/ai/feed",
     "https://www.reddit.com/r/ArtificialInteligence/top/.rss?t=day",
-    "https://www.techmeme.com/feed.xml,
+    "https://www.techmeme.com/feed.xml",
     "https://www.roadtovr.com/feed/",
     "https://uploadvr.com/rss",
     "https://arinsider.co/feed/",
