@@ -15,7 +15,7 @@ RSS_FEEDS = [
     "https://news.ycombinator.com/rss",
 ]
 
-MAX_ARTICLES = 20
+MAX_ARTICLES = 15
 ARCHIVE_DIR = "docs/daily"
 INDEX_PATH = "docs/index.html"
 
@@ -56,7 +56,7 @@ def fetch_and_summarize():
     items = items[:MAX_ARTICLES]
 
     summarized = []
-    for title, link, content in items:
+    for idx, (title, link, content) in enumerate(items):
         summary = summarize(content, title)
         summarized.append(
             {
@@ -65,6 +65,8 @@ def fetch_and_summarize():
                 "summary": summary,
             }
         )
+        # 한도 보호용 딜레이 (필요시)
+        time.sleep(2)  # 2초씩 쉬면 20개 기준 40초 → 분당 호출 분산
 
     return summarized
 
