@@ -10,12 +10,12 @@ import random
 RSS_FEEDS = [
     "https://www.aitimes.com/rss/allArticle.xml",
     "https://www.bloter.net/archives/category/ai/feed",
-    "https://venturebeat.com/category/ai/feed/",
-    "https://techcrunch.com/category/artificial-intelligence/feed/",
-    "https://www.technologyreview.com/feed/",
-    "https://www.theverge.com/rss/index.xml",
-    "https://news.hada.io/rss/news",
-    "https://news.ycombinator.com/rss",
+    "https://www.reddit.com/r/ArtificialInteligence/top/.rss?t=day",
+    "https://www.techmeme.com/feed.xml,
+    "https://www.roadtovr.com/feed/",
+    "https://uploadvr.com/rss",
+    "https://arinsider.co/feed/",
+    "https://skarredghost.com/feed/",
 ]
 
 MAX_ARTICLES = 15          # 최종 노출할 기사 수 (상위 N개)
