@@ -6,7 +6,13 @@ import google.generativeai as genai
 import re
 import random
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Dict, List
+
+try:
+    from googletrans import Translator
+except ImportError:  # pragma: no cover - optional dependency for local dev
+    Translator = None
 
 @dataclass
 class CategoryConfig:
@@ -49,6 +55,7 @@ CATEGORIES: Dict[str, CategoryConfig] = {
 
 # Gemini 호출 간격 (무료 플랜이면 6~7초 이상 권장, 유료/여유 있으면 줄여도 됨)
 REQUEST_INTERVAL_SECONDS = 2
+HIGHLIGHT_COLOR = "#fff6b0"
 
 
 # **텍스트** → 노란색 강조 span + 줄바꿈 처리
@@ -59,16 +66,54 @@ def markdown_bold_to_highlight(html_text: str) -> str:
     로 바꾼 뒤, 줄바꿈(\n)을 <br/>로 변환
     """
 
-    def repl(match: re.Match) -> str:
-        inner = match.group(1)
-        return f"<span style='background-color: yellow;'>{inner}</span>"
+    lines = []
 
-    # **...** → <span ...>...</span>
-    converted = re.sub(r"\*\*(.+?)\*\*", repl, html_text)
+    for raw_line in html_text.splitlines():
+        # **...** → <strong>...</strong>
+        converted = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", raw_line)
 
-    # 줄바꿈을 <br/>로
-    converted = converted.replace("\n", "<br/>")
-    return converted
+        # 문장 단위로 옅은 노란색 배경을 적용
+        wrapped = (
+            f"<span class='highlight-line' style='background-color: {HIGHLIGHT_COLOR};"
+            " padding: 4px 6px; border-radius: 4px; display: inline-block;'>"
+            f"{converted.strip()}"
+            "</span>"
+        )
+        lines.append(wrapped)
+
+    # 줄바꿈을 <br/>로 변환
+    return "<br/>".join(lines)
+
+
+def contains_korean(text: str) -> bool:
+    return bool(re.search(r"[가-힣]", text))
+
+
+_translator = None
+
+
+@lru_cache(maxsize=256)
+def translate_title_to_korean(title: str) -> str:
+    """Translate English titles to Korean for display. Fallback to original on failure."""
+
+    if not title or contains_korean(title):
+        return title
+
+    if Translator is None:
+        return title
+
+    global _translator
+    if _translator is None:
+        _translator = Translator()
+
+    try:
+        result = _translator.translate(title, dest="ko")
+        if result and result.text:
+            return result.text
+    except Exception:
+        pass
+
+    return title
 
 
 # 1) Gemini 요약 함수
@@ -161,10 +206,24 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
     parts.append(
         "  <meta name='viewport' content='width=device-width, initial-scale=1' />"
     )
+    parts.append("  <style>")
+    parts.append(
+        "    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; line-height: 1.6; margin: 1.5rem; }"
+    )
+    parts.append("    h1 { margin-bottom: 0.4rem; }")
+    parts.append("    .meta { color: #4b5563; margin-bottom: 1rem; }")
+    parts.append("    .article { margin-bottom: 1.75rem; }")
+    parts.append("    .article h2 { margin: 0 0 0.35rem; }")
+    parts.append("    .original-title { display: block; font-size: 0.9rem; color: #6b7280; margin-top: 4px; }")
+    parts.append(
+        "    .highlight-line { background-color: %s; padding: 4px 6px; border-radius: 4px; display: inline-block; margin: 0.15rem 0; }"
+        % HIGHLIGHT_COLOR
+    )
+    parts.append("  </style>")
     parts.append("</head>")
     parts.append("<body>")
     parts.append(f"  <h1>{date_str} {config.display_name} News</h1>")
-    parts.append(f"  <p>Updated at {time_str} (KST)</p>")
+    parts.append(f"  <p class='meta'>Updated at {time_str} (KST)</p>")
     parts.append(
         "  <p><a href='../index.html'>← 전체 날짜/시간 목록으로 돌아가기</a></p>"
     )
@@ -173,9 +232,19 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
 
     for art in articles:
         summary_html = markdown_bold_to_highlight(art["summary"])
-        parts.append("    <li style='margin-bottom:1.5rem;'>")
+        display_title = translate_title_to_korean(art["title"])
+        original_hint = (
+            f"<span class='original-title'>원문 제목: {art['title']}</span>"
+            if display_title != art["title"]
+            else ""
+        )
+
+        parts.append("    <li class='article'>")
         parts.append(
-            f"      <h2><a href='{art['link']}' target='_blank'>{art['title']}</a></h2>"
+            "      <h2>"
+            f"<a href='{art['link']}' target='_blank'>{display_title}</a>"
+            f"{original_hint}"
+            "</h2>"
         )
         parts.append(f"      <p>{summary_html}</p>")
         parts.append("    </li>")
@@ -188,12 +257,11 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
 
 
 # 4) index.html 목록 페이지 재생성 (여러 번/하루 여러 회 실행 포함)
-def rebuild_index_html(config: CategoryConfig):
+def collect_run_entries(config: CategoryConfig):
     os.makedirs(config.archive_dir, exist_ok=True)
 
     files = [f for f in os.listdir(config.archive_dir) if f.endswith(".html")]
 
-    # 파일명: YYYY-MM-DD_HHMMSS.html
     run_entries = []
     for fname in files:
         base = fname.replace(".html", "")
@@ -212,8 +280,12 @@ def rebuild_index_html(config: CategoryConfig):
                 time_str = time_part
         run_entries.append((base, date_str, time_str, fname))
 
-    # base(= 날짜+시간 문자열) 기준 내림차순 정렬 → 최신 실행이 위로
     run_entries.sort(key=lambda x: x[0], reverse=True)
+    return run_entries
+
+
+def rebuild_index_html(config: CategoryConfig):
+    run_entries = collect_run_entries(config)
 
     parts = []
     parts.append("<!DOCTYPE html>")
@@ -253,6 +325,8 @@ def rebuild_index_html(config: CategoryConfig):
 
 
 def build_root_index(categories: Dict[str, CategoryConfig]):
+    categorized_runs = {cfg.key: collect_run_entries(cfg) for cfg in categories.values()}
+
     parts = []
     parts.append("<!DOCTYPE html>")
     parts.append("<html lang='ko'>")
@@ -260,20 +334,71 @@ def build_root_index(categories: Dict[str, CategoryConfig]):
     parts.append("  <meta charset='utf-8' />")
     parts.append("  <title>AI & XR News Archives</title>")
     parts.append("  <meta name='viewport' content='width=device-width, initial-scale=1' />")
+    parts.append("  <style>")
+    parts.append("    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; margin: 1.25rem; line-height: 1.6; }")
+    parts.append("    h1 { margin-bottom: 0.5rem; }")
+    parts.append("    .subtitle { color: #4b5563; margin-bottom: 1rem; }")
+    parts.append("    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }")
+    parts.append(
+        "    .tab-btn { padding: 0.45rem 0.9rem; border: 1px solid #d1d5db; border-radius: 8px; background: #f3f4f6; cursor: pointer; font-weight: 600; }")
+    parts.append(
+        "    .tab-btn.active { background: #111827; color: #f9fafb; border-color: #111827; }"
+    )
+    parts.append("    .tab-panel { display: none; }")
+    parts.append("    .tab-panel.active { display: block; }")
+    parts.append("    ul { padding-left: 1.1rem; }")
+    parts.append("    li + li { margin-top: 0.35rem; }")
+    parts.append("    .timestamp { color: #6b7280; font-size: 0.95rem; margin-left: 0.35rem; }")
+    parts.append("  </style>")
     parts.append("</head>")
     parts.append("<body>")
     parts.append("  <h1>AI & XR Daily News Archives</h1>")
-    parts.append(
-        "  <p>카테고리별 최신 실행 결과를 확인하려면 아래 링크를 클릭하세요.</p>"
-    )
-    parts.append("  <ul>")
+    parts.append("  <p class='subtitle'>탭을 눌러 AI/XR 뉴스를 구분해 확인하세요. 모든 시각은 한국 표준시(KST) 기준이며, 과거 실행 결과도 누적해 보여줍니다.</p>")
 
+    parts.append("  <div class='tabs'>")
     for cfg in categories.values():
         parts.append(
-            f"    <li><a href='{cfg.key}/index.html'>{cfg.display_name} 뉴스 아카이브</a></li>"
+            f"    <button class='tab-btn' data-target='{cfg.key}'>{cfg.display_name} 뉴스</button>"
+        )
+    parts.append("  </div>")
+
+    for cfg in categories.values():
+        runs = categorized_runs.get(cfg.key, [])
+        parts.append(
+            f"  <div class='tab-panel' id='{cfg.key}'>"
+        )
+        parts.append(
+            f"    <p><a href='{cfg.key}/index.html'>{cfg.display_name} 아카이브 전체 보기 →</a></p>"
         )
 
-    parts.append("  </ul>")
+        if not runs:
+            parts.append("    <p>아직 저장된 뉴스가 없습니다.</p>")
+        else:
+            parts.append("    <ul>")
+            for base, date_str, time_str, fname in runs:
+                label = f"{date_str} {time_str} KST" if time_str else f"{date_str} KST"
+                parts.append(
+                    "      <li>"
+                    f"<a href='{cfg.key}/daily/{fname}'>{cfg.display_name} 뉴스</a>"
+                    f" <span class='timestamp'>{label}</span>"
+                    "</li>"
+                )
+            parts.append("    </ul>")
+
+        parts.append("  </div>")
+
+    parts.append("  <script>")
+    parts.append(
+        "    const tabs = document.querySelectorAll('.tab-btn'); const panels = document.querySelectorAll('.tab-panel');"
+    )
+    parts.append(
+        "    function activateTab(key) { panels.forEach(p => p.classList.toggle('active', p.id === key)); tabs.forEach(t => t.classList.toggle('active', t.dataset.target === key)); }"
+    )
+    parts.append(
+        "    tabs.forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.target)));"
+    )
+    parts.append("    if (tabs.length) { activateTab(tabs[0].dataset.target); }")
+    parts.append("  </script>")
     parts.append("</body>")
     parts.append("</html>")
 
