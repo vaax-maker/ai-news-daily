@@ -5,28 +5,114 @@
   <title>Daily AI News Archive</title>
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <style>
-    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; margin: 1.25rem; line-height: 1.6; background: #f9fafb; color: #0f172a; }
-    h1 { margin-bottom: 0.35rem; }
-    .nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
-    .nav a { padding: 0.45rem 0.85rem; border: 1px solid #e5e7eb; border-radius: 8px; text-decoration: none; color: #0f172a; background: #fff; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
-    .run-list { list-style: none; padding: 0; display: grid; gap: 0.75rem; margin-top: 1rem; }
-    .run-item { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 0.9rem 1rem; box-shadow: 0 8px 18px rgba(15,23,42,0.05); }
-    .run-item a { color: #0f172a; text-decoration: none; font-weight: 700; }
-    .run-item a:hover { text-decoration: underline; }
-    .timestamp { color: #475569; font-size: 0.95rem; display: block; margin-top: 0.2rem; }
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap');
+
+    :root {
+      --bg: #04070f;
+      --card: rgba(12, 18, 30, 0.78);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #e7f1ff;
+      --muted: #9fb4cf;
+      --accent: #6df21f;
+      --accent-2: #33d37b;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans KR', 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at 15% 15%, rgba(109, 242, 31, 0.14), transparent 28%),
+        radial-gradient(circle at 80% 0%, rgba(33, 195, 255, 0.12), transparent 30%),
+        linear-gradient(140deg, #050914 0%, #03060c 70%);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 0 1.2rem 2.4rem;
+    }
+
+    .page { max-width: 960px; margin: 0 auto; padding-top: 2.4rem; }
+
+    .nav { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .nav a {
+      padding: 0.55rem 1.05rem;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.05);
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      box-shadow: var(--shadow);
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .nav a:hover { border-color: rgba(109, 242, 31, 0.6); color: var(--accent); }
+
+    .hero {
+      background: linear-gradient(150deg, rgba(12, 18, 30, 0.85), rgba(12, 18, 30, 0.62));
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 1.1rem 1.2rem 1.3rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 10%, rgba(109, 242, 31, 0.1), transparent 30%),
+        radial-gradient(circle at 0% 70%, rgba(51, 211, 123, 0.12), transparent 38%);
+      pointer-events: none;
+    }
+
+    h1 { margin: 0 0 0.4rem; font-size: 1.55rem; letter-spacing: 0.01em; position: relative; z-index: 1; }
+    .subtitle { margin: 0; color: var(--muted); position: relative; z-index: 1; }
+
+    .run-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.2rem 0 0;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .run-item {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1rem 1.05rem;
+      box-shadow: var(--shadow);
+    }
+
+    .run-item a { color: #f6fffe; text-decoration: none; font-weight: 800; letter-spacing: 0.01em; }
+    .run-item a:hover { color: var(--accent); text-decoration: underline; }
+    .timestamp { color: var(--muted); font-size: 0.95rem; display: block; margin-top: 0.25rem; }
+
+    @media (max-width: 640px) {
+      .run-item { padding: 0.9rem; }
+    }
   </style>
 </head>
 <body>
-  <div class='nav'>
-    <a href='../index.html'>🏠 홈으로</a>
-  </div>
-  <h1>Daily AI News Archive</h1>
-  <p>실행 시점(날짜+시간, KST)별로 저장된 AI 기사 요약 목록입니다.</p>
-  <ul class='run-list'>
-    <li class='run-item'><a href='daily/2025-12-04_145006.html'>2025-12-04 14:50:06 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-04 14:50:06 (KST)</span></li>
-    <li class='run-item'><a href='daily/2025-12-04_142819.html'>2025-12-04 14:28:19 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-04 14:28:19 (KST)</span></li>
-    <li class='run-item'><a href='daily/2025-12-04_140656.html'>2025-12-04 14:06:56 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-04 14:06:56 (KST)</span></li>
-    <li class='run-item'><a href='daily/2025-12-04_140139.html'>2025-12-04 14:01:39 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-04 14:01:39 (KST)</span></li>
-  </ul>
+  <main class='page'>
+    <nav class='nav'>
+      <a href='../index.html'>🏠 홈으로</a>
+    </nav>
+
+    <section class='hero'>
+      <h1>Daily AI News Archive</h1>
+      <p class='subtitle'>AI 최신 기사 요약을 실행 시점별로 모아둔 아카이브입니다. 원하는 시간을 눌러 상세 내용을 바로 확인하세요.</p>
+    </section>
+
+    <ul class='run-list'>
+      <li class='run-item'><a href='daily/2025-12-04_145006.html'>2025-12-04 14:50:06 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-04 14:50:06 (KST)</span></li>
+      <li class='run-item'><a href='daily/2025-12-04_142819.html'>2025-12-04 14:28:19 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-04 14:28:19 (KST)</span></li>
+      <li class='run-item'><a href='daily/2025-12-04_140656.html'>2025-12-04 14:06:56 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-04 14:06:56 (KST)</span></li>
+      <li class='run-item'><a href='daily/2025-12-04_140139.html'>2025-12-04 14:01:39 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-04 14:01:39 (KST)</span></li>
+    </ul>
+  </main>
 </body>
 </html>
