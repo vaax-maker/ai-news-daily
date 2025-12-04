@@ -57,6 +57,22 @@ CATEGORIES: Dict[str, CategoryConfig] = {
 # Gemini 호출 간격 (무료 플랜이면 6~7초 이상 권장, 유료/여유 있으면 줄여도 됨)
 REQUEST_INTERVAL_SECONDS = 2
 HIGHLIGHT_COLOR = "#fff6b0"
+CATEGORY_BASE_PATH = os.environ.get("SITE_BASE_PATH", "").strip("/")
+
+
+def with_base_path(path: str) -> str:
+    """Prefix internal links with the configured base path for GitHub Pages.
+
+    GitHub Pages의 프로젝트 사이트(`/<repo-name>/…`)나 커스텀 도메인(`/`) 모두에서
+    동작하도록, 환경 변수 `SITE_BASE_PATH`에 repo 이름(예: `ai-news-daily`)을 넣으면
+    내부 링크를 절대 경로로 만들어 준다. 값이 비어 있으면 기존처럼 상대 경로를 사용한다.
+    """
+
+    if not CATEGORY_BASE_PATH:
+        return path
+
+    normalized = path.lstrip("/")
+    return f"/{CATEGORY_BASE_PATH}/{normalized}".replace("//", "/")
 
 
 # **텍스트** → 강조 색상(문구만) + 목록 처리
@@ -321,8 +337,8 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
     parts.append("</head>")
     parts.append("<body>")
     parts.append("  <div class='nav'>")
-    parts.append("    <a href='../../index.html'>🏠 홈으로</a>")
-    parts.append("    <a href='../index.html'>📅 날짜별 목록</a>")
+    parts.append(f"    <a href='{with_base_path('index.html')}'>🏠 홈으로</a>")
+    parts.append(f"    <a href='{with_base_path(f'{config.key}/index.html')}'>📅 날짜별 목록</a>")
     parts.append("  </div>")
     parts.append(f"  <h1>{date_str} {config.display_name} News</h1>")
     parts.append(f"  <p class='meta'>Updated at {time_str} (KST)</p>")
@@ -440,7 +456,7 @@ def rebuild_index_html(config: CategoryConfig):
     parts.append("</head>")
     parts.append("<body>")
     parts.append("  <div class='nav'>")
-    parts.append("    <a href='../index.html'>🏠 홈으로</a>")
+    parts.append(f"    <a href='{with_base_path('index.html')}'>🏠 홈으로</a>")
     parts.append("  </div>")
     parts.append(f"  <h1>Daily {config.display_name} News Archive</h1>")
     parts.append(
@@ -458,7 +474,7 @@ def rebuild_index_html(config: CategoryConfig):
                 label = f"{date_str} {config.display_name} News"
             parts.append(
                 "    <li class='run-item'>"
-                f"<a href='daily/{fname}'>{label}</a>"
+                f"<a href='{with_base_path(f'{config.key}/daily/{fname}')}'>{label}</a>"
                 f"<span class='timestamp'>원본 생성 시간: {date_str} {time_str or ''} (KST)</span>"
                 "</li>"
             )
@@ -523,7 +539,7 @@ def build_root_index(categories: Dict[str, CategoryConfig]):
         )
         parts.append("    <div class='panel-card'>")
         parts.append(
-            f"      <p class='archive-link'><a href='{cfg.key}/index.html'>{cfg.display_name} 아카이브 전체 보기 →</a></p>"
+            f"      <p class='archive-link'><a href='{with_base_path(f'{cfg.key}/index.html')}'>{cfg.display_name} 아카이브 전체 보기 →</a></p>"
         )
 
         if not runs:
@@ -534,7 +550,7 @@ def build_root_index(categories: Dict[str, CategoryConfig]):
                 label = f"{date_str} {time_str} KST" if time_str else f"{date_str} KST"
                 parts.append(
                     "        <li>"
-                    f"<a href='{cfg.key}/daily/{fname}'>{cfg.display_name} 뉴스</a>"
+                    f"<a href='{with_base_path(f'{cfg.key}/daily/{fname}')}'>{cfg.display_name} 뉴스</a>"
                     f" <span class='timestamp'>{label}</span>"
                     "</li>"
                 )
@@ -559,6 +575,10 @@ def build_root_index(categories: Dict[str, CategoryConfig]):
     parts.append("</html>")
 
     os.makedirs("docs", exist_ok=True)
+    # GitHub Pages가 Jekyll 처리를 건너뛰도록 명시
+    with open(os.path.join("docs", ".nojekyll"), "w", encoding="utf-8") as f:
+        f.write("static site")
+
     with open("docs/index.html", "w", encoding="utf-8") as f:
         f.write("\n".join(parts))
 
@@ -589,7 +609,5 @@ def main():
         rebuild_index_html(cfg)
 
     build_root_index(CATEGORIES)
-
-
 if __name__ == "__main__":
     main()
