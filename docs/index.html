@@ -5,213 +5,57 @@
   <title>AI & XR News Archives</title>
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap');
-
-    :root {
-      --bg: #04070f;
-      --card: rgba(12, 18, 30, 0.72);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --text: #e7f1ff;
-      --muted: #9fb4cf;
-      --accent: #6df21f;
-      --accent-2: #33d37b;
-      --tab-inactive: rgba(255, 255, 255, 0.05);
-      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      font-family: 'Noto Sans KR', 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      margin: 0;
-      min-height: 100vh;
-      background: radial-gradient(circle at 20% 20%, rgba(88, 255, 149, 0.12), transparent 28%),
-        radial-gradient(circle at 80% 0%, rgba(39, 186, 255, 0.12), transparent 30%),
-        linear-gradient(135deg, #050914 0%, #03060c 70%);
-      color: var(--text);
-      line-height: 1.7;
-      padding: 0 1.2rem 2.5rem;
-    }
-
-    .page {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding-top: 2.75rem;
-    }
-
-    .hero {
-      padding: 1.25rem 1.25rem 1.6rem;
-      border-radius: 20px;
-      border: 1px solid var(--card-border);
-      background: linear-gradient(145deg, rgba(12, 18, 30, 0.82), rgba(12, 18, 30, 0.58));
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 10%, rgba(109, 242, 31, 0.12), transparent 32%),
-        radial-gradient(circle at 80% 60%, rgba(51, 211, 123, 0.16), transparent 35%);
-      pointer-events: none;
-    }
-
-    .logo-mark {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.4rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .logo-text {
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      font-size: clamp(1.8rem, 3vw, 2.35rem);
-      background: linear-gradient(120deg, #182233 0%, #6df21f 45%, #1dcf7c 70%, #0f1827 100%);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-transform: uppercase;
-      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
-    }
-
-    .tagline {
-      margin: 0.3rem 0 0.8rem;
-      color: var(--muted);
-      font-size: 1.05rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .tagline strong {
-      color: var(--accent);
-      font-weight: 800;
-    }
-
-    .subtitle { color: var(--muted); margin: 0.35rem 0 1rem; max-width: 620px; position: relative; z-index: 1; }
-
-    .surface {
-      margin-top: 1.5rem;
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 1.2rem;
-      box-shadow: var(--shadow);
-    }
-
-    .surface-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .surface-title { font-size: 1.2rem; font-weight: 700; color: #eaf5ff; margin: 0; }
-
-    .tabs { display: flex; gap: 0.6rem; margin: 0.6rem 0 1rem; flex-wrap: wrap; }
-
-    .tab-btn {
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
-      background: var(--tab-inactive);
-      color: var(--muted);
-      border: 1px solid var(--card-border);
-      cursor: pointer;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      transition: all 0.2s ease;
-    }
-
-    .tab-btn:hover { border-color: rgba(109, 242, 31, 0.6); color: #dff8d0; }
-    .tab-btn.active { background: linear-gradient(120deg, #6df21f, #33d37b); color: #0b1220; border-color: transparent; box-shadow: 0 10px 30px rgba(79, 255, 149, 0.35); }
-
+    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; margin: 1.25rem; line-height: 1.6; background: #f9fafb; color: #0f172a; }
+    h1 { margin-bottom: 0.5rem; }
+    .subtitle { color: #4b5563; margin-bottom: 1rem; }
+    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .tab-btn { padding: 0.45rem 0.9rem; border: 1px solid #d1d5db; border-radius: 8px; background: #f3f4f6; cursor: pointer; font-weight: 600; }
+    .tab-btn.active { background: #111827; color: #f9fafb; border-color: #111827; }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
-
-    .panel-card {
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 1rem 1.1rem;
-    }
-
-    .archive-link { margin: 0 0 0.4rem; font-weight: 800; letter-spacing: 0.01em; color: #e9f7ff; }
-    .archive-link a { color: inherit; text-decoration: none; }
-    .archive-link a:hover { color: var(--accent); }
-
-    ul { padding-left: 1rem; margin: 0; }
+    .panel-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.1rem; box-shadow: 0 8px 18px rgba(15,23,42,0.05); }
+    ul { padding-left: 1.1rem; margin: 0; }
     li + li { margin-top: 0.35rem; }
-    a { color: #f6fffe; text-decoration: none; }
-    a:hover { color: var(--accent); text-decoration: underline; }
-    .timestamp { color: var(--muted); font-size: 0.95rem; margin-left: 0.35rem; }
-
-    @media (max-width: 640px) {
-      .surface { padding: 1rem; }
-      .tabs { gap: 0.4rem; }
-      .tab-btn { width: 100%; text-align: center; }
-    }
+    .timestamp { color: #6b7280; font-size: 0.95rem; margin-left: 0.35rem; }
+    .archive-link { margin: 0 0 0.5rem; font-weight: 700; }
   </style>
 </head>
 <body>
-  <main class='page'>
-    <header class='hero'>
-      <div class='logo-mark'>
-        <div class='logo-text' aria-label='VAAX'>VAAX</div>
-      </div>
-      <p class='tagline'>VR-AR-AI-XR 기술과 비즈니스를 연결하는 <strong>‘성장 나눔’</strong> 커뮤니티</p>
-      <p class='subtitle'>AI & XR 데일리 요약을 깔끔하게 모았습니다. 탭을 눌러 분야별로 최신 결과를 확인하고, 전체 아카이브에서 더 많은 기록을 확인하세요.</p>
-    </header>
-
-    <section class='surface'>
-      <div class='surface-header'>
-        <h2 class='surface-title'>최신 아카이브</h2>
-        <div class='tabs'>
-          <button class='tab-btn' data-target='ai'>AI 뉴스</button>
-          <button class='tab-btn' data-target='xr'>XR 뉴스</button>
-        </div>
-      </div>
-
-      <div class='tab-panel' id='ai'>
-        <div class='panel-card'>
-          <p class='archive-link'><a href='ai/index.html'>AI 아카이브 전체 보기 →</a></p>
-          <ul>
-            <li><a href='ai/daily/2025-12-04_145006.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:50:06 KST</span></li>
-            <li><a href='ai/daily/2025-12-04_142819.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:28:19 KST</span></li>
-            <li><a href='ai/daily/2025-12-04_140656.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:06:56 KST</span></li>
-            <li><a href='ai/daily/2025-12-04_140139.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:01:39 KST</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class='tab-panel' id='xr'>
-        <div class='panel-card'>
-          <p class='archive-link'><a href='xr/index.html'>XR 아카이브 전체 보기 →</a></p>
-          <ul>
-            <li><a href='xr/daily/2025-12-04_145006.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:50:06 KST</span></li>
-            <li><a href='xr/daily/2025-12-04_142819.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:28:19 KST</span></li>
-            <li><a href='xr/daily/2025-12-04_140656.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:06:56 KST</span></li>
-            <li><a href='xr/daily/2025-12-04_140139.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:01:39 KST</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </main>
-
+  <h1>AI & XR Daily News Archives</h1>
+  <p class='subtitle'>탭을 눌러 AI/XR 뉴스를 구분해 확인하세요. 모든 시각은 한국 표준시(KST) 기준이며, 과거 실행 결과도 누적해 보여줍니다.</p>
+  <div class='tabs'>
+    <button class='tab-btn' data-target='ai'>AI 뉴스</button>
+    <button class='tab-btn' data-target='xr'>XR 뉴스</button>
+  </div>
+  <div class='tab-panel' id='ai'>
+    <div class='panel-card'>
+      <p class='archive-link'><a href='ai/index.html'>AI 아카이브 전체 보기 →</a></p>
+      <ul>
+        <li><a href='ai/daily/2025-12-04_154258.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 15:42:58 KST</span></li>
+        <li><a href='ai/daily/2025-12-04_145006.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:50:06 KST</span></li>
+        <li><a href='ai/daily/2025-12-04_142819.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:28:19 KST</span></li>
+        <li><a href='ai/daily/2025-12-04_140656.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:06:56 KST</span></li>
+        <li><a href='ai/daily/2025-12-04_140139.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:01:39 KST</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class='tab-panel' id='xr'>
+    <div class='panel-card'>
+      <p class='archive-link'><a href='xr/index.html'>XR 아카이브 전체 보기 →</a></p>
+      <ul>
+        <li><a href='xr/daily/2025-12-04_154258.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 15:42:58 KST</span></li>
+        <li><a href='xr/daily/2025-12-04_145006.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:50:06 KST</span></li>
+        <li><a href='xr/daily/2025-12-04_142819.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:28:19 KST</span></li>
+        <li><a href='xr/daily/2025-12-04_140656.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:06:56 KST</span></li>
+        <li><a href='xr/daily/2025-12-04_140139.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:01:39 KST</span></li>
+      </ul>
+    </div>
+  </div>
   <script>
-    const tabs = document.querySelectorAll('.tab-btn');
-    const panels = document.querySelectorAll('.tab-panel');
-    function activateTab(key) {
-      panels.forEach((p) => p.classList.toggle('active', p.id === key));
-      tabs.forEach((t) => t.classList.toggle('active', t.dataset.target === key));
-    }
-    tabs.forEach((btn) => btn.addEventListener('click', () => activateTab(btn.dataset.target)));
-    if (tabs.length) {
-      activateTab(tabs[0].dataset.target);
-    }
+    const tabs = document.querySelectorAll('.tab-btn'); const panels = document.querySelectorAll('.tab-panel');
+    function activateTab(key) { panels.forEach(p => p.classList.toggle('active', p.id === key)); tabs.forEach(t => t.classList.toggle('active', t.dataset.target === key)); }
+    tabs.forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.target)));
+    if (tabs.length) { activateTab(tabs[0].dataset.target); }
   </script>
 </body>
 </html>
