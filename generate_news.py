@@ -8,6 +8,7 @@ import random
 from dataclasses import dataclass
 from functools import lru_cache
 from typing import Dict, List
+from urllib.parse import urlparse
 
 try:
     from googletrans import Translator
@@ -58,31 +59,35 @@ REQUEST_INTERVAL_SECONDS = 2
 HIGHLIGHT_COLOR = "#fff6b0"
 
 
-# **텍스트** → 노란색 강조 span + 줄바꿈 처리
+# **텍스트** → 강조 색상(문구만) + 목록 처리
 def markdown_bold_to_highlight(html_text: str) -> str:
-    """
-    요약문 안의 **텍스트**를
-    <span style='background-color: yellow;'>텍스트</span>
-    로 바꾼 뒤, 줄바꿈(\n)을 <br/>로 변환
-    """
+    """Convert **bold** markers into highlighted phrases and list items."""
+
+    def wrap_highlight(match):
+        text = match.group(1)
+        if len(text.split()) >= 2:
+            return (
+                f"<span class='highlight' style='background-color: {HIGHLIGHT_COLOR};"
+                " padding: 3px 5px; border-radius: 4px;'>"
+                f"{text}"
+                "</span>"
+            )
+        return f"<strong>{text}</strong>"
 
     lines = []
-
     for raw_line in html_text.splitlines():
-        # **...** → <strong>...</strong>
-        converted = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", raw_line)
+        cleaned = raw_line.strip()
+        if not cleaned:
+            continue
+        cleaned = re.sub(r"^[•□\-]\s*", "", cleaned)
+        converted = re.sub(r"\*\*(.+?)\*\*", wrap_highlight, cleaned)
+        lines.append(converted)
 
-        # 문장 단위로 옅은 노란색 배경을 적용
-        wrapped = (
-            f"<span class='highlight-line' style='background-color: {HIGHLIGHT_COLOR};"
-            " padding: 4px 6px; border-radius: 4px; display: inline-block;'>"
-            f"{converted.strip()}"
-            "</span>"
-        )
-        lines.append(wrapped)
+    if not lines:
+        return ""
 
-    # 줄바꿈을 <br/>로 변환
-    return "<br/>".join(lines)
+    items = [f"<li>{line}</li>" for line in lines]
+    return "<ul class='summary-list'>" + "".join(items) + "</ul>"
 
 
 def contains_korean(text: str) -> bool:
@@ -116,6 +121,66 @@ def translate_title_to_korean(title: str) -> str:
     return title
 
 
+def format_timestamp(ts: float) -> str:
+    if not ts:
+        return "발행 시각 정보 없음"
+
+    try:
+        return datetime.datetime.fromtimestamp(ts).strftime("%Y-%m-%d %H:%M")
+    except Exception:
+        return "발행 시각 정보 없음"
+
+
+def extract_source_name(entry, link: str) -> str:
+    source_title = getattr(entry, "source", None)
+    if source_title:
+        title_val = getattr(source_title, "title", None)
+        if title_val:
+            return title_val
+
+    netloc = urlparse(link or "").netloc
+    if netloc.startswith("www."):
+        netloc = netloc[4:]
+    return netloc or "출처 미상"
+
+
+def extract_image_url(entry) -> str:
+    media_content = getattr(entry, "media_content", None) or []
+    if media_content:
+        first = media_content[0]
+        if isinstance(first, dict) and first.get("url"):
+            return first["url"]
+
+    media_thumbnail = getattr(entry, "media_thumbnail", None) or []
+    if media_thumbnail:
+        thumb = media_thumbnail[0]
+        if isinstance(thumb, dict) and thumb.get("url"):
+            return thumb["url"]
+
+    image_link = getattr(entry, "image", None)
+    if isinstance(image_link, dict) and image_link.get("href"):
+        return image_link["href"]
+
+    return ""
+
+
+def sanitize_summary(summary: str) -> str:
+    cleaned_lines = []
+    for line in summary.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if "URL:" in stripped:
+            continue
+        if re.search(r"출처\s*:", stripped):
+            continue
+        if re.search(r"https?://", stripped):
+            continue
+        cleaned_lines.append(stripped)
+
+    return "\n".join(cleaned_lines)
+
+
 # 1) Gemini 요약 함수
 def summarize(text: str, title: str, display_name: str) -> str:
     genai.configure(api_key=os.environ["GEMINI_API_KEY"])
@@ -126,8 +191,7 @@ def summarize(text: str, title: str, display_name: str) -> str:
     prompt = f"""
 아래 {display_name} 관련 기사 내용을 5줄 이내 한국어로 핵심만 요약해줘.
 가능하면 수치, 회사명, 핵심 이슈 위주로 하고, 각 줄은 불릿 기호 "□"으로 시작해줘.
-핵심 키워드는 강조(**굵게**) 처리해줘.
-마지막 줄에는 "URL: ... / 출처: ..." 형식으로 기사 URL과 출처를 명시해줘.
+핵심 키워드는 강조(**굵게**) 처리하되, URL이나 링크는 포함하지 마.
 
 제목: {title}
 내용:
@@ -161,7 +225,7 @@ def fetch_and_summarize(config: CategoryConfig):
             else:
                 ts = 0  # 날짜 정보 없으면 가장 뒤로 밀림 (time 모드일 때)
 
-            raw_items.append((ts, title, link, content))
+            raw_items.append((ts, title, link, content, entry))
 
     # 기사 정렬/선택 방식
     if config.display_order == "time":
@@ -177,15 +241,19 @@ def fetch_and_summarize(config: CategoryConfig):
     selected = raw_items[: config.max_articles]
 
     summarized = []
-    for idx, (ts, title, link, content) in enumerate(selected):
+    for idx, (ts, title, link, content, entry) in enumerate(selected):
         text_with_url = content + f"\n\n기사 URL: {link}"
 
         summary = summarize(text_with_url, title, config.display_name)
+        summary = sanitize_summary(summary)
         summarized.append(
             {
                 "title": title,
                 "link": link,
                 "summary": summary,
+                "published_display": format_timestamp(ts),
+                "source_name": extract_source_name(entry, link),
+                "image_url": extract_image_url(entry),
             }
         )
 
@@ -208,27 +276,57 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
     )
     parts.append("  <style>")
     parts.append(
-        "    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; line-height: 1.6; margin: 1.5rem; }"
+        "    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; line-height: 1.7; margin: 1.5rem; background: #f9fafb; color: #0f172a; }"
     )
-    parts.append("    h1 { margin-bottom: 0.4rem; }")
-    parts.append("    .meta { color: #4b5563; margin-bottom: 1rem; }")
-    parts.append("    .article { margin-bottom: 1.75rem; }")
-    parts.append("    .article h2 { margin: 0 0 0.35rem; }")
-    parts.append("    .original-title { display: block; font-size: 0.9rem; color: #6b7280; margin-top: 4px; }")
+    parts.append("    h1 { margin-bottom: 0.25rem; }")
+    parts.append("    .meta { color: #475569; margin-bottom: 1.25rem; }")
     parts.append(
-        "    .highlight-line { background-color: %s; padding: 4px 6px; border-radius: 4px; display: inline-block; margin: 0.15rem 0; }"
+        "    .nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }"
+    )
+    parts.append(
+        "    .nav a { padding: 0.45rem 0.8rem; border: 1px solid #e5e7eb; border-radius: 8px; text-decoration: none; color: #0f172a; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.04); font-weight: 600; }"
+    )
+    parts.append(
+        "    .articles { display: grid; gap: 1rem; }"
+    )
+    parts.append(
+        "    .article-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.1rem 1.2rem; box-shadow: 0 10px 25px rgba(15,23,42,0.06); }"
+    )
+    parts.append("    .article-card h2 { margin: 0; font-size: 1.15rem; }")
+    parts.append(
+        "    .article-card h2 a { color: #0f172a; text-decoration: none; }"
+    )
+    parts.append(
+        "    .article-card h2 a:hover { text-decoration: underline; }"
+    )
+    parts.append(
+        "    .original-title { display: block; font-size: 0.9rem; color: #6b7280; margin-top: 4px; }"
+    )
+    parts.append(
+        "    .article-meta { color: #475569; font-size: 0.95rem; margin: 0.5rem 0 0.75rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }"
+    )
+    parts.append(
+        "    .meta-pill { background: #eef2ff; color: #4338ca; padding: 0.25rem 0.6rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; }"
+    )
+    parts.append(
+        "    .article-image { width: 100%; max-height: 320px; object-fit: cover; border-radius: 10px; border: 1px solid #e5e7eb; margin-bottom: 0.75rem; }"
+    )
+    parts.append("    .summary-list { margin: 0; padding-left: 1.15rem; color: #0f172a; }")
+    parts.append("    .summary-list li { margin-bottom: 0.35rem; }")
+    parts.append(
+        "    .highlight { background-color: %s; padding: 3px 5px; border-radius: 4px; }"
         % HIGHLIGHT_COLOR
     )
     parts.append("  </style>")
     parts.append("</head>")
     parts.append("<body>")
+    parts.append("  <div class='nav'>")
+    parts.append("    <a href='../../index.html'>🏠 홈으로</a>")
+    parts.append("    <a href='../index.html'>📅 날짜별 목록</a>")
+    parts.append("  </div>")
     parts.append(f"  <h1>{date_str} {config.display_name} News</h1>")
     parts.append(f"  <p class='meta'>Updated at {time_str} (KST)</p>")
-    parts.append(
-        "  <p><a href='../index.html'>← 전체 날짜/시간 목록으로 돌아가기</a></p>"
-    )
-    parts.append("  <hr/>")
-    parts.append("  <ul>")
+    parts.append("  <section class='articles'>")
 
     for art in articles:
         summary_html = markdown_bold_to_highlight(art["summary"])
@@ -239,17 +337,35 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
             else ""
         )
 
-        parts.append("    <li class='article'>")
+        parts.append("    <article class='article-card'>")
         parts.append(
             "      <h2>"
             f"<a href='{art['link']}' target='_blank'>{display_title}</a>"
             f"{original_hint}"
             "</h2>"
         )
-        parts.append(f"      <p>{summary_html}</p>")
-        parts.append("    </li>")
 
-    parts.append("  </ul>")
+        meta_bits = [bit for bit in [art.get("published_display"), art.get("source_name")] if bit]
+        if meta_bits:
+            extra_meta = " · ".join(meta_bits[1:]) if len(meta_bits) > 1 else ""
+            extra_span = f"<span>{extra_meta}</span>" if extra_meta else ""
+            parts.append(
+                "      <p class='article-meta'>"
+                f"<span class='meta-pill'>{meta_bits[0]}</span>"
+                f"{extra_span}"
+                "</p>"
+            )
+
+        if art.get("image_url"):
+            parts.append(
+                f"      <img src='{art['image_url']}' alt='기사 이미지' class='article-image' loading='lazy'/>"
+            )
+
+        if summary_html:
+            parts.append(f"      {summary_html}")
+        parts.append("    </article>")
+
+    parts.append("  </section>")
     parts.append("</body>")
     parts.append("</html>")
 
@@ -296,24 +412,56 @@ def rebuild_index_html(config: CategoryConfig):
     parts.append(
         "  <meta name='viewport' content='width=device-width, initial-scale=1' />"
     )
+    parts.append("  <style>")
+    parts.append(
+        "    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; margin: 1.25rem; line-height: 1.6; background: #f9fafb; color: #0f172a; }"
+    )
+    parts.append("    h1 { margin-bottom: 0.35rem; }")
+    parts.append(
+        "    .nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }"
+    )
+    parts.append(
+        "    .nav a { padding: 0.45rem 0.85rem; border: 1px solid #e5e7eb; border-radius: 8px; text-decoration: none; color: #0f172a; background: #fff; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }"
+    )
+    parts.append(
+        "    .run-list { list-style: none; padding: 0; display: grid; gap: 0.75rem; margin-top: 1rem; }"
+    )
+    parts.append(
+        "    .run-item { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 0.9rem 1rem; box-shadow: 0 8px 18px rgba(15,23,42,0.05); }"
+    )
+    parts.append(
+        "    .run-item a { color: #0f172a; text-decoration: none; font-weight: 700; }"
+    )
+    parts.append("    .run-item a:hover { text-decoration: underline; }")
+    parts.append(
+        "    .timestamp { color: #475569; font-size: 0.95rem; display: block; margin-top: 0.2rem; }"
+    )
+    parts.append("  </style>")
     parts.append("</head>")
     parts.append("<body>")
+    parts.append("  <div class='nav'>")
+    parts.append("    <a href='../index.html'>🏠 홈으로</a>")
+    parts.append("  </div>")
     parts.append(f"  <h1>Daily {config.display_name} News Archive</h1>")
     parts.append(
         f"  <p>실행 시점(날짜+시간, KST)별로 저장된 {config.display_name} 기사 요약 목록입니다.</p>"
     )
-    parts.append("  <hr/>")
 
     if not run_entries:
         parts.append("  <p>아직 저장된 뉴스가 없습니다.</p>")
     else:
-        parts.append("  <ul>")
+        parts.append("  <ul class='run-list'>")
         for base, date_str, time_str, fname in run_entries:
             if time_str:
                 label = f"{date_str} {time_str} {config.display_name} News"
             else:
                 label = f"{date_str} {config.display_name} News"
-            parts.append(f"    <li><a href='daily/{fname}'>{label}</a></li>")
+            parts.append(
+                "    <li class='run-item'>"
+                f"<a href='daily/{fname}'>{label}</a>"
+                f"<span class='timestamp'>원본 생성 시간: {date_str} {time_str or ''} (KST)</span>"
+                "</li>"
+            )
         parts.append("  </ul>")
 
     parts.append("</body>")
@@ -335,7 +483,9 @@ def build_root_index(categories: Dict[str, CategoryConfig]):
     parts.append("  <title>AI & XR News Archives</title>")
     parts.append("  <meta name='viewport' content='width=device-width, initial-scale=1' />")
     parts.append("  <style>")
-    parts.append("    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; margin: 1.25rem; line-height: 1.6; }")
+    parts.append(
+        "    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; margin: 1.25rem; line-height: 1.6; background: #f9fafb; color: #0f172a; }"
+    )
     parts.append("    h1 { margin-bottom: 0.5rem; }")
     parts.append("    .subtitle { color: #4b5563; margin-bottom: 1rem; }")
     parts.append("    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }")
@@ -346,9 +496,13 @@ def build_root_index(categories: Dict[str, CategoryConfig]):
     )
     parts.append("    .tab-panel { display: none; }")
     parts.append("    .tab-panel.active { display: block; }")
-    parts.append("    ul { padding-left: 1.1rem; }")
+    parts.append(
+        "    .panel-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.1rem; box-shadow: 0 8px 18px rgba(15,23,42,0.05); }"
+    )
+    parts.append("    ul { padding-left: 1.1rem; margin: 0; }")
     parts.append("    li + li { margin-top: 0.35rem; }")
     parts.append("    .timestamp { color: #6b7280; font-size: 0.95rem; margin-left: 0.35rem; }")
+    parts.append("    .archive-link { margin: 0 0 0.5rem; font-weight: 700; }")
     parts.append("  </style>")
     parts.append("</head>")
     parts.append("<body>")
@@ -367,24 +521,26 @@ def build_root_index(categories: Dict[str, CategoryConfig]):
         parts.append(
             f"  <div class='tab-panel' id='{cfg.key}'>"
         )
+        parts.append("    <div class='panel-card'>")
         parts.append(
-            f"    <p><a href='{cfg.key}/index.html'>{cfg.display_name} 아카이브 전체 보기 →</a></p>"
+            f"      <p class='archive-link'><a href='{cfg.key}/index.html'>{cfg.display_name} 아카이브 전체 보기 →</a></p>"
         )
 
         if not runs:
-            parts.append("    <p>아직 저장된 뉴스가 없습니다.</p>")
+            parts.append("      <p>아직 저장된 뉴스가 없습니다.</p>")
         else:
-            parts.append("    <ul>")
+            parts.append("      <ul>")
             for base, date_str, time_str, fname in runs:
                 label = f"{date_str} {time_str} KST" if time_str else f"{date_str} KST"
                 parts.append(
-                    "      <li>"
+                    "        <li>"
                     f"<a href='{cfg.key}/daily/{fname}'>{cfg.display_name} 뉴스</a>"
                     f" <span class='timestamp'>{label}</span>"
                     "</li>"
                 )
-            parts.append("    </ul>")
+            parts.append("      </ul>")
 
+        parts.append("    </div>")
         parts.append("  </div>")
 
     parts.append("  <script>")
