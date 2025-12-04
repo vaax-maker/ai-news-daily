@@ -5,7 +5,7 @@
   <title>AI & XR News Archives</title>
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <style>
-    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; margin: 1.25rem; line-height: 1.6; }
+    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; margin: 1.25rem; line-height: 1.6; background: #f9fafb; color: #0f172a; }
     h1 { margin-bottom: 0.5rem; }
     .subtitle { color: #4b5563; margin-bottom: 1rem; }
     .tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
@@ -13,9 +13,11 @@
     .tab-btn.active { background: #111827; color: #f9fafb; border-color: #111827; }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
-    ul { padding-left: 1.1rem; }
+    .panel-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.1rem; box-shadow: 0 8px 18px rgba(15,23,42,0.05); }
+    ul { padding-left: 1.1rem; margin: 0; }
     li + li { margin-top: 0.35rem; }
     .timestamp { color: #6b7280; font-size: 0.95rem; margin-left: 0.35rem; }
+    .archive-link { margin: 0 0 0.5rem; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -26,20 +28,26 @@
     <button class='tab-btn' data-target='xr'>XR 뉴스</button>
   </div>
   <div class='tab-panel' id='ai'>
-    <p><a href='ai/index.html'>AI 아카이브 전체 보기 →</a></p>
-    <ul>
-      <li><a href='ai/daily/2025-12-04_142819.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:28:19 KST</span></li>
-      <li><a href='ai/daily/2025-12-04_140656.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:06:56 KST</span></li>
-      <li><a href='ai/daily/2025-12-04_140139.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:01:39 KST</span></li>
-    </ul>
+    <div class='panel-card'>
+      <p class='archive-link'><a href='ai/index.html'>AI 아카이브 전체 보기 →</a></p>
+      <ul>
+        <li><a href='ai/daily/2025-12-04_145006.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:50:06 KST</span></li>
+        <li><a href='ai/daily/2025-12-04_142819.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:28:19 KST</span></li>
+        <li><a href='ai/daily/2025-12-04_140656.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:06:56 KST</span></li>
+        <li><a href='ai/daily/2025-12-04_140139.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:01:39 KST</span></li>
+      </ul>
+    </div>
   </div>
   <div class='tab-panel' id='xr'>
-    <p><a href='xr/index.html'>XR 아카이브 전체 보기 →</a></p>
-    <ul>
-      <li><a href='xr/daily/2025-12-04_142819.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:28:19 KST</span></li>
-      <li><a href='xr/daily/2025-12-04_140656.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:06:56 KST</span></li>
-      <li><a href='xr/daily/2025-12-04_140139.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:01:39 KST</span></li>
-    </ul>
+    <div class='panel-card'>
+      <p class='archive-link'><a href='xr/index.html'>XR 아카이브 전체 보기 →</a></p>
+      <ul>
+        <li><a href='xr/daily/2025-12-04_145006.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:50:06 KST</span></li>
+        <li><a href='xr/daily/2025-12-04_142819.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:28:19 KST</span></li>
+        <li><a href='xr/daily/2025-12-04_140656.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:06:56 KST</span></li>
+        <li><a href='xr/daily/2025-12-04_140139.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:01:39 KST</span></li>
+      </ul>
+    </div>
   </div>
   <script>
     const tabs = document.querySelectorAll('.tab-btn'); const panels = document.querySelectorAll('.tab-panel');
