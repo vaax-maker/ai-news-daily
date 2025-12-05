@@ -23,6 +23,7 @@ class CategoryConfig:
     archive_dir: str
     index_path: str
     max_articles: int = 15
+    fallback_image_url: str = ""
     # selection_mode: 기사 선택 방식 설정 (워크플로 입력 → 환경 변수 → 기본값 순으로 결정)
     #  - "time": RSS에서 가져온 최신 순으로 정렬해 상위 N개 선택
     #  - "random": 정렬 없이 무작위 섞기 후 상위 N개 선택
@@ -69,6 +70,7 @@ CATEGORIES: Dict[str, CategoryConfig] = {
         ],
         archive_dir="docs/ai/daily",
         index_path="docs/ai/index.html",
+        fallback_image_url="https://placehold.co/800x420/111827/FFFFFF?text=AI+News",
         selection_mode=resolve_selection_mode("ai"),
         keyword_filters=resolve_keyword_filters("ai"),
     ),
@@ -293,12 +295,16 @@ def fetch_and_summarize(config: CategoryConfig):
         ]
 
     # 기사 정렬/선택 방식
+    three_days_ago = time.time() - 3 * 24 * 60 * 60
     if config.selection_mode == "time":
         # 시간 모드: 게시 시각(ts) 내림차순으로 최신 기사부터 정렬
         raw_items.sort(key=lambda x: x[0], reverse=True)
     elif config.selection_mode == "random":
-        # 랜덤 모드: 정렬 없이 무작위 섞기
-        random.shuffle(raw_items)
+        # 랜덤 모드: 최근 3일 내 기사만 대상으로 무작위 섞기 (없으면 전체 사용)
+        recent_items = [item for item in raw_items if item[0] and item[0] >= three_days_ago]
+        candidate_items = recent_items if recent_items else raw_items
+        random.shuffle(candidate_items)
+        raw_items = candidate_items
     elif config.selection_mode == "keyword":
         # 키워드 모드: 필터링 후 최신 순 정렬 (키워드가 없으면 아래 else로 동일 처리)
         raw_items.sort(key=lambda x: x[0], reverse=True)
@@ -314,6 +320,8 @@ def fetch_and_summarize(config: CategoryConfig):
 
         summary = summarize(text_with_url, title, config.display_name)
         summary = sanitize_summary(summary)
+        image_url = extract_image_url(entry) or config.fallback_image_url
+
         summarized.append(
             {
                 "title": title,
@@ -321,7 +329,7 @@ def fetch_and_summarize(config: CategoryConfig):
                 "summary": summary,
                 "published_display": format_timestamp(ts),
                 "source_name": extract_source_name(entry, link),
-                "image_url": extract_image_url(entry),
+                "image_url": image_url,
             }
         )
 
