@@ -383,13 +383,13 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
         "    .meta-pill { background: #eef2ff; color: #4338ca; padding: 0.25rem 0.6rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; }"
     )
     parts.append(
-        "    .article-body { display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; }"
+        "    .article-body { display: flex; gap: 0.85rem; align-items: flex-start; flex-wrap: wrap; }"
     )
     parts.append(
         "    .summary-column { flex: 1 1 0; min-width: 0; }"
     )
     parts.append(
-        "    .article-image { flex: 0 0 25%; max-width: 25%; height: auto; max-height: 320px; object-fit: cover; border-radius: 10px; border: 1px solid #e5e7eb; margin-left: auto; }"
+        "    .article-image { flex: 0 1 320px; width: clamp(170px, 30vw, 320px); height: auto; max-height: 320px; object-fit: cover; border-radius: 10px; border: 1px solid #e5e7eb; margin-left: 0; align-self: flex-start; }"
     )
     parts.append("    .summary-list { margin: 0; padding-left: 1.15rem; color: #0f172a; }")
     parts.append("    .summary-list li { margin-bottom: 0.35rem; }")
@@ -397,6 +397,13 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
         "    .highlight { background-color: %s; padding: 3px 5px; border-radius: 4px; }"
         % HIGHLIGHT_COLOR
     )
+    parts.append("    @media (max-width: 768px) {")
+    parts.append("      .article-body { flex-direction: column; gap: 0.75rem; }")
+    parts.append(
+        "      .article-image { order: 2; width: clamp(160px, 75%, 260px); max-width: 260px; max-height: 220px; flex: 0 0 auto; align-self: flex-start; }"
+    )
+    parts.append("      .summary-column { width: 100%; }")
+    parts.append("    }")
     parts.append("  </style>")
     parts.append("</head>")
     parts.append("<body>")
