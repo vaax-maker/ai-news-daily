@@ -18,7 +18,9 @@
     .original-title { display: block; font-size: 0.9rem; color: #6b7280; margin-top: 4px; }
     .article-meta { color: #475569; font-size: 0.95rem; margin: 0.5rem 0 0.75rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
     .meta-pill { background: #eef2ff; color: #4338ca; padding: 0.25rem 0.6rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; }
-    .article-image { width: 100%; max-height: 320px; object-fit: cover; border-radius: 10px; border: 1px solid #e5e7eb; margin-bottom: 0.75rem; }
+    .article-body { display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; }
+    .summary-column { flex: 1 1 0; min-width: 0; }
+    .article-image { flex: 0 0 25%; max-width: 25%; height: auto; max-height: 320px; object-fit: cover; border-radius: 10px; border: 1px solid #e5e7eb; margin-left: auto; }
     .summary-list { margin: 0; padding-left: 1.15rem; color: #0f172a; }
     .summary-list li { margin-bottom: 0.35rem; }
     .highlight { background-color: #fff6b0; padding: 3px 5px; border-radius: 4px; }
@@ -35,92 +37,167 @@
     <article class='article-card'>
       <h2><a href='http://www.techmeme.com/251204/p54#a251204p54' target='_blank'>전화 걸기, 이메일 처리, 작업 완료를 위한 소프트웨어 운영과 같은 디지털 작업을 자동화하는 AI 에이전트를 제공하는 Pine은 2,500만 달러 규모의 시리즈 A(FinSME)를 유치했습니다.</a><span class='original-title'>원문 제목: Pine, which offers an AI agent to automate digital chores, like making calls, handling emails, and operating software to complete tasks, raised a $25M Series A (FinSMEs)</span></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-05 02:50</span><span>techmeme.com</span></p>
-      <img src='http://www.techmeme.com/251204/i54.jpg' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li><span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AI 에이전트</span> 제공업체 <strong>Pine</strong>이 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>Series A</span> 펀딩 라운드를 마감했다.</li><li><strong>Pine</strong>은 이번 라운드를 통해 총 <strong>$25M</strong> (2,500만 달러)를 유치했다.</li><li>이 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AI 에이전트</span>는 소비자의 디지털 잡무를 자동화하는 것이 핵심 이슈이다.</li><li>자동화 대상 작업에는 전화 통화, 이메일 처리, 소프트웨어 운영 등이 포함된다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li><span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AI 에이전트</span> 제공업체 <strong>Pine</strong>이 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>Series A</span> 펀딩 라운드를 마감했다.</li><li><strong>Pine</strong>은 이번 라운드를 통해 총 <strong>$25M</strong> (2,500만 달러)를 유치했다.</li><li>이 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AI 에이전트</span>는 소비자의 디지털 잡무를 자동화하는 것이 핵심 이슈이다.</li><li>자동화 대상 작업에는 전화 통화, 이메일 처리, 소프트웨어 운영 등이 포함된다.</li></ul>
+        </div>
+        <img src='http://www.techmeme.com/251204/i54.jpg' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.reddit.com/r/ArtificialInteligence/comments/1pebdni/llm_agent_to_autobuild_probabilistic_models/' target='_blank'>확률 모델을 자동 구축하는 LLM 에이전트 – 이것을 시도해 본 사람이 있나요?</a><span class='original-title'>원문 제목: LLM Agent to Auto-Build Probabilistic Models – Anyone Tried This?</span></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 20:49</span><span>reddit.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li><span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>LLM 에이전트</span>를 사용하여 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>확률 모델</span> (베이지안 스타일)을 자동 구축하는 아이디어가 제시됨.</li><li>핵심 이슈는 <strong>LLM</strong>이 스스로 모델을 반복하고 개선하는 에이전트 루프의 구현 가능성임.</li><li>입력 데이터로는 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>스포츠 베팅 데이터</span>, 라이브 이벤트, 해설 등이 사용될 예정임.</li><li>이 모델의 궁극적 목표는 자동화된 트레이딩 또는 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>베팅 전략</span>을 수립하는 것임.</li><li>작성자는 해당 접근 방식이 이미 존재하는지 커뮤니티에 문의하며 개발 계획을 시사함.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li><span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>LLM 에이전트</span>를 사용하여 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>확률 모델</span> (베이지안 스타일)을 자동 구축하는 아이디어가 제시됨.</li><li>핵심 이슈는 <strong>LLM</strong>이 스스로 모델을 반복하고 개선하는 에이전트 루프의 구현 가능성임.</li><li>입력 데이터로는 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>스포츠 베팅 데이터</span>, 라이브 이벤트, 해설 등이 사용될 예정임.</li><li>이 모델의 궁극적 목표는 자동화된 트레이딩 또는 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>베팅 전략</span>을 수립하는 것임.</li><li>작성자는 해당 접근 방식이 이미 존재하는지 커뮤니티에 문의하며 개발 계획을 시사함.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='http://www.techmeme.com/251204/p41#a251204p41' target='_blank'>AI를 사용하여 자율 에이전트와 인간 간의 상호 작용을 분석하는 Lumia는 Team8이 이끄는 1,800만 달러의 시드를 모금했습니다(Chris Metinko/Axios).</a><span class='original-title'>원문 제목: Lumia, which uses AI to analyze interactions between autonomous agents and humans, raised an $18M seed led by Team8 (Chris Metinko/Axios)</span></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 20:00</span><span>techmeme.com</span></p>
-      <img src='http://www.techmeme.com/251204/i41.jpg' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li><strong>Lumia</strong>는 <strong>Team8</strong>이 주도한 시드(Seed) 라운드를 통해 투자를 유치했다.</li><li>유치 금액은 총 <strong>$18M</strong>(1,800만 달러)이다.</li><li>핵심 기술은 <strong>AI</strong>를 사용하여 자율 에이전트(Autonomous Agents)와 인간 간의 상호작용을 분석하는 것이다.</li><li><strong>Lumia</strong>는 이 분석을 통해 기업이 <strong>AI</strong> 사용 현황과 보안 가시성을 확보하도록 지원한다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li><strong>Lumia</strong>는 <strong>Team8</strong>이 주도한 시드(Seed) 라운드를 통해 투자를 유치했다.</li><li>유치 금액은 총 <strong>$18M</strong>(1,800만 달러)이다.</li><li>핵심 기술은 <strong>AI</strong>를 사용하여 자율 에이전트(Autonomous Agents)와 인간 간의 상호작용을 분석하는 것이다.</li><li><strong>Lumia</strong>는 이 분석을 통해 기업이 <strong>AI</strong> 사용 현황과 보안 가시성을 확보하도록 지원한다.</li></ul>
+        </div>
+        <img src='http://www.techmeme.com/251204/i41.jpg' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.reddit.com/r/ArtificialInteligence/comments/1pe8u26/why_your_single_ai_model_keeps_failing_in/' target='_blank'>단일 AI 모델이 프로덕션에서 계속 실패하는 이유(및 다중 에이전트 아키텍처 수정 사항)</a><span class='original-title'>원문 제목: Why your single AI model keeps failing in production (and what multi-agent architecture fixes)</span></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 19:09</span><span>reddit.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li>단일(Monolithic) AI 모델은 조정 및 전문성 부족으로 실패, 고위험 제조 환경에서 성공적인 운영을 위해 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>다중 에이전트 아키텍처</span>로 전환됨.</li><li>에이전트들은 감시, 진단, 권고, 실행의 4가지 역할로 전문화되었으며, 자연어가 아닌 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>구조화된 데이터</span>를 통해 소통함.</li><li>실행 에이전트는 엄격한 범위 내에서만 자율 작동하며, 인간의 신뢰 확보를 위해 시스템은 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>30초 이내</span> 롤백이 가능해야 함.</li><li>이 전문화된 파이프라인 덕분에 장비 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>가동 중단 시간</span>은 <strong>15~40%</strong> 감소했으며, 운영 비용은 <strong>12~30%</strong> 절감됨.</li><li>품질 결함이 <strong>8~25%</strong> 감소했고, 한 시설의 OEE는 4개월 만에 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>71%에서 81%</span>로 크게 향상됨.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li>단일(Monolithic) AI 모델은 조정 및 전문성 부족으로 실패, 고위험 제조 환경에서 성공적인 운영을 위해 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>다중 에이전트 아키텍처</span>로 전환됨.</li><li>에이전트들은 감시, 진단, 권고, 실행의 4가지 역할로 전문화되었으며, 자연어가 아닌 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>구조화된 데이터</span>를 통해 소통함.</li><li>실행 에이전트는 엄격한 범위 내에서만 자율 작동하며, 인간의 신뢰 확보를 위해 시스템은 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>30초 이내</span> 롤백이 가능해야 함.</li><li>이 전문화된 파이프라인 덕분에 장비 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>가동 중단 시간</span>은 <strong>15~40%</strong> 감소했으며, 운영 비용은 <strong>12~30%</strong> 절감됨.</li><li>품질 결함이 <strong>8~25%</strong> 감소했고, 한 시설의 OEE는 4개월 만에 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>71%에서 81%</span>로 크게 향상됨.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.reddit.com/r/ArtificialInteligence/comments/1pe7y8a/deepseek_gathered_a_large_stock_of_nvidia_chips/' target='_blank'>DeepSeek은 미국 수출 금지 이전에 Nvidia 칩의 대량 재고를 수집했습니다.</a><span class='original-title'>원문 제목: DeepSeek gathered a large stock ⁠of Nvidia chips before the US export bans</span></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 18:37</span><span>reddit.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li>미국은 지난 4월 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>H20 칩</span> 판매를 제한했으며, 이후 중국 기업들의 AI 훈련이 해외(offshore)에서 증가하는 추세다.</li><li>대부분의 중국 기업들은 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>미국 수출 통제</span>를 우회하기 위해 해외 데이터센터 임대에 의존하고 있다.</li><li><strong>DeepSeek</strong>은 이러한 일반적인 전략과 대비되는 예외적인 사례로 주목받고 있다.</li><li><strong>DeepSeek</strong>은 미국의 수출 금지 조치 이전에 대량의 <strong>Nvidia</strong> 칩 재고를 선확보했다.</li><li>이 덕분에 <strong>DeepSeek</strong>은 다른 기업들과 달리 모델 훈련을 <strong>국내</strong>에서 진행하고 있다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li>미국은 지난 4월 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>H20 칩</span> 판매를 제한했으며, 이후 중국 기업들의 AI 훈련이 해외(offshore)에서 증가하는 추세다.</li><li>대부분의 중국 기업들은 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>미국 수출 통제</span>를 우회하기 위해 해외 데이터센터 임대에 의존하고 있다.</li><li><strong>DeepSeek</strong>은 이러한 일반적인 전략과 대비되는 예외적인 사례로 주목받고 있다.</li><li><strong>DeepSeek</strong>은 미국의 수출 금지 조치 이전에 대량의 <strong>Nvidia</strong> 칩 재고를 선확보했다.</li><li>이 덕분에 <strong>DeepSeek</strong>은 다른 기업들과 달리 모델 훈련을 <strong>국내</strong>에서 진행하고 있다.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.reddit.com/r/ArtificialInteligence/comments/1pe77qf/googles_agentic_ai_wipes_users_entire_hdd_without/' target='_blank'>Google의 Agentic AI는 치명적인 오류 발생 시 허가 없이 사용자의 전체 HDD를 삭제합니다.</a><span class='original-title'>원문 제목: Google's Agentic AI wipes user's entire HDD without permission in catastrophic failure</span></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 18:10</span><span>reddit.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li><strong>Google</strong>의 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>Agentic AI</span> 개발 도구 'Antigravity'에서 심각한 오류가 발생했다.</li><li>개발자가 캐시 삭제를 요청하자, AI가 명령을 잘못 실행하여 사용자의 전체 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>D 드라이브</span>를 무단으로 영구 삭제했다.</li><li>AI는 `rmdir` 명령이 프로젝트 폴더 대신 D: 드라이브의 루트를 지정했으며, `/q` (quiet) 플래그를 사용해 휴지통 없이 파일을 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>영구 삭제</span>했다고 시인했다.</li><li>해당 AI는 스스로를 "중대한 실패(<span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>critical failure</span>)"로 규정하며 사용자의 모든 파일이 사라진 것에 대해 사과했다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li><strong>Google</strong>의 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>Agentic AI</span> 개발 도구 'Antigravity'에서 심각한 오류가 발생했다.</li><li>개발자가 캐시 삭제를 요청하자, AI가 명령을 잘못 실행하여 사용자의 전체 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>D 드라이브</span>를 무단으로 영구 삭제했다.</li><li>AI는 `rmdir` 명령이 프로젝트 폴더 대신 D: 드라이브의 루트를 지정했으며, `/q` (quiet) 플래그를 사용해 휴지통 없이 파일을 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>영구 삭제</span>했다고 시인했다.</li><li>해당 AI는 스스로를 "중대한 실패(<span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>critical failure</span>)"로 규정하며 사용자의 모든 파일이 사라진 것에 대해 사과했다.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.reddit.com/r/ArtificialInteligence/comments/1pe6w4e/does_aws_bedrock_suck_or_is_it_just_a_skill_issue/' target='_blank'>AWS Bedrock은 형편없습니까, 아니면 단지 기술 문제입니까?</a><span class='original-title'>원문 제목: Does AWS Bedrock suck or is it just a skill issue?</span></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 17:59</span><span>reddit.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li><span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AWS Bedrock</span> 사용자가 예상치 못한 불안정한 동작과 잦은 오류(특히 <strong>us-east-1</strong> 문제 주변)로 인해 프로젝트 진행에 어려움을 겪고 있음.</li><li>RPM, TPM 등 서비스 할당량(quota) 증가 승인이 매우 느려 솔루션 활용에 제약이 컸으며, nonprod 계정의 할당량 제한으로 <strong>prod</strong> 환경에서 테스트해야 하는 문제에 직면함.</li><li>AWS의 신규 모델(예: <strong>Anthropic</strong> Sonnet 4.5) 채택 권유에 따라 전환했으나, Bedrock의 기본값(temperature=1) 설정 때문에 `top_p`와 동시에 사용할 수 없는 기술적 충돌이 발생함.</li><li><strong>CDK</strong> 구조체 및 SDK 메서드에서 문서화되지 않은 비정상적 동작이 빈번했으며, 공식 문서의 내용이 부정확하거나 오류를 포함하고 있어 디버깅에 막대한 시간이 소요됨.</li><li>사용자는 이러한 불안정성과 낮은 생산성 때문에 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AWS Bedrock</span> 플랫폼 이탈을 심각하게 고려 중임.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li><span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AWS Bedrock</span> 사용자가 예상치 못한 불안정한 동작과 잦은 오류(특히 <strong>us-east-1</strong> 문제 주변)로 인해 프로젝트 진행에 어려움을 겪고 있음.</li><li>RPM, TPM 등 서비스 할당량(quota) 증가 승인이 매우 느려 솔루션 활용에 제약이 컸으며, nonprod 계정의 할당량 제한으로 <strong>prod</strong> 환경에서 테스트해야 하는 문제에 직면함.</li><li>AWS의 신규 모델(예: <strong>Anthropic</strong> Sonnet 4.5) 채택 권유에 따라 전환했으나, Bedrock의 기본값(temperature=1) 설정 때문에 `top_p`와 동시에 사용할 수 없는 기술적 충돌이 발생함.</li><li><strong>CDK</strong> 구조체 및 SDK 메서드에서 문서화되지 않은 비정상적 동작이 빈번했으며, 공식 문서의 내용이 부정확하거나 오류를 포함하고 있어 디버깅에 막대한 시간이 소요됨.</li><li>사용자는 이러한 불안정성과 낮은 생산성 때문에 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AWS Bedrock</span> 플랫폼 이탈을 심각하게 고려 중임.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.aitimes.com/news/articleView.html?idxno=204528' target='_blank'>[게시판] 이연수 NC AI 대표, SW 산업발전 대통령 표창 등 단신</a></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 17:50</span><span>aitimes.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li><span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>NC AI</span> 이연수 대표가 소프트웨어 산업발전 유공자 포상에서 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>대통령 표창</span>을 수상했다.</li><li>이 대표는 게임 업계 최초 <strong>LLM</strong> (대형언어모델) 개발로 국내 <strong>AI</strong> 기술을 강화한 공로를 인정받았다.</li><li><span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>NC AI</span> 김민재 CTO 역시 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AI 콘텐츠</span> 제작 기술 상용화 기여로 과학기술정보통신부 장관 표창을 받았다.</li><li>드론 <strong>AI</strong> 전문 <strong>니어스랩</strong>은 '2025 대한민국 기술대상' 관련 소식을 알렸다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li><span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>NC AI</span> 이연수 대표가 소프트웨어 산업발전 유공자 포상에서 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>대통령 표창</span>을 수상했다.</li><li>이 대표는 게임 업계 최초 <strong>LLM</strong> (대형언어모델) 개발로 국내 <strong>AI</strong> 기술을 강화한 공로를 인정받았다.</li><li><span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>NC AI</span> 김민재 CTO 역시 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AI 콘텐츠</span> 제작 기술 상용화 기여로 과학기술정보통신부 장관 표창을 받았다.</li><li>드론 <strong>AI</strong> 전문 <strong>니어스랩</strong>은 '2025 대한민국 기술대상' 관련 소식을 알렸다.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.reddit.com/r/ArtificialInteligence/comments/1pe51of/what_are_the_hardest_things_to_achieve_ai/' target='_blank'>AI를 달성하기 위해 가장 어려운 점은 무엇입니까?</a><span class='original-title'>원문 제목: What are the hardest things to achieve AI?</span></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 16:51</span><span>reddit.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li><strong>인공지능(AI)</strong>의 궁극적 목표를 달성하기 위해 극복해야 할 가장 어려운 난제와 핵심 과제에 대한 논의가 촉발됨.</li><li>현재의 주류 방식인 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>LLM(대규모 언어 모델)</span>의 성능을 단순히 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>규모 확장</span>하는 전략만으로는 진정한 <strong>AI</strong>를 이룰 수 없다는 근본적인 회의론이 주요 쟁점으로 부각됨.</li><li>이는 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>규모 확장</span>의 한계를 넘어선 새로운 <strong>AI</strong> 패러다임이 필요하다는 관점을 제기한다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li><strong>인공지능(AI)</strong>의 궁극적 목표를 달성하기 위해 극복해야 할 가장 어려운 난제와 핵심 과제에 대한 논의가 촉발됨.</li><li>현재의 주류 방식인 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>LLM(대규모 언어 모델)</span>의 성능을 단순히 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>규모 확장</span>하는 전략만으로는 진정한 <strong>AI</strong>를 이룰 수 없다는 근본적인 회의론이 주요 쟁점으로 부각됨.</li><li>이는 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>규모 확장</span>의 한계를 넘어선 새로운 <strong>AI</strong> 패러다임이 필요하다는 관점을 제기한다.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.aitimes.com/news/articleView.html?idxno=204517' target='_blank'>아크릴, 리벨리온 NPU에 LLM 서비스 연동...”국산 AI 인프라 결합”</a></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 15:43</span><span>aitimes.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li><strong>아크릴</strong>은 AI 반도체 전문 <strong>리벨리온</strong>의 NPU ‘<strong>아톰</strong>’에 AI 서비스 ‘<strong>조나단</strong>’을 성공적으로 연동했다.</li><li>이번 연동은 국산 AI 반도체를 기반으로 하는 <strong>LLM</strong> 서비스 기술 경쟁력 강화를 목적으로 한다.</li><li><strong>조나단</strong> 시스템은 개편을 통해 모델 관리, 학습, 추론, 배포 등 AI 서비스 전 주기를 NPU 환경에서 운영한다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li><strong>아크릴</strong>은 AI 반도체 전문 <strong>리벨리온</strong>의 NPU ‘<strong>아톰</strong>’에 AI 서비스 ‘<strong>조나단</strong>’을 성공적으로 연동했다.</li><li>이번 연동은 국산 AI 반도체를 기반으로 하는 <strong>LLM</strong> 서비스 기술 경쟁력 강화를 목적으로 한다.</li><li><strong>조나단</strong> 시스템은 개편을 통해 모델 관리, 학습, 추론, 배포 등 AI 서비스 전 주기를 NPU 환경에서 운영한다.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.aitimes.com/news/articleView.html?idxno=204516' target='_blank'>업스테이지, 공공기관에 ‘AI 워크스페이스’ 공급 확대...”LLM·OCR로 문서 작업 효율화”</a></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 14:32</span><span>aitimes.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li><strong>업스테이지</strong>는 조달청과 공공 업무용 ‘생성 AI 업무지원 서비스’ 공급 계약을 체결하고 공공기관 시장 진출을 확대한다.</li><li>이번 서비스는 정부 및 공공기관의 보안 망 분리(인터넷망 분리) 환경에서도 <strong>AI</strong>를 안전하게 활용할 수 있도록 지원한다.</li><li><strong>업스테이지</strong>는 조달청 디지털서비스몰에 신설된 생성 AI 업무지원 서비스 부문의 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>첫 공급사</span>로 선정되었다.</li><li><strong>LLM</strong> 및 <strong>OCR</strong> 기술이 적용된 ‘공공 AI 워크스페이스’를 제공하여 공공기관의 문서 작업 효율화에 기여하는 것이 핵심 목표이다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li><strong>업스테이지</strong>는 조달청과 공공 업무용 ‘생성 AI 업무지원 서비스’ 공급 계약을 체결하고 공공기관 시장 진출을 확대한다.</li><li>이번 서비스는 정부 및 공공기관의 보안 망 분리(인터넷망 분리) 환경에서도 <strong>AI</strong>를 안전하게 활용할 수 있도록 지원한다.</li><li><strong>업스테이지</strong>는 조달청 디지털서비스몰에 신설된 생성 AI 업무지원 서비스 부문의 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>첫 공급사</span>로 선정되었다.</li><li><strong>LLM</strong> 및 <strong>OCR</strong> 기술이 적용된 ‘공공 AI 워크스페이스’를 제공하여 공공기관의 문서 작업 효율화에 기여하는 것이 핵심 목표이다.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.aitimes.com/news/articleView.html?idxno=204504' target='_blank'>인터엑스, 제조 특화 ‘도큐먼트.AI API’ 출시...복잡한 표·수식도 정밀 분석</a></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 12:20</span><span>aitimes.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li><span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AI 제조</span> 전문 기업 <strong>인터엑스</strong>가 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>제조 특화</span> 문서 전처리 서비스 ‘<span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>도큐먼트.AI API</span>’를 출시했다.</li><li>본 <strong>API</strong>는 <strong>LLM</strong> 및 <strong>RAG</strong> 기반 챗봇, 사내 포털 구축 등에 필요한 핵심 <strong>전처리</strong> 기능을 제공한다.</li><li>복잡한 기술 문서 내 <strong>수식</strong>, 중첩 표, 차트 등을 최대한 보존하며 정밀하게 구조화한다.</li><li><strong>제조</strong>·엔지니어링 문서의 멀티 페이지 표를 자동으로 하나로 병합하는 기능이 특징이다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li><span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AI 제조</span> 전문 기업 <strong>인터엑스</strong>가 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>제조 특화</span> 문서 전처리 서비스 ‘<span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>도큐먼트.AI API</span>’를 출시했다.</li><li>본 <strong>API</strong>는 <strong>LLM</strong> 및 <strong>RAG</strong> 기반 챗봇, 사내 포털 구축 등에 필요한 핵심 <strong>전처리</strong> 기능을 제공한다.</li><li>복잡한 기술 문서 내 <strong>수식</strong>, 중첩 표, 차트 등을 최대한 보존하며 정밀하게 구조화한다.</li><li><strong>제조</strong>·엔지니어링 문서의 멀티 페이지 표를 자동으로 하나로 병합하는 기능이 특징이다.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.reddit.com/r/ArtificialInteligence/comments/1pdx8hx/is_this_ai_pet_a_future_headache/' target='_blank'>이 AI 애완동물은 미래의 골칫거리일까요?</a><span class='original-title'>원문 제목: Is this AI pet a future headache?</span></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 11:04</span><span>reddit.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li>AI 펫 로봇 <strong>Loona</strong>는 <strong>ChatGPT</strong> 통합 및 감정 표현 기능을 제공하며, 약 <strong>$500</strong>의 가격대이다.</li><li>주요 우려는 장기적인 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>하드웨어 내구성</span> 문제이며, 복잡한 내부 <strong>기어</strong> 시스템의 고장 위험이 크다.</li><li>몇 달 사용 후 삐걱거리는 소리, <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>기어 고장</span>, 바퀴 축 문제 등의 <strong>신뢰성</strong> 이슈가 보고되었다.</li><li>공식 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>보증 기간</span>은 <strong>1년</strong>에 불과해 고장 시 값비싼 고철 덩어리가 될 위험이 지적된다.</li><li>짧은 배터리 수명(1.5~2시간)과 1년 후 성능 저하, 음성 제어의 <strong>정확도</strong> 또한 문제로 제기된다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li>AI 펫 로봇 <strong>Loona</strong>는 <strong>ChatGPT</strong> 통합 및 감정 표현 기능을 제공하며, 약 <strong>$500</strong>의 가격대이다.</li><li>주요 우려는 장기적인 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>하드웨어 내구성</span> 문제이며, 복잡한 내부 <strong>기어</strong> 시스템의 고장 위험이 크다.</li><li>몇 달 사용 후 삐걱거리는 소리, <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>기어 고장</span>, 바퀴 축 문제 등의 <strong>신뢰성</strong> 이슈가 보고되었다.</li><li>공식 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>보증 기간</span>은 <strong>1년</strong>에 불과해 고장 시 값비싼 고철 덩어리가 될 위험이 지적된다.</li><li>짧은 배터리 수명(1.5~2시간)과 1년 후 성능 저하, 음성 제어의 <strong>정확도</strong> 또한 문제로 제기된다.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.reddit.com/r/ArtificialInteligence/comments/1pdwpo1/i_went_to_an_ai_networking_event_and_discovered/' target='_blank'>AI 네트워킹 행사에 갔다가 AI를 이해하는 사람이 아무도 없다는 사실을 발견했습니다. (변호사 제외)</a><span class='original-title'>원문 제목: I Went to an AI Networking Event and Discovered Nobody Understands AI (Except the Lawyer)</span></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 10:32</span><span>reddit.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li>AI 네트워킹 행사에서 엔지니어인 저자는 대다수 참가자들이 버즈워드만 난무하는 프로젝트를 발표하며 핵심 기술에 대한 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>이해 부족</span>을 드러냈다고 지적했다.</li><li>현 AI 개발은 'scale and pray' 수준에 머물러 있으며, 저자의 <strong>윤리</strong> 및 <strong>안전</strong> 관련 논의 제안은 무관심에 부딪혔다.</li><li>행사의 하이라이트는 기술 배경이 없는 한 <strong>변호사</strong>였으며, 이 인물은 날카로운 질문을 통해 <strong>LLM</strong> 스택의 복잡한 작동 방식(RMSNorm, GQA, MoE 등)을 빠르게 파악했다.</li><li>이 <strong>변호사</strong>는 무료 API 기반의 '차세대 AGI' 앱을 홍보하던 대부분의 기술 전문가보다 더 정확한 시스템 작동 모델을 갖게 되었다.</li><li>결론적으로, 업계에는 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AI 아키텍처</span>에 대한 깊이 있는 이해 없이 <strong>과대광고</strong>만 넘쳐나는 상황이 만연해 있다는 진단이다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li>AI 네트워킹 행사에서 엔지니어인 저자는 대다수 참가자들이 버즈워드만 난무하는 프로젝트를 발표하며 핵심 기술에 대한 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>이해 부족</span>을 드러냈다고 지적했다.</li><li>현 AI 개발은 'scale and pray' 수준에 머물러 있으며, 저자의 <strong>윤리</strong> 및 <strong>안전</strong> 관련 논의 제안은 무관심에 부딪혔다.</li><li>행사의 하이라이트는 기술 배경이 없는 한 <strong>변호사</strong>였으며, 이 인물은 날카로운 질문을 통해 <strong>LLM</strong> 스택의 복잡한 작동 방식(RMSNorm, GQA, MoE 등)을 빠르게 파악했다.</li><li>이 <strong>변호사</strong>는 무료 API 기반의 '차세대 AGI' 앱을 홍보하던 대부분의 기술 전문가보다 더 정확한 시스템 작동 모델을 갖게 되었다.</li><li>결론적으로, 업계에는 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AI 아키텍처</span>에 대한 깊이 있는 이해 없이 <strong>과대광고</strong>만 넘쳐나는 상황이 만연해 있다는 진단이다.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.reddit.com/r/ArtificialInteligence/comments/1pdvr2b/nvidia_ceo_on_new_jre_podcast_ai_scaling/' target='_blank'>새로운 JRE 팟캐스트의 NVIDIA CEO: AI 확장법, 로봇 및 원자력</a><span class='original-title'>원문 제목: NVIDIA CEO on new JRE podcast: AI scaling laws,Robots and nuclear energy</span></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 09:31</span><span>reddit.com</span></p>
-      <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li><strong>NVIDIA</strong> CEO <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>Jensen Huang</span>은 AI 성장을 위해 기존 1개가 아닌 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>세 가지 스케일링 법칙</span>을 제시했으며, 특히 모델이 답하기 전에 생각하는 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>추론 시간 스케일링</span>을 새로운 핵심 요소로 강조했다.</li><li>그는 AI가 생성하는 지식을 '정제된 지능'이라 정의하며, <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>2~3년 내</span>에 전 세계 지식의 <strong>90%</strong>가 AI에 의해 생성될 것이라고 예측했다.</li><li>폭증하는 에너지 수요 해결을 위해, <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>6~7년 내</span>에 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>수백 메가와트</span>급 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>소형 모듈 원자로(SMR)</span>가 데이터 센터에 직접 전력을 공급해야 한다고 주장했다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li><strong>NVIDIA</strong> CEO <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>Jensen Huang</span>은 AI 성장을 위해 기존 1개가 아닌 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>세 가지 스케일링 법칙</span>을 제시했으며, 특히 모델이 답하기 전에 생각하는 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>추론 시간 스케일링</span>을 새로운 핵심 요소로 강조했다.</li><li>그는 AI가 생성하는 지식을 '정제된 지능'이라 정의하며, <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>2~3년 내</span>에 전 세계 지식의 <strong>90%</strong>가 AI에 의해 생성될 것이라고 예측했다.</li><li>폭증하는 에너지 수요 해결을 위해, <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>6~7년 내</span>에 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>수백 메가와트</span>급 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>소형 모듈 원자로(SMR)</span>가 데이터 센터에 직접 전력을 공급해야 한다고 주장했다.</li></ul>
+        </div>
+        <img src='https://placehold.co/800x420/111827/FFFFFF?text=AI+News' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
   </section>
 </body>
