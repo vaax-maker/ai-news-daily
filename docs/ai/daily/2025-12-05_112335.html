@@ -18,7 +18,9 @@
     .original-title { display: block; font-size: 0.9rem; color: #6b7280; margin-top: 4px; }
     .article-meta { color: #475569; font-size: 0.95rem; margin: 0.5rem 0 0.75rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
     .meta-pill { background: #eef2ff; color: #4338ca; padding: 0.25rem 0.6rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; }
-    .article-image { width: 100%; max-height: 320px; object-fit: cover; border-radius: 10px; border: 1px solid #e5e7eb; margin-bottom: 0.75rem; }
+    .article-body { display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; }
+    .summary-column { flex: 1 1 0; min-width: 0; }
+    .article-image { flex: 0 0 25%; max-width: 25%; height: auto; max-height: 320px; object-fit: cover; border-radius: 10px; border: 1px solid #e5e7eb; margin-left: auto; }
     .summary-list { margin: 0; padding-left: 1.15rem; color: #0f172a; }
     .summary-list li { margin-bottom: 0.35rem; }
     .highlight { background-color: #fff6b0; padding: 3px 5px; border-radius: 4px; }
@@ -40,8 +42,13 @@
     <article class='article-card'>
       <h2><a href='http://www.techmeme.com/251204/p41#a251204p41' target='_blank'>AI를 사용하여 자율 에이전트와 인간 간의 상호 작용을 분석하는 Lumia는 Team8이 이끄는 1,800만 달러의 시드를 모금했습니다(Chris Metinko/Axios).</a><span class='original-title'>원문 제목: Lumia, which uses AI to analyze interactions between autonomous agents and humans, raised an $18M seed led by Team8 (Chris Metinko/Axios)</span></h2>
       <p class='article-meta'><span class='meta-pill'>2025-12-04 20:00</span><span>techmeme.com</span></p>
-      <img src='http://www.techmeme.com/251204/i41.jpg' alt='기사 이미지' class='article-image' loading='lazy'/>
-      <ul class='summary-list'><li><strong>Lumia</strong>는 <strong>Team8</strong> 주도 하에 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>1,800만 달러</span> 규모의 시드 투자를 유치했습니다.</li><li>핵심 기술은 <strong>AI</strong>를 사용하여 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>자율 에이전트</span>와 인간 사이의 상호작용을 분석하는 것입니다.</li><li>이는 기업들이 시스템 내 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AI 사용</span> 현황 및 보안에 대한 가시성을 확보하도록 돕습니다.</li><li>기금은 <strong>Lumia</strong>의 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>에이전트 AI</span> 보안 솔루션 개발에 사용될 예정입니다.</li></ul>
+      <div class='article-body'>
+        <div class='summary-column'>
+          <ul class='summary-list'><li><strong>Lumia</strong>는 <strong>Team8</strong> 주도 하에 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>1,800만 달러</span> 규모의 시드 투자를 유치했습니다.</li><li>핵심 기술은 <strong>AI</strong>를 사용하여 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>자율 에이전트</span>와 인간 사이의 상호작용을 분석하는 것입니다.</li><li>이는 기업들이 시스템 내 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>AI 사용</span> 현황 및 보안에 대한 가시성을 확보하도록 돕습니다.</li><li>기금은 <strong>Lumia</strong>의 <span class='highlight' style='background-color: #fff6b0; padding: 3px 5px; border-radius: 4px;'>에이전트 AI</span> 보안 솔루션 개발에 사용될 예정입니다.</li></ul>
+        </div>
+        <img src='http://www.techmeme.com/251204/i41.jpg' alt='기사 이미지' class='article-image' loading='lazy'/>
+      </div>
+
     </article>
     <article class='article-card'>
       <h2><a href='https://www.reddit.com/r/ArtificialInteligence/comments/1pe8u26/why_your_single_ai_model_keeps_failing_in/' target='_blank'>단일 AI 모델이 프로덕션에서 계속 실패하는 이유(및 다중 에이전트 아키텍처 수정 사항)</a><span class='original-title'>원문 제목: Why your single AI model keeps failing in production (and what multi-agent architecture fixes)</span></h2>

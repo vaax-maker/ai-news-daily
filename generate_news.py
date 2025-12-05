@@ -362,9 +362,7 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
     parts.append(
         "    .nav a { padding: 0.45rem 0.8rem; border: 1px solid #e5e7eb; border-radius: 8px; text-decoration: none; color: #0f172a; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.04); font-weight: 600; }"
     )
-    parts.append(
-        "    .articles { display: grid; gap: 1rem; }"
-    )
+    parts.append("    .articles { display: grid; gap: 1rem; }")
     parts.append(
         "    .article-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.1rem 1.2rem; box-shadow: 0 10px 25px rgba(15,23,42,0.06); }"
     )
@@ -385,7 +383,13 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
         "    .meta-pill { background: #eef2ff; color: #4338ca; padding: 0.25rem 0.6rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; }"
     )
     parts.append(
-        "    .article-image { width: 100%; max-height: 320px; object-fit: cover; border-radius: 10px; border: 1px solid #e5e7eb; margin-bottom: 0.75rem; }"
+        "    .article-body { display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; }"
+    )
+    parts.append(
+        "    .summary-column { flex: 1 1 0; min-width: 0; }"
+    )
+    parts.append(
+        "    .article-image { flex: 0 0 25%; max-width: 25%; height: auto; max-height: 320px; object-fit: cover; border-radius: 10px; border: 1px solid #e5e7eb; margin-left: auto; }"
     )
     parts.append("    .summary-list { margin: 0; padding-left: 1.15rem; color: #0f172a; }")
     parts.append("    .summary-list li { margin-bottom: 0.35rem; }")
@@ -432,13 +436,19 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
                 "</p>"
             )
 
-        if art.get("image_url"):
-            parts.append(
-                f"      <img src='{art['image_url']}' alt='기사 이미지' class='article-image' loading='lazy'/>"
-            )
+        if summary_html or art.get("image_url"):
+            parts.append("      <div class='article-body'>")
+            parts.append("        <div class='summary-column'>")
+            if summary_html:
+                parts.append(f"          {summary_html}")
+            parts.append("        </div>")
 
-        if summary_html:
-            parts.append(f"      {summary_html}")
+            if art.get("image_url"):
+                parts.append(
+                    f"        <img src='{art['image_url']}' alt='기사 이미지' class='article-image' loading='lazy'/>"
+                )
+
+            parts.append("      </div>")
         parts.append("    </article>")
 
     parts.append("  </section>")
