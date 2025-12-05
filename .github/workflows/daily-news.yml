@@ -6,15 +6,15 @@ on:
       ai_selection_mode:
         description: "AI 뉴스 선택 방식 (time/random/keyword)"
         required: false
-        default: "time"
+        default: "keyword"
       ai_keywords:
         description: "AI 뉴스 키워드 필터 (콤마로 구분)"
         required: false
-        default: ""
+        default: "agent,agentic,llm,lam,robot"
       xr_selection_mode:
         description: "XR 뉴스 선택 방식 (time/random/keyword)"
         required: false
-        default: "time"
+        default: "random"
       xr_keywords:
         description: "XR 뉴스 키워드 필터 (콤마로 구분)"
         required: false
