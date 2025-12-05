@@ -5,7 +5,7 @@ import feedparser
 import google.generativeai as genai
 import re
 import random
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import lru_cache
 from typing import Dict, List
 from urllib.parse import urlparse
@@ -23,7 +23,25 @@ class CategoryConfig:
     archive_dir: str
     index_path: str
     max_articles: int = 15
-    display_order: str = "time"  # "time" or "random"
+    selection_mode: str = "time"  # "time", "random", "keyword"
+    keyword_filters: List[str] = field(default_factory=list)
+
+
+# --- 설정 ---
+
+
+def resolve_selection_mode(key: str, default: str = "time") -> str:
+    env_val = os.getenv(f"{key.upper()}_SELECTION_MODE", default).strip().lower()
+    if env_val in {"time", "random", "keyword"}:
+        return env_val
+    return default
+
+
+def resolve_keyword_filters(key: str) -> List[str]:
+    raw = os.getenv(f"{key.upper()}_KEYWORDS", "").strip()
+    if not raw:
+        return []
+    return [kw.strip() for kw in raw.split(",") if kw.strip()]
 
 
 # --- 설정 ---
@@ -39,6 +57,8 @@ CATEGORIES: Dict[str, CategoryConfig] = {
         ],
         archive_dir="docs/ai/daily",
         index_path="docs/ai/index.html",
+        selection_mode=resolve_selection_mode("ai"),
+        keyword_filters=resolve_keyword_filters("ai"),
     ),
     "xr": CategoryConfig(
         key="xr",
@@ -51,6 +71,8 @@ CATEGORIES: Dict[str, CategoryConfig] = {
         ],
         archive_dir="docs/xr/daily",
         index_path="docs/xr/index.html",
+        selection_mode=resolve_selection_mode("xr"),
+        keyword_filters=resolve_keyword_filters("xr"),
     ),
 }
 
@@ -161,6 +183,26 @@ def extract_image_url(entry) -> str:
     if isinstance(image_link, dict) and image_link.get("href"):
         return image_link["href"]
 
+    def extract_from_html(html_text: str) -> str:
+        if not html_text:
+            return ""
+        match = re.search(r"<img[^>]+src=['\"]([^'\"]+)['\"]", html_text, re.IGNORECASE)
+        return match.group(1) if match else ""
+
+    contents = getattr(entry, "content", None) or []
+    for content in contents:
+        if isinstance(content, dict):
+            candidate = extract_from_html(content.get("value", ""))
+        else:
+            candidate = extract_from_html(getattr(content, "value", ""))
+        if candidate:
+            return candidate
+
+    summary_html = getattr(entry, "summary", "") or getattr(entry, "description", "")
+    html_candidate = extract_from_html(summary_html)
+    if html_candidate:
+        return html_candidate
+
     return ""
 
 
@@ -227,14 +269,24 @@ def fetch_and_summarize(config: CategoryConfig):
 
             raw_items.append((ts, title, link, content, entry))
 
+    keywords = [kw.lower() for kw in config.keyword_filters]
+
+    if config.selection_mode == "keyword" and keywords:
+        raw_items = [
+            item
+            for item in raw_items
+            if any(kw in ((item[1] or "") + " " + (item[3] or "")).lower() for kw in keywords)
+        ]
+
     # 기사 정렬/선택 방식
-    if config.display_order == "time":
+    if config.selection_mode == "time":
         # 최신 기사 순으로 정렬 (ts 내림차순)
         raw_items.sort(key=lambda x: x[0], reverse=True)
-    elif config.display_order == "random":
+    elif config.selection_mode == "random":
         random.shuffle(raw_items)
+    elif config.selection_mode == "keyword":
+        raw_items.sort(key=lambda x: x[0], reverse=True)
     else:
-        # 잘못된 설정이면 기본은 time
         raw_items.sort(key=lambda x: x[0], reverse=True)
 
     # 상위 N개만 선택
