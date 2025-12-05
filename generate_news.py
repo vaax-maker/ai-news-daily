@@ -23,7 +23,7 @@ class CategoryConfig:
     archive_dir: str
     index_path: str
     max_articles: int = 15
-    # selection_mode: 기사 선택 방식 설정
+    # selection_mode: 기사 선택 방식 설정 (워크플로 입력 → 환경 변수 → 기본값 순으로 결정)
     #  - "time": RSS에서 가져온 최신 순으로 정렬해 상위 N개 선택
     #  - "random": 정렬 없이 무작위 섞기 후 상위 N개 선택
     #  - "keyword": 지정한 키워드가 제목·본문에 들어간 기사만 필터링 후 최신 순으로 선택
@@ -37,6 +37,7 @@ class CategoryConfig:
 def resolve_selection_mode(key: str, default: str = "time") -> str:
     # <카테고리>_SELECTION_MODE 환경 변수로 선택 모드를 지정한다.
     # 예) AI 카테고리에 랜덤 적용: `export AI_SELECTION_MODE=random`
+    # GitHub Actions( daily-news.yml )에서 workflow_dispatch 입력을 이 환경 변수로 전달한다.
     # 지원 값 외가 들어오면 기본값(default)을 사용한다.
     env_val = os.getenv(f"{key.upper()}_SELECTION_MODE", default).strip().lower()
     if env_val in {"time", "random", "keyword"}:
@@ -47,6 +48,7 @@ def resolve_selection_mode(key: str, default: str = "time") -> str:
 def resolve_keyword_filters(key: str) -> List[str]:
     # <카테고리>_KEYWORDS 환경 변수에 콤마(,)로 구분된 키워드를 넣는다.
     # 예) AI 카테고리에 "openai"와 "llm"을 필터링: `export AI_KEYWORDS="openai,llm"`
+    # daily-news.yml의 workflow_dispatch 입력이 동일 이름의 환경 변수로 채워져 여기에서 읽힌다.
     # 키워드는 대소문자 구분 없이 제목·본문에서 검색된다.
     raw = os.getenv(f"{key.upper()}_KEYWORDS", "").strip()
     if not raw:
