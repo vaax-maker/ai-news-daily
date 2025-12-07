@@ -3,6 +3,7 @@ import time
 import datetime
 import feedparser
 import google.generativeai as genai
+from google.api_core import exceptions
 import re
 import random
 from dataclasses import dataclass, field
@@ -237,6 +238,20 @@ def sanitize_summary(summary: str) -> str:
     return "\n".join(cleaned_lines)
 
 
+def _extract_retry_delay(exc: Exception, default: float = 30.0) -> float:
+    """Extract retry-after seconds from Gemini quota errors."""
+
+    message = str(exc).lower()
+    match = re.search(r"retry in ([0-9]+(?:\.[0-9]+)?)s", message)
+    if match:
+        try:
+            return float(match.group(1))
+        except ValueError:
+            pass
+
+    return default
+
+
 # 1) Gemini 요약 함수
 def summarize(text: str, title: str, display_name: str) -> str:
     genai.configure(api_key=os.environ["GEMINI_API_KEY"])
@@ -253,9 +268,35 @@ def summarize(text: str, title: str, display_name: str) -> str:
 내용:
 {text[:2000]}
 """
+    last_exc: Exception | None = None
+    for attempt in range(3):
+        try:
+            res = model.generate_content(prompt)
+            return res.text.strip()
+        except exceptions.ResourceExhausted as exc:
+            last_exc = exc
+            if attempt == 2:
+                raise
 
-    res = model.generate_content(prompt)
-    return res.text.strip()
+            delay = _extract_retry_delay(exc)
+            print(
+                f"[warn] Gemini quota exceeded, retrying in {delay:.1f}s "
+                f"(attempt {attempt + 2}/3)"
+            )
+            time.sleep(delay)
+        except exceptions.GoogleAPICallError as exc:
+            last_exc = exc
+            if attempt == 2:
+                raise
+
+            backoff = (attempt + 1) * 5
+            print(
+                f"[warn] Gemini API error ({exc}); retrying in {backoff}s "
+                f"(attempt {attempt + 2}/3)"
+            )
+            time.sleep(backoff)
+
+    raise last_exc if last_exc else RuntimeError("Gemini summarization failed")
 
 
 # 2) RSS → (여러 RSS 전체) → 시간/랜덤 정렬 → 상위 N개만 요약
