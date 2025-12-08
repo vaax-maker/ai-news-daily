@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ date_str }} {{ category_display_name }} News{% endblock %}
+
+{% block extra_css %}{% endblock %}
+
+{% block content %}
+<h1>{{ date_str }} {{ category_display_name }} News</h1>
+<p class="subtitle">Updated at {{ time_str }} (KST)</p>
+
+<div class="item-list">
+    {% for article in articles %}
+    <article class="news-item">
+        <div class="news-content">
+            <h2 class="news-title">
+                <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+                {% if article.original_title and article.original_title != article.title %}
+                <span class="origin-title">Original: {{ article.original_title }}</span>
+                {% endif %}
+            </h2>
+            <div class="news-meta">
+                <span class="source-badge">{{ article.source_name }}</span>
+                <span>{{ article.published_display }}</span>
+            </div>
+            <div class="summary-box">
+                {{ article.summary_html | safe }}
+            </div>
+        </div>
+        {% if article.image_url %}
+        <div class="news-thumb">
+            <a href="{{ article.link }}" target="_blank">
+                <img src="{{ article.image_url }}" alt="Thumbnail" loading="lazy">
+            </a>
+        </div>
+        {% endif %}
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}

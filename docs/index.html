@@ -1,108 +1,169 @@
 <!DOCTYPE html>
 <html lang='ko'>
+
 <head>
-  <meta charset='utf-8' />
-  <title>AI & XR News Archives</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1' />
-  <style>
-    body { font-family: Roboto, 'Noto Sans KR', 'Pretendard', sans-serif; margin: 0; line-height: 1.6; background: #fff; color: #111; }
-    a { text-decoration: none; color: inherit; }
-    a { text-decoration: none; color: inherit; }
-    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
-    header { background: #f4f4f4; border-bottom: 1px solid #ddd; padding: 10px 0; margin-bottom: 30px; }
-    .gnb { max-width: 1000px; margin: 0 auto; display: flex; gap: 20px; padding: 0 20px; }
-    .gnb a { font-weight: bold; color: #555; text-decoration: none; font-size: 1rem; }
-    .gnb a:hover { color: #2272c9; }
-    .gnb a.active { color: #2272c9; }
-    h1 { margin-bottom: 0.5rem; letter-spacing: -1px; }
-    .subtitle { color: #555; margin-bottom: 20px; font-size: 0.95rem; }
-    .tabs { display: flex; gap: 5px; margin-bottom: 15px; border-bottom: 2px solid #2272c9; }
-    .tab-btn { padding: 10px 20px; border: 1px solid #ddd; border-bottom: none; border-radius: 5px 5px 0 0; background: #f9f9f9; cursor: pointer; font-weight: bold; color: #555; margin-bottom: -2px; z-index: 1; }
-    .tab-btn.active { background: #2272c9; color: #fff; border-color: #2272c9; }
-    .tab-panel { display: none; padding-top: 10px; }
-    .tab-panel.active { display: block; }
-    .panel-card { background: #fff; }
-    .list-header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 10px; font-weight: bold; }
-    ul { list-style: none; padding: 0; }
-    li { border-bottom: 1px solid #eee; padding: 8px 5px; font-size: 1rem; }
-    li:hover { background: #f9f9f9; }
-    .timestamp { color: #888; font-size: 0.85rem; margin-left: 8px; }
-    .archive-link { margin-bottom: 15px; font-weight: bold; }
-    .archive-link a { color: #2272c9; text-decoration: underline; }
-  </style>
-  </style>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>News Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/style.css">
+    
+    <style>
+        /* Page specific overrides if any */
+    </style>
 </head>
+
 <body>
-  <header>
-    <div class='gnb'>
-      <a href='index.html' class='active'>Home</a>
-      <a href='ai/index.html'>AI News</a>
-      <a href='xr/index.html'>XR News</a>
+    <header>
+        <div class="gnb">
+            <a href="./index.html"
+                class="active">Home</a>
+            <a href="./ai/index.html"
+                class="">AI News</a>
+            <a href="./xr/index.html"
+                class="">XR News</a>
+            <a href="./gov/index.html"
+                class="">Gov</a>
+            <!-- Members tab placeholder -->
+        </div>
+    </header>
+
+    <div class="container">
+        
+<div class="intro-box">
+    <h2>News Dashboard</h2>
+    <p>AI, XR 및 정부 사업공고에 대한 최신 뉴스와 아카이브를 제공합니다.<br>
+        회원사별 맞춤형 뉴스 기능이 곧 추가될 예정입니다.</p>
+</div>
+
+<div class="dashboard-grid">
+    
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">AI News</h3>
+            <a href="ai/index.html" class="card-link">View Archive →</a>
+        </div>
+        <div class="card-body">
+            
+            <ul class="latest-list">
+                
+                <li class="latest-item">
+                    <a href="ai/daily/2025-12-08_202356.html">2025-12-08</a>
+                    <span class="time">20:23:56</span>
+                </li>
+                
+                <li class="latest-item">
+                    <a href="ai/daily/2025-12-08_201700.html">2025-12-08</a>
+                    <span class="time">20:17:00</span>
+                </li>
+                
+                <li class="latest-item">
+                    <a href="ai/daily/2025-12-08_200144.html">2025-12-08</a>
+                    <span class="time">20:01:44</span>
+                </li>
+                
+                <li class="latest-item">
+                    <a href="ai/daily/2025-12-08_193427.html">2025-12-08</a>
+                    <span class="time">19:34:27</span>
+                </li>
+                
+                <li class="latest-item">
+                    <a href="ai/daily/2025-12-08_192833.html">2025-12-08</a>
+                    <span class="time">19:28:33</span>
+                </li>
+                
+            </ul>
+            
+        </div>
     </div>
-  </header>
-  <div class='container'>
-    <h1>AI & XR Daily News Archives</h1>
-    <p class='subtitle'>탭을 눌러 AI/XR 뉴스를 구분해 확인하세요. 모든 시각은 한국 표준시(KST) 기준이며, 과거 실행 결과도 누적해 보여줍니다.</p>
-  <div class='tabs'>
-    <button class='tab-btn' data-target='ai'>AI 뉴스</button>
-    <button class='tab-btn' data-target='xr'>XR 뉴스</button>
-  </div>
-  <div class='tab-panel' id='ai'>
-    <div class='panel-card'>
-      <p class='archive-link'><a href='ai/index.html'>AI 아카이브 전체 보기 →</a></p>
-      <ul>
-        <li><a href='ai/daily/2025-12-08_170828.html'>AI 뉴스</a> <span class='timestamp'>2025-12-08 17:08:28 KST</span></li>
-        <li><a href='ai/daily/2025-12-08_164629.html'>AI 뉴스</a> <span class='timestamp'>2025-12-08 16:46:29 KST</span></li>
-        <li><a href='ai/daily/2025-12-08_161510.html'>AI 뉴스</a> <span class='timestamp'>2025-12-08 16:15:10 KST</span></li>
-        <li><a href='ai/daily/2025-12-08_105629.html'>AI 뉴스</a> <span class='timestamp'>2025-12-08 10:56:29 KST</span></li>
-        <li><a href='ai/daily/2025-12-06_074528.html'>AI 뉴스</a> <span class='timestamp'>2025-12-06 07:45:28 KST</span></li>
-        <li><a href='ai/daily/2025-12-05_152717.html'>AI 뉴스</a> <span class='timestamp'>2025-12-05 15:27:17 KST</span></li>
-        <li><a href='ai/daily/2025-12-05_123520.html'>AI 뉴스</a> <span class='timestamp'>2025-12-05 12:35:20 KST</span></li>
-        <li><a href='ai/daily/2025-12-05_120037.html'>AI 뉴스</a> <span class='timestamp'>2025-12-05 12:00:37 KST</span></li>
-        <li><a href='ai/daily/2025-12-05_112335.html'>AI 뉴스</a> <span class='timestamp'>2025-12-05 11:23:35 KST</span></li>
-        <li><a href='ai/daily/2025-12-05_100814.html'>AI 뉴스</a> <span class='timestamp'>2025-12-05 10:08:14 KST</span></li>
-        <li><a href='ai/daily/2025-12-05_074629.html'>AI 뉴스</a> <span class='timestamp'>2025-12-05 07:46:29 KST</span></li>
-        <li><a href='ai/daily/2025-12-04_163850.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 16:38:50 KST</span></li>
-        <li><a href='ai/daily/2025-12-04_160340.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 16:03:40 KST</span></li>
-        <li><a href='ai/daily/2025-12-04_154258.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 15:42:58 KST</span></li>
-        <li><a href='ai/daily/2025-12-04_145006.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:50:06 KST</span></li>
-        <li><a href='ai/daily/2025-12-04_142819.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:28:19 KST</span></li>
-        <li><a href='ai/daily/2025-12-04_140656.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:06:56 KST</span></li>
-        <li><a href='ai/daily/2025-12-04_140139.html'>AI 뉴스</a> <span class='timestamp'>2025-12-04 14:01:39 KST</span></li>
-      </ul>
+    
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">XR News</h3>
+            <a href="xr/index.html" class="card-link">View Archive →</a>
+        </div>
+        <div class="card-body">
+            
+            <ul class="latest-list">
+                
+                <li class="latest-item">
+                    <a href="xr/daily/2025-12-08_202356.html">2025-12-08</a>
+                    <span class="time">20:23:56</span>
+                </li>
+                
+                <li class="latest-item">
+                    <a href="xr/daily/2025-12-08_201700.html">2025-12-08</a>
+                    <span class="time">20:17:00</span>
+                </li>
+                
+                <li class="latest-item">
+                    <a href="xr/daily/2025-12-08_200144.html">2025-12-08</a>
+                    <span class="time">20:01:44</span>
+                </li>
+                
+                <li class="latest-item">
+                    <a href="xr/daily/2025-12-08_193427.html">2025-12-08</a>
+                    <span class="time">19:34:27</span>
+                </li>
+                
+                <li class="latest-item">
+                    <a href="xr/daily/2025-12-08_192833.html">2025-12-08</a>
+                    <span class="time">19:28:33</span>
+                </li>
+                
+            </ul>
+            
+        </div>
     </div>
-  </div>
-  <div class='tab-panel' id='xr'>
-    <div class='panel-card'>
-      <p class='archive-link'><a href='xr/index.html'>XR 아카이브 전체 보기 →</a></p>
-      <ul>
-        <li><a href='xr/daily/2025-12-08_170828.html'>XR 뉴스</a> <span class='timestamp'>2025-12-08 17:08:28 KST</span></li>
-        <li><a href='xr/daily/2025-12-08_164629.html'>XR 뉴스</a> <span class='timestamp'>2025-12-08 16:46:29 KST</span></li>
-        <li><a href='xr/daily/2025-12-08_161510.html'>XR 뉴스</a> <span class='timestamp'>2025-12-08 16:15:10 KST</span></li>
-        <li><a href='xr/daily/2025-12-08_105629.html'>XR 뉴스</a> <span class='timestamp'>2025-12-08 10:56:29 KST</span></li>
-        <li><a href='xr/daily/2025-12-06_074528.html'>XR 뉴스</a> <span class='timestamp'>2025-12-06 07:45:28 KST</span></li>
-        <li><a href='xr/daily/2025-12-05_152717.html'>XR 뉴스</a> <span class='timestamp'>2025-12-05 15:27:17 KST</span></li>
-        <li><a href='xr/daily/2025-12-05_123520.html'>XR 뉴스</a> <span class='timestamp'>2025-12-05 12:35:20 KST</span></li>
-        <li><a href='xr/daily/2025-12-05_120037.html'>XR 뉴스</a> <span class='timestamp'>2025-12-05 12:00:37 KST</span></li>
-        <li><a href='xr/daily/2025-12-05_112335.html'>XR 뉴스</a> <span class='timestamp'>2025-12-05 11:23:35 KST</span></li>
-        <li><a href='xr/daily/2025-12-05_100814.html'>XR 뉴스</a> <span class='timestamp'>2025-12-05 10:08:14 KST</span></li>
-        <li><a href='xr/daily/2025-12-05_074629.html'>XR 뉴스</a> <span class='timestamp'>2025-12-05 07:46:29 KST</span></li>
-        <li><a href='xr/daily/2025-12-04_163850.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 16:38:50 KST</span></li>
-        <li><a href='xr/daily/2025-12-04_160340.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 16:03:40 KST</span></li>
-        <li><a href='xr/daily/2025-12-04_154258.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 15:42:58 KST</span></li>
-        <li><a href='xr/daily/2025-12-04_145006.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:50:06 KST</span></li>
-        <li><a href='xr/daily/2025-12-04_142819.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:28:19 KST</span></li>
-        <li><a href='xr/daily/2025-12-04_140656.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:06:56 KST</span></li>
-        <li><a href='xr/daily/2025-12-04_140139.html'>XR 뉴스</a> <span class='timestamp'>2025-12-04 14:01:39 KST</span></li>
-      </ul>
+    
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Gov News</h3>
+            <a href="gov/index.html" class="card-link">View Archive →</a>
+        </div>
+        <div class="card-body">
+            
+            <ul class="latest-list">
+                
+                <li class="latest-item">
+                    <a href="gov/daily/2025-12-08_202356.html">2025-12-08</a>
+                    <span class="time">20:23:56</span>
+                </li>
+                
+                <li class="latest-item">
+                    <a href="gov/daily/2025-12-08_201700.html">2025-12-08</a>
+                    <span class="time">20:17:00</span>
+                </li>
+                
+                <li class="latest-item">
+                    <a href="gov/daily/2025-12-08_200144.html">2025-12-08</a>
+                    <span class="time">20:01:44</span>
+                </li>
+                
+                <li class="latest-item">
+                    <a href="gov/daily/2025-12-08_193427.html">2025-12-08</a>
+                    <span class="time">19:34:27</span>
+                </li>
+                
+                <li class="latest-item">
+                    <a href="gov/daily/2025-12-08_192833.html">2025-12-08</a>
+                    <span class="time">19:28:33</span>
+                </li>
+                
+            </ul>
+            
+        </div>
     </div>
-  </div>
-  <script>
-    const tabs = document.querySelectorAll('.tab-btn'); const panels = document.querySelectorAll('.tab-panel');
-    function activateTab(key) { panels.forEach(p => p.classList.toggle('active', p.id === key)); tabs.forEach(t => t.classList.toggle('active', t.dataset.target === key)); }
-    tabs.forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.target)));
-    if (tabs.length) { activateTab(tabs[0].dataset.target); }
-  </script>
-  </div>
+    
+</div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 AI News Daily Project. All rights reserved.</p>
+    </footer>
 </body>
+
 </html>

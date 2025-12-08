@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ date_str }} {{ category_display_name }} Archive{% endblock %}
+
+{% block extra_css %}{% endblock %}
+
+{% block content %}
+<h1>{{ date_str }} {{ category_display_name }} Announcements</h1>
+<p class="subtitle">Updated at {{ time_str }} (KST)</p>
+
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th class="col-idx">#</th>
+                <th>공고 제목</th>
+                <th class="col-dept">담당부서</th>
+                <th class="col-dept">담당자</th>
+                <th class="col-date">등록일</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in articles %}
+            <tr>
+                <td class="col-idx">{{ loop.index }}</td>
+                <td class="col-title"><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></td>
+                <td class="col-dept">{{ item.dept }}</td>
+                <td class="col-dept">{{ item.manager }}</td>
+                <td class="col-date">{{ item.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

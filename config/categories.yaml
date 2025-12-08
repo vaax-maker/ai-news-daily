@@ -1,0 +1,41 @@
+categories:
+  ai:
+    key: ai
+    display_name: AI
+    rss_feeds:
+    - https://www.aitimes.com/rss/allArticle.xml
+    - https://www.bloter.net/archives/category/ai/feed
+    - https://www.reddit.com/r/ArtificialInteligence/top/.rss?t=day
+    - https://www.techmeme.com/feed.xml
+    - https://techcrunch.com/category/artificial-intelligence/feed/
+    - https://a16z.com/feed/
+    - https://www.themiilk.com/feed
+    - https://www.technologyreview.com/feed/
+    - https://www.technologyreview.com/topic/artificial-intelligence/feed/
+    - http://www.aitimes.kr/rss/allArticle.xml
+    archive_dir: docs/ai/daily
+    index_path: docs/ai/index.html
+    fallback_image_url: https://placehold.co/800x420/111827/FFFFFF?text=AI+News
+    selection_mode: time
+    keyword_filters: []
+    use_ai_ranking: true
+  xr:
+    key: xr
+    display_name: XR
+    rss_feeds:
+    - https://www.roadtovr.com/feed/
+    - https://uploadvr.com/rss
+    - https://arinsider.co/feed/
+    - https://skarredghost.com/feed/
+    archive_dir: docs/xr/daily
+    index_path: docs/xr/index.html
+    selection_mode: time
+    keyword_filters: []
+    use_ai_ranking: false
+  gov:
+    key: gov
+    display_name: Gov
+    rss_feeds: []
+    archive_dir: docs/gov/daily
+    index_path: docs/gov/index.html
+    is_table_view: true
