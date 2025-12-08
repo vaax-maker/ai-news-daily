@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ member.name }} News History{% endblock %}
+
+{% block content %}
+<h1>{{ member.name }} News</h1>
+<p class="subtitle">Latest news related to {{ member.name }}</p>
+
+<ul class="news-list">
+    {% for item in articles %}
+    <li class="news-item">
+        <div class="news-meta">
+            {{ item.published_display }} | {{ item.source_name or 'Google News' }}
+        </div>
+        <h3 class="news-title">
+            <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+        </h3>
+        {% if item.summary_html %}
+        <div class="news-summary">
+            {{ item.summary_html | safe }}
+        </div>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+{% if not articles %}
+<div class="empty-msg">
+    아직 수집된 뉴스가 없습니다.
+</div>
+{% endif %}
+{% endblock %}

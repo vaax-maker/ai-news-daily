@@ -10,29 +10,72 @@
     <p>AI, XR 및 정부 사업공고에 대한 최신 뉴스와 아카이브를 제공합니다.<br>
         회원사별 맞춤형 뉴스 기능이 곧 추가될 예정입니다.</p>
 </div>
+<h1>Daily Tech Briefing</h1>
+<p class="subtitle">AI, XR, Government, and Startup News Aggregation</p>
 
 <div class="dashboard-grid">
-    {% for cat_key, cat_data in categories.items() %}
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">{{ cat_data.display_name }} News</h3>
-            <a href="{{ cat_key }}/index.html" class="card-link">View Archive →</a>
-        </div>
-        <div class="card-body">
-            {% if cat_data.runs %}
-            <ul class="latest-list">
-                {% for run in cat_data.runs[:5] %}
-                <li class="latest-item">
-                    <a href="{{ cat_key }}/daily/{{ run.filename }}">{{ run.date_str }}</a>
-                    <span class="time">{{ run.time_str }}</span>
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <div class="empty-msg">No data yet</div>
-            {% endif %}
-        </div>
+    <!-- AI Section -->
+    <div class="dashboard-section">
+        <h2>
+            AI News
+            <a href="ai/index.html" class="section-more">More &rarr;</a>
+        </h2>
+        <ul class="preview-list">
+            {% for item in ai_latest %}
+            <li>
+                <span class="preview-date">{{ item.published_display }}</span>
+                <a href="{{ item.link }}" target="_blank" class="preview-title">{{ item.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
-    {% endfor %}
+
+    <!-- XR Section -->
+    <div class="dashboard-section">
+        <h2>
+            XR News
+            <a href="xr/index.html" class="section-more">More &rarr;</a>
+        </h2>
+        <ul class="preview-list">
+            {% for item in xr_latest %}
+            <li>
+                <span class="preview-date">{{ item.published_display }}</span>
+                <a href="{{ item.link }}" target="_blank" class="preview-title">{{ item.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Members Section -->
+    <div class="dashboard-section">
+        <h2>
+            Members News
+            <a href="members/index.html" class="section-more">More &rarr;</a>
+        </h2>
+        <ul class="preview-list">
+            {% for item in members_latest %}
+            <li>
+                <span class="preview-date">{{ item.published_display }} | {{ item.member_name }}</span>
+                <a href="{{ item.link }}" target="_blank" class="preview-title">{{ item.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Gov Section -->
+    <div class="dashboard-section">
+        <h2>
+            Gov Announcements
+            <a href="gov/index.html" class="section-more">More &rarr;</a>
+        </h2>
+        <ul class="preview-list">
+            {% for item in gov_latest %}
+            <li>
+                <span class="preview-date">{{ item.published_display }} | {{ item.dept or '과기정통부' }}</span>
+                <a href="{{ item.link }}" target="_blank" class="preview-title">{{ item.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}

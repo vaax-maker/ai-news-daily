@@ -41,14 +41,26 @@ def render_dashboard(categories):
         now_year=datetime.datetime.now().year
     )
 
-def render_member_daily_page(articles, date_str, time_str):
-    template = env.get_template("daily_member_news.html")
+def render_member_page(member, articles, date_str):
+    template = env.get_template("member_page.html")
+    # articles will be list of dicts.
     return template.render(
+        member=member,
         articles=articles,
         date_str=date_str,
-        time_str=time_str,
-        category_display_name="Members",
-        active_tab="members",
         now_year=datetime.datetime.now().year,
+        active_tab="members",
         root_path="../.." 
+    )
+
+def render_dashboard(ai_latest, xr_latest, gov_latest, members_latest):
+    template = env.get_template("dashboard.html")
+    return template.render(
+        ai_latest=ai_latest,
+        xr_latest=xr_latest,
+        gov_latest=gov_latest,
+        members_latest=members_latest,
+        now_year=datetime.datetime.now().year,
+        active_tab="home",
+        root_path="."
     )
