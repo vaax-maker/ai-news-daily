@@ -3,6 +3,7 @@ import time
 import datetime
 import feedparser
 import google.generativeai as genai
+from google.api_core import exceptions
 import re
 import random
 from dataclasses import dataclass, field
@@ -237,6 +238,28 @@ def sanitize_summary(summary: str) -> str:
     return "\n".join(cleaned_lines)
 
 
+def _extract_retry_delay(exc: Exception, default: float = 30.0) -> float:
+    """Extract retry-after seconds from Gemini quota errors."""
+
+    message = str(exc).lower()
+    match = re.search(r"retry in ([0-9]+(?:\.[0-9]+)?)s", message)
+    if match:
+        try:
+            return float(match.group(1))
+        except ValueError:
+            pass
+
+    return default
+
+
+class GeminiQuotaError(RuntimeError):
+    """Raised when Gemini quota limits prevent further summarization."""
+
+    def __init__(self, message: str, fatal: bool = False):
+        super().__init__(message)
+        self.fatal = fatal
+
+
 # 1) Gemini 요약 함수
 def summarize(text: str, title: str, display_name: str) -> str:
     genai.configure(api_key=os.environ["GEMINI_API_KEY"])
@@ -253,9 +276,44 @@ def summarize(text: str, title: str, display_name: str) -> str:
 내용:
 {text[:2000]}
 """
+    last_exc: Exception | None = None
+    for attempt in range(3):
+        try:
+            res = model.generate_content(prompt)
+            return res.text.strip()
+        except exceptions.ResourceExhausted as exc:
+            last_exc = exc
 
-    res = model.generate_content(prompt)
-    return res.text.strip()
+            # 하루 무료 요청 한도(PerDay)라면 재시도해도 실패하므로 즉시 안내 후 중단
+            if "perday" in str(exc).lower():
+                raise GeminiQuotaError(
+                    "Gemini 무료 일일 할당량을 초과했습니다. 내일 다시 시도하거나 "
+                    "유료 한도를 늘려주세요.",
+                    fatal=True,
+                ) from exc
+
+            if attempt == 2:
+                raise
+
+            delay = _extract_retry_delay(exc)
+            print(
+                f"[warn] Gemini quota exceeded, retrying in {delay:.1f}s "
+                f"(attempt {attempt + 2}/3)"
+            )
+            time.sleep(delay)
+        except exceptions.GoogleAPICallError as exc:
+            last_exc = exc
+            if attempt == 2:
+                raise
+
+            backoff = (attempt + 1) * 5
+            print(
+                f"[warn] Gemini API error ({exc}); retrying in {backoff}s "
+                f"(attempt {attempt + 2}/3)"
+            )
+            time.sleep(backoff)
+
+    raise last_exc if last_exc else RuntimeError("Gemini summarization failed")
 
 
 # 2) RSS → (여러 RSS 전체) → 시간/랜덤 정렬 → 상위 N개만 요약
@@ -318,20 +376,38 @@ def fetch_and_summarize(config: CategoryConfig):
     for idx, (ts, title, link, content, entry) in enumerate(selected):
         text_with_url = content + f"\n\n기사 URL: {link}"
 
-        summary = summarize(text_with_url, title, config.display_name)
-        summary = sanitize_summary(summary)
-        image_url = extract_image_url(entry) or config.fallback_image_url
+        try:
+            summary = summarize(text_with_url, title, config.display_name)
+            summary = sanitize_summary(summary)
+            image_url = extract_image_url(entry) or config.fallback_image_url
 
-        summarized.append(
-            {
-                "title": title,
-                "link": link,
-                "summary": summary,
-                "published_display": format_timestamp(ts),
-                "source_name": extract_source_name(entry, link),
-                "image_url": image_url,
-            }
-        )
+            summarized.append(
+                {
+                    "title": title,
+                    "link": link,
+                    "summary": summary,
+                    "published_display": format_timestamp(ts),
+                    "source_name": extract_source_name(entry, link),
+                    "image_url": image_url,
+                }
+            )
+        except GeminiQuotaError as exc:
+            if exc.fatal:
+                print("[warn] Gemini daily quota exceeded; generating notice page instead.")
+                return [
+                    {
+                        "title": "Gemini 요약 일시 중단",
+                        "link": "",
+                        "summary": (
+                            "Gemini 무료 일일 할당량을 초과해 오늘은 요약을 생성할 수 없습니다. "
+                            "내일 다시 시도하거나 API 한도를 늘려주세요."
+                        ),
+                        "published_display": format_timestamp(time.time()),
+                        "source_name": "Gemini API",
+                        "image_url": config.fallback_image_url,
+                    }
+                ]
+            raise
 
         # 쿼터 보호용 딜레이
         time.sleep(REQUEST_INTERVAL_SECONDS)
