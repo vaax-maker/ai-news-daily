@@ -274,6 +274,9 @@ def main():
     # We need a dict-like object
     class MemberCatData:
         display_name = "Startups"
+        key = "members"
+        archive_dir = "docs/members/daily"
+        index_path = "docs/members/index.html"
         runs = m_runs
     
     categories["members"] = MemberCatData()
