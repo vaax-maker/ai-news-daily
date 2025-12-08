@@ -783,10 +783,6 @@ def rebuild_index_html(config: CategoryConfig):
     else:
         parts.append("  <ul class='run-list'>")
         for base, date_str, time_str, fname in run_entries:
-        parts.append("  <p>아직 저장된 뉴스가 없습니다.</p>")
-    else:
-        parts.append("  <ul class='run-list'>")
-        for base, date_str, time_str, fname in run_entries:
             if time_str:
                 label = f"{date_str} {time_str}" # [변경] 라벨 간소화
             else:
