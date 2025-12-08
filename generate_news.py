@@ -547,70 +547,68 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
     parts.append(
         "  <meta name='viewport' content='width=device-width, initial-scale=1' />"
     )
-    parts.append("  <style>")
     parts.append(
-        "    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; line-height: 1.7; margin: 1.5rem; background: #f9fafb; color: #0f172a; }"
+        "    body { font-family: Roboto, 'Noto Sans KR', 'Pretendard', sans-serif; line-height: 1.5; margin: 0; background: #fff; color: #111; }"
     )
-    parts.append("    h1 { margin-bottom: 0.25rem; }")
-    parts.append("    .meta { color: #475569; margin-bottom: 1.25rem; }")
+    parts.append("    a { text-decoration: none; color: inherit; }")
+    parts.append("    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }")
+    parts.append("    h1 { font-size: 1.5rem; margin-bottom: 5px; color: #111; letter-spacing: -1px; }")
+    parts.append("    .meta { color: #888; font-size: 0.9rem; margin-bottom: 20px; }")
+    
     parts.append(
-        "    .nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }"
-    )
-    parts.append(
-        "    .nav a { padding: 0.45rem 0.8rem; border: 1px solid #e5e7eb; border-radius: 8px; text-decoration: none; color: #0f172a; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.04); font-weight: 600; }"
-    )
-    parts.append("    .articles { display: grid; gap: 1rem; }")
-    parts.append(
-        "    .article-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.1rem 1.2rem; box-shadow: 0 10px 25px rgba(15,23,42,0.06); }"
-    )
-    parts.append("    .article-card h2 { margin: 0; font-size: 1.15rem; }")
-    parts.append(
-        "    .article-card h2 a { color: #0f172a; text-decoration: none; }"
+        "    .nav { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 15px; }"
     )
     parts.append(
-        "    .article-card h2 a:hover { text-decoration: underline; }"
+        "    .nav a { padding: 8px 15px; background: #f4f4f4; border-radius: 4px; color: #333; font-size: 0.9rem; font-weight: bold; transition: background 0.2s; }"
     )
+    parts.append("    .nav a:hover { background: #e0e0e0; }")
+
+    parts.append("    .board-list { border-top: 2px solid #2272c9; }")
     parts.append(
-        "    .original-title { display: block; font-size: 0.9rem; color: #6b7280; margin-top: 4px; }"
+        "    .list-item { display: block; border-bottom: 1px solid #e0e0e0; padding: 15px 10px; transition: background 0.2s; }"
     )
+    parts.append("    .list-item:hover { background: #f9f9f9; }")
+    
+    parts.append("    .item-title { font-size: 1.1rem; font-weight: normal; margin: 0 0 5px; line-height: 1.4; }")
+    parts.append("    .item-title a { color: #232f3e; transition: color 0.2s; }")
+    parts.append("    .item-title a:hover { color: #d43f3a; text-decoration: underline; }")
+    
     parts.append(
-        "    .article-meta { color: #475569; font-size: 0.95rem; margin: 0.5rem 0 0.75rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }"
+        "    .item-meta { font-size: 0.85rem; color: #959595; display: flex; gap: 8px; align-items: center; margin-top: 4px; }"
     )
+    parts.append("    .source-badge { color: #2272c9; font-weight: bold; }")
+    parts.append("    .original-title { color: #aaa; font-size: 0.8rem; display: block; margin-top: 2px; }")
+
+    parts.append("    .item-body { margin-top: 10px; display: flex; gap: 15px; }")
     parts.append(
-        "    .meta-pill { background: #eef2ff; color: #4338ca; padding: 0.25rem 0.6rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; }"
+        "    .summary-text { flex: 1; font-size: 0.95rem; color: #333; line-height: 1.6; word-break: break-all; }"
     )
+    parts.append("    .summary-list { margin: 0; padding-left: 1.2rem; }")
+    parts.append("    .summary-list li { margin-bottom: 3px; }")
+    
     parts.append(
-        "    .article-body { display: flex; gap: 0.85rem; align-items: flex-start; flex-wrap: wrap; }"
+        "    .item-image { width: 120px; height: 90px; object-fit: cover; border-radius: 4px; border: 1px solid #eee; flex-shrink: 0; }"
     )
+    
     parts.append(
-        "    .summary-column { flex: 1 1 0; min-width: 0; }"
+        "    .highlight { background-color: #fff8c4; padding: 2px 4px; border-radius: 2px; }"
     )
-    parts.append(
-        "    .article-image { flex: 0 1 320px; width: clamp(170px, 30vw, 320px); height: auto; max-height: 320px; object-fit: cover; border-radius: 10px; border: 1px solid #e5e7eb; margin-left: 0; align-self: flex-start; }"
-    )
-    parts.append("    .summary-list { margin: 0; padding-left: 1.15rem; color: #0f172a; }")
-    parts.append("    .summary-list li { margin-bottom: 0.35rem; }")
-    parts.append(
-        "    .highlight { background-color: %s; padding: 3px 5px; border-radius: 4px; }"
-        % HIGHLIGHT_COLOR
-    )
-    parts.append("    @media (max-width: 768px) {")
-    parts.append("      .article-body { flex-direction: column; gap: 0.75rem; }")
-    parts.append(
-        "      .article-image { order: 2; width: clamp(160px, 75%, 260px); max-width: 260px; max-height: 220px; flex: 0 0 auto; align-self: flex-start; }"
-    )
-    parts.append("      .summary-column { width: 100%; }")
+    
+    parts.append("    @media (max-width: 600px) {")
+    parts.append("      .container { padding: 15px; }")
+    parts.append("      .item-image { width: 80px; height: 60px; }")
     parts.append("    }")
     parts.append("  </style>")
     parts.append("</head>")
     parts.append("<body>")
-    parts.append("  <div class='nav'>")
-    parts.append("    <a href='../../index.html'>🏠 홈으로</a>")
-    parts.append("    <a href='../index.html'>📅 날짜별 목록</a>")
-    parts.append("  </div>")
-    parts.append(f"  <h1>{date_str} {config.display_name} News</h1>")
-    parts.append(f"  <p class='meta'>Updated at {time_str} (KST)</p>")
-    parts.append("  <section class='articles'>")
+    parts.append("  <div class='container'>")
+    parts.append("    <div class='nav'>")
+    parts.append("      <a href='../../index.html'>🏠 홈으로</a>")
+    parts.append("      <a href='../index.html'>📅 날짜별 목록</a>")
+    parts.append("    </div>")
+    parts.append(f"    <h1>{date_str} {config.display_name} News</h1>")
+    parts.append(f"    <p class='meta'>Updated at {time_str} (KST)</p>")
+    parts.append("    <div class='board-list'>")
 
     for art in articles:
         summary_html = markdown_bold_to_highlight(art["summary"])
@@ -621,41 +619,41 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
             else ""
         )
 
-        parts.append("    <article class='article-card'>")
+        parts.append("      <div class='list-item'>")
         parts.append(
-            "      <h2>"
+            "        <div class='item-title'>"
             f"<a href='{art['link']}' target='_blank'>{display_title}</a>"
-            f"{original_hint}"
-            "</h2>"
         )
+        if original_hint:
+             parts.append(f"          <br/>{original_hint}")
+        parts.append("        </div>")
 
-        meta_bits = [bit for bit in [art.get("published_display"), art.get("source_name")] if bit]
+        meta_bits = [bit for bit in [art.get("source_name"), art.get("published_display")] if bit]
         if meta_bits:
-            extra_meta = " · ".join(meta_bits[1:]) if len(meta_bits) > 1 else ""
-            extra_span = f"<span>{extra_meta}</span>" if extra_meta else ""
-            parts.append(
-                "      <p class='article-meta'>"
-                f"<span class='meta-pill'>{meta_bits[0]}</span>"
-                f"{extra_span}"
-                "</p>"
-            )
-
-        if summary_html or art.get("image_url"):
-            parts.append("      <div class='article-body'>")
-            parts.append("        <div class='summary-column'>")
-            if summary_html:
-                parts.append(f"          {summary_html}")
+            parts.append("        <div class='item-meta'>")
+            parts.append(f"          <span class='source-badge'>{meta_bits[0]}</span>")
+            if len(meta_bits) > 1:
+                parts.append(f"          <span>| {meta_bits[1]}</span>")
             parts.append("        </div>")
 
+        if summary_html or art.get("image_url"):
+            parts.append("        <div class='item-body'>")
+            
             if art.get("image_url"):
                 parts.append(
-                    f"        <img src='{art['image_url']}' alt='기사 이미지' class='article-image' loading='lazy'/>"
+                    f"          <img src='{art['image_url']}' alt='기사 이미지' class='item-image' loading='lazy'/>"
                 )
 
-            parts.append("      </div>")
-        parts.append("    </article>")
+            parts.append("          <div class='summary-text'>")
+            if summary_html:
+                parts.append(f"            {summary_html}")
+            parts.append("          </div>")
+            parts.append("        </div>")
+            
+        parts.append("      </div>")
 
-    parts.append("  </section>")
+    parts.append("    </div>") # End board-list
+    parts.append("  </div>") # End container
     parts.append("</body>")
     parts.append("</html>")
 
@@ -704,35 +702,41 @@ def rebuild_index_html(config: CategoryConfig):
     )
     parts.append("  <style>")
     parts.append(
-        "    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; margin: 1.25rem; line-height: 1.6; background: #f9fafb; color: #0f172a; }"
+        "    body { font-family: Roboto, 'Noto Sans KR', 'Pretendard', sans-serif; margin: 0; line-height: 1.6; background: #fff; color: #111; }"
     )
-    parts.append("    h1 { margin-bottom: 0.35rem; }")
+    parts.append("    a { text-decoration: none; color: inherit; }")
+    parts.append("    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }")
+    
+    parts.append("    h1 { margin-bottom: 0.35rem; font-size: 1.5rem; letter-spacing: -1px; }")
     parts.append(
-        "    .nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }"
-    )
-    parts.append(
-        "    .nav a { padding: 0.45rem 0.85rem; border: 1px solid #e5e7eb; border-radius: 8px; text-decoration: none; color: #0f172a; background: #fff; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }"
-    )
-    parts.append(
-        "    .run-list { list-style: none; padding: 0; display: grid; gap: 0.75rem; margin-top: 1rem; }"
+        "    .nav { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 15px; }"
     )
     parts.append(
-        "    .run-item { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 0.9rem 1rem; box-shadow: 0 8px 18px rgba(15,23,42,0.05); }"
+        "    .nav a { padding: 8px 15px; background: #f4f4f4; border-radius: 4px; color: #333; font-size: 0.9rem; font-weight: bold; transition: background 0.2s; }"
     )
+    parts.append("    .nav a:hover { background: #e0e0e0; }")
+
+    parts.append("    .run-list { list-style: none; padding: 0; border-top: 2px solid #2272c9; margin-top: 15px; }")
     parts.append(
-        "    .run-item a { color: #0f172a; text-decoration: none; font-weight: 700; }"
+        "    .run-item { border-bottom: 1px solid #e0e0e0; padding: 12px 10px; transition: background 0.2s; }"
     )
-    parts.append("    .run-item a:hover { text-decoration: underline; }")
+    parts.append("    .run-item:hover { background: #f9f9f9; }")
+    
     parts.append(
-        "    .timestamp { color: #475569; font-size: 0.95rem; display: block; margin-top: 0.2rem; }"
+        "    .run-item a { color: #232f3e; font-size: 1.1rem; }"
+    )
+    parts.append("    .run-item a:hover { color: #d43f3a; text-decoration: underline; }")
+    parts.append(
+        "    .timestamp { color: #888; font-size: 0.85rem; display: block; margin-top: 4px; }"
     )
     parts.append("  </style>")
     parts.append("</head>")
     parts.append("<body>")
-    parts.append("  <div class='nav'>")
-    parts.append("    <a href='../index.html'>🏠 홈으로</a>")
-    parts.append("  </div>")
-    parts.append(f"  <h1>Daily {config.display_name} News Archive</h1>")
+    parts.append("  <div class='container'>")
+    parts.append("    <div class='nav'>")
+    parts.append("      <a href='../index.html'>🏠 홈으로</a>")
+    parts.append("    </div>")
+    parts.append(f"    <h1>Daily {config.display_name} News Archive</h1>")
     parts.append(
         f"  <p>실행 시점(날짜+시간, KST)별로 저장된 {config.display_name} 기사 요약 목록입니다.</p>"
     )
@@ -754,6 +758,7 @@ def rebuild_index_html(config: CategoryConfig):
             )
         parts.append("  </ul>")
 
+    parts.append("  </div>")
     parts.append("</body>")
     parts.append("</html>")
 
@@ -774,30 +779,41 @@ def build_root_index(categories: Dict[str, CategoryConfig]):
     parts.append("  <meta name='viewport' content='width=device-width, initial-scale=1' />")
     parts.append("  <style>")
     parts.append(
-        "    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; margin: 1.25rem; line-height: 1.6; background: #f9fafb; color: #0f172a; }"
+        "    body { font-family: Roboto, 'Noto Sans KR', 'Pretendard', sans-serif; margin: 0; line-height: 1.6; background: #fff; color: #111; }"
     )
-    parts.append("    h1 { margin-bottom: 0.5rem; }")
-    parts.append("    .subtitle { color: #4b5563; margin-bottom: 1rem; }")
-    parts.append("    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }")
+    parts.append("    a { text-decoration: none; color: inherit; }")
+    parts.append("    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }")
+
+    parts.append("    h1 { margin-bottom: 0.5rem; letter-spacing: -1px; }")
+    parts.append("    .subtitle { color: #555; margin-bottom: 20px; font-size: 0.95rem; }")
+    
+    parts.append("    .tabs { display: flex; gap: 5px; margin-bottom: 15px; border-bottom: 2px solid #2272c9; }")
     parts.append(
-        "    .tab-btn { padding: 0.45rem 0.9rem; border: 1px solid #d1d5db; border-radius: 8px; background: #f3f4f6; cursor: pointer; font-weight: 600; }")
-    parts.append(
-        "    .tab-btn.active { background: #111827; color: #f9fafb; border-color: #111827; }"
+        "    .tab-btn { padding: 10px 20px; border: 1px solid #ddd; border-bottom: none; border-radius: 5px 5px 0 0; background: #f9f9f9; cursor: pointer; font-weight: bold; color: #555; margin-bottom: -2px; z-index: 1; }"
     )
-    parts.append("    .tab-panel { display: none; }")
+    parts.append(
+        "    .tab-btn.active { background: #2272c9; color: #fff; border-color: #2272c9; }"
+    )
+    
+    parts.append("    .tab-panel { display: none; padding-top: 10px; }")
     parts.append("    .tab-panel.active { display: block; }")
-    parts.append(
-        "    .panel-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.1rem; box-shadow: 0 8px 18px rgba(15,23,42,0.05); }"
-    )
-    parts.append("    ul { padding-left: 1.1rem; margin: 0; }")
-    parts.append("    li + li { margin-top: 0.35rem; }")
-    parts.append("    .timestamp { color: #6b7280; font-size: 0.95rem; margin-left: 0.35rem; }")
-    parts.append("    .archive-link { margin: 0 0 0.5rem; font-weight: 700; }")
+    
+    parts.append("    .panel-card { background: #fff; }")
+    parts.append("    .list-header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 10px; font-weight: bold; }")
+
+    parts.append("    ul { list-style: none; padding: 0; }")
+    parts.append("    li { border-bottom: 1px solid #eee; padding: 8px 5px; font-size: 1rem; }")
+    parts.append("    li:hover { background: #f9f9f9; }")
+    
+    parts.append("    .timestamp { color: #888; font-size: 0.85rem; margin-left: 8px; }")
+    parts.append("    .archive-link { margin-bottom: 15px; font-weight: bold; }")
+    parts.append("    .archive-link a { color: #2272c9; text-decoration: underline; }")
     parts.append("  </style>")
     parts.append("</head>")
     parts.append("<body>")
-    parts.append("  <h1>AI & XR Daily News Archives</h1>")
-    parts.append("  <p class='subtitle'>탭을 눌러 AI/XR 뉴스를 구분해 확인하세요. 모든 시각은 한국 표준시(KST) 기준이며, 과거 실행 결과도 누적해 보여줍니다.</p>")
+    parts.append("  <div class='container'>")
+    parts.append("    <h1>AI & XR Daily News Archives</h1>")
+    parts.append("    <p class='subtitle'>탭을 눌러 AI/XR 뉴스를 구분해 확인하세요. 모든 시각은 한국 표준시(KST) 기준이며, 과거 실행 결과도 누적해 보여줍니다.</p>")
 
     parts.append("  <div class='tabs'>")
     for cfg in categories.values():
@@ -845,6 +861,7 @@ def build_root_index(categories: Dict[str, CategoryConfig]):
     )
     parts.append("    if (tabs.length) { activateTab(tabs[0].dataset.target); }")
     parts.append("  </script>")
+    parts.append("  </div>")
     parts.append("</body>")
     parts.append("</html>")
 
