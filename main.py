@@ -121,22 +121,7 @@ def rebuild_indexes(categories):
     with open("docs/index.html", "w", encoding="utf-8") as f:
         f.write(dash_html)
 
-def main():
-    now_utc = datetime.datetime.now(datetime.timezone.utc)
-    
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--limit", type=int, default=None, help="Limit number of articles per category for testing")
-    args = parser.parse_args()
 
-    categories = load_categories()
-    
-    for key, config in categories.items():
-        # Apply limit if provided
-        if args.limit:
-            config.max_articles = args.limit
-            
-        try:
-           res = process_category(config, now_utc)
 def process_members(limit_per_member=None):
     from src.config import load_members, CategoryConfig
     from src.fetchers.search import fetch_search_news
