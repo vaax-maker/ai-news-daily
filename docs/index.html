@@ -7,7 +7,13 @@
   <style>
     body { font-family: Roboto, 'Noto Sans KR', 'Pretendard', sans-serif; margin: 0; line-height: 1.6; background: #fff; color: #111; }
     a { text-decoration: none; color: inherit; }
+    a { text-decoration: none; color: inherit; }
     .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    header { background: #f4f4f4; border-bottom: 1px solid #ddd; padding: 10px 0; margin-bottom: 30px; }
+    .gnb { max-width: 1000px; margin: 0 auto; display: flex; gap: 20px; padding: 0 20px; }
+    .gnb a { font-weight: bold; color: #555; text-decoration: none; font-size: 1rem; }
+    .gnb a:hover { color: #2272c9; }
+    .gnb a.active { color: #2272c9; }
     h1 { margin-bottom: 0.5rem; letter-spacing: -1px; }
     .subtitle { color: #555; margin-bottom: 20px; font-size: 0.95rem; }
     .tabs { display: flex; gap: 5px; margin-bottom: 15px; border-bottom: 2px solid #2272c9; }
@@ -24,8 +30,16 @@
     .archive-link { margin-bottom: 15px; font-weight: bold; }
     .archive-link a { color: #2272c9; text-decoration: underline; }
   </style>
+  </style>
 </head>
 <body>
+  <header>
+    <div class='gnb'>
+      <a href='index.html' class='active'>Home</a>
+      <a href='ai/index.html'>AI News</a>
+      <a href='xr/index.html'>XR News</a>
+    </div>
+  </header>
   <div class='container'>
     <h1>AI & XR Daily News Archives</h1>
     <p class='subtitle'>탭을 눌러 AI/XR 뉴스를 구분해 확인하세요. 모든 시각은 한국 표준시(KST) 기준이며, 과거 실행 결과도 누적해 보여줍니다.</p>
@@ -37,6 +51,7 @@
     <div class='panel-card'>
       <p class='archive-link'><a href='ai/index.html'>AI 아카이브 전체 보기 →</a></p>
       <ul>
+        <li><a href='ai/daily/2025-12-08_170828.html'>AI 뉴스</a> <span class='timestamp'>2025-12-08 17:08:28 KST</span></li>
         <li><a href='ai/daily/2025-12-08_164629.html'>AI 뉴스</a> <span class='timestamp'>2025-12-08 16:46:29 KST</span></li>
         <li><a href='ai/daily/2025-12-08_161510.html'>AI 뉴스</a> <span class='timestamp'>2025-12-08 16:15:10 KST</span></li>
         <li><a href='ai/daily/2025-12-08_105629.html'>AI 뉴스</a> <span class='timestamp'>2025-12-08 10:56:29 KST</span></li>
@@ -61,6 +76,7 @@
     <div class='panel-card'>
       <p class='archive-link'><a href='xr/index.html'>XR 아카이브 전체 보기 →</a></p>
       <ul>
+        <li><a href='xr/daily/2025-12-08_170828.html'>XR 뉴스</a> <span class='timestamp'>2025-12-08 17:08:28 KST</span></li>
         <li><a href='xr/daily/2025-12-08_164629.html'>XR 뉴스</a> <span class='timestamp'>2025-12-08 16:46:29 KST</span></li>
         <li><a href='xr/daily/2025-12-08_161510.html'>XR 뉴스</a> <span class='timestamp'>2025-12-08 16:15:10 KST</span></li>
         <li><a href='xr/daily/2025-12-08_105629.html'>XR 뉴스</a> <span class='timestamp'>2025-12-08 10:56:29 KST</span></li>
