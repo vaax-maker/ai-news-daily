@@ -5,3 +5,5 @@ deep-translator>=1.11,<2.0
 groq>=0.4.2,<1.0
 PyYAML
 Jinja2
+requests
+beautifulsoup4

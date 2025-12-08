@@ -260,6 +260,18 @@ def main():
         with open("docs/index.html", "w", encoding="utf-8") as f:
             f.write(dash_html)
         print("[Dashboard] Index generated.")
+        
+        # 5. Asset Deployment
+        # Copy static/ to docs/static/ so GitHub Pages can serve it
+        import shutil
+        src_static = "static"
+        dst_static = "docs/static"
+        if os.path.exists(src_static):
+            if os.path.exists(dst_static):
+                shutil.rmtree(dst_static)
+            shutil.copytree(src_static, dst_static)
+            print(f"[Deployment] Copied {src_static} -> {dst_static}")
+            
     except Exception as e:
         print(f"[Dashboard] Failed to render: {e}")
         import traceback
