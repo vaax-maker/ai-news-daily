@@ -5,24 +5,30 @@
   <title>AI & XR News Archives</title>
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <style>
-    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; margin: 1.25rem; line-height: 1.6; background: #f9fafb; color: #0f172a; }
-    h1 { margin-bottom: 0.5rem; }
-    .subtitle { color: #4b5563; margin-bottom: 1rem; }
-    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-    .tab-btn { padding: 0.45rem 0.9rem; border: 1px solid #d1d5db; border-radius: 8px; background: #f3f4f6; cursor: pointer; font-weight: 600; }
-    .tab-btn.active { background: #111827; color: #f9fafb; border-color: #111827; }
-    .tab-panel { display: none; }
+    body { font-family: Roboto, 'Noto Sans KR', 'Pretendard', sans-serif; margin: 0; line-height: 1.6; background: #fff; color: #111; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    h1 { margin-bottom: 0.5rem; letter-spacing: -1px; }
+    .subtitle { color: #555; margin-bottom: 20px; font-size: 0.95rem; }
+    .tabs { display: flex; gap: 5px; margin-bottom: 15px; border-bottom: 2px solid #2272c9; }
+    .tab-btn { padding: 10px 20px; border: 1px solid #ddd; border-bottom: none; border-radius: 5px 5px 0 0; background: #f9f9f9; cursor: pointer; font-weight: bold; color: #555; margin-bottom: -2px; z-index: 1; }
+    .tab-btn.active { background: #2272c9; color: #fff; border-color: #2272c9; }
+    .tab-panel { display: none; padding-top: 10px; }
     .tab-panel.active { display: block; }
-    .panel-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.1rem; box-shadow: 0 8px 18px rgba(15,23,42,0.05); }
-    ul { padding-left: 1.1rem; margin: 0; }
-    li + li { margin-top: 0.35rem; }
-    .timestamp { color: #6b7280; font-size: 0.95rem; margin-left: 0.35rem; }
-    .archive-link { margin: 0 0 0.5rem; font-weight: 700; }
+    .panel-card { background: #fff; }
+    .list-header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 10px; font-weight: bold; }
+    ul { list-style: none; padding: 0; }
+    li { border-bottom: 1px solid #eee; padding: 8px 5px; font-size: 1rem; }
+    li:hover { background: #f9f9f9; }
+    .timestamp { color: #888; font-size: 0.85rem; margin-left: 8px; }
+    .archive-link { margin-bottom: 15px; font-weight: bold; }
+    .archive-link a { color: #2272c9; text-decoration: underline; }
   </style>
 </head>
 <body>
-  <h1>AI & XR Daily News Archives</h1>
-  <p class='subtitle'>탭을 눌러 AI/XR 뉴스를 구분해 확인하세요. 모든 시각은 한국 표준시(KST) 기준이며, 과거 실행 결과도 누적해 보여줍니다.</p>
+  <div class='container'>
+    <h1>AI & XR Daily News Archives</h1>
+    <p class='subtitle'>탭을 눌러 AI/XR 뉴스를 구분해 확인하세요. 모든 시각은 한국 표준시(KST) 기준이며, 과거 실행 결과도 누적해 보여줍니다.</p>
   <div class='tabs'>
     <button class='tab-btn' data-target='ai'>AI 뉴스</button>
     <button class='tab-btn' data-target='xr'>XR 뉴스</button>
@@ -31,6 +37,7 @@
     <div class='panel-card'>
       <p class='archive-link'><a href='ai/index.html'>AI 아카이브 전체 보기 →</a></p>
       <ul>
+        <li><a href='ai/daily/2025-12-08_164629.html'>AI 뉴스</a> <span class='timestamp'>2025-12-08 16:46:29 KST</span></li>
         <li><a href='ai/daily/2025-12-08_161510.html'>AI 뉴스</a> <span class='timestamp'>2025-12-08 16:15:10 KST</span></li>
         <li><a href='ai/daily/2025-12-08_105629.html'>AI 뉴스</a> <span class='timestamp'>2025-12-08 10:56:29 KST</span></li>
         <li><a href='ai/daily/2025-12-06_074528.html'>AI 뉴스</a> <span class='timestamp'>2025-12-06 07:45:28 KST</span></li>
@@ -54,6 +61,7 @@
     <div class='panel-card'>
       <p class='archive-link'><a href='xr/index.html'>XR 아카이브 전체 보기 →</a></p>
       <ul>
+        <li><a href='xr/daily/2025-12-08_164629.html'>XR 뉴스</a> <span class='timestamp'>2025-12-08 16:46:29 KST</span></li>
         <li><a href='xr/daily/2025-12-08_161510.html'>XR 뉴스</a> <span class='timestamp'>2025-12-08 16:15:10 KST</span></li>
         <li><a href='xr/daily/2025-12-08_105629.html'>XR 뉴스</a> <span class='timestamp'>2025-12-08 10:56:29 KST</span></li>
         <li><a href='xr/daily/2025-12-06_074528.html'>XR 뉴스</a> <span class='timestamp'>2025-12-06 07:45:28 KST</span></li>
@@ -79,5 +87,6 @@
     tabs.forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.target)));
     if (tabs.length) { activateTab(tabs[0].dataset.target); }
   </script>
+  </div>
 </body>
 </html>

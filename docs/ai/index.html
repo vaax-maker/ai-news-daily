@@ -5,24 +5,30 @@
   <title>Daily AI News Archive</title>
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <style>
-    body { font-family: 'Noto Sans KR', 'Pretendard', sans-serif; margin: 1.25rem; line-height: 1.6; background: #f9fafb; color: #0f172a; }
-    h1 { margin-bottom: 0.35rem; }
-    .nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
-    .nav a { padding: 0.45rem 0.85rem; border: 1px solid #e5e7eb; border-radius: 8px; text-decoration: none; color: #0f172a; background: #fff; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
-    .run-list { list-style: none; padding: 0; display: grid; gap: 0.75rem; margin-top: 1rem; }
-    .run-item { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 0.9rem 1rem; box-shadow: 0 8px 18px rgba(15,23,42,0.05); }
-    .run-item a { color: #0f172a; text-decoration: none; font-weight: 700; }
-    .run-item a:hover { text-decoration: underline; }
-    .timestamp { color: #475569; font-size: 0.95rem; display: block; margin-top: 0.2rem; }
+    body { font-family: Roboto, 'Noto Sans KR', 'Pretendard', sans-serif; margin: 0; line-height: 1.6; background: #fff; color: #111; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    h1 { margin-bottom: 0.35rem; font-size: 1.5rem; letter-spacing: -1px; }
+    .nav { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 15px; }
+    .nav a { padding: 8px 15px; background: #f4f4f4; border-radius: 4px; color: #333; font-size: 0.9rem; font-weight: bold; transition: background 0.2s; }
+    .nav a:hover { background: #e0e0e0; }
+    .run-list { list-style: none; padding: 0; border-top: 2px solid #2272c9; margin-top: 15px; }
+    .run-item { border-bottom: 1px solid #e0e0e0; padding: 12px 10px; transition: background 0.2s; }
+    .run-item:hover { background: #f9f9f9; }
+    .run-item a { color: #232f3e; font-size: 1.1rem; }
+    .run-item a:hover { color: #d43f3a; text-decoration: underline; }
+    .timestamp { color: #888; font-size: 0.85rem; display: block; margin-top: 4px; }
   </style>
 </head>
 <body>
-  <div class='nav'>
-    <a href='../index.html'>🏠 홈으로</a>
-  </div>
-  <h1>Daily AI News Archive</h1>
+  <div class='container'>
+    <div class='nav'>
+      <a href='../index.html'>🏠 홈으로</a>
+    </div>
+    <h1>Daily AI News Archive</h1>
   <p>실행 시점(날짜+시간, KST)별로 저장된 AI 기사 요약 목록입니다.</p>
   <ul class='run-list'>
+    <li class='run-item'><a href='daily/2025-12-08_164629.html'>2025-12-08 16:46:29 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-08 16:46:29 (KST)</span></li>
     <li class='run-item'><a href='daily/2025-12-08_161510.html'>2025-12-08 16:15:10 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-08 16:15:10 (KST)</span></li>
     <li class='run-item'><a href='daily/2025-12-08_105629.html'>2025-12-08 10:56:29 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-08 10:56:29 (KST)</span></li>
     <li class='run-item'><a href='daily/2025-12-06_074528.html'>2025-12-06 07:45:28 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-06 07:45:28 (KST)</span></li>
@@ -40,5 +46,6 @@
     <li class='run-item'><a href='daily/2025-12-04_140656.html'>2025-12-04 14:06:56 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-04 14:06:56 (KST)</span></li>
     <li class='run-item'><a href='daily/2025-12-04_140139.html'>2025-12-04 14:01:39 AI News</a><span class='timestamp'>원본 생성 시간: 2025-12-04 14:01:39 (KST)</span></li>
   </ul>
+  </div>
 </body>
 </html>
