@@ -4,6 +4,7 @@ import datetime
 import feedparser
 import google.generativeai as genai
 from google.api_core import exceptions
+from groq import Groq
 import re
 import random
 from dataclasses import dataclass, field
@@ -252,14 +253,9 @@ def _extract_retry_delay(exc: Exception, default: float = 30.0) -> float:
     return default
 
 
-# 1) Gemini 요약 함수
-def summarize(text: str, title: str, display_name: str) -> str:
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-
-    # 사용 중인 모델 (필요시 다른 ID로 교체)
-    model = genai.GenerativeModel("gemini-2.5-flash-preview-09-2025")
-
-    prompt = f"""
+# 1) Gemini/Grok 요약 함수
+def _build_summary_prompt(text: str, title: str, display_name: str) -> str:
+    return f"""
 아래 {display_name} 관련 기사 내용을 5줄 이내 한국어로 핵심만 요약해줘.
 가능하면 수치, 회사명, 핵심 이슈 위주로 하고, 각 줄은 불릿 기호 "□"으로 시작해줘.
 핵심 키워드는 강조(**굵게**) 처리하되, URL이나 링크는 포함하지 마.
@@ -268,6 +264,14 @@ def summarize(text: str, title: str, display_name: str) -> str:
 내용:
 {text[:2000]}
 """
+
+
+def _summarize_with_gemini(prompt: str) -> str:
+    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+
+    # 사용 중인 모델 (필요시 다른 ID로 교체)
+    model = genai.GenerativeModel("gemini-2.5-flash-preview-09-2025")
+
     last_exc: Exception | None = None
     for attempt in range(3):
         try:
@@ -297,6 +301,42 @@ def summarize(text: str, title: str, display_name: str) -> str:
             time.sleep(backoff)
 
     raise last_exc if last_exc else RuntimeError("Gemini summarization failed")
+
+
+def _summarize_with_grok(prompt: str) -> str:
+    api_key = os.getenv("GROK_API_KEY")
+    if not api_key:
+        raise RuntimeError("GROK_API_KEY is not set for Grok fallback")
+
+    client = Groq(api_key=api_key)
+    model = os.getenv("GROK_MODEL", "llama-3.3-70b-versatile")
+
+    res = client.chat.completions.create(
+        messages=[{"role": "user", "content": prompt}],
+        model=model,
+    )
+
+    content = res.choices[0].message.content if res.choices else ""
+    if not content:
+        raise RuntimeError("Grok did not return a summary")
+
+    return content.strip()
+
+
+def summarize(text: str, title: str, display_name: str) -> str:
+    prompt = _build_summary_prompt(text, title, display_name)
+
+    try:
+        return _summarize_with_gemini(prompt)
+    except Exception as gemini_exc:
+        print(f"[warn] Gemini failed with error: {gemini_exc}; falling back to Grok")
+
+        try:
+            return _summarize_with_grok(prompt)
+        except Exception as grok_exc:
+            raise RuntimeError(
+                "Both Gemini and Grok summarization failed. Check API keys and quotas."
+            ) from grok_exc
 
 
 # 2) RSS → (여러 RSS 전체) → 시간/랜덤 정렬 → 상위 N개만 요약
