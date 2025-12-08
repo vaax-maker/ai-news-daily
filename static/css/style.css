@@ -209,6 +209,42 @@ html {
     /* Align top with image */
 }
 
+/* Custom Highlight */
+.highlight {
+    background-color: #ccff00;
+    /* Neon Green */
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* Logo Sizing: Match h2 size (~1.4rem = 22.4px) */
+.header-logo {
+    height: 24px;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    padding: 0 !important;
+}
+
+.logo-link:hover {
+    border-bottom: none !important;
+}
+
+.summary-list {
+    list-style-type: disc;
+    padding-left: 1.2rem;
+}
+
+.summary-list li {
+    margin-bottom: 0.6rem;
+}
+
 /* Table */
 .table-responsive {
     overflow-x: auto;
