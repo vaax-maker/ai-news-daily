@@ -102,6 +102,9 @@ CATEGORIES: Dict[str, CategoryConfig] = {
 
 # Gemini 호출 간격 (무료 플랜이면 6~7초 이상 권장, 유료/여유 있으면 줄여도 됨)
 REQUEST_INTERVAL_SECONDS = 2
+# Google 측에서 제안하는 retry-after 값이 1분 이상일 때 워크플로가 멈춰 보이는 것을
+# 방지하기 위해 지연 시간을 상한 처리한다.
+MAX_GEMINI_RETRY_DELAY = 15.0
 HIGHLIGHT_COLOR = "#fff6b0"
 
 
@@ -254,11 +257,11 @@ def _extract_retry_delay(exc: Exception, default: float = 30.0) -> float:
     match = re.search(r"retry in ([0-9]+(?:\.[0-9]+)?)s", message)
     if match:
         try:
-            return float(match.group(1))
+            return min(float(match.group(1)), MAX_GEMINI_RETRY_DELAY)
         except ValueError:
             pass
 
-    return default
+    return min(default, MAX_GEMINI_RETRY_DELAY)
 
 
 # 1) Gemini/Grok 요약 함수
@@ -335,16 +338,16 @@ def summarize(text: str, title: str, display_name: str) -> str:
     prompt = _build_summary_prompt(text, title, display_name)
 
     try:
-        return _summarize_with_gemini(prompt)
-    except Exception as gemini_exc:
-        print(f"[warn] Gemini failed with error: {gemini_exc}; falling back to Grok")
+        return _summarize_with_grok(prompt)
+    except Exception as grok_exc:
+        print(f"[warn] Grok failed with error: {grok_exc}; falling back to Gemini")
 
         try:
-            return _summarize_with_grok(prompt)
-        except Exception as grok_exc:
+            return _summarize_with_gemini(prompt)
+        except Exception as gemini_exc:
             raise RuntimeError(
-                "Both Gemini and Grok summarization failed. Check API keys and quotas."
-            ) from grok_exc
+                "Both Grok and Gemini summarization failed. Check API keys and quotas."
+            ) from gemini_exc
 
 
 # 2) RSS → (여러 RSS 전체) → 시간/랜덤 정렬 → 상위 N개만 요약
