@@ -180,63 +180,23 @@ def process_members(limit_per_member=None):
     # Sort all collected news by timestamp and take top 5
     all_latest_news.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
     
-    # Collect for Word Cloud (Titles only to reduce noise)
-    all_text = ""
-    for article in all_latest_news:
-        all_text += " " + article.get("title", "")
-    
-    # Simple Word Cloud Logic
-    # 1. Tokenize (Simple split extended for Korean/English mixed)
-    words = re.findall(r"[\w']+", all_text.lower())
-    
-    # 2. Stopwords (Basic list)
-    stopwords = set([
-        "ai", "xr", "meta", "google", "apple", "news", "daily", "daily_news",
-        "the", "a", "an", "in", "on", "at", "for", "to", "of", "and", "is", "are",
-        "with", "by", "from", "up", "about", "into", "over", "after",
-        "2024", "2025", "com", "kr", "co", "http", "https", "www"
-    ])
-    
-    filtered_words = [w for w in words if len(w) > 1 and w not in stopwords]
-    
-    # 3. Frequency
-    counts = Counter(filtered_words)
-    top_keywords = counts.most_common(50)
-    
-    if top_keywords:
-        max_count = top_keywords[0][1]
-        min_count = top_keywords[-1][1]
-        
-    word_cloud_data = []
-    
-    # Fallback for verification if no news found
-    if not top_keywords:
-        print("[Members] No keywords found. using sample data for Word Cloud verification.")
-        sample_words = [("AI", 10), ("Startups", 8), ("Growth", 7), ("Investment", 6), ("Tech", 5), ("Future", 4), ("Market", 3)]
-        top_keywords = sample_words
-        max_count = 10
-        min_count = 3
+    # Collect for Word Cloud (Titles only) -> REMOVED per user request
+    # word_cloud_data calculation removed.
 
-    for word, count in top_keywords:
-        # Scale size 1.0 to 3.0
-        if max_count == min_count:
-            size = 1.5
-        else:
-            size = 1.0 + 2.0 * (count - min_count) / (max_count - min_count)
-        word_cloud_data.append({"word": word, "size": round(size, 2)})
-
+    # Generate Members Index (Just a list of links to member pages)
+    
     # Sort members by accumulated news count (descending)
-    member_news_counts = {}
-    # We need to load counts because we might not have visited everyone in this run if limit was set?
-    # Actually, the loop iterates ALL members.
-    
-    # Wait, I didn't capture counts in the loop above. I need to redo the loop logic capture or just load them now.
-    # Since we are outside the loop, let's just peek at the storage or file?
-    # Better to capture in the loop. But since I can't edit the whole function efficiently, I'll insert a quick loader here 
-    # OR, assume I should have captured it. 
-    # Let's use storage to get counts quickly.
-    
     member_entries = []
+    
+    # Clean up existing member pages to remove stale English files
+    # Only if we are doing a full run or just always? Always is safer for "unused files" requirement.
+    # But wait, we just generated them. If I delete them now, I lose what I generated in the loop above?
+    # No, the loop above generated them. 
+    # STRICTLY SPEAKING: I should have cleaned `docs/members` BEFORE the loop.
+    # But since I can't easily edit the top of the function without large replace, 
+    # I will rely on the user manually deleting or I will use a separate script?
+    # Actually, I can just walk `docs/members` and delete files that are NOT in `member_entries`.
+    
     for m_key, member in members.items():
         # Load accumulated news from storage
         history = storage.load_news(m_key)
@@ -253,7 +213,21 @@ def process_members(limit_per_member=None):
     # Sort by Count (Desc) then Name (Asc)
     member_entries.sort(key=lambda x: (-x["count"], x["name"]))
     
-    idx_html = render_member_index(member_entries, word_cloud_data)
+    # Cleanup: Delete files in docs/members that are not in member_entries
+    existing_files = set(os.listdir(member_page_dir))
+    generated_files = {entry["filename"] for entry in member_entries}
+    generated_files.add("index.html") # Don't delete index
+    
+    for filename in existing_files:
+        if filename.endswith(".html") and filename not in generated_files:
+            file_path = os.path.join(member_page_dir, filename)
+            try:
+                os.remove(file_path)
+                print(f"[Cleanup] Removed stale file: {filename}")
+            except OSError as e:
+                print(f"[Cleanup] Error deleting {filename}: {e}")
+    
+    idx_html = render_member_index(member_entries)
     with open("docs/members/index.html", "w", encoding="utf-8") as f:
         f.write(idx_html)
         

@@ -9,16 +9,14 @@
 <p class="subtitle">실행 시점(날짜+시간, KST)별 저장된 뉴스 목록입니다.</p>
 
 {% if run_entries %}
-<ul class="archive-list">
-    {% for entry in run_entries %}
+<ul class="archive-list">{% for entry in run_entries %}
     <li class="archive-item">
         <a href="daily/{{ entry.filename }}" class="archive-link">
             {{ entry.date_str }}
             {% if entry.time_str %}<small>{{ entry.time_str }}</small>{% endif %}
         </a>
         <span class="archive-time">{{ entry.date_str }} {{ entry.time_str }} (KST)</span>
-    </li>
-    {% endfor %}
+    </li>{% endfor %}
 </ul>
 {% else %}
 <div class="empty-msg">아직 발행된 뉴스가 없습니다.</div>

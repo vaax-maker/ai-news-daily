@@ -48,16 +48,14 @@ def render_member_page(member, articles, now_str):
     )
     return html
 
-def render_member_index(members_list, word_cloud_data):
+def render_member_index(members_list):
     """
-    Renders the members index page with a Word Cloud.
+    Renders the members index page.
     members_list: list of dict { "name": ..., "filename": ... }
-    word_cloud_data: list of dict { "word": ..., "size": ... }
     """
     template = env.get_template("member_index.html")
     html = template.render(
         members=members_list,
-        word_cloud=word_cloud_data,
         root_path="../.." # doc/members/index.html -> root is ../..
     )
     return html
