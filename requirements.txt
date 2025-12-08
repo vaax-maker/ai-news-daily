@@ -1,4 +1,5 @@
 feedparser
 google-generativeai
 googletrans==4.0.0-rc1
-groq
+# Pin to a version that exposes the `Groq` client class used in generate_news.py
+groq>=0.4.2,<1.0
