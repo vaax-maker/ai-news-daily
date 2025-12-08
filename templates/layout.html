@@ -18,6 +18,9 @@
 <body>
     <header>
         <div class="gnb">
+            <a href="{{ root_path | default('.') }}/index.html" class="logo-link">
+                <img src="{{ root_path | default('.') }}/static/images/logo.jpg" alt="VAAX" class="header-logo">
+            </a>
             <a href="{{ root_path | default('.') }}/index.html"
                 class="{% if active_tab == 'home' %}active{% endif %}">Home</a>
             <a href="{{ root_path | default('.') }}/ai/index.html"

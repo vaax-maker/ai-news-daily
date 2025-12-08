@@ -6,23 +6,36 @@
 <h1>{{ member.name }} News</h1>
 <p class="subtitle">Latest news related to {{ member.name }}</p>
 
-<ul class="news-list">
+<div class="news-list">
     {% for item in articles %}
-    <li class="news-item">
-        <div class="news-meta">
-            {{ item.published_display }} | {{ item.source_name or 'Google News' }}
+    <article class="news-item">
+        <div class="news-header">
+            <h3 class="news-title">
+                <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+            </h3>
+            <div class="news-meta">
+                <span class="source-link">{{ item.source_name or 'Google News' }}</span> | {{ item.published_display }}
+            </div>
         </div>
-        <h3 class="news-title">
-            <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-        </h3>
-        {% if item.summary_html %}
-        <div class="news-summary">
-            {{ item.summary_html | safe }}
+
+        <div class="news-body">
+            {% if item.image_url %}
+            <div class="news-image">
+                <img src="{{ item.image_url }}" alt="Thumbnail" loading="lazy">
+            </div>
+            {% endif %}
+
+            <div class="news-summary">
+                {% if item.summary_html %}
+                {{ item.summary_html | safe }}
+                {% else %}
+                <p>No summary available.</p>
+                {% endif %}
+            </div>
         </div>
-        {% endif %}
-    </li>
+    </article>
     {% endfor %}
-</ul>
+</div>
 
 {% if not articles %}
 <div class="empty-msg">

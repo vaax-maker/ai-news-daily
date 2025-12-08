@@ -1,6 +1,11 @@
+&id001
+name: 브이브이알
+keywords:
+- VVR .
+representative: YoungHoon Mok
 members:
-  ALCHERA:
-    name: ALCHERA
+  알체라:
+    name: 알체라
     keywords:
     - ALCHERA
     representative: 강민수
@@ -9,8 +14,8 @@ members:
     keywords:
     - 포니이엔티
     representative: 강민호
-  KMA:
-    name: KMA
+  한국능률협회:
+    name: 한국능률협회
     keywords:
     - KMA
     representative: 강석
@@ -29,8 +34,8 @@ members:
     keywords:
     - 시니스트
     representative: 강신래
-  MIXCON ENTERTAINMENT:
-    name: MIXCON ENTERTAINMENT
+  믹스콘엔터테인먼트:
+    name: 믹스콘엔터테인먼트
     keywords:
     - MIXCON ENTERTAINMENT
     representative: 강영수
@@ -39,8 +44,8 @@ members:
     keywords:
     - 에쓰핀테크놀로지
     representative: 강지원
-  VIVE STUDIOS:
-    name: VIVE STUDIOS
+  비브스튜디오스:
+    name: 비브스튜디오스
     keywords:
     - VIVE STUDIOS
     representative: 고광민
@@ -49,8 +54,8 @@ members:
     keywords:
     - 하남디지털캠프
     representative: 고명
-  concreate:
-    name: concreate
+  콘크리에이트:
+    name: 콘크리에이트
     keywords:
     - concreate
     representative: 고명미
@@ -79,19 +84,20 @@ members:
     keywords:
     - 포스트미디어
     representative: 국현규
-  AMBERIN:
-    name: AMBERIN
+  앰버린:
+    name: 앰버린
     keywords:
     - AMBERIN
     representative: 권기석
-  ZENSTEM:
-    name: ZENSTEM
+  젠스템:
+    name: 젠스템
     keywords:
     - ZENSTEM
     representative: 권순재
   LG유플러스:
     name: LG유플러스
     keywords:
+    - LG 유플러스
     - LG유플러스
     representative: 권순홍
   헉미디어:
@@ -114,8 +120,8 @@ members:
     keywords:
     - 서강대학교
     representative: 김군주
-  READY MADE:
-    name: READY MADE
+  레디메이드:
+    name: 레디메이드
     keywords:
     - READY MADE
     representative: 김기홍
@@ -124,8 +130,8 @@ members:
     keywords:
     - 미래시티 글로벌
     representative: 김동우
-  AIXLAB:
-    name: AIXLAB
+  AIX랩:
+    name: AIX랩
     keywords:
     - AIXLAB
     representative: 김민균
@@ -144,8 +150,8 @@ members:
     keywords:
     - 하나금융TI
     representative: 김병근
-  LOCO:
-    name: LOCO
+  로코:
+    name: 로코
     keywords:
     - LOCO
     representative: 김수련
@@ -154,13 +160,14 @@ members:
     keywords:
     - 메타키움
     representative: 김영수
-  DEXTER studios:
-    name: DEXTER studios
+  덱스터스튜디오:
+    name: 덱스터스튜디오
     keywords:
+    - DEXTER STUDIOS
     - DEXTER studios
     representative: 김욱
-  MLINE:
-    name: MLINE
+  엠라인스튜디오:
+    name: 엠라인스튜디오
     keywords:
     - MLINE
     representative: 김윤필
@@ -179,8 +186,8 @@ members:
     keywords:
     - 살린
     representative: 김재현
-  SM ENTERTAINMENT GROUP:
-    name: SM ENTERTAINMENT GROUP
+  SM엔터테인먼트:
+    name: SM엔터테인먼트
     keywords:
     - SM ENTERTAINMENT GROUP
     representative: 김종민
@@ -199,13 +206,13 @@ members:
     keywords:
     - 대신증권
     representative: 김태욱
-  GALAXY CORP.:
-    name: GALAXY CORP.
+  갤럭시코퍼레이션:
+    name: 갤럭시코퍼레이션
     keywords:
     - GALAXY CORP.
     representative: 김현정
-  COXSPACE:
-    name: COXSPACE
+  콕스스페이스:
+    name: 콕스스페이스
     keywords:
     - COXSPACE
     representative: 김호연
@@ -219,8 +226,8 @@ members:
     keywords:
     - 한국열린사이버대학교
     representative: 남희양
-  Munhwa Broadcasting Corp.:
-    name: Munhwa Broadcasting Corp.
+  MBC:
+    name: MBC
     keywords:
     - Munhwa Broadcasting Corp.
     representative: 노시용
@@ -244,8 +251,8 @@ members:
     keywords:
     - 네오컨버전스
     representative: 류내원
-  VENTURE SQUARE:
-    name: VENTURE SQUARE
+  벤처스퀘어:
+    name: 벤처스퀘어
     keywords:
     - VENTURE SQUARE
     representative: 명승은
@@ -274,33 +281,28 @@ members:
     keywords:
     - 세계미디어
     representative: 박동선
-  DOORIBUN:
-    name: DOORIBUN
+  두리번:
+    name: 두리번
     keywords:
     - DOORIBUN
     representative: 박두환
-  LG 유플러스:
-    name: LG 유플러스
-    keywords:
-    - LG 유플러스
-    representative: 박명환
-  DATAKING:
-    name: DATAKING
+  데이터킹:
+    name: 데이터킹
     keywords:
     - DATAKING
     representative: 박선규
-  DIVEXR:
-    name: DIVEXR
+  다이브엑스알:
+    name: 다이브엑스알
     keywords:
     - DIVEXR
     representative: 박선영
-  kt engcore:
-    name: kt engcore
+  KT이엔지코어:
+    name: KT이엔지코어
     keywords:
     - kt engcore
     representative: 박성배
-  HNIX:
-    name: HNIX
+  에이치엔아이엑스:
+    name: 에이치엔아이엑스
     keywords:
     - HNIX
     representative: 박성우
@@ -339,8 +341,8 @@ members:
     keywords:
     - 아이피버스
     representative: 박희석
-  BIBIMBLE:
-    name: BIBIMBLE
+  비빔블:
+    name: 비빔블
     keywords:
     - BIBIMBLE
     representative: 방준영
@@ -399,13 +401,13 @@ members:
     keywords:
     - 이노시뮬레이션
     representative: 성인제
-  STUDIO SHOH ENTERTAINMENT:
-    name: STUDIO SHOH ENTERTAINMENT
+  스튜디오쇼:
+    name: 스튜디오쇼
     keywords:
     - STUDIO SHOH ENTERTAINMENT
     representative: 성지환
-  SUPER VR:
-    name: SUPER VR
+  슈퍼브이알:
+    name: 슈퍼브이알
     keywords:
     - SUPER VR
     representative: 송민철
@@ -419,18 +421,18 @@ members:
     keywords:
     - 삼우이머션
     representative: 송영진
-  CODEREACH:
-    name: CODEREACH
+  코드리치:
+    name: 코드리치
     keywords:
     - CODEREACH
     representative: 송진우
-  DT:
-    name: DT
+  디티:
+    name: 디티
     keywords:
     - DT
     representative: 신원호
-  AICON:
-    name: AICON
+  에이아이콘:
+    name: 에이아이콘
     keywords:
     - AICON
     representative: 신준우
@@ -439,8 +441,8 @@ members:
     keywords:
     - 한국항공우주산업
     representative: 안정일
-  Caretive / Pulse9:
-    name: Caretive / Pulse9
+  펄스나인:
+    name: 펄스나인
     keywords:
     - Caretive / Pulse9
     representative: 양병석
@@ -459,13 +461,13 @@ members:
     keywords:
     - 에어에이알
     representative: 오성훈
-  Gcam:
-    name: Gcam
+  지캠:
+    name: 지캠
     keywords:
     - Gcam
     representative: 오세광
-  EQUAL SOUL:
-    name: EQUAL SOUL
+  이퀄소울:
+    name: 이퀄소울
     keywords:
     - EQUAL SOUL
     representative: 오제욱
@@ -489,8 +491,8 @@ members:
     keywords:
     - 맘모식스
     representative: 유철호
-  NFINITY 7:
-    name: NFINITY 7
+  엔피니티세븐:
+    name: 엔피니티세븐
     keywords:
     - NFINITY 7
     representative: 윤승훈
@@ -509,13 +511,13 @@ members:
     keywords:
     - 메타버스쇼
     representative: 이경용
-  OVER THE HAND:
-    name: OVER THE HAND
+  오버더핸드:
+    name: 오버더핸드
     keywords:
     - OVER THE HAND
     representative: 이규승
-  STMicroelectronics Asia Pacific Pte. Ltd:
-    name: STMicroelectronics Asia Pacific Pte. Ltd
+  ST마이크로일렉트로닉스:
+    name: ST마이크로일렉트로닉스
     keywords:
     - STMicroelectronics Asia Pacific Pte. Ltd
     representative: 이규진
@@ -534,18 +536,18 @@ members:
     keywords:
     - 메타로켓
     representative: 이상헌
-  TANGKA:
-    name: TANGKA
+  탕카:
+    name: 탕카
     keywords:
     - TANGKA
     representative: 이석민
-  Jtbc:
-    name: Jtbc
+  JTBC:
+    name: JTBC
     keywords:
     - Jtbc
     representative: 이선우
-  STORYTACO:
-    name: STORYTACO
+  스토리타코:
+    name: 스토리타코
     keywords:
     - STORYTACO
     representative: 이승종
@@ -554,8 +556,8 @@ members:
     keywords:
     - 국회미래연구원
     representative: 이승환
-  Contents Cloud:
-    name: Contents Cloud
+  콘텐츠클라우드:
+    name: 콘텐츠클라우드
     keywords:
     - Contents Cloud
     representative: 이시윤
@@ -574,13 +576,13 @@ members:
     keywords:
     - 이노베이션시스템
     representative: 이유섭
-  VRUNCH:
-    name: VRUNCH
+  브이런치:
+    name: 브이런치
     keywords:
     - VRUNCH
     representative: 이윤우
-  Humelo:
-    name: Humelo
+  휴멜로:
+    name: 휴멜로
     keywords:
     - Humelo
     representative: 이자룡
@@ -589,8 +591,8 @@ members:
     keywords:
     - 메타팩토리코퍼레이션
     representative: 이재일
-  GAUSS LAB:
-    name: GAUSS LAB
+  가우스랩:
+    name: 가우스랩
     keywords:
     - GAUSS LAB
     representative: 이정근
@@ -619,11 +621,6 @@ members:
     keywords:
     - 세종일렉트릭
     representative: 이종석
-  DEXTER STUDIOS:
-    name: DEXTER STUDIOS
-    keywords:
-    - DEXTER STUDIOS
-    representative: 이주원
   버넥트:
     name: 버넥트
     keywords:
@@ -639,8 +636,8 @@ members:
     keywords:
     - 브이리스브이알
     representative: 이창수
-  DEEP INSPECTION:
-    name: DEEP INSPECTION
+  딥인스펙션:
+    name: 딥인스펙션
     keywords:
     - DEEP INSPECTION
     representative: 이철희
@@ -659,8 +656,8 @@ members:
     keywords:
     - 에스원
     representative: 임승채
-  MIRACLE:
-    name: MIRACLE
+  미라클:
+    name: 미라클
     keywords:
     - MIRACLE
     representative: 임용진
@@ -684,13 +681,13 @@ members:
     keywords:
     - 다올자산운용
     representative: 전우석
-  VENTA X:
-    name: VENTA X
+  벤타엑스:
+    name: 벤타엑스
     keywords:
     - VENTA X
     representative: 전우열
-  ANIPEN:
-    name: ANIPEN
+  애니펜:
+    name: 애니펜
     keywords:
     - ANIPEN
     representative: 전재웅
@@ -699,13 +696,13 @@ members:
     keywords:
     - 볼드스텝
     representative: 전진수
-  Visual Light:
-    name: Visual Light
+  비주얼라이트:
+    name: 비주얼라이트
     keywords:
     - Visual Light
     representative: 정성근
-  LITA:
-    name: LITA
+  리타:
+    name: 리타
     keywords:
     - LITA
     representative: 정승희
@@ -719,8 +716,8 @@ members:
     keywords:
     - 제이앤컴퍼니
     representative: 정철화
-  SPACEELVIS:
-    name: SPACEELVIS
+  스페이스엘비스:
+    name: 스페이스엘비스
     keywords:
     - SPACEELVIS
     representative: 조성호
@@ -804,28 +801,28 @@ members:
     keywords:
     - (사)한국메타버스산업협회
     representative: 황철호
-  PARABLE Ent.:
-    name: PARABLE Ent.
+  패러블엔터테인먼트:
+    name: 패러블엔터테인먼트
     keywords:
     - PARABLE Ent.
     representative: 함정훈
-  ADVANCED RF TECHNOLOGIES,:
-    name: ADVANCED RF TECHNOLOGIES,
+  어드밴스드RF:
+    name: 어드밴스드RF
     keywords:
     - ADVANCED RF TECHNOLOGIES,
     representative: ANDREW JUN PhD
-  ZYX Technology .:
-    name: ZYX Technology .
+  직스테크놀로지:
+    name: 직스테크놀로지
     keywords:
     - ZYX Technology .
     representative: Choi, Jongbok Andrew
-  Soongsil University:
-    name: Soongsil University
+  숭실대학교:
+    name: 숭실대학교
     keywords:
     - Soongsil University
     representative: Jeong-A Park
-  VUDEX:
-    name: VUDEX
+  뷰덱스:
+    name: 뷰덱스
     keywords:
     - VUDEX
     representative: Seok. Namkoong
@@ -839,8 +836,4 @@ members:
     keywords:
     - 미스트플레이
     representative: Suzie Insuk Kim
-  VVR .:
-    name: VVR .
-    keywords:
-    - VVR .
-    representative: YoungHoon Mok
+  브이브이알: *id001

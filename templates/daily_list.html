@@ -11,28 +11,27 @@
 <div class="item-list">
     {% for article in articles %}
     <article class="news-item">
-        <div class="news-content">
+        <div class="news-header">
             <h2 class="news-title">
                 <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
-                {% if article.original_title and article.original_title != article.title %}
-                <span class="origin-title">Original: {{ article.original_title }}</span>
-                {% endif %}
             </h2>
             <div class="news-meta">
-                <span class="source-badge">{{ article.source_name }}</span>
-                <span>{{ article.published_display }}</span>
+                <a href="{{ article.link }}" target="_blank" class="source-link">{{ article.source_name }}</a> | {{
+                article.published_display }}
             </div>
-            <div class="summary-box">
+        </div>
+
+        <div class="news-body">
+            {% if article.image_url %}
+            <div class="news-image">
+                <img src="{{ article.image_url }}" alt="Thumbnail" loading="lazy">
+            </div>
+            {% endif %}
+
+            <div class="news-summary">
                 {{ article.summary_html | safe }}
             </div>
         </div>
-        {% if article.image_url %}
-        <div class="news-thumb">
-            <a href="{{ article.link }}" target="_blank">
-                <img src="{{ article.image_url }}" alt="Thumbnail" loading="lazy">
-            </a>
-        </div>
-        {% endif %}
     </article>
     {% endfor %}
 </div>

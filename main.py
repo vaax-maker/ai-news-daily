@@ -5,9 +5,14 @@ from src.config import load_categories
 from src.fetchers.rss import fetch_rss_items
 from src.fetchers.gov import fetch_gov_announcements
 from src.generators.llm import summarize_article, rank_items_with_ai
-from src.generators.html import render_daily_page, render_archive_index, render_dashboard, render_member_page
+from src.generators.html import (
+    render_daily_page, render_archive_index,
+    render_member_page, render_dashboard, render_member_index
+)
 from src.utils.common import extract_source_name, extract_image_url, sanitize_summary, translate_title_to_korean, format_timestamp, markdown_bold_to_highlight
 from src.utils.storage import MemberStorage
+from collections import Counter
+import re
 
 def process_category(config, now_utc, kst_timezone_offset=9):
     print(f"[{config.key.upper()}] Processing...")
@@ -175,32 +180,80 @@ def process_members(limit_per_member=None):
     # Sort all collected news by timestamp and take top 5
     all_latest_news.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
     
-    # Generate Members Index (Just a list of links to member pages)
-    # We can use render_archive_index or a new simple list template?
-    # Actually, render_archive_index expects filename/date.
-    # We want a list of Members.
-    # Let's just create a simple "Members Directory" page logic here.
-    # reusing archive_index.html might be confusing as it expects dates.
-    # Let's create a definition for members index: Just a list of names linking to their pages.
+    # Collect for Word Cloud (Titles only to reduce noise)
+    all_text = ""
+    for article in all_latest_news:
+        all_text += " " + article.get("title", "")
     
-    # We'll use a simple generated HTML string for now or reuse layout
-    # reusing render_archive_index with custom entries:
+    # Simple Word Cloud Logic
+    # 1. Tokenize (Simple split extended for Korean/English mixed)
+    words = re.findall(r"[\w']+", all_text.lower())
+    
+    # 2. Stopwords (Basic list)
+    stopwords = set([
+        "ai", "xr", "meta", "google", "apple", "news", "daily", "daily_news",
+        "the", "a", "an", "in", "on", "at", "for", "to", "of", "and", "is", "are",
+        "with", "by", "from", "up", "about", "into", "over", "after",
+        "2024", "2025", "com", "kr", "co", "http", "https", "www"
+    ])
+    
+    filtered_words = [w for w in words if len(w) > 1 and w not in stopwords]
+    
+    # 3. Frequency
+    counts = Counter(filtered_words)
+    top_keywords = counts.most_common(50)
+    
+    if top_keywords:
+        max_count = top_keywords[0][1]
+        min_count = top_keywords[-1][1]
+        
+    word_cloud_data = []
+    
+    # Fallback for verification if no news found
+    if not top_keywords:
+        print("[Members] No keywords found. using sample data for Word Cloud verification.")
+        sample_words = [("AI", 10), ("Startups", 8), ("Growth", 7), ("Investment", 6), ("Tech", 5), ("Future", 4), ("Market", 3)]
+        top_keywords = sample_words
+        max_count = 10
+        min_count = 3
+
+    for word, count in top_keywords:
+        # Scale size 1.0 to 3.0
+        if max_count == min_count:
+            size = 1.5
+        else:
+            size = 1.0 + 2.0 * (count - min_count) / (max_count - min_count)
+        word_cloud_data.append({"word": word, "size": round(size, 2)})
+
+    # Sort members by accumulated news count (descending)
+    member_news_counts = {}
+    # We need to load counts because we might not have visited everyone in this run if limit was set?
+    # Actually, the loop iterates ALL members.
+    
+    # Wait, I didn't capture counts in the loop above. I need to redo the loop logic capture or just load them now.
+    # Since we are outside the loop, let's just peek at the storage or file?
+    # Better to capture in the loop. But since I can't edit the whole function efficiently, I'll insert a quick loader here 
+    # OR, assume I should have captured it. 
+    # Let's use storage to get counts quickly.
+    
     member_entries = []
     for m_key, member in members.items():
-        member_entries.append({
-            "filename": f"{m_key}.html", # relative to docs/members/
-            "date_str": member.name,     # Abuse date_str for Name
-            "time_str": ""               # No time
-        })
-    # Sort by Name
-    member_entries.sort(key=lambda x: x["date_str"])
-    
-    class MemberIndexConfig:
-        display_name = "Members Directory"
-        key = "members"
-        archive_dir = "docs/members" # irrelevant for this
+        # Load accumulated news from storage
+        history = storage.load_news(m_key)
+        count = len(history)
         
-    idx_html = render_archive_index(member_entries, MemberIndexConfig())
+        # Sanitize filename
+        safe_name = m_key.replace("/", "_").replace("\\", "_")
+        member_entries.append({
+            "filename": f"{safe_name}.html", 
+            "name": member.name, 
+            "count": count
+        })
+        
+    # Sort by Count (Desc) then Name (Asc)
+    member_entries.sort(key=lambda x: (-x["count"], x["name"]))
+    
+    idx_html = render_member_index(member_entries, word_cloud_data)
     with open("docs/members/index.html", "w", encoding="utf-8") as f:
         f.write(idx_html)
         

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}Members Directory{% endblock %}
+
+{% block content %}
+<h1>Members Directory</h1>
+<p class="subtitle">News gathered from {{ members|length }} sources</p>
+
+{% if word_cloud %}
+<h2>Keyword Cloud</h2>
+<div class="word-cloud">
+    {% for tag in word_cloud %}
+    <span style="font-size: {{ tag.size }}em;">
+        {{ tag.word }}
+    </span>
+    {% endfor %}
+</div>
+</section>
+{% endif %}
+
+<div class="calendar-list">
+    <ul class="archive-list">
+        {% for member in members %}
+        <li>
+            <a href="{{ member.filename }}" class="archive-link">
+                <span class="archive-date">{{ member.name }}</span>
+                <span class="archive-count">View News &rarr;</span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

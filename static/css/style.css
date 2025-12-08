@@ -135,15 +135,149 @@ h1 {
     margin-bottom: 0.2rem;
 }
 
-.preview-title {
-    font-weight: 500;
-    display: block;
-    line-height: 1.4;
+/* News Item (List View) */
+.news-item {
+    background: var(--card-bg);
+    border-top: 2px solid var(--border-color);
+    /* Separator line like in image */
+    padding: 2rem 0;
+    margin-bottom: 0;
 }
 
 /* Member Page List */
 .news-list {
     list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.news-item:first-child {
+    border-top: none;
+}
+
+.news-header {
+    margin-bottom: 1.5rem;
+}
+
+.news-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    /* Regular weight, not too bold */
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+    line-height: 1.3;
+}
+
+.news-title a:hover {
+    text-decoration: underline;
+    color: var(--primary-color);
+}
+
+.news-meta {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.source-link {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.news-body {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.news-image img {
+    width: 220px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.news-summary {
+    flex: 1;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #334155;
+    margin-top: -5px;
+    /* Align top with image */
+}
+
+/* Custom Highlight */
+.highlight {
+    background-color: #ccff00;
+    /* Neon Green */
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.header-logo {
+    height: 40px;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    padding: 0 !important;
+    /* Override gnb a padding if needed */
+}
+
+.logo-link:hover {
+    border-bottom: none !important;
+}
+
+.summary-list {
+    list-style-type: disc;
+    padding-left: 1.2rem;
+}
+
+.summary-list li {
+    margin-bottom: 0.6rem;
+}
+
+/* Word Cloud */
+.dashboard-section {
+    margin-bottom: 2rem;
+}
+
+.word-cloud {
+    text-align: center;
+    padding: 1.5rem;
+    line-height: 2;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.word-cloud span {
+    margin: 0 5px;
+    color: #555;
+    display: inline-block;
+    transition: color 0.2s;
+}
+
+.word-cloud span:hover {
+    color: var(--primary-color);
+    cursor: default;
+}
+
+@media (max-width: 768px) {
+
+    .news-body {
+        flex-direction: column;
+    }
+
+    .news-image img {
+        width: 100%;
+        max-width: 400px;
+    }
 }
 
 .news-item {

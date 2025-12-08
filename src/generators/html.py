@@ -33,25 +33,34 @@ def render_archive_index(run_entries, config):
         root_path=".."
     )
 
-def render_dashboard(categories):
-    template = env.get_template("dashboard.html")
-    return template.render(
-        categories=categories,
-        active_tab="home",
-        now_year=datetime.datetime.now().year
-    )
 
-def render_member_page(member, articles, date_str):
+
+def render_member_page(member, articles, now_str):
+    """
+    Renders the individual member page with their entire history.
+    """
     template = env.get_template("member_page.html")
-    # articles will be list of dicts.
-    return template.render(
+    html = template.render(
         member=member,
         articles=articles,
-        date_str=date_str,
-        now_year=datetime.datetime.now().year,
-        active_tab="members",
-        root_path="../.." 
+        updated_date=now_str,
+        root_path="../.." # doc/members/<Page> -> root is ../..
     )
+    return html
+
+def render_member_index(members_list, word_cloud_data):
+    """
+    Renders the members index page with a Word Cloud.
+    members_list: list of dict { "name": ..., "filename": ... }
+    word_cloud_data: list of dict { "word": ..., "size": ... }
+    """
+    template = env.get_template("member_index.html")
+    html = template.render(
+        members=members_list,
+        word_cloud=word_cloud_data,
+        root_path="../.." # doc/members/index.html -> root is ../..
+    )
+    return html
 
 def render_dashboard(ai_latest, xr_latest, gov_latest, members_latest):
     template = env.get_template("dashboard.html")
