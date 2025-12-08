@@ -482,6 +482,22 @@ def fetch_and_summarize(config: CategoryConfig):
             if any(kw in ((item[1] or "") + " " + (item[3] or "")).lower() for kw in keywords)
         ]
 
+    candidate_items = []
+    
+    # [설정] 최신 2일(오늘, 어제) 기사만 필터링
+    # 48시간 기준보다는 '날짜' 기준으로 하는 것이 일반적이나, 편의상 최근 48시간 + 여유분으로 처리하거나
+    # datetime 비교를 수행. 여기서는 간단히 timestamp 기준으로 48시간 이내만 1차 필터링 수행.
+    # 단, published 정보가 없는(ts=0) 경우는 제외되거나(또는 포함하거나) 정책 결정 필요.
+    # 여기서는 ts >= (현재 - 2일) 인 것만 남김.
+    two_days_ago = time.time() - 48 * 60 * 60
+    
+    # 1차 필터링: 최근 2일 데이터를 우선 확보
+    filtered_items = [item for item in raw_items if item[0] >= two_days_ago]
+    
+    # 만약 필터링 결과가 너무 적으면(5개 미만) 그냥 전체에서 가져오거나, 그대로 진행.
+    # 여기서는 그대로 진행.
+    raw_items = filtered_items
+
     # 기사 정렬/선택 방식
     three_days_ago = time.time() - 3 * 24 * 60 * 60
     if config.selection_mode == "time":
@@ -517,7 +533,10 @@ def fetch_and_summarize(config: CategoryConfig):
 
         summary = summarize(text_with_url, title, config.display_name)
         summary = sanitize_summary(summary)
-        image_url = extract_image_url(entry) or config.fallback_image_url
+        
+        # [변경] fallback_image_url 사용 안 함. 이미지가 없으면 빈 문자열.
+        real_image_url = extract_image_url(entry)
+        image_url = real_image_url if real_image_url else ""
 
         summarized.append(
             {
@@ -548,6 +567,11 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
         "  <meta name='viewport' content='width=device-width, initial-scale=1' />"
     )
     parts.append(
+        "  <meta name='viewport' content='width=device-width, initial-scale=1' />"
+    )
+    # [Bug Fix] Missing <style> tag start
+    parts.append("  <style>")
+    parts.append(
         "    body { font-family: Roboto, 'Noto Sans KR', 'Pretendard', sans-serif; line-height: 1.5; margin: 0; background: #fff; color: #111; }"
     )
     parts.append("    a { text-decoration: none; color: inherit; }")
@@ -555,13 +579,12 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
     parts.append("    h1 { font-size: 1.5rem; margin-bottom: 5px; color: #111; letter-spacing: -1px; }")
     parts.append("    .meta { color: #888; font-size: 0.9rem; margin-bottom: 20px; }")
     
-    parts.append(
-        "    .nav { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 15px; }"
-    )
-    parts.append(
-        "    .nav a { padding: 8px 15px; background: #f4f4f4; border-radius: 4px; color: #333; font-size: 0.9rem; font-weight: bold; transition: background 0.2s; }"
-    )
-    parts.append("    .nav a:hover { background: #e0e0e0; }")
+    # [변경] GNB 스타일 (Home | AI | XR | Archive)
+    parts.append("    header { background: #f4f4f4; border-bottom: 1px solid #ddd; padding: 10px 0; margin-bottom: 30px; }")
+    parts.append("    .gnb { max-width: 1000px; margin: 0 auto; display: flex; gap: 20px; padding: 0 20px; }")
+    parts.append("    .gnb a { font-weight: bold; color: #555; text-decoration: none; font-size: 1rem; }")
+    parts.append("    .gnb a:hover { color: #2272c9; }")
+    parts.append("    .gnb a.active { color: #2272c9; }")
 
     parts.append("    .board-list { border-top: 2px solid #2272c9; }")
     parts.append(
@@ -569,7 +592,8 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
     )
     parts.append("    .list-item:hover { background: #f9f9f9; }")
     
-    parts.append("    .item-title { font-size: 1.1rem; font-weight: normal; margin: 0 0 5px; line-height: 1.4; }")
+    # [변경] 제목 폰트 키움 (1.1rem -> 1.35rem)
+    parts.append("    .item-title { font-size: 1.35rem; font-weight: normal; margin: 0 0 8px; line-height: 1.4; letter-spacing: -0.5px; }")
     parts.append("    .item-title a { color: #232f3e; transition: color 0.2s; }")
     parts.append("    .item-title a:hover { color: #d43f3a; text-decoration: underline; }")
     
@@ -586,8 +610,9 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
     parts.append("    .summary-list { margin: 0; padding-left: 1.2rem; }")
     parts.append("    .summary-list li { margin-bottom: 3px; }")
     
+    # [변경] 이미지 크기 및 배치 조정
     parts.append(
-        "    .item-image { width: 120px; height: 90px; object-fit: cover; border-radius: 4px; border: 1px solid #eee; flex-shrink: 0; }"
+        "    .item-image { width: 160px; height: 110px; object-fit: cover; border-radius: 4px; border: 1px solid #eee; flex-shrink: 0; }"
     )
     
     parts.append(
@@ -596,16 +621,24 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
     
     parts.append("    @media (max-width: 600px) {")
     parts.append("      .container { padding: 15px; }")
-    parts.append("      .item-image { width: 80px; height: 60px; }")
+    # [변경] 모바일에서 이미지는 숨기거나 작게 -> 작게 유지
+    parts.append("      .item-image { width: 90px; height: 70px; }")
+    parts.append("      .item-title { font-size: 1.2rem; }")
     parts.append("    }")
     parts.append("  </style>")
     parts.append("</head>")
     parts.append("<body>")
-    parts.append("  <div class='container'>")
-    parts.append("    <div class='nav'>")
-    parts.append("      <a href='../../index.html'>🏠 홈으로</a>")
-    parts.append("      <a href='../index.html'>📅 날짜별 목록</a>")
+    # [변경] 공통 GNB 추가
+    parts.append("  <header>")
+    parts.append("    <div class='gnb'>")
+    parts.append("      <a href='../../index.html'>Home</a>")
+    parts.append("      <a href='../../ai/index.html' " + ("class='active'" if config.key == 'ai' else "") + ">AI News</a>")
+    parts.append("      <a href='../../xr/index.html' " + ("class='active'" if config.key == 'xr' else "") + ">XR News</a>")
     parts.append("    </div>")
+    parts.append("  </header>")
+
+    parts.append("  <div class='container'>")
+    # [삭제] 기존 .nav 제거
     parts.append(f"    <h1>{date_str} {config.display_name} News</h1>")
     parts.append(f"    <p class='meta'>Updated at {time_str} (KST)</p>")
     parts.append("    <div class='board-list'>")
@@ -639,9 +672,10 @@ def build_daily_page(articles, date_str: str, time_str: str, config: CategoryCon
         if summary_html or art.get("image_url"):
             parts.append("        <div class='item-body'>")
             
+            # [변경] 이미지가 있을 때만 <img> 태그 생성
             if art.get("image_url"):
                 parts.append(
-                    f"          <img src='{art['image_url']}' alt='기사 이미지' class='item-image' loading='lazy'/>"
+                     f"          <a href='{art['link']}' target='_blank'><img src='{art['image_url']}' alt='썸네일' class='item-image' loading='lazy'/></a>"
                 )
 
             parts.append("          <div class='summary-text'>")
@@ -707,14 +741,13 @@ def rebuild_index_html(config: CategoryConfig):
     parts.append("    a { text-decoration: none; color: inherit; }")
     parts.append("    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }")
     
+    
     parts.append("    h1 { margin-bottom: 0.35rem; font-size: 1.5rem; letter-spacing: -1px; }")
-    parts.append(
-        "    .nav { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 15px; }"
-    )
-    parts.append(
-        "    .nav a { padding: 8px 15px; background: #f4f4f4; border-radius: 4px; color: #333; font-size: 0.9rem; font-weight: bold; transition: background 0.2s; }"
-    )
-    parts.append("    .nav a:hover { background: #e0e0e0; }")
+    # [변경] GNB 스타일 (Index 페이지용)
+    parts.append("    header { background: #f4f4f4; border-bottom: 1px solid #ddd; padding: 10px 0; margin-bottom: 30px; }")
+    parts.append("    .gnb { max-width: 1000px; margin: 0 auto; display: flex; gap: 20px; padding: 0 20px; }")
+    parts.append("    .gnb a { font-weight: bold; color: #555; text-decoration: none; font-size: 1rem; }")
+    parts.append("    .gnb a:hover { color: #2272c9; }")
 
     parts.append("    .run-list { list-style: none; padding: 0; border-top: 2px solid #2272c9; margin-top: 15px; }")
     parts.append(
@@ -732,10 +765,14 @@ def rebuild_index_html(config: CategoryConfig):
     parts.append("  </style>")
     parts.append("</head>")
     parts.append("<body>")
-    parts.append("  <div class='container'>")
-    parts.append("    <div class='nav'>")
-    parts.append("      <a href='../index.html'>🏠 홈으로</a>")
+    # [변경] GNB 추가 (카테고리별 아카이브 페이지)
+    parts.append("  <header>")
+    parts.append("    <div class='gnb'>")
+    parts.append("      <a href='../index.html'>Home</a>")
+    parts.append("      <a href='index.html' class='active'>" + config.display_name + " News</a>")
     parts.append("    </div>")
+    parts.append("  </header>")
+    parts.append("  <div class='container'>")
     parts.append(f"    <h1>Daily {config.display_name} News Archive</h1>")
     parts.append(
         f"  <p>실행 시점(날짜+시간, KST)별로 저장된 {config.display_name} 기사 요약 목록입니다.</p>"
@@ -746,8 +783,12 @@ def rebuild_index_html(config: CategoryConfig):
     else:
         parts.append("  <ul class='run-list'>")
         for base, date_str, time_str, fname in run_entries:
+        parts.append("  <p>아직 저장된 뉴스가 없습니다.</p>")
+    else:
+        parts.append("  <ul class='run-list'>")
+        for base, date_str, time_str, fname in run_entries:
             if time_str:
-                label = f"{date_str} {time_str} {config.display_name} News"
+                label = f"{date_str} {time_str}" # [변경] 라벨 간소화
             else:
                 label = f"{date_str} {config.display_name} News"
             parts.append(
@@ -782,7 +823,14 @@ def build_root_index(categories: Dict[str, CategoryConfig]):
         "    body { font-family: Roboto, 'Noto Sans KR', 'Pretendard', sans-serif; margin: 0; line-height: 1.6; background: #fff; color: #111; }"
     )
     parts.append("    a { text-decoration: none; color: inherit; }")
+    parts.append("    a { text-decoration: none; color: inherit; }")
     parts.append("    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }")
+    # [변경] GNB 스타일
+    parts.append("    header { background: #f4f4f4; border-bottom: 1px solid #ddd; padding: 10px 0; margin-bottom: 30px; }")
+    parts.append("    .gnb { max-width: 1000px; margin: 0 auto; display: flex; gap: 20px; padding: 0 20px; }")
+    parts.append("    .gnb a { font-weight: bold; color: #555; text-decoration: none; font-size: 1rem; }")
+    parts.append("    .gnb a:hover { color: #2272c9; }")
+    parts.append("    .gnb a.active { color: #2272c9; }")
 
     parts.append("    h1 { margin-bottom: 0.5rem; letter-spacing: -1px; }")
     parts.append("    .subtitle { color: #555; margin-bottom: 20px; font-size: 0.95rem; }")
@@ -809,8 +857,16 @@ def build_root_index(categories: Dict[str, CategoryConfig]):
     parts.append("    .archive-link { margin-bottom: 15px; font-weight: bold; }")
     parts.append("    .archive-link a { color: #2272c9; text-decoration: underline; }")
     parts.append("  </style>")
+    parts.append("  </style>")
     parts.append("</head>")
     parts.append("<body>")
+    parts.append("  <header>")
+    parts.append("    <div class='gnb'>")
+    parts.append("      <a href='index.html' class='active'>Home</a>")
+    parts.append("      <a href='ai/index.html'>AI News</a>")
+    parts.append("      <a href='xr/index.html'>XR News</a>")
+    parts.append("    </div>")
+    parts.append("  </header>")
     parts.append("  <div class='container'>")
     parts.append("    <h1>AI & XR Daily News Archives</h1>")
     parts.append("    <p class='subtitle'>탭을 눌러 AI/XR 뉴스를 구분해 확인하세요. 모든 시각은 한국 표준시(KST) 기준이며, 과거 실행 결과도 누적해 보여줍니다.</p>")
