@@ -13,9 +13,9 @@ from typing import Dict, List
 from urllib.parse import urlparse
 
 try:
-    from googletrans import Translator
+    from deep_translator import GoogleTranslator
 except ImportError:  # pragma: no cover - optional dependency for local dev
-    Translator = None
+    GoogleTranslator = None
 
 if not hasattr(groq_lib, "Groq"):
     raise ImportError(
@@ -150,17 +150,17 @@ def translate_title_to_korean(title: str) -> str:
     if not title or contains_korean(title):
         return title
 
-    if Translator is None:
+    if GoogleTranslator is None:
         return title
 
     global _translator
     if _translator is None:
-        _translator = Translator()
+        _translator = GoogleTranslator(source="auto", target="ko")
 
     try:
-        result = _translator.translate(title, dest="ko")
-        if result and result.text:
-            return result.text
+        result = _translator.translate(title)
+        if result:
+            return result
     except Exception:
         pass
 
