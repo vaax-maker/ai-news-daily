@@ -40,6 +40,8 @@ class CategoryConfig:
     #  - "keyword": 지정한 키워드가 제목·본문에 들어간 기사만 필터링 후 최신 순으로 선택
     selection_mode: str = "time"
     keyword_filters: List[str] = field(default_factory=list)
+    # importance_scoring: LLM을 이용해 기사 중요도를 평가하고 선별할지 여부
+    use_ai_ranking: bool = False
 
 
 # --- 설정 ---
@@ -54,6 +56,12 @@ def resolve_selection_mode(key: str, default: str = "time") -> str:
     if env_val in {"time", "random", "keyword"}:
         return env_val
     return default
+
+
+def resolve_use_ai_ranking(key: str, default: bool = False) -> bool:
+    # <카테고리>_USE_AI_RANKING 환경 변수가 "true"면 AI 랭킹을 적용한다.
+    env_val = os.getenv(f"{key.upper()}_USE_AI_RANKING", str(default)).lower()
+    return env_val == "true"
 
 
 def resolve_keyword_filters(key: str) -> List[str]:
@@ -77,12 +85,20 @@ CATEGORIES: Dict[str, CategoryConfig] = {
             "https://www.bloter.net/archives/category/ai/feed",
             "https://www.reddit.com/r/ArtificialInteligence/top/.rss?t=day",
             "https://www.techmeme.com/feed.xml",
+            # New Feeds
+            "https://techcrunch.com/category/artificial-intelligence/feed/",
+            "https://a16z.com/feed/",
+            "https://www.themiilk.com/feed",
+            "https://www.technologyreview.com/feed/",
+            "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
+            "http://www.aitimes.kr/rss/allArticle.xml",
         ],
         archive_dir="docs/ai/daily",
         index_path="docs/ai/index.html",
         fallback_image_url="https://placehold.co/800x420/111827/FFFFFF?text=AI+News",
         selection_mode=resolve_selection_mode("ai"),
         keyword_filters=resolve_keyword_filters("ai"),
+        use_ai_ranking=resolve_use_ai_ranking("ai", default=True),  # Apply AI ranking by default for AI
     ),
     "xr": CategoryConfig(
         key="xr",
@@ -350,7 +366,87 @@ def summarize(text: str, title: str, display_name: str) -> str:
             ) from gemini_exc
 
 
-# 2) RSS → (여러 RSS 전체) → 시간/랜덤 정렬 → 상위 N개만 요약
+            ) from gemini_exc
+
+
+# 1.5) AI 중요도 평가 (Ranking)
+def _build_ranking_prompt(items_for_ranking: List[tuple], limit: int) -> str:
+    # (idx, title) 목록 생성
+    candidates = []
+    for idx, (ts, title, link, content, entry) in enumerate(items_for_ranking):
+        candidates.append(f"{idx}. {title}")
+    
+    candidates_text = "\n".join(candidates)
+
+    return f"""
+다음은 다양한 AI/테크 뉴스 기사들의 제목 리스트야.
+이 중에서 오늘날짜 뉴스레터에 포함시킬 가장 '중요하고 의미 있는' 기사 {limit}개를 골라줘.
+
+중요도 판단 기준:
+1. 주요 기술 기업(OpenAI, Google, Apple 등)의 새로운 제품/모델 출시
+2. AI 분야의 획기적인 연구 성과나 논문
+3. 업계의 큰 인수합병이나 정책 변화
+4. 단순 튜토리얼이나 홍보성 기사는 제외
+
+응답 형식:
+- 가장 중요하다고 생각되는 기사의 '인덱스 번호'를 중요도 순서대로 나열해줘.
+- 번호 외에 다른 설명은 필요 없어.
+- 쉼표(,)로 구분해줘. 예: 1, 5, 10, 3, 2
+
+[기사 목록]
+{candidates_text}
+"""
+
+def rank_items_with_ai(raw_items: List[tuple], limit: int) -> List[tuple]:
+    """
+    LLM을 사용하여 기사들의 중요도를 평가하고 상위 limit개를 반환한다.
+    - 비용 절약을 위해 raw_items가 너무 많으면 최신 50개 정도로 먼저 자르고 보낸다.
+    """
+    if not raw_items:
+        return []
+
+    # API 비용 고려: 최신순 정렬 후 최대 60개만 LLM에게 평가 요청 (그 이상은 토큰/비용 낭비 가능성)
+    candidates = sorted(raw_items, key=lambda x: x[0], reverse=True)[:60]
+    
+    prompt = _build_ranking_prompt(candidates, limit)
+    
+    ranked_indices = []
+    try:
+        # 요약과 동일한 Grok -> Gemini 로직 사용
+        response_text = _summarize_with_grok(prompt)
+        # 응답 파싱 (숫자만 추출)
+        # 예: "1, 5, 23" -> [1, 5, 23]
+        matches = re.findall(r"\d+", response_text)
+        ranked_indices = [int(m) for m in matches]
+        
+    except Exception as e:
+        print(f"[warn] AI ranking failed ({e}); falling back to time-based sorting.")
+        return candidates[:limit]
+
+    # 선택된 인덱스에 해당하는 항목 추출 (중복 제거 및 순서 유지)
+    selected_items = []
+    seen_indices = set()
+    
+    # LLM이 반환한 순서대로 담기
+    for idx in ranked_indices:
+        if idx in seen_indices:
+            continue
+        if 0 <= idx < len(candidates):
+            selected_items.append(candidates[idx])
+            seen_indices.add(idx)
+            
+    # 만약 LLM이 충분한 개수를 반환하지 않았다면, 원본 순서(최신순)대로 나머지 채움
+    if len(selected_items) < limit:
+        for idx in range(len(candidates)):
+            if idx not in seen_indices:
+                selected_items.append(candidates[idx])
+                if len(selected_items) >= limit:
+                    break
+                    
+    return selected_items[:limit]
+
+
+# 2) RSS → (여러 RSS 전체) → 시간/랜덤/AI 정렬 → 상위 N개만 요약
 def fetch_and_summarize(config: CategoryConfig):
     raw_items = []
 
@@ -403,8 +499,17 @@ def fetch_and_summarize(config: CategoryConfig):
     else:
         raw_items.sort(key=lambda x: x[0], reverse=True)
 
-    # 상위 N개만 선택
-    selected = raw_items[: config.max_articles]
+    # ---------------------------------------------------------
+    # AI 랭킹 적용 여부 확인
+    # ---------------------------------------------------------
+    # selection_mode가 'random'이 아니고, config에 use_ai_ranking가 켜져 있으면
+    # 기존 정렬 결과에서 AI가 다시 선별한다.
+    if config.use_ai_ranking and config.selection_mode != "random":
+        print(f"[{config.key.upper()}] Applying AI Ranking for selection...")
+        selected = rank_items_with_ai(raw_items, config.max_articles)
+    else:
+        # 상위 N개만 선택 (기존 방식)
+        selected = raw_items[: config.max_articles]
 
     summarized = []
     for idx, (ts, title, link, content, entry) in enumerate(selected):
