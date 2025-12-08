@@ -4,7 +4,7 @@ import datetime
 import feedparser
 import google.generativeai as genai
 from google.api_core import exceptions
-from groq import Groq
+import groq as groq_lib
 import re
 import random
 from dataclasses import dataclass, field
@@ -16,6 +16,14 @@ try:
     from googletrans import Translator
 except ImportError:  # pragma: no cover - optional dependency for local dev
     Translator = None
+
+if not hasattr(groq_lib, "Groq"):
+    raise ImportError(
+        "The installed `groq` package does not expose the `Groq` client class. "
+        "Install groq>=0.4.2 to enable Groq-based summarization."
+    )
+
+Groq = groq_lib.Groq
 
 @dataclass
 class CategoryConfig:
