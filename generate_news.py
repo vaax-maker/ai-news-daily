@@ -366,7 +366,7 @@ def summarize(text: str, title: str, display_name: str) -> str:
             ) from gemini_exc
 
 
-            ) from gemini_exc
+
 
 
 # 1.5) AI 중요도 평가 (Ranking)
