@@ -51,14 +51,15 @@ header {
     margin: 0 auto;
     padding: 0 1rem;
     display: flex;
-    gap: 2rem;
-    font-weight: 500;
+    align-items: center;
+    gap: 2.5rem;
+    font-weight: 600;
 }
 
 .gnb a {
     color: var(--text-main);
     padding: 0.5rem 0;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
 
 .gnb a.active {
@@ -67,7 +68,7 @@ header {
 }
 
 .header-logo {
-    height: 3.3rem; /* 3x the nav text height for balance */
+    height: 9.9rem; /* Triple the previous logo height */
     width: auto;
     vertical-align: middle;
     margin-right: 0.8rem;
