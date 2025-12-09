@@ -136,3 +136,33 @@ def sanitize_summary(summary: str) -> str:
         cleaned_lines.append(stripped)
 
     return "\n".join(cleaned_lines)
+
+
+def trim_summary_lines(summary: str, min_lines: int = 3, max_lines: int = 5) -> str:
+    """Force summaries to stay within the desired 3~5 line window."""
+    lines = [line.strip() for line in summary.splitlines() if line.strip()]
+
+    if len(lines) < min_lines:
+        # Break long sentences to meet the minimum line requirement
+        combined = " ".join(lines) if lines else summary
+        sentences = re.split(r"(?<=[.!?\u3002])\s+", combined)
+        sentences = [s.strip() for s in sentences if s.strip()]
+
+        for sentence in sentences:
+            if sentence not in lines:
+                lines.append(sentence)
+            if len(lines) >= min_lines:
+                break
+
+    trimmed = lines[:max_lines] if lines else []
+    return "\n".join(trimmed)
+
+
+def shorten_korean_title(title: str, max_length: int = 40) -> str:
+    """Translate English titles to Korean and trim them to under 40 chars."""
+    translated = translate_title_to_korean(title)
+    translated = translated or title
+
+    if len(translated) > max_length:
+        return translated[: max_length - 1] + "…"
+    return translated

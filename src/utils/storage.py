@@ -27,50 +27,72 @@ class MemberStorage:
         Rules:
         1. Filter out items older than 2025-01-01.
         2. Deduplicate by link AND normalized title.
-        3. Prepend new items (incremental).
+        3. Only accumulate items newer than the latest stored article.
         """
         import datetime
-        
+
         existing = self.load_news(member_id)
-        
+
         # 1. Date Filter Limit
         cutoff_date = datetime.datetime(2025, 1, 1).timestamp()
-        
-        # Helper to normalize title for dedup
+
         def normalize(s):
             return "".join(s.split()).lower()
 
-        # Build set of existing signatures
-        seen_links = {item['link'] for item in existing}
-        seen_titles = {normalize(item['title']) for item in existing if 'title' in item}
-        
+        def dedup_items(items):
+            seen_links = set()
+            seen_titles = set()
+            cleaned = []
+            for item in sorted(items, key=lambda x: x.get("timestamp", 0), reverse=True):
+                link = item.get("link")
+                title = item.get("title", "")
+                norm_title = normalize(title)
+
+                if link in seen_links or norm_title in seen_titles:
+                    continue
+
+                seen_links.add(link)
+                seen_titles.add(norm_title)
+                cleaned.append(item)
+            return cleaned
+
+        # Clean existing articles up-front (date + duplicates)
+        existing = [item for item in existing if item.get('timestamp', 0) >= cutoff_date]
+        existing = dedup_items(existing)
+
+        latest_existing_ts = max([item.get('timestamp', 0) for item in existing], default=0)
+
         unique_new = []
         for item in new_items:
             # Date Check
             ts = item.get('timestamp', 0)
             if ts < cutoff_date:
                 continue
-                
-            # Dedup Check
-            norm_title = normalize(item['title'])
-            if item['link'] in seen_links:
+
+            # Skip anything older than the latest stored article
+            if latest_existing_ts and ts <= latest_existing_ts:
                 continue
-            if norm_title in seen_titles:
+
+            # Dedup Check against cleaned existing + new batch
+            norm_title = normalize(item.get('title', ''))
+            existing_links = {i.get('link') for i in existing}
+            existing_titles = {normalize(i.get('title', '')) for i in existing}
+            new_links = {n.get('link') for n in unique_new}
+            new_titles = {normalize(n.get('title', '')) for n in unique_new}
+
+            if item.get('link') in existing_links or item.get('link') in new_links:
                 continue
-                
+            if norm_title in existing_titles or norm_title in new_titles:
+                continue
+
             unique_new.append(item)
-            seen_links.add(item['link'])
-            seen_titles.add(norm_title)
-                
-        if not unique_new:
-            return existing # No change
-            
-        # Prepend new items
-        merged = unique_new + existing
-        
+
+        # Combine and save if needed
+        merged = dedup_items(unique_new + existing)
+
         # Sort by timestamp desc just in case
         merged.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
-        
+
         try:
             with open(self._get_path(member_id), "w", encoding="utf-8") as f:
                 json.dump(merged, f, ensure_ascii=False, indent=2)

@@ -9,34 +9,36 @@
 <p class="subtitle">실행 시점(날짜+시간, KST)별 저장된 뉴스 목록입니다.</p>
 
 {% if run_entries %}
-<table class="styled-table">
-    <thead>
-        <tr>
-            <th>생성날짜(요일)-시간</th>
-            {% if active_tab == 'gov' %}
-            <th>출처</th>
-            {% else %}
-            <th>생성조건(자동-수동)</th>
-            {% endif %}
-        </tr>
-    </thead>
-    <tbody>
-        {% for entry in run_entries %}
-        <tr>
-            <td>
-                <a href="daily/{{ entry.filename }}" class="text-decoration-none text-dark">
-                    {{ entry.date_str }} ({{ entry.day_of_week }}) {{ entry.time_str }}
-                </a>
-            </td>
-            {% if active_tab == 'gov' %}
-            <td>과기정통부</td> <!-- Default for Gov for now, or extracted if possible -->
-            {% else %}
-            <td>자동</td> <!-- Default Auto -->
-            {% endif %}
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>생성날짜(요일)-시간</th>
+                {% if active_tab == 'gov' %}
+                <th>출처</th>
+                {% else %}
+                <th>생성조건(자동-수동)</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in run_entries %}
+            <tr>
+                <td>
+                    <a href="daily/{{ entry.filename }}" class="text-decoration-none text-dark">
+                        {{ entry.date_str }} ({{ entry.day_of_week }}) {{ entry.time_str }}
+                    </a>
+                </td>
+                {% if active_tab == 'gov' %}
+                <td>과기정통부</td> <!-- Default for Gov for now, or extracted if possible -->
+                {% else %}
+                <td>자동</td> <!-- Default Auto -->
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% else %}
 <div class="empty-msg">아직 발행된 뉴스가 없습니다.</div>
 {% endif %}
