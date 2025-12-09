@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from difflib import SequenceMatcher
 from typing import List, Dict
 
 class MemberStorage:
@@ -24,81 +25,106 @@ class MemberStorage:
             
     def save_news(self, member_id: str, new_items: List[Dict]):
         """
-        Merge new items with existing items.
+        Merge new items with existing items for a member.
+
         Rules:
-        1. Filter out items older than 2025-01-01.
-        2. Deduplicate by link AND normalized title.
-        3. Only accumulate items newer than the latest stored article.
+        1. Keep only articles between 2025-01-01 and now.
+        2. Deduplicate by link *or* similar normalized titles.
+        3. Always accumulate unique items onto previous results.
+        4. Allow at most two articles per member for the same calendar date.
         """
         import datetime
 
         existing = self.load_news(member_id)
 
-        # 1. Date Filter Limit
         cutoff_date = datetime.datetime(2025, 1, 1).timestamp()
+        now_ts = datetime.datetime.now().timestamp()
 
         def normalize(s):
             cleaned = re.sub(r"[^0-9A-Za-z가-힣]", "", s)
             return cleaned.lower()
 
+        def is_similar_title(norm_title: str, seen_titles: List[str], threshold: float = 0.9) -> bool:
+            return any(SequenceMatcher(None, norm_title, seen).ratio() >= threshold for seen in seen_titles)
+
         def dedup_items(items):
             seen_links = set()
-            seen_titles = set()
+            seen_titles: List[str] = []
             cleaned = []
             for item in sorted(items, key=lambda x: x.get("timestamp", 0), reverse=True):
                 link = item.get("link")
                 title = item.get("title", "")
                 norm_title = normalize(title)
 
-                if link in seen_links or norm_title in seen_titles:
+                if link in seen_links:
+                    continue
+                if norm_title and is_similar_title(norm_title, seen_titles):
                     continue
 
                 seen_links.add(link)
-                seen_titles.add(norm_title)
+                if norm_title:
+                    seen_titles.append(norm_title)
                 cleaned.append(item)
             return cleaned
 
-        # Clean existing articles up-front (date + duplicates)
-        existing = [item for item in existing if item.get('timestamp', 0) >= cutoff_date]
-        existing = dedup_items(existing)
+        def is_salrin_noun(title: str) -> bool:
+            if not title or "살린" not in title:
+                return False
 
-        latest_existing_ts = max([item.get('timestamp', 0) for item in existing], default=0)
+            # Accept explicit romanization mentions as a proper noun.
+            if re.search(r"\bSALIN\b", title, flags=re.IGNORECASE):
+                return True
 
-        unique_new = []
-        for item in new_items:
-            # Date Check
-            ts = item.get('timestamp', 0)
-            if ts < cutoff_date:
-                continue
+            verb_like_patterns = [
+                # Object + 살린 + noun (e.g., "김수용 살린 김숙", "생명 살린 의용소방대원")
+                r"[가-힣A-Za-z0-9][\)\]\"'’”]?\s*살린\s+[가-힣0-9]",
+                # Past-tense clause tails such as "살린 뒤", "살린 후", "살린 적"
+                r"살린\s+(뒤|후|채|적|줄|상황|점|것)",
+            ]
 
-            # Skip anything older than the latest stored article
-            if latest_existing_ts and ts <= latest_existing_ts:
-                continue
+            for pat in verb_like_patterns:
+                if re.search(pat, title):
+                    return False
 
-            # Dedup Check against cleaned existing + new batch
-            norm_title = normalize(item.get('title', ''))
-            existing_links = {i.get('link') for i in existing}
-            existing_titles = {normalize(i.get('title', '')) for i in existing}
-            new_links = {n.get('link') for n in unique_new}
-            new_titles = {normalize(n.get('title', '')) for n in unique_new}
+            return True
 
-            if item.get('link') in existing_links or item.get('link') in new_links:
-                continue
-            if norm_title in existing_titles or norm_title in new_titles:
-                continue
+        def apply_member_specific_filters(items: List[Dict]) -> List[Dict]:
+            if member_id == "살린":
+                filtered = []
+                for item in items:
+                    if is_salrin_noun(item.get("title", "")) or is_salrin_noun(item.get("original_title", "")):
+                        filtered.append(item)
+                return filtered
+            return items
 
-            unique_new.append(item)
+        def within_range(item):
+            ts = item.get("timestamp", 0)
+            return cutoff_date <= ts <= now_ts
 
-        # Combine and save if needed
-        merged = dedup_items(unique_new + existing)
+        def enforce_daily_limit(items, limit_per_date: int = 2):
+            counts = {}
+            limited = []
+            for item in items:
+                ts = item.get("timestamp", 0)
+                date_key = datetime.datetime.fromtimestamp(ts).date()
+                counts.setdefault(date_key, 0)
+                if counts[date_key] >= limit_per_date:
+                    continue
+                counts[date_key] += 1
+                limited.append(item)
+            return limited
 
-        # Sort by timestamp desc just in case
+        cleaned_existing = dedup_items(apply_member_specific_filters([item for item in existing if within_range(item)]))
+        cleaned_new = apply_member_specific_filters([item for item in new_items if within_range(item)])
+
+        merged = dedup_items(cleaned_existing + cleaned_new)
         merged.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
+        merged = enforce_daily_limit(merged)
 
         try:
             with open(self._get_path(member_id), "w", encoding="utf-8") as f:
                 json.dump(merged, f, ensure_ascii=False, indent=2)
         except Exception as e:
             print(f"[Storage] Failed to save {member_id}: {e}")
-            
+
         return merged
