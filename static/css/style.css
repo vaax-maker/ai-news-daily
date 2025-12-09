@@ -68,7 +68,7 @@ header {
 }
 
 .header-logo {
-    height: 9.9rem; /* Triple the previous logo height */
+    height: 4.5rem; /* About 45% of the previous logo height */
     width: auto;
     vertical-align: middle;
     margin-right: 0.8rem;
