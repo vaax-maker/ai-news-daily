@@ -11,49 +11,6 @@
     <link rel="stylesheet" href="../../static/css/style.css">
     
 </head>
-<style>
-    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
-    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
-    
-    /* Global Table Style */
-    .styled-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.95em;
-        background-color: white;
-    }
-    .styled-table thead tr {
-        border-top: 2px solid #adb5bd; /* Gray top */
-        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
-        text-align: left;
-        background-color: #f8f9fa;
-        color: #333;
-    }
-    .styled-table th, .styled-table td {
-        padding: 12px 15px;
-        border-bottom: 1px solid #dee2e6; /* Light gray rows */
-    }
-    .styled-table tbody tr:hover {
-        background-color: #f1f3f5;
-    }
-
-    /* News Box Style */
-    .news-item {
-        border: 2px solid #adb5bd; /* Gray border request */
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 20px;
-        background-color: white;
-    }
-    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
-    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
-
-    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
-    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
-    .gnb a.active { color: #007bff; font-weight: 700; }
-    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
-</style>
 
 <body>
     <header>
@@ -70,7 +27,7 @@
             <a href="../../gov/index.html"
                 class="">Gov</a>
             <a href="../../members/index.html"
-                class="">Members</a>
+                class="active">Members</a>
         </div>
     </header>
 
@@ -81,71 +38,18 @@
 
 <div class="item-list">
     
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE1kWHlLQ0RyZVZnT29CQ0RFU3ZjLVBOc2hxUHNRM1BFbmNYUTlQaHdYNnU0UFl0by1iS2hueGFLdHFOMTFlcDhuZFUyb3VCQlF6VWt2dTJR?oc=5" target="_blank">VVR, 최고위자문역으로 싱가포르 난양공대 이관민 석좌교수 영입 - 매일경제</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE1kWHlLQ0RyZVZnT29CQ0RFU3ZjLVBOc2hxUHNRM1BFbmNYUTlQaHdYNnU0UFl0by1iS2hueGFLdHFOMTFlcDhuZFUyb3VCQlF6VWt2dTJR?oc=5" target="_blank" class="source-link">매일경제</a> | 2024-06-06 07:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE1kWHlLQ0RyZVZnT29CQ0RFU3ZjLVBOc2hxUHNRM1BFbmNYUTlQaHdYNnU0UFl0by1iS2hueGFLdHFOMTFlcDhuZFUyb3VCQlF6VWt2dTJR?oc=5" target="_blank">VVR, 최고위자문역으로 싱가포르 난양공대 이관민 석좌교수 영입</a>&nbsp;&nbsp;<font color="#6f6f6f">매일경제</font>
-            </div>
-        </div>
-    </article>
-    
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8xY3BQMlJZU1hLdmtBQkJrVzBEdFJLY1JVR3ZObVBxd2pkVW9vNW1wSEhfRTJTMG9DNlZoeXNfTnZBeHBnSlBZbUgxdU9Cb21qUTZ2T1BLZGM1bExabXA3UTIxMVVJd2s?oc=5" target="_blank">VVR, ‘스포디’ XR시스템으로 메타버스 교육 활용도 높여 - 아이티비즈</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8xY3BQMlJZU1hLdmtBQkJrVzBEdFJLY1JVR3ZObVBxd2pkVW9vNW1wSEhfRTJTMG9DNlZoeXNfTnZBeHBnSlBZbUgxdU9Cb21qUTZ2T1BLZGM1bExabXA3UTIxMVVJd2s?oc=5" target="_blank" class="source-link">아이티비즈</a> | 2023-07-14 07:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8xY3BQMlJZU1hLdmtBQkJrVzBEdFJLY1JVR3ZObVBxd2pkVW9vNW1wSEhfRTJTMG9DNlZoeXNfTnZBeHBnSlBZbUgxdU9Cb21qUTZ2T1BLZGM1bExabXA3UTIxMVVJd2s?oc=5" target="_blank">VVR, ‘스포디’ XR시스템으로 메타버스 교육 활용도 높여</a>&nbsp;&nbsp;<font color="#6f6f6f">아이티비즈</font>
-            </div>
-        </div>
-    </article>
-    
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9kWWhBemhRUXVkVFNVSEpEQTJGVHBRVHN1aC1RNkd1WWk5TzdmQ1g1MXhOVTYtaHVYS2xRU1FGME9zUHhTbERFd1JWSFVuaUxxWmxTSnR5SGRVaVd5ZnJnY3dfVzZRZ2JfNUNsYQ?oc=5" target="_blank">VVR, 'SPODY(스포디)' 통한 XR 교육 제공 - 데일리시큐</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9kWWhBemhRUXVkVFNVSEpEQTJGVHBRVHN1aC1RNkd1WWk5TzdmQ1g1MXhOVTYtaHVYS2xRU1FGME9zUHhTbERFd1JWSFVuaUxxWmxTSnR5SGRVaVd5ZnJnY3dfVzZRZ2JfNUNsYQ?oc=5" target="_blank" class="source-link">데일리시큐</a> | 2023-07-10 07:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9kWWhBemhRUXVkVFNVSEpEQTJGVHBRVHN1aC1RNkd1WWk5TzdmQ1g1MXhOVTYtaHVYS2xRU1FGME9zUHhTbERFd1JWSFVuaUxxWmxTSnR5SGRVaVd5ZnJnY3dfVzZRZ2JfNUNsYQ?oc=5" target="_blank">VVR, 'SPODY(스포디)' 통한 XR 교육 제공</a>&nbsp;&nbsp;<font color="#6f6f6f">데일리시큐</font>
-            </div>
-        </div>
-    </article>
-    
 </div>
 
+
+<div class="empty-msg">
+    아직 수집된 뉴스가 없습니다.
+</div>
 
 
     </div>
 
     <footer>
-        <p>&copy;  AI News Daily Project. All rights reserved.</p>
+        <p>&copy; 2025 AI News Daily Project. All rights reserved.</p>
     </footer>
 </body>
 

@@ -11,49 +11,6 @@
     <link rel="stylesheet" href="../../static/css/style.css">
     
 </head>
-<style>
-    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
-    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
-    
-    /* Global Table Style */
-    .styled-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.95em;
-        background-color: white;
-    }
-    .styled-table thead tr {
-        border-top: 2px solid #adb5bd; /* Gray top */
-        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
-        text-align: left;
-        background-color: #f8f9fa;
-        color: #333;
-    }
-    .styled-table th, .styled-table td {
-        padding: 12px 15px;
-        border-bottom: 1px solid #dee2e6; /* Light gray rows */
-    }
-    .styled-table tbody tr:hover {
-        background-color: #f1f3f5;
-    }
-
-    /* News Box Style */
-    .news-item {
-        border: 2px solid #adb5bd; /* Gray border request */
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 20px;
-        background-color: white;
-    }
-    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
-    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
-
-    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
-    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
-    .gnb a.active { color: #007bff; font-weight: 700; }
-    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
-</style>
 
 <body>
     <header>
@@ -70,7 +27,7 @@
             <a href="../../gov/index.html"
                 class="">Gov</a>
             <a href="../../members/index.html"
-                class="">Members</a>
+                class="active">Members</a>
         </div>
     </header>
 
@@ -100,63 +57,6 @@
         </div>
     </article>
     
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE9RQS1pNjlBeXhLcmYwQWdRdEEzUGM5ekhObHRVLXdQcXl0WFh6SEVUVDAtZUhiVzRlTVNHcmo1N0tSZklpT2VZWk1hcXd0cnBUVGc?oc=5" target="_blank">[줌인 ifez] 송도 바이오클러스터 ‘스타트업 육성’ 판 키운다 - 경인일보</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE9RQS1pNjlBeXhLcmYwQWdRdEEzUGM5ekhObHRVLXdQcXl0WFh6SEVUVDAtZUhiVzRlTVNHcmo1N0tSZklpT2VZWk1hcXd0cnBUVGc?oc=5" target="_blank" class="source-link">경인일보</a> | 2024-12-08 08:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE9RQS1pNjlBeXhLcmYwQWdRdEEzUGM5ekhObHRVLXdQcXl0WFh6SEVUVDAtZUhiVzRlTVNHcmo1N0tSZklpT2VZWk1hcXd0cnBUVGc?oc=5" target="_blank">[줌인 ifez] 송도 바이오클러스터 ‘스타트업 육성’ 판 키운다</a>&nbsp;&nbsp;<font color="#6f6f6f">경인일보</font>
-            </div>
-        </div>
-    </article>
-    
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxPSUw5ajRSNHFNbjZDbGtEWXBYYS1ISURMa0xJTVRnX1VPRHA1TmFfdzQ0TzIwR0tieFR0dmRyME03NTFBM19TcDJnOTdhbEdla1VGQUVEZUFTVlJUNWZ4R25malNpNXVSNjA0TmQ3WUlWUlFwcHM5UXJXcG1DVkFvQzh0UVJ3OFpVRnFhOEh2NWrSAaQBQVVfeXFMTmg0QUd0b0hTXzlIU1hSZmZBNk1tcHdIcWEzbjZsZGpfZHJ0Y0Iyd2E0TFVnbTdSOVhUemlHck90ZmQwT2stM2E5ekQxa2hfUGZQSkNKc2d5QTNremxfaXU3eFlvdWVKS0JXeDNQUU1mZ3NXWmliSUNrTFVheGVlOGk4Y0xmRkd0Smc0WHNhTk1iZldYTGJKMGI5VGJPcnhWWFFvd2o?oc=5" target="_blank">벤처기업협회·SBA, ‘오픈 이노베이션’ 협력 나서 - 조선비즈 - Chosunbiz</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxPSUw5ajRSNHFNbjZDbGtEWXBYYS1ISURMa0xJTVRnX1VPRHA1TmFfdzQ0TzIwR0tieFR0dmRyME03NTFBM19TcDJnOTdhbEdla1VGQUVEZUFTVlJUNWZ4R25malNpNXVSNjA0TmQ3WUlWUlFwcHM5UXJXcG1DVkFvQzh0UVJ3OFpVRnFhOEh2NWrSAaQBQVVfeXFMTmg0QUd0b0hTXzlIU1hSZmZBNk1tcHdIcWEzbjZsZGpfZHJ0Y0Iyd2E0TFVnbTdSOVhUemlHck90ZmQwT2stM2E5ekQxa2hfUGZQSkNKc2d5QTNremxfaXU3eFlvdWVKS0JXeDNQUU1mZ3NXWmliSUNrTFVheGVlOGk4Y0xmRkd0Smc0WHNhTk1iZldYTGJKMGI5VGJPcnhWWFFvd2o?oc=5" target="_blank" class="source-link">Chosunbiz</a> | 2024-08-26 07:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxPSUw5ajRSNHFNbjZDbGtEWXBYYS1ISURMa0xJTVRnX1VPRHA1TmFfdzQ0TzIwR0tieFR0dmRyME03NTFBM19TcDJnOTdhbEdla1VGQUVEZUFTVlJUNWZ4R25malNpNXVSNjA0TmQ3WUlWUlFwcHM5UXJXcG1DVkFvQzh0UVJ3OFpVRnFhOEh2NWrSAaQBQVVfeXFMTmg0QUd0b0hTXzlIU1hSZmZBNk1tcHdIcWEzbjZsZGpfZHJ0Y0Iyd2E0TFVnbTdSOVhUemlHck90ZmQwT2stM2E5ekQxa2hfUGZQSkNKc2d5QTNremxfaXU3eFlvdWVKS0JXeDNQUU1mZ3NXWmliSUNrTFVheGVlOGk4Y0xmRkd0Smc0WHNhTk1iZldYTGJKMGI5VGJPcnhWWFFvd2o?oc=5" target="_blank">벤처기업협회·SBA, ‘오픈 이노베이션’ 협력 나서 - 조선비즈</a>&nbsp;&nbsp;<font color="#6f6f6f">Chosunbiz</font>
-            </div>
-        </div>
-    </article>
-    
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTFBGODJfaUF5dDY2dmtyVWo2OVJNUHV5eFEtZDFaNmVsVnlsQmctQ05rRThzTlpwLW0xTzA4bl9QY0dNR016c1N0ZnpkV21zdnRaSm5FSE1IVXVzSGRlT0dVZFQyN0JRWlYwOEE?oc=5" target="_blank">엠디뮨, 미래의학연구재단과 MOU 체결 - 히트뉴스</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTFBGODJfaUF5dDY2dmtyVWo2OVJNUHV5eFEtZDFaNmVsVnlsQmctQ05rRThzTlpwLW0xTzA4bl9QY0dNR016c1N0ZnpkV21zdnRaSm5FSE1IVXVzSGRlT0dVZFQyN0JRWlYwOEE?oc=5" target="_blank" class="source-link">히트뉴스</a> | 2022-07-18 07:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTFBGODJfaUF5dDY2dmtyVWo2OVJNUHV5eFEtZDFaNmVsVnlsQmctQ05rRThzTlpwLW0xTzA4bl9QY0dNR016c1N0ZnpkV21zdnRaSm5FSE1IVXVzSGRlT0dVZFQyN0JRWlYwOEE?oc=5" target="_blank">엠디뮨, 미래의학연구재단과 MOU 체결</a>&nbsp;&nbsp;<font color="#6f6f6f">히트뉴스</font>
-            </div>
-        </div>
-    </article>
-    
 </div>
 
 
@@ -164,7 +64,7 @@
     </div>
 
     <footer>
-        <p>&copy;  AI News Daily Project. All rights reserved.</p>
+        <p>&copy; 2025 AI News Daily Project. All rights reserved.</p>
     </footer>
 </body>
 

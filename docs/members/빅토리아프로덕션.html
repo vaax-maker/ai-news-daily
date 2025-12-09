@@ -11,49 +11,6 @@
     <link rel="stylesheet" href="../../static/css/style.css">
     
 </head>
-<style>
-    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
-    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
-    
-    /* Global Table Style */
-    .styled-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.95em;
-        background-color: white;
-    }
-    .styled-table thead tr {
-        border-top: 2px solid #adb5bd; /* Gray top */
-        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
-        text-align: left;
-        background-color: #f8f9fa;
-        color: #333;
-    }
-    .styled-table th, .styled-table td {
-        padding: 12px 15px;
-        border-bottom: 1px solid #dee2e6; /* Light gray rows */
-    }
-    .styled-table tbody tr:hover {
-        background-color: #f1f3f5;
-    }
-
-    /* News Box Style */
-    .news-item {
-        border: 2px solid #adb5bd; /* Gray border request */
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 20px;
-        background-color: white;
-    }
-    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
-    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
-
-    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
-    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
-    .gnb a.active { color: #007bff; font-weight: 700; }
-    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
-</style>
 
 <body>
     <header>
@@ -70,7 +27,7 @@
             <a href="../../gov/index.html"
                 class="">Gov</a>
             <a href="../../members/index.html"
-                class="">Members</a>
+                class="active">Members</a>
         </div>
     </header>
 
@@ -100,44 +57,6 @@
         </div>
     </article>
     
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9fWjYydi11YjIzREZmUkZtQ3ZZU0c4dXh5Ym4zVzJxRDBnaDlVRm03Wmc2ZTF2SG5RSE9rbDFkeEFoR1laNDRvb1l3TTJSM002OGhWcFlMc3NMM09rV0FMcGl2YUJLQkXSAWtBVV95cUxNaVJucnVtZ0pwZjRjVEFwMHNzZV85OVZMaDA1WEozanpkczBUaXdwTXgtcGp0eFFHRGhmSE95SVVIZzJEbngzdUl0alVxV3RHdWtzREdWUnFHQUFSWE9IeWh0NlVGb3kzMmN6cw?oc=5" target="_blank">빅토리아프로덕션, KMF 2023서 북플러스앱(Book+App) '태그미3D(Tagme3D)' 공개... “책 속 단어 그림 태깅!” - 에이빙</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9fWjYydi11YjIzREZmUkZtQ3ZZU0c4dXh5Ym4zVzJxRDBnaDlVRm03Wmc2ZTF2SG5RSE9rbDFkeEFoR1laNDRvb1l3TTJSM002OGhWcFlMc3NMM09rV0FMcGl2YUJLQkXSAWtBVV95cUxNaVJucnVtZ0pwZjRjVEFwMHNzZV85OVZMaDA1WEozanpkczBUaXdwTXgtcGp0eFFHRGhmSE95SVVIZzJEbngzdUl0alVxV3RHdWtzREdWUnFHQUFSWE9IeWh0NlVGb3kzMmN6cw?oc=5" target="_blank" class="source-link">에이빙</a> | 2023-10-16 07:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9fWjYydi11YjIzREZmUkZtQ3ZZU0c4dXh5Ym4zVzJxRDBnaDlVRm03Wmc2ZTF2SG5RSE9rbDFkeEFoR1laNDRvb1l3TTJSM002OGhWcFlMc3NMM09rV0FMcGl2YUJLQkXSAWtBVV95cUxNaVJucnVtZ0pwZjRjVEFwMHNzZV85OVZMaDA1WEozanpkczBUaXdwTXgtcGp0eFFHRGhmSE95SVVIZzJEbngzdUl0alVxV3RHdWtzREdWUnFHQUFSWE9IeWh0NlVGb3kzMmN6cw?oc=5" target="_blank">빅토리아프로덕션, KMF 2023서 북플러스앱(Book+App) '태그미3D(Tagme3D)' 공개... “책 속 단어 그림 태깅!”</a>&nbsp;&nbsp;<font color="#6f6f6f">에이빙</font>
-            </div>
-        </div>
-    </article>
-    
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE0yZXNxVFc0NUlEUW1uZ3VFQXVwbzZrZmNEODJmNjJDN2dkeEdKMGYwYjdRVFdtM3BFY01qWGljTWpMWEJVZGh1TEZPTWxBaDV6b1hmbjlVT2RRcDUxdVE?oc=5" target="_blank">"AR 교실에서 창의력 뿜뿜"…빅토리아프로덕션 - 한국교육신문</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE0yZXNxVFc0NUlEUW1uZ3VFQXVwbzZrZmNEODJmNjJDN2dkeEdKMGYwYjdRVFdtM3BFY01qWGljTWpMWEJVZGh1TEZPTWxBaDV6b1hmbjlVT2RRcDUxdVE?oc=5" target="_blank" class="source-link">한국교육신문</a> | 2022-07-20 07:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE0yZXNxVFc0NUlEUW1uZ3VFQXVwbzZrZmNEODJmNjJDN2dkeEdKMGYwYjdRVFdtM3BFY01qWGljTWpMWEJVZGh1TEZPTWxBaDV6b1hmbjlVT2RRcDUxdVE?oc=5" target="_blank">"AR 교실에서 창의력 뿜뿜"…빅토리아프로덕션</a>&nbsp;&nbsp;<font color="#6f6f6f">한국교육신문</font>
-            </div>
-        </div>
-    </article>
-    
 </div>
 
 
@@ -145,7 +64,7 @@
     </div>
 
     <footer>
-        <p>&copy;  AI News Daily Project. All rights reserved.</p>
+        <p>&copy; 2025 AI News Daily Project. All rights reserved.</p>
     </footer>
 </body>
 

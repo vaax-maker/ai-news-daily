@@ -65,6 +65,24 @@ header {
     border-bottom: 2px solid var(--primary-color);
 }
 
+.header-logo {
+    height: 3rem;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 0.8rem;
+    object-fit: contain;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    padding: 0 !important;
+}
+
+.logo-link:hover {
+    border-bottom: none !important;
+}
+
 /* General Styles */
 h1 {
     font-size: 2rem;
@@ -143,9 +161,10 @@ html {
 /* News Item (List View) - Unified Style */
 .news-item {
     background: var(--card-bg);
-    border-bottom: 1px solid var(--border-color);
-    padding: 2rem 0;
-    margin-bottom: 0;
+    border: 1.5px solid #9ca3af;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .news-item:last-child {
@@ -212,9 +231,9 @@ html {
     
     /* New Gray Line Style */
     background-color: #ffffff;
-    border: 1px solid #9ca3af; /* Gray border */
-    border-radius: 8px;
-    padding: 1.25rem;
+    border: 1.5px solid #9ca3af; /* Gray border */
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
     position: relative;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
@@ -226,25 +245,6 @@ html {
     padding: 2px 4px;
     border-radius: 4px;
     font-weight: 500;
-}
-
-/* Logo Sizing: Match text height */
-.header-logo {
-    height: 1.4rem; /* match h2 font size roughly or line-height */
-    width: auto;
-    vertical-align: middle;
-    margin-right: 0.8rem;
-    object-fit: contain;
-}
-
-.logo-link {
-    display: flex;
-    align-items: center;
-    padding: 0 !important;
-}
-
-.logo-link:hover {
-    border-bottom: none !important;
 }
 
 .summary-list {
@@ -260,15 +260,24 @@ html {
 .table-responsive {
     overflow-x: auto;
     background: var(--card-bg);
-    border: 1px solid #9ca3af; /* Outer gray border */
-    border-radius: 8px;
+    border: 1.5px solid #9ca3af; /* Outer gray border */
+    border-radius: 10px;
     margin-bottom: 2rem;
 }
 
-table {
+table,
+.styled-table {
     width: 100%;
     border-collapse: collapse;
     min-width: 600px;
+}
+
+.styled-table {
+    border: 1.5px solid #9ca3af;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card-bg);
+    margin-bottom: 1.25rem;
 }
 
 th {

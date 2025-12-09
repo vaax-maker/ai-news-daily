@@ -1,16 +1,6 @@
 [
   {
     "member_name": "에이아이파크",
-    "title": "에이아이파크, AI 아바타 영상 솔루션 ‘AiVATAR’로 CES 2026 혁신상 수상 - 뉴스와이어",
-    "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1SNE1sdUVhdmItY1ozMEN2RUdGYVZ1WG9sOURiRTJydlo0UHNkRFR1RFJjUnZNLXVfRURDRExPbmtGSHNYQ1lfVUxYQk80eWhvd3hmbzlvYzlKa2JCbFV3?oc=5",
-    "published_display": "2025-11-12 08:00",
-    "summary_html": "<a href=\"https://news.google.com/rss/articles/CBMiX0FVX3lxTE1SNE1sdUVhdmItY1ozMEN2RUdGYVZ1WG9sOURiRTJydlo0UHNkRFR1RFJjUnZNLXVfRURDRExPbmtGSHNYQ1lfVUxYQk80eWhvd3hmbzlvYzlKa2JCbFV3?oc=5\" target=\"_blank\">에이아이파크, AI 아바타 영상 솔루션 ‘AiVATAR’로 CES 2026 혁신상 수상</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">뉴스와이어</font>",
-    "source_name": "뉴스와이어",
-    "image_url": "",
-    "timestamp": 1762934400.0
-  },
-  {
-    "member_name": "에이아이파크",
     "title": "에이아이파크, AI 아바타 솔루션 ‘아이바타’ CES 2026 혁신상 수상 - 플래텀(Platum)",
     "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5fOXg1WVR1OG03M3M4WHBxaFN6WmtfdkRIMnR6ME00eHZRM3BhRzBoVW5xWEJLcEpPbTY1anBjMGV3ZDZ4bEw1dA?oc=5",
     "published_display": "2025-11-26 09:06",
@@ -38,5 +28,15 @@
     "source_name": "데일리경제",
     "image_url": "",
     "timestamp": 1764132523.0
+  },
+  {
+    "member_name": "에이아이파크",
+    "title": "에이아이파크, AI 아바타 영상 솔루션 ‘AiVATAR’로 CES 2026 혁신상 수상 - 뉴스와이어",
+    "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1SNE1sdUVhdmItY1ozMEN2RUdGYVZ1WG9sOURiRTJydlo0UHNkRFR1RFJjUnZNLXVfRURDRExPbmtGSHNYQ1lfVUxYQk80eWhvd3hmbzlvYzlKa2JCbFV3?oc=5",
+    "published_display": "2025-11-12 08:00",
+    "summary_html": "<a href=\"https://news.google.com/rss/articles/CBMiX0FVX3lxTE1SNE1sdUVhdmItY1ozMEN2RUdGYVZ1WG9sOURiRTJydlo0UHNkRFR1RFJjUnZNLXVfRURDRExPbmtGSHNYQ1lfVUxYQk80eWhvd3hmbzlvYzlKa2JCbFV3?oc=5\" target=\"_blank\">에이아이파크, AI 아바타 영상 솔루션 ‘AiVATAR’로 CES 2026 혁신상 수상</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">뉴스와이어</font>",
+    "source_name": "뉴스와이어",
+    "image_url": "",
+    "timestamp": 1762934400.0
   }
 ]

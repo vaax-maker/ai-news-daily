@@ -11,49 +11,6 @@
     <link rel="stylesheet" href="../../static/css/style.css">
     
 </head>
-<style>
-    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
-    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
-    
-    /* Global Table Style */
-    .styled-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.95em;
-        background-color: white;
-    }
-    .styled-table thead tr {
-        border-top: 2px solid #adb5bd; /* Gray top */
-        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
-        text-align: left;
-        background-color: #f8f9fa;
-        color: #333;
-    }
-    .styled-table th, .styled-table td {
-        padding: 12px 15px;
-        border-bottom: 1px solid #dee2e6; /* Light gray rows */
-    }
-    .styled-table tbody tr:hover {
-        background-color: #f1f3f5;
-    }
-
-    /* News Box Style */
-    .news-item {
-        border: 2px solid #adb5bd; /* Gray border request */
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 20px;
-        background-color: white;
-    }
-    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
-    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
-
-    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
-    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
-    .gnb a.active { color: #007bff; font-weight: 700; }
-    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
-</style>
 
 <body>
     <header>
@@ -70,7 +27,7 @@
             <a href="../../gov/index.html"
                 class="">Gov</a>
             <a href="../../members/index.html"
-                class="">Members</a>
+                class="active">Members</a>
         </div>
     </header>
 
@@ -81,71 +38,18 @@
 
 <div class="item-list">
     
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE1Rdl92eVJ2MTRPSFI1RnVYWW01SzZHNEFiRjhkQUZueVhvbm1ZbU16MkE0TnY0ZENvQlU1bndzT3R0ZENGRVE?oc=5" target="_blank">“휴대폰이 아니고 열화상 카메라?” 두 번째 이야기 - 소방방재신문</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE1Rdl92eVJ2MTRPSFI1RnVYWW01SzZHNEFiRjhkQUZueVhvbm1ZbU16MkE0TnY0ZENvQlU1bndzT3R0ZENGRVE?oc=5" target="_blank" class="source-link">소방방재신문</a> | 2020-03-18 07:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE1Rdl92eVJ2MTRPSFI1RnVYWW01SzZHNEFiRjhkQUZueVhvbm1ZbU16MkE0TnY0ZENvQlU1bndzT3R0ZENGRVE?oc=5" target="_blank">“휴대폰이 아니고 열화상 카메라?” 두 번째 이야기</a>&nbsp;&nbsp;<font color="#6f6f6f">소방방재신문</font>
-            </div>
-        </div>
-    </article>
-    
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE0yQ2dua1VZaGhtbWcxd29xOHdxOVg3WU5MWUdCVl9vS0wwaE8zNi1kbTVCVXM4aXlwYnU3N0xJR1RUaWgyVHJtbmxPMFhDc29aY29rdjZ0Zm8zY0NDS2lGeUZMUUU?oc=5" target="_blank">[힘내라! 중소기업] 글로벌 VR게임시장 당찬 도전장 ‘비주얼라이트’ - 밥상뉴스</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE0yQ2dua1VZaGhtbWcxd29xOHdxOVg3WU5MWUdCVl9vS0wwaE8zNi1kbTVCVXM4aXlwYnU3N0xJR1RUaWgyVHJtbmxPMFhDc29aY29rdjZ0Zm8zY0NDS2lGeUZMUUU?oc=5" target="_blank" class="source-link">밥상뉴스</a> | 2019-11-15 08:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE0yQ2dua1VZaGhtbWcxd29xOHdxOVg3WU5MWUdCVl9vS0wwaE8zNi1kbTVCVXM4aXlwYnU3N0xJR1RUaWgyVHJtbmxPMFhDc29aY29rdjZ0Zm8zY0NDS2lGeUZMUUU?oc=5" target="_blank">[힘내라! 중소기업] 글로벌 VR게임시장 당찬 도전장 ‘비주얼라이트’</a>&nbsp;&nbsp;<font color="#6f6f6f">밥상뉴스</font>
-            </div>
-        </div>
-    </article>
-    
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE5yRU5QWXJYLTBrWmVrUy1Rdm44R2hucWlFQ0dJMnBLMGVhdDZPX2F4RXVNVTNUS1hWTVZqSmlrMThKTHlTVzY0VWx3Z1FSQ3g2SUtsRnBqR2Q1b1RyZ3VDUDFYWDJVbldONnFtaA?oc=5" target="_blank">한콘진 "2018 도쿄게임쇼 한국공동관, 상담액 9803만 불 달성" - 스마트경제</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE5yRU5QWXJYLTBrWmVrUy1Rdm44R2hucWlFQ0dJMnBLMGVhdDZPX2F4RXVNVTNUS1hWTVZqSmlrMThKTHlTVzY0VWx3Z1FSQ3g2SUtsRnBqR2Q1b1RyZ3VDUDFYWDJVbldONnFtaA?oc=5" target="_blank" class="source-link">스마트경제</a> | 2018-10-12 07:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE5yRU5QWXJYLTBrWmVrUy1Rdm44R2hucWlFQ0dJMnBLMGVhdDZPX2F4RXVNVTNUS1hWTVZqSmlrMThKTHlTVzY0VWx3Z1FSQ3g2SUtsRnBqR2Q1b1RyZ3VDUDFYWDJVbldONnFtaA?oc=5" target="_blank">한콘진 "2018 도쿄게임쇼 한국공동관, 상담액 9803만 불 달성"</a>&nbsp;&nbsp;<font color="#6f6f6f">스마트경제</font>
-            </div>
-        </div>
-    </article>
-    
 </div>
 
+
+<div class="empty-msg">
+    아직 수집된 뉴스가 없습니다.
+</div>
 
 
     </div>
 
     <footer>
-        <p>&copy;  AI News Daily Project. All rights reserved.</p>
+        <p>&copy; 2025 AI News Daily Project. All rights reserved.</p>
     </footer>
 </body>
 

@@ -11,49 +11,6 @@
     <link rel="stylesheet" href="../../static/css/style.css">
     
 </head>
-<style>
-    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
-    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
-    
-    /* Global Table Style */
-    .styled-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.95em;
-        background-color: white;
-    }
-    .styled-table thead tr {
-        border-top: 2px solid #adb5bd; /* Gray top */
-        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
-        text-align: left;
-        background-color: #f8f9fa;
-        color: #333;
-    }
-    .styled-table th, .styled-table td {
-        padding: 12px 15px;
-        border-bottom: 1px solid #dee2e6; /* Light gray rows */
-    }
-    .styled-table tbody tr:hover {
-        background-color: #f1f3f5;
-    }
-
-    /* News Box Style */
-    .news-item {
-        border: 2px solid #adb5bd; /* Gray border request */
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 20px;
-        background-color: white;
-    }
-    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
-    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
-
-    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
-    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
-    .gnb a.active { color: #007bff; font-weight: 700; }
-    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
-</style>
 
 <body>
     <header>
@@ -70,7 +27,7 @@
             <a href="../../gov/index.html"
                 class="">Gov</a>
             <a href="../../members/index.html"
-                class="">Members</a>
+                class="active">Members</a>
         </div>
     </header>
 
@@ -122,25 +79,6 @@
     <article class="news-item">
         <div class="news-header">
             <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE0zU0g0cmhzWXBOdjFEbTNIelZoNmtNUDBmSXJnRGkwMFhVNFlnX0k5VGtIaTVleUpaSEkzZGhJNl9PeHJlQU5hN0ZMZU1rLVV6MURtSlVkaXF1eF8tdVhyOGlIRTdOMkpVbkHSAWpBVV95cUxNM1NINHJoc1lwTnYxRG0zSHpWaDZrTVAwZklyZ0RpMDBYVTRZZ19JOVRrSGk1ZXlKWkhJM2RoSTZfT3hyZUFOYTdGTGVNay1VejFEbUpVZGlxdXhfLXVYcjhpSEU3TjJKVW5B?oc=5" target="_blank">한국열린사이버대 박지영 교수, 서울시의회 의장상 수상... “미래형 사회복지 교육 선도” - 대학저널</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE0zU0g0cmhzWXBOdjFEbTNIelZoNmtNUDBmSXJnRGkwMFhVNFlnX0k5VGtIaTVleUpaSEkzZGhJNl9PeHJlQU5hN0ZMZU1rLVV6MURtSlVkaXF1eF8tdVhyOGlIRTdOMkpVbkHSAWpBVV95cUxNM1NINHJoc1lwTnYxRG0zSHpWaDZrTVAwZklyZ0RpMDBYVTRZZ19JOVRrSGk1ZXlKWkhJM2RoSTZfT3hyZUFOYTdGTGVNay1VejFEbUpVZGlxdXhfLXVYcjhpSEU3TjJKVW5B?oc=5" target="_blank" class="source-link">대학저널</a> | 2025-12-08 01:04
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE0zU0g0cmhzWXBOdjFEbTNIelZoNmtNUDBmSXJnRGkwMFhVNFlnX0k5VGtIaTVleUpaSEkzZGhJNl9PeHJlQU5hN0ZMZU1rLVV6MURtSlVkaXF1eF8tdVhyOGlIRTdOMkpVbkHSAWpBVV95cUxNM1NINHJoc1lwTnYxRG0zSHpWaDZrTVAwZklyZ0RpMDBYVTRZZ19JOVRrSGk1ZXlKWkhJM2RoSTZfT3hyZUFOYTdGTGVNay1VejFEbUpVZGlxdXhfLXVYcjhpSEU3TjJKVW5B?oc=5" target="_blank">한국열린사이버대 박지영 교수, 서울시의회 의장상 수상... “미래형 사회복지 교육 선도”</a>&nbsp;&nbsp;<font color="#6f6f6f">대학저널</font>
-            </div>
-        </div>
-    </article>
-    
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTFBxNDEyVThaUHZKY1dBWFJoUHZGOEF4SWxMWTUwT01mZ1F2RzU3MGlIaGhCZHBWZjN3S211YW5pVW1NdHUyRDlWRXdOVzh1aG9Qa1E?oc=5" target="_blank">“한국열린사이버대학교, 자연 속에서 미래를 배우다...자연숲치유산업학과 신·편입생 모집” - 유스연합</a>
             </h2>
             <div class="news-meta">
@@ -176,25 +114,6 @@
         </div>
     </article>
     
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMickFVX3lxTFBma2hSQmQ2bTZpNklNaXBqYlE2bmVLSlgxcHQzTTRRNjBfOHNaOFJYWWtHQTRQeHBSZzhSNm9FZl9oLVFpUlRNNF96dy0wNmxkejlKWURhdlREaVcyZDBkZHF0cFZuY19jeC1PV3RQVm5DQdIBckFVX3lxTFBma2hSQmQ2bTZpNklNaXBqYlE2bmVLSlgxcHQzTTRRNjBfOHNaOFJYWWtHQTRQeHBSZzhSNm9FZl9oLVFpUlRNNF96dy0wNmxkejlKWURhdlREaVcyZDBkZHF0cFZuY19jeC1PV3RQVm5DQQ?oc=5" target="_blank">공무원 필수 자격, 사회복지사 2급 과정, 12월 10일까지 수강생 모집 - 메가경제</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMickFVX3lxTFBma2hSQmQ2bTZpNklNaXBqYlE2bmVLSlgxcHQzTTRRNjBfOHNaOFJYWWtHQTRQeHBSZzhSNm9FZl9oLVFpUlRNNF96dy0wNmxkejlKWURhdlREaVcyZDBkZHF0cFZuY19jeC1PV3RQVm5DQdIBckFVX3lxTFBma2hSQmQ2bTZpNklNaXBqYlE2bmVLSlgxcHQzTTRRNjBfOHNaOFJYWWtHQTRQeHBSZzhSNm9FZl9oLVFpUlRNNF96dy0wNmxkejlKWURhdlREaVcyZDBkZHF0cFZuY19jeC1PV3RQVm5DQQ?oc=5" target="_blank" class="source-link">메가경제</a> | 2025-12-05 09:09
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMickFVX3lxTFBma2hSQmQ2bTZpNklNaXBqYlE2bmVLSlgxcHQzTTRRNjBfOHNaOFJYWWtHQTRQeHBSZzhSNm9FZl9oLVFpUlRNNF96dy0wNmxkejlKWURhdlREaVcyZDBkZHF0cFZuY19jeC1PV3RQVm5DQdIBckFVX3lxTFBma2hSQmQ2bTZpNklNaXBqYlE2bmVLSlgxcHQzTTRRNjBfOHNaOFJYWWtHQTRQeHBSZzhSNm9FZl9oLVFpUlRNNF96dy0wNmxkejlKWURhdlREaVcyZDBkZHF0cFZuY19jeC1PV3RQVm5DQQ?oc=5" target="_blank">공무원 필수 자격, 사회복지사 2급 과정, 12월 10일까지 수강생 모집</a>&nbsp;&nbsp;<font color="#6f6f6f">메가경제</font>
-            </div>
-        </div>
-    </article>
-    
 </div>
 
 
@@ -202,7 +121,7 @@
     </div>
 
     <footer>
-        <p>&copy;  AI News Daily Project. All rights reserved.</p>
+        <p>&copy; 2025 AI News Daily Project. All rights reserved.</p>
     </footer>
 </body>
 

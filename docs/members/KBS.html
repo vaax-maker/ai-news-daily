@@ -11,49 +11,6 @@
     <link rel="stylesheet" href="../../static/css/style.css">
     
 </head>
-<style>
-    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
-    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
-    
-    /* Global Table Style */
-    .styled-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.95em;
-        background-color: white;
-    }
-    .styled-table thead tr {
-        border-top: 2px solid #adb5bd; /* Gray top */
-        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
-        text-align: left;
-        background-color: #f8f9fa;
-        color: #333;
-    }
-    .styled-table th, .styled-table td {
-        padding: 12px 15px;
-        border-bottom: 1px solid #dee2e6; /* Light gray rows */
-    }
-    .styled-table tbody tr:hover {
-        background-color: #f1f3f5;
-    }
-
-    /* News Box Style */
-    .news-item {
-        border: 2px solid #adb5bd; /* Gray border request */
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 20px;
-        background-color: white;
-    }
-    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
-    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
-
-    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
-    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
-    .gnb a.active { color: #007bff; font-weight: 700; }
-    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
-</style>
 
 <body>
     <header>
@@ -70,7 +27,7 @@
             <a href="../../gov/index.html"
                 class="">Gov</a>
             <a href="../../members/index.html"
-                class="">Members</a>
+                class="active">Members</a>
         </div>
     </header>
 
@@ -80,6 +37,44 @@
 <p class="subtitle">Latest news related to KBS</p>
 
 <div class="item-list">
+    
+    <article class="news-item">
+        <div class="news-header">
+            <h2 class="news-title">
+                <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE5Mb2luMXFQb3pydUIweWQ5VTNCZU9NZG9uWGdwdkNsTkxjZXpBV0ZvcU5JMERtWG1nZTFMcnlqQnZMeGJtZWRyUVNudDM1VXZPR0pZbUcyUXNYRkhiaWhCZDZLWjZ0RkUySFZ2YUt4MEs?oc=5" target="_blank">조세호, ‘유퀴즈’ ‘1박2일’ 하차…KBS “출연자 결정 존중” - …</a>
+            </h2>
+            <div class="news-meta">
+                <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE5Mb2luMXFQb3pydUIweWQ5VTNCZU9NZG9uWGdwdkNsTkxjZXpBV0ZvcU5JMERtWG1nZTFMcnlqQnZMeGJtZWRyUVNudDM1VXZPR0pZbUcyUXNYRkhiaWhCZDZLWjZ0RkUySFZ2YUt4MEs?oc=5" target="_blank" class="source-link">미디어오늘</a> | 2025-12-09 02:08
+            </div>
+        </div>
+
+        <div class="news-body">
+            
+
+            <div class="news-summary">
+                
+            </div>
+        </div>
+    </article>
+    
+    <article class="news-item">
+        <div class="news-header">
+            <h2 class="news-title">
+                <a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE5yUVhfdzRlLXBjOXZsODZqNUM2QkhzR0Fsc0hYU1lrVWxldDI1c1RlZ1ZnTi1QZVAwNUI3NGRvZER5TU9ETjJEWk82Q3hZbzA?oc=5" target="_blank">일본, 간호사 부족으로 ‘병동 폐쇄’ 잇따라 - v.daum.net</a>
+            </h2>
+            <div class="news-meta">
+                <a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE5yUVhfdzRlLXBjOXZsODZqNUM2QkhzR0Fsc0hYU1lrVWxldDI1c1RlZ1ZnTi1QZVAwNUI3NGRvZER5TU9ETjJEWk82Q3hZbzA?oc=5" target="_blank" class="source-link">v.daum.net</a> | 2025-12-09 00:53
+            </div>
+        </div>
+
+        <div class="news-body">
+            
+
+            <div class="news-summary">
+                
+            </div>
+        </div>
+    </article>
     
     <article class="news-item">
         <div class="news-header">
@@ -198,25 +193,6 @@
     <article class="news-item">
         <div class="news-header">
             <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE05RldXQUJvQTJJMWhaTXNFenRaZTZtS0NrdlM0YWFKbHBZMDdEMS1GRVg2aW1aVUhDcXlRTXVRVGpvY1htbWFzallpZTlBeXJNdmRPT1lMWElGd1k?oc=5" target="_blank">KBS stops tax scam in progress - KBS 뉴스</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE05RldXQUJvQTJJMWhaTXNFenRaZTZtS0NrdlM0YWFKbHBZMDdEMS1GRVg2aW1aVUhDcXlRTXVRVGpvY1htbWFzallpZTlBeXJNdmRPT1lMWElGd1k?oc=5" target="_blank" class="source-link">KBS 뉴스</a> | 2025-12-08 15:40
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE05RldXQUJvQTJJMWhaTXNFenRaZTZtS0NrdlM0YWFKbHBZMDdEMS1GRVg2aW1aVUhDcXlRTXVRVGpvY1htbWFzallpZTlBeXJNdmRPT1lMWElGd1k?oc=5" target="_blank">KBS stops tax scam in progress</a>&nbsp;&nbsp;<font color="#6f6f6f">KBS 뉴스</font>
-            </div>
-        </div>
-    </article>
-    
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE84QUNhejZmbTNETjRFZmY5cXRWbXN3aE9rMXFVU29PTWk3ZjFoRVF6N3hoaEtaZ1FBQzlFV2tDYU9nUlZ5eXVyY1VMdV9XTkE?oc=5" target="_blank">0시 축제 기부금 KBS 보도…목요언론 이달의 기자상 - v.daum.net</a>
             </h2>
             <div class="news-meta">
@@ -278,7 +254,7 @@
     </div>
 
     <footer>
-        <p>&copy;  AI News Daily Project. All rights reserved.</p>
+        <p>&copy; 2025 AI News Daily Project. All rights reserved.</p>
     </footer>
 </body>
 

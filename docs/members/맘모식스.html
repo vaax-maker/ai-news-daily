@@ -11,49 +11,6 @@
     <link rel="stylesheet" href="../../static/css/style.css">
     
 </head>
-<style>
-    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
-    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
-    
-    /* Global Table Style */
-    .styled-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.95em;
-        background-color: white;
-    }
-    .styled-table thead tr {
-        border-top: 2px solid #adb5bd; /* Gray top */
-        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
-        text-align: left;
-        background-color: #f8f9fa;
-        color: #333;
-    }
-    .styled-table th, .styled-table td {
-        padding: 12px 15px;
-        border-bottom: 1px solid #dee2e6; /* Light gray rows */
-    }
-    .styled-table tbody tr:hover {
-        background-color: #f1f3f5;
-    }
-
-    /* News Box Style */
-    .news-item {
-        border: 2px solid #adb5bd; /* Gray border request */
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 20px;
-        background-color: white;
-    }
-    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
-    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
-
-    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
-    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
-    .gnb a.active { color: #007bff; font-weight: 700; }
-    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
-</style>
 
 <body>
     <header>
@@ -70,7 +27,7 @@
             <a href="../../gov/index.html"
                 class="">Gov</a>
             <a href="../../members/index.html"
-                class="">Members</a>
+                class="active">Members</a>
         </div>
     </header>
 
@@ -100,82 +57,6 @@
         </div>
     </article>
     
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE1ESXBIaFN2MDl4dVVXbVRaMnljVUZfRDJNeFd6Tk43aENZTURVV2hmdEZRbTgybmlHeVdZMzMzYUc0QVRMQm9sLVREOER4LWJ2cmdCdVpjWkc4cmJMblZEY0xpcmlHZnotM2hnQ9IBcEFVX3lxTE5BdTNXOHNGZkV6enJZY1pDSWxRY2pXenYyYzFCNUU3aDdHbC1hMGVGbDVJTmgtYVBjZ280cUx6OEhrZm9XY19NTDZldEhHX2Q2RXptTGRlYlJYUHFyS2ZRVmVpSFZ2QWlTa0Y5S1RhX0Y?oc=5" target="_blank">맘모식스, 갤럭시티 어스 태국 서비스에 실시간 메타버스 도시 정보 연동 기술 선보여 - 경향게임스</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE1ESXBIaFN2MDl4dVVXbVRaMnljVUZfRDJNeFd6Tk43aENZTURVV2hmdEZRbTgybmlHeVdZMzMzYUc0QVRMQm9sLVREOER4LWJ2cmdCdVpjWkc4cmJMblZEY0xpcmlHZnotM2hnQ9IBcEFVX3lxTE5BdTNXOHNGZkV6enJZY1pDSWxRY2pXenYyYzFCNUU3aDdHbC1hMGVGbDVJTmgtYVBjZ280cUx6OEhrZm9XY19NTDZldEhHX2Q2RXptTGRlYlJYUHFyS2ZRVmVpSFZ2QWlTa0Y5S1RhX0Y?oc=5" target="_blank" class="source-link">경향게임스</a> | 2024-07-08 07:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE1ESXBIaFN2MDl4dVVXbVRaMnljVUZfRDJNeFd6Tk43aENZTURVV2hmdEZRbTgybmlHeVdZMzMzYUc0QVRMQm9sLVREOER4LWJ2cmdCdVpjWkc4cmJMblZEY0xpcmlHZnotM2hnQ9IBcEFVX3lxTE5BdTNXOHNGZkV6enJZY1pDSWxRY2pXenYyYzFCNUU3aDdHbC1hMGVGbDVJTmgtYVBjZ280cUx6OEhrZm9XY19NTDZldEhHX2Q2RXptTGRlYlJYUHFyS2ZRVmVpSFZ2QWlTa0Y5S1RhX0Y?oc=5" target="_blank">맘모식스, 갤럭시티 어스 태국 서비스에 실시간 메타버스 도시 정보 연동 기술 선보여</a>&nbsp;&nbsp;<font color="#6f6f6f">경향게임스</font>
-            </div>
-        </div>
-    </article>
-    
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMie0FVX3lxTFA0aDhNVnVqdFd3M1VNdGVfZGdzYU5rRml2X3l2U2E1c0p5RVlPQkZFME1sLVVRQkFpUTRjYU9Nb3pwSDZlMWdlcEtGYUlFVVVXbTZrM056Mk9sbGFVa1RoVm5RTzY2QTFsNnd2dGt4T0YwRzFUcklmdXFLRQ?oc=5" target="_blank">맘모식스, 비무장지대 체험 VR 콘텐츠 스팀 출시 - 데일리게임</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMie0FVX3lxTFA0aDhNVnVqdFd3M1VNdGVfZGdzYU5rRml2X3l2U2E1c0p5RVlPQkZFME1sLVVRQkFpUTRjYU9Nb3pwSDZlMWdlcEtGYUlFVVVXbTZrM056Mk9sbGFVa1RoVm5RTzY2QTFsNnd2dGt4T0YwRzFUcklmdXFLRQ?oc=5" target="_blank" class="source-link">데일리게임</a> | 2023-11-22 08:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMie0FVX3lxTFA0aDhNVnVqdFd3M1VNdGVfZGdzYU5rRml2X3l2U2E1c0p5RVlPQkZFME1sLVVRQkFpUTRjYU9Nb3pwSDZlMWdlcEtGYUlFVVVXbTZrM056Mk9sbGFVa1RoVm5RTzY2QTFsNnd2dGt4T0YwRzFUcklmdXFLRQ?oc=5" target="_blank">맘모식스, 비무장지대 체험 VR 콘텐츠 스팀 출시</a>&nbsp;&nbsp;<font color="#6f6f6f">데일리게임</font>
-            </div>
-        </div>
-    </article>
-    
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE9GeXRFTkZWRXliclJzMzBUQ2M5N0dYV0hoVXJiM014Z0JXYnV3QktIcy1uVmdXS2RvSnEzVVNrWkRMWVhqRXZFRXRUbzkyZXZSbkNZTTRHNjZVc0JrTnfSAWNBVV95cUxNVnhVMWpWSmtnb1BZR0xrSk83Q2NxRnBGMEdqNTFGc2JwSlNtcXRFUzNEaVZfMmR1V3R5V0VITTlxWFBmYS14VmFuQTRpMDIwZUJSZzBDVHV2a0hrYS1qMVBMTk0?oc=5" target="_blank">VR로 실감하는 비무장지대…맘모식스, 스팀에 ‘DMZ VR’ 출시 - 스포츠경향</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE9GeXRFTkZWRXliclJzMzBUQ2M5N0dYV0hoVXJiM014Z0JXYnV3QktIcy1uVmdXS2RvSnEzVVNrWkRMWVhqRXZFRXRUbzkyZXZSbkNZTTRHNjZVc0JrTnfSAWNBVV95cUxNVnhVMWpWSmtnb1BZR0xrSk83Q2NxRnBGMEdqNTFGc2JwSlNtcXRFUzNEaVZfMmR1V3R5V0VITTlxWFBmYS14VmFuQTRpMDIwZUJSZzBDVHV2a0hrYS1qMVBMTk0?oc=5" target="_blank" class="source-link">스포츠경향</a> | 2023-11-22 08:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE9GeXRFTkZWRXliclJzMzBUQ2M5N0dYV0hoVXJiM014Z0JXYnV3QktIcy1uVmdXS2RvSnEzVVNrWkRMWVhqRXZFRXRUbzkyZXZSbkNZTTRHNjZVc0JrTnfSAWNBVV95cUxNVnhVMWpWSmtnb1BZR0xrSk83Q2NxRnBGMEdqNTFGc2JwSlNtcXRFUzNEaVZfMmR1V3R5V0VITTlxWFBmYS14VmFuQTRpMDIwZUJSZzBDVHV2a0hrYS1qMVBMTk0?oc=5" target="_blank">VR로 실감하는 비무장지대…맘모식스, 스팀에 ‘DMZ VR’ 출시</a>&nbsp;&nbsp;<font color="#6f6f6f">스포츠경향</font>
-            </div>
-        </div>
-    </article>
-    
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE9mNzlYa3RHa2d0bTVQbXlEQk4zZlBKdG9hcnJCMTFxdVlDMHFvODNOTHVpOWt2WWc5OXVrRXBfZlVyTDhjYTB3S2lqZTBIR0RmdXV1akdORVVYX1XSAWBBVV95cUxORThOWFY2SF8zeXBMeXpBZUpfcXhtWnotaG1ISVhQM2loSFU2V21veG5jZG5qT2VydnNYeHRMMlc1bC02VnFQZFRZN19QMVZMWGU0ZjB0Z0NrSFRXblBwbG0?oc=5" target="_blank">VR로 펼쳐지는 비무장지대…맘모식스, 스팀에 'DMZ VR' 출시 - 연합뉴스</a>
-            </h2>
-            <div class="news-meta">
-                <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE9mNzlYa3RHa2d0bTVQbXlEQk4zZlBKdG9hcnJCMTFxdVlDMHFvODNOTHVpOWt2WWc5OXVrRXBfZlVyTDhjYTB3S2lqZTBIR0RmdXV1akdORVVYX1XSAWBBVV95cUxORThOWFY2SF8zeXBMeXpBZUpfcXhtWnotaG1ISVhQM2loSFU2V21veG5jZG5qT2VydnNYeHRMMlc1bC02VnFQZFRZN19QMVZMWGU0ZjB0Z0NrSFRXblBwbG0?oc=5" target="_blank" class="source-link">연합뉴스</a> | 2023-11-22 08:00
-            </div>
-        </div>
-
-        <div class="news-body">
-            
-
-            <div class="news-summary">
-                <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE9mNzlYa3RHa2d0bTVQbXlEQk4zZlBKdG9hcnJCMTFxdVlDMHFvODNOTHVpOWt2WWc5OXVrRXBfZlVyTDhjYTB3S2lqZTBIR0RmdXV1akdORVVYX1XSAWBBVV95cUxORThOWFY2SF8zeXBMeXpBZUpfcXhtWnotaG1ISVhQM2loSFU2V21veG5jZG5qT2VydnNYeHRMMlc1bC02VnFQZFRZN19QMVZMWGU0ZjB0Z0NrSFRXblBwbG0?oc=5" target="_blank">VR로 펼쳐지는 비무장지대…맘모식스, 스팀에 'DMZ VR' 출시</a>&nbsp;&nbsp;<font color="#6f6f6f">연합뉴스</font>
-            </div>
-        </div>
-    </article>
-    
 </div>
 
 
@@ -183,7 +64,7 @@
     </div>
 
     <footer>
-        <p>&copy;  AI News Daily Project. All rights reserved.</p>
+        <p>&copy; 2025 AI News Daily Project. All rights reserved.</p>
     </footer>
 </body>
 
