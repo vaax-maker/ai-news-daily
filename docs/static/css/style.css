@@ -6,6 +6,7 @@
     --text-main: #1e293b;
     --text-muted: #64748b;
     --border-color: #e2e8f0;
+    --line-gray: #9ca3af;
 }
 
 * {
@@ -50,14 +51,15 @@ header {
     margin: 0 auto;
     padding: 0 1rem;
     display: flex;
-    gap: 2rem;
-    font-weight: 500;
+    align-items: center;
+    gap: 2.5rem;
+    font-weight: 600;
 }
 
 .gnb a {
     color: var(--text-main);
     padding: 0.5rem 0;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
 
 .gnb a.active {
@@ -66,7 +68,7 @@ header {
 }
 
 .header-logo {
-    height: 3.3rem; /* 3x the nav text height for balance */
+    height: 9.9rem; /* Triple the previous logo height */
     width: auto;
     vertical-align: middle;
     margin-right: 0.8rem;
@@ -161,7 +163,7 @@ html {
 /* News Item (List View) - Unified Style */
 .news-item {
     background: var(--card-bg);
-    border: 1.5px solid #9ca3af;
+    border: 1.5px solid var(--line-gray);
     border-radius: 10px;
     padding: 1.5rem;
     margin-bottom: 1.25rem;
@@ -231,7 +233,7 @@ html {
 
     /* New Gray Line Style */
     background-color: #ffffff;
-    border: 2px solid #9ca3af; /* Gray border */
+    border: 2px solid var(--line-gray); /* Gray border */
     border-radius: 12px;
     padding: 1.25rem 1.5rem;
     position: relative;
@@ -260,7 +262,7 @@ html {
 .table-responsive {
     overflow-x: auto;
     background: var(--card-bg);
-    border: 1.5px solid #9ca3af; /* Outer gray border */
+    border: 1.5px solid var(--line-gray); /* Outer gray border */
     border-radius: 10px;
     margin-bottom: 2rem;
 }
@@ -273,7 +275,7 @@ table,
 }
 
 .styled-table {
-    border: 1.5px solid #9ca3af;
+    border: 1.5px solid var(--line-gray);
     border-radius: 10px;
     overflow: hidden;
     background: var(--card-bg);
@@ -286,12 +288,12 @@ th {
     text-align: left;
     font-weight: 600;
     color: var(--text-muted);
-    border-bottom: 2px solid #9ca3af; /* Header gray line */
+    border-bottom: 2px solid var(--line-gray); /* Header gray line */
 }
 
 td {
     padding: 1rem;
-    border-bottom: 1px solid #9ca3af; /* Row gray line */
+    border-bottom: 1px solid var(--line-gray); /* Row gray line */
     color: var(--text-main);
 }
 
@@ -320,7 +322,7 @@ tr:hover {
 }
 
 .col-date {
-    width: 140px;
+    width: 180px;
     text-align: center;
     color: var(--text-muted);
 }
@@ -330,6 +332,13 @@ tr:hover {
     text-align: right;
     font-weight: 700;
     color: var(--primary-color);
+}
+
+.col-meta {
+    width: 160px;
+    text-align: center;
+    color: var(--text-muted);
+    font-weight: 600;
 }
 
 .text-decoration-none { text-decoration: none; }
