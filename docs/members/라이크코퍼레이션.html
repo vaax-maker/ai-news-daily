@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>라이크코퍼레이션 News</h1>
 <p class="subtitle">Latest news related to 라이크코퍼레이션</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBfSFR6T1FSb3R3Z2VLWkZSV3ZZNkE0NDRfd1ZMaW9teTVhNnZDaWplU2FQYVA4bm83MGlVVjAxTVVrYWlLVEU1ZEk2RFp2M3Rac1pHSDJhTkhJdmNfU1VEaXFMS2I5YnM?oc=5" target="_blank">건양대-라이크코퍼레이션-제이나인, 실감미디어 및 국방XR 분야 협력 위한 업무협약 체결 - 세종의소리</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">세종의소리</span> | 2024-10-14 07:00
+                <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBfSFR6T1FSb3R3Z2VLWkZSV3ZZNkE0NDRfd1ZMaW9teTVhNnZDaWplU2FQYVA4bm83MGlVVjAxTVVrYWlLVEU1ZEk2RFp2M3Rac1pHSDJhTkhJdmNfU1VEaXFMS2I5YnM?oc=5" target="_blank" class="source-link">세종의소리</a> | 2024-10-14 07:00
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBfSFR6T1FSb3R3Z2VLWkZSV3ZZNkE0NDRfd1ZMaW9teTVhNnZDaWplU2FQYVA4bm83MGlVVjAxTVVrYWlLVEU1ZEk2RFp2M3Rac1pHSDJhTkhJdmNfU1VEaXFMS2I5YnM?oc=5" target="_blank">건양대-라이크코퍼레이션-제이나인, 실감미디어 및 국방XR 분야 협력 위한 업무협약 체결</a>&nbsp;&nbsp;<font color="#6f6f6f">세종의소리</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMib0FVX3lxTE1rS2ZqdWluWFlzSW5TY2g2Nk1yc05qQjNFYm43QThlMXlEYV94SmdYVzdGS0lpZjlVQUxjMUFtM3FmQUVCQVJSdk1Rc1I3bnR3clh6UXhOTmhnQWNRTGJGbTdJMnN2ZExUSXFxM3BRVdIBZkFVX3lxTE10QVctOWlaYWloZmRVd3J3QXMzRkdrV01qQkNyckJ4MDlnWVQ4Z3ZlejJFak1taE5yMm5iXzhJajR5X0h4bVBLTXdtRGx6d2VrRWNpU05hWF9ZTXlZcDZqTnVtYkpLUQ?oc=5" target="_blank">실감형 콘텐츠로 구현한 뿌리산업 명장의 기술력·노하우 ‘디지털 뿌리명장’ - 동아일보</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">동아일보</span> | 2023-10-25 07:00
+                <a href="https://news.google.com/rss/articles/CBMib0FVX3lxTE1rS2ZqdWluWFlzSW5TY2g2Nk1yc05qQjNFYm43QThlMXlEYV94SmdYVzdGS0lpZjlVQUxjMUFtM3FmQUVCQVJSdk1Rc1I3bnR3clh6UXhOTmhnQWNRTGJGbTdJMnN2ZExUSXFxM3BRVdIBZkFVX3lxTE10QVctOWlaYWloZmRVd3J3QXMzRkdrV01qQkNyckJ4MDlnWVQ4Z3ZlejJFak1taE5yMm5iXzhJajR5X0h4bVBLTXdtRGx6d2VrRWNpU05hWF9ZTXlZcDZqTnVtYkpLUQ?oc=5" target="_blank" class="source-link">동아일보</a> | 2023-10-25 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMib0FVX3lxTE1rS2ZqdWluWFlzSW5TY2g2Nk1yc05qQjNFYm43QThlMXlEYV94SmdYVzdGS0lpZjlVQUxjMUFtM3FmQUVCQVJSdk1Rc1I3bnR3clh6UXhOTmhnQWNRTGJGbTdJMnN2ZExUSXFxM3BRVdIBZkFVX3lxTE10QVctOWlaYWloZmRVd3J3QXMzRkdrV01qQkNyckJ4MDlnWVQ4Z3ZlejJFak1taE5yMm5iXzhJajR5X0h4bVBLTXdtRGx6d2VrRWNpU05hWF9ZTXlZcDZqTnVtYkpLUQ?oc=5" target="_blank">실감형 콘텐츠로 구현한 뿌리산업 명장의 기술력·노하우 ‘디지털 뿌리명장’</a>&nbsp;&nbsp;<font color="#6f6f6f">동아일보</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1GTFkzWFBMRm9rTmtIRDhGVnF3bjZ4cFRTQTRoTlkwbGhhVEhwQVo4WjZBZXhQNjNrbmJzRHJZeGRYdDdEcU13RmJXV3lpM3gtQVlSaHE4M0J2cEw2ejlVZ0ZvbHdpVkQyenc?oc=5" target="_blank">[ICT 종합] 유니티 및 멜론 소식 외 - 게임뷰</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">게임뷰</span> | 2022-11-09 08:00
+                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1GTFkzWFBMRm9rTmtIRDhGVnF3bjZ4cFRTQTRoTlkwbGhhVEhwQVo4WjZBZXhQNjNrbmJzRHJZeGRYdDdEcU13RmJXV3lpM3gtQVlSaHE4M0J2cEw2ejlVZ0ZvbHdpVkQyenc?oc=5" target="_blank" class="source-link">게임뷰</a> | 2022-11-09 08:00
             </div>
         </div>
 
@@ -97,20 +133,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1GTFkzWFBMRm9rTmtIRDhGVnF3bjZ4cFRTQTRoTlkwbGhhVEhwQVo4WjZBZXhQNjNrbmJzRHJZeGRYdDdEcU13RmJXV3lpM3gtQVlSaHE4M0J2cEw2ejlVZ0ZvbHdpVkQyenc?oc=5" target="_blank">[ICT 종합] 유니티 및 멜론 소식 외</a>&nbsp;&nbsp;<font color="#6f6f6f">게임뷰</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTFBBS09QazJVN0dzbEJubFgzZExISWdiZmtGS21ROE5jQ3AwZGQwc1pRNDc3eGJ2bHVremo5aVRxVlBjanZIeFBsWGxiM0NQcW1KM1pVcURB?oc=5" target="_blank">넥슨-라이크, '메이플스토리 월드' 기반 교육 파트너십 체결 - 지디넷코리아</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">지디넷코리아</span> | 2022-11-09 08:00
+                <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTFBBS09QazJVN0dzbEJubFgzZExISWdiZmtGS21ROE5jQ3AwZGQwc1pRNDc3eGJ2bHVremo5aVRxVlBjanZIeFBsWGxiM0NQcW1KM1pVcURB?oc=5" target="_blank" class="source-link">지디넷코리아</a> | 2022-11-09 08:00
             </div>
         </div>
 
@@ -118,20 +152,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTFBBS09QazJVN0dzbEJubFgzZExISWdiZmtGS21ROE5jQ3AwZGQwc1pRNDc3eGJ2bHVremo5aVRxVlBjanZIeFBsWGxiM0NQcW1KM1pVcURB?oc=5" target="_blank">넥슨-라이크, '메이플스토리 월드' 기반 교육 파트너십 체결</a>&nbsp;&nbsp;<font color="#6f6f6f">지디넷코리아</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE80SEtmRFhtbnVtWTRnbkNJaWwzQThyLU5nM1F1SUR4YnM3MjI2NjhIa0RxbDJOTmkxUTZ1Z0h0bFBiNFVNTWlDNTBfc3QtMmw0QnVUQm1LSkxUSWVDRHBDeld3TTc?oc=5" target="_blank">전주대, 메타버스 전문기업 3곳과 산학협력 협약 체결 - 한국대학신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">한국대학신문</span> | 2022-05-23 07:00
+                <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE80SEtmRFhtbnVtWTRnbkNJaWwzQThyLU5nM1F1SUR4YnM3MjI2NjhIa0RxbDJOTmkxUTZ1Z0h0bFBiNFVNTWlDNTBfc3QtMmw0QnVUQm1LSkxUSWVDRHBDeld3TTc?oc=5" target="_blank" class="source-link">한국대학신문</a> | 2022-05-23 07:00
             </div>
         </div>
 
@@ -139,9 +171,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE80SEtmRFhtbnVtWTRnbkNJaWwzQThyLU5nM1F1SUR4YnM3MjI2NjhIa0RxbDJOTmkxUTZ1Z0h0bFBiNFVNTWlDNTBfc3QtMmw0QnVUQm1LSkxUSWVDRHBDeld3TTc?oc=5" target="_blank">전주대, 메타버스 전문기업 3곳과 산학협력 협약 체결</a>&nbsp;&nbsp;<font color="#6f6f6f">한국대학신문</font>
-                
             </div>
         </div>
     </article>

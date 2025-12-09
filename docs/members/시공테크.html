@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>시공테크 News</h1>
 <p class="subtitle">Latest news related to 시공테크</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTFBYZGY0Vi1SS01lMnBYRE5saXFpVzNyUTVoblN2dlQ3dEg1azJJNW9xSkZKeWVLYVlQRU8zTGo4a0RwQTI4S3c5cjJiMTZ2M3hmZHd6RjhCSGVySlU?oc=5" target="_blank">[즉시분석] 시공테크 8%↑···여수 엑스포 수혜? - 아이투자</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">아이투자</span> | 2025-12-03 04:03
+                <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTFBYZGY0Vi1SS01lMnBYRE5saXFpVzNyUTVoblN2dlQ3dEg1azJJNW9xSkZKeWVLYVlQRU8zTGo4a0RwQTI4S3c5cjJiMTZ2M3hmZHd6RjhCSGVySlU?oc=5" target="_blank" class="source-link">아이투자</a> | 2025-12-03 04:03
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTFBYZGY0Vi1SS01lMnBYRE5saXFpVzNyUTVoblN2dlQ3dEg1azJJNW9xSkZKeWVLYVlQRU8zTGo4a0RwQTI4S3c5cjJiMTZ2M3hmZHd6RjhCSGVySlU?oc=5" target="_blank">[즉시분석] 시공테크 8%↑···여수 엑스포 수혜?</a>&nbsp;&nbsp;<font color="#6f6f6f">아이투자</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE9PNG56T2JZelR5SS1VVFRrS052cERod3BPZHdIVHowbVZISnE2OXR0X29jRlVVM3pPa0dqTlNYS2hYZ08tcUkyMkVXdXdsSEFiRlNZUFBPZnUtdWs?oc=5" target="_blank">시공테크, 53억 체험시설 설계·제작설치 수주.. 매출비 6% - 아이투자</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">아이투자</span> | 2025-12-01 15:03
+                <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE9PNG56T2JZelR5SS1VVFRrS052cERod3BPZHdIVHowbVZISnE2OXR0X29jRlVVM3pPa0dqTlNYS2hYZ08tcUkyMkVXdXdsSEFiRlNZUFBPZnUtdWs?oc=5" target="_blank" class="source-link">아이투자</a> | 2025-12-01 15:03
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE9PNG56T2JZelR5SS1VVFRrS052cERod3BPZHdIVHowbVZISnE2OXR0X29jRlVVM3pPa0dqTlNYS2hYZ08tcUkyMkVXdXdsSEFiRlNZUFBPZnUtdWs?oc=5" target="_blank">시공테크, 53억 체험시설 설계·제작설치 수주.. 매출비 6%</a>&nbsp;&nbsp;<font color="#6f6f6f">아이투자</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTFAwMV9uWGZwQ3phbFZkbTlaQ0c0OUhhSk9JU3VYMEFDemk0RElrN1RCYXZERFkwRGFVZkJHRGlkYmF1Sjd4YmdKTFV4em5mYjZGSDFWLXlYYnVnTVU?oc=5" target="_blank">[즉시분석] 시공테크, 주가 강세...이유 있나? - 아이투자</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">아이투자</span> | 2025-11-26 18:24
+                <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTFAwMV9uWGZwQ3phbFZkbTlaQ0c0OUhhSk9JU3VYMEFDemk0RElrN1RCYXZERFkwRGFVZkJHRGlkYmF1Sjd4YmdKTFV4em5mYjZGSDFWLXlYYnVnTVU?oc=5" target="_blank" class="source-link">아이투자</a> | 2025-11-26 18:24
             </div>
         </div>
 
@@ -97,20 +133,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTFAwMV9uWGZwQ3phbFZkbTlaQ0c0OUhhSk9JU3VYMEFDemk0RElrN1RCYXZERFkwRGFVZkJHRGlkYmF1Sjd4YmdKTFV4em5mYjZGSDFWLXlYYnVnTVU?oc=5" target="_blank">[즉시분석] 시공테크, 주가 강세...이유 있나?</a>&nbsp;&nbsp;<font color="#6f6f6f">아이투자</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE45ZEpWZjYzZVAzVEFESEY1Wm10b0NabVdjYWk1NllPb291ZU54Mzl0aTBEWFJKcmlGWXp6OWJ1UE53SnVISTZqNkxDeEVTUjY0OTNMMmJSXzQzQlFJR2sycHdHaE0zZ21Q0gFsQVVfeXFMTmxRaWZpS1k0NDV1MVMxSy1RRm05eWxveTM2eDJpc3Y3bFNFYzB0ZjVzUC0yQWJVMVUyWkdFblo4ZzRtZnViYzUxSGp6OG1LVDVndzNjeEViYmViN0U2NzFBbm5GVEg1ZWJScHYz?oc=5" target="_blank">시공테크, 127억 규모 하나드림타운 그룹헤드쿼터 관련 공사 수주 - 블로터</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">블로터</span> | 2025-09-25 07:00
+                <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE45ZEpWZjYzZVAzVEFESEY1Wm10b0NabVdjYWk1NllPb291ZU54Mzl0aTBEWFJKcmlGWXp6OWJ1UE53SnVISTZqNkxDeEVTUjY0OTNMMmJSXzQzQlFJR2sycHdHaE0zZ21Q0gFsQVVfeXFMTmxRaWZpS1k0NDV1MVMxSy1RRm05eWxveTM2eDJpc3Y3bFNFYzB0ZjVzUC0yQWJVMVUyWkdFblo4ZzRtZnViYzUxSGp6OG1LVDVndzNjeEViYmViN0U2NzFBbm5GVEg1ZWJScHYz?oc=5" target="_blank" class="source-link">블로터</a> | 2025-09-25 07:00
             </div>
         </div>
 
@@ -118,9 +152,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE45ZEpWZjYzZVAzVEFESEY1Wm10b0NabVdjYWk1NllPb291ZU54Mzl0aTBEWFJKcmlGWXp6OWJ1UE53SnVISTZqNkxDeEVTUjY0OTNMMmJSXzQzQlFJR2sycHdHaE0zZ21Q0gFsQVVfeXFMTmxRaWZpS1k0NDV1MVMxSy1RRm05eWxveTM2eDJpc3Y3bFNFYzB0ZjVzUC0yQWJVMVUyWkdFblo4ZzRtZnViYzUxSGp6OG1LVDVndzNjeEViYmViN0U2NzFBbm5GVEg1ZWJScHYz?oc=5" target="_blank">시공테크, 127억 규모 하나드림타운 그룹헤드쿼터 관련 공사 수주</a>&nbsp;&nbsp;<font color="#6f6f6f">블로터</font>
-                
             </div>
         </div>
     </article>

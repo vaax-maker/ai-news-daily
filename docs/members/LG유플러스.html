@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>LG유플러스 News</h1>
 <p class="subtitle">Latest news related to LG유플러스</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE9mUGZzeklEOS1RNlFhLTVDZ0hWNXk0SjduQzh6d0lWdXRJenJtakdTMC1nN1VWQlhIRUYwSFVTYTNPeDQxTjFmazBJY1puaFc2NWFiUjN6WHFDLVM3eHdFaVdKVWlWdDdhMEVlQ3htTGZLTEE?oc=5" target="_blank">LGU+ '익시오' 통화 요약 노출 사고에...AI 전화 신뢰 흔들 - 디지털투데이</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">디지털투데이</span> | 2025-12-08 22:30
+                <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE9mUGZzeklEOS1RNlFhLTVDZ0hWNXk0SjduQzh6d0lWdXRJenJtakdTMC1nN1VWQlhIRUYwSFVTYTNPeDQxTjFmazBJY1puaFc2NWFiUjN6WHFDLVM3eHdFaVdKVWlWdDdhMEVlQ3htTGZLTEE?oc=5" target="_blank" class="source-link">디지털투데이</a> | 2025-12-08 22:30
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE9mUGZzeklEOS1RNlFhLTVDZ0hWNXk0SjduQzh6d0lWdXRJenJtakdTMC1nN1VWQlhIRUYwSFVTYTNPeDQxTjFmazBJY1puaFc2NWFiUjN6WHFDLVM3eHdFaVdKVWlWdDdhMEVlQ3htTGZLTEE?oc=5" target="_blank">LGU+ '익시오' 통화 요약 노출 사고에...AI 전화 신뢰 흔들</a>&nbsp;&nbsp;<font color="#6f6f6f">디지털투데이</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE5VRjJsTEVuMmdyd2RFNGdmbUVJSkhxZ0V2MVREZWtWaG15ZFFCa0VtQXhkR1FtZmxlX2t6RWcyY3RBT3g0V3J4cmNSQjRFVEZSYUNaOGRZdWdtZzZaRDBIWGpha1hOYk9aMW9oTkNaX1VpdWfSAXdBVV95cUxNRk41cDd1WHhqTFRMVTgzUDVBZ201a04xdGlza2xEdkdlN0FtcUs0ZlFzZ0dlSDUtR0JiRFdXMlZEbGNONHRtTnNvWTFSaVRmX3VyZVYtUFc2bW9GMkRfQlBQRDZXZHduYXhFbmtQLWI3SzNESzVJVQ?oc=5" target="_blank">통신 상장기업 브랜드평판 12월 1위 LG유플러스, 2위 KT, 3위 SK텔레콤 - 핀포인트뉴스</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">핀포인트뉴스</span> | 2025-12-08 22:29
+                <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE5VRjJsTEVuMmdyd2RFNGdmbUVJSkhxZ0V2MVREZWtWaG15ZFFCa0VtQXhkR1FtZmxlX2t6RWcyY3RBT3g0V3J4cmNSQjRFVEZSYUNaOGRZdWdtZzZaRDBIWGpha1hOYk9aMW9oTkNaX1VpdWfSAXdBVV95cUxNRk41cDd1WHhqTFRMVTgzUDVBZ201a04xdGlza2xEdkdlN0FtcUs0ZlFzZ0dlSDUtR0JiRFdXMlZEbGNONHRtTnNvWTFSaVRmX3VyZVYtUFc2bW9GMkRfQlBQRDZXZHduYXhFbmtQLWI3SzNESzVJVQ?oc=5" target="_blank" class="source-link">핀포인트뉴스</a> | 2025-12-08 22:29
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE5VRjJsTEVuMmdyd2RFNGdmbUVJSkhxZ0V2MVREZWtWaG15ZFFCa0VtQXhkR1FtZmxlX2t6RWcyY3RBT3g0V3J4cmNSQjRFVEZSYUNaOGRZdWdtZzZaRDBIWGpha1hOYk9aMW9oTkNaX1VpdWfSAXdBVV95cUxNRk41cDd1WHhqTFRMVTgzUDVBZ201a04xdGlza2xEdkdlN0FtcUs0ZlFzZ0dlSDUtR0JiRFdXMlZEbGNONHRtTnNvWTFSaVRmX3VyZVYtUFc2bW9GMkRfQlBQRDZXZHduYXhFbmtQLWI3SzNESzVJVQ?oc=5" target="_blank">통신 상장기업 브랜드평판 12월 1위 LG유플러스, 2위 KT, 3위 SK텔레콤</a>&nbsp;&nbsp;<font color="#6f6f6f">핀포인트뉴스</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxNYVYyMW1rNVVhMUtnRWV2ZlpjWkdZWXdud05DRTBKQmxoMnlUeUZRUEQwaWRTZnRzYXNDMlpORFFrQXNGbnpNN3p3RmdHVUZEdkotSWQycEhQZzJTWmpIaVdiNnBKNUY2S3NBSVFqMTg4dHR1enl1WDU2c0Y4YmZjSWNn0gGWAUFVX3lxTE94c2Rhd0p5dzRwc1pMcHVFSHlJQThRR0tmM1MxcjFIQ2ZFNVpIQkFWOV9IVDQwLUEtcTNYbmFzTDZkYXQzOUo3dTN3eUlVUjAydnM1RXNUMlB2bTA0Z3BwT24zSzlWajJMUjdYeWRPSks1SGEwRENXQXdZdnJyNHU3eGw0NWtNVzBHai1WSjhzZXNidllOUQ?oc=5" target="_blank">[비즈톡톡] “온디바이스라 안전” LG유플러스 익시오 보안 사고에 ‘불안’ - 조선비즈 - Chosunbiz</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">Chosunbiz</span> | 2025-12-08 21:00
+                <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxNYVYyMW1rNVVhMUtnRWV2ZlpjWkdZWXdud05DRTBKQmxoMnlUeUZRUEQwaWRTZnRzYXNDMlpORFFrQXNGbnpNN3p3RmdHVUZEdkotSWQycEhQZzJTWmpIaVdiNnBKNUY2S3NBSVFqMTg4dHR1enl1WDU2c0Y4YmZjSWNn0gGWAUFVX3lxTE94c2Rhd0p5dzRwc1pMcHVFSHlJQThRR0tmM1MxcjFIQ2ZFNVpIQkFWOV9IVDQwLUEtcTNYbmFzTDZkYXQzOUo3dTN3eUlVUjAydnM1RXNUMlB2bTA0Z3BwT24zSzlWajJMUjdYeWRPSks1SGEwRENXQXdZdnJyNHU3eGw0NWtNVzBHai1WSjhzZXNidllOUQ?oc=5" target="_blank" class="source-link">Chosunbiz</a> | 2025-12-08 21:00
             </div>
         </div>
 
@@ -97,20 +133,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxNYVYyMW1rNVVhMUtnRWV2ZlpjWkdZWXdud05DRTBKQmxoMnlUeUZRUEQwaWRTZnRzYXNDMlpORFFrQXNGbnpNN3p3RmdHVUZEdkotSWQycEhQZzJTWmpIaVdiNnBKNUY2S3NBSVFqMTg4dHR1enl1WDU2c0Y4YmZjSWNn0gGWAUFVX3lxTE94c2Rhd0p5dzRwc1pMcHVFSHlJQThRR0tmM1MxcjFIQ2ZFNVpIQkFWOV9IVDQwLUEtcTNYbmFzTDZkYXQzOUo3dTN3eUlVUjAydnM1RXNUMlB2bTA0Z3BwT24zSzlWajJMUjdYeWRPSks1SGEwRENXQXdZdnJyNHU3eGw0NWtNVzBHai1WSjhzZXNidllOUQ?oc=5" target="_blank">[비즈톡톡] “온디바이스라 안전” LG유플러스 익시오 보안 사고에 ‘불안’ - 조선비즈</a>&nbsp;&nbsp;<font color="#6f6f6f">Chosunbiz</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxNM0FUaHBzTWdzZ2kzakFyalVUX3M2dW1Zcnc0VFk2dVp5NUNBczdqWmdUZVRweWZaRnhTTWZyZ2o1aDZYSmpoSGVMRGlUcjhpMWdaMWFTWWdvUjdjTERhLThUdzd6ZG5FT2U5V0J3WkUtRmZORW9EeENSbUt0X3RIWmMxeVVkb2xmTllGQ3hR0gGiAUFVX3lxTE9ZRFh2NGIxdFlvdkd1TzE4MmtWV3MwTFlfTHYtUkdOcV8wMG5ROG54WG1ya1NaNmNFendJLWRMaUYybnhOSl9XV1p5Zm8yNDkwYmltRHd6dklWQWFfQVFUVWVLNEtCMjM5aHJLVEtFTnBTQ0IzZHJJcFRmUWJINDZpb0dvbjhqdjVoWGkxNE5ycW9OdVdXc2l2aHNhMzBvQWdJUQ?oc=5" target="_blank">단순 응답 넘어 상담·처리·가입 돕는 ‘실행형 AI’ 도입… 고객 만족도 높아 - 조선일보</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">조선일보</span> | 2025-12-08 15:30
+                <a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxNM0FUaHBzTWdzZ2kzakFyalVUX3M2dW1Zcnc0VFk2dVp5NUNBczdqWmdUZVRweWZaRnhTTWZyZ2o1aDZYSmpoSGVMRGlUcjhpMWdaMWFTWWdvUjdjTERhLThUdzd6ZG5FT2U5V0J3WkUtRmZORW9EeENSbUt0X3RIWmMxeVVkb2xmTllGQ3hR0gGiAUFVX3lxTE9ZRFh2NGIxdFlvdkd1TzE4MmtWV3MwTFlfTHYtUkdOcV8wMG5ROG54WG1ya1NaNmNFendJLWRMaUYybnhOSl9XV1p5Zm8yNDkwYmltRHd6dklWQWFfQVFUVWVLNEtCMjM5aHJLVEtFTnBTQ0IzZHJJcFRmUWJINDZpb0dvbjhqdjVoWGkxNE5ycW9OdVdXc2l2aHNhMzBvQWdJUQ?oc=5" target="_blank" class="source-link">조선일보</a> | 2025-12-08 15:30
             </div>
         </div>
 
@@ -118,20 +152,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxNM0FUaHBzTWdzZ2kzakFyalVUX3M2dW1Zcnc0VFk2dVp5NUNBczdqWmdUZVRweWZaRnhTTWZyZ2o1aDZYSmpoSGVMRGlUcjhpMWdaMWFTWWdvUjdjTERhLThUdzd6ZG5FT2U5V0J3WkUtRmZORW9EeENSbUt0X3RIWmMxeVVkb2xmTllGQ3hR0gGiAUFVX3lxTE9ZRFh2NGIxdFlvdkd1TzE4MmtWV3MwTFlfTHYtUkdOcV8wMG5ROG54WG1ya1NaNmNFendJLWRMaUYybnhOSl9XV1p5Zm8yNDkwYmltRHd6dklWQWFfQVFUVWVLNEtCMjM5aHJLVEtFTnBTQ0IzZHJJcFRmUWJINDZpb0dvbjhqdjVoWGkxNE5ycW9OdVdXc2l2aHNhMzBvQWdJUQ?oc=5" target="_blank">단순 응답 넘어 상담·처리·가입 돕는 ‘실행형 AI’ 도입… 고객 만족도 높아</a>&nbsp;&nbsp;<font color="#6f6f6f">조선일보</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5ZZjRCejQtOEM4cjMzdkhnWThWOWpNS09BNVBvS2xqSVJTWFo1T05uMG0tdGtqTVBrcjB1cjRJX3Rzb21abWhybXlDX1p3OUNnVUhISjVvRE9XV0p1QVZEUGEyYmRCQ3VuOWduSzZR?oc=5" target="_blank">LG유플러스, AI '익시오'서 통화 내용 유출…SKT·KT 이어 보안 '구멍' - 뉴스후플러스</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">뉴스후플러스</span> | 2025-12-08 09:32
+                <a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5ZZjRCejQtOEM4cjMzdkhnWThWOWpNS09BNVBvS2xqSVJTWFo1T05uMG0tdGtqTVBrcjB1cjRJX3Rzb21abWhybXlDX1p3OUNnVUhISjVvRE9XV0p1QVZEUGEyYmRCQ3VuOWduSzZR?oc=5" target="_blank" class="source-link">뉴스후플러스</a> | 2025-12-08 09:32
             </div>
         </div>
 
@@ -139,20 +171,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5ZZjRCejQtOEM4cjMzdkhnWThWOWpNS09BNVBvS2xqSVJTWFo1T05uMG0tdGtqTVBrcjB1cjRJX3Rzb21abWhybXlDX1p3OUNnVUhISjVvRE9XV0p1QVZEUGEyYmRCQ3VuOWduSzZR?oc=5" target="_blank">LG유플러스, AI '익시오'서 통화 내용 유출…SKT·KT 이어 보안 '구멍'</a>&nbsp;&nbsp;<font color="#6f6f6f">뉴스후플러스</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE9YdkQ3ek8tbVA3LWVVRXpPVWxjclhKcTlVQXNTSVBwYWtSMjZVeGtCODAwcHVuTFpWQmFHYXdtM0wwX1ViUk43bXNXY3haSG9YaVVv?oc=5" target="_blank">Z세대 홀린 '유쇼페'…"나다움 찾도록 기회줬죠" - 네이트</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">네이트</span> | 2025-12-08 09:09
+                <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE9YdkQ3ek8tbVA3LWVVRXpPVWxjclhKcTlVQXNTSVBwYWtSMjZVeGtCODAwcHVuTFpWQmFHYXdtM0wwX1ViUk43bXNXY3haSG9YaVVv?oc=5" target="_blank" class="source-link">네이트</a> | 2025-12-08 09:09
             </div>
         </div>
 
@@ -160,20 +190,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE9YdkQ3ek8tbVA3LWVVRXpPVWxjclhKcTlVQXNTSVBwYWtSMjZVeGtCODAwcHVuTFpWQmFHYXdtM0wwX1ViUk43bXNXY3haSG9YaVVv?oc=5" target="_blank">Z세대 홀린 '유쇼페'…"나다움 찾도록 기회줬죠"</a>&nbsp;&nbsp;<font color="#6f6f6f">네이트</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE5yZDZDbF8tVHZ3Tmw4WEF0b2duMExQQ0VDRjc2b2diZkY0UXAyME5LVXVBWUI4VVRpYk53X2FxR1dnREpsQ1hBRE05b0FyNGNtQmRPWnRPUEZnQdIBXkFVX3lxTE5IREFOWnk1aTV5N3NkY3Npblo0c1NHal91dXowVU83ZXdYcTFIXzZMdU5kdHRHTTVVVUdpMDNtalRPdmZ5RjhEUU1WbkhuNHlXQmZtWUMxdF91M1h5THc?oc=5" target="_blank">Z세대 홀린 '유쇼페'… "나다움 찾도록 기회줬죠" - 파이낸셜뉴스</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">파이낸셜뉴스</span> | 2025-12-08 09:08
+                <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE5yZDZDbF8tVHZ3Tmw4WEF0b2duMExQQ0VDRjc2b2diZkY0UXAyME5LVXVBWUI4VVRpYk53X2FxR1dnREpsQ1hBRE05b0FyNGNtQmRPWnRPUEZnQdIBXkFVX3lxTE5IREFOWnk1aTV5N3NkY3Npblo0c1NHal91dXowVU83ZXdYcTFIXzZMdU5kdHRHTTVVVUdpMDNtalRPdmZ5RjhEUU1WbkhuNHlXQmZtWUMxdF91M1h5THc?oc=5" target="_blank" class="source-link">파이낸셜뉴스</a> | 2025-12-08 09:08
             </div>
         </div>
 
@@ -181,20 +209,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE5yZDZDbF8tVHZ3Tmw4WEF0b2duMExQQ0VDRjc2b2diZkY0UXAyME5LVXVBWUI4VVRpYk53X2FxR1dnREpsQ1hBRE05b0FyNGNtQmRPWnRPUEZnQdIBXkFVX3lxTE5IREFOWnk1aTV5N3NkY3Npblo0c1NHal91dXowVU83ZXdYcTFIXzZMdU5kdHRHTTVVVUdpMDNtalRPdmZ5RjhEUU1WbkhuNHlXQmZtWUMxdF91M1h5THc?oc=5" target="_blank">Z세대 홀린 '유쇼페'… "나다움 찾도록 기회줬죠"</a>&nbsp;&nbsp;<font color="#6f6f6f">파이낸셜뉴스</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE9rWVRsQjdhQXF5dC00ZEJBY05nSHRJOWFNN1BoYnFKZHdpN3NwQU9VUm11YXJMVnRFazh0X21TVmFtc2FGVmRuM0VUSldOc0NfYkdvY005dW9EM1B6SXliWlN2ZXZCdVlj?oc=5" target="_blank">[초점] LG유플러스 '익시오', 보안 강조 한달 만에…통화정보 유출 논란 - 뉴스워치</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">뉴스워치</span> | 2025-12-08 08:52
+                <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE9rWVRsQjdhQXF5dC00ZEJBY05nSHRJOWFNN1BoYnFKZHdpN3NwQU9VUm11YXJMVnRFazh0X21TVmFtc2FGVmRuM0VUSldOc0NfYkdvY005dW9EM1B6SXliWlN2ZXZCdVlj?oc=5" target="_blank" class="source-link">뉴스워치</a> | 2025-12-08 08:52
             </div>
         </div>
 
@@ -202,9 +228,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE9rWVRsQjdhQXF5dC00ZEJBY05nSHRJOWFNN1BoYnFKZHdpN3NwQU9VUm11YXJMVnRFazh0X21TVmFtc2FGVmRuM0VUSldOc0NfYkdvY005dW9EM1B6SXliWlN2ZXZCdVlj?oc=5" target="_blank">[초점] LG유플러스 '익시오', 보안 강조 한달 만에…통화정보 유출 논란</a>&nbsp;&nbsp;<font color="#6f6f6f">뉴스워치</font>
-                
             </div>
         </div>
     </article>

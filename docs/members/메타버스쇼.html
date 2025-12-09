@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>메타버스쇼 News</h1>
 <p class="subtitle">Latest news related to 메타버스쇼</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE1GcGJWcFhpcTZPNFhaV25iM0tqaE5rSUJfczg4ZnJENnIzZDVNcEpLaE5qTEhDV1BmT3Jxamtmb0syZXFxTzdpQ3pQckJNV05MUzNHTGdmQ3A2LTU5QVNn?oc=5" target="_blank">용인 남촌초, 어울림 발표회 및 독도사랑 퀴즈 한마당, 메타버스 흡연예방 공연 실시 - 한국교육신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">한국교육신문</span> | 2024-11-01 07:00
+                <a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE1GcGJWcFhpcTZPNFhaV25iM0tqaE5rSUJfczg4ZnJENnIzZDVNcEpLaE5qTEhDV1BmT3Jxamtmb0syZXFxTzdpQ3pQckJNV05MUzNHTGdmQ3A2LTU5QVNn?oc=5" target="_blank" class="source-link">한국교육신문</a> | 2024-11-01 07:00
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE1GcGJWcFhpcTZPNFhaV25iM0tqaE5rSUJfczg4ZnJENnIzZDVNcEpLaE5qTEhDV1BmT3Jxamtmb0syZXFxTzdpQ3pQckJNV05MUzNHTGdmQ3A2LTU5QVNn?oc=5" target="_blank">용인 남촌초, 어울림 발표회 및 독도사랑 퀴즈 한마당, 메타버스 흡연예방 공연 실시</a>&nbsp;&nbsp;<font color="#6f6f6f">한국교육신문</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE03aE5TZmRGVW5sSXNQbTlPQTFKbkJEMDl0MFRSLTlIY3BTa1ZhNWc0OU1DeTlSbEJrenNheklaaVN0TEhGaEl6WkEyZmVNX1hhSWQ4aE81aF91bnZvWlRjWWd2c2hxUF9BaXfSAW5BVV95cUxQODdwVVdzWVBHekhSaDduV0k0LThvT3pYUnJaTlp1azd2ZHQwaXVZM1hQTmdTeTBPMUd0bFZrcllGcXBMbUFtYjVxcmJuMUpyVWJvczVPQVpIR1pReFBCOEFyYlhhakw1bUc4TkFsZw?oc=5" target="_blank">[현장] 韓 최대 메타버스 쇼 'KMF 2024' 개막 - 뉴시안</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">뉴시안</span> | 2024-10-17 07:00
+                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE03aE5TZmRGVW5sSXNQbTlPQTFKbkJEMDl0MFRSLTlIY3BTa1ZhNWc0OU1DeTlSbEJrenNheklaaVN0TEhGaEl6WkEyZmVNX1hhSWQ4aE81aF91bnZvWlRjWWd2c2hxUF9BaXfSAW5BVV95cUxQODdwVVdzWVBHekhSaDduV0k0LThvT3pYUnJaTlp1azd2ZHQwaXVZM1hQTmdTeTBPMUd0bFZrcllGcXBMbUFtYjVxcmJuMUpyVWJvczVPQVpIR1pReFBCOEFyYlhhakw1bUc4TkFsZw?oc=5" target="_blank" class="source-link">뉴시안</a> | 2024-10-17 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE03aE5TZmRGVW5sSXNQbTlPQTFKbkJEMDl0MFRSLTlIY3BTa1ZhNWc0OU1DeTlSbEJrenNheklaaVN0TEhGaEl6WkEyZmVNX1hhSWQ4aE81aF91bnZvWlRjWWd2c2hxUF9BaXfSAW5BVV95cUxQODdwVVdzWVBHekhSaDduV0k0LThvT3pYUnJaTlp1azd2ZHQwaXVZM1hQTmdTeTBPMUd0bFZrcllGcXBMbUFtYjVxcmJuMUpyVWJvczVPQVpIR1pReFBCOEFyYlhhakw1bUc4TkFsZw?oc=5" target="_blank">[현장] 韓 최대 메타버스 쇼 'KMF 2024' 개막</a>&nbsp;&nbsp;<font color="#6f6f6f">뉴시안</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE4xU0UwaC1sQ3IzMU12WVlyMU9SUU5lNGpFMFBTcGF0Mm9rLXFmV1VaWW56S0Z0akNlVFpESTVQdDV1QzY4Smh0QmVIYnZmNHBrQWNQVlZ3YkRjSklfZWozakt5UG9vUGdqaWc?oc=5" target="_blank">[AI&빅데이터쇼 D-2] AI 말고도 스마트·로봇·메타버스 있다...'스마트테크 코리아' 동시 개최 - AI타임스</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">AI타임스</span> | 2023-06-26 07:00
+                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE4xU0UwaC1sQ3IzMU12WVlyMU9SUU5lNGpFMFBTcGF0Mm9rLXFmV1VaWW56S0Z0akNlVFpESTVQdDV1QzY4Smh0QmVIYnZmNHBrQWNQVlZ3YkRjSklfZWozakt5UG9vUGdqaWc?oc=5" target="_blank" class="source-link">AI타임스</a> | 2023-06-26 07:00
             </div>
         </div>
 
@@ -97,20 +133,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE4xU0UwaC1sQ3IzMU12WVlyMU9SUU5lNGpFMFBTcGF0Mm9rLXFmV1VaWW56S0Z0akNlVFpESTVQdDV1QzY4Smh0QmVIYnZmNHBrQWNQVlZ3YkRjSklfZWozakt5UG9vUGdqaWc?oc=5" target="_blank">[AI&빅데이터쇼 D-2] AI 말고도 스마트·로봇·메타버스 있다...'스마트테크 코리아' 동시 개최</a>&nbsp;&nbsp;<font color="#6f6f6f">AI타임스</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFBtWTBjaVctMW5Lc0tOazFieXlETE00VUdfWWxUcEdCcERjdmQ3UFhnbjI0dkhWVUwtVEV4TjkyaXJ4eW85TDhyTA?oc=5" target="_blank">한국 대중음악 레전드 ‘송창식, 정훈희, 함춘호’의 공연을 메타버스로 즐긴다 - SK텔레콤 뉴스룸</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">SK텔레콤 뉴스룸</span> | 2022-10-12 07:00
+                <a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFBtWTBjaVctMW5Lc0tOazFieXlETE00VUdfWWxUcEdCcERjdmQ3UFhnbjI0dkhWVUwtVEV4TjkyaXJ4eW85TDhyTA?oc=5" target="_blank" class="source-link">SK텔레콤 뉴스룸</a> | 2022-10-12 07:00
             </div>
         </div>
 
@@ -118,9 +152,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFBtWTBjaVctMW5Lc0tOazFieXlETE00VUdfWWxUcEdCcERjdmQ3UFhnbjI0dkhWVUwtVEV4TjkyaXJ4eW85TDhyTA?oc=5" target="_blank">한국 대중음악 레전드 ‘송창식, 정훈희, 함춘호’의 공연을 메타버스로 즐긴다</a>&nbsp;&nbsp;<font color="#6f6f6f">SK텔레콤 뉴스룸</font>
-                
             </div>
         </div>
     </article>

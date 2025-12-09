@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>호텔롯데 News</h1>
 <p class="subtitle">Latest news related to 호텔롯데</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE1WWXg0SU92TEtoVjVrS2N6UU9QOXF0aDA4aHBUNThRYkhxUi1vWWU5MEFBdmJYRFdfRzlwSmJhekpGN210OEtmTlBabmYxTFBCdXZmX2FyQU5FWGtDTDlsRFNYNDFwQVEwN21NSGtQbzFkM00?oc=5" target="_blank">호텔롯데 6년 만의 최대 이익 예약, 정호석·김동하·권오상 '삼끌이' 첫해 본궤도 - 비즈니스포스트</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">비즈니스포스트</span> | 2025-12-08 05:01
+                <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE1WWXg0SU92TEtoVjVrS2N6UU9QOXF0aDA4aHBUNThRYkhxUi1vWWU5MEFBdmJYRFdfRzlwSmJhekpGN210OEtmTlBabmYxTFBCdXZmX2FyQU5FWGtDTDlsRFNYNDFwQVEwN21NSGtQbzFkM00?oc=5" target="_blank" class="source-link">비즈니스포스트</a> | 2025-12-08 05:01
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE1WWXg0SU92TEtoVjVrS2N6UU9QOXF0aDA4aHBUNThRYkhxUi1vWWU5MEFBdmJYRFdfRzlwSmJhekpGN210OEtmTlBabmYxTFBCdXZmX2FyQU5FWGtDTDlsRFNYNDFwQVEwN21NSGtQbzFkM00?oc=5" target="_blank">호텔롯데 6년 만의 최대 이익 예약, 정호석·김동하·권오상 '삼끌이' 첫해 본궤도</a>&nbsp;&nbsp;<font color="#6f6f6f">비즈니스포스트</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMi3ANBVV95cUxNbHdPTUh0eFZ2aTJrei01eVcyNmVta2kzNFZSSDZ5UjlvR3ZIb3AzSFlLZGJTYmlQWG5OXzlMcDNaRHJObnZuRzBjc09aZmwyQVZQbnRiOGFKNTlWTlNFSW11RmozcmhhNkpZN1RRck5SZFpfenEwRWhZSTlhT1pyRDMxSWdhT3JMZ1lReFV2eDR0anhEY2I3ckxNaEw3SmRhbmFvczNjSEU1Q3dDNUR6Vkh6djk0ZERNYnF3d0hmRlc2d0FOYm1PSTYyWkphNmFqRFJfUnVYdnpGM0tna05lbnFhbVBNTXNXYXR6QnE0LXA0RmFvSHpaZ2QzWFZBZDNEeU04NkltaFl2MTFEbEFMZ3hITlpnLTZYUkFhbFBBYnNkWjZJcXBSRE01TDRtOWoyNGpzQjluZ1RsaFF1bkZxMWZMR3pWT0NCRUVmNVVxVjdPUlJjQWFMR2wzTE5hTXNwVnA1a00zWm5UZzNhbWppWERXWkh1dWpnMkhQZlhOZ0JoemdrTFNpRGQ1emNrSFc1QW40N0IzNFgwWXMyNXJPb0JKODgtUEFuTm40OEd1UFREb1JNSmJJSDBoQUd4Uk9SWXpXeUtFVHAtekVnRW91aHB2Vjcta1BneHZLSg?oc=5" target="_blank">호텔롯데, 과학기술정보통신부 장관 표창 수상… "정보보호 공시 우수기관 선정" - MSN</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">MSN</span> | 2025-12-08 01:34
+                <a href="https://news.google.com/rss/articles/CBMi3ANBVV95cUxNbHdPTUh0eFZ2aTJrei01eVcyNmVta2kzNFZSSDZ5UjlvR3ZIb3AzSFlLZGJTYmlQWG5OXzlMcDNaRHJObnZuRzBjc09aZmwyQVZQbnRiOGFKNTlWTlNFSW11RmozcmhhNkpZN1RRck5SZFpfenEwRWhZSTlhT1pyRDMxSWdhT3JMZ1lReFV2eDR0anhEY2I3ckxNaEw3SmRhbmFvczNjSEU1Q3dDNUR6Vkh6djk0ZERNYnF3d0hmRlc2d0FOYm1PSTYyWkphNmFqRFJfUnVYdnpGM0tna05lbnFhbVBNTXNXYXR6QnE0LXA0RmFvSHpaZ2QzWFZBZDNEeU04NkltaFl2MTFEbEFMZ3hITlpnLTZYUkFhbFBBYnNkWjZJcXBSRE01TDRtOWoyNGpzQjluZ1RsaFF1bkZxMWZMR3pWT0NCRUVmNVVxVjdPUlJjQWFMR2wzTE5hTXNwVnA1a00zWm5UZzNhbWppWERXWkh1dWpnMkhQZlhOZ0JoemdrTFNpRGQ1emNrSFc1QW40N0IzNFgwWXMyNXJPb0JKODgtUEFuTm40OEd1UFREb1JNSmJJSDBoQUd4Uk9SWXpXeUtFVHAtekVnRW91aHB2Vjcta1BneHZLSg?oc=5" target="_blank" class="source-link">MSN</a> | 2025-12-08 01:34
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMi3ANBVV95cUxNbHdPTUh0eFZ2aTJrei01eVcyNmVta2kzNFZSSDZ5UjlvR3ZIb3AzSFlLZGJTYmlQWG5OXzlMcDNaRHJObnZuRzBjc09aZmwyQVZQbnRiOGFKNTlWTlNFSW11RmozcmhhNkpZN1RRck5SZFpfenEwRWhZSTlhT1pyRDMxSWdhT3JMZ1lReFV2eDR0anhEY2I3ckxNaEw3SmRhbmFvczNjSEU1Q3dDNUR6Vkh6djk0ZERNYnF3d0hmRlc2d0FOYm1PSTYyWkphNmFqRFJfUnVYdnpGM0tna05lbnFhbVBNTXNXYXR6QnE0LXA0RmFvSHpaZ2QzWFZBZDNEeU04NkltaFl2MTFEbEFMZ3hITlpnLTZYUkFhbFBBYnNkWjZJcXBSRE01TDRtOWoyNGpzQjluZ1RsaFF1bkZxMWZMR3pWT0NCRUVmNVVxVjdPUlJjQWFMR2wzTE5hTXNwVnA1a00zWm5UZzNhbWppWERXWkh1dWpnMkhQZlhOZ0JoemdrTFNpRGQ1emNrSFc1QW40N0IzNFgwWXMyNXJPb0JKODgtUEFuTm40OEd1UFREb1JNSmJJSDBoQUd4Uk9SWXpXeUtFVHAtekVnRW91aHB2Vjcta1BneHZLSg?oc=5" target="_blank">호텔롯데, 과학기술정보통신부 장관 표창 수상… "정보보호 공시 우수기관 선정"</a>&nbsp;&nbsp;<font color="#6f6f6f">MSN</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE15d2RFOERRSWRjTHVuSHhpRklyWU9qRFhDMzdFOTNFZUNHTExnZVQ1cTdYa0ozTTJBVXJLY1lDclhJSXgzZGFweEtUb0xYQ3plc2puQjk1QUxRcUNRYzZCWnNkVlBacWtJTnlMdWwzSnA?oc=5" target="_blank">롯데호텔, 경주 APEC 정상들이 즐긴 디저트 재해석 - 신아일보</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">신아일보</span> | 2025-12-07 02:52
+                <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE15d2RFOERRSWRjTHVuSHhpRklyWU9qRFhDMzdFOTNFZUNHTExnZVQ1cTdYa0ozTTJBVXJLY1lDclhJSXgzZGFweEtUb0xYQ3plc2puQjk1QUxRcUNRYzZCWnNkVlBacWtJTnlMdWwzSnA?oc=5" target="_blank" class="source-link">신아일보</a> | 2025-12-07 02:52
             </div>
         </div>
 
@@ -97,20 +133,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE15d2RFOERRSWRjTHVuSHhpRklyWU9qRFhDMzdFOTNFZUNHTExnZVQ1cTdYa0ozTTJBVXJLY1lDclhJSXgzZGFweEtUb0xYQ3plc2puQjk1QUxRcUNRYzZCWnNkVlBacWtJTnlMdWwzSnA?oc=5" target="_blank">롯데호텔, 경주 APEC 정상들이 즐긴 디저트 재해석</a>&nbsp;&nbsp;<font color="#6f6f6f">신아일보</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFBzR2lMY1BJb0JDQ0lHUW80NVE3dGtOVFhuSFROMnJGOWtLbDU1RXJkSF94RGJaQjNHNFNxcmZfR1lla0tNXzlzaTdSZ3ZqcWV4N0FQaUVWNVMyaUwwc2NrMWhyWDBpNTJOYkVr0gFvQVVfeXFMTmJnREUwWWlJdmZGTURKeUo1UC1HeEpEbVZ2S21OLXBDa0xheUlMMG51UXpwR0V6cWVTMkNGUUNUTVJ1T2F5YTd6TlVtM0hJV2d6WlVZYkVkRlU3aUlzcm1PNHlIRm1CYzlScUFNdVk4?oc=5" target="_blank">호텔롯데, 정보보호 선도적 역할로 과기정통부 장관 표창 수상 - 뉴스로드</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">뉴스로드</span> | 2025-12-04 20:00
+                <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFBzR2lMY1BJb0JDQ0lHUW80NVE3dGtOVFhuSFROMnJGOWtLbDU1RXJkSF94RGJaQjNHNFNxcmZfR1lla0tNXzlzaTdSZ3ZqcWV4N0FQaUVWNVMyaUwwc2NrMWhyWDBpNTJOYkVr0gFvQVVfeXFMTmJnREUwWWlJdmZGTURKeUo1UC1HeEpEbVZ2S21OLXBDa0xheUlMMG51UXpwR0V6cWVTMkNGUUNUTVJ1T2F5YTd6TlVtM0hJV2d6WlVZYkVkRlU3aUlzcm1PNHlIRm1CYzlScUFNdVk4?oc=5" target="_blank" class="source-link">뉴스로드</a> | 2025-12-04 20:00
             </div>
         </div>
 
@@ -118,20 +152,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFBzR2lMY1BJb0JDQ0lHUW80NVE3dGtOVFhuSFROMnJGOWtLbDU1RXJkSF94RGJaQjNHNFNxcmZfR1lla0tNXzlzaTdSZ3ZqcWV4N0FQaUVWNVMyaUwwc2NrMWhyWDBpNTJOYkVr0gFvQVVfeXFMTmJnREUwWWlJdmZGTURKeUo1UC1HeEpEbVZ2S21OLXBDa0xheUlMMG51UXpwR0V6cWVTMkNGUUNUTVJ1T2F5YTd6TlVtM0hJV2d6WlVZYkVkRlU3aUlzcm1PNHlIRm1CYzlScUFNdVk4?oc=5" target="_blank">호텔롯데, 정보보호 선도적 역할로 과기정통부 장관 표창 수상</a>&nbsp;&nbsp;<font color="#6f6f6f">뉴스로드</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE9FQ3Z0STVfel9xVldSNWQzNkFWbWYwb09QaXdNY2w3YjJud1NaWDRVU002b1ZsR0dhVEdFR2pabXcwdlhtOUZmeGhEVS1HdHJwcXpVNGRIMzhvZ2t0cEE?oc=5" target="_blank">[AT 유통]호텔롯데·호텔신라·이랜드파크 - 아시아타임즈</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">아시아타임즈</span> | 2025-12-04 08:20
+                <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE9FQ3Z0STVfel9xVldSNWQzNkFWbWYwb09QaXdNY2w3YjJud1NaWDRVU002b1ZsR0dhVEdFR2pabXcwdlhtOUZmeGhEVS1HdHJwcXpVNGRIMzhvZ2t0cEE?oc=5" target="_blank" class="source-link">아시아타임즈</a> | 2025-12-04 08:20
             </div>
         </div>
 
@@ -139,9 +171,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE9FQ3Z0STVfel9xVldSNWQzNkFWbWYwb09QaXdNY2w3YjJud1NaWDRVU002b1ZsR0dhVEdFR2pabXcwdlhtOUZmeGhEVS1HdHJwcXpVNGRIMzhvZ2t0cEE?oc=5" target="_blank">[AT 유통]호텔롯데·호텔신라·이랜드파크</a>&nbsp;&nbsp;<font color="#6f6f6f">아시아타임즈</font>
-                
             </div>
         </div>
     </article>

@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>AIX랩 News</h1>
 <p class="subtitle">Latest news related to AIX랩</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE83Y0thNGs2b2pZZFpZeVdwTDV3RmJvZXdvTENqVVBCclcyTTRNSUI4b2Vnai16NjV4VTF3bzhSck1NWTVzZk5qZjJPWlhnOWlSVHJNeHhBQkJjakY5UjZ4WWh1VGo2dW16cHVib1Azbi1Wd0xwejNN?oc=5" target="_blank">에이아이엑스랩, 중국 VR 기업과 LOI 체결 - 인벤</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">인벤</span> | 2025-12-05 14:24
+                <a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE83Y0thNGs2b2pZZFpZeVdwTDV3RmJvZXdvTENqVVBCclcyTTRNSUI4b2Vnai16NjV4VTF3bzhSck1NWTVzZk5qZjJPWlhnOWlSVHJNeHhBQkJjakY5UjZ4WWh1VGo2dW16cHVib1Azbi1Wd0xwejNN?oc=5" target="_blank" class="source-link">인벤</a> | 2025-12-05 14:24
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE83Y0thNGs2b2pZZFpZeVdwTDV3RmJvZXdvTENqVVBCclcyTTRNSUI4b2Vnai16NjV4VTF3bzhSck1NWTVzZk5qZjJPWlhnOWlSVHJNeHhBQkJjakY5UjZ4WWh1VGo2dW16cHVib1Azbi1Wd0xwejNN?oc=5" target="_blank">에이아이엑스랩, 중국 VR 기업과 LOI 체결</a>&nbsp;&nbsp;<font color="#6f6f6f">인벤</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE9fNDI4bjNyNmNWYkFqWVZjTm1DeDdJc3pkdkJSbTJzV2dBOWtWYzZnVDQyS09ySDdaMzh3ZTEwX1JxY3ljcG1yU0duakxtM3ZsR2dyaDBhUjZUdU40ZUluSG9MTk9yVmtBLUFtdklZZk4?oc=5" target="_blank">국내 제작 흉가 VR, 시리즈 전체 중국 대형 VR 플랫폼 공급 - 인벤</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">인벤</span> | 2025-11-29 06:02
+                <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE9fNDI4bjNyNmNWYkFqWVZjTm1DeDdJc3pkdkJSbTJzV2dBOWtWYzZnVDQyS09ySDdaMzh3ZTEwX1JxY3ljcG1yU0duakxtM3ZsR2dyaDBhUjZUdU40ZUluSG9MTk9yVmtBLUFtdklZZk4?oc=5" target="_blank" class="source-link">인벤</a> | 2025-11-29 06:02
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE9fNDI4bjNyNmNWYkFqWVZjTm1DeDdJc3pkdkJSbTJzV2dBOWtWYzZnVDQyS09ySDdaMzh3ZTEwX1JxY3ljcG1yU0duakxtM3ZsR2dyaDBhUjZUdU40ZUluSG9MTk9yVmtBLUFtdklZZk4?oc=5" target="_blank">국내 제작 흉가 VR, 시리즈 전체 중국 대형 VR 플랫폼 공급</a>&nbsp;&nbsp;<font color="#6f6f6f">인벤</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFBvMjQ3R3h5bGVtVE1XNHZJTFlTaS1YWW5MaHBLdnk1T0o3Rmp1dWkyOXpVUEtmVGloeHp2c3hBLWIxTDBvQTFNb3dfVDdjUm5mUk94dldxa2NCQXNWYVAzVi1FSENPZlI1dW1CeUtySm4?oc=5" target="_blank">'골목길:귀흔', 익숙한 K-골목길이 선사하는 공포 체험 - 인벤</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">인벤</span> | 2025-10-31 03:05
+                <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFBvMjQ3R3h5bGVtVE1XNHZJTFlTaS1YWW5MaHBLdnk1T0o3Rmp1dWkyOXpVUEtmVGloeHp2c3hBLWIxTDBvQTFNb3dfVDdjUm5mUk94dldxa2NCQXNWYVAzVi1FSENPZlI1dW1CeUtySm4?oc=5" target="_blank" class="source-link">인벤</a> | 2025-10-31 03:05
             </div>
         </div>
 
@@ -97,20 +133,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFBvMjQ3R3h5bGVtVE1XNHZJTFlTaS1YWW5MaHBLdnk1T0o3Rmp1dWkyOXpVUEtmVGloeHp2c3hBLWIxTDBvQTFNb3dfVDdjUm5mUk94dldxa2NCQXNWYVAzVi1FSENPZlI1dW1CeUtySm4?oc=5" target="_blank">'골목길:귀흔', 익숙한 K-골목길이 선사하는 공포 체험</a>&nbsp;&nbsp;<font color="#6f6f6f">인벤</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE5CZEYza3FxbzdOZ2s0V1FEcFcteWV3Y0NEVVVhbHVoUFZfT3N4dGprcm81MUEtbmJiNm5JOHBTVWRjR19WdGR6WTAzRWFTNGlZckFpbGs5NFY5Z2dzbTBpOWlET2tDUm1mRS04ZzlFTFBOWkpxc2o2RA?oc=5" target="_blank">스마일게이트, 정통 K-공포 10월 29일 출시 - 스마일게이트 뉴스룸</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">스마일게이트 뉴스룸</span> | 2025-10-30 07:00
+                <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE5CZEYza3FxbzdOZ2s0V1FEcFcteWV3Y0NEVVVhbHVoUFZfT3N4dGprcm81MUEtbmJiNm5JOHBTVWRjR19WdGR6WTAzRWFTNGlZckFpbGs5NFY5Z2dzbTBpOWlET2tDUm1mRS04ZzlFTFBOWkpxc2o2RA?oc=5" target="_blank" class="source-link">스마일게이트 뉴스룸</a> | 2025-10-30 07:00
             </div>
         </div>
 
@@ -118,9 +152,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE5CZEYza3FxbzdOZ2s0V1FEcFcteWV3Y0NEVVVhbHVoUFZfT3N4dGprcm81MUEtbmJiNm5JOHBTVWRjR19WdGR6WTAzRWFTNGlZckFpbGs5NFY5Z2dzbTBpOWlET2tDUm1mRS04ZzlFTFBOWkpxc2o2RA?oc=5" target="_blank">스마일게이트, 정통 K-공포 10월 29일 출시</a>&nbsp;&nbsp;<font color="#6f6f6f">스마일게이트 뉴스룸</font>
-                
             </div>
         </div>
     </article>

@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>네오컨버전스 News</h1>
 <p class="subtitle">Latest news related to 네오컨버전스</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQWVVzb1VyYUwyUGpIWVRzMzctQXpYTjhjSWsyR080emw3aVdzZWs1bGhKaU9kRDNJb2p2d3ZfQ254QzlzMkNUdG9yQ0dWMXJXTGNTSDdzcURlc1dKYUU1SGhhZ2ZFZjhoZkRsZTNfX2liTFNZYjM5Rk0zTmhPM3hoNA?oc=5" target="_blank">청량리시장 주차장, AI 무인시스템 전면 도입 - 동대문신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">동대문신문</span> | 2025-11-11 08:51
+                <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQWVVzb1VyYUwyUGpIWVRzMzctQXpYTjhjSWsyR080emw3aVdzZWs1bGhKaU9kRDNJb2p2d3ZfQ254QzlzMkNUdG9yQ0dWMXJXTGNTSDdzcURlc1dKYUU1SGhhZ2ZFZjhoZkRsZTNfX2liTFNZYjM5Rk0zTmhPM3hoNA?oc=5" target="_blank" class="source-link">동대문신문</a> | 2025-11-11 08:51
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQWVVzb1VyYUwyUGpIWVRzMzctQXpYTjhjSWsyR080emw3aVdzZWs1bGhKaU9kRDNJb2p2d3ZfQ254QzlzMkNUdG9yQ0dWMXJXTGNTSDdzcURlc1dKYUU1SGhhZ2ZFZjhoZkRsZTNfX2liTFNZYjM5Rk0zTmhPM3hoNA?oc=5" target="_blank">청량리시장 주차장, AI 무인시스템 전면 도입</a>&nbsp;&nbsp;<font color="#6f6f6f">동대문신문</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE5XV1pnNjh3YjVIZ2pLQVlCTGlINE5MTFRlUG1DSmlZN3k1b0IwbDVrZXdWLXNvOFVoZkZsN2FXdHhYWWVnNG9XT0FXa3NDaGprSXU5bk93?oc=5" target="_blank">청량리시장 공영주차장 2026년부터 ‘AI 기반 스마트 주차장’으로 전면 전환 - 헤럴드경제</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">헤럴드경제</span> | 2025-11-05 08:00
+                <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE5XV1pnNjh3YjVIZ2pLQVlCTGlINE5MTFRlUG1DSmlZN3k1b0IwbDVrZXdWLXNvOFVoZkZsN2FXdHhYWWVnNG9XT0FXa3NDaGprSXU5bk93?oc=5" target="_blank" class="source-link">헤럴드경제</a> | 2025-11-05 08:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE5XV1pnNjh3YjVIZ2pLQVlCTGlINE5MTFRlUG1DSmlZN3k1b0IwbDVrZXdWLXNvOFVoZkZsN2FXdHhYWWVnNG9XT0FXa3NDaGprSXU5bk93?oc=5" target="_blank">청량리시장 공영주차장 2026년부터 ‘AI 기반 스마트 주차장’으로 전면 전환</a>&nbsp;&nbsp;<font color="#6f6f6f">헤럴드경제</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE9iNmI3TGprci1fd09YdmtwLVVtd3hIMDZ6cXpiQUw4emhTdDdsQXdkRlNjWWllQmY1QTdpdTRKSXhTVkZob29ScUdOaXpyOGJnMmFjeUNzUk5ySWxUaEtGRFFra3U?oc=5" target="_blank">[여주] 道 최초 AI CCTV 무인주차시스템 시범 운영 - 교차로저널</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">교차로저널</span> | 2025-08-08 07:00
+                <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE9iNmI3TGprci1fd09YdmtwLVVtd3hIMDZ6cXpiQUw4emhTdDdsQXdkRlNjWWllQmY1QTdpdTRKSXhTVkZob29ScUdOaXpyOGJnMmFjeUNzUk5ySWxUaEtGRFFra3U?oc=5" target="_blank" class="source-link">교차로저널</a> | 2025-08-08 07:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE9iNmI3TGprci1fd09YdmtwLVVtd3hIMDZ6cXpiQUw4emhTdDdsQXdkRlNjWWllQmY1QTdpdTRKSXhTVkZob29ScUdOaXpyOGJnMmFjeUNzUk5ySWxUaEtGRFFra3U?oc=5" target="_blank">[여주] 道 최초 AI CCTV 무인주차시스템 시범 운영</a>&nbsp;&nbsp;<font color="#6f6f6f">교차로저널</font>
-                
             </div>
         </div>
     </article>

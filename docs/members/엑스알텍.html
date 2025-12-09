@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>엑스알텍 News</h1>
 <p class="subtitle">Latest news related to 엑스알텍</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE16X1ZwUGdRSkdkRnJISEdLUS12ZTB1cnczQmFrS19kak1STGVwNlJMUjJuMnZQWjRBb0lFYU1GZDdZSklHZjZhdk1HZGlQUlVmS0dj?oc=5" target="_blank">엑스알텍, 중국 유명 엔터테인먼트 기업 대자재영시(D.FREE FILM COMPANY)와 전략적 업무제휴 - 네이트</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">네이트</span> | 2025-06-22 07:00
+                <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE16X1ZwUGdRSkdkRnJISEdLUS12ZTB1cnczQmFrS19kak1STGVwNlJMUjJuMnZQWjRBb0lFYU1GZDdZSklHZjZhdk1HZGlQUlVmS0dj?oc=5" target="_blank" class="source-link">네이트</a> | 2025-06-22 07:00
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE16X1ZwUGdRSkdkRnJISEdLUS12ZTB1cnczQmFrS19kak1STGVwNlJMUjJuMnZQWjRBb0lFYU1GZDdZSklHZjZhdk1HZGlQUlVmS0dj?oc=5" target="_blank">엑스알텍, 중국 유명 엔터테인먼트 기업 대자재영시(D.FREE FILM COMPANY)와 전략적 업무제휴</a>&nbsp;&nbsp;<font color="#6f6f6f">네이트</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTFBZNzZyM1ZqVkdjUEJoUXRKM29tUkJUQ0VGWnhsd0FvSWxGSm5zZXdwbmdmcVFkU3FBNUhOX29SMWprVXJkWDdNUnB3UmZCWEVyRnU4LWNES24zb2ZuazRLelNjTExNQ0lsWlg1Z1BBZ3Q0M2hO0gF4QVVfeXFMT3VVdFBTZnBpSkxydnBUSHZZZlBuZUVUZXY2UnNPb3NsVlcwdDNmdHJnUE0tWVRQMHI0VF9zZUp1OXkySFZBOGRzMm9NOGpyNGk4MDhfclhIYzNfNkV6aXFKYTFEOG1CMzQybXJQWkhwc05jd0I4c2oz?oc=5" target="_blank">㈜엑스알텍, 중국 유명 엔터테인먼트 기업 대자재영시(D.FREE FILM COMPANY)와 전략적 업무제휴 - 스타데일리뉴스</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">스타데일리뉴스</span> | 2025-06-22 07:00
+                <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTFBZNzZyM1ZqVkdjUEJoUXRKM29tUkJUQ0VGWnhsd0FvSWxGSm5zZXdwbmdmcVFkU3FBNUhOX29SMWprVXJkWDdNUnB3UmZCWEVyRnU4LWNES24zb2ZuazRLelNjTExNQ0lsWlg1Z1BBZ3Q0M2hO0gF4QVVfeXFMT3VVdFBTZnBpSkxydnBUSHZZZlBuZUVUZXY2UnNPb3NsVlcwdDNmdHJnUE0tWVRQMHI0VF9zZUp1OXkySFZBOGRzMm9NOGpyNGk4MDhfclhIYzNfNkV6aXFKYTFEOG1CMzQybXJQWkhwc05jd0I4c2oz?oc=5" target="_blank" class="source-link">스타데일리뉴스</a> | 2025-06-22 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTFBZNzZyM1ZqVkdjUEJoUXRKM29tUkJUQ0VGWnhsd0FvSWxGSm5zZXdwbmdmcVFkU3FBNUhOX29SMWprVXJkWDdNUnB3UmZCWEVyRnU4LWNES24zb2ZuazRLelNjTExNQ0lsWlg1Z1BBZ3Q0M2hO0gF4QVVfeXFMT3VVdFBTZnBpSkxydnBUSHZZZlBuZUVUZXY2UnNPb3NsVlcwdDNmdHJnUE0tWVRQMHI0VF9zZUp1OXkySFZBOGRzMm9NOGpyNGk4MDhfclhIYzNfNkV6aXFKYTFEOG1CMzQybXJQWkhwc05jd0I4c2oz?oc=5" target="_blank">㈜엑스알텍, 중국 유명 엔터테인먼트 기업 대자재영시(D.FREE FILM COMPANY)와 전략적 업무제휴</a>&nbsp;&nbsp;<font color="#6f6f6f">스타데일리뉴스</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE1leTA5QkdnbTRzZl85QnFxUGxwNWlxRFZ5TGgzWjBXdkFHN296N19Ed29qNDBhVmFkSmtpQUlHcVR4TEtuaU8zZ01vWTcyRTRjQkc4NnlVM19LVHJWNm00M3pHcU5vN2hYYmpyaVl4OV9pQWxu0gF4QVVfeXFMTjlmdV9LWWNMRXpJcnRBUTZrMWk0TjFWMmlfZ1ZLZ1lWLUxxRWVpTUZzNXI4RnRUelRkbkw2UHRXbGNNTjZHMERheFBURWdBbmRiYWM5QlBEckV0Rm51b1FxYkE5aElhVVJSTm1tVWRTTUlLNGR1UE5r?oc=5" target="_blank">엑스알텍 AI콘텐츠랩스, 한국애니메이션예술인협회와 로봇태권V의 아버지 김청기 감독과 AI콘텐츠 제작관련 업무협약 체결 - 스타데일리뉴스</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">스타데일리뉴스</span> | 2025-04-18 07:00
+                <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE1leTA5QkdnbTRzZl85QnFxUGxwNWlxRFZ5TGgzWjBXdkFHN296N19Ed29qNDBhVmFkSmtpQUlHcVR4TEtuaU8zZ01vWTcyRTRjQkc4NnlVM19LVHJWNm00M3pHcU5vN2hYYmpyaVl4OV9pQWxu0gF4QVVfeXFMTjlmdV9LWWNMRXpJcnRBUTZrMWk0TjFWMmlfZ1ZLZ1lWLUxxRWVpTUZzNXI4RnRUelRkbkw2UHRXbGNNTjZHMERheFBURWdBbmRiYWM5QlBEckV0Rm51b1FxYkE5aElhVVJSTm1tVWRTTUlLNGR1UE5r?oc=5" target="_blank" class="source-link">스타데일리뉴스</a> | 2025-04-18 07:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE1leTA5QkdnbTRzZl85QnFxUGxwNWlxRFZ5TGgzWjBXdkFHN296N19Ed29qNDBhVmFkSmtpQUlHcVR4TEtuaU8zZ01vWTcyRTRjQkc4NnlVM19LVHJWNm00M3pHcU5vN2hYYmpyaVl4OV9pQWxu0gF4QVVfeXFMTjlmdV9LWWNMRXpJcnRBUTZrMWk0TjFWMmlfZ1ZLZ1lWLUxxRWVpTUZzNXI4RnRUelRkbkw2UHRXbGNNTjZHMERheFBURWdBbmRiYWM5QlBEckV0Rm51b1FxYkE5aElhVVJSTm1tVWRTTUlLNGR1UE5r?oc=5" target="_blank">엑스알텍 AI콘텐츠랩스, 한국애니메이션예술인협회와 로봇태권V의 아버지 김청기 감독과 AI콘텐츠 제작관련 업무협약 체결</a>&nbsp;&nbsp;<font color="#6f6f6f">스타데일리뉴스</font>
-                
             </div>
         </div>
     </article>

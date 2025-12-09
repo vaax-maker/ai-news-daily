@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>비햅틱스 News</h1>
 <p class="subtitle">Latest news related to 비햅틱스</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiS0FVX3lxTE54eVlINzNCTHhQb0JheENVcHdMT2xsVzFydFdQUk1IenhUZ1huS1JEWVVIWXlFVEZjc1psQ1FUNXViMHVQVGZ3clk4Zw?oc=5" target="_blank">VR 햅틱 웨어러블 기술 선보이는 비햅틱스 - 뉴스1</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">뉴스1</span> | 2025-06-26 07:00
+                <a href="https://news.google.com/rss/articles/CBMiS0FVX3lxTE54eVlINzNCTHhQb0JheENVcHdMT2xsVzFydFdQUk1IenhUZ1huS1JEWVVIWXlFVEZjc1psQ1FUNXViMHVQVGZ3clk4Zw?oc=5" target="_blank" class="source-link">뉴스1</a> | 2025-06-26 07:00
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiS0FVX3lxTE54eVlINzNCTHhQb0JheENVcHdMT2xsVzFydFdQUk1IenhUZ1huS1JEWVVIWXlFVEZjc1psQ1FUNXViMHVQVGZ3clk4Zw?oc=5" target="_blank">VR 햅틱 웨어러블 기술 선보이는 비햅틱스</a>&nbsp;&nbsp;<font color="#6f6f6f">뉴스1</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE5Kbk1UOXpBMjlSeXJjVW95MUVVTklkLVJjb2MxdjR0TUw2d2JyVEMyWFhLY19IRWVHUFBRYVctNWhNTG9YSDl1ejBIS3BqLXBoMnhSUnZVUFpQSW5RbkI2eHBJdFR1MlZGWmhEZk1TcU53QlJ3aDRZTGw2MzlVNms?oc=5" target="_blank">비햅틱스, '택수트 프로·에어' 메이드 포 메타 인증 취득 - 글로벌이코노믹</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">글로벌이코노믹</span> | 2025-06-12 07:00
+                <a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE5Kbk1UOXpBMjlSeXJjVW95MUVVTklkLVJjb2MxdjR0TUw2d2JyVEMyWFhLY19IRWVHUFBRYVctNWhNTG9YSDl1ejBIS3BqLXBoMnhSUnZVUFpQSW5RbkI2eHBJdFR1MlZGWmhEZk1TcU53QlJ3aDRZTGw2MzlVNms?oc=5" target="_blank" class="source-link">글로벌이코노믹</a> | 2025-06-12 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE5Kbk1UOXpBMjlSeXJjVW95MUVVTklkLVJjb2MxdjR0TUw2d2JyVEMyWFhLY19IRWVHUFBRYVctNWhNTG9YSDl1ejBIS3BqLXBoMnhSUnZVUFpQSW5RbkI2eHBJdFR1MlZGWmhEZk1TcU53QlJ3aDRZTGw2MzlVNms?oc=5" target="_blank">비햅틱스, '택수트 프로·에어' 메이드 포 메타 인증 취득</a>&nbsp;&nbsp;<font color="#6f6f6f">글로벌이코노믹</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE9CSlM1YjdHdGVURGxyemNsU1dOVWxfU0J4djhNOGYtSTFEcjF3Wk1VV3VOaWY3RzVobmhseGxBWmJURk9wRTExbzJHSVN5NkY0UU1OQVZ2eVFMejZ2OXBueDdFcFNaUUxTR1E?oc=5" target="_blank">[인터뷰] XR 유저와 시장 연결하는 '회로' 될 것... 김정현 비햅틱스 매니저 - kmjournal.net</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">kmjournal.net</span> | 2025-05-20 07:00
+                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE9CSlM1YjdHdGVURGxyemNsU1dOVWxfU0J4djhNOGYtSTFEcjF3Wk1VV3VOaWY3RzVobmhseGxBWmJURk9wRTExbzJHSVN5NkY0UU1OQVZ2eVFMejZ2OXBueDdFcFNaUUxTR1E?oc=5" target="_blank" class="source-link">kmjournal.net</a> | 2025-05-20 07:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE9CSlM1YjdHdGVURGxyemNsU1dOVWxfU0J4djhNOGYtSTFEcjF3Wk1VV3VOaWY3RzVobmhseGxBWmJURk9wRTExbzJHSVN5NkY0UU1OQVZ2eVFMejZ2OXBueDdFcFNaUUxTR1E?oc=5" target="_blank">[인터뷰] XR 유저와 시장 연결하는 '회로' 될 것... 김정현 비햅틱스 매니저</a>&nbsp;&nbsp;<font color="#6f6f6f">kmjournal.net</font>
-                
             </div>
         </div>
     </article>

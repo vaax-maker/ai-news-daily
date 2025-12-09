@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>니에프스 News</h1>
 <p class="subtitle">Latest news related to 니에프스</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE90dTRuVHZpWGZBOTk5REFaRlUxLUFaQXYtUE82Z0EzRVU3X1VsdENtZjEyMUgxaGdCM05sOUpfelhSN1RhbTJxOE5iX1F1R1NNc3JlZ2RSSE5zUTg?oc=5" target="_blank">(주)니에프스, XR·메타버스 융합으로 차세대 미디어 생태계 열다 - 일간스포츠</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">일간스포츠</span> | 2025-11-27 09:08
+                <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE90dTRuVHZpWGZBOTk5REFaRlUxLUFaQXYtUE82Z0EzRVU3X1VsdENtZjEyMUgxaGdCM05sOUpfelhSN1RhbTJxOE5iX1F1R1NNc3JlZ2RSSE5zUTg?oc=5" target="_blank" class="source-link">일간스포츠</a> | 2025-11-27 09:08
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE90dTRuVHZpWGZBOTk5REFaRlUxLUFaQXYtUE82Z0EzRVU3X1VsdENtZjEyMUgxaGdCM05sOUpfelhSN1RhbTJxOE5iX1F1R1NNc3JlZ2RSSE5zUTg?oc=5" target="_blank">(주)니에프스, XR·메타버스 융합으로 차세대 미디어 생태계 열다</a>&nbsp;&nbsp;<font color="#6f6f6f">일간스포츠</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE5UcHc4UjNwb2VzZkd2SlpvSEZkMkJDd2ZVU1NoVkQ3MGdUNlhuQnZndENaX2J2SFQxam5QQUVucU1TeFgwRHhaMU94ZXJoUGM?oc=5" target="_blank">XR 버추얼 프로덕션으로 방송 제작의 미래를 여는 스타트업 ‘니에프스’ - v.daum.net</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">v.daum.net</span> | 2025-11-19 08:00
+                <a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE5UcHc4UjNwb2VzZkd2SlpvSEZkMkJDd2ZVU1NoVkQ3MGdUNlhuQnZndENaX2J2SFQxam5QQUVucU1TeFgwRHhaMU94ZXJoUGM?oc=5" target="_blank" class="source-link">v.daum.net</a> | 2025-11-19 08:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE5UcHc4UjNwb2VzZkd2SlpvSEZkMkJDd2ZVU1NoVkQ3MGdUNlhuQnZndENaX2J2SFQxam5QQUVucU1TeFgwRHhaMU94ZXJoUGM?oc=5" target="_blank">XR 버추얼 프로덕션으로 방송 제작의 미래를 여는 스타트업 ‘니에프스’</a>&nbsp;&nbsp;<font color="#6f6f6f">v.daum.net</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE93MXNUT2VnZU9RdlFtTTVKajBpRGlpQkw5RU5vR0lKcEl0X1VnYUVBTTdoTnI3c25UcTVzUjVIaDJhZ1BXdnlxM3lUMVNGV0tsZXgzMUxn?oc=5" target="_blank">전북대, XR·AI 실습 인프라 구축…디지털 인재 양성 가속 - 지디넷코리아</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">지디넷코리아</span> | 2025-04-10 07:00
+                <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE93MXNUT2VnZU9RdlFtTTVKajBpRGlpQkw5RU5vR0lKcEl0X1VnYUVBTTdoTnI3c25UcTVzUjVIaDJhZ1BXdnlxM3lUMVNGV0tsZXgzMUxn?oc=5" target="_blank" class="source-link">지디넷코리아</a> | 2025-04-10 07:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE93MXNUT2VnZU9RdlFtTTVKajBpRGlpQkw5RU5vR0lKcEl0X1VnYUVBTTdoTnI3c25UcTVzUjVIaDJhZ1BXdnlxM3lUMVNGV0tsZXgzMUxn?oc=5" target="_blank">전북대, XR·AI 실습 인프라 구축…디지털 인재 양성 가속</a>&nbsp;&nbsp;<font color="#6f6f6f">지디넷코리아</font>
-                
             </div>
         </div>
     </article>

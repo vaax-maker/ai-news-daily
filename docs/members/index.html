@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -41,1012 +81,2356 @@
 
 
 
-<div class="calendar-list">
-    <ul class="archive-list">
-        <li>
-            <a href="LG유플러스.html" class="archive-link">
-                <span class="archive-date">LG유플러스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="KBS.html" class="archive-link">
-                <span class="archive-date">KBS</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="글로벌 이코노믹.html" class="archive-link">
-                <span class="archive-date">글로벌 이코노믹</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="삼성전자.html" class="archive-link">
-                <span class="archive-date">삼성전자</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="스코넥엔터테인먼트.html" class="archive-link">
-                <span class="archive-date">스코넥엔터테인먼트</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="에스원.html" class="archive-link">
-                <span class="archive-date">에스원</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="한국열린사이버대학교.html" class="archive-link">
-                <span class="archive-date">한국열린사이버대학교</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="한국전자통신연구원.html" class="archive-link">
-                <span class="archive-date">한국전자통신연구원</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="대교.html" class="archive-link">
-                <span class="archive-date">대교</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="대신증권.html" class="archive-link">
-                <span class="archive-date">대신증권</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="대진대학교.html" class="archive-link">
-                <span class="archive-date">대진대학교</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="디오비스튜디오.html" class="archive-link">
-                <span class="archive-date">디오비스튜디오</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="라이크코퍼레이션.html" class="archive-link">
-                <span class="archive-date">라이크코퍼레이션</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="맘모식스.html" class="archive-link">
-                <span class="archive-date">맘모식스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="버넥트.html" class="archive-link">
-                <span class="archive-date">버넥트</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="볼드스텝.html" class="archive-link">
-                <span class="archive-date">볼드스텝</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="살린.html" class="archive-link">
-                <span class="archive-date">살린</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="세계미디어.html" class="archive-link">
-                <span class="archive-date">세계미디어</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="포스트미디어.html" class="archive-link">
-                <span class="archive-date">포스트미디어</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="한국공학대학교.html" class="archive-link">
-                <span class="archive-date">한국공학대학교</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="호텔롯데.html" class="archive-link">
-                <span class="archive-date">호텔롯데</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="AIX랩.html" class="archive-link">
-                <span class="archive-date">AIX랩</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="CJ제일제당.html" class="archive-link">
-                <span class="archive-date">CJ제일제당</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="HTC.html" class="archive-link">
-                <span class="archive-date">HTC</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="덱스터스튜디오.html" class="archive-link">
-                <span class="archive-date">덱스터스튜디오</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="도도스튜디오.html" class="archive-link">
-                <span class="archive-date">도도스튜디오</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="두리번.html" class="archive-link">
-                <span class="archive-date">두리번</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="디티.html" class="archive-link">
-                <span class="archive-date">디티</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="레디메이드.html" class="archive-link">
-                <span class="archive-date">레디메이드</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="로코.html" class="archive-link">
-                <span class="archive-date">로코</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="리타.html" class="archive-link">
-                <span class="archive-date">리타</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="메타버스쇼.html" class="archive-link">
-                <span class="archive-date">메타버스쇼</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="베스트텍.html" class="archive-link">
-                <span class="archive-date">베스트텍</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="벤타엑스.html" class="archive-link">
-                <span class="archive-date">벤타엑스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="서강대학교.html" class="archive-link">
-                <span class="archive-date">서강대학교</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="숭실대학교.html" class="archive-link">
-                <span class="archive-date">숭실대학교</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="스토익엔터테인먼트.html" class="archive-link">
-                <span class="archive-date">스토익엔터테인먼트</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="스튜디오메타케이.html" class="archive-link">
-                <span class="archive-date">스튜디오메타케이</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="시공테크.html" class="archive-link">
-                <span class="archive-date">시공테크</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="쓰리디타다.html" class="archive-link">
-                <span class="archive-date">쓰리디타다</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="아테크넷.html" class="archive-link">
-                <span class="archive-date">아테크넷</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="에쓰핀테크놀로지.html" class="archive-link">
-                <span class="archive-date">에쓰핀테크놀로지</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="에어에이알.html" class="archive-link">
-                <span class="archive-date">에어에이알</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="에이아이파크.html" class="archive-link">
-                <span class="archive-date">에이아이파크</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="원유니버스.html" class="archive-link">
-                <span class="archive-date">원유니버스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="이노베이션시스템.html" class="archive-link">
-                <span class="archive-date">이노베이션시스템</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="전략과 실행.html" class="archive-link">
-                <span class="archive-date">전략과 실행</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="트러스테이.html" class="archive-link">
-                <span class="archive-date">트러스테이</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="퓨처디자이너스 | 라이프스퀘어.html" class="archive-link">
-                <span class="archive-date">퓨처디자이너스 | 라이프스퀘어</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="프리다츠.html" class="archive-link">
-                <span class="archive-date">프리다츠</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="하남디지털캠프.html" class="archive-link">
-                <span class="archive-date">하남디지털캠프</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="한국과학기술원.html" class="archive-link">
-                <span class="archive-date">한국과학기술원</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="한국능률협회.html" class="archive-link">
-                <span class="archive-date">한국능률협회</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="한국메타버스산업협회.html" class="archive-link">
-                <span class="archive-date">한국메타버스산업협회</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="(사)한국메타버스산업협회.html" class="archive-link">
-                <span class="archive-date">(사)한국메타버스산업협회</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="(재)전남정보문화산업진흥원.html" class="archive-link">
-                <span class="archive-date">(재)전남정보문화산업진흥원</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="JTBC.html" class="archive-link">
-                <span class="archive-date">JTBC</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="KT이엔지코어.html" class="archive-link">
-                <span class="archive-date">KT이엔지코어</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="SM엔터테인먼트.html" class="archive-link">
-                <span class="archive-date">SM엔터테인먼트</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="갤럭시코퍼레이션.html" class="archive-link">
-                <span class="archive-date">갤럭시코퍼레이션</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="국회미래연구원.html" class="archive-link">
-                <span class="archive-date">국회미래연구원</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="네오컨버전스.html" class="archive-link">
-                <span class="archive-date">네오컨버전스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="니에프스.html" class="archive-link">
-                <span class="archive-date">니에프스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="다올자산운용.html" class="archive-link">
-                <span class="archive-date">다올자산운용</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="데이터마케팅코리아.html" class="archive-link">
-                <span class="archive-date">데이터마케팅코리아</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="드림브이알.html" class="archive-link">
-                <span class="archive-date">드림브이알</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="딥다이버스.html" class="archive-link">
-                <span class="archive-date">딥다이버스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="딥인스펙션.html" class="archive-link">
-                <span class="archive-date">딥인스펙션</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="루디벨.html" class="archive-link">
-                <span class="archive-date">루디벨</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="리앤팍스.html" class="archive-link">
-                <span class="archive-date">리앤팍스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="메타로켓.html" class="archive-link">
-                <span class="archive-date">메타로켓</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="메타뷰.html" class="archive-link">
-                <span class="archive-date">메타뷰</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="메타키움.html" class="archive-link">
-                <span class="archive-date">메타키움</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="메타팩토리코퍼레이션.html" class="archive-link">
-                <span class="archive-date">메타팩토리코퍼레이션</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="미라클.html" class="archive-link">
-                <span class="archive-date">미라클</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="미래시티 글로벌.html" class="archive-link">
-                <span class="archive-date">미래시티 글로벌</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="미스트플레이.html" class="archive-link">
-                <span class="archive-date">미스트플레이</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="밀당.html" class="archive-link">
-                <span class="archive-date">밀당</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="벤처스퀘어.html" class="archive-link">
-                <span class="archive-date">벤처스퀘어</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="브이런치.html" class="archive-link">
-                <span class="archive-date">브이런치</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="브이리스브이알.html" class="archive-link">
-                <span class="archive-date">브이리스브이알</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="브이브이알.html" class="archive-link">
-                <span class="archive-date">브이브이알</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="브이알크루.html" class="archive-link">
-                <span class="archive-date">브이알크루</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="블라우비트.html" class="archive-link">
-                <span class="archive-date">블라우비트</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="비브스튜디오스.html" class="archive-link">
-                <span class="archive-date">비브스튜디오스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="비빔블.html" class="archive-link">
-                <span class="archive-date">비빔블</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="비주얼라이트.html" class="archive-link">
-                <span class="archive-date">비주얼라이트</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="비햅틱스.html" class="archive-link">
-                <span class="archive-date">비햅틱스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="빅토리아프로덕션.html" class="archive-link">
-                <span class="archive-date">빅토리아프로덕션</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="삼우이머션.html" class="archive-link">
-                <span class="archive-date">삼우이머션</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="새만금 메타버스체험관.html" class="archive-link">
-                <span class="archive-date">새만금 메타버스체험관</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="세종일렉트릭.html" class="archive-link">
-                <span class="archive-date">세종일렉트릭</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="슈퍼브이알.html" class="archive-link">
-                <span class="archive-date">슈퍼브이알</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="스카이터틀.html" class="archive-link">
-                <span class="archive-date">스카이터틀</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="스페이스에이디.html" class="archive-link">
-                <span class="archive-date">스페이스에이디</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="시너스텍.html" class="archive-link">
-                <span class="archive-date">시너스텍</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="시니스트.html" class="archive-link">
-                <span class="archive-date">시니스트</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="아이피버스.html" class="archive-link">
-                <span class="archive-date">아이피버스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="알체라.html" class="archive-link">
-                <span class="archive-date">알체라</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="애니펜.html" class="archive-link">
-                <span class="archive-date">애니펜</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="에스와이코마드.html" class="archive-link">
-                <span class="archive-date">에스와이코마드</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="에이아이콘.html" class="archive-link">
-                <span class="archive-date">에이아이콘</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="에이치엔아이엑스.html" class="archive-link">
-                <span class="archive-date">에이치엔아이엑스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="에이치오 엔터테인먼트.html" class="archive-link">
-                <span class="archive-date">에이치오 엔터테인먼트</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="엑스알텍.html" class="archive-link">
-                <span class="archive-date">엑스알텍</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="오버더핸드.html" class="archive-link">
-                <span class="archive-date">오버더핸드</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="와이엠엑스.html" class="archive-link">
-                <span class="archive-date">와이엠엑스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="위치스.html" class="archive-link">
-                <span class="archive-date">위치스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="유니브이알.html" class="archive-link">
-                <span class="archive-date">유니브이알</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="유디포엠.html" class="archive-link">
-                <span class="archive-date">유디포엠</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="이노시뮬레이션.html" class="archive-link">
-                <span class="archive-date">이노시뮬레이션</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="이머시브캐스트.html" class="archive-link">
-                <span class="archive-date">이머시브캐스트</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="이모션웨이브.html" class="archive-link">
-                <span class="archive-date">이모션웨이브</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="이솔정보통신.html" class="archive-link">
-                <span class="archive-date">이솔정보통신</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="제이앤컴퍼니.html" class="archive-link">
-                <span class="archive-date">제이앤컴퍼니</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="제이원스페이스.html" class="archive-link">
-                <span class="archive-date">제이원스페이스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="지캠.html" class="archive-link">
-                <span class="archive-date">지캠</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="직스테크놀로지.html" class="archive-link">
-                <span class="archive-date">직스테크놀로지</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="칸.html" class="archive-link">
-                <span class="archive-date">칸</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="케이브이알 인터랙티브.html" class="archive-link">
-                <span class="archive-date">케이브이알 인터랙티브</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="케타버스.html" class="archive-link">
-                <span class="archive-date">케타버스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="콘텐츠코리아.html" class="archive-link">
-                <span class="archive-date">콘텐츠코리아</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="크리에이터버스.html" class="archive-link">
-                <span class="archive-date">크리에이터버스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="특허법인 위더피플.html" class="archive-link">
-                <span class="archive-date">특허법인 위더피플</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="페어엑스.html" class="archive-link">
-                <span class="archive-date">페어엑스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="포니이엔티.html" class="archive-link">
-                <span class="archive-date">포니이엔티</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="플레이큐리오.html" class="archive-link">
-                <span class="archive-date">플레이큐리오</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="플레이파크.html" class="archive-link">
-                <span class="archive-date">플레이파크</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="피앤씨솔루션.html" class="archive-link">
-                <span class="archive-date">피앤씨솔루션</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="하나금융TI.html" class="archive-link">
-                <span class="archive-date">하나금융TI</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="한국교육학술정보원.html" class="archive-link">
-                <span class="archive-date">한국교육학술정보원</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="한국전자정보통신산업진흥회.html" class="archive-link">
-                <span class="archive-date">한국전자정보통신산업진흥회</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="한국항공우주산업.html" class="archive-link">
-                <span class="archive-date">한국항공우주산업</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="홍익과학기술.html" class="archive-link">
-                <span class="archive-date">홍익과학기술</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="가우스랩.html" class="archive-link">
-                <span class="archive-date">가우스랩</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="다이브엑스알.html" class="archive-link">
-                <span class="archive-date">다이브엑스알</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="스토리타코.html" class="archive-link">
-                <span class="archive-date">스토리타코</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="앰버린.html" class="archive-link">
-                <span class="archive-date">앰버린</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="클라이어스.html" class="archive-link">
-                <span class="archive-date">클라이어스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="스튜디오쇼.html" class="archive-link">
-                <span class="archive-date">스튜디오쇼</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="어드밴스드RF.html" class="archive-link">
-                <span class="archive-date">어드밴스드RF</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="에스아이오티인포텍.html" class="archive-link">
-                <span class="archive-date">에스아이오티인포텍</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="엠라인스튜디오.html" class="archive-link">
-                <span class="archive-date">엠라인스튜디오</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="유니티테크놀로지스코리아(유).html" class="archive-link">
-                <span class="archive-date">유니티테크놀로지스코리아(유)</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="콘크리에이트.html" class="archive-link">
-                <span class="archive-date">콘크리에이트</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="콘텐츠클라우드.html" class="archive-link">
-                <span class="archive-date">콘텐츠클라우드</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="탕카.html" class="archive-link">
-                <span class="archive-date">탕카</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="패러블엔터테인먼트.html" class="archive-link">
-                <span class="archive-date">패러블엔터테인먼트</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="헉미디어.html" class="archive-link">
-                <span class="archive-date">헉미디어</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="휴멜로.html" class="archive-link">
-                <span class="archive-date">휴멜로</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="MBC.html" class="archive-link">
-                <span class="archive-date">MBC</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="ST마이크로일렉트로닉스.html" class="archive-link">
-                <span class="archive-date">ST마이크로일렉트로닉스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="데이터킹.html" class="archive-link">
-                <span class="archive-date">데이터킹</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="믹스콘엔터테인먼트.html" class="archive-link">
-                <span class="archive-date">믹스콘엔터테인먼트</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="뷰덱스.html" class="archive-link">
-                <span class="archive-date">뷰덱스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="스튜디오 엠버스703 (MBUS703).html" class="archive-link">
-                <span class="archive-date">스튜디오 엠버스703 (MBUS703)</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="스튜디오리얼라이브 _ STUDIOREALIVE.html" class="archive-link">
-                <span class="archive-date">스튜디오리얼라이브 / STUDIOREALIVE</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="스페이스엘비스.html" class="archive-link">
-                <span class="archive-date">스페이스엘비스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="엔피니티세븐.html" class="archive-link">
-                <span class="archive-date">엔피니티세븐</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="우신정보시스템.html" class="archive-link">
-                <span class="archive-date">우신정보시스템</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="이노 법률사무소.html" class="archive-link">
-                <span class="archive-date">이노 법률사무소</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="이퀄소울.html" class="archive-link">
-                <span class="archive-date">이퀄소울</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="젠스템.html" class="archive-link">
-                <span class="archive-date">젠스템</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="친구친구티비.html" class="archive-link">
-                <span class="archive-date">친구친구티비</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="코드리치.html" class="archive-link">
-                <span class="archive-date">코드리치</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="콕스스페이스.html" class="archive-link">
-                <span class="archive-date">콕스스페이스</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-        <li>
-            <a href="펄스나인.html" class="archive-link">
-                <span class="archive-date">펄스나인</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>
-    </ul>
-</div>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>회사명</th>
+            <th>최근기사 생성날짜(요일)-시간</th>
+            <th>누적 기사수</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>
+                <a href="LG유플러스.html" class="text-decoration-none text-dark fw-bold">
+                    LG유플러스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-09(화) 07:30
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                8
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="KBS.html" class="text-decoration-none text-dark fw-bold">
+                    KBS
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-09(화) 07:36
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                7
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="글로벌 이코노믹.html" class="text-decoration-none text-dark fw-bold">
+                    글로벌 이코노믹
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-09(화) 07:41
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                6
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="삼성전자.html" class="text-decoration-none text-dark fw-bold">
+                    삼성전자
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-09(화) 07:35
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                6
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="스코넥엔터테인먼트.html" class="text-decoration-none text-dark fw-bold">
+                    스코넥엔터테인먼트
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 15:50
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                6
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="에스원.html" class="text-decoration-none text-dark fw-bold">
+                    에스원
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-06(토) 08:38
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                6
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="한국열린사이버대학교.html" class="text-decoration-none text-dark fw-bold">
+                    한국열린사이버대학교
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 23:47
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                6
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="한국전자통신연구원.html" class="text-decoration-none text-dark fw-bold">
+                    한국전자통신연구원
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 22:58
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                6
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="대교.html" class="text-decoration-none text-dark fw-bold">
+                    대교
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-09(화) 05:36
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="대신증권.html" class="text-decoration-none text-dark fw-bold">
+                    대신증권
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 23:31
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="대진대학교.html" class="text-decoration-none text-dark fw-bold">
+                    대진대학교
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 13:15
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="디오비스튜디오.html" class="text-decoration-none text-dark fw-bold">
+                    디오비스튜디오
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 03:16
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="라이크코퍼레이션.html" class="text-decoration-none text-dark fw-bold">
+                    라이크코퍼레이션
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-10-14(월) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="맘모식스.html" class="text-decoration-none text-dark fw-bold">
+                    맘모식스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-05-17(토) 01:03
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="버넥트.html" class="text-decoration-none text-dark fw-bold">
+                    버넥트
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-07(일) 15:42
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="볼드스텝.html" class="text-decoration-none text-dark fw-bold">
+                    볼드스텝
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 15:34
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="살린.html" class="text-decoration-none text-dark fw-bold">
+                    살린
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-09(화) 07:02
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="세계미디어.html" class="text-decoration-none text-dark fw-bold">
+                    세계미디어
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-06(토) 09:46
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="포스트미디어.html" class="text-decoration-none text-dark fw-bold">
+                    포스트미디어
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-06(토) 11:39
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="한국공학대학교.html" class="text-decoration-none text-dark fw-bold">
+                    한국공학대학교
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 22:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="호텔롯데.html" class="text-decoration-none text-dark fw-bold">
+                    호텔롯데
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 14:01
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                5
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="AIX랩.html" class="text-decoration-none text-dark fw-bold">
+                    AIX랩
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-05(금) 23:24
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="CJ제일제당.html" class="text-decoration-none text-dark fw-bold">
+                    CJ제일제당
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 23:37
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="HTC.html" class="text-decoration-none text-dark fw-bold">
+                    HTC
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-20(목) 08:55
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="덱스터스튜디오.html" class="text-decoration-none text-dark fw-bold">
+                    덱스터스튜디오
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-20(목) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="도도스튜디오.html" class="text-decoration-none text-dark fw-bold">
+                    도도스튜디오
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-09-17(수) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="두리번.html" class="text-decoration-none text-dark fw-bold">
+                    두리번
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-05(수) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="디티.html" class="text-decoration-none text-dark fw-bold">
+                    디티
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 22:14
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="레디메이드.html" class="text-decoration-none text-dark fw-bold">
+                    레디메이드
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-01(월) 00:01
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="로코.html" class="text-decoration-none text-dark fw-bold">
+                    로코
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-25(화) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="리타.html" class="text-decoration-none text-dark fw-bold">
+                    리타
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-02-05(수) 20:38
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="메타버스쇼.html" class="text-decoration-none text-dark fw-bold">
+                    메타버스쇼
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-11-01(금) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="베스트텍.html" class="text-decoration-none text-dark fw-bold">
+                    베스트텍
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-06(토) 11:59
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="벤타엑스.html" class="text-decoration-none text-dark fw-bold">
+                    벤타엑스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-03-15(금) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="서강대학교.html" class="text-decoration-none text-dark fw-bold">
+                    서강대학교
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 19:03
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="숭실대학교.html" class="text-decoration-none text-dark fw-bold">
+                    숭실대학교
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-05(금) 15:09
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="스토익엔터테인먼트.html" class="text-decoration-none text-dark fw-bold">
+                    스토익엔터테인먼트
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-25(화) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="스튜디오메타케이.html" class="text-decoration-none text-dark fw-bold">
+                    스튜디오메타케이
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-28(금) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="시공테크.html" class="text-decoration-none text-dark fw-bold">
+                    시공테크
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-03(수) 13:03
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="쓰리디타다.html" class="text-decoration-none text-dark fw-bold">
+                    쓰리디타다
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-04-20(토) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="아테크넷.html" class="text-decoration-none text-dark fw-bold">
+                    아테크넷
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-07-05(토) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="에쓰핀테크놀로지.html" class="text-decoration-none text-dark fw-bold">
+                    에쓰핀테크놀로지
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-07-18(금) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="에어에이알.html" class="text-decoration-none text-dark fw-bold">
+                    에어에이알
+                </a>
+            </td>
+            <td style="color: #666;">
+                2023-10-23(월) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="에이아이파크.html" class="text-decoration-none text-dark fw-bold">
+                    에이아이파크
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-26(수) 18:06
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="원유니버스.html" class="text-decoration-none text-dark fw-bold">
+                    원유니버스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-06(토) 19:15
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="이노베이션시스템.html" class="text-decoration-none text-dark fw-bold">
+                    이노베이션시스템
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-04-01(화) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="전략과 실행.html" class="text-decoration-none text-dark fw-bold">
+                    전략과 실행
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-09(화) 00:30
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="트러스테이.html" class="text-decoration-none text-dark fw-bold">
+                    트러스테이
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-06(토) 00:10
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="프리다츠.html" class="text-decoration-none text-dark fw-bold">
+                    프리다츠
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-10-21(화) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="하남디지털캠프.html" class="text-decoration-none text-dark fw-bold">
+                    하남디지털캠프
+                </a>
+            </td>
+            <td style="color: #666;">
+                2021-08-09(월) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="한국과학기술원.html" class="text-decoration-none text-dark fw-bold">
+                    한국과학기술원
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 15:51
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="한국능률협회.html" class="text-decoration-none text-dark fw-bold">
+                    한국능률협회
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 22:25
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="한국메타버스산업협회.html" class="text-decoration-none text-dark fw-bold">
+                    한국메타버스산업협회
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 15:10
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                4
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="(사)한국메타버스산업협회.html" class="text-decoration-none text-dark fw-bold">
+                    (사)한국메타버스산업협회
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-28(금) 17:46
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="(재)전남정보문화산업진흥원.html" class="text-decoration-none text-dark fw-bold">
+                    (재)전남정보문화산업진흥원
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 14:41
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="KT이엔지코어.html" class="text-decoration-none text-dark fw-bold">
+                    KT이엔지코어
+                </a>
+            </td>
+            <td style="color: #666;">
+                2021-01-12(화) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="SM엔터테인먼트.html" class="text-decoration-none text-dark fw-bold">
+                    SM엔터테인먼트
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-07-18(금) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="갤럭시코퍼레이션.html" class="text-decoration-none text-dark fw-bold">
+                    갤럭시코퍼레이션
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-10-20(월) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="국회미래연구원.html" class="text-decoration-none text-dark fw-bold">
+                    국회미래연구원
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 08:10
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="네오컨버전스.html" class="text-decoration-none text-dark fw-bold">
+                    네오컨버전스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-11(화) 17:51
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="니에프스.html" class="text-decoration-none text-dark fw-bold">
+                    니에프스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-27(목) 18:08
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="다올자산운용.html" class="text-decoration-none text-dark fw-bold">
+                    다올자산운용
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-05(수) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="데이터마케팅코리아.html" class="text-decoration-none text-dark fw-bold">
+                    데이터마케팅코리아
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-01(월) 15:32
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="드림브이알.html" class="text-decoration-none text-dark fw-bold">
+                    드림브이알
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-01-08(수) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="딥다이버스.html" class="text-decoration-none text-dark fw-bold">
+                    딥다이버스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-10-04(토) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="딥인스펙션.html" class="text-decoration-none text-dark fw-bold">
+                    딥인스펙션
+                </a>
+            </td>
+            <td style="color: #666;">
+                2023-09-19(화) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="루디벨.html" class="text-decoration-none text-dark fw-bold">
+                    루디벨
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-02-07(금) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="리앤팍스.html" class="text-decoration-none text-dark fw-bold">
+                    리앤팍스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-28(금) 17:04
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="메타로켓.html" class="text-decoration-none text-dark fw-bold">
+                    메타로켓
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-09-07(일) 11:12
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="메타뷰.html" class="text-decoration-none text-dark fw-bold">
+                    메타뷰
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-07-03(목) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="메타키움.html" class="text-decoration-none text-dark fw-bold">
+                    메타키움
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-08-12(월) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="메타팩토리코퍼레이션.html" class="text-decoration-none text-dark fw-bold">
+                    메타팩토리코퍼레이션
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-08-20(수) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="미라클.html" class="text-decoration-none text-dark fw-bold">
+                    미라클
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-07(일) 23:15
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="미래시티 글로벌.html" class="text-decoration-none text-dark fw-bold">
+                    미래시티 글로벌
+                </a>
+            </td>
+            <td style="color: #666;">
+                2023-11-22(수) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="미스트플레이.html" class="text-decoration-none text-dark fw-bold">
+                    미스트플레이
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-07(일) 14:34
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="밀당.html" class="text-decoration-none text-dark fw-bold">
+                    밀당
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-06(토) 07:30
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="벤처스퀘어.html" class="text-decoration-none text-dark fw-bold">
+                    벤처스퀘어
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 17:27
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="브이런치.html" class="text-decoration-none text-dark fw-bold">
+                    브이런치
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-18(화) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="브이리스브이알.html" class="text-decoration-none text-dark fw-bold">
+                    브이리스브이알
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-10-28(화) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="브이브이알.html" class="text-decoration-none text-dark fw-bold">
+                    브이브이알
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-06-06(목) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="브이알크루.html" class="text-decoration-none text-dark fw-bold">
+                    브이알크루
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-12-04(수) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="블라우비트.html" class="text-decoration-none text-dark fw-bold">
+                    블라우비트
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-10-04(토) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="비브스튜디오스.html" class="text-decoration-none text-dark fw-bold">
+                    비브스튜디오스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-03(수) 15:18
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="비빔블.html" class="text-decoration-none text-dark fw-bold">
+                    비빔블
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-04(목) 11:02
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="비주얼라이트.html" class="text-decoration-none text-dark fw-bold">
+                    비주얼라이트
+                </a>
+            </td>
+            <td style="color: #666;">
+                2020-03-18(수) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="비햅틱스.html" class="text-decoration-none text-dark fw-bold">
+                    비햅틱스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-06-26(목) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="빅토리아프로덕션.html" class="text-decoration-none text-dark fw-bold">
+                    빅토리아프로덕션
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-28(금) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="삼우이머션.html" class="text-decoration-none text-dark fw-bold">
+                    삼우이머션
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-03(수) 11:22
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="새만금 메타버스체험관.html" class="text-decoration-none text-dark fw-bold">
+                    새만금 메타버스체험관
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-06(토) 23:16
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="세종일렉트릭.html" class="text-decoration-none text-dark fw-bold">
+                    세종일렉트릭
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-09-12(금) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="슈퍼브이알.html" class="text-decoration-none text-dark fw-bold">
+                    슈퍼브이알
+                </a>
+            </td>
+            <td style="color: #666;">
+                2021-05-25(화) 11:55
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="스카이터틀.html" class="text-decoration-none text-dark fw-bold">
+                    스카이터틀
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-08-19(화) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="스페이스에이디.html" class="text-decoration-none text-dark fw-bold">
+                    스페이스에이디
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-10-20(일) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="시너스텍.html" class="text-decoration-none text-dark fw-bold">
+                    시너스텍
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-07-02(수) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="시니스트.html" class="text-decoration-none text-dark fw-bold">
+                    시니스트
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-10-13(월) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="아이피버스.html" class="text-decoration-none text-dark fw-bold">
+                    아이피버스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2022-09-05(월) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="알체라.html" class="text-decoration-none text-dark fw-bold">
+                    알체라
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-10-15(수) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="애니펜.html" class="text-decoration-none text-dark fw-bold">
+                    애니펜
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-02(일) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="에스와이코마드.html" class="text-decoration-none text-dark fw-bold">
+                    에스와이코마드
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-11-20(수) 15:18
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="에이아이콘.html" class="text-decoration-none text-dark fw-bold">
+                    에이아이콘
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-10-21(화) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="에이치엔아이엑스.html" class="text-decoration-none text-dark fw-bold">
+                    에이치엔아이엑스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-09-22(월) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="에이치오 엔터테인먼트.html" class="text-decoration-none text-dark fw-bold">
+                    에이치오 엔터테인먼트
+                </a>
+            </td>
+            <td style="color: #666;">
+                2022-12-06(화) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="엑스알텍.html" class="text-decoration-none text-dark fw-bold">
+                    엑스알텍
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-06-22(일) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="오버더핸드.html" class="text-decoration-none text-dark fw-bold">
+                    오버더핸드
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-10-22(화) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="와이엠엑스.html" class="text-decoration-none text-dark fw-bold">
+                    와이엠엑스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-11-04(월) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="위치스.html" class="text-decoration-none text-dark fw-bold">
+                    위치스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-05(금) 18:36
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="유니브이알.html" class="text-decoration-none text-dark fw-bold">
+                    유니브이알
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-04-24(목) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="유디포엠.html" class="text-decoration-none text-dark fw-bold">
+                    유디포엠
+                </a>
+            </td>
+            <td style="color: #666;">
+                2023-12-01(금) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="이노시뮬레이션.html" class="text-decoration-none text-dark fw-bold">
+                    이노시뮬레이션
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-03(수) 15:08
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="이머시브캐스트.html" class="text-decoration-none text-dark fw-bold">
+                    이머시브캐스트
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-10-23(목) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="이모션웨이브.html" class="text-decoration-none text-dark fw-bold">
+                    이모션웨이브
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-28(금) 17:46
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="이솔정보통신.html" class="text-decoration-none text-dark fw-bold">
+                    이솔정보통신
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-08-06(수) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="제이앤컴퍼니.html" class="text-decoration-none text-dark fw-bold">
+                    제이앤컴퍼니
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-07(금) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="제이원스페이스.html" class="text-decoration-none text-dark fw-bold">
+                    제이원스페이스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-08-13(화) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="지캠.html" class="text-decoration-none text-dark fw-bold">
+                    지캠
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-04-21(월) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="직스테크놀로지.html" class="text-decoration-none text-dark fw-bold">
+                    직스테크놀로지
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-10-30(목) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="칸.html" class="text-decoration-none text-dark fw-bold">
+                    칸
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 18:37
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="케이브이알 인터랙티브.html" class="text-decoration-none text-dark fw-bold">
+                    케이브이알 인터랙티브
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-10-21(월) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="케타버스.html" class="text-decoration-none text-dark fw-bold">
+                    케타버스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-04-09(수) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="콘텐츠코리아.html" class="text-decoration-none text-dark fw-bold">
+                    콘텐츠코리아
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 19:51
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="크리에이터버스.html" class="text-decoration-none text-dark fw-bold">
+                    크리에이터버스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-08-22(금) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="특허법인 위더피플.html" class="text-decoration-none text-dark fw-bold">
+                    특허법인 위더피플
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-01-23(목) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="페어엑스.html" class="text-decoration-none text-dark fw-bold">
+                    페어엑스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-11(화) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="포니이엔티.html" class="text-decoration-none text-dark fw-bold">
+                    포니이엔티
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-04-05(금) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="플레이큐리오.html" class="text-decoration-none text-dark fw-bold">
+                    플레이큐리오
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-04(목) 11:26
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="플레이파크.html" class="text-decoration-none text-dark fw-bold">
+                    플레이파크
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-10-31(금) 23:27
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="피앤씨솔루션.html" class="text-decoration-none text-dark fw-bold">
+                    피앤씨솔루션
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-02(화) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="하나금융TI.html" class="text-decoration-none text-dark fw-bold">
+                    하나금융TI
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-27(목) 18:03
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="한국교육학술정보원.html" class="text-decoration-none text-dark fw-bold">
+                    한국교육학술정보원
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 17:44
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="한국전자정보통신산업진흥회.html" class="text-decoration-none text-dark fw-bold">
+                    한국전자정보통신산업진흥회
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-11-13(목) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="한국항공우주산업.html" class="text-decoration-none text-dark fw-bold">
+                    한국항공우주산업
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-12-08(월) 15:42
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="홍익과학기술.html" class="text-decoration-none text-dark fw-bold">
+                    홍익과학기술
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-03-15(금) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                3
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="가우스랩.html" class="text-decoration-none text-dark fw-bold">
+                    가우스랩
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-08-08(금) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                2
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="다이브엑스알.html" class="text-decoration-none text-dark fw-bold">
+                    다이브엑스알
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-12-03(화) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                2
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="스토리타코.html" class="text-decoration-none text-dark fw-bold">
+                    스토리타코
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-10-21(화) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                2
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="앰버린.html" class="text-decoration-none text-dark fw-bold">
+                    앰버린
+                </a>
+            </td>
+            <td style="color: #666;">
+                2022-05-12(목) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                2
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="클라이어스.html" class="text-decoration-none text-dark fw-bold">
+                    클라이어스
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-08-08(금) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                2
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="스튜디오쇼.html" class="text-decoration-none text-dark fw-bold">
+                    스튜디오쇼
+                </a>
+            </td>
+            <td style="color: #666;">
+                2019-10-08(화) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                1
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="어드밴스드RF.html" class="text-decoration-none text-dark fw-bold">
+                    어드밴스드RF
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-07-13(토) 22:28
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                1
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="에스아이오티인포텍.html" class="text-decoration-none text-dark fw-bold">
+                    에스아이오티인포텍
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-06-08(일) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                1
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="엠라인스튜디오.html" class="text-decoration-none text-dark fw-bold">
+                    엠라인스튜디오
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-08-01(금) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                1
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="유니티테크놀로지스코리아(유).html" class="text-decoration-none text-dark fw-bold">
+                    유니티테크놀로지스코리아(유)
+                </a>
+            </td>
+            <td style="color: #666;">
+                2025-06-11(수) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                1
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="콘크리에이트.html" class="text-decoration-none text-dark fw-bold">
+                    콘크리에이트
+                </a>
+            </td>
+            <td style="color: #666;">
+                2017-05-23(화) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                1
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="콘텐츠클라우드.html" class="text-decoration-none text-dark fw-bold">
+                    콘텐츠클라우드
+                </a>
+            </td>
+            <td style="color: #666;">
+                2023-05-31(수) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                1
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="탕카.html" class="text-decoration-none text-dark fw-bold">
+                    탕카
+                </a>
+            </td>
+            <td style="color: #666;">
+                2005-11-25(금) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                1
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="패러블엔터테인먼트.html" class="text-decoration-none text-dark fw-bold">
+                    패러블엔터테인먼트
+                </a>
+            </td>
+            <td style="color: #666;">
+                2023-11-16(목) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                1
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="헉미디어.html" class="text-decoration-none text-dark fw-bold">
+                    헉미디어
+                </a>
+            </td>
+            <td style="color: #666;">
+                2024-07-16(화) 16:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                1
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="휴멜로.html" class="text-decoration-none text-dark fw-bold">
+                    휴멜로
+                </a>
+            </td>
+            <td style="color: #666;">
+                2021-12-09(목) 17:00
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                1
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="JTBC.html" class="text-decoration-none text-dark fw-bold">
+                    JTBC
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="MBC.html" class="text-decoration-none text-dark fw-bold">
+                    MBC
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="ST마이크로일렉트로닉스.html" class="text-decoration-none text-dark fw-bold">
+                    ST마이크로일렉트로닉스
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="데이터킹.html" class="text-decoration-none text-dark fw-bold">
+                    데이터킹
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="믹스콘엔터테인먼트.html" class="text-decoration-none text-dark fw-bold">
+                    믹스콘엔터테인먼트
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="뷰덱스.html" class="text-decoration-none text-dark fw-bold">
+                    뷰덱스
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="스튜디오 엠버스703 (MBUS703).html" class="text-decoration-none text-dark fw-bold">
+                    스튜디오 엠버스703 (MBUS703)
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="스튜디오리얼라이브 _ STUDIOREALIVE.html" class="text-decoration-none text-dark fw-bold">
+                    스튜디오리얼라이브 / STUDIOREALIVE
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="스페이스엘비스.html" class="text-decoration-none text-dark fw-bold">
+                    스페이스엘비스
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="엔피니티세븐.html" class="text-decoration-none text-dark fw-bold">
+                    엔피니티세븐
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="우신정보시스템.html" class="text-decoration-none text-dark fw-bold">
+                    우신정보시스템
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="이노 법률사무소.html" class="text-decoration-none text-dark fw-bold">
+                    이노 법률사무소
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="이퀄소울.html" class="text-decoration-none text-dark fw-bold">
+                    이퀄소울
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="젠스템.html" class="text-decoration-none text-dark fw-bold">
+                    젠스템
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="친구친구티비.html" class="text-decoration-none text-dark fw-bold">
+                    친구친구티비
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="코드리치.html" class="text-decoration-none text-dark fw-bold">
+                    코드리치
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="콕스스페이스.html" class="text-decoration-none text-dark fw-bold">
+                    콕스스페이스
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="펄스나인.html" class="text-decoration-none text-dark fw-bold">
+                    펄스나인
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="퓨처디자이너스 _ 라이프스퀘어.html" class="text-decoration-none text-dark fw-bold">
+                    퓨처디자이너스 | 라이프스퀘어
+                </a>
+            </td>
+            <td style="color: #666;">
+                -
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                0
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
 
     </div>
 

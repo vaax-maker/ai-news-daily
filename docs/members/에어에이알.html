@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>에어에이알 News</h1>
 <p class="subtitle">Latest news related to 에어에이알</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxOekllNENPOUtkVUtSVndqQzVITVZFVF9tWEM1SW1BNmR4bWlGSUQwcmdpZnpwd0hGZGdmWm8zOUlpSG4yeDJjNk1YVGROb2o5VW4xLU1LZ25FaFQ0UHFoX085TUlNMzVHLVNtTU9Yd0JQUlJNbWVqNTYxVFMybHFKRDYwMU1pZDU0?oc=5" target="_blank">‘어린이 재난상황, 이렇게 대처하세요’ - 국제신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">국제신문</span> | 2023-10-23 07:00
+                <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxOekllNENPOUtkVUtSVndqQzVITVZFVF9tWEM1SW1BNmR4bWlGSUQwcmdpZnpwd0hGZGdmWm8zOUlpSG4yeDJjNk1YVGROb2o5VW4xLU1LZ25FaFQ0UHFoX085TUlNMzVHLVNtTU9Yd0JQUlJNbWVqNTYxVFMybHFKRDYwMU1pZDU0?oc=5" target="_blank" class="source-link">국제신문</a> | 2023-10-23 07:00
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxOekllNENPOUtkVUtSVndqQzVITVZFVF9tWEM1SW1BNmR4bWlGSUQwcmdpZnpwd0hGZGdmWm8zOUlpSG4yeDJjNk1YVGROb2o5VW4xLU1LZ25FaFQ0UHFoX085TUlNMzVHLVNtTU9Yd0JQUlJNbWVqNTYxVFMybHFKRDYwMU1pZDU0?oc=5" target="_blank">‘어린이 재난상황, 이렇게 대처하세요’</a>&nbsp;&nbsp;<font color="#6f6f6f">국제신문</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5YaS1jVk1xWUtoX0xMUUg4dlpBUkVqQm5rV3pPME9YQkpKbkozbnF3SmNOYUQ4ZE1USmJqQ09xYTA0VmVWSlNybF9Jc1hFT2Z4UXJzNEV0SHJSbHhieEl1Vm1KeWhfX2s?oc=5" target="_blank">총회 증강전도지 ‘The Way’ 공개 - 기독신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">기독신문</span> | 2023-02-09 08:00
+                <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5YaS1jVk1xWUtoX0xMUUg4dlpBUkVqQm5rV3pPME9YQkpKbkozbnF3SmNOYUQ4ZE1USmJqQ09xYTA0VmVWSlNybF9Jc1hFT2Z4UXJzNEV0SHJSbHhieEl1Vm1KeWhfX2s?oc=5" target="_blank" class="source-link">기독신문</a> | 2023-02-09 08:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5YaS1jVk1xWUtoX0xMUUg4dlpBUkVqQm5rV3pPME9YQkpKbkozbnF3SmNOYUQ4ZE1USmJqQ09xYTA0VmVWSlNybF9Jc1hFT2Z4UXJzNEV0SHJSbHhieEl1Vm1KeWhfX2s?oc=5" target="_blank">총회 증강전도지 ‘The Way’ 공개</a>&nbsp;&nbsp;<font color="#6f6f6f">기독신문</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFA3TFZ3U2dMOEJNLUxhN3c0NDNBQkZSTnAwWXdkcG1QcjVuV1N1dmNjNm45UHdLWENtVHFLS2hQV0JOZ3F2UnoySk10TWNhai14T3d0NTdxT3ZLcjFIeDBIaFBWQ0thRWlEUTI0UHdPalbSAXRBVV95cUxOWEFjYUZJSG4ycXJjelgzOFlvc2k2dkQxN3AxZ1VyTkRUSU5xLVA1SUQ4enBJaEV4TXJORTUzRUs0bmhSVG1BWFI5VU8wTUlSZDZXcDdBMXJPRDU1TWlfY1FMMkNVZk1BNzFWWHB6Wk05dnBzcA?oc=5" target="_blank">에어에이알, ‘XR 메타버스’ 콘텐츠 사업 위해 페네시아와 MOU 체결 - IT조선</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">IT조선</span> | 2021-12-03 08:00
+                <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFA3TFZ3U2dMOEJNLUxhN3c0NDNBQkZSTnAwWXdkcG1QcjVuV1N1dmNjNm45UHdLWENtVHFLS2hQV0JOZ3F2UnoySk10TWNhai14T3d0NTdxT3ZLcjFIeDBIaFBWQ0thRWlEUTI0UHdPalbSAXRBVV95cUxOWEFjYUZJSG4ycXJjelgzOFlvc2k2dkQxN3AxZ1VyTkRUSU5xLVA1SUQ4enBJaEV4TXJORTUzRUs0bmhSVG1BWFI5VU8wTUlSZDZXcDdBMXJPRDU1TWlfY1FMMkNVZk1BNzFWWHB6Wk05dnBzcA?oc=5" target="_blank" class="source-link">IT조선</a> | 2021-12-03 08:00
             </div>
         </div>
 
@@ -97,20 +133,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFA3TFZ3U2dMOEJNLUxhN3c0NDNBQkZSTnAwWXdkcG1QcjVuV1N1dmNjNm45UHdLWENtVHFLS2hQV0JOZ3F2UnoySk10TWNhai14T3d0NTdxT3ZLcjFIeDBIaFBWQ0thRWlEUTI0UHdPalbSAXRBVV95cUxOWEFjYUZJSG4ycXJjelgzOFlvc2k2dkQxN3AxZ1VyTkRUSU5xLVA1SUQ4enBJaEV4TXJORTUzRUs0bmhSVG1BWFI5VU8wTUlSZDZXcDdBMXJPRDU1TWlfY1FMMkNVZk1BNzFWWHB6Wk05dnBzcA?oc=5" target="_blank">에어에이알, ‘XR 메타버스’ 콘텐츠 사업 위해 페네시아와 MOU 체결</a>&nbsp;&nbsp;<font color="#6f6f6f">IT조선</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE5WcFBEV2txNEc0Z0MweEJMZ0dDa2NKNzAxbEV2d3NEd2VNWnpYRGMzYWxIMEUyZm9wMFRUZjAzdnVud0lvVzYxalJJNmh1ZzU0NnJSdHZGWS1IeVdGSGZNUHJEeXppTWs4aDRkM29XTnrSAXRBVV95cUxOUTNVR24zVDZGb1ZzbXlLSkZFTk1wU3Q3N19YLWxYZGJqajZ3ejlSTkk0bEw1cWtObkhqMW5JZU0xbmh3LVlkWU9FYW5pdkVjUmVBaXpSakhjSXczaGVDaEZIaHkxWmpHTFd4NkRaUEhtRUxwRQ?oc=5" target="_blank">에어에이알, 성남 시니어산업혁신센터에 ‘AR 탑재 실내 내비게이션’ 도입 - IT조선</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">IT조선</span> | 2021-09-09 07:00
+                <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE5WcFBEV2txNEc0Z0MweEJMZ0dDa2NKNzAxbEV2d3NEd2VNWnpYRGMzYWxIMEUyZm9wMFRUZjAzdnVud0lvVzYxalJJNmh1ZzU0NnJSdHZGWS1IeVdGSGZNUHJEeXppTWs4aDRkM29XTnrSAXRBVV95cUxOUTNVR24zVDZGb1ZzbXlLSkZFTk1wU3Q3N19YLWxYZGJqajZ3ejlSTkk0bEw1cWtObkhqMW5JZU0xbmh3LVlkWU9FYW5pdkVjUmVBaXpSakhjSXczaGVDaEZIaHkxWmpHTFd4NkRaUEhtRUxwRQ?oc=5" target="_blank" class="source-link">IT조선</a> | 2021-09-09 07:00
             </div>
         </div>
 
@@ -118,9 +152,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE5WcFBEV2txNEc0Z0MweEJMZ0dDa2NKNzAxbEV2d3NEd2VNWnpYRGMzYWxIMEUyZm9wMFRUZjAzdnVud0lvVzYxalJJNmh1ZzU0NnJSdHZGWS1IeVdGSGZNUHJEeXppTWs4aDRkM29XTnrSAXRBVV95cUxOUTNVR24zVDZGb1ZzbXlLSkZFTk1wU3Q3N19YLWxYZGJqajZ3ejlSTkk0bEw1cWtObkhqMW5JZU0xbmh3LVlkWU9FYW5pdkVjUmVBaXpSakhjSXczaGVDaEZIaHkxWmpHTFd4NkRaUEhtRUxwRQ?oc=5" target="_blank">에어에이알, 성남 시니어산업혁신센터에 ‘AR 탑재 실내 내비게이션’ 도입</a>&nbsp;&nbsp;<font color="#6f6f6f">IT조선</font>
-                
             </div>
         </div>
     </article>

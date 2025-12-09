@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="./static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -44,28 +84,20 @@
     <div class="dashboard-section">
         <h2>
             AI News
-            <a href="ai/index.html" class="section-more">More &rarr;</a>
+            <a href="ai/daily/2025-12-09_101432.html" class="section-more">More &rarr;</a>
         </h2>
         <ul class="preview-list">
             <li>
-                <span class="preview-date">2025-12-09 07:00</span>
-                <a href="https://www.aitimes.com/news/articleView.html?idxno=204601" target="_blank" class="preview-title">[12월8일] 30세의 챗GPT 책임자가 오픈AI의 핵심으로 떠오른 이유</a>
+                <span class="preview-date">2025-12-09 09:34</span>
+                <a href="https://www.aitimes.kr/news/articleView.html?idxno=37619" target="_blank" class="preview-title">팀네이버, 세계 최고 권위 AI 학회 ‘뉴립스 2025’에서 논문 10개 채택...글로벌 AI 기술력 입증</a>
             </li>
             <li>
-                <span class="preview-date">2025-12-09 06:55</span>
-                <a href="https://www.aitimes.com/news/articleView.html?idxno=204616" target="_blank" class="preview-title">머스크 얼굴을 한 기괴한 로봇 강아지...무려 1.5억?</a>
+                <span class="preview-date">2025-12-09 09:21</span>
+                <a href="https://www.aitimes.kr/news/articleView.html?idxno=37618" target="_blank" class="preview-title">AI가 설계한 차세대 항염증 단백질, 기존 치료제보다 50% 이상 강력한 효과!</a>
             </li>
             <li>
-                <span class="preview-date">2025-12-08 22:25</span>
-                <a href="http://www.techmeme.com/251208/p39#a251208p39" target="_blank" class="preview-title">The CTO of Amazon's Zoox says the company plans to start charging for rides in Las Vegas in early 2026 and is focused on transporting people, not deliveries (Amanda Gerut/Fortune)</a>
-            </li>
-            <li>
-                <span class="preview-date">2025-12-08 21:55</span>
-                <a href="http://www.techmeme.com/251208/p38#a251208p38" target="_blank" class="preview-title">Trump says the US will allow Nvidia to ship H200 chips to "approved customers" in China and elsewhere, and 25% of the chip sales will be paid to the US (Kevin Breuninger/CNBC)</a>
-            </li>
-            <li>
-                <span class="preview-date">2025-12-08 21:40</span>
-                <a href="https://techcrunch.com/2025/12/08/department-of-commerce-may-approve-nvidia-h200-chip-exports-to-china/" target="_blank" class="preview-title">Department of Commerce approves Nvidia H200 chip exports to China</a>
+                <span class="preview-date">2025-12-09 08:59</span>
+                <a href="https://www.aitimes.kr/news/articleView.html?idxno=37617" target="_blank" class="preview-title">경기창조경제혁신센터 투자기업 8개사, 중기부 TIPS 전원 선정… 기술기업 성장 견인</a>
             </li>
         </ul>
     </div>
@@ -74,34 +106,9 @@
     <div class="dashboard-section">
         <h2>
             XR News
-            <a href="xr/index.html" class="section-more">More &rarr;</a>
+            <a href="xr/daily/2025-12-09_101432.html" class="section-more">More &rarr;</a>
         </h2>
         <ul class="preview-list">
-            
-            <li>
-                <span class="preview-date">2025-12-08 18:52</span>
-                <a href="https://www.uploadvr.com/xreal-project-aura-android-xr-first-images-clip/" target="_blank" class="preview-title">First Clip Of Xreal&#x27;s Project Aura Android XR Device In Use Revealed</a>
-            </li>
-            
-            <li>
-                <span class="preview-date">2025-12-08 18:00</span>
-                <a href="https://www.uploadvr.com/samsung-galaxy-xr-android-xr-likeness-beta-travel-mode/" target="_blank" class="preview-title">Samsung Galaxy XR Gets Realistic &#x27;Likeness&#x27; Avatars &amp; Travel Mode</a>
-            </li>
-            
-            <li>
-                <span class="preview-date">2025-12-08 17:59</span>
-                <a href="https://www.roadtovr.com/xreal-aura-ar-glasses-android-xr-hands-on-preview/" target="_blank" class="preview-title">Hands-on: XREAL Aura AR Glasses with Android XR and a 70-degree Field-of-view, Launching Next Year</a>
-            </li>
-            
-            <li>
-                <span class="preview-date">2025-12-08 13:00</span>
-                <a href="https://arinsider.co/2025/12/08/dreampark-reimagines-theme-parks-from-atoms-to-bits/" target="_blank" class="preview-title">DreamPark Reimagines Theme Parks From Atoms to Bits</a>
-            </li>
-            
-            <li>
-                <span class="preview-date">2025-12-08 06:55</span>
-                <a href="https://skarredghost.com/2025/12/08/meta-cuts-quest-4/" target="_blank" class="preview-title">The XR Week Peek (2025.12.08): Meta disinvests in MR but is still committed for the future, and more!</a>
-            </li>
             
         </ul>
     </div>
@@ -146,7 +153,7 @@
     <div class="dashboard-section">
         <h2>
             Gov Announcements
-            <a href="gov/index.html" class="section-more">More &rarr;</a>
+            <a href="gov/daily/2025-12-09_101432.html" class="section-more">More &rarr;</a>
         </h2>
         <ul class="preview-list">
             

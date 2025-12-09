@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>(사)한국메타버스산업협회 News</h1>
 <p class="subtitle">Latest news related to (사)한국메타버스산업협회</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE44aU1fWHlMclJXTTVDN2NSRkZKSGlPYm9jcnRFOEZJU0NaRWVDR0c5RDduRzZ3a0FfMTg1YUI5a3luUTB3bkhnUDZtTWNjLVFTd1FzOG9lRllOa0E?oc=5" target="_blank">교사도, 학생도 연수 받더니 경진대회 수상 '턱'...XR메타버스교사협회 프로젝트팀, META상 수상 - 더에듀</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">더에듀</span> | 2025-11-28 08:46
+                <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE44aU1fWHlMclJXTTVDN2NSRkZKSGlPYm9jcnRFOEZJU0NaRWVDR0c5RDduRzZ3a0FfMTg1YUI5a3luUTB3bkhnUDZtTWNjLVFTd1FzOG9lRllOa0E?oc=5" target="_blank" class="source-link">더에듀</a> | 2025-11-28 08:46
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE44aU1fWHlMclJXTTVDN2NSRkZKSGlPYm9jcnRFOEZJU0NaRWVDR0c5RDduRzZ3a0FfMTg1YUI5a3luUTB3bkhnUDZtTWNjLVFTd1FzOG9lRllOa0E?oc=5" target="_blank">교사도, 학생도 연수 받더니 경진대회 수상 '턱'...XR메타버스교사협회 프로젝트팀, META상 수상</a>&nbsp;&nbsp;<font color="#6f6f6f">더에듀</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE9TLXVKdGVtcTN1dzlUQWNqQm1SXy1NVWJwRjg1OEtrQS1ubUE1M2ZTMUZIbHpWWVlxdnY5eUVMT1lQd3MyZ05WSGluODYzejBLbmJTYVFJUV83QdIBVEFVX3lxTE9yMUxzZnZxWE5Gbzg5bHpsODFxQW5MLVd3c0NybW9vRXV1bVItMkhXRVJsSkdNNldKanBFb1lIaXRkVTU0UGcwVjZEX094QjhadnhrdQ?oc=5" target="_blank">'2025 대한민국 가상융합산업대전' 참가기업 조기 신청 8월 14일 마감 - hankyung.com</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">hankyung.com</span> | 2025-08-06 07:00
+                <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE9TLXVKdGVtcTN1dzlUQWNqQm1SXy1NVWJwRjg1OEtrQS1ubUE1M2ZTMUZIbHpWWVlxdnY5eUVMT1lQd3MyZ05WSGluODYzejBLbmJTYVFJUV83QdIBVEFVX3lxTE9yMUxzZnZxWE5Gbzg5bHpsODFxQW5MLVd3c0NybW9vRXV1bVItMkhXRVJsSkdNNldKanBFb1lIaXRkVTU0UGcwVjZEX094QjhadnhrdQ?oc=5" target="_blank" class="source-link">hankyung.com</a> | 2025-08-06 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE9TLXVKdGVtcTN1dzlUQWNqQm1SXy1NVWJwRjg1OEtrQS1ubUE1M2ZTMUZIbHpWWVlxdnY5eUVMT1lQd3MyZ05WSGluODYzejBLbmJTYVFJUV83QdIBVEFVX3lxTE9yMUxzZnZxWE5Gbzg5bHpsODFxQW5MLVd3c0NybW9vRXV1bVItMkhXRVJsSkdNNldKanBFb1lIaXRkVTU0UGcwVjZEX094QjhadnhrdQ?oc=5" target="_blank">'2025 대한민국 가상융합산업대전' 참가기업 조기 신청 8월 14일 마감</a>&nbsp;&nbsp;<font color="#6f6f6f">hankyung.com</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTFBaRjlsN3VGYkpVbHFES1R3NDlXNVFOQkp5ekRQdEs4VnVoYWpWa21yQU5BSlo0Y3drRF9TV2FTeVJrNVJXWG9NNEQyUVVFWmh4bzFFcGhn?oc=5" target="_blank">광운대-한국메타버스산업협회, 인재양성·지역 동반성장 산학협력 MOU - 중앙일보</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">중앙일보</span> | 2024-11-27 08:00
+                <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTFBaRjlsN3VGYkpVbHFES1R3NDlXNVFOQkp5ekRQdEs4VnVoYWpWa21yQU5BSlo0Y3drRF9TV2FTeVJrNVJXWG9NNEQyUVVFWmh4bzFFcGhn?oc=5" target="_blank" class="source-link">중앙일보</a> | 2024-11-27 08:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTFBaRjlsN3VGYkpVbHFES1R3NDlXNVFOQkp5ekRQdEs4VnVoYWpWa21yQU5BSlo0Y3drRF9TV2FTeVJrNVJXWG9NNEQyUVVFWmh4bzFFcGhn?oc=5" target="_blank">광운대-한국메타버스산업협회, 인재양성·지역 동반성장 산학협력 MOU</a>&nbsp;&nbsp;<font color="#6f6f6f">중앙일보</font>
-                
             </div>
         </div>
     </article>

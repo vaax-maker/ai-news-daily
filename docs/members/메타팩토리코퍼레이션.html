@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>메타팩토리코퍼레이션 News</h1>
 <p class="subtitle">Latest news related to 메타팩토리코퍼레이션</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9QZ2lmQTdHNEFSQjdwZFpVTDJxY1VHRENweF9waTdRaDI4UEdBNl8wNmFJNERUbVNkZTFfbWxhcm9nZ21FelUwTUlFV2NFYzlkcDVkYlRDWlBfeHpFcUNob2FBMTdSTm9WOEs1Yg?oc=5" target="_blank">메가박스·메타팩토리, AI 몰입형 공간 MOU 체결 … 콘텐트리중앙 주가 전일 대비 4%↑ - econovill.com</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">econovill.com</span> | 2025-08-20 07:00
+                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9QZ2lmQTdHNEFSQjdwZFpVTDJxY1VHRENweF9waTdRaDI4UEdBNl8wNmFJNERUbVNkZTFfbWxhcm9nZ21FelUwTUlFV2NFYzlkcDVkYlRDWlBfeHpFcUNob2FBMTdSTm9WOEs1Yg?oc=5" target="_blank" class="source-link">econovill.com</a> | 2025-08-20 07:00
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9QZ2lmQTdHNEFSQjdwZFpVTDJxY1VHRENweF9waTdRaDI4UEdBNl8wNmFJNERUbVNkZTFfbWxhcm9nZ21FelUwTUlFV2NFYzlkcDVkYlRDWlBfeHpFcUNob2FBMTdSTm9WOEs1Yg?oc=5" target="_blank">메가박스·메타팩토리, AI 몰입형 공간 MOU 체결 … 콘텐트리중앙 주가 전일 대비 4%↑</a>&nbsp;&nbsp;<font color="#6f6f6f">econovill.com</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE1zVi1sWmx3UzlVbTRJU0dtMVVFcmRYdWx2V1Y5TTVlVERyR2d5N0lIdXFzWXBBdThTc3ZsOE9UbzYzMTA2ZnA4ZWxJbUtpQVRndDRQMTNDQXg1Qm5sdlHSAWNBVV95cUxNU0NtRUZVZkYwZU9yWHo4WXdzSHFDamhSUFcyM19oVWFIRy1EY0JWQlJLUUxSR1dWd3NNVmo0NUNBazFGUzYzbXpFdW9yTE9TTzlGY09aV0J4cUNVRWlnWTlhZXc?oc=5" target="_blank">메가박스-메타팩토리 MOU 체결···AI 기반 차세대 몰입형 콘텐트 공간 신사업 추진 - 스포츠경향</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">스포츠경향</span> | 2025-08-19 07:00
+                <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE1zVi1sWmx3UzlVbTRJU0dtMVVFcmRYdWx2V1Y5TTVlVERyR2d5N0lIdXFzWXBBdThTc3ZsOE9UbzYzMTA2ZnA4ZWxJbUtpQVRndDRQMTNDQXg1Qm5sdlHSAWNBVV95cUxNU0NtRUZVZkYwZU9yWHo4WXdzSHFDamhSUFcyM19oVWFIRy1EY0JWQlJLUUxSR1dWd3NNVmo0NUNBazFGUzYzbXpFdW9yTE9TTzlGY09aV0J4cUNVRWlnWTlhZXc?oc=5" target="_blank" class="source-link">스포츠경향</a> | 2025-08-19 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE1zVi1sWmx3UzlVbTRJU0dtMVVFcmRYdWx2V1Y5TTVlVERyR2d5N0lIdXFzWXBBdThTc3ZsOE9UbzYzMTA2ZnA4ZWxJbUtpQVRndDRQMTNDQXg1Qm5sdlHSAWNBVV95cUxNU0NtRUZVZkYwZU9yWHo4WXdzSHFDamhSUFcyM19oVWFIRy1EY0JWQlJLUUxSR1dWd3NNVmo0NUNBazFGUzYzbXpFdW9yTE9TTzlGY09aV0J4cUNVRWlnWTlhZXc?oc=5" target="_blank">메가박스-메타팩토리 MOU 체결···AI 기반 차세대 몰입형 콘텐트 공간 신사업 추진</a>&nbsp;&nbsp;<font color="#6f6f6f">스포츠경향</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE02NUUyZWpGYUc2cEtBLWRhc3JxOXNHeTZ1Qzc1US1IQzhSSC02Wkp0aEd1dGFsVHZIWGd4c194R25xT0k4SjlfV21FZjNGSTlNMWc?oc=5" target="_blank">메가박스-메타팩토리, AI 활용 전용 콘텐츠 개발 나선다 - 노컷뉴스</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">노컷뉴스</span> | 2025-08-19 07:00
+                <a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE02NUUyZWpGYUc2cEtBLWRhc3JxOXNHeTZ1Qzc1US1IQzhSSC02Wkp0aEd1dGFsVHZIWGd4c194R25xT0k4SjlfV21FZjNGSTlNMWc?oc=5" target="_blank" class="source-link">노컷뉴스</a> | 2025-08-19 07:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE02NUUyZWpGYUc2cEtBLWRhc3JxOXNHeTZ1Qzc1US1IQzhSSC02Wkp0aEd1dGFsVHZIWGd4c194R25xT0k4SjlfV21FZjNGSTlNMWc?oc=5" target="_blank">메가박스-메타팩토리, AI 활용 전용 콘텐츠 개발 나선다</a>&nbsp;&nbsp;<font color="#6f6f6f">노컷뉴스</font>
-                
             </div>
         </div>
     </article>

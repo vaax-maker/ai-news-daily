@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>레디메이드 News</h1>
 <p class="subtitle">Latest news related to 레디메이드</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE84NVUzLWtSSWdJUnp3Mk5CVUtLNmFiQ3dYVHBJcGVwSUpQcEVQdllmN0NUc0pudEIwcU9ONGlGOFEydFhoeUF3M1V6M2Q4UmpqY0Z6Z3JtM3h6OXlFTS1ETDVYamE2QlduMjEwenRn?oc=5" target="_blank">예술은 어디에서 시작되는가? - artsnculture.com</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">artsnculture.com</span> | 2025-11-30 15:01
+                <a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE84NVUzLWtSSWdJUnp3Mk5CVUtLNmFiQ3dYVHBJcGVwSUpQcEVQdllmN0NUc0pudEIwcU9ONGlGOFEydFhoeUF3M1V6M2Q4UmpqY0Z6Z3JtM3h6OXlFTS1ETDVYamE2QlduMjEwenRn?oc=5" target="_blank" class="source-link">artsnculture.com</a> | 2025-11-30 15:01
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE84NVUzLWtSSWdJUnp3Mk5CVUtLNmFiQ3dYVHBJcGVwSUpQcEVQdllmN0NUc0pudEIwcU9ONGlGOFEydFhoeUF3M1V6M2Q4UmpqY0Z6Z3JtM3h6OXlFTS1ETDVYamE2QlduMjEwenRn?oc=5" target="_blank">예술은 어디에서 시작되는가?</a>&nbsp;&nbsp;<font color="#6f6f6f">artsnculture.com</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE94SDZMRFg0OTM1V1hoSWQ0cERPMG1xR0dfNFU1SEdYRW9WcGJiTFRHSGhBVmFQWkUyNU9RdDZJY3hkYWpvY2NZMjBBNUwwSUtfeVE?oc=5" target="_blank">10편 4차 산업으로 펼쳐진 예술민주주의 - 브런치</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">브런치</span> | 2025-08-21 07:00
+                <a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE94SDZMRFg0OTM1V1hoSWQ0cERPMG1xR0dfNFU1SEdYRW9WcGJiTFRHSGhBVmFQWkUyNU9RdDZJY3hkYWpvY2NZMjBBNUwwSUtfeVE?oc=5" target="_blank" class="source-link">브런치</a> | 2025-08-21 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE94SDZMRFg0OTM1V1hoSWQ0cERPMG1xR0dfNFU1SEdYRW9WcGJiTFRHSGhBVmFQWkUyNU9RdDZJY3hkYWpvY2NZMjBBNUwwSUtfeVE?oc=5" target="_blank">10편 4차 산업으로 펼쳐진 예술민주주의</a>&nbsp;&nbsp;<font color="#6f6f6f">브런치</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE9COThqS2x4cXBfbHFrZHBfNE9OTXNQSUQwVTVqRnYza1cya1dTQ2dueEVpZEFlRFRTYmFJQzgtSk50clRJLUFKOWVFckRHajZPMWliMGcwYjg3Y293c1NPUjN6U2ZpeEU2?oc=5" target="_blank">[김정락 교수의 근대 미술사] "뻔뻔한 사실주의" - 미술여행신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">미술여행신문</span> | 2025-06-17 07:00
+                <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE9COThqS2x4cXBfbHFrZHBfNE9OTXNQSUQwVTVqRnYza1cya1dTQ2dueEVpZEFlRFRTYmFJQzgtSk50clRJLUFKOWVFckRHajZPMWliMGcwYjg3Y293c1NPUjN6U2ZpeEU2?oc=5" target="_blank" class="source-link">미술여행신문</a> | 2025-06-17 07:00
             </div>
         </div>
 
@@ -97,20 +133,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE9COThqS2x4cXBfbHFrZHBfNE9OTXNQSUQwVTVqRnYza1cya1dTQ2dueEVpZEFlRFRTYmFJQzgtSk50clRJLUFKOWVFckRHajZPMWliMGcwYjg3Y293c1NPUjN6U2ZpeEU2?oc=5" target="_blank">[김정락 교수의 근대 미술사] "뻔뻔한 사실주의"</a>&nbsp;&nbsp;<font color="#6f6f6f">미술여행신문</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE5SdE0yWGRXNURGUnh2UTdnajAwLXdDdW84ZWNJUXhOS0ZuQ2dFSHJSUVQxRzJxRkZfd1JrRVhRSlFTNnpnRk9ZcmREWkpFU1pNWWVyaEU0Y3MwUm9pa0s3Yw?oc=5" target="_blank">[Review] 레디 메이드의 시대, 핸드 메이드의 마음을 읽다 – 타샤의 집 - 아트인사이트</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">아트인사이트</span> | 2025-06-14 07:00
+                <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE5SdE0yWGRXNURGUnh2UTdnajAwLXdDdW84ZWNJUXhOS0ZuQ2dFSHJSUVQxRzJxRkZfd1JrRVhRSlFTNnpnRk9ZcmREWkpFU1pNWWVyaEU0Y3MwUm9pa0s3Yw?oc=5" target="_blank" class="source-link">아트인사이트</a> | 2025-06-14 07:00
             </div>
         </div>
 
@@ -118,9 +152,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE5SdE0yWGRXNURGUnh2UTdnajAwLXdDdW84ZWNJUXhOS0ZuQ2dFSHJSUVQxRzJxRkZfd1JrRVhRSlFTNnpnRk9ZcmREWkpFU1pNWWVyaEU0Y3MwUm9pa0s3Yw?oc=5" target="_blank">[Review] 레디 메이드의 시대, 핸드 메이드의 마음을 읽다 – 타샤의 집</a>&nbsp;&nbsp;<font color="#6f6f6f">아트인사이트</font>
-                
             </div>
         </div>
     </article>

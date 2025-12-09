@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>에이치오 엔터테인먼트 News</h1>
 <p class="subtitle">Latest news related to 에이치오 엔터테인먼트</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE9iWlpQb2UzaTNoeXdreWFiU2Y4WHFTaHgySldnajlXeGIteHBJcVFlWGNLU1lQZEJKb1k0by1BSzRYbkRPZFVaLVJxMWZfa2hTZzhRY04xQTJleHNiUHc?oc=5" target="_blank">증강현실로 만나는 안성의 독립운동, 증강현실 도슨트 투어 콘텐츠 출시 - 뉴스와이어</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">뉴스와이어</span> | 2022-12-06 08:00
+                <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE9iWlpQb2UzaTNoeXdreWFiU2Y4WHFTaHgySldnajlXeGIteHBJcVFlWGNLU1lQZEJKb1k0by1BSzRYbkRPZFVaLVJxMWZfa2hTZzhRY04xQTJleHNiUHc?oc=5" target="_blank" class="source-link">뉴스와이어</a> | 2022-12-06 08:00
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE9iWlpQb2UzaTNoeXdreWFiU2Y4WHFTaHgySldnajlXeGIteHBJcVFlWGNLU1lQZEJKb1k0by1BSzRYbkRPZFVaLVJxMWZfa2hTZzhRY04xQTJleHNiUHc?oc=5" target="_blank">증강현실로 만나는 안성의 독립운동, 증강현실 도슨트 투어 콘텐츠 출시</a>&nbsp;&nbsp;<font color="#6f6f6f">뉴스와이어</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTFAyUDJLOE10NkdRRWs0aWZSckVhdkFHZWxWajNvdWQ5c2owWGlrR0M2ZlhwMlBTT0JlUFBkTlFYS0NIdHB5elN4aWRfa3pMYUo3aUo4dlNPUVBuZDlHWnlFRDVqMWR1THPSAWtBVV95cUxPNmZSWDRWdzdOTTg1Wk9Qc1lQbmZaZW82SmRkYW1VWGpqRVpheE5mM2JMNVF1VmdZQks4X1ZEcUl0bkFzbXJhMVRJbWVWTlo5QXl4UzdvVmpEaUQ3aDg5R21sc3ZDQVlnZUUyQQ?oc=5" target="_blank">[ICT광장] 현장 경찰관을 위한 실감형 가상훈련시스템 개발 - 정보통신신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">정보통신신문</span> | 2022-04-10 07:00
+                <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTFAyUDJLOE10NkdRRWs0aWZSckVhdkFHZWxWajNvdWQ5c2owWGlrR0M2ZlhwMlBTT0JlUFBkTlFYS0NIdHB5elN4aWRfa3pMYUo3aUo4dlNPUVBuZDlHWnlFRDVqMWR1THPSAWtBVV95cUxPNmZSWDRWdzdOTTg1Wk9Qc1lQbmZaZW82SmRkYW1VWGpqRVpheE5mM2JMNVF1VmdZQks4X1ZEcUl0bkFzbXJhMVRJbWVWTlo5QXl4UzdvVmpEaUQ3aDg5R21sc3ZDQVlnZUUyQQ?oc=5" target="_blank" class="source-link">정보통신신문</a> | 2022-04-10 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTFAyUDJLOE10NkdRRWs0aWZSckVhdkFHZWxWajNvdWQ5c2owWGlrR0M2ZlhwMlBTT0JlUFBkTlFYS0NIdHB5elN4aWRfa3pMYUo3aUo4dlNPUVBuZDlHWnlFRDVqMWR1THPSAWtBVV95cUxPNmZSWDRWdzdOTTg1Wk9Qc1lQbmZaZW82SmRkYW1VWGpqRVpheE5mM2JMNVF1VmdZQks4X1ZEcUl0bkFzbXJhMVRJbWVWTlo5QXl4UzdvVmpEaUQ3aDg5R21sc3ZDQVlnZUUyQQ?oc=5" target="_blank">[ICT광장] 현장 경찰관을 위한 실감형 가상훈련시스템 개발</a>&nbsp;&nbsp;<font color="#6f6f6f">정보통신신문</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE5DbzB6LUlxSmRJU3ZLU19Lc3JFVmpJWkZUUXpPVEI2UVFDNXdlVEJNSW9fTW4yTGlUZnF3MDVCUDJoOWxESUFSeTVyOWRBV0U4MS1B?oc=5" target="_blank">CSIVR방탈출카페, 코엑스 창업박람회 참가 - 네이트</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">네이트</span> | 2019-10-04 07:00
+                <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE5DbzB6LUlxSmRJU3ZLU19Lc3JFVmpJWkZUUXpPVEI2UVFDNXdlVEJNSW9fTW4yTGlUZnF3MDVCUDJoOWxESUFSeTVyOWRBV0U4MS1B?oc=5" target="_blank" class="source-link">네이트</a> | 2019-10-04 07:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE5DbzB6LUlxSmRJU3ZLU19Lc3JFVmpJWkZUUXpPVEI2UVFDNXdlVEJNSW9fTW4yTGlUZnF3MDVCUDJoOWxESUFSeTVyOWRBV0U4MS1B?oc=5" target="_blank">CSIVR방탈출카페, 코엑스 창업박람회 참가</a>&nbsp;&nbsp;<font color="#6f6f6f">네이트</font>
-                
             </div>
         </div>
     </article>

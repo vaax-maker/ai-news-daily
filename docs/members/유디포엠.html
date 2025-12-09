@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>유디포엠 News</h1>
 <p class="subtitle">Latest news related to 유디포엠</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFBnVzJzdUVxelBhd0dZRFZGaDZfZ2Z2TkJIcDZuOElleUlSMlZfSDlKWkNFWndiOF9aZk9Qbk5CLWN1Y3NXZERJVEZqdTU1T1ZhMUZGOEFpY1owNjR0V1JEVUI2MjZoMDN0VzRv0gFvQVVfeXFMT2Zfa2VuRENyZWU0U2NiS3J5NGE2TlRIcUNJTFJYQWFDcGU4VE5DZXc5WHF1SUxDQ0wyRy1vUHk0U2QtcFIwX05NaWV3NjBacTVhUnJvUmVTM0xqdlA0SEJBYzBoVEFZQ0drQjVKQTU0?oc=5" target="_blank">[강소기업이 간다] 가상과 현실 연결하는 차별화된 플랫폼 ‘메타도어’ 개발한 ‘유디포엠’ - 한스경제</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">한스경제</span> | 2023-12-01 08:00
+                <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFBnVzJzdUVxelBhd0dZRFZGaDZfZ2Z2TkJIcDZuOElleUlSMlZfSDlKWkNFWndiOF9aZk9Qbk5CLWN1Y3NXZERJVEZqdTU1T1ZhMUZGOEFpY1owNjR0V1JEVUI2MjZoMDN0VzRv0gFvQVVfeXFMT2Zfa2VuRENyZWU0U2NiS3J5NGE2TlRIcUNJTFJYQWFDcGU4VE5DZXc5WHF1SUxDQ0wyRy1vUHk0U2QtcFIwX05NaWV3NjBacTVhUnJvUmVTM0xqdlA0SEJBYzBoVEFZQ0drQjVKQTU0?oc=5" target="_blank" class="source-link">한스경제</a> | 2023-12-01 08:00
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFBnVzJzdUVxelBhd0dZRFZGaDZfZ2Z2TkJIcDZuOElleUlSMlZfSDlKWkNFWndiOF9aZk9Qbk5CLWN1Y3NXZERJVEZqdTU1T1ZhMUZGOEFpY1owNjR0V1JEVUI2MjZoMDN0VzRv0gFvQVVfeXFMT2Zfa2VuRENyZWU0U2NiS3J5NGE2TlRIcUNJTFJYQWFDcGU4VE5DZXc5WHF1SUxDQ0wyRy1vUHk0U2QtcFIwX05NaWV3NjBacTVhUnJvUmVTM0xqdlA0SEJBYzBoVEFZQ0drQjVKQTU0?oc=5" target="_blank">[강소기업이 간다] 가상과 현실 연결하는 차별화된 플랫폼 ‘메타도어’ 개발한 ‘유디포엠’</a>&nbsp;&nbsp;<font color="#6f6f6f">한스경제</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFBzbDNGS0wtUmdMTWJiTGwzSzZDUGhfVzNVelc2dkpaOFhrcEx5b2xaSTNYZzBzYmtMMWNhLWJXTU5zVjVmUzR5WDktankxQUFCY0ZJVGkySXpOajFHN3V6VHI3Z05sWUtieTJv0gFvQVVfeXFMTVdZLVJmQVdHQUlkTGs1OXozM2gzZjRuUVlBQTRLSTJ0YUd0NVdpcVRlcmxnNU56UG0yU3VTclYtcGJzMmp1TndybFFjaGZBS0NoTU1nZjVmMkpuaURfLUlwNTJ0ZFNSd003RWlXb3RB?oc=5" target="_blank">IBK기업은행, 해외 진출 중소기업 8000만달러 규모 지원 - 한스경제</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">한스경제</span> | 2023-12-01 08:00
+                <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFBzbDNGS0wtUmdMTWJiTGwzSzZDUGhfVzNVelc2dkpaOFhrcEx5b2xaSTNYZzBzYmtMMWNhLWJXTU5zVjVmUzR5WDktankxQUFCY0ZJVGkySXpOajFHN3V6VHI3Z05sWUtieTJv0gFvQVVfeXFMTVdZLVJmQVdHQUlkTGs1OXozM2gzZjRuUVlBQTRLSTJ0YUd0NVdpcVRlcmxnNU56UG0yU3VTclYtcGJzMmp1TndybFFjaGZBS0NoTU1nZjVmMkpuaURfLUlwNTJ0ZFNSd003RWlXb3RB?oc=5" target="_blank" class="source-link">한스경제</a> | 2023-12-01 08:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFBzbDNGS0wtUmdMTWJiTGwzSzZDUGhfVzNVelc2dkpaOFhrcEx5b2xaSTNYZzBzYmtMMWNhLWJXTU5zVjVmUzR5WDktankxQUFCY0ZJVGkySXpOajFHN3V6VHI3Z05sWUtieTJv0gFvQVVfeXFMTVdZLVJmQVdHQUlkTGs1OXozM2gzZjRuUVlBQTRLSTJ0YUd0NVdpcVRlcmxnNU56UG0yU3VTclYtcGJzMmp1TndybFFjaGZBS0NoTU1nZjVmMkpuaURfLUlwNTJ0ZFNSd003RWlXb3RB?oc=5" target="_blank">IBK기업은행, 해외 진출 중소기업 8000만달러 규모 지원</a>&nbsp;&nbsp;<font color="#6f6f6f">한스경제</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5LMnk1OWJ0UE14Vl9lTWJ4bFY3ekJLT0VJdlQ3NmcxM0tRWXg4M0NTNDdlNkNUdnRuTXAzampMYnh4TGFnZ2owcGFLcFlLaFpDcmZRZUNNam9sSGpnaUFnWEZlcXUzWmNJckE?oc=5" target="_blank">떨어진 공간과 사람을 ‘메타도어’로 연결 - 한국일보</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">한국일보</span> | 2023-11-09 08:00
+                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5LMnk1OWJ0UE14Vl9lTWJ4bFY3ekJLT0VJdlQ3NmcxM0tRWXg4M0NTNDdlNkNUdnRuTXAzampMYnh4TGFnZ2owcGFLcFlLaFpDcmZRZUNNam9sSGpnaUFnWEZlcXUzWmNJckE?oc=5" target="_blank" class="source-link">한국일보</a> | 2023-11-09 08:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5LMnk1OWJ0UE14Vl9lTWJ4bFY3ekJLT0VJdlQ3NmcxM0tRWXg4M0NTNDdlNkNUdnRuTXAzampMYnh4TGFnZ2owcGFLcFlLaFpDcmZRZUNNam9sSGpnaUFnWEZlcXUzWmNJckE?oc=5" target="_blank">떨어진 공간과 사람을 ‘메타도어’로 연결</a>&nbsp;&nbsp;<font color="#6f6f6f">한국일보</font>
-                
             </div>
         </div>
     </article>

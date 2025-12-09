@@ -60,13 +60,14 @@ def render_member_index(members_list):
     )
     return html
 
-def render_dashboard(ai_latest, xr_latest, gov_latest, members_latest):
+def render_dashboard(ai_latest, xr_latest, gov_latest, members_latest, section_links=None):
     template = env.get_template("dashboard.html")
     return template.render(
         ai_latest=ai_latest,
         xr_latest=xr_latest,
         gov_latest=gov_latest,
         members_latest=members_latest,
+        section_links=section_links or {},
         now_year=datetime.datetime.now().year,
         active_tab="home",
         root_path="."

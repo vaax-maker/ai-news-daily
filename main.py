@@ -80,11 +80,13 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         "filename": filename,
         "date_str": date_str,
         "time_str": time_str,
-        "items": summarized_items # Return items for dashboard
+        "items": summarized_items
     }
 
 def rebuild_indexes(categories):
     # Daily Archives Index Generation
+    weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
+    
     for key, cfg in categories.items():
         daily_dir = cfg.archive_dir
         if not os.path.exists(daily_dir):
@@ -96,13 +98,17 @@ def rebuild_indexes(categories):
             name_part = f.replace(".html", "")
             try:
                 dt = datetime.datetime.strptime(name_part, "%Y-%m-%d_%H%M%S")
+                # Add Weekday
+                wd = weekday_map[dt.weekday()]
+                
                 entries.append({
                     "filename": f,
                     "date_str": dt.strftime("%Y-%m-%d"),
-                    "time_str": dt.strftime("%H:%M:%S")
+                    "time_str": dt.strftime("%H:%M:%S"),
+                    "day_of_week": wd
                 })
             except:
-                entries.append({"filename": f, "date_str": f, "time_str": ""})
+                entries.append({"filename": f, "date_str": f, "time_str": "", "day_of_week": ""})
         
         index_html = render_archive_index(entries, cfg)
         with open(cfg.index_path, "w", encoding="utf-8") as f:
@@ -148,12 +154,9 @@ def process_members(limit_per_member=None):
                 })
             
             # 3. Save/Merge with persistence
-            # Key: Storage uses member key
             updated_history = storage.save_news(m_key, new_articles)
             
             # 4. Generate Individual Member Page
-            # We want to show the full history
-            # Date for page generation
             now_str = datetime.datetime.now().strftime("%Y-%m-%d")
             
             # Sort by timestamp desc
@@ -161,17 +164,12 @@ def process_members(limit_per_member=None):
             
             html = render_member_page(member, updated_history, now_str)
             
-            safe_name = m_key.replace("/", "_").replace("\\", "_")
+            safe_name = re.sub(r'[<>:"/\\|?*]', '_', m_key).strip()
             page_filename = f"{safe_name}.html" 
             
             with open(os.path.join(member_page_dir, page_filename), "w", encoding="utf-8") as f:
                 f.write(html)
             
-            # 5. Collect for Dashboard (Top items from this member's *new* or *latest*)
-            # We want global top 5 across all members.
-            # So add top 1 from each member to the pot? 
-            # Or add ALL updated items to a list and sort later?
-            # Let's add top 3 latest from this member to global list
             all_latest_news.extend(updated_history[:2])
             
         except Exception as e:
@@ -179,53 +177,53 @@ def process_members(limit_per_member=None):
             
     # Sort all collected news by timestamp and take top 5
     all_latest_news.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
-    
-    # Collect for Word Cloud (Titles only) -> REMOVED per user request
-    # word_cloud_data calculation removed.
 
-    # Generate Members Index (Just a list of links to member pages)
-    
-    # Sort members by accumulated news count (descending)
+    # Generate Members Index
     member_entries = []
-    
-    # Clean up existing member pages to remove stale English files
-    # Only if we are doing a full run or just always? Always is safer for "unused files" requirement.
-    # But wait, we just generated them. If I delete them now, I lose what I generated in the loop above?
-    # No, the loop above generated them. 
-    # STRICTLY SPEAKING: I should have cleaned `docs/members` BEFORE the loop.
-    # But since I can't easily edit the top of the function without large replace, 
-    # I will rely on the user manually deleting or I will use a separate script?
-    # Actually, I can just walk `docs/members` and delete files that are NOT in `member_entries`.
+    weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
     
     for m_key, member in members.items():
-        # Load accumulated news from storage
         history = storage.load_news(m_key)
         count = len(history)
         
-        # Sanitize filename
-        safe_name = m_key.replace("/", "_").replace("\\", "_")
+        # Safe name
+        safe_name = re.sub(r'[<>:"/\\|?*]', '_', m_key).strip()
+        
+        # Latest date
+        latest_str = "-"
+        if history:
+            # Sort ensure
+            history.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
+            latest = history[0]
+            ts = latest.get("timestamp", 0)
+            if ts:
+                dt = datetime.datetime.fromtimestamp(ts)
+                wd = weekday_map[dt.weekday()]
+                latest_str = f"{dt.strftime('%Y-%m-%d')}({wd}) {dt.strftime('%H:%M')}"
+            else:
+                latest_str = latest.get("published_display", "-")
+
         member_entries.append({
             "filename": f"{safe_name}.html", 
             "name": member.name, 
-            "count": count
+            "count": count,
+            "latest_date": latest_str
         })
         
-    # Sort by Count (Desc) then Name (Asc)
+    # Sort by Count (Desc)
     member_entries.sort(key=lambda x: (-x["count"], x["name"]))
     
-    # Cleanup: Delete files in docs/members that are not in member_entries
+    # Cleanup stale files
     existing_files = set(os.listdir(member_page_dir))
     generated_files = {entry["filename"] for entry in member_entries}
-    generated_files.add("index.html") # Don't delete index
+    generated_files.add("index.html")
     
     for filename in existing_files:
         if filename.endswith(".html") and filename not in generated_files:
             file_path = os.path.join(member_page_dir, filename)
             try:
                 os.remove(file_path)
-                print(f"[Cleanup] Removed stale file: {filename}")
-            except OSError as e:
-                print(f"[Cleanup] Error deleting {filename}: {e}")
+            except: pass
     
     idx_html = render_member_index(member_entries)
     with open("docs/members/index.html", "w", encoding="utf-8") as f:
@@ -240,12 +238,12 @@ def main():
     parser.add_argument("--limit", type=int, default=None, help="Limit number of articles per category for testing")
     args = parser.parse_args()
 
-    # Data holders for dashboard
     dashboard_data = {
         "ai": [],
         "xr": [],
         "gov": [],
-        "members": []
+        "members": [],
+        "links": {} # To store latest filenames
     }
 
     # 1. Process Categories
@@ -257,8 +255,13 @@ def main():
         try:
            res = process_category(config, now_utc)
            print(f"[{key}] Generated: {res['filename']}")
-           # Store items for dashboard
            dashboard_data[key] = res.get("items", [])
+           # Store latest filename relative to docs root
+           # docs/ai/daily/xyz.html -> ai/daily/xyz.html
+           # config.archive_dir is "docs/ai/daily"
+           rel_path = f"{key}/daily/{res['filename']}"
+           dashboard_data["links"][key] = rel_path
+           
         except Exception as e:
            print(f"[{key}] Failed: {e}")
            import traceback
@@ -268,28 +271,29 @@ def main():
     try:
         members_latest = process_members(limit_per_member=1 if args.limit else None)
         dashboard_data["members"] = members_latest
+        dashboard_data["links"]["members"] = "members/index.html" # Members always goes to index
     except Exception as e:
         print(f"[Members] Process failed: {e}")
         import traceback
         traceback.print_exc()
 
-    # 3. Rebuild Indexes (Category Archives)
+    # 3. Rebuild Indexes
     rebuild_indexes(categories)
 
-    # 4. Render Dashboard (Root Index)
+    # 4. Render Dashboard
     try:
         dash_html = render_dashboard(
             ai_latest=dashboard_data.get("ai", [])[:5],
             xr_latest=dashboard_data.get("xr", [])[:5],
             gov_latest=dashboard_data.get("gov", [])[:5],
-            members_latest=dashboard_data.get("members", [])[:5]
+            members_latest=dashboard_data.get("members", [])[:5],
+            section_links=dashboard_data.get("links", {})
         )
         with open("docs/index.html", "w", encoding="utf-8") as f:
             f.write(dash_html)
         print("[Dashboard] Index generated.")
         
         # 5. Asset Deployment
-        # Copy static/ to docs/static/ so GitHub Pages can serve it
         import shutil
         src_static = "static"
         dst_static = "docs/static"

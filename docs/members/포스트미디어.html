@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>포스트미디어 News</h1>
 <p class="subtitle">Latest news related to 포스트미디어</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFBxclFrVm50R0JWMHppNWt5LVZOZFBqcUlBQ21jNmlSNXV6ZFgtYzBETXE2SGdmcTVoOHZkT1R3Qmtpek1OUEhHbFd5elN1YmtmNWww?oc=5" target="_blank">'헤그세스 전원사살 발언'보도했다고…美 백악관 "워싱턴포스트, 미디어 범죄자" 맹비난 - 네이트</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">네이트</span> | 2025-12-06 02:39
+                <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFBxclFrVm50R0JWMHppNWt5LVZOZFBqcUlBQ21jNmlSNXV6ZFgtYzBETXE2SGdmcTVoOHZkT1R3Qmtpek1OUEhHbFd5elN1YmtmNWww?oc=5" target="_blank" class="source-link">네이트</a> | 2025-12-06 02:39
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFBxclFrVm50R0JWMHppNWt5LVZOZFBqcUlBQ21jNmlSNXV6ZFgtYzBETXE2SGdmcTVoOHZkT1R3Qmtpek1OUEhHbFd5elN1YmtmNWww?oc=5" target="_blank">'헤그세스 전원사살 발언'보도했다고…美 백악관 "워싱턴포스트, 미디어 범죄자" 맹비난</a>&nbsp;&nbsp;<font color="#6f6f6f">네이트</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE9sNE5pQ3QwMlBBR1kxSjR0aTIwOWVLWEVRRWROVkVwNzRsZ2FWRl82ZVNnXzZfRVFOY1ZnLXJmUGFEUUtCMERRTzY1cFhKRlIwZ3o2aGdNLU1sbXBuQ0tmb05NUHhacFdBZjMtaS1kTUlYdU1LSEU0eA?oc=5" target="_blank">'헤그세스 전원사살 발언'보도했다고…美 백악관 "워싱턴포스트, 미디어 범죄자" 맹비난 - 네이트</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">네이트</span> | 2025-12-06 02:39
+                <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE9sNE5pQ3QwMlBBR1kxSjR0aTIwOWVLWEVRRWROVkVwNzRsZ2FWRl82ZVNnXzZfRVFOY1ZnLXJmUGFEUUtCMERRTzY1cFhKRlIwZ3o2aGdNLU1sbXBuQ0tmb05NUHhacFdBZjMtaS1kTUlYdU1LSEU0eA?oc=5" target="_blank" class="source-link">네이트</a> | 2025-12-06 02:39
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE9sNE5pQ3QwMlBBR1kxSjR0aTIwOWVLWEVRRWROVkVwNzRsZ2FWRl82ZVNnXzZfRVFOY1ZnLXJmUGFEUUtCMERRTzY1cFhKRlIwZ3o2aGdNLU1sbXBuQ0tmb05NUHhacFdBZjMtaS1kTUlYdU1LSEU0eA?oc=5" target="_blank">'헤그세스 전원사살 발언'보도했다고…美 백악관 "워싱턴포스트, 미디어 범죄자" 맹비난</a>&nbsp;&nbsp;<font color="#6f6f6f">네이트</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTFBULWRib1VyTF9TQmZFcGFZWHZTcVpFU25EYTN6czgwR2Y0SnVoRUNKRUY0WEFobk9jU01SVl9GejNqRHNxWUNLbElPQ0VlbXFzekVnZGdVNDlja3dPQVBZOGctVmY1UQ?oc=5" target="_blank">국가유산청 협력 미디어아트 전 7500여명 관람 - 이머니뉴스</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">이머니뉴스</span> | 2025-08-12 07:00
+                <a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTFBULWRib1VyTF9TQmZFcGFZWHZTcVpFU25EYTN6czgwR2Y0SnVoRUNKRUY0WEFobk9jU01SVl9GejNqRHNxWUNLbElPQ0VlbXFzekVnZGdVNDlja3dPQVBZOGctVmY1UQ?oc=5" target="_blank" class="source-link">이머니뉴스</a> | 2025-08-12 07:00
             </div>
         </div>
 
@@ -97,20 +133,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTFBULWRib1VyTF9TQmZFcGFZWHZTcVpFU25EYTN6czgwR2Y0SnVoRUNKRUY0WEFobk9jU01SVl9GejNqRHNxWUNLbElPQ0VlbXFzekVnZGdVNDlja3dPQVBZOGctVmY1UQ?oc=5" target="_blank">국가유산청 협력 미디어아트 전 7500여명 관람</a>&nbsp;&nbsp;<font color="#6f6f6f">이머니뉴스</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE93T2JMbno3dURJT092bWtxMlNXSzJyNjMzODFsdGl6MFEzNkFXY1hKUDBuNjRUWFBnN3JOWjhTMG5FUk1sWk5CM1FfcU1kTnc?oc=5" target="_blank">미디어 제왕 머독, 캘리포니아판 뉴욕포스트 만든다 - v.daum.net</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">v.daum.net</span> | 2025-08-06 07:00
+                <a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE93T2JMbno3dURJT092bWtxMlNXSzJyNjMzODFsdGl6MFEzNkFXY1hKUDBuNjRUWFBnN3JOWjhTMG5FUk1sWk5CM1FfcU1kTnc?oc=5" target="_blank" class="source-link">v.daum.net</a> | 2025-08-06 07:00
             </div>
         </div>
 
@@ -118,20 +152,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE93T2JMbno3dURJT092bWtxMlNXSzJyNjMzODFsdGl6MFEzNkFXY1hKUDBuNjRUWFBnN3JOWjhTMG5FUk1sWk5CM1FfcU1kTnc?oc=5" target="_blank">미디어 제왕 머독, 캘리포니아판 뉴욕포스트 만든다</a>&nbsp;&nbsp;<font color="#6f6f6f">v.daum.net</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTFBpSnZUNldKYndoLTBYVERieDRBcmtCazJmRE5EUGp3STFjRWdNUllBNVp6aEVES3d3eXVUbUxrUHAxZmFYbElhZXgyR29Wa0JsZktkZGdGTWRSWUQ3ZzhrMkdLTkY?oc=5" target="_blank">"기억의 틈, 유산을 잇다" 콘진원,‘ K-컬처 뮤지엄’ 전통과 기술을 융합한 기획전시 개최 - 매일일보</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">매일일보</span> | 2025-07-16 07:00
+                <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTFBpSnZUNldKYndoLTBYVERieDRBcmtCazJmRE5EUGp3STFjRWdNUllBNVp6aEVES3d3eXVUbUxrUHAxZmFYbElhZXgyR29Wa0JsZktkZGdGTWRSWUQ3ZzhrMkdLTkY?oc=5" target="_blank" class="source-link">매일일보</a> | 2025-07-16 07:00
             </div>
         </div>
 
@@ -139,9 +171,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTFBpSnZUNldKYndoLTBYVERieDRBcmtCazJmRE5EUGp3STFjRWdNUllBNVp6aEVES3d3eXVUbUxrUHAxZmFYbElhZXgyR29Wa0JsZktkZGdGTWRSWUQ3ZzhrMkdLTkY?oc=5" target="_blank">"기억의 틈, 유산을 잇다" 콘진원,‘ K-컬처 뮤지엄’ 전통과 기술을 융합한 기획전시 개최</a>&nbsp;&nbsp;<font color="#6f6f6f">매일일보</font>
-                
             </div>
         </div>
     </article>

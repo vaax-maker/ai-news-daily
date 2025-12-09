@@ -13,7 +13,7 @@
     <div class="dashboard-section">
         <h2>
             AI News
-            <a href="ai/index.html" class="section-more">More &rarr;</a>
+            <a href="{{ section_links.get('ai', 'ai/index.html') }}" class="section-more">More &rarr;</a>
         </h2>
         <ul class="preview-list">{% for item in ai_latest %}
             <li>
@@ -27,7 +27,7 @@
     <div class="dashboard-section">
         <h2>
             XR News
-            <a href="xr/index.html" class="section-more">More &rarr;</a>
+            <a href="{{ section_links.get('xr', 'xr/index.html') }}" class="section-more">More &rarr;</a>
         </h2>
         <ul class="preview-list">
             {% for item in xr_latest %}
@@ -43,7 +43,7 @@
     <div class="dashboard-section">
         <h2>
             Members News
-            <a href="members/index.html" class="section-more">More &rarr;</a>
+            <a href="{{ section_links.get('members', 'members/index.html') }}" class="section-more">More &rarr;</a>
         </h2>
         <ul class="preview-list">
             {% for item in members_latest %}
@@ -59,7 +59,7 @@
     <div class="dashboard-section">
         <h2>
             Gov Announcements
-            <a href="gov/index.html" class="section-more">More &rarr;</a>
+            <a href="{{ section_links.get('gov', 'gov/index.html') }}" class="section-more">More &rarr;</a>
         </h2>
         <ul class="preview-list">
             {% for item in gov_latest %}

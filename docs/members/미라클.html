@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>미라클 News</h1>
 <p class="subtitle">Latest news related to 미라클</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE9BV0paSGQyT1ZibjMxRTBNXzhuYnprcjROTHF5SUNYdmpyeS1peEFtb0ZyRGlzOG1Dczd4Skx4VlNpTk8tTG4yVEFZdWFQd3VKZmtDemlsLUYwaGNsR29TbnNLSTHSAWNBVV95cUxONFZ2QlVRRldIbUk0eThJdlE1RUgxc05iYjFEcHBlTUMtZFh3MmMwQ2lXSTZ3eU5fMjFPT0Q5em5ROU1Odkh0SUJJYUZndGhGTHpEVkpvVHVZc3ViTEpLd1U5Zlk?oc=5" target="_blank">‘Challenge’ Day, Haru’s ‘Miracle’… Will the dream come true on the ‘Stage of Dreams’? - 스포츠경향</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">스포츠경향</span> | 2025-12-07 14:15
+                <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE9BV0paSGQyT1ZibjMxRTBNXzhuYnprcjROTHF5SUNYdmpyeS1peEFtb0ZyRGlzOG1Dczd4Skx4VlNpTk8tTG4yVEFZdWFQd3VKZmtDemlsLUYwaGNsR29TbnNLSTHSAWNBVV95cUxONFZ2QlVRRldIbUk0eThJdlE1RUgxc05iYjFEcHBlTUMtZFh3MmMwQ2lXSTZ3eU5fMjFPT0Q5em5ROU1Odkh0SUJJYUZndGhGTHpEVkpvVHVZc3ViTEpLd1U5Zlk?oc=5" target="_blank" class="source-link">스포츠경향</a> | 2025-12-07 14:15
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE9BV0paSGQyT1ZibjMxRTBNXzhuYnprcjROTHF5SUNYdmpyeS1peEFtb0ZyRGlzOG1Dczd4Skx4VlNpTk8tTG4yVEFZdWFQd3VKZmtDemlsLUYwaGNsR29TbnNLSTHSAWNBVV95cUxONFZ2QlVRRldIbUk0eThJdlE1RUgxc05iYjFEcHBlTUMtZFh3MmMwQ2lXSTZ3eU5fMjFPT0Q5em5ROU1Odkh0SUJJYUZndGhGTHpEVkpvVHVZc3ViTEpLd1U5Zlk?oc=5" target="_blank">‘Challenge’ Day, Haru’s ‘Miracle’… Will the dream come true on the ‘Stage of Dreams’?</a>&nbsp;&nbsp;<font color="#6f6f6f">스포츠경향</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE1TWURvTzRLQmtUSG5zUjRaM293TXRkczVVYURwZGlBVjJFSU8tM3ZKTWJpbjg0TnNMS1dsQmV4cGRySDBTb0ZsOEQ5eWc4RWw5N2V4dmxCckdJUlI5QXl2WtIBX0FVX3lxTE1oVk54ZldtejN4R0FaWmhGWkI5bXBDc2xLSFdZalBMTXlTSHEyLXAwcFA0cjMyWUREcXk0MUoyVThEaUxUN2EtTEdVX0VZajNPWUtrbmpKUUQ4ZEpHay1V?oc=5" target="_blank">The miracle of ‘Love House’ that brought smiles to a family who had to endure the midwinter cold - 경향신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">경향신문</span> | 2025-12-07 08:17
+                <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE1TWURvTzRLQmtUSG5zUjRaM293TXRkczVVYURwZGlBVjJFSU8tM3ZKTWJpbjg0TnNMS1dsQmV4cGRySDBTb0ZsOEQ5eWc4RWw5N2V4dmxCckdJUlI5QXl2WtIBX0FVX3lxTE1oVk54ZldtejN4R0FaWmhGWkI5bXBDc2xLSFdZalBMTXlTSHEyLXAwcFA0cjMyWUREcXk0MUoyVThEaUxUN2EtTEdVX0VZajNPWUtrbmpKUUQ4ZEpHay1V?oc=5" target="_blank" class="source-link">경향신문</a> | 2025-12-07 08:17
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE1TWURvTzRLQmtUSG5zUjRaM293TXRkczVVYURwZGlBVjJFSU8tM3ZKTWJpbjg0TnNMS1dsQmV4cGRySDBTb0ZsOEQ5eWc4RWw5N2V4dmxCckdJUlI5QXl2WtIBX0FVX3lxTE1oVk54ZldtejN4R0FaWmhGWkI5bXBDc2xLSFdZalBMTXlTSHEyLXAwcFA0cjMyWUREcXk0MUoyVThEaUxUN2EtTEdVX0VZajNPWUtrbmpKUUQ4ZEpHay1V?oc=5" target="_blank">The miracle of ‘Love House’ that brought smiles to a family who had to endure the midwinter cold</a>&nbsp;&nbsp;<font color="#6f6f6f">경향신문</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE9SZVAtLTlLdUNibVd0ZzlaaG5JdmpLRGg4U1o2bkNfb2w4SDlKbmFtTjdFS1luVUdUSm9admdWNjZ3MERVTlE?oc=5" target="_blank">06화 홈런보다 '안타'가 먼저! - 브런치</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">브런치</span> | 2025-12-01 16:19
+                <a href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE9SZVAtLTlLdUNibVd0ZzlaaG5JdmpLRGg4U1o2bkNfb2w4SDlKbmFtTjdFS1luVUdUSm9admdWNjZ3MERVTlE?oc=5" target="_blank" class="source-link">브런치</a> | 2025-12-01 16:19
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE9SZVAtLTlLdUNibVd0ZzlaaG5JdmpLRGg4U1o2bkNfb2w4SDlKbmFtTjdFS1luVUdUSm9admdWNjZ3MERVTlE?oc=5" target="_blank">06화 홈런보다 '안타'가 먼저!</a>&nbsp;&nbsp;<font color="#6f6f6f">브런치</font>
-                
             </div>
         </div>
     </article>

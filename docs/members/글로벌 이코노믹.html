@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>글로벌 이코노믹 News</h1>
 <p class="subtitle">Latest news related to 글로벌 이코노믹</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxQQkE3V2k0LXp3amR5c2VGVzc0cGlQX1B6NmFvZ1Y5TDQ0OWRXWVZDUDlYWVduRDhuLXlabzhUalM5NkdYUXVoYlJCVnZQWk1MV3FiMldyRnduRWZ3OGJBYVFvRFRpaUhuTmg5djBwTlR4Tl9RSkg0RTNiVFNTYW84djRFWEFqTG5f?oc=5" target="_blank">시바이누, 미국 선물 거래 대형 호재에 “폭등 기대” - 글로벌이코노믹</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">글로벌이코노믹</span> | 2025-12-08 22:41
+                <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxQQkE3V2k0LXp3amR5c2VGVzc0cGlQX1B6NmFvZ1Y5TDQ0OWRXWVZDUDlYWVduRDhuLXlabzhUalM5NkdYUXVoYlJCVnZQWk1MV3FiMldyRnduRWZ3OGJBYVFvRFRpaUhuTmg5djBwTlR4Tl9RSkg0RTNiVFNTYW84djRFWEFqTG5f?oc=5" target="_blank" class="source-link">글로벌이코노믹</a> | 2025-12-08 22:41
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxQQkE3V2k0LXp3amR5c2VGVzc0cGlQX1B6NmFvZ1Y5TDQ0OWRXWVZDUDlYWVduRDhuLXlabzhUalM5NkdYUXVoYlJCVnZQWk1MV3FiMldyRnduRWZ3OGJBYVFvRFRpaUhuTmg5djBwTlR4Tl9RSkg0RTNiVFNTYW84djRFWEFqTG5f?oc=5" target="_blank">시바이누, 미국 선물 거래 대형 호재에 “폭등 기대”</a>&nbsp;&nbsp;<font color="#6f6f6f">글로벌이코노믹</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxPb3QyTkJFcU4zRVA1OHNFd0lreHZucWdjd1YtaEprdWFoZFI4MTBVU2J3NHZ4XzJ0dTMwSGlUS0tQN21tWEEwTXBzaGJmaXhNWGZQR1B5dXVfeTdfLWZVOVh2RHk0SlB6cXJXYU1YWXdtcDNnWXhSZlRtQ2QzX2s5a045RV9PUmZ2?oc=5" target="_blank">[뉴욕증시] FOMC 앞두고 3대 지수 약세 전환…마이크론 4.09% 급등·테슬라 3.39% 하락 - 글로벌이코노믹</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">글로벌이코노믹</span> | 2025-12-08 21:25
+                <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxPb3QyTkJFcU4zRVA1OHNFd0lreHZucWdjd1YtaEprdWFoZFI4MTBVU2J3NHZ4XzJ0dTMwSGlUS0tQN21tWEEwTXBzaGJmaXhNWGZQR1B5dXVfeTdfLWZVOVh2RHk0SlB6cXJXYU1YWXdtcDNnWXhSZlRtQ2QzX2s5a045RV9PUmZ2?oc=5" target="_blank" class="source-link">글로벌이코노믹</a> | 2025-12-08 21:25
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxPb3QyTkJFcU4zRVA1OHNFd0lreHZucWdjd1YtaEprdWFoZFI4MTBVU2J3NHZ4XzJ0dTMwSGlUS0tQN21tWEEwTXBzaGJmaXhNWGZQR1B5dXVfeTdfLWZVOVh2RHk0SlB6cXJXYU1YWXdtcDNnWXhSZlRtQ2QzX2s5a045RV9PUmZ2?oc=5" target="_blank">[뉴욕증시] FOMC 앞두고 3대 지수 약세 전환…마이크론 4.09% 급등·테슬라 3.39% 하락</a>&nbsp;&nbsp;<font color="#6f6f6f">글로벌이코노믹</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxOREtVY2dKUl8zNzdMcWFKQWtKaVNremFGN0djTkJkQW9OSTk0bUVWS3N0RTdWVVM5dXI1TTUydnl5T052WnRPRTVJVmJ6YzR3ejNMVFMzTEYyWTZkM242bmpCcDkzQzRaSFRwNjBlRFFKQXNqaWY3NkhlWHdiQ2pKZGtpQzVhT0tV?oc=5" target="_blank">[속보] 트럼프 긴급 행정명령 "인공지능 AI 직접 통제" - 글로벌이코노믹</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">글로벌이코노믹</span> | 2025-12-08 20:21
+                <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxOREtVY2dKUl8zNzdMcWFKQWtKaVNremFGN0djTkJkQW9OSTk0bUVWS3N0RTdWVVM5dXI1TTUydnl5T052WnRPRTVJVmJ6YzR3ejNMVFMzTEYyWTZkM242bmpCcDkzQzRaSFRwNjBlRFFKQXNqaWY3NkhlWHdiQ2pKZGtpQzVhT0tV?oc=5" target="_blank" class="source-link">글로벌이코노믹</a> | 2025-12-08 20:21
             </div>
         </div>
 
@@ -97,20 +133,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxOREtVY2dKUl8zNzdMcWFKQWtKaVNremFGN0djTkJkQW9OSTk0bUVWS3N0RTdWVVM5dXI1TTUydnl5T052WnRPRTVJVmJ6YzR3ejNMVFMzTEYyWTZkM242bmpCcDkzQzRaSFRwNjBlRFFKQXNqaWY3NkhlWHdiQ2pKZGtpQzVhT0tV?oc=5" target="_blank">[속보] 트럼프 긴급 행정명령 "인공지능 AI 직접 통제"</a>&nbsp;&nbsp;<font color="#6f6f6f">글로벌이코노믹</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbGVYT0dqajVMTkJrcHBhUWp2Tml0eXRPa1dYanhDVXdmQ1pYRGdQaE1acUNIMWxhU0EzYjdETDd4NE9IR3RfRUUyUlNzNEhQQi0zMlU2TlNlcjFSU05sNGdtYmxSZ2R0NS0tQk5PZ2pVOFdqQjRNeXRydUF5Mk1LbHVTWWdnLV9Z?oc=5" target="_blank">XRP, 美 CFTC 규제 현물 상장...금융 역사 새로 쓰다 - 글로벌이코노믹</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">글로벌이코노믹</span> | 2025-12-08 11:47
+                <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbGVYT0dqajVMTkJrcHBhUWp2Tml0eXRPa1dYanhDVXdmQ1pYRGdQaE1acUNIMWxhU0EzYjdETDd4NE9IR3RfRUUyUlNzNEhQQi0zMlU2TlNlcjFSU05sNGdtYmxSZ2R0NS0tQk5PZ2pVOFdqQjRNeXRydUF5Mk1LbHVTWWdnLV9Z?oc=5" target="_blank" class="source-link">글로벌이코노믹</a> | 2025-12-08 11:47
             </div>
         </div>
 
@@ -118,20 +152,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbGVYT0dqajVMTkJrcHBhUWp2Tml0eXRPa1dYanhDVXdmQ1pYRGdQaE1acUNIMWxhU0EzYjdETDd4NE9IR3RfRUUyUlNzNEhQQi0zMlU2TlNlcjFSU05sNGdtYmxSZ2R0NS0tQk5PZ2pVOFdqQjRNeXRydUF5Mk1LbHVTWWdnLV9Z?oc=5" target="_blank">XRP, 美 CFTC 규제 현물 상장...금융 역사 새로 쓰다</a>&nbsp;&nbsp;<font color="#6f6f6f">글로벌이코노믹</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxNbkJuWmxjQzMybUJIdUZHTTZ4ZXc5d2o5UldmR0JFYzVRWWxaNWVobnUxOEdYZDhMaXA2MlRBazhFZWVzb2RqOTV0QlY3VW14SVVPcGdzbkdMd0dmWjhiR0ZMd2czR1dJNWlaZW9OcG55WWotQ25lZDU5NGQ2bGFZUUhuRUE4Y2pBV3dj?oc=5" target="_blank">[내일날씨] 전국 아침 기온 대체로 ‘영하’ - 글로벌이코노믹</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">글로벌이코노믹</span> | 2025-12-08 11:44
+                <a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxNbkJuWmxjQzMybUJIdUZHTTZ4ZXc5d2o5UldmR0JFYzVRWWxaNWVobnUxOEdYZDhMaXA2MlRBazhFZWVzb2RqOTV0QlY3VW14SVVPcGdzbkdMd0dmWjhiR0ZMd2czR1dJNWlaZW9OcG55WWotQ25lZDU5NGQ2bGFZUUhuRUE4Y2pBV3dj?oc=5" target="_blank" class="source-link">글로벌이코노믹</a> | 2025-12-08 11:44
             </div>
         </div>
 
@@ -139,20 +171,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxNbkJuWmxjQzMybUJIdUZHTTZ4ZXc5d2o5UldmR0JFYzVRWWxaNWVobnUxOEdYZDhMaXA2MlRBazhFZWVzb2RqOTV0QlY3VW14SVVPcGdzbkdMd0dmWjhiR0ZMd2czR1dJNWlaZW9OcG55WWotQ25lZDU5NGQ2bGFZUUhuRUE4Y2pBV3dj?oc=5" target="_blank">[내일날씨] 전국 아침 기온 대체로 ‘영하’</a>&nbsp;&nbsp;<font color="#6f6f6f">글로벌이코노믹</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxQTm90YXQ4NVl6dHI2Q3o1UGhRZmpBa2VnekpVcmpvX3gwVEFTOFRxOGZaQWZfREM3d2JJNkp0MEw0RjBDNlVDVTFreDBaVm1xdmZYUmZXbXcxVlc0Y3FTNEhoM0NDRHNkUkVzUElsRHd0ZUtMVEVGUWZSMFFBX0k3QUhIelZwVi1i?oc=5" target="_blank">아로마티카, 블랙 프라이데이 기간 글로벌 매출 2배 증가 - 글로벌이코노믹</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">글로벌이코노믹</span> | 2025-12-08 11:14
+                <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxQTm90YXQ4NVl6dHI2Q3o1UGhRZmpBa2VnekpVcmpvX3gwVEFTOFRxOGZaQWZfREM3d2JJNkp0MEw0RjBDNlVDVTFreDBaVm1xdmZYUmZXbXcxVlc0Y3FTNEhoM0NDRHNkUkVzUElsRHd0ZUtMVEVGUWZSMFFBX0k3QUhIelZwVi1i?oc=5" target="_blank" class="source-link">글로벌이코노믹</a> | 2025-12-08 11:14
             </div>
         </div>
 
@@ -160,9 +190,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxQTm90YXQ4NVl6dHI2Q3o1UGhRZmpBa2VnekpVcmpvX3gwVEFTOFRxOGZaQWZfREM3d2JJNkp0MEw0RjBDNlVDVTFreDBaVm1xdmZYUmZXbXcxVlc0Y3FTNEhoM0NDRHNkUkVzUElsRHd0ZUtMVEVGUWZSMFFBX0k3QUhIelZwVi1i?oc=5" target="_blank">아로마티카, 블랙 프라이데이 기간 글로벌 매출 2배 증가</a>&nbsp;&nbsp;<font color="#6f6f6f">글로벌이코노믹</font>
-                
             </div>
         </div>
     </article>

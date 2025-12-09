@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -40,288 +80,503 @@
 <p class="subtitle">실행 시점(날짜+시간, KST)별 저장된 뉴스 목록입니다.</p>
 
 
-<ul class="archive-list">
-    <li class="archive-item">
-        <a href="daily/2025-12-09_074714.html" class="archive-link">
-            2025-12-09
-            <small>07:47:14</small>
-        </a>
-        <span class="archive-time">2025-12-09 07:47:14 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-09_003700.html" class="archive-link">
-            2025-12-09
-            <small>00:37:00</small>
-        </a>
-        <span class="archive-time">2025-12-09 00:37:00 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-09_003216.html" class="archive-link">
-            2025-12-09
-            <small>00:32:16</small>
-        </a>
-        <span class="archive-time">2025-12-09 00:32:16 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-09_002222.html" class="archive-link">
-            2025-12-09
-            <small>00:22:22</small>
-        </a>
-        <span class="archive-time">2025-12-09 00:22:22 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-09_001627.html" class="archive-link">
-            2025-12-09
-            <small>00:16:27</small>
-        </a>
-        <span class="archive-time">2025-12-09 00:16:27 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_235857.html" class="archive-link">
-            2025-12-08
-            <small>23:58:57</small>
-        </a>
-        <span class="archive-time">2025-12-08 23:58:57 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_234917.html" class="archive-link">
-            2025-12-08
-            <small>23:49:17</small>
-        </a>
-        <span class="archive-time">2025-12-08 23:49:17 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_234130.html" class="archive-link">
-            2025-12-08
-            <small>23:41:30</small>
-        </a>
-        <span class="archive-time">2025-12-08 23:41:30 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_233322.html" class="archive-link">
-            2025-12-08
-            <small>23:33:22</small>
-        </a>
-        <span class="archive-time">2025-12-08 23:33:22 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_233005.html" class="archive-link">
-            2025-12-08
-            <small>23:30:05</small>
-        </a>
-        <span class="archive-time">2025-12-08 23:30:05 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_232844.html" class="archive-link">
-            2025-12-08
-            <small>23:28:44</small>
-        </a>
-        <span class="archive-time">2025-12-08 23:28:44 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_230413.html" class="archive-link">
-            2025-12-08
-            <small>23:04:13</small>
-        </a>
-        <span class="archive-time">2025-12-08 23:04:13 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_224251.html" class="archive-link">
-            2025-12-08
-            <small>22:42:51</small>
-        </a>
-        <span class="archive-time">2025-12-08 22:42:51 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_223949.html" class="archive-link">
-            2025-12-08
-            <small>22:39:49</small>
-        </a>
-        <span class="archive-time">2025-12-08 22:39:49 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_223154.html" class="archive-link">
-            2025-12-08
-            <small>22:31:54</small>
-        </a>
-        <span class="archive-time">2025-12-08 22:31:54 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_222059.html" class="archive-link">
-            2025-12-08
-            <small>22:20:59</small>
-        </a>
-        <span class="archive-time">2025-12-08 22:20:59 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_220553.html" class="archive-link">
-            2025-12-08
-            <small>22:05:53</small>
-        </a>
-        <span class="archive-time">2025-12-08 22:05:53 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_202356.html" class="archive-link">
-            2025-12-08
-            <small>20:23:56</small>
-        </a>
-        <span class="archive-time">2025-12-08 20:23:56 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_201700.html" class="archive-link">
-            2025-12-08
-            <small>20:17:00</small>
-        </a>
-        <span class="archive-time">2025-12-08 20:17:00 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_200144.html" class="archive-link">
-            2025-12-08
-            <small>20:01:44</small>
-        </a>
-        <span class="archive-time">2025-12-08 20:01:44 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_193427.html" class="archive-link">
-            2025-12-08
-            <small>19:34:27</small>
-        </a>
-        <span class="archive-time">2025-12-08 19:34:27 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_192833.html" class="archive-link">
-            2025-12-08
-            <small>19:28:33</small>
-        </a>
-        <span class="archive-time">2025-12-08 19:28:33 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_170828.html" class="archive-link">
-            2025-12-08
-            <small>17:08:28</small>
-        </a>
-        <span class="archive-time">2025-12-08 17:08:28 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_164629.html" class="archive-link">
-            2025-12-08
-            <small>16:46:29</small>
-        </a>
-        <span class="archive-time">2025-12-08 16:46:29 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_161510.html" class="archive-link">
-            2025-12-08
-            <small>16:15:10</small>
-        </a>
-        <span class="archive-time">2025-12-08 16:15:10 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-08_105629.html" class="archive-link">
-            2025-12-08
-            <small>10:56:29</small>
-        </a>
-        <span class="archive-time">2025-12-08 10:56:29 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-06_074528.html" class="archive-link">
-            2025-12-06
-            <small>07:45:28</small>
-        </a>
-        <span class="archive-time">2025-12-06 07:45:28 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-05_152717.html" class="archive-link">
-            2025-12-05
-            <small>15:27:17</small>
-        </a>
-        <span class="archive-time">2025-12-05 15:27:17 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-05_123520.html" class="archive-link">
-            2025-12-05
-            <small>12:35:20</small>
-        </a>
-        <span class="archive-time">2025-12-05 12:35:20 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-05_120037.html" class="archive-link">
-            2025-12-05
-            <small>12:00:37</small>
-        </a>
-        <span class="archive-time">2025-12-05 12:00:37 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-05_112335.html" class="archive-link">
-            2025-12-05
-            <small>11:23:35</small>
-        </a>
-        <span class="archive-time">2025-12-05 11:23:35 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-05_100814.html" class="archive-link">
-            2025-12-05
-            <small>10:08:14</small>
-        </a>
-        <span class="archive-time">2025-12-05 10:08:14 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-05_074629.html" class="archive-link">
-            2025-12-05
-            <small>07:46:29</small>
-        </a>
-        <span class="archive-time">2025-12-05 07:46:29 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-04_163850.html" class="archive-link">
-            2025-12-04
-            <small>16:38:50</small>
-        </a>
-        <span class="archive-time">2025-12-04 16:38:50 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-04_160340.html" class="archive-link">
-            2025-12-04
-            <small>16:03:40</small>
-        </a>
-        <span class="archive-time">2025-12-04 16:03:40 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-04_154258.html" class="archive-link">
-            2025-12-04
-            <small>15:42:58</small>
-        </a>
-        <span class="archive-time">2025-12-04 15:42:58 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-04_145006.html" class="archive-link">
-            2025-12-04
-            <small>14:50:06</small>
-        </a>
-        <span class="archive-time">2025-12-04 14:50:06 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-04_142819.html" class="archive-link">
-            2025-12-04
-            <small>14:28:19</small>
-        </a>
-        <span class="archive-time">2025-12-04 14:28:19 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-04_140656.html" class="archive-link">
-            2025-12-04
-            <small>14:06:56</small>
-        </a>
-        <span class="archive-time">2025-12-04 14:06:56 (KST)</span>
-    </li>
-    <li class="archive-item">
-        <a href="daily/2025-12-04_140139.html" class="archive-link">
-            2025-12-04
-            <small>14:01:39</small>
-        </a>
-        <span class="archive-time">2025-12-04 14:01:39 (KST)</span>
-    </li>
-</ul>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>생성날짜(요일)-시간</th>
+            
+            <th>생성조건(자동-수동)</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-09_101432.html" class="text-decoration-none text-dark">
+                    2025-12-09 (화) 10:14:32
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-09_100555.html" class="text-decoration-none text-dark">
+                    2025-12-09 (화) 10:05:55
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-09_095853.html" class="text-decoration-none text-dark">
+                    2025-12-09 (화) 09:58:53
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-09_093243.html" class="text-decoration-none text-dark">
+                    2025-12-09 (화) 09:32:43
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-09_074714.html" class="text-decoration-none text-dark">
+                    2025-12-09 (화) 07:47:14
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-09_003700.html" class="text-decoration-none text-dark">
+                    2025-12-09 (화) 00:37:00
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-09_003216.html" class="text-decoration-none text-dark">
+                    2025-12-09 (화) 00:32:16
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-09_002222.html" class="text-decoration-none text-dark">
+                    2025-12-09 (화) 00:22:22
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-09_001627.html" class="text-decoration-none text-dark">
+                    2025-12-09 (화) 00:16:27
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_235857.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 23:58:57
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_234917.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 23:49:17
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_234130.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 23:41:30
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_233322.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 23:33:22
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_233005.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 23:30:05
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_232844.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 23:28:44
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_230413.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 23:04:13
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_224251.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 22:42:51
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_223949.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 22:39:49
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_223154.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 22:31:54
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_222059.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 22:20:59
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_220553.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 22:05:53
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_202356.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 20:23:56
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_201700.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 20:17:00
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_200144.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 20:01:44
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_193427.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 19:34:27
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_192833.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 19:28:33
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_170828.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 17:08:28
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_164629.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 16:46:29
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_161510.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 16:15:10
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-08_105629.html" class="text-decoration-none text-dark">
+                    2025-12-08 (월) 10:56:29
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-06_074528.html" class="text-decoration-none text-dark">
+                    2025-12-06 (토) 07:45:28
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-05_152717.html" class="text-decoration-none text-dark">
+                    2025-12-05 (금) 15:27:17
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-05_123520.html" class="text-decoration-none text-dark">
+                    2025-12-05 (금) 12:35:20
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-05_120037.html" class="text-decoration-none text-dark">
+                    2025-12-05 (금) 12:00:37
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-05_112335.html" class="text-decoration-none text-dark">
+                    2025-12-05 (금) 11:23:35
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-05_100814.html" class="text-decoration-none text-dark">
+                    2025-12-05 (금) 10:08:14
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-05_074629.html" class="text-decoration-none text-dark">
+                    2025-12-05 (금) 07:46:29
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-04_163850.html" class="text-decoration-none text-dark">
+                    2025-12-04 (목) 16:38:50
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-04_160340.html" class="text-decoration-none text-dark">
+                    2025-12-04 (목) 16:03:40
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-04_154258.html" class="text-decoration-none text-dark">
+                    2025-12-04 (목) 15:42:58
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-04_145006.html" class="text-decoration-none text-dark">
+                    2025-12-04 (목) 14:50:06
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-04_142819.html" class="text-decoration-none text-dark">
+                    2025-12-04 (목) 14:28:19
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-04_140656.html" class="text-decoration-none text-dark">
+                    2025-12-04 (목) 14:06:56
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+        <tr>
+            <td>
+                <a href="daily/2025-12-04_140139.html" class="text-decoration-none text-dark">
+                    2025-12-04 (목) 14:01:39
+                </a>
+            </td>
+            
+            <td>자동</td> <!-- Default Auto -->
+            
+        </tr>
+        
+    </tbody>
+</table>
 
 
     </div>

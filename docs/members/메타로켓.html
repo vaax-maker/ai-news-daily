@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>메타로켓 News</h1>
 <p class="subtitle">Latest news related to 메타로켓</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiS0FVX3lxTE9pM2dOMGlvbURmanFOYmtNeDE3Yk9EMDhVX0NVSVd1cHk2bk15LVJwbzNZM3A2UTZfMmc2N3FjVDVQQk5lVkNiTjJfaw?oc=5" target="_blank">09화 버추얼콘텐츠 무대 뒤편 핵심 조연들(1) - 브런치</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">브런치</span> | 2025-09-07 02:12
+                <a href="https://news.google.com/rss/articles/CBMiS0FVX3lxTE9pM2dOMGlvbURmanFOYmtNeDE3Yk9EMDhVX0NVSVd1cHk2bk15LVJwbzNZM3A2UTZfMmc2N3FjVDVQQk5lVkNiTjJfaw?oc=5" target="_blank" class="source-link">브런치</a> | 2025-09-07 02:12
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiS0FVX3lxTE9pM2dOMGlvbURmanFOYmtNeDE3Yk9EMDhVX0NVSVd1cHk2bk15LVJwbzNZM3A2UTZfMmc2N3FjVDVQQk5lVkNiTjJfaw?oc=5" target="_blank">09화 버추얼콘텐츠 무대 뒤편 핵심 조연들(1)</a>&nbsp;&nbsp;<font color="#6f6f6f">브런치</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE9Mck9yVDdUTUtJVDIzbUJfSzVDSlhRS3N5d2lUblZpZkpYQnhCQWVfbG5fNHZpRmZxTGYyMFM3a3ZsZ3lCdWtWOGs0a2o2OElSLXlhVXM3dEN6M21nQktPOQ?oc=5" target="_blank">DSC인베, 플레이브·QWER 등 서브컬처 투자 성과 - 아시아경제</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">아시아경제</span> | 2025-08-29 07:00
+                <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE9Mck9yVDdUTUtJVDIzbUJfSzVDSlhRS3N5d2lUblZpZkpYQnhCQWVfbG5fNHZpRmZxTGYyMFM3a3ZsZ3lCdWtWOGs0a2o2OElSLXlhVXM3dEN6M21nQktPOQ?oc=5" target="_blank" class="source-link">아시아경제</a> | 2025-08-29 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE9Mck9yVDdUTUtJVDIzbUJfSzVDSlhRS3N5d2lUblZpZkpYQnhCQWVfbG5fNHZpRmZxTGYyMFM3a3ZsZ3lCdWtWOGs0a2o2OElSLXlhVXM3dEN6M21nQktPOQ?oc=5" target="_blank">DSC인베, 플레이브·QWER 등 서브컬처 투자 성과</a>&nbsp;&nbsp;<font color="#6f6f6f">아시아경제</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiWEFVX3lxTFBXdkxycFNFQV9WYnNENnpOa1NRdVRlTi1EZFJIdmJsLTN6bC1LTmthMUtacTB1dW9TUVF2MVVTZTFreFdrdlp5SFVkWlVFNVVBZjVCTXVCYk3SAVtBVV95cUxNTkRiS2Z3enlyUDNMOUJPOENDTUk4c0k5NG9lMDBMQ1gwRk10UHBVYk5iaXNDSEFvVEk4NUhVdmk3QUw4TmQ4NWhjWnZCV0JNYUdmZTl5WmlyS3JF?oc=5" target="_blank">역대 최대 방문자 갱신, 언리얼 페스트 서울 2025 성료 - 게임메카</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">게임메카</span> | 2025-08-29 07:00
+                <a href="https://news.google.com/rss/articles/CBMiWEFVX3lxTFBXdkxycFNFQV9WYnNENnpOa1NRdVRlTi1EZFJIdmJsLTN6bC1LTmthMUtacTB1dW9TUVF2MVVTZTFreFdrdlp5SFVkWlVFNVVBZjVCTXVCYk3SAVtBVV95cUxNTkRiS2Z3enlyUDNMOUJPOENDTUk4c0k5NG9lMDBMQ1gwRk10UHBVYk5iaXNDSEFvVEk4NUhVdmk3QUw4TmQ4NWhjWnZCV0JNYUdmZTl5WmlyS3JF?oc=5" target="_blank" class="source-link">게임메카</a> | 2025-08-29 07:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiWEFVX3lxTFBXdkxycFNFQV9WYnNENnpOa1NRdVRlTi1EZFJIdmJsLTN6bC1LTmthMUtacTB1dW9TUVF2MVVTZTFreFdrdlp5SFVkWlVFNVVBZjVCTXVCYk3SAVtBVV95cUxNTkRiS2Z3enlyUDNMOUJPOENDTUk4c0k5NG9lMDBMQ1gwRk10UHBVYk5iaXNDSEFvVEk4NUhVdmk3QUw4TmQ4NWhjWnZCV0JNYUdmZTl5WmlyS3JF?oc=5" target="_blank">역대 최대 방문자 갱신, 언리얼 페스트 서울 2025 성료</a>&nbsp;&nbsp;<font color="#6f6f6f">게임메카</font>
-                
             </div>
         </div>
     </article>

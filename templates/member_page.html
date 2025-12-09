@@ -6,31 +6,28 @@
 <h1>{{ member.name }} News</h1>
 <p class="subtitle">Latest news related to {{ member.name }}</p>
 
-<div class="news-list">
-    {% for item in articles %}
+<div class="item-list">
+    {% for article in articles %}
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
-                <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-            </h3>
+            <h2 class="news-title">
+                <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">{{ item.source_name or 'Google News' }}</span> | {{ item.published_display }}
+                <a href="{{ article.link }}" target="_blank" class="source-link">{{ article.source_name or 'Source'
+                    }}</a> | {{ article.published_display }}
             </div>
         </div>
 
         <div class="news-body">
-            {% if item.image_url %}
+            {% if article.image_url %}
             <div class="news-image">
-                <img src="{{ item.image_url }}" alt="Thumbnail" loading="lazy">
+                <img src="{{ article.image_url }}" alt="Thumbnail" loading="lazy">
             </div>
             {% endif %}
 
             <div class="news-summary">
-                {% if item.summary_html %}
-                {{ item.summary_html | safe }}
-                {% else %}
-                <p>No summary available.</p>
-                {% endif %}
+                {{ article.summary_html | safe }}
             </div>
         </div>
     </article>

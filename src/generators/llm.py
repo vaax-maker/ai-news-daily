@@ -69,10 +69,17 @@ def _summarize_with_grok(prompt: str) -> str:
     return res.choices[0].message.content.strip()
 
 def summarize_article(text: str, title: str, display_name: str) -> str:
+    # Check if any API key is available
+    if not os.environ.get("GEMINI_API_KEY") and not os.environ.get("GROK_API_KEY"):
+        return "API Key 미설정으로 AI 요약 생략"
+
     prompt = f"""
-아래 {display_name} 관련 기사 내용을 5줄 이내 한국어로 핵심만 요약해줘.
-가능하면 수치, 회사명, 핵심 이슈 위주로 하고, 각 줄은 불릿 기호 "□"으로 시작해줘.
-핵심 키워드는 강조(**굵게**) 처리하되, URL이나 링크는 포함하지 마.
+아래 {display_name} 관련 기사를 "한글"로 요약해줘.
+조건:
+1. 기사의 핵심 내용을 **한글 40자 미만**으로 요약할 것.
+2. 영문 기사나 제목일 경우 반드시 **한글로 번역**하여 요약할 것.
+3. 명사형 종결 어미(~함, ~임)나 음슴체(~하다) 대신 해요체(~해요, ~합니다)나 자연스러운 문장으로 작성.
+4. 불릿 기호 없이 기사의 핵심만 담은 **단 한 문장**으로 작성.
 
 제목: {title}
 내용:
@@ -90,6 +97,11 @@ def rank_items_with_ai(items: List[tuple], limit: int) -> List[tuple]:
 
     # Sort by time desc first, take top 60
     candidates = sorted(items, key=lambda x: x[0], reverse=True)[:60]
+    
+    # Check API usage
+    if not os.environ.get("GEMINI_API_KEY") and not os.environ.get("GROK_API_KEY"):
+        print("[LLM] API Key missing, skipping AI ranking (fallback to time sort).")
+        return candidates[:limit]
     
     candidates_text = "\n".join([f"{idx}. {t[1]}" for idx, t in enumerate(candidates)])
     

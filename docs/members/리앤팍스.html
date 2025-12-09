@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>리앤팍스 News</h1>
 <p class="subtitle">Latest news related to 리앤팍스</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFBXS2g0VVN0aUd0Z2JmY2N0bEJ4VjVhTjdkY3piVGtKeVpWcTNhVkRCUWNHTDlJWlZDd3lBcy1jX1liUmp3TFQ5ZEV6OGlTcjBBcFd3?oc=5" target="_blank">[KMF2025]리앤팍스, VR체험으로 피트니스 혁신…"건강 미래 그린다" - 네이트</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">네이트</span> | 2025-11-28 08:04
+                <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFBXS2g0VVN0aUd0Z2JmY2N0bEJ4VjVhTjdkY3piVGtKeVpWcTNhVkRCUWNHTDlJWlZDd3lBcy1jX1liUmp3TFQ5ZEV6OGlTcjBBcFd3?oc=5" target="_blank" class="source-link">네이트</a> | 2025-11-28 08:04
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFBXS2g0VVN0aUd0Z2JmY2N0bEJ4VjVhTjdkY3piVGtKeVpWcTNhVkRCUWNHTDlJWlZDd3lBcy1jX1liUmp3TFQ5ZEV6OGlTcjBBcFd3?oc=5" target="_blank">[KMF2025]리앤팍스, VR체험으로 피트니스 혁신…"건강 미래 그린다"</a>&nbsp;&nbsp;<font color="#6f6f6f">네이트</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE9ZMDk0ZGxFaFlHY1dzeFlzanJXS0JVMlBJREdhNmJiTUttbHdZOG5fVWItRzZKelM2NHBUeXNwMk5zQ1VYaF9RVWNhRFJNMnc1a19HeXplejF6Z9IBXkFVX3lxTFBWM3kyMG1TcHh6MkxrVXVObnZnZEdvZF9zam9NVS13RW84c0RNUVhMZ254dU1jZXZzVnEzZDBCMEVmNUF1YjFUNkpGWjBDYXZTOC1RNGhUQ2YtMVdweXc?oc=5" target="_blank">'센서'로 감지해 걷고 뛰는 VR 기기인데…'모터' 없으면 놀이기구 아니다? - 파이낸셜뉴스</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">파이낸셜뉴스</span> | 2019-11-07 08:00
+                <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE9ZMDk0ZGxFaFlHY1dzeFlzanJXS0JVMlBJREdhNmJiTUttbHdZOG5fVWItRzZKelM2NHBUeXNwMk5zQ1VYaF9RVWNhRFJNMnc1a19HeXplejF6Z9IBXkFVX3lxTFBWM3kyMG1TcHh6MkxrVXVObnZnZEdvZF9zam9NVS13RW84c0RNUVhMZ254dU1jZXZzVnEzZDBCMEVmNUF1YjFUNkpGWjBDYXZTOC1RNGhUQ2YtMVdweXc?oc=5" target="_blank" class="source-link">파이낸셜뉴스</a> | 2019-11-07 08:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE9ZMDk0ZGxFaFlHY1dzeFlzanJXS0JVMlBJREdhNmJiTUttbHdZOG5fVWItRzZKelM2NHBUeXNwMk5zQ1VYaF9RVWNhRFJNMnc1a19HeXplejF6Z9IBXkFVX3lxTFBWM3kyMG1TcHh6MkxrVXVObnZnZEdvZF9zam9NVS13RW84c0RNUVhMZ254dU1jZXZzVnEzZDBCMEVmNUF1YjFUNkpGWjBDYXZTOC1RNGhUQ2YtMVdweXc?oc=5" target="_blank">'센서'로 감지해 걷고 뛰는 VR 기기인데…'모터' 없으면 놀이기구 아니다?</a>&nbsp;&nbsp;<font color="#6f6f6f">파이낸셜뉴스</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE5zdFNFZkRNMDM2ODFVOFp4Smlhb0hQbUx5N0liRXZLU2JEd3VMLUV2bTNDR1JDQVM1dG5RUHhVN2I5N0xKTVVoUi1yNUpTWm1TNjhUMlQ4TzNWVlNOa01USDR1N1VNa3hPVmtv?oc=5" target="_blank">박지호 대표 “과기부, 리앤팍스 VR영업규제 해소 기쁘다” - 게임톡</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">게임톡</span> | 2019-09-27 07:00
+                <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE5zdFNFZkRNMDM2ODFVOFp4Smlhb0hQbUx5N0liRXZLU2JEd3VMLUV2bTNDR1JDQVM1dG5RUHhVN2I5N0xKTVVoUi1yNUpTWm1TNjhUMlQ4TzNWVlNOa01USDR1N1VNa3hPVmtv?oc=5" target="_blank" class="source-link">게임톡</a> | 2019-09-27 07:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE5zdFNFZkRNMDM2ODFVOFp4Smlhb0hQbUx5N0liRXZLU2JEd3VMLUV2bTNDR1JDQVM1dG5RUHhVN2I5N0xKTVVoUi1yNUpTWm1TNjhUMlQ4TzNWVlNOa01USDR1N1VNa3hPVmtv?oc=5" target="_blank">박지호 대표 “과기부, 리앤팍스 VR영업규제 해소 기쁘다”</a>&nbsp;&nbsp;<font color="#6f6f6f">게임톡</font>
-                
             </div>
         </div>
     </article>

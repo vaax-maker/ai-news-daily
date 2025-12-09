@@ -23,19 +23,44 @@ class MemberStorage:
             
     def save_news(self, member_id: str, new_items: List[Dict]):
         """
-        Merge new items with existing items, deduplicate by link.
-        Prepend new items.
+        Merge new items with existing items.
+        Rules:
+        1. Filter out items older than 2025-01-01.
+        2. Deduplicate by link AND normalized title.
+        3. Prepend new items (incremental).
         """
+        import datetime
+        
         existing = self.load_news(member_id)
         
-        # Dedup logic: Use set of links
+        # 1. Date Filter Limit
+        cutoff_date = datetime.datetime(2025, 1, 1).timestamp()
+        
+        # Helper to normalize title for dedup
+        def normalize(s):
+            return "".join(s.split()).lower()
+
+        # Build set of existing signatures
         seen_links = {item['link'] for item in existing}
+        seen_titles = {normalize(item['title']) for item in existing if 'title' in item}
         
         unique_new = []
         for item in new_items:
-            if item['link'] not in seen_links:
-                unique_new.append(item)
-                seen_links.add(item['link'])
+            # Date Check
+            ts = item.get('timestamp', 0)
+            if ts < cutoff_date:
+                continue
+                
+            # Dedup Check
+            norm_title = normalize(item['title'])
+            if item['link'] in seen_links:
+                continue
+            if norm_title in seen_titles:
+                continue
+                
+            unique_new.append(item)
+            seen_links.add(item['link'])
+            seen_titles.add(norm_title)
                 
         if not unique_new:
             return existing # No change
@@ -43,8 +68,8 @@ class MemberStorage:
         # Prepend new items
         merged = unique_new + existing
         
-        # Limit total history? (Optional, say 100 items)
-        merged = merged[:100]
+        # Sort by timestamp desc just in case
+        merged.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
         
         try:
             with open(self._get_path(member_id), "w", encoding="utf-8") as f:

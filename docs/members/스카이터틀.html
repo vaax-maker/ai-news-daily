@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>스카이터틀 News</h1>
 <p class="subtitle">Latest news related to 스카이터틀</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE1QeldZcHRfRGtsTFRJcy1nWWNDWmIxemdqV25RSWpRbzM2MHBYOU9QZmVuaVdqSkcwbXhEZXlfQlhVSzRncEE1ck9TZTdPTVBkeDRzRXpwWUUwVmw0dmtpdNIBeEFVX3lxTE5ncm9XM1h2NWMtUFF1Q29QYldMTzQ3aGlDcjdmRUVRNjFtRk1JMWhCU1JvTEYxdFQxSmdWelNSeldWLVhvWDR1S2ZTUWdINklRdDhrcGxOX3MwYk1uWDNZWjZjbEViM1FSR2dMQ3NqVGFTOGx1RDZiWA?oc=5" target="_blank">이수근, 절친 김병만 결혼식 사회 본다 - 뉴시스</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">뉴시스</span> | 2025-08-19 07:00
+                <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE1QeldZcHRfRGtsTFRJcy1nWWNDWmIxemdqV25RSWpRbzM2MHBYOU9QZmVuaVdqSkcwbXhEZXlfQlhVSzRncEE1ck9TZTdPTVBkeDRzRXpwWUUwVmw0dmtpdNIBeEFVX3lxTE5ncm9XM1h2NWMtUFF1Q29QYldMTzQ3aGlDcjdmRUVRNjFtRk1JMWhCU1JvTEYxdFQxSmdWelNSeldWLVhvWDR1S2ZTUWdINklRdDhrcGxOX3MwYk1uWDNZWjZjbEViM1FSR2dMQ3NqVGFTOGx1RDZiWA?oc=5" target="_blank" class="source-link">뉴시스</a> | 2025-08-19 07:00
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE1QeldZcHRfRGtsTFRJcy1nWWNDWmIxemdqV25RSWpRbzM2MHBYOU9QZmVuaVdqSkcwbXhEZXlfQlhVSzRncEE1ck9TZTdPTVBkeDRzRXpwWUUwVmw0dmtpdNIBeEFVX3lxTE5ncm9XM1h2NWMtUFF1Q29QYldMTzQ3aGlDcjdmRUVRNjFtRk1JMWhCU1JvTEYxdFQxSmdWelNSeldWLVhvWDR1S2ZTUWdINklRdDhrcGxOX3MwYk1uWDNZWjZjbEViM1FSR2dMQ3NqVGFTOGx1RDZiWA?oc=5" target="_blank">이수근, 절친 김병만 결혼식 사회 본다</a>&nbsp;&nbsp;<font color="#6f6f6f">뉴시스</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5rNm9xRXB2MldwVlJYbU1oZU83RXh6UlpDYmpmYVRPMmZtcS1MdDVUOENndU1LMWRPTERNMVJXUEZrRDVnSGNXVThkZVFXajVESDR3aGZjV3pHRjlEX3RENEk0NktOZWVQZXc?oc=5" target="_blank">김병만 측 "입양 딸 파양... 더 이상 상처 받는 일 없길" - 한국일보</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">한국일보</span> | 2025-08-12 07:00
+                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5rNm9xRXB2MldwVlJYbU1oZU83RXh6UlpDYmpmYVRPMmZtcS1MdDVUOENndU1LMWRPTERNMVJXUEZrRDVnSGNXVThkZVFXajVESDR3aGZjV3pHRjlEX3RENEk0NktOZWVQZXc?oc=5" target="_blank" class="source-link">한국일보</a> | 2025-08-12 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5rNm9xRXB2MldwVlJYbU1oZU83RXh6UlpDYmpmYVRPMmZtcS1MdDVUOENndU1LMWRPTERNMVJXUEZrRDVnSGNXVThkZVFXajVESDR3aGZjV3pHRjlEX3RENEk0NktOZWVQZXc?oc=5" target="_blank">김병만 측 "입양 딸 파양... 더 이상 상처 받는 일 없길"</a>&nbsp;&nbsp;<font color="#6f6f6f">한국일보</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE90enREOTFSSVBOX0pra1dUcDFubWVuOTBMdEJhcEhVV3NpaFA5VFFIR01jRnFOaHhDbjRZdDM5Tk92Q3A3ZHNTVHFxSC01TTlFZS1TNXlWS0ltZ9IBXkFVX3lxTE8tTFM4TXVmYS1lUTlNR3F2dS1DWXlFMUF0UldIcV9yQVdHUjQ0bnNkMU05RGlFWk82VUVyUGRhWG93TmJRTzI4dnlVSnZDRHRneE0xNi11dFhkYjByV0E?oc=5" target="_blank">"판결문 해석 차이"…김병만, 입양딸 파양 논란 재입장 [전문] - 파이낸셜뉴스</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">파이낸셜뉴스</span> | 2025-08-12 07:00
+                <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE90enREOTFSSVBOX0pra1dUcDFubWVuOTBMdEJhcEhVV3NpaFA5VFFIR01jRnFOaHhDbjRZdDM5Tk92Q3A3ZHNTVHFxSC01TTlFZS1TNXlWS0ltZ9IBXkFVX3lxTE8tTFM4TXVmYS1lUTlNR3F2dS1DWXlFMUF0UldIcV9yQVdHUjQ0bnNkMU05RGlFWk82VUVyUGRhWG93TmJRTzI4dnlVSnZDRHRneE0xNi11dFhkYjByV0E?oc=5" target="_blank" class="source-link">파이낸셜뉴스</a> | 2025-08-12 07:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE90enREOTFSSVBOX0pra1dUcDFubWVuOTBMdEJhcEhVV3NpaFA5VFFIR01jRnFOaHhDbjRZdDM5Tk92Q3A3ZHNTVHFxSC01TTlFZS1TNXlWS0ltZ9IBXkFVX3lxTE8tTFM4TXVmYS1lUTlNR3F2dS1DWXlFMUF0UldIcV9yQVdHUjQ0bnNkMU05RGlFWk82VUVyUGRhWG93TmJRTzI4dnlVSnZDRHRneE0xNi11dFhkYjByV0E?oc=5" target="_blank">"판결문 해석 차이"…김병만, 입양딸 파양 논란 재입장 [전문]</a>&nbsp;&nbsp;<font color="#6f6f6f">파이낸셜뉴스</font>
-                
             </div>
         </div>
     </article>

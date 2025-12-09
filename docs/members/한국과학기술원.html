@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>한국과학기술원 News</h1>
 <p class="subtitle">Latest news related to 한국과학기술원</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE4wQWVHMXNUaklNQ3RycXExb2toNXBVVEdMNVM1ak1OUVhRX041TUsxMUJDQVoycGFXQkdZWFp4dGdPMDNvd0RGNklESEVUMnY5eUhaXzV0d0dDNk53V3JlMGxpM2xpdHR60gFsQVVfeXFMTkZpTEVYTTRTMGdoSTRTTTNCV2VZcVFYU0J3NVZyQmxvZGlVSktucDJsOEVLX1FPSzNRb3JDZG5MaWpGa0phSmhaNmRTLWNOZjBhbjBDeDk5aXlLeHZPNllWU0hwYlBVLXRCYTNv?oc=5" target="_blank">KAIST, ‘나노 물방울 기술’로 초미세먼지 99.9% 제거 - 정보통신신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">정보통신신문</span> | 2025-12-08 06:51
+                <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE4wQWVHMXNUaklNQ3RycXExb2toNXBVVEdMNVM1ak1OUVhRX041TUsxMUJDQVoycGFXQkdZWFp4dGdPMDNvd0RGNklESEVUMnY5eUhaXzV0d0dDNk53V3JlMGxpM2xpdHR60gFsQVVfeXFMTkZpTEVYTTRTMGdoSTRTTTNCV2VZcVFYU0J3NVZyQmxvZGlVSktucDJsOEVLX1FPSzNRb3JDZG5MaWpGa0phSmhaNmRTLWNOZjBhbjBDeDk5aXlLeHZPNllWU0hwYlBVLXRCYTNv?oc=5" target="_blank" class="source-link">정보통신신문</a> | 2025-12-08 06:51
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE4wQWVHMXNUaklNQ3RycXExb2toNXBVVEdMNVM1ak1OUVhRX041TUsxMUJDQVoycGFXQkdZWFp4dGdPMDNvd0RGNklESEVUMnY5eUhaXzV0d0dDNk53V3JlMGxpM2xpdHR60gFsQVVfeXFMTkZpTEVYTTRTMGdoSTRTTTNCV2VZcVFYU0J3NVZyQmxvZGlVSktucDJsOEVLX1FPSzNRb3JDZG5MaWpGa0phSmhaNmRTLWNOZjBhbjBDeDk5aXlLeHZPNllWU0hwYlBVLXRCYTNv?oc=5" target="_blank">KAIST, ‘나노 물방울 기술’로 초미세먼지 99.9% 제거</a>&nbsp;&nbsp;<font color="#6f6f6f">정보통신신문</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxQNldSQnV1WUdRY2pNV0RaYW9IWnY2R1ZrV09aQmpZeGlVNlEtUl9BNjUxVERTNjNZbC1CTFhpa0swSTJGWi0zUGJPZ2pzNklGN3ZOaHpxV2gtSjRNTUFrenZVcHdoSlBIaUVCbU5HOWFhbzExLWFMQnI5QWtKZm5scmd30gGWAUFVX3lxTE04X2ctb1FRM1oyRjI1dDhocmd2bWRiakMzY3Rid0MtdkVXcG5EcW5tamg4d2I1bnAwcUd6cjJiTDkxRGhhSXI5aUtzNHdlMUZwWDNVX0M3X3BpNHNUeW1ZeTJ3anU5dTBfRWFZX3NZTWRGSGZjc0dBQ1FfSWtiWnVVWUJCVlVfMV9GbkdwVHlHU01lV0tFZw?oc=5" target="_blank">KAIST 김일두·이승섭 교수 연구팀 “필터 없이 초미세먼지 99.9% 제거” - 조선비즈 - Chosunbiz</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">Chosunbiz</span> | 2025-12-08 06:35
+                <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxQNldSQnV1WUdRY2pNV0RaYW9IWnY2R1ZrV09aQmpZeGlVNlEtUl9BNjUxVERTNjNZbC1CTFhpa0swSTJGWi0zUGJPZ2pzNklGN3ZOaHpxV2gtSjRNTUFrenZVcHdoSlBIaUVCbU5HOWFhbzExLWFMQnI5QWtKZm5scmd30gGWAUFVX3lxTE04X2ctb1FRM1oyRjI1dDhocmd2bWRiakMzY3Rid0MtdkVXcG5EcW5tamg4d2I1bnAwcUd6cjJiTDkxRGhhSXI5aUtzNHdlMUZwWDNVX0M3X3BpNHNUeW1ZeTJ3anU5dTBfRWFZX3NZTWRGSGZjc0dBQ1FfSWtiWnVVWUJCVlVfMV9GbkdwVHlHU01lV0tFZw?oc=5" target="_blank" class="source-link">Chosunbiz</a> | 2025-12-08 06:35
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxQNldSQnV1WUdRY2pNV0RaYW9IWnY2R1ZrV09aQmpZeGlVNlEtUl9BNjUxVERTNjNZbC1CTFhpa0swSTJGWi0zUGJPZ2pzNklGN3ZOaHpxV2gtSjRNTUFrenZVcHdoSlBIaUVCbU5HOWFhbzExLWFMQnI5QWtKZm5scmd30gGWAUFVX3lxTE04X2ctb1FRM1oyRjI1dDhocmd2bWRiakMzY3Rid0MtdkVXcG5EcW5tamg4d2I1bnAwcUd6cjJiTDkxRGhhSXI5aUtzNHdlMUZwWDNVX0M3X3BpNHNUeW1ZeTJ3anU5dTBfRWFZX3NZTWRGSGZjc0dBQ1FfSWtiWnVVWUJCVlVfMV9GbkdwVHlHU01lV0tFZw?oc=5" target="_blank">KAIST 김일두·이승섭 교수 연구팀 “필터 없이 초미세먼지 99.9% 제거” - 조선비즈</a>&nbsp;&nbsp;<font color="#6f6f6f">Chosunbiz</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiTkFVX3lxTFBhbmFlT0tYTERnWFpRRlU2QzNhWnN5cDgtNUlCOWNoNktpZ1VpN1RoN2NTdlNTQmdKOWZtMkNvNHNzcnVGQ255ZEEtU2VYQQ?oc=5" target="_blank">2025 대덕특구 홍보대상, KAIST·표준연 선정 - 전자신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">전자신문</span> | 2025-12-08 05:12
+                <a href="https://news.google.com/rss/articles/CBMiTkFVX3lxTFBhbmFlT0tYTERnWFpRRlU2QzNhWnN5cDgtNUlCOWNoNktpZ1VpN1RoN2NTdlNTQmdKOWZtMkNvNHNzcnVGQ255ZEEtU2VYQQ?oc=5" target="_blank" class="source-link">전자신문</a> | 2025-12-08 05:12
             </div>
         </div>
 
@@ -97,20 +133,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiTkFVX3lxTFBhbmFlT0tYTERnWFpRRlU2QzNhWnN5cDgtNUlCOWNoNktpZ1VpN1RoN2NTdlNTQmdKOWZtMkNvNHNzcnVGQ255ZEEtU2VYQQ?oc=5" target="_blank">2025 대덕특구 홍보대상, KAIST·표준연 선정</a>&nbsp;&nbsp;<font color="#6f6f6f">전자신문</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiTEFVX3lxTE1WLXIzT2R5ZHlQOTNCQXNQY2hsV2NNdDFuSDBjLXZIVUdqa1ROX0Z3dURtNW1MLWpzWXNvUWNHeVA0N1pyRUdjeHFybG0?oc=5" target="_blank">2025 대덕특구 홍보대상, KAIST·표준연 선정 - 전자신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">전자신문</span> | 2025-12-08 05:12
+                <a href="https://news.google.com/rss/articles/CBMiTEFVX3lxTE1WLXIzT2R5ZHlQOTNCQXNQY2hsV2NNdDFuSDBjLXZIVUdqa1ROX0Z3dURtNW1MLWpzWXNvUWNHeVA0N1pyRUdjeHFybG0?oc=5" target="_blank" class="source-link">전자신문</a> | 2025-12-08 05:12
             </div>
         </div>
 
@@ -118,9 +152,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiTEFVX3lxTE1WLXIzT2R5ZHlQOTNCQXNQY2hsV2NNdDFuSDBjLXZIVUdqa1ROX0Z3dURtNW1MLWpzWXNvUWNHeVA0N1pyRUdjeHFybG0?oc=5" target="_blank">2025 대덕특구 홍보대상, KAIST·표준연 선정</a>&nbsp;&nbsp;<font color="#6f6f6f">전자신문</font>
-                
             </div>
         </div>
     </article>

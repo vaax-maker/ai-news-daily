@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>케이브이알 인터랙티브 News</h1>
 <p class="subtitle">Latest news related to 케이브이알 인터랙티브</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1XYjRvVlp2dlNRNXNWVVliRnJ1QzlyQXJmVlBVWHhZY2dSNXlRN1dpZE9NbjhOQk1KTWVIVkpZYXRXNHJ3SHduRUFadW0zNDdaNl9YR2VkWHFEWWEzNnliRVNOYWV0X1HSAWtBVV95cUxOc1Y0cjlEamtHVVJuYjBYdmlvRWc5NWMyQ0ctQ2pEd21fQ1dkdFl6ZGpubTFydzNvQmc4a1dUM0o1M3RfOFNiMEVfZUpucktDQ3pBSUtKV0twRzhndzBKeWZNMFN2aDdtbERMOA?oc=5" target="_blank">케이브이알인터랙티브, KMF 2024서 VR 기반 MICE 솔루션 소개 나서... “효율적인 전시·박람회로 다양한 비즈니스 기회 창출 지원!” - 에이빙</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">에이빙</span> | 2024-10-21 07:00
+                <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1XYjRvVlp2dlNRNXNWVVliRnJ1QzlyQXJmVlBVWHhZY2dSNXlRN1dpZE9NbjhOQk1KTWVIVkpZYXRXNHJ3SHduRUFadW0zNDdaNl9YR2VkWHFEWWEzNnliRVNOYWV0X1HSAWtBVV95cUxOc1Y0cjlEamtHVVJuYjBYdmlvRWc5NWMyQ0ctQ2pEd21fQ1dkdFl6ZGpubTFydzNvQmc4a1dUM0o1M3RfOFNiMEVfZUpucktDQ3pBSUtKV0twRzhndzBKeWZNMFN2aDdtbERMOA?oc=5" target="_blank" class="source-link">에이빙</a> | 2024-10-21 07:00
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1XYjRvVlp2dlNRNXNWVVliRnJ1QzlyQXJmVlBVWHhZY2dSNXlRN1dpZE9NbjhOQk1KTWVIVkpZYXRXNHJ3SHduRUFadW0zNDdaNl9YR2VkWHFEWWEzNnliRVNOYWV0X1HSAWtBVV95cUxOc1Y0cjlEamtHVVJuYjBYdmlvRWc5NWMyQ0ctQ2pEd21fQ1dkdFl6ZGpubTFydzNvQmc4a1dUM0o1M3RfOFNiMEVfZUpucktDQ3pBSUtKV0twRzhndzBKeWZNMFN2aDdtbERMOA?oc=5" target="_blank">케이브이알인터랙티브, KMF 2024서 VR 기반 MICE 솔루션 소개 나서... “효율적인 전시·박람회로 다양한 비즈니스 기회 창출 지원!”</a>&nbsp;&nbsp;<font color="#6f6f6f">에이빙</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9XLVRQMzNzekVacmtkSVZSdnFHUE9oZnBwN2I1QjVucEZ0RUxibTk3NDhrTS1hWGJleWZoaVJWb3RUTENyT1hTWmpyczZkamhhaEhkNi04WG5VTXhqQXVsWVd2MFBNSlXSAWtBVV95cUxPeGZfaHM1ZnpNOWtKY0kwQVpUcTMzUGJvWEpSeE5rTVE4UVBjdkZGUVV2bGFjVHdud2x3VUdSbklPbDQyRUNGLW8yQkxSRFE5YmpqUHhxdDRTRVFnTW50ZGU5QUd1QU5tcU1QUQ?oc=5" target="_blank">케이브이알 인터랙티브, 2024 월드IT쇼 참가... 메타버스 전시 플랫폼 ‘엑스알허브(XRhub)’ 선보인다 - 에이빙</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">에이빙</span> | 2024-04-11 07:00
+                <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9XLVRQMzNzekVacmtkSVZSdnFHUE9oZnBwN2I1QjVucEZ0RUxibTk3NDhrTS1hWGJleWZoaVJWb3RUTENyT1hTWmpyczZkamhhaEhkNi04WG5VTXhqQXVsWVd2MFBNSlXSAWtBVV95cUxPeGZfaHM1ZnpNOWtKY0kwQVpUcTMzUGJvWEpSeE5rTVE4UVBjdkZGUVV2bGFjVHdud2x3VUdSbklPbDQyRUNGLW8yQkxSRFE5YmpqUHhxdDRTRVFnTW50ZGU5QUd1QU5tcU1QUQ?oc=5" target="_blank" class="source-link">에이빙</a> | 2024-04-11 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9XLVRQMzNzekVacmtkSVZSdnFHUE9oZnBwN2I1QjVucEZ0RUxibTk3NDhrTS1hWGJleWZoaVJWb3RUTENyT1hTWmpyczZkamhhaEhkNi04WG5VTXhqQXVsWVd2MFBNSlXSAWtBVV95cUxPeGZfaHM1ZnpNOWtKY0kwQVpUcTMzUGJvWEpSeE5rTVE4UVBjdkZGUVV2bGFjVHdud2x3VUdSbklPbDQyRUNGLW8yQkxSRFE5YmpqUHhxdDRTRVFnTW50ZGU5QUd1QU5tcU1QUQ?oc=5" target="_blank">케이브이알 인터랙티브, 2024 월드IT쇼 참가... 메타버스 전시 플랫폼 ‘엑스알허브(XRhub)’ 선보인다</a>&nbsp;&nbsp;<font color="#6f6f6f">에이빙</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTFBjZm9aZ1p5eWtyaGJZdjBMWXNOdjR4ay02aHhSampCX0VudUpHZTFheFB2bjNvYzNIUTdYNHhKQV9MLWwycWhMSHZFQ0JYREN2M2JzUGxudG9YX0hSVkNUNQ?oc=5" target="_blank">케이브이알인터랙티브, 추모 플랫폼 ‘안녕’ 서비스 개시 - 아시아경제</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">아시아경제</span> | 2023-11-21 08:00
+                <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTFBjZm9aZ1p5eWtyaGJZdjBMWXNOdjR4ay02aHhSampCX0VudUpHZTFheFB2bjNvYzNIUTdYNHhKQV9MLWwycWhMSHZFQ0JYREN2M2JzUGxudG9YX0hSVkNUNQ?oc=5" target="_blank" class="source-link">아시아경제</a> | 2023-11-21 08:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTFBjZm9aZ1p5eWtyaGJZdjBMWXNOdjR4ay02aHhSampCX0VudUpHZTFheFB2bjNvYzNIUTdYNHhKQV9MLWwycWhMSHZFQ0JYREN2M2JzUGxudG9YX0hSVkNUNQ?oc=5" target="_blank">케이브이알인터랙티브, 추모 플랫폼 ‘안녕’ 서비스 개시</a>&nbsp;&nbsp;<font color="#6f6f6f">아시아경제</font>
-                
             </div>
         </div>
     </article>

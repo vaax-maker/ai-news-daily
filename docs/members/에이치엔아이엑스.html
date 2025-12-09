@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>에이치엔아이엑스 News</h1>
 <p class="subtitle">Latest news related to 에이치엔아이엑스</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiYkFVX3lxTE9CLVY3VTNsNkZxU29peF9HR2hBbksxZUhRWjF5ellUOTZaY0FsVUxHSnhyYU1weFJ4Y0hrQTM1RGRKWGxzZmJORmtOenV6TlJqXzZnVHd3WWZWQlVoNUtXUTRR?oc=5" target="_blank">HNIX, 차세대 3D 저작 플랫폼 ‘모델릭 플러스’ 새 버전 공개 - 디지털데일리</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">디지털데일리</span> | 2025-09-22 07:00
+                <a href="https://news.google.com/rss/articles/CBMiYkFVX3lxTE9CLVY3VTNsNkZxU29peF9HR2hBbksxZUhRWjF5ellUOTZaY0FsVUxHSnhyYU1weFJ4Y0hrQTM1RGRKWGxzZmJORmtOenV6TlJqXzZnVHd3WWZWQlVoNUtXUTRR?oc=5" target="_blank" class="source-link">디지털데일리</a> | 2025-09-22 07:00
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiYkFVX3lxTE9CLVY3VTNsNkZxU29peF9HR2hBbksxZUhRWjF5ellUOTZaY0FsVUxHSnhyYU1weFJ4Y0hrQTM1RGRKWGxzZmJORmtOenV6TlJqXzZnVHd3WWZWQlVoNUtXUTRR?oc=5" target="_blank">HNIX, 차세대 3D 저작 플랫폼 ‘모델릭 플러스’ 새 버전 공개</a>&nbsp;&nbsp;<font color="#6f6f6f">디지털데일리</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9tcFFzUnBPclcyTTJHMkFoR3VFNVNCVnAxZFprZE9GMk9SYy1IbkxSLWNTWFRheExFLXlUMlgzWURkLTdXNER5Tjl4WDBwN1gyMTFSSnh2OUdURHRLQl9wT1NMbWdEa1ZYN2tZUw?oc=5" target="_blank">누구나 XR 크리에이터로! HNIX, 차세대 3D 저작 플랫폼 공개 - 뉴스탭</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">뉴스탭</span> | 2025-09-22 07:00
+                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9tcFFzUnBPclcyTTJHMkFoR3VFNVNCVnAxZFprZE9GMk9SYy1IbkxSLWNTWFRheExFLXlUMlgzWURkLTdXNER5Tjl4WDBwN1gyMTFSSnh2OUdURHRLQl9wT1NMbWdEa1ZYN2tZUw?oc=5" target="_blank" class="source-link">뉴스탭</a> | 2025-09-22 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9tcFFzUnBPclcyTTJHMkFoR3VFNVNCVnAxZFprZE9GMk9SYy1IbkxSLWNTWFRheExFLXlUMlgzWURkLTdXNER5Tjl4WDBwN1gyMTFSSnh2OUdURHRLQl9wT1NMbWdEa1ZYN2tZUw?oc=5" target="_blank">누구나 XR 크리에이터로! HNIX, 차세대 3D 저작 플랫폼 공개</a>&nbsp;&nbsp;<font color="#6f6f6f">뉴스탭</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE83X09ZaHpmTWd6SjR4SlVLeTBfY0M2NWV4OFNucUphYW1XN3VfNFpPM29kdEZkZThkWFcwbWRlc242VHl1Vzdsa1pwaUxiNmZBcDBvWTFRaFoxejJjQ2lWRm45ZU9sUHMxMGc?oc=5" target="_blank">"글만 쓰면 3D 오브젝트 생성" HNIX, 모델릭 플러스 v2.5 공개 - kmjournal.net</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">kmjournal.net</span> | 2025-09-22 07:00
+                <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE83X09ZaHpmTWd6SjR4SlVLeTBfY0M2NWV4OFNucUphYW1XN3VfNFpPM29kdEZkZThkWFcwbWRlc242VHl1Vzdsa1pwaUxiNmZBcDBvWTFRaFoxejJjQ2lWRm45ZU9sUHMxMGc?oc=5" target="_blank" class="source-link">kmjournal.net</a> | 2025-09-22 07:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE83X09ZaHpmTWd6SjR4SlVLeTBfY0M2NWV4OFNucUphYW1XN3VfNFpPM29kdEZkZThkWFcwbWRlc242VHl1Vzdsa1pwaUxiNmZBcDBvWTFRaFoxejJjQ2lWRm45ZU9sUHMxMGc?oc=5" target="_blank">"글만 쓰면 3D 오브젝트 생성" HNIX, 모델릭 플러스 v2.5 공개</a>&nbsp;&nbsp;<font color="#6f6f6f">kmjournal.net</font>
-                
             </div>
         </div>
     </article>

@@ -10,10 +10,50 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/style.css">
     
-    <style>
-        /* Page specific overrides if any */
-    </style>
 </head>
+<style>
+    body { font-family: 'Suit', 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+    .logo-img { height: 1.5em; vertical-align: middle; margin-right: 0.5rem; }
+    
+    /* Global Table Style */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.95em;
+        background-color: white;
+    }
+    .styled-table thead tr {
+        border-top: 2px solid #adb5bd; /* Gray top */
+        border-bottom: 2px solid #adb5bd; /* Gray bottom header */
+        text-align: left;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6; /* Light gray rows */
+    }
+    .styled-table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    /* News Box Style */
+    .news-item {
+        border: 2px solid #adb5bd; /* Gray border request */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+    .news-title a { text-decoration: none; color: #333; font-weight: 700; }
+    .news-meta { color: #6c757d; font-size: 0.9em; margin-top: 5px; }
+
+    .gnb { padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 2rem; display: flex; align-items: center; }
+    .gnb a { text-decoration: none; color: #333; margin-right: 20px; font-weight: 500; }
+    .gnb a.active { color: #007bff; font-weight: 700; }
+    .header-logo { height: 24px; vertical-align: middle; margin-right: 10px; } /* Logo fix */
+</style>
 
 <body>
     <header>
@@ -39,15 +79,15 @@
 <h1>세종일렉트릭 News</h1>
 <p class="subtitle">Latest news related to 세종일렉트릭</p>
 
-<div class="news-list">
+<div class="item-list">
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE5aOThNYzZvdmU5Y2ZTRW1raEZoM25RSENTOWU4Qjl5UW80YlNvdXBrbTNVdzlNWVdra3dWR0FaYTNmV19QYTg0TTFxcG51VVlwdFR0MlRKNE5zZUpvMTlPa3pnVWZSNHVqOE5xdNIBcEFVX3lxTFBrdTVWTFc1VVJSNGItZk94RFozUmZGZXZUS2dwRVVYWVF3U3o2bXNVcVkyN1AyTGxVbzYxYnJmTFRtV1ZDY0t0UFdrT2kyUWYzbzdJcnJLYkNKNTNBeVNBc2pZZDZESDk4LS1OeGNia2Q?oc=5" target="_blank">[2025 전력AI포럼]AI, 전력인프라 시장에 도전과 기회를 불러오다 - 전기신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">전기신문</span> | 2025-09-12 07:00
+                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE5aOThNYzZvdmU5Y2ZTRW1raEZoM25RSENTOWU4Qjl5UW80YlNvdXBrbTNVdzlNWVdra3dWR0FaYTNmV19QYTg0TTFxcG51VVlwdFR0MlRKNE5zZUpvMTlPa3pnVWZSNHVqOE5xdNIBcEFVX3lxTFBrdTVWTFc1VVJSNGItZk94RFozUmZGZXZUS2dwRVVYWVF3U3o2bXNVcVkyN1AyTGxVbzYxYnJmTFRtV1ZDY0t0UFdrT2kyUWYzbzdJcnJLYkNKNTNBeVNBc2pZZDZESDk4LS1OeGNia2Q?oc=5" target="_blank" class="source-link">전기신문</a> | 2025-09-12 07:00
             </div>
         </div>
 
@@ -55,20 +95,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE5aOThNYzZvdmU5Y2ZTRW1raEZoM25RSENTOWU4Qjl5UW80YlNvdXBrbTNVdzlNWVdra3dWR0FaYTNmV19QYTg0TTFxcG51VVlwdFR0MlRKNE5zZUpvMTlPa3pnVWZSNHVqOE5xdNIBcEFVX3lxTFBrdTVWTFc1VVJSNGItZk94RFozUmZGZXZUS2dwRVVYWVF3U3o2bXNVcVkyN1AyTGxVbzYxYnJmTFRtV1ZDY0t0UFdrT2kyUWYzbzdJcnJLYkNKNTNBeVNBc2pZZDZESDk4LS1OeGNia2Q?oc=5" target="_blank">[2025 전력AI포럼]AI, 전력인프라 시장에 도전과 기회를 불러오다</a>&nbsp;&nbsp;<font color="#6f6f6f">전기신문</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE01TFNNZ2dFX1VaMDdJMmx0WnJyR2ZUenJhV1c3ZEtwaUYwYWw2M2pNdDZRMDFxbU91ajFBMnB0bXZvdXJwWC10NXM3WnJ0YVdTdXlpQWR3MVlTUUJva0FPbVB3cXZITzZWc2VlWtIBcEFVX3lxTE1QV01OTDNTc3JpR2R0WTVXcUZibUVoSzdpUEpqNm41Sk9Vc1RSZVc4X3dxNjVSZVlLUXpIM0piNEEzal93ZUg4N0FNTjBFcWZ2d3dfb0ViaEt3aTJGRXNVSEFnMm9tSWttREM3SEdwc0I?oc=5" target="_blank">전기신문, ‘2025 전력AI포럼 및 전시회’서 전력과 AI의 융합 모색 - 전기신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">전기신문</span> | 2025-08-18 07:00
+                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE01TFNNZ2dFX1VaMDdJMmx0WnJyR2ZUenJhV1c3ZEtwaUYwYWw2M2pNdDZRMDFxbU91ajFBMnB0bXZvdXJwWC10NXM3WnJ0YVdTdXlpQWR3MVlTUUJva0FPbVB3cXZITzZWc2VlWtIBcEFVX3lxTE1QV01OTDNTc3JpR2R0WTVXcUZibUVoSzdpUEpqNm41Sk9Vc1RSZVc4X3dxNjVSZVlLUXpIM0piNEEzal93ZUg4N0FNTjBFcWZ2d3dfb0ViaEt3aTJGRXNVSEFnMm9tSWttREM3SEdwc0I?oc=5" target="_blank" class="source-link">전기신문</a> | 2025-08-18 07:00
             </div>
         </div>
 
@@ -76,20 +114,18 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE01TFNNZ2dFX1VaMDdJMmx0WnJyR2ZUenJhV1c3ZEtwaUYwYWw2M2pNdDZRMDFxbU91ajFBMnB0bXZvdXJwWC10NXM3WnJ0YVdTdXlpQWR3MVlTUUJva0FPbVB3cXZITzZWc2VlWtIBcEFVX3lxTE1QV01OTDNTc3JpR2R0WTVXcUZibUVoSzdpUEpqNm41Sk9Vc1RSZVc4X3dxNjVSZVlLUXpIM0piNEEzal93ZUg4N0FNTjBFcWZ2d3dfb0ViaEt3aTJGRXNVSEFnMm9tSWttREM3SEdwc0I?oc=5" target="_blank">전기신문, ‘2025 전력AI포럼 및 전시회’서 전력과 AI의 융합 모색</a>&nbsp;&nbsp;<font color="#6f6f6f">전기신문</font>
-                
             </div>
         </div>
     </article>
     
     <article class="news-item">
         <div class="news-header">
-            <h3 class="news-title">
+            <h2 class="news-title">
                 <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9Pc0lWM2ktd2Z3Q0xnWXBoUjU5N0Fac3I5YXZENHMyZzhUdnItLTh3V0N2aXNvQlk5YVRyTlFZSVh6NTNJWmNjTGdFSERHTzFCUm9FV3lJaWVlNkVod1hrdlpQZm1PU2ZmM0lLZtIBcEFVX3lxTE5GY1MwdGdQemZTSDQ5ajVZZDg0cUo0cXVELTI1SWdINmFhVENCY2JvNmJ1UXFNSnp5Qk42dFFpLVhOSVNxbG41VmxRbzlRcWJRdHhBYTM3NnlrTkVDa0lqSzdUYzZtMWJRUkZxZWd0b3Y?oc=5" target="_blank">전력기기 업계에 부는 ‘일렉트릭’ 바람…비츠로·동우 등 앞다퉈 사명변경 - 전기신문</a>
-            </h3>
+            </h2>
             <div class="news-meta">
-                <span class="source-link">전기신문</span> | 2025-07-15 07:00
+                <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9Pc0lWM2ktd2Z3Q0xnWXBoUjU5N0Fac3I5YXZENHMyZzhUdnItLTh3V0N2aXNvQlk5YVRyTlFZSVh6NTNJWmNjTGdFSERHTzFCUm9FV3lJaWVlNkVod1hrdlpQZm1PU2ZmM0lLZtIBcEFVX3lxTE5GY1MwdGdQemZTSDQ5ajVZZDg0cUo0cXVELTI1SWdINmFhVENCY2JvNmJ1UXFNSnp5Qk42dFFpLVhOSVNxbG41VmxRbzlRcWJRdHhBYTM3NnlrTkVDa0lqSzdUYzZtMWJRUkZxZWd0b3Y?oc=5" target="_blank" class="source-link">전기신문</a> | 2025-07-15 07:00
             </div>
         </div>
 
@@ -97,9 +133,7 @@
             
 
             <div class="news-summary">
-                
                 <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE9Pc0lWM2ktd2Z3Q0xnWXBoUjU5N0Fac3I5YXZENHMyZzhUdnItLTh3V0N2aXNvQlk5YVRyTlFZSVh6NTNJWmNjTGdFSERHTzFCUm9FV3lJaWVlNkVod1hrdlpQZm1PU2ZmM0lLZtIBcEFVX3lxTE5GY1MwdGdQemZTSDQ5ajVZZDg0cUo0cXVELTI1SWdINmFhVENCY2JvNmJ1UXFNSnp5Qk42dFFpLVhOSVNxbG41VmxRbzlRcWJRdHhBYTM3NnlrTkVDa0lqSzdUYzZtMWJRUkZxZWd0b3Y?oc=5" target="_blank">전력기기 업계에 부는 ‘일렉트릭’ 바람…비츠로·동우 등 앞다퉈 사명변경</a>&nbsp;&nbsp;<font color="#6f6f6f">전기신문</font>
-                
             </div>
         </div>
     </article>

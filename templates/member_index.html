@@ -8,14 +8,30 @@
 
 
 
-<div class="calendar-list">
-    <ul class="archive-list">{% for member in members %}
-        <li>
-            <a href="{{ member.filename }}" class="archive-link">
-                <span class="archive-date">{{ member.name }}</span>
-                <span class="archive-count">View News &rarr;</span>
-            </a>
-        </li>{% endfor %}
-    </ul>
-</div>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>회사명</th>
+            <th>최근기사 생성날짜(요일)-시간</th>
+            <th>누적 기사수</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in members %}
+        <tr>
+            <td>
+                <a href="{{ member.filename }}" class="text-decoration-none text-dark fw-bold">
+                    {{ member.name }}
+                </a>
+            </td>
+            <td style="color: #666;">
+                {{ member.latest_date }}
+            </td>
+            <td style="font-weight: bold; color: #0d6efd;">
+                {{ member.count }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
