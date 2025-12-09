@@ -9,7 +9,15 @@ from src.generators.html import (
     render_daily_page, render_archive_index,
     render_member_page, render_dashboard, render_member_index
 )
-from src.utils.common import extract_source_name, extract_image_url, sanitize_summary, translate_title_to_korean, format_timestamp, markdown_bold_to_highlight
+from src.utils.common import (
+    extract_source_name,
+    extract_image_url,
+    format_timestamp,
+    markdown_bold_to_highlight,
+    sanitize_summary,
+    shorten_korean_title,
+    trim_summary_lines,
+)
 from src.utils.storage import MemberStorage
 from collections import Counter
 import re
@@ -31,10 +39,10 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         
         # Rankings (if enabled)
         if config.use_ai_ranking and config.selection_mode != "random":
-             print(f"[{config.key.upper()}] AI Ranking...")
-             selected_raw = rank_items_with_ai(raw_items, config.max_articles)
+            print(f"[{config.key.upper()}] AI Ranking...")
+            selected_raw = rank_items_with_ai(raw_items, config.max_articles)
         else:
-             selected_raw = raw_items[:config.max_articles]
+            selected_raw = raw_items[:config.max_articles]
              
         # Summarize
         summarized_items = []
@@ -43,24 +51,25 @@ def process_category(config, now_utc, kst_timezone_offset=9):
             try:
                 summary = summarize_article(text_with_url, title, config.display_name)
                 summary = sanitize_summary(summary)
+                summary = trim_summary_lines(summary)
             except Exception as e:
                 print(f"[{config.key}] Summarization error: {e}")
                 summary = "요약 실패"
 
             summarized_items.append({
-                "title": title,
+                "title": shorten_korean_title(title),
                 "link": link,
-                "summary_html": summary, 
+                "summary_html": summary,
                 "published_display": format_timestamp(ts),
                 "source_name": extract_source_name(entry, link),
                 "image_url": extract_image_url(entry),
-                "original_title": title 
+                "original_title": title
             })
             
     # Markdown processing for AI items
     if config.key != "gov":
-         for item in summarized_items:
-             item["summary_html"] = markdown_bold_to_highlight(item["summary_html"])
+        for item in summarized_items:
+            item["summary_html"] = markdown_bold_to_highlight(item["summary_html"])
 
     # 2. Render Page
     kst_now = now_utc + datetime.timedelta(hours=kst_timezone_offset)
@@ -118,7 +127,6 @@ def rebuild_indexes(categories):
 def process_members(limit_per_member=None):
     from src.config import load_members
     from src.fetchers.search import fetch_search_news
-    from src.utils.common import format_timestamp
     
     # Setup paths
     member_page_dir = "docs/members"
@@ -142,15 +150,20 @@ def process_members(limit_per_member=None):
             # 2. Format
             new_articles = []
             for ts, title, link, content, entry in raw_items:
+                summary = sanitize_summary(content)
+                summary = trim_summary_lines(summary)
+                formatted_summary = markdown_bold_to_highlight(summary)
+
                 new_articles.append({
-                    "member_name": member.name, 
-                    "title": title,
+                    "member_name": member.name,
+                    "title": shorten_korean_title(title),
                     "link": link,
                     "published_display": format_timestamp(ts),
-                    "summary_html": content, # Search returns snippet
+                    "summary_html": formatted_summary, # Search returns snippet
                     "source_name": extract_source_name(entry, link),
                     "image_url": extract_image_url(entry),
-                    "timestamp": ts
+                    "timestamp": ts,
+                    "original_title": title
                 })
             
             # 3. Save/Merge with persistence
