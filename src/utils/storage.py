@@ -1,5 +1,6 @@
 import json
 import os
+import re
 from typing import List, Dict
 
 class MemberStorage:
@@ -37,7 +38,8 @@ class MemberStorage:
         cutoff_date = datetime.datetime(2025, 1, 1).timestamp()
 
         def normalize(s):
-            return "".join(s.split()).lower()
+            cleaned = re.sub(r"[^0-9A-Za-z가-힣]", "", s)
+            return cleaned.lower()
 
         def dedup_items(items):
             seen_links = set()
