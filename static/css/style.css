@@ -66,7 +66,7 @@ header {
 }
 
 .header-logo {
-    height: 3rem;
+    height: 3.3rem; /* 3x the nav text height for balance */
     width: auto;
     vertical-align: middle;
     margin-right: 0.8rem;
@@ -228,14 +228,14 @@ html {
     line-height: 1.7;
     color: #334155;
     margin-top: -5px;
-    
+
     /* New Gray Line Style */
     background-color: #ffffff;
-    border: 1.5px solid #9ca3af; /* Gray border */
-    border-radius: 10px;
+    border: 2px solid #9ca3af; /* Gray border */
+    border-radius: 12px;
     padding: 1.25rem 1.5rem;
     position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
 /* Custom Highlight */
@@ -324,6 +324,17 @@ tr:hover {
     text-align: center;
     color: var(--text-muted);
 }
+
+.col-count {
+    width: 120px;
+    text-align: right;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.text-decoration-none { text-decoration: none; }
+.text-dark { color: var(--text-main); }
+.fw-bold { font-weight: 700; }
 
 .empty-msg {
     text-align: center;

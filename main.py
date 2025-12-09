@@ -92,6 +92,23 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         "items": summarized_items
     }
 
+
+def latest_daily_page_path(config):
+    """Return the most recent generated daily page for a category (relative to docs root)."""
+    if not os.path.isdir(config.archive_dir):
+        return None
+
+    html_files = sorted(
+        [f for f in os.listdir(config.archive_dir) if f.endswith(".html")],
+        reverse=True
+    )
+    if not html_files:
+        return None
+
+    latest_filename = html_files[0]
+    rel_dir = os.path.relpath(config.archive_dir, "docs")
+    return f"{rel_dir}/{latest_filename}"
+
 def rebuild_indexes(categories):
     # Daily Archives Index Generation
     weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
@@ -264,21 +281,26 @@ def main():
     for key, config in categories.items():
         if args.limit:
             config.max_articles = args.limit
-            
+
         try:
-           res = process_category(config, now_utc)
-           print(f"[{key}] Generated: {res['filename']}")
-           dashboard_data[key] = res.get("items", [])
-           # Store latest filename relative to docs root
-           # docs/ai/daily/xyz.html -> ai/daily/xyz.html
-           # config.archive_dir is "docs/ai/daily"
-           rel_path = f"{key}/daily/{res['filename']}"
-           dashboard_data["links"][key] = rel_path
-           
+            res = process_category(config, now_utc)
+            print(f"[{key}] Generated: {res['filename']}")
+            dashboard_data[key] = res.get("items", [])
+            # Store latest filename relative to docs root
+            # docs/ai/daily/xyz.html -> ai/daily/xyz.html
+            # config.archive_dir is "docs/ai/daily"
+            rel_path = f"{key}/daily/{res['filename']}"
+            dashboard_data["links"][key] = rel_path
+
         except Exception as e:
-           print(f"[{key}] Failed: {e}")
-           import traceback
-           traceback.print_exc()
+            print(f"[{key}] Failed: {e}")
+            import traceback
+            traceback.print_exc()
+
+        # Ensure the dashboard has a path to the newest available daily page
+        fallback_path = latest_daily_page_path(config)
+        if fallback_path:
+            dashboard_data["links"].setdefault(key, fallback_path)
     
     # 2. Process Members
     try:
