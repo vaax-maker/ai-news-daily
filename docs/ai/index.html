@@ -44,6 +44,62 @@
 </div>
 
 
+<section class="search-section card">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">기사 검색</p>
+            <h3>아카이브된 뉴스에서 키워드로 찾아보세요</h3>
+            <p class="subtitle">검색 결과는 아래와 같은 뉴스 카드 형태로 표시됩니다.</p>
+        </div>
+    </div>
+    <form class="search-bar" id="archive-search-form">
+        <input type="text" id="archive-search-input" placeholder="검색어를 입력하세요" aria-label="기사 검색">
+        <button type="submit" class="primary-btn">검색</button>
+    </form>
+    <div id="search-results-section" class="search-results hidden">
+        <div class="section-heading compact">
+            <div>
+                <p class="eyebrow">검색 결과</p>
+                <h4 id="search-result-title"></h4>
+            </div>
+            <div class="pill" id="search-count"></div>
+            <button type="button" id="search-reset" class="ghost-btn subtle">검색 닫기</button>
+        </div>
+        <div id="search-results-grid" class="news-grid"></div>
+    </div>
+</section>
+
+<section class="calendar-section card">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">날짜별 아카이브</p>
+            <h3>캘린더에서 날짜를 선택하세요</h3>
+            <p class="subtitle">날짜를 누르면 해당 날짜의 회차가 팝업으로 표시됩니다.</p>
+        </div>
+    </div>
+    <div class="calendar-nav">
+        <button id="prev-month" class="ghost-btn" aria-label="이전 달 보기">←</button>
+        <div id="current-month-label" class="month-label"></div>
+        <button id="next-month" class="ghost-btn" aria-label="다음 달 보기">→</button>
+    </div>
+    <div id="run-popover" class="run-popover hidden" role="dialog" aria-modal="false" aria-labelledby="popover-date-label">
+        <div class="popover-header">
+            <div>
+                <p class="eyebrow">회차 선택</p>
+                <h4 id="popover-date-label"></h4>
+            </div>
+            <button type="button" class="ghost-btn" id="popover-close" aria-label="회차 선택 닫기">✕</button>
+        </div>
+        <div id="popover-run-list" class="popover-list"></div>
+    </div>
+    <div class="calendar-nav">
+        <button id="prev-month" class="ghost-btn" aria-label="이전 달 보기">←</button>
+        <div id="current-month-label" class="month-label"></div>
+        <button id="next-month" class="ghost-btn" aria-label="다음 달 보기">→</button>
+    </div>
+    <div id="calendar-container" class="calendar-container"></div>
+</section>
+
 <section class="today-section card">
     <div class="section-heading">
         <div>
@@ -58,25 +114,37 @@
     </div>
 </section>
 
-<section class="calendar-section card">
-    <div class="section-heading">
-        <div>
-            <p class="eyebrow">날짜별 아카이브</p>
-            <h3>캘린더에서 날짜를 선택하세요</h3>
-            <p class="subtitle">날짜 또는 번호를 누르면 상단의 뉴스 리스트가 해당 회차로 변경됩니다.</p>
-        </div>
-    </div>
-    <div id="calendar-container" class="calendar-container"></div>
-</section>
-
 <script>
-    const runEntries = [{"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_124834.html", "time_str": "12:48:34"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_113619.html", "time_str": "11:36:19"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_110944.html", "time_str": "11:09:44"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_074555.html", "time_str": "07:45:55"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_165531.html", "time_str": "16:55:31"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_155422.html", "time_str": "15:54:22"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_152250.html", "time_str": "15:22:50"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_150649.html", "time_str": "15:06:49"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_131254.html", "time_str": "13:12:54"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_112456.html", "time_str": "11:24:56"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_102606.html", "time_str": "10:26:06"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_101432.html", "time_str": "10:14:32"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_100555.html", "time_str": "10:05:55"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_095853.html", "time_str": "09:58:53"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_093243.html", "time_str": "09:32:43"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_074714.html", "time_str": "07:47:14"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_003700.html", "time_str": "00:37:00"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_003216.html", "time_str": "00:32:16"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_002222.html", "time_str": "00:22:22"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_001627.html", "time_str": "00:16:27"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_235857.html", "time_str": "23:58:57"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_234917.html", "time_str": "23:49:17"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_234130.html", "time_str": "23:41:30"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_233322.html", "time_str": "23:33:22"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_233005.html", "time_str": "23:30:05"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_232844.html", "time_str": "23:28:44"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_230413.html", "time_str": "23:04:13"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_224251.html", "time_str": "22:42:51"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_223949.html", "time_str": "22:39:49"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_223154.html", "time_str": "22:31:54"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_222059.html", "time_str": "22:20:59"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_220553.html", "time_str": "22:05:53"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_202356.html", "time_str": "20:23:56"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_201700.html", "time_str": "20:17:00"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_200144.html", "time_str": "20:01:44"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_193427.html", "time_str": "19:34:27"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_192833.html", "time_str": "19:28:33"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_170828.html", "time_str": "17:08:28"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_164629.html", "time_str": "16:46:29"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_161510.html", "time_str": "16:15:10"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_105629.html", "time_str": "10:56:29"}, {"date_str": "2025-12-06", "day_of_week": "\ud1a0", "filename": "2025-12-06_074528.html", "time_str": "07:45:28"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_152717.html", "time_str": "15:27:17"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_123520.html", "time_str": "12:35:20"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_120037.html", "time_str": "12:00:37"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_112335.html", "time_str": "11:23:35"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_100814.html", "time_str": "10:08:14"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_074629.html", "time_str": "07:46:29"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_163850.html", "time_str": "16:38:50"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_160340.html", "time_str": "16:03:40"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_154258.html", "time_str": "15:42:58"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_145006.html", "time_str": "14:50:06"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_142819.html", "time_str": "14:28:19"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_140656.html", "time_str": "14:06:56"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_140139.html", "time_str": "14:01:39"}];
+    const runEntries = [{"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_135717.html", "time_str": "13:57:17"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_124834.html", "time_str": "12:48:34"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_113619.html", "time_str": "11:36:19"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_110944.html", "time_str": "11:09:44"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_074555.html", "time_str": "07:45:55"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_165531.html", "time_str": "16:55:31"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_155422.html", "time_str": "15:54:22"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_152250.html", "time_str": "15:22:50"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_150649.html", "time_str": "15:06:49"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_131254.html", "time_str": "13:12:54"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_112456.html", "time_str": "11:24:56"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_102606.html", "time_str": "10:26:06"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_101432.html", "time_str": "10:14:32"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_100555.html", "time_str": "10:05:55"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_095853.html", "time_str": "09:58:53"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_093243.html", "time_str": "09:32:43"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_074714.html", "time_str": "07:47:14"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_003700.html", "time_str": "00:37:00"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_003216.html", "time_str": "00:32:16"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_002222.html", "time_str": "00:22:22"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_001627.html", "time_str": "00:16:27"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_235857.html", "time_str": "23:58:57"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_234917.html", "time_str": "23:49:17"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_234130.html", "time_str": "23:41:30"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_233322.html", "time_str": "23:33:22"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_233005.html", "time_str": "23:30:05"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_232844.html", "time_str": "23:28:44"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_230413.html", "time_str": "23:04:13"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_224251.html", "time_str": "22:42:51"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_223949.html", "time_str": "22:39:49"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_223154.html", "time_str": "22:31:54"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_222059.html", "time_str": "22:20:59"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_220553.html", "time_str": "22:05:53"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_202356.html", "time_str": "20:23:56"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_201700.html", "time_str": "20:17:00"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_200144.html", "time_str": "20:01:44"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_193427.html", "time_str": "19:34:27"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_192833.html", "time_str": "19:28:33"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_170828.html", "time_str": "17:08:28"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_164629.html", "time_str": "16:46:29"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_161510.html", "time_str": "16:15:10"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_105629.html", "time_str": "10:56:29"}, {"date_str": "2025-12-06", "day_of_week": "\ud1a0", "filename": "2025-12-06_074528.html", "time_str": "07:45:28"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_152717.html", "time_str": "15:27:17"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_123520.html", "time_str": "12:35:20"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_120037.html", "time_str": "12:00:37"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_112335.html", "time_str": "11:23:35"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_100814.html", "time_str": "10:08:14"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_074629.html", "time_str": "07:46:29"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_163850.html", "time_str": "16:38:50"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_160340.html", "time_str": "16:03:40"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_154258.html", "time_str": "15:42:58"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_145006.html", "time_str": "14:50:06"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_142819.html", "time_str": "14:28:19"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_140656.html", "time_str": "14:06:56"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_140139.html", "time_str": "14:01:39"}];
     const runsByDate = {};
     const todayGrid = document.getElementById('today-news-grid');
     const dateLabel = document.getElementById('selected-date-label');
     const timeLabel = document.getElementById('selected-time-label');
     const countLabel = document.getElementById('selected-count');
     const calendarContainer = document.getElementById('calendar-container');
+    const monthLabel = document.getElementById('current-month-label');
+    const prevMonthBtn = document.getElementById('prev-month');
+    const nextMonthBtn = document.getElementById('next-month');
+    const popover = document.getElementById('run-popover');
+    const popoverList = document.getElementById('popover-run-list');
+    const popoverDateLabel = document.getElementById('popover-date-label');
+    const popoverClose = document.getElementById('popover-close');
+    const searchForm = document.getElementById('archive-search-form');
+    const searchInput = document.getElementById('archive-search-input');
+    const searchSection = document.getElementById('search-results-section');
+    const searchGrid = document.getElementById('search-results-grid');
+    const searchTitle = document.getElementById('search-result-title');
+    const searchCount = document.getElementById('search-count');
+    const searchReset = document.getElementById('search-reset');
+    const calendarCard = document.querySelector('.calendar-section');
+    const todayCard = document.querySelector('.today-section');
+
+    const articleCache = {};
+    let monthKeys = [];
+    let currentMonthIndex = 0;
+    let activeDate = '';
+    let activeDisplayIndex = 0;
+    let dateArticleTotals = {};
 
     function buildRunMap() {
         runEntries.forEach((run, idx) => {
@@ -88,6 +156,28 @@
         Object.values(runsByDate).forEach(list => {
             list.sort((a, b) => (a.time_str < b.time_str ? 1 : -1));
         });
+
+        const uniqueMonths = new Set();
+        Object.keys(runsByDate).forEach(dateStr => {
+            const key = getMonthKey(dateStr);
+            if (key) uniqueMonths.add(key);
+        });
+
+        monthKeys = Array.from(uniqueMonths).sort((a, b) => {
+            const [ay, am] = a.split('-').map(Number);
+            const [by, bm] = b.split('-').map(Number);
+            if (ay !== by) return ay - by;
+            return am - bm;
+        });
+        currentMonthIndex = monthKeys.length ? monthKeys.length - 1 : 0;
+    }
+
+    function updateDateTotals() {
+        dateArticleTotals = {};
+        Object.entries(runsByDate).forEach(([dateKey, runs]) => {
+            const total = runs.reduce((sum, run) => sum + (run.article_count || 0), 0);
+            dateArticleTotals[dateKey] = total;
+        });
     }
 
     function formatDateLabel(dateStr) {
@@ -96,57 +186,107 @@
         return `${parts[0]}년 ${Number(parts[1])}월 ${Number(parts[2])}일`;
     }
 
-    function renderTodayNews(articles, run) {
-        todayGrid.innerHTML = '';
+    function getMonthKey(dateStr) {
+        const dateObj = new Date(dateStr + 'T00:00:00');
+        if (isNaN(dateObj)) return '';
+        return `${dateObj.getFullYear()}-${dateObj.getMonth()}`;
+    }
 
+    function formatMonthLabel(key) {
+        const [year, month] = key.split('-').map(Number);
+        if (isNaN(year) || isNaN(month)) return '';
+        return `${year}년 ${month + 1}월`;
+    }
+
+    function createNewsCard(article, extraMetaParts = []) {
+        const card = document.createElement('article');
+        card.className = 'news-card';
+
+        const meta = document.createElement('div');
+        meta.className = 'news-card-meta';
+        const metaParts = [...extraMetaParts];
+        if (article.source) metaParts.push(article.source);
+        if (article.published) metaParts.push(article.published);
+        meta.textContent = metaParts.join(' · ');
+
+        const title = document.createElement('h3');
+        title.className = 'news-card-title';
+        const link = document.createElement('a');
+        link.href = article.link;
+        link.target = '_blank';
+        link.textContent = article.title;
+        title.appendChild(link);
+
+        const summary = document.createElement('div');
+        summary.className = 'news-card-summary';
+        summary.innerHTML = article.summary;
+
+        card.appendChild(title);
+        card.appendChild(meta);
+        if (article.image) {
+            const thumb = document.createElement('div');
+            thumb.className = 'news-card-thumb';
+            const img = document.createElement('img');
+            img.src = article.image;
+            img.alt = 'thumbnail';
+            img.loading = 'lazy';
+            thumb.appendChild(img);
+            card.appendChild(thumb);
+        }
+        card.appendChild(summary);
+
+        return card;
+    }
+
+    function renderNewsCards(container, articles, metaPartsFactory = () => [], emptyMessage = '결과가 없습니다.') {
+        container.innerHTML = '';
         if (!articles.length) {
-            todayGrid.innerHTML = '<p class="empty-msg">이 날짜에는 뉴스가 없습니다.</p>';
+            container.innerHTML = `<p class="empty-msg">${emptyMessage}</p>`;
             return;
         }
 
+        articles.forEach((article, idx) => {
+            const card = createNewsCard(article, metaPartsFactory(article, idx));
+            container.appendChild(card);
+        });
+    }
+
+    function updateTodayHeader(articles, run) {
         dateLabel.textContent = `${formatDateLabel(run.date_str)} (${run.day_of_week})`;
         timeLabel.textContent = `${run.time_str} 생성됨`;
         countLabel.textContent = `${run.display_index}회차 · ${articles.length}개 기사`;
+    }
 
-        articles.forEach(article => {
-            const card = document.createElement('article');
-            card.className = 'news-card';
+    async function fetchRunArticles(run) {
+        if (articleCache[run.filename]) return articleCache[run.filename];
 
-            const meta = document.createElement('div');
-            meta.className = 'news-card-meta';
-            const metaParts = [];
-            if (article.source) metaParts.push(article.source);
-            if (article.published) metaParts.push(article.published);
-            meta.textContent = metaParts.join(' · ');
+        const response = await fetch(`daily/${run.filename}`);
+        const html = await response.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const articles = Array.from(doc.querySelectorAll('.news-item')).map(item => ({
+            title: item.querySelector('.news-title a')?.textContent?.trim() || '제목 없음',
+            link: item.querySelector('.news-title a')?.getAttribute('href') || '#',
+            summary: item.querySelector('.news-summary')?.innerHTML || '',
+            source: item.querySelector('.news-meta .source-link')?.textContent?.trim() || '',
+            published: item.querySelector('.news-meta .published-date')?.textContent?.trim() || '',
+            image: item.querySelector('.news-image img')?.getAttribute('src') || ''
+        }));
 
-            const title = document.createElement('h3');
-            title.className = 'news-card-title';
-            const link = document.createElement('a');
-            link.href = article.link;
-            link.target = '_blank';
-            link.textContent = article.title;
-            title.appendChild(link);
+        articleCache[run.filename] = { articles, run };
+        run.article_count = articles.length;
+        return articleCache[run.filename];
+    }
 
-            const summary = document.createElement('div');
-            summary.className = 'news-card-summary';
-            summary.innerHTML = article.summary;
-
-            card.appendChild(title);
-            card.appendChild(meta);
-            if (article.image) {
-                const thumb = document.createElement('div');
-                thumb.className = 'news-card-thumb';
-                const img = document.createElement('img');
-                img.src = article.image;
-                img.alt = 'thumbnail';
-                img.loading = 'lazy';
-                thumb.appendChild(img);
-                card.appendChild(thumb);
-            }
-            card.appendChild(summary);
-
-            todayGrid.appendChild(card);
-        });
+    async function prefetchArticleCounts() {
+        await Promise.all(
+            runEntries.map(async (run) => {
+                if (typeof run.article_count === 'number') return;
+                const { articles } = await fetchRunArticles(run);
+                run.article_count = articles.length;
+            })
+        );
+        updateDateTotals();
+        renderCalendar();
     }
 
     async function loadRun(dateStr, runIndex = 0) {
@@ -157,131 +297,210 @@
         todayGrid.innerHTML = '<p class="empty-msg">뉴스를 불러오는 중입니다...</p>';
 
         try {
-            const response = await fetch(`daily/${run.filename}`);
-            const html = await response.text();
-            const doc = new DOMParser().parseFromString(html, 'text/html');
-            const articles = Array.from(doc.querySelectorAll('.news-item')).map(item => ({
-                title: item.querySelector('.news-title a')?.textContent?.trim() || '제목 없음',
-                link: item.querySelector('.news-title a')?.getAttribute('href') || '#',
-                summary: item.querySelector('.news-summary')?.innerHTML || '',
-                source: item.querySelector('.news-meta .source-link')?.textContent?.trim() || '',
-                published: item.querySelector('.news-meta')?.textContent?.split('|')[1]?.trim() || '',
-                image: item.querySelector('.news-image img')?.getAttribute('src') || ''
-            }));
-
-            renderTodayNews(articles, run);
-            highlightActive(dateStr, run.display_index);
+            const { articles } = await fetchRunArticles(run);
+            renderNewsCards(todayGrid, articles, () => [], '이 날짜에는 뉴스가 없습니다.');
+            updateTodayHeader(articles, run);
+            highlightActive(run.date_str, run.display_index);
         } catch (err) {
             todayGrid.innerHTML = `<p class="empty-msg">뉴스를 불러오지 못했습니다: ${err}</p>`;
         }
     }
 
-    function buildCalendar() {
-        const monthGroups = {};
-        Object.keys(runsByDate).forEach(dateStr => {
-            const dateObj = new Date(dateStr + 'T00:00:00');
-            if (isNaN(dateObj)) return;
-            const key = `${dateObj.getFullYear()}-${dateObj.getMonth()}`;
-            if (!monthGroups[key]) monthGroups[key] = { year: dateObj.getFullYear(), month: dateObj.getMonth(), dates: [] };
-            monthGroups[key].dates.push(dateObj);
-        });
-
-        const sortedKeys = Object.keys(monthGroups).sort((a, b) => Number(b.split('-')[0]) - Number(a.split('-')[0]) || Number(b.split('-')[1]) - Number(a.split('-')[1]));
+    function renderCalendar() {
+        const key = monthKeys[currentMonthIndex];
         calendarContainer.innerHTML = '';
+        monthLabel.textContent = key ? formatMonthLabel(key) : '';
 
-        sortedKeys.forEach(key => {
-            const group = monthGroups[key];
-            const firstDay = new Date(group.year, group.month, 1);
-            const lastDay = new Date(group.year, group.month + 1, 0);
+        if (!key) {
+            calendarContainer.innerHTML = '<p class="empty-msg">캘린더 데이터를 찾을 수 없습니다.</p>';
+            return;
+        }
 
-            const monthBlock = document.createElement('div');
-            monthBlock.className = 'month-block';
+        const [year, month] = key.split('-').map(Number);
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
 
-            const header = document.createElement('div');
-            header.className = 'month-header';
-            header.textContent = `${group.year}년 ${group.month + 1}월`;
-            monthBlock.appendChild(header);
+        const monthBlock = document.createElement('div');
+        monthBlock.className = 'month-block';
 
-            const weekdayRow = document.createElement('div');
-            weekdayRow.className = 'weekday-row';
-            ['일', '월', '화', '수', '목', '금', '토'].forEach(d => {
-                const wd = document.createElement('div');
-                wd.textContent = d;
-                weekdayRow.appendChild(wd);
-            });
-            monthBlock.appendChild(weekdayRow);
-
-            const grid = document.createElement('div');
-            grid.className = 'calendar-grid';
-
-            for (let i = 0; i < firstDay.getDay(); i++) {
-                grid.appendChild(document.createElement('div'));
-            }
-
-            for (let day = 1; day <= lastDay.getDate(); day++) {
-                const dateStr = `${group.year}-${String(group.month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const cell = document.createElement('div');
-                cell.className = 'calendar-cell';
-                cell.dataset.date = dateStr;
-
-                const dateLabel = document.createElement('button');
-                dateLabel.type = 'button';
-                dateLabel.className = 'cell-date';
-                dateLabel.textContent = day;
-                dateLabel.addEventListener('click', () => loadRun(dateStr, 0));
-                cell.appendChild(dateLabel);
-
-                const runs = runsByDate[dateStr];
-                if (runs && runs.length) {
-                    const badges = document.createElement('div');
-                    badges.className = 'run-badges';
-                    runs.forEach((run, idx) => {
-                        const badge = document.createElement('button');
-                        badge.type = 'button';
-                        badge.className = 'run-badge';
-                        badge.textContent = run.display_index;
-                        badge.title = `${run.time_str} 회차 보기`;
-                        badge.dataset.date = dateStr;
-                        badge.dataset.idx = run.display_index;
-                        badge.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            loadRun(dateStr, idx);
-                        });
-                        badges.appendChild(badge);
-                    });
-                    cell.appendChild(badges);
-                    cell.addEventListener('click', () => loadRun(dateStr, 0));
-                } else {
-                    cell.classList.add('empty');
-                }
-
-                grid.appendChild(cell);
-            }
-
-            monthBlock.appendChild(grid);
-            calendarContainer.appendChild(monthBlock);
+        const weekdayRow = document.createElement('div');
+        weekdayRow.className = 'weekday-row';
+        ['일', '월', '화', '수', '목', '금', '토'].forEach(d => {
+            const wd = document.createElement('div');
+            wd.textContent = d;
+            weekdayRow.appendChild(wd);
         });
+        monthBlock.appendChild(weekdayRow);
+
+        const grid = document.createElement('div');
+        grid.className = 'calendar-grid';
+
+        for (let i = 0; i < firstDay.getDay(); i++) {
+            grid.appendChild(document.createElement('div'));
+        }
+
+        for (let day = 1; day <= lastDay.getDate(); day++) {
+            const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            const cell = document.createElement('div');
+            cell.className = 'calendar-cell';
+            cell.dataset.date = dateStr;
+
+            const dateLabel = document.createElement('button');
+            dateLabel.type = 'button';
+            dateLabel.className = 'cell-date';
+            dateLabel.textContent = day;
+            cell.appendChild(dateLabel);
+
+            const runs = runsByDate[dateStr];
+            if (runs && runs.length) {
+                const runCount = document.createElement('div');
+                runCount.className = 'run-count';
+                const totalArticles = dateArticleTotals[dateStr];
+                runCount.textContent = typeof totalArticles === 'number' && totalArticles > 0 ? totalArticles : runs.length;
+                runCount.setAttribute('aria-label', `${runs.length}회차 · ${totalArticles || 0}개 기사`);
+                cell.appendChild(runCount);
+                cell.addEventListener('click', () => openRunPopover(dateStr));
+            } else {
+                cell.classList.add('empty');
+            }
+
+            grid.appendChild(cell);
+        }
+
+        monthBlock.appendChild(grid);
+        calendarContainer.appendChild(monthBlock);
+        highlightActive(activeDate, activeDisplayIndex);
     }
 
     function highlightActive(dateStr, displayIndex) {
+        activeDate = dateStr;
+        activeDisplayIndex = displayIndex;
         document.querySelectorAll('.calendar-cell').forEach(cell => cell.classList.remove('active'));
         const selector = `.calendar-cell[data-date="${dateStr}"]`;
         const target = document.querySelector(selector);
         if (target) target.classList.add('active');
+    }
 
-        document.querySelectorAll('.run-badge').forEach(b => b.classList.remove('active'));
-        if (displayIndex) {
-            const badge = document.querySelector(`.run-badge[data-date="${dateStr}"][data-idx="${displayIndex}"]`);
-            if (badge) badge.classList.add('active');
+    function changeMonth(delta) {
+        const nextIndex = currentMonthIndex + delta;
+        if (nextIndex < 0 || nextIndex >= monthKeys.length) return;
+        currentMonthIndex = nextIndex;
+        renderCalendar();
+    }
+
+    async function openRunPopover(dateStr) {
+        const runs = runsByDate[dateStr];
+        if (!runs || !runs.length) return;
+
+        popoverList.innerHTML = '<p class="empty-msg">회차 정보를 불러오는 중입니다...</p>';
+        popoverDateLabel.textContent = formatDateLabel(dateStr);
+        popover.classList.remove('hidden');
+
+        const runInfo = [];
+        for (const [idx, run] of runs.entries()) {
+            const { articles } = await fetchRunArticles(run);
+            runInfo.push({ run, count: articles.length, idx });
         }
+
+        updateDateTotals();
+        renderCalendar();
+
+        popoverList.innerHTML = '';
+        runInfo.forEach(info => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'modal-run';
+            button.innerHTML = `<div class="modal-run-title">${info.run.display_index}회차 · ${info.run.time_str}</div><div class="modal-run-sub">${info.count}개 기사</div>`;
+            button.addEventListener('click', () => {
+                popover.classList.add('hidden');
+                loadRun(dateStr, info.idx);
+            });
+            popoverList.appendChild(button);
+        });
+    }
+
+    function closePopover() {
+        popover.classList.add('hidden');
+    }
+
+    function exitSearchMode() {
+        searchSection.classList.add('hidden');
+        searchGrid.innerHTML = '';
+        searchTitle.textContent = '';
+        searchCount.textContent = '';
+        searchInput.value = '';
+        calendarCard.classList.remove('hidden');
+        todayCard.classList.remove('hidden');
+        closePopover();
+        history.replaceState({}, '', window.location.pathname);
+    }
+
+    function stripHtml(html) {
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+        return temp.textContent || '';
+    }
+
+    async function handleSearch(event) {
+        event.preventDefault();
+        const keyword = searchInput.value.trim();
+
+        if (!keyword) {
+            exitSearchMode();
+            return;
+        }
+
+        const normalized = keyword.toLowerCase();
+        searchSection.classList.remove('hidden');
+        searchGrid.innerHTML = '<p class="empty-msg">검색 중입니다...</p>';
+        searchTitle.textContent = `"${keyword}" 검색 결과`;
+        calendarCard.classList.add('hidden');
+        todayCard.classList.add('hidden');
+        closePopover();
+        history.pushState({ searching: true }, '', '#search');
+
+        const matches = [];
+        for (const run of runEntries) {
+            const { articles } = await fetchRunArticles(run);
+            articles.forEach(article => {
+                const haystack = `${article.title} ${stripHtml(article.summary)}`.toLowerCase();
+                if (haystack.includes(normalized)) {
+                    matches.push({ article, run });
+                }
+            });
+        }
+
+        searchCount.textContent = `${matches.length}건`;
+        if (!matches.length) {
+            searchGrid.innerHTML = '<p class="empty-msg">일치하는 기사가 없습니다.</p>';
+            return;
+        }
+
+        searchGrid.innerHTML = '';
+        matches.forEach(({ article, run }) => {
+            const card = createNewsCard(article, [formatDateLabel(run.date_str), run.time_str]);
+            searchGrid.appendChild(card);
+        });
     }
 
     buildRunMap();
-    buildCalendar();
+    renderCalendar();
+    prefetchArticleCounts();
     const newest = runEntries[0];
     if (newest) {
         loadRun(newest.date_str, 0);
     }
+
+    prevMonthBtn.addEventListener('click', () => changeMonth(-1));
+    nextMonthBtn.addEventListener('click', () => changeMonth(1));
+    popoverClose.addEventListener('click', closePopover);
+    searchForm.addEventListener('submit', handleSearch);
+    searchReset.addEventListener('click', exitSearchMode);
+    window.addEventListener('popstate', (event) => {
+        if (!event.state || !event.state.searching) {
+            exitSearchMode();
+        }
+    });
 </script>
 
 
