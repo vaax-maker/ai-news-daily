@@ -89,7 +89,7 @@ jobs:
       # 워크플로 입력(workflow_dispatch) 또는 기본값을 환경 변수로 전달하여 기사 선택 모드/키워드를 제어합니다.
       AI_SELECTION_MODE: ${{ github.event.inputs.ai_selection_mode || 'keyword' }}
       AI_USE_AI_RANKING: ${{ github.event.inputs.ai_use_ai_ranking || 'true' }}
-      AI_KEYWORDS: ${{ github.event.inputs.ai_keywords || '' }}
+      AI_KEYWORDS: ${{ github.event.inputs.ai_keywords || 'agent,agentic,llm,lam,robot' }}
       XR_SELECTION_MODE: ${{ github.event.inputs.xr_selection_mode || 'random' }}
       XR_USE_AI_RANKING: ${{ github.event.inputs.xr_use_ai_ranking || 'false' }}
       XR_KEYWORDS: ${{ github.event.inputs.xr_keywords || '' }}
