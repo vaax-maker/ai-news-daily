@@ -77,25 +77,107 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         for item in summarized_items:
             item["summary_html"] = markdown_bold_to_highlight(item["summary_html"])
 
+    def parse_existing_articles(html_path: str):
+        if not os.path.exists(html_path):
+            return []
+
+        with open(html_path, "r", encoding="utf-8") as f:
+            soup = BeautifulSoup(f, "html.parser")
+
+        parsed = []
+        news_articles = soup.select("article.news-item")
+
+        if news_articles:
+            for article in news_articles:
+                title_el = article.select_one(".news-title a")
+                summary_el = article.select_one(".news-summary")
+
+                parsed.append({
+                    "title": title_el.get_text(strip=True) if title_el else "",
+                    "link": title_el.get("href", "") if title_el else "",
+                    "summary_html": summary_el.decode_contents().strip() if summary_el else "",
+                    "published_display": article.select_one(".published-date").get_text(strip=True) if article.select_one(".published-date") else "",
+                    "source_name": article.select_one(".source-link").get_text(strip=True) if article.select_one(".source-link") else "",
+                    "image_url": article.select_one(".news-image img").get("src", "") if article.select_one(".news-image img") else "",
+                })
+
+            return parsed
+
+        for row in soup.select("table.styled-table tbody tr"):
+            title_el = row.select_one(".col-title a")
+            parsed.append({
+                "title": title_el.get_text(strip=True) if title_el else "",
+                "link": title_el.get("href", "") if title_el else "",
+                "dept": row.select_one(".col-dept").get_text(strip=True) if row.select_one(".col-dept") else "",
+                "manager": row.select(".col-dept")[-1].get_text(strip=True) if row.select(".col-dept") else "",
+                "date": row.select_one(".col-date").get_text(strip=True) if row.select_one(".col-date") else "",
+            })
+
+        return parsed
+
+    def resolve_daily_file(date_str: str, run_id: str):
+        os.makedirs(config.archive_dir, exist_ok=True)
+        html_files = [
+            f for f in os.listdir(config.archive_dir)
+            if f.endswith(".html") and f.startswith(date_str)
+        ]
+
+        if html_files:
+            html_files.sort()
+            return html_files[0], html_files[1:]
+
+        return f"{run_id}.html", []
+
+    def merge_articles(new_items, existing_items):
+        merged = []
+        seen_links = set()
+
+        def add_items(items):
+            for item in items:
+                link = item.get("link")
+                if link and link in seen_links:
+                    continue
+                if link:
+                    seen_links.add(link)
+                merged.append(item)
+
+        add_items(new_items)
+        add_items(existing_items)
+        return merged
+
     # 2. Render Page
     kst_now = now_utc + datetime.timedelta(hours=kst_timezone_offset)
     date_str = kst_now.strftime("%Y-%m-%d")
     time_str = kst_now.strftime("%H:%M:%S")
     run_id = kst_now.strftime("%Y-%m-%d_%H%M%S")
-    
-    html = render_daily_page(summarized_items, date_str, time_str, config)
-    
+
+    filename, duplicates = resolve_daily_file(date_str, run_id)
+    archived_articles = []
+
+    for fname in [filename] + duplicates:
+        path = os.path.join(config.archive_dir, fname)
+        archived_articles.extend(parse_existing_articles(path))
+
+    merged_items = merge_articles(summarized_items, archived_articles)
+
+    html = render_daily_page(merged_items, date_str, time_str, config)
+
     # 3. Save
-    os.makedirs(config.archive_dir, exist_ok=True)
-    filename = f"{run_id}.html"
     with open(os.path.join(config.archive_dir, filename), "w", encoding="utf-8") as f:
         f.write(html)
-        
+
+    # Clean up duplicate runs for the same day now that they are merged
+    for dup in duplicates:
+        try:
+            os.remove(os.path.join(config.archive_dir, dup))
+        except Exception:
+            pass
+
     return {
         "filename": filename,
         "date_str": date_str,
         "time_str": time_str,
-        "items": summarized_items
+        "items": merged_items
     }
 
 
@@ -208,14 +290,22 @@ def rebuild_indexes(categories):
             continue
             
         files = sorted([f for f in os.listdir(daily_dir) if f.endswith(".html")], reverse=True)
-        entries = []
+        earliest_by_date = {}
+
         for f in files:
+            date_part = f.split("_")[0]
+            existing = earliest_by_date.get(date_part)
+            if existing is None or f < existing:
+                earliest_by_date[date_part] = f
+
+        entries = []
+        for f in sorted(earliest_by_date.values(), reverse=True):
             name_part = f.replace(".html", "")
             try:
                 dt = datetime.datetime.strptime(name_part, "%Y-%m-%d_%H%M%S")
                 # Add Weekday
                 wd = weekday_map[dt.weekday()]
-                
+
                 entries.append({
                     "filename": f,
                     "date_str": dt.strftime("%Y-%m-%d"),
