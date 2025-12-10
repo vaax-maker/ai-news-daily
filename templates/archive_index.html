@@ -46,6 +46,7 @@
             <h3>캘린더에서 날짜를 선택하세요</h3>
             <p class="subtitle">날짜를 누르면 해당 날짜의 회차가 팝업으로 표시됩니다.</p>
         </div>
+        <div id="popover-run-list" class="popover-list"></div>
     </div>
     <div class="calendar-nav">
         <button id="prev-month" class="ghost-btn" aria-label="이전 달 보기">←</button>
@@ -112,7 +113,40 @@
     let activeAnchor = null;
     let dateArticleTotals = {};
 
+    function parseDateSafe(value) {
+        if (!value) return null;
+        const normalized = value.replace(/\./g, '-');
+        const parsed = new Date(normalized);
+        return isNaN(parsed) ? null : parsed;
+    }
+
+    function sortArticlesByPublished(articles) {
+        return [...articles].sort((a, b) => {
+            const da = parseDateSafe(a.published);
+            const db = parseDateSafe(b.published);
+            if (da && db) return db - da;
+            if (db) return 1;
+            if (da) return -1;
+            return 0;
+        });
+    }
+
+    function parseRunDateTime(run) {
+        if (!run?.date_str) return 0;
+        const timePart = run.time_str?.length ? run.time_str : '00:00';
+        const parsed = new Date(`${run.date_str}T${timePart}`);
+        if (!isNaN(parsed)) return parsed.getTime();
+        const fallback = new Date(run.date_str);
+        return isNaN(fallback) ? 0 : fallback.getTime();
+    }
+
+    function sortRunEntries() {
+        runEntries.sort((a, b) => parseRunDateTime(b) - parseRunDateTime(a));
+    }
+
     function buildRunMap() {
+        sortRunEntries();
+
         runEntries.forEach((run, idx) => {
             const list = runsByDate[run.date_str] || [];
             list.push({ ...run, display_index: list.length + 1, absolute_index: idx });
@@ -238,7 +272,8 @@
             image: item.querySelector('.news-image img')?.getAttribute('src') || ''
         }));
 
-        articleCache[run.filename] = { articles, run };
+        const sortedArticles = sortArticlesByPublished(articles);
+        articleCache[run.filename] = { articles: sortedArticles, run };
         run.article_count = articles.length;
         return articleCache[run.filename];
     }
@@ -318,14 +353,16 @@
             cell.appendChild(dateLabel);
 
             const runs = runsByDate[dateStr];
-            if (runs && runs.length) {
+            const hasRuns = runs && runs.length;
+            if (hasRuns) {
+                cell.classList.add('has-articles');
                 const runCount = document.createElement('div');
                 runCount.className = 'run-count';
                 const totalArticles = dateArticleTotals[dateStr];
                 runCount.textContent = typeof totalArticles === 'number' && totalArticles > 0 ? totalArticles : runs.length;
                 runCount.setAttribute('aria-label', `${runs.length}회차 · ${totalArticles || 0}개 기사`);
                 cell.appendChild(runCount);
-                cell.addEventListener('click', () => openRunPopover(dateStr, cell));
+                cell.addEventListener('click', () => handleDateSelection(dateStr, cell));
             } else {
                 cell.classList.add('empty');
             }
@@ -388,11 +425,13 @@
         popover.classList.remove('hidden');
         requestAnimationFrame(() => positionPopover(activeAnchor));
 
-        const runInfo = [];
-        for (const [idx, run] of runs.entries()) {
-            const { articles } = await fetchRunArticles(run);
-            runInfo.push({ run, count: articles.length, idx });
-        }
+        await Promise.all(
+            runs.map(async (run) => {
+                if (typeof run.article_count === 'number') return;
+                const { articles } = await fetchRunArticles(run);
+                run.article_count = articles.length;
+            })
+        );
 
         updateDateTotals();
         renderCalendar();
@@ -403,19 +442,46 @@
         }
 
         popoverList.innerHTML = '';
-        runInfo.forEach(info => {
+        runs.forEach((run, idx) => {
             const button = document.createElement('button');
             button.type = 'button';
-            button.className = 'modal-run';
-            button.innerHTML = `<div class="modal-run-title">${info.run.display_index}회차 · ${info.run.time_str}</div><div class="modal-run-sub">${info.count}개 기사</div>`;
+            button.className = 'modal-run compact';
+            button.textContent = run.display_index;
+            button.title = `${run.display_index}회차 (${run.article_count || 0}개 기사)`;
             button.addEventListener('click', () => {
                 popover.classList.add('hidden');
-                loadRun(dateStr, info.idx);
+                loadRun(dateStr, idx);
             });
             popoverList.appendChild(button);
         });
 
         positionPopover(activeAnchor);
+    }
+
+    async function handleDateSelection(dateStr, anchorEl) {
+        const runs = runsByDate[dateStr];
+        if (!runs || !runs.length) return;
+
+        let anchor = anchorEl;
+
+        if (runs.length === 1) {
+            if (typeof runs[0].article_count !== 'number') {
+                const { articles } = await fetchRunArticles(runs[0]);
+                runs[0].article_count = articles.length;
+                updateDateTotals();
+                renderCalendar();
+                anchor = document.querySelector(`.calendar-cell[data-date="${dateStr}"]`) || anchor;
+            }
+
+            const total = dateArticleTotals[dateStr] ?? runs[0].article_count;
+            if (typeof total === 'number' && total <= 1) {
+                closePopover();
+                return loadRun(dateStr, 0);
+            }
+        }
+
+        activeAnchor = anchor;
+        openRunPopover(dateStr, anchor);
     }
 
     function closePopover() {
