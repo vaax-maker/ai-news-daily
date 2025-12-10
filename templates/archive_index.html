@@ -280,8 +280,6 @@
                 run.article_count = articles.length;
             })
         );
-        updateDateTotals();
-        renderCalendar();
     }
 
     async function loadRun(dateStr, runIndex = 0) {
@@ -456,14 +454,18 @@
         });
     }
 
-    buildRunMap();
-    updateDateTotals();
-    renderCalendar();
-    prefetchArticleCounts();
-    const newest = runEntries[0];
-    if (newest) {
-        loadRun(newest.date_str, 0);
+    async function initArchivePage() {
+        buildRunMap();
+        await prefetchArticleCounts();
+        updateDateTotals();
+        renderCalendar();
+        const newest = runEntries[0];
+        if (newest) {
+            loadRun(newest.date_str, 0);
+        }
     }
+
+    initArchivePage();
 
     prevMonthBtn.addEventListener('click', () => changeMonth(-1));
     nextMonthBtn.addEventListener('click', () => changeMonth(1));
