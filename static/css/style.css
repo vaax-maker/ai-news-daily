@@ -22,6 +22,10 @@ body {
     line-height: 1.6;
 }
 
+.hidden {
+    display: none !important;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -517,9 +521,35 @@ tr:hover {
     object-fit: cover;
 }
 
+.calendar-section {
+    position: relative;
+    overflow: visible;
+}
+
 .calendar-container {
     display: grid;
     gap: 1rem;
+    position: relative;
+}
+
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.calendar-nav .ghost-btn {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-weight: 700;
+}
+
+.month-label {
+    font-weight: 800;
+    color: var(--text-main);
 }
 
 .calendar-nav {
@@ -547,6 +577,7 @@ tr:hover {
     border-radius: 10px;
     overflow: hidden;
     background: #fff;
+    width: 100%;
 }
 
 .month-header {
@@ -573,7 +604,7 @@ tr:hover {
 
 .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     gap: 0.25rem;
     padding: 0.75rem;
 }
@@ -581,7 +612,7 @@ tr:hover {
 .calendar-cell {
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    min-height: 82px;
+    min-height: 34px;
     padding: 0.4rem;
     display: flex;
     flex-direction: column;
@@ -619,8 +650,10 @@ tr:hover {
     border-radius: 6px;
     background: #f1f5f9;
     color: var(--text-main);
-    font-weight: 700;
+    font-weight: 800;
     align-self: flex-start;
+    min-width: 36px;
+    justify-content: center;
 }
 
 .search-bar {
@@ -654,6 +687,11 @@ tr:hover {
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.15s ease;
+}
+
+.ghost-btn.subtle {
+    border-color: transparent;
+    background: #f8fafc;
 }
 
 .ghost-btn:hover {
@@ -730,8 +768,62 @@ tr:hover {
     margin-top: 0.2rem;
 }
 
+.run-popover {
+    position: absolute;
+    top: -0.5rem;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    background: #fff;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    padding: 1rem;
+    width: min(520px, 94vw);
+    z-index: 4;
+}
+
+.popover-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.popover-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.5rem;
+}
+
+.popover-list .modal-run {
+    margin: 0;
+}
+
 @media (max-width: 640px) {
+    .calendar-section {
+        position: relative;
+        overflow: visible;
+    }
+
     .calendar-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 0.2rem;
+    }
+
+    .calendar-cell {
+        min-height: 30px;
+        padding: 0.35rem;
+    }
+
+    .cell-date {
+        font-size: 0.95rem;
+    }
+
+    .run-popover {
+        position: fixed;
+        top: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
