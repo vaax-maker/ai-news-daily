@@ -2,6 +2,7 @@ import os
 import datetime
 import argparse
 from src.config import load_categories
+from bs4 import BeautifulSoup
 from src.fetchers.rss import fetch_rss_items
 from src.fetchers.gov import fetch_gov_announcements
 from src.generators.llm import summarize_article, rank_items_with_ai
@@ -114,6 +115,80 @@ def latest_daily_page_path(config):
     rel_dir = os.path.relpath(config.archive_dir, "docs")
     return f"{rel_dir}/{latest_filename}"
 
+
+def parse_preview_articles_from_html(html_path, limit=5):
+    if not os.path.exists(html_path):
+        return []
+
+    with open(html_path, "r", encoding="utf-8") as f:
+        soup = BeautifulSoup(f, "html.parser")
+
+    previews = []
+    for article in soup.select("article.news-item")[:limit]:
+        title_el = article.select_one(".news-title a")
+        meta_el = article.select_one(".news-meta")
+
+        source_name = ""
+        published_display = ""
+
+        if meta_el:
+            meta_text = meta_el.get_text(" ", strip=True)
+            if "|" in meta_text:
+                left, right = meta_text.split("|", 1)
+                source_name = left.strip()
+                published_display = right.strip()
+            else:
+                published_display = meta_text
+
+        previews.append({
+            "title": title_el.get_text(strip=True) if title_el else "",
+            "link": title_el.get("href", "") if title_el else "",
+            "published_display": published_display,
+            "source_name": source_name
+        })
+
+    return previews
+
+
+def load_latest_articles_from_archive(config, limit=5):
+    latest_path = latest_daily_page_path(config)
+    if not latest_path:
+        return []
+
+    full_path = os.path.join("docs", latest_path)
+    return parse_preview_articles_from_html(full_path, limit=limit)
+
+
+def sort_gov_announcements(announcements):
+    def sort_key(item):
+        date_str = item.get("date") or item.get("published_display") or ""
+        try:
+            return datetime.datetime.strptime(date_str, "%Y-%m-%d")
+        except Exception:
+            return datetime.datetime.min
+
+    announcements.sort(key=sort_key, reverse=True)
+    return announcements
+
+
+def load_existing_members_latest(limit=5):
+    from src.config import load_members
+
+    members = load_members()
+    storage = MemberStorage()
+    collected = []
+
+    for m_key in members.keys():
+        history = storage.load_news(m_key)
+        if not history:
+            continue
+
+        history.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
+        collected.extend(history[:2])
+
+    collected.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
+    return collected[:limit]
+
 def rebuild_indexes(categories):
     # Daily Archives Index Generation
     weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
@@ -121,16 +196,7 @@ def rebuild_indexes(categories):
     for key, cfg in categories.items():
         if key == "gov":
             storage = GovStorage()
-            announcements = storage.load_announcements()
-
-            def sort_key(item):
-                date_str = item.get("date") or item.get("published_display") or ""
-                try:
-                    return datetime.datetime.strptime(date_str, "%Y-%m-%d")
-                except Exception:
-                    return datetime.datetime.min
-
-            announcements.sort(key=sort_key, reverse=True)
+            announcements = sort_gov_announcements(storage.load_announcements())
 
             index_html = render_gov_archive(announcements)
             with open(cfg.index_path, "w", encoding="utf-8") as f:
@@ -311,6 +377,19 @@ def main():
     for key, config in categories.items():
         if not run_flags.get(key, True):
             print(f"[{key}] Skipped by configuration.")
+            if key == "gov":
+                storage = GovStorage()
+                announcements = sort_gov_announcements(storage.load_announcements())
+                dashboard_data["gov"] = announcements[:5]
+                dashboard_data["links"]["gov"] = "gov/index.html"
+            else:
+                fallback_articles = load_latest_articles_from_archive(config)
+                if fallback_articles:
+                    dashboard_data[key] = fallback_articles
+
+                fallback_path = latest_daily_page_path(config)
+                if fallback_path:
+                    dashboard_data["links"][key] = fallback_path
             continue
 
         if args.limit:
@@ -351,6 +430,8 @@ def main():
             traceback.print_exc()
     else:
         print("[Members] Skipped by configuration.")
+        dashboard_data["members"] = load_existing_members_latest()
+        dashboard_data["links"]["members"] = "members/index.html"
 
     # 3. Rebuild Indexes
     rebuild_indexes(categories)
