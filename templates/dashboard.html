@@ -5,8 +5,8 @@
 {% block extra_css %}{% endblock %}
 
 {% block content %}
-<h1>VAAX 오늘의 볼거리</h1>
-<p class="subtitle">AI, XR, Government, and Startup News Aggregation</p>
+<h1>오늘의 볼거리</h1>
+<p class="subtitle">매일 오전8시에 업데이트 됩니다.</p>
 
 <div class="dashboard-grid">
     <!-- AI Section -->
@@ -42,7 +42,7 @@
     <!-- Members Section -->
     <div class="dashboard-section">
         <h2>
-            회원사관련 기사모음
+            회원사 소식
             <a href="{{ section_links.get('members', 'members/index.html') }}" class="section-more">더보기</a>
         </h2>
         <ul class="preview-list">
@@ -58,7 +58,7 @@
     <!-- Gov Section -->
     <div class="dashboard-section">
         <h2>
-            정부과제 찾기
+            정부과제
             <a href="{{ section_links.get('gov', 'gov/index.html') }}" class="section-more">더보기</a>
         </h2>
         <ul class="preview-list">
