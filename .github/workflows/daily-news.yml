@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       run_ai:
-        description: "AI 읽을거리 실행 여부"
+        description: "🔵 AI 읽을거리 실행 여부"
         required: false
         default: "실행"
         type: choice
@@ -33,7 +33,7 @@ on:
         required: false
         default: "agent,agentic,llm,lam,robot"
       run_xr:
-        description: "XR 읽을거리 실행 여부"
+        description: "🟢 XR 읽을거리 실행 여부"
         required: false
         default: "실행"
         type: choice
@@ -41,7 +41,7 @@ on:
           - "실행"
           - "건너뛰기"
       xr_selection_mode:
-        description: "XR 뉴스 선택 방식 (time/random/keyword)"
+        description: "  ↳ 🟢 XR 뉴스 선택 방식 (time/random/keyword)"
         required: false
         default: "random"
         type: choice
@@ -50,7 +50,7 @@ on:
           - "random"
           - "keyword"
       xr_use_ai_ranking:
-        description: "XR 카테고리 AI 랭킹 사용 여부 (true/false)"
+        description: "  ↳ 🟢 XR 카테고리 AI 랭킹 사용 여부 (true/false)"
         required: false
         default: "false"
         type: choice
@@ -58,7 +58,7 @@ on:
           - "true"
           - "false"
       xr_keywords:
-        description: "XR 뉴스 키워드 필터 (콤마로 구분)"
+        description: "  ↳ 🟢 XR 뉴스 키워드 필터 (콤마로 구분)"
         required: false
         default: ""
       run_gov:
@@ -87,10 +87,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # 워크플로 입력(workflow_dispatch) 또는 기본값을 환경 변수로 전달하여 기사 선택 모드/키워드를 제어합니다.
-      AI_SELECTION_MODE: ${{ github.event.inputs.ai_selection_mode || 'time' }}
+      AI_SELECTION_MODE: ${{ github.event.inputs.ai_selection_mode || 'keyword' }}
       AI_USE_AI_RANKING: ${{ github.event.inputs.ai_use_ai_ranking || 'true' }}
-      AI_KEYWORDS: ${{ github.event.inputs.ai_keywords || '' }}
-      XR_SELECTION_MODE: ${{ github.event.inputs.xr_selection_mode || 'time' }}
+      AI_KEYWORDS: ${{ github.event.inputs.ai_keywords || 'agent,agentic,llm,lam,robot' }}
+      XR_SELECTION_MODE: ${{ github.event.inputs.xr_selection_mode || 'random' }}
       XR_USE_AI_RANKING: ${{ github.event.inputs.xr_use_ai_ranking || 'false' }}
       XR_KEYWORDS: ${{ github.event.inputs.xr_keywords || '' }}
       RUN_AI: ${{ github.event.inputs.run_ai == '건너뛰기' && 'false' || 'true' }}
