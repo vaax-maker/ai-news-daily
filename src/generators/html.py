@@ -2,18 +2,45 @@ from jinja2 import Environment, FileSystemLoader
 import os
 import datetime
 
+
+def _parse_article_datetime(article):
+    candidates = [
+        article.get("published_display"),
+        article.get("published"),
+        article.get("published_at"),
+        article.get("date"),
+    ]
+
+    for value in candidates:
+        if not value:
+            continue
+        cleaned = str(value).replace(".", "-")
+        try:
+            return datetime.datetime.fromisoformat(cleaned.replace("Z", "+00:00"))
+        except Exception:
+            pass
+        for fmt in ("%Y-%m-%d %H:%M", "%Y-%m-%d"):
+            try:
+                return datetime.datetime.strptime(cleaned, fmt)
+            except Exception:
+                continue
+
+    return datetime.datetime.min
+
 # Setup Jinja2 env
 TEMPLATE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "templates")
 env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
 
 def render_daily_page(articles, date_str, time_str, config, active_tab="home"):
+    sorted_articles = sorted(articles, key=_parse_article_datetime, reverse=True)
+
     if config.is_table_view:
         template = env.get_template("daily_table.html")
     else:
         template = env.get_template("daily_list.html")
-        
+
     return template.render(
-        articles=articles,
+        articles=sorted_articles,
         date_str=date_str,
         time_str=time_str,
         category_display_name=config.display_name,

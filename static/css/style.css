@@ -22,6 +22,10 @@ body {
     line-height: 1.6;
 }
 
+.hidden {
+    display: none !important;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -223,18 +227,26 @@ html {
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
-    color: var(--text-main);
+    color: var(--primary-color);
     line-height: 1.3;
+}
+
+.news-title a {
+    color: inherit;
 }
 
 .news-title a:hover {
     text-decoration: underline;
-    color: var(--primary-color);
+    color: var(--primary-color-hover);
 }
 
 .news-meta {
     font-size: 0.9rem;
     color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
 }
 
 .source-link {
@@ -484,9 +496,26 @@ tr:hover {
     margin-bottom: 0.25rem;
 }
 
+.news-card-title a {
+    color: var(--primary-color);
+}
+
+.news-card-title a:hover {
+    color: var(--primary-color-hover);
+}
+
 .news-card-meta {
     color: var(--text-muted);
     font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.news-meta .published-date,
+.news-card-meta .published-date {
+    color: var(--text-muted);
 }
 
 .news-card-summary {
@@ -504,9 +533,35 @@ tr:hover {
     object-fit: cover;
 }
 
+.calendar-section {
+    position: relative;
+    overflow: visible;
+}
+
 .calendar-container {
     display: grid;
     gap: 1rem;
+    position: relative;
+}
+
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.calendar-nav .ghost-btn {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-weight: 700;
+}
+
+.month-label {
+    font-weight: 800;
+    color: var(--text-main);
 }
 
 .month-block {
@@ -514,6 +569,7 @@ tr:hover {
     border-radius: 10px;
     overflow: hidden;
     background: #fff;
+    width: 100%;
 }
 
 .month-header {
@@ -540,7 +596,7 @@ tr:hover {
 
 .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     gap: 0.25rem;
     padding: 0.75rem;
 }
@@ -548,7 +604,7 @@ tr:hover {
 .calendar-cell {
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    min-height: 82px;
+    min-height: 34px;
     padding: 0.4rem;
     display: flex;
     flex-direction: column;
@@ -556,6 +612,11 @@ tr:hover {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     background: #fff;
     cursor: pointer;
+}
+
+.calendar-cell.has-articles {
+    background: #e6f8d7;
+    border-color: #b9e3a0;
 }
 
 .calendar-cell.empty {
@@ -578,38 +639,191 @@ tr:hover {
     cursor: pointer;
 }
 
-.run-badges {
-    display: flex;
-    flex-wrap: wrap;
+.run-count {
+    display: inline-flex;
+    align-items: center;
     gap: 0.25rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: var(--text-main);
+    font-weight: 800;
+    align-self: flex-start;
+    min-width: 36px;
+    justify-content: center;
 }
 
-.run-badge {
+.search-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 0.75rem 1rem;
     border: 1px solid var(--border-color);
-    background: #f8fafc;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+.search-results.hidden {
+    display: none;
+}
+
+.search-results .section-heading.compact {
+    padding: 0;
+    margin-bottom: 0.75rem;
+}
+
+.ghost-btn {
+    border: 1px solid var(--border-color);
+    background: #fff;
     color: var(--text-main);
-    padding: 0.25rem 0.45rem;
-    border-radius: 6px;
-    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.15s ease;
 }
 
-.run-badge + .run-badge::before {
-    content: "|";
-    margin-right: 4px;
-    color: var(--text-muted);
+.ghost-btn.subtle {
+    border-color: transparent;
+    background: #f8fafc;
 }
 
-.run-badge.active,
-.run-badge:hover {
+.ghost-btn:hover {
     border-color: var(--primary-color);
-    background: rgba(37, 99, 235, 0.1);
     color: var(--primary-color);
 }
 
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.4);
+}
+
+.modal-body {
+    position: relative;
+    background: #fff;
+    border-radius: 14px;
+    padding: 1.25rem;
+    width: min(500px, 90vw);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+    z-index: 1;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.modal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.modal-run {
+    width: 100%;
+    text-align: left;
+    border: 1px solid var(--border-color);
+    background: #f8fafc;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.modal-run:hover {
+    border-color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.08);
+}
+
+.modal-run-title {
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.modal-run-sub {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.2rem;
+}
+
+.run-popover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: none;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    padding: 0.75rem;
+    width: min(320px, 90vw);
+    z-index: 4;
+}
+
+.popover-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.popover-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+    gap: 0.4rem;
+    margin-top: 0.25rem;
+}
+
+.popover-list .modal-run {
+    margin: 0;
+}
+
+.modal-run.compact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    padding: 0.6rem 0.4rem;
+}
+
 @media (max-width: 640px) {
-    .calendar-grid {
-        grid-template-columns: repeat(4, 1fr);
+    .calendar-section {
+        position: relative;
+        overflow: visible;
     }
+
+    .calendar-grid {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 0.2rem;
+    }
+
+    .calendar-cell {
+        min-height: 30px;
+        padding: 0.35rem;
+    }
+
+    .cell-date {
+        font-size: 0.95rem;
+    }
+
 }
