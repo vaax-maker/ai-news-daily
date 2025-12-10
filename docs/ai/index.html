@@ -63,6 +63,7 @@
                 <h4 id="search-result-title"></h4>
             </div>
             <div class="pill" id="search-count"></div>
+            <button type="button" id="search-reset" class="ghost-btn subtle">검색 닫기</button>
         </div>
         <div id="search-results-grid" class="news-grid"></div>
     </div>
@@ -75,6 +76,21 @@
             <h3>캘린더에서 날짜를 선택하세요</h3>
             <p class="subtitle">날짜를 누르면 해당 날짜의 회차가 팝업으로 표시됩니다.</p>
         </div>
+    </div>
+    <div class="calendar-nav">
+        <button id="prev-month" class="ghost-btn" aria-label="이전 달 보기">←</button>
+        <div id="current-month-label" class="month-label"></div>
+        <button id="next-month" class="ghost-btn" aria-label="다음 달 보기">→</button>
+    </div>
+    <div id="run-popover" class="run-popover hidden" role="dialog" aria-modal="false" aria-labelledby="popover-date-label">
+        <div class="popover-header">
+            <div>
+                <p class="eyebrow">회차 선택</p>
+                <h4 id="popover-date-label"></h4>
+            </div>
+            <button type="button" class="ghost-btn" id="popover-close" aria-label="회차 선택 닫기">✕</button>
+        </div>
+        <div id="popover-run-list" class="popover-list"></div>
     </div>
     <div class="calendar-nav">
         <button id="prev-month" class="ghost-btn" aria-label="이전 달 보기">←</button>
@@ -98,22 +114,8 @@
     </div>
 </section>
 
-<div id="run-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-date-label">
-    <div class="modal-backdrop"></div>
-    <div class="modal-body">
-        <div class="modal-header">
-            <div>
-                <p class="eyebrow">회차 선택</p>
-                <h3 id="modal-date-label"></h3>
-            </div>
-            <button type="button" class="ghost-btn" id="modal-close">✕</button>
-        </div>
-        <div id="modal-run-list" class="modal-list"></div>
-    </div>
-</div>
-
 <script>
-    const runEntries = [{"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_124834.html", "time_str": "12:48:34"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_113619.html", "time_str": "11:36:19"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_110944.html", "time_str": "11:09:44"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_074555.html", "time_str": "07:45:55"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_165531.html", "time_str": "16:55:31"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_155422.html", "time_str": "15:54:22"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_152250.html", "time_str": "15:22:50"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_150649.html", "time_str": "15:06:49"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_131254.html", "time_str": "13:12:54"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_112456.html", "time_str": "11:24:56"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_102606.html", "time_str": "10:26:06"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_101432.html", "time_str": "10:14:32"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_100555.html", "time_str": "10:05:55"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_095853.html", "time_str": "09:58:53"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_093243.html", "time_str": "09:32:43"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_074714.html", "time_str": "07:47:14"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_003700.html", "time_str": "00:37:00"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_003216.html", "time_str": "00:32:16"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_002222.html", "time_str": "00:22:22"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_001627.html", "time_str": "00:16:27"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_235857.html", "time_str": "23:58:57"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_234917.html", "time_str": "23:49:17"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_234130.html", "time_str": "23:41:30"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_233322.html", "time_str": "23:33:22"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_233005.html", "time_str": "23:30:05"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_232844.html", "time_str": "23:28:44"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_230413.html", "time_str": "23:04:13"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_224251.html", "time_str": "22:42:51"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_223949.html", "time_str": "22:39:49"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_223154.html", "time_str": "22:31:54"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_222059.html", "time_str": "22:20:59"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_220553.html", "time_str": "22:05:53"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_202356.html", "time_str": "20:23:56"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_201700.html", "time_str": "20:17:00"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_200144.html", "time_str": "20:01:44"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_193427.html", "time_str": "19:34:27"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_192833.html", "time_str": "19:28:33"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_170828.html", "time_str": "17:08:28"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_164629.html", "time_str": "16:46:29"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_161510.html", "time_str": "16:15:10"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_105629.html", "time_str": "10:56:29"}, {"date_str": "2025-12-06", "day_of_week": "\ud1a0", "filename": "2025-12-06_074528.html", "time_str": "07:45:28"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_152717.html", "time_str": "15:27:17"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_123520.html", "time_str": "12:35:20"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_120037.html", "time_str": "12:00:37"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_112335.html", "time_str": "11:23:35"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_100814.html", "time_str": "10:08:14"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_074629.html", "time_str": "07:46:29"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_163850.html", "time_str": "16:38:50"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_160340.html", "time_str": "16:03:40"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_154258.html", "time_str": "15:42:58"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_145006.html", "time_str": "14:50:06"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_142819.html", "time_str": "14:28:19"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_140656.html", "time_str": "14:06:56"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_140139.html", "time_str": "14:01:39"}];
+    const runEntries = [{"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_135717.html", "time_str": "13:57:17"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_124834.html", "time_str": "12:48:34"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_113619.html", "time_str": "11:36:19"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_110944.html", "time_str": "11:09:44"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_074555.html", "time_str": "07:45:55"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_165531.html", "time_str": "16:55:31"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_155422.html", "time_str": "15:54:22"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_152250.html", "time_str": "15:22:50"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_150649.html", "time_str": "15:06:49"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_131254.html", "time_str": "13:12:54"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_112456.html", "time_str": "11:24:56"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_102606.html", "time_str": "10:26:06"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_101432.html", "time_str": "10:14:32"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_100555.html", "time_str": "10:05:55"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_095853.html", "time_str": "09:58:53"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_093243.html", "time_str": "09:32:43"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_074714.html", "time_str": "07:47:14"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_003700.html", "time_str": "00:37:00"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_003216.html", "time_str": "00:32:16"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_002222.html", "time_str": "00:22:22"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_001627.html", "time_str": "00:16:27"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_235857.html", "time_str": "23:58:57"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_234917.html", "time_str": "23:49:17"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_234130.html", "time_str": "23:41:30"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_233322.html", "time_str": "23:33:22"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_233005.html", "time_str": "23:30:05"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_232844.html", "time_str": "23:28:44"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_230413.html", "time_str": "23:04:13"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_224251.html", "time_str": "22:42:51"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_223949.html", "time_str": "22:39:49"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_223154.html", "time_str": "22:31:54"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_222059.html", "time_str": "22:20:59"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_220553.html", "time_str": "22:05:53"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_202356.html", "time_str": "20:23:56"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_201700.html", "time_str": "20:17:00"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_200144.html", "time_str": "20:01:44"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_193427.html", "time_str": "19:34:27"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_192833.html", "time_str": "19:28:33"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_170828.html", "time_str": "17:08:28"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_164629.html", "time_str": "16:46:29"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_161510.html", "time_str": "16:15:10"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_105629.html", "time_str": "10:56:29"}, {"date_str": "2025-12-06", "day_of_week": "\ud1a0", "filename": "2025-12-06_074528.html", "time_str": "07:45:28"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_152717.html", "time_str": "15:27:17"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_123520.html", "time_str": "12:35:20"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_120037.html", "time_str": "12:00:37"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_112335.html", "time_str": "11:23:35"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_100814.html", "time_str": "10:08:14"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_074629.html", "time_str": "07:46:29"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_163850.html", "time_str": "16:38:50"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_160340.html", "time_str": "16:03:40"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_154258.html", "time_str": "15:42:58"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_145006.html", "time_str": "14:50:06"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_142819.html", "time_str": "14:28:19"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_140656.html", "time_str": "14:06:56"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_140139.html", "time_str": "14:01:39"}];
     const runsByDate = {};
     const todayGrid = document.getElementById('today-news-grid');
     const dateLabel = document.getElementById('selected-date-label');
@@ -123,22 +125,26 @@
     const monthLabel = document.getElementById('current-month-label');
     const prevMonthBtn = document.getElementById('prev-month');
     const nextMonthBtn = document.getElementById('next-month');
-    const modal = document.getElementById('run-modal');
-    const modalList = document.getElementById('modal-run-list');
-    const modalDateLabel = document.getElementById('modal-date-label');
-    const modalClose = document.getElementById('modal-close');
+    const popover = document.getElementById('run-popover');
+    const popoverList = document.getElementById('popover-run-list');
+    const popoverDateLabel = document.getElementById('popover-date-label');
+    const popoverClose = document.getElementById('popover-close');
     const searchForm = document.getElementById('archive-search-form');
     const searchInput = document.getElementById('archive-search-input');
     const searchSection = document.getElementById('search-results-section');
     const searchGrid = document.getElementById('search-results-grid');
     const searchTitle = document.getElementById('search-result-title');
     const searchCount = document.getElementById('search-count');
+    const searchReset = document.getElementById('search-reset');
+    const calendarCard = document.querySelector('.calendar-section');
+    const todayCard = document.querySelector('.today-section');
 
     const articleCache = {};
     let monthKeys = [];
     let currentMonthIndex = 0;
     let activeDate = '';
     let activeDisplayIndex = 0;
+    let dateArticleTotals = {};
 
     function buildRunMap() {
         runEntries.forEach((run, idx) => {
@@ -164,6 +170,14 @@
             return am - bm;
         });
         currentMonthIndex = monthKeys.length ? monthKeys.length - 1 : 0;
+    }
+
+    function updateDateTotals() {
+        dateArticleTotals = {};
+        Object.entries(runsByDate).forEach(([dateKey, runs]) => {
+            const total = runs.reduce((sum, run) => sum + (run.article_count || 0), 0);
+            dateArticleTotals[dateKey] = total;
+        });
     }
 
     function formatDateLabel(dateStr) {
@@ -259,7 +273,20 @@
         }));
 
         articleCache[run.filename] = { articles, run };
+        run.article_count = articles.length;
         return articleCache[run.filename];
+    }
+
+    async function prefetchArticleCounts() {
+        await Promise.all(
+            runEntries.map(async (run) => {
+                if (typeof run.article_count === 'number') return;
+                const { articles } = await fetchRunArticles(run);
+                run.article_count = articles.length;
+            })
+        );
+        updateDateTotals();
+        renderCalendar();
     }
 
     async function loadRun(dateStr, runIndex = 0) {
@@ -328,9 +355,11 @@
             if (runs && runs.length) {
                 const runCount = document.createElement('div');
                 runCount.className = 'run-count';
-                runCount.textContent = `${runs.length}회차`;
+                const totalArticles = dateArticleTotals[dateStr];
+                runCount.textContent = typeof totalArticles === 'number' && totalArticles > 0 ? totalArticles : runs.length;
+                runCount.setAttribute('aria-label', `${runs.length}회차 · ${totalArticles || 0}개 기사`);
                 cell.appendChild(runCount);
-                cell.addEventListener('click', () => openRunModal(dateStr));
+                cell.addEventListener('click', () => openRunPopover(dateStr));
             } else {
                 cell.classList.add('empty');
             }
@@ -359,13 +388,13 @@
         renderCalendar();
     }
 
-    async function openRunModal(dateStr) {
+    async function openRunPopover(dateStr) {
         const runs = runsByDate[dateStr];
         if (!runs || !runs.length) return;
 
-        modalList.innerHTML = '<p class="empty-msg">회차 정보를 불러오는 중입니다...</p>';
-        modalDateLabel.textContent = formatDateLabel(dateStr);
-        modal.classList.remove('hidden');
+        popoverList.innerHTML = '<p class="empty-msg">회차 정보를 불러오는 중입니다...</p>';
+        popoverDateLabel.textContent = formatDateLabel(dateStr);
+        popover.classList.remove('hidden');
 
         const runInfo = [];
         for (const [idx, run] of runs.entries()) {
@@ -373,22 +402,37 @@
             runInfo.push({ run, count: articles.length, idx });
         }
 
-        modalList.innerHTML = '';
+        updateDateTotals();
+        renderCalendar();
+
+        popoverList.innerHTML = '';
         runInfo.forEach(info => {
             const button = document.createElement('button');
             button.type = 'button';
             button.className = 'modal-run';
             button.innerHTML = `<div class="modal-run-title">${info.run.display_index}회차 · ${info.run.time_str}</div><div class="modal-run-sub">${info.count}개 기사</div>`;
             button.addEventListener('click', () => {
-                modal.classList.add('hidden');
+                popover.classList.add('hidden');
                 loadRun(dateStr, info.idx);
             });
-            modalList.appendChild(button);
+            popoverList.appendChild(button);
         });
     }
 
-    function closeModal() {
-        modal.classList.add('hidden');
+    function closePopover() {
+        popover.classList.add('hidden');
+    }
+
+    function exitSearchMode() {
+        searchSection.classList.add('hidden');
+        searchGrid.innerHTML = '';
+        searchTitle.textContent = '';
+        searchCount.textContent = '';
+        searchInput.value = '';
+        calendarCard.classList.remove('hidden');
+        todayCard.classList.remove('hidden');
+        closePopover();
+        history.replaceState({}, '', window.location.pathname);
     }
 
     function stripHtml(html) {
@@ -402,10 +446,7 @@
         const keyword = searchInput.value.trim();
 
         if (!keyword) {
-            searchSection.classList.add('hidden');
-            searchGrid.innerHTML = '';
-            searchTitle.textContent = '';
-            searchCount.textContent = '';
+            exitSearchMode();
             return;
         }
 
@@ -413,6 +454,10 @@
         searchSection.classList.remove('hidden');
         searchGrid.innerHTML = '<p class="empty-msg">검색 중입니다...</p>';
         searchTitle.textContent = `"${keyword}" 검색 결과`;
+        calendarCard.classList.add('hidden');
+        todayCard.classList.add('hidden');
+        closePopover();
+        history.pushState({ searching: true }, '', '#search');
 
         const matches = [];
         for (const run of runEntries) {
@@ -440,6 +485,7 @@
 
     buildRunMap();
     renderCalendar();
+    prefetchArticleCounts();
     const newest = runEntries[0];
     if (newest) {
         loadRun(newest.date_str, 0);
@@ -447,12 +493,14 @@
 
     prevMonthBtn.addEventListener('click', () => changeMonth(-1));
     nextMonthBtn.addEventListener('click', () => changeMonth(1));
-    modalClose.addEventListener('click', closeModal);
-    modal.querySelector('.modal-backdrop').addEventListener('click', closeModal);
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal();
-    });
+    popoverClose.addEventListener('click', closePopover);
     searchForm.addEventListener('submit', handleSearch);
+    searchReset.addEventListener('click', exitSearchMode);
+    window.addEventListener('popstate', (event) => {
+        if (!event.state || !event.state.searching) {
+            exitSearchMode();
+        }
+    });
 </script>
 
 
