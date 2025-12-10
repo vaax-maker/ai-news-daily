@@ -44,7 +44,7 @@
         <div>
             <p class="eyebrow">날짜별 아카이브</p>
             <h3>캘린더에서 날짜를 선택하세요</h3>
-            <p class="subtitle">날짜를 누르면 해당 날짜의 회차가 팝업으로 표시됩니다.</p>
+            <p class="subtitle">날짜를 누르면 해당 날짜의 기사들이 바로 표시됩니다.</p>
         </div>
         <div id="popover-run-list" class="popover-list"></div>
     </div>
@@ -91,10 +91,6 @@
     const monthLabel = document.getElementById('current-month-label');
     const prevMonthBtn = document.getElementById('prev-month');
     const nextMonthBtn = document.getElementById('next-month');
-    const popover = document.getElementById('run-popover');
-    const popoverList = document.getElementById('popover-run-list');
-    const popoverDateLabel = document.getElementById('popover-date-label');
-    const popoverClose = document.getElementById('popover-close');
     const searchForm = document.getElementById('archive-search-form');
     const searchInput = document.getElementById('archive-search-input');
     const searchSection = document.getElementById('search-results-section');
@@ -109,8 +105,6 @@
     let monthKeys = [];
     let currentMonthIndex = 0;
     let activeDate = '';
-    let activeDisplayIndex = 0;
-    let activeAnchor = null;
     let dateArticleTotals = {};
 
     function parseDateSafe(value) {
@@ -149,7 +143,7 @@
 
         runEntries.forEach((run, idx) => {
             const list = runsByDate[run.date_str] || [];
-            list.push({ ...run, display_index: list.length + 1, absolute_index: idx });
+            list.push({ ...run, absolute_index: idx });
             runsByDate[run.date_str] = list;
         });
 
@@ -253,8 +247,8 @@
 
     function updateTodayHeader(articles, run) {
         dateLabel.textContent = `${formatDateLabel(run.date_str)} (${run.day_of_week})`;
-        timeLabel.textContent = `${run.time_str} 생성됨`;
-        countLabel.textContent = `${run.display_index}회차 · ${articles.length}개 기사`;
+        timeLabel.textContent = run.time_str ? `${run.time_str} 생성됨` : '';
+        countLabel.textContent = `${articles.length}개 기사`;
     }
 
     async function fetchRunArticles(run) {
@@ -301,7 +295,7 @@
             const { articles } = await fetchRunArticles(run);
             renderNewsCards(todayGrid, articles, () => [], '이 날짜에는 뉴스가 없습니다.');
             updateTodayHeader(articles, run);
-            highlightActive(run.date_str, run.display_index);
+            highlightActive(run.date_str);
         } catch (err) {
             todayGrid.innerHTML = `<p class="empty-msg">뉴스를 불러오지 못했습니다: ${err}</p>`;
         }
@@ -359,10 +353,10 @@
                 const runCount = document.createElement('div');
                 runCount.className = 'run-count';
                 const totalArticles = dateArticleTotals[dateStr];
-                runCount.textContent = typeof totalArticles === 'number' && totalArticles > 0 ? totalArticles : runs.length;
-                runCount.setAttribute('aria-label', `${runs.length}회차 · ${totalArticles || 0}개 기사`);
+                runCount.textContent = typeof totalArticles === 'number' && totalArticles > 0 ? totalArticles : 0;
+                runCount.setAttribute('aria-label', `${totalArticles || 0}개 기사`);
                 cell.appendChild(runCount);
-                cell.addEventListener('click', () => handleDateSelection(dateStr, cell));
+                cell.addEventListener('click', () => handleDateSelection(dateStr));
             } else {
                 cell.classList.add('empty');
             }
@@ -372,12 +366,11 @@
 
         monthBlock.appendChild(grid);
         calendarContainer.appendChild(monthBlock);
-        highlightActive(activeDate, activeDisplayIndex);
+        highlightActive(activeDate);
     }
 
-    function highlightActive(dateStr, displayIndex) {
+    function highlightActive(dateStr) {
         activeDate = dateStr;
-        activeDisplayIndex = displayIndex;
         document.querySelectorAll('.calendar-cell').forEach(cell => cell.classList.remove('active'));
         const selector = `.calendar-cell[data-date="${dateStr}"]`;
         const target = document.querySelector(selector);
@@ -391,103 +384,18 @@
         renderCalendar();
     }
 
-    function positionPopover(anchorEl) {
-        if (!anchorEl) return;
-
-        const containerRect = calendarContainer.getBoundingClientRect();
-        const anchorRect = anchorEl.getBoundingClientRect();
-
-        const popWidth = popover.offsetWidth;
-        const popHeight = popover.offsetHeight;
-
-        let left = anchorRect.left - containerRect.left + anchorRect.width / 2 - popWidth / 2;
-        const maxLeft = calendarContainer.clientWidth - popWidth - 8;
-        left = Math.max(8, Math.min(left, maxLeft));
-
-        let top = anchorRect.top - containerRect.top - popHeight - 12;
-        if (top < 8) {
-            top = anchorRect.bottom - containerRect.top + 12;
-        }
-
-        popover.style.left = `${left}px`;
-        popover.style.top = `${top}px`;
-        popover.style.visibility = 'visible';
-    }
-
-    async function openRunPopover(dateStr, anchorEl) {
+    async function handleDateSelection(dateStr) {
         const runs = runsByDate[dateStr];
         if (!runs || !runs.length) return;
 
-        activeAnchor = anchorEl;
-        popoverList.innerHTML = '<p class="empty-msg">회차 정보를 불러오는 중입니다...</p>';
-        popoverDateLabel.textContent = formatDateLabel(dateStr);
-        popover.style.visibility = 'hidden';
-        popover.classList.remove('hidden');
-        requestAnimationFrame(() => positionPopover(activeAnchor));
-
-        await Promise.all(
-            runs.map(async (run) => {
-                if (typeof run.article_count === 'number') return;
-                const { articles } = await fetchRunArticles(run);
-                run.article_count = articles.length;
-            })
-        );
-
-        updateDateTotals();
-        renderCalendar();
-
-        const refreshedAnchor = document.querySelector(`.calendar-cell[data-date="${dateStr}"]`);
-        if (refreshedAnchor) {
-            activeAnchor = refreshedAnchor;
+        if (typeof runs[0].article_count !== 'number') {
+            const { articles } = await fetchRunArticles(runs[0]);
+            runs[0].article_count = articles.length;
+            updateDateTotals();
+            renderCalendar();
         }
 
-        popoverList.innerHTML = '';
-        runs.forEach((run, idx) => {
-            const button = document.createElement('button');
-            button.type = 'button';
-            button.className = 'modal-run compact';
-            button.textContent = run.display_index;
-            button.title = `${run.display_index}회차 (${run.article_count || 0}개 기사)`;
-            button.addEventListener('click', () => {
-                popover.classList.add('hidden');
-                loadRun(dateStr, idx);
-            });
-            popoverList.appendChild(button);
-        });
-
-        positionPopover(activeAnchor);
-    }
-
-    async function handleDateSelection(dateStr, anchorEl) {
-        const runs = runsByDate[dateStr];
-        if (!runs || !runs.length) return;
-
-        let anchor = anchorEl;
-
-        if (runs.length === 1) {
-            if (typeof runs[0].article_count !== 'number') {
-                const { articles } = await fetchRunArticles(runs[0]);
-                runs[0].article_count = articles.length;
-                updateDateTotals();
-                renderCalendar();
-                anchor = document.querySelector(`.calendar-cell[data-date="${dateStr}"]`) || anchor;
-            }
-
-            const total = dateArticleTotals[dateStr] ?? runs[0].article_count;
-            if (typeof total === 'number' && total <= 1) {
-                closePopover();
-                return loadRun(dateStr, 0);
-            }
-        }
-
-        activeAnchor = anchor;
-        openRunPopover(dateStr, anchor);
-    }
-
-    function closePopover() {
-        popover.classList.add('hidden');
-        popover.style.visibility = '';
-        activeAnchor = null;
+        return loadRun(dateStr, 0);
     }
 
     function exitSearchMode() {
@@ -498,7 +406,6 @@
         searchInput.value = '';
         calendarCard.classList.remove('hidden');
         todayCard.classList.remove('hidden');
-        closePopover();
         history.replaceState({}, '', window.location.pathname);
     }
 
@@ -523,7 +430,6 @@
         searchTitle.textContent = `"${keyword}" 검색 결과`;
         calendarCard.classList.add('hidden');
         todayCard.classList.add('hidden');
-        closePopover();
         history.pushState({ searching: true }, '', '#search');
 
         const matches = [];
@@ -560,7 +466,6 @@
 
     prevMonthBtn.addEventListener('click', () => changeMonth(-1));
     nextMonthBtn.addEventListener('click', () => changeMonth(1));
-    popoverClose.addEventListener('click', closePopover);
     searchForm.addEventListener('submit', handleSearch);
     searchReset.addEventListener('click', exitSearchMode);
     window.addEventListener('popstate', (event) => {

@@ -290,14 +290,22 @@ def rebuild_indexes(categories):
             continue
             
         files = sorted([f for f in os.listdir(daily_dir) if f.endswith(".html")], reverse=True)
-        entries = []
+        earliest_by_date = {}
+
         for f in files:
+            date_part = f.split("_")[0]
+            existing = earliest_by_date.get(date_part)
+            if existing is None or f < existing:
+                earliest_by_date[date_part] = f
+
+        entries = []
+        for f in sorted(earliest_by_date.values(), reverse=True):
             name_part = f.replace(".html", "")
             try:
                 dt = datetime.datetime.strptime(name_part, "%Y-%m-%d_%H%M%S")
                 # Add Weekday
                 wd = weekday_map[dt.weekday()]
-                
+
                 entries.append({
                     "filename": f,
                     "date_str": dt.strftime("%Y-%m-%d"),
