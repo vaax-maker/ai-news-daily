@@ -5,15 +5,15 @@
 {% block extra_css %}{% endblock %}
 
 {% block content %}
-<h1>Daily Tech Briefing</h1>
+<h1>VAAX 오늘의 볼거리</h1>
 <p class="subtitle">AI, XR, Government, and Startup News Aggregation</p>
 
 <div class="dashboard-grid">
     <!-- AI Section -->
     <div class="dashboard-section">
         <h2>
-            AI News
-            <a href="{{ section_links.get('ai', 'ai/index.html') }}" class="section-more">More &rarr;</a>
+            AI 읽을거리
+            <a href="{{ section_links.get('ai', 'ai/index.html') }}" class="section-more">더보기</a>
         </h2>
         <ul class="preview-list">{% for item in ai_latest %}
             <li>
@@ -26,8 +26,8 @@
     <!-- XR Section -->
     <div class="dashboard-section">
         <h2>
-            XR News
-            <a href="{{ section_links.get('xr', 'xr/index.html') }}" class="section-more">More &rarr;</a>
+            XR 읽을거리
+            <a href="{{ section_links.get('xr', 'xr/index.html') }}" class="section-more">더보기</a>
         </h2>
         <ul class="preview-list">
             {% for item in xr_latest %}
@@ -42,8 +42,8 @@
     <!-- Members Section -->
     <div class="dashboard-section">
         <h2>
-            Members News
-            <a href="{{ section_links.get('members', 'members/index.html') }}" class="section-more">More &rarr;</a>
+            회원사관련 기사모음
+            <a href="{{ section_links.get('members', 'members/index.html') }}" class="section-more">더보기</a>
         </h2>
         <ul class="preview-list">
             {% for item in members_latest %}
@@ -58,8 +58,8 @@
     <!-- Gov Section -->
     <div class="dashboard-section">
         <h2>
-            Gov Announcements
-            <a href="{{ section_links.get('gov', 'gov/index.html') }}" class="section-more">More &rarr;</a>
+            정부과제 찾기
+            <a href="{{ section_links.get('gov', 'gov/index.html') }}" class="section-more">더보기</a>
         </h2>
         <ul class="preview-list">
             {% for item in gov_latest %}
