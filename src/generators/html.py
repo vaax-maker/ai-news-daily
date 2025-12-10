@@ -29,6 +29,7 @@ def render_archive_index(run_entries, config):
         run_entries=run_entries,
         category_display_name=config.display_name,
         active_tab=config.key,
+        category_key=config.key,
         now_year=datetime.datetime.now().year,
         root_path=".."
     )
