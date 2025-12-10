@@ -27,6 +27,105 @@ import re
 def str_to_bool(value: str) -> bool:
     return str(value).strip().lower() in ["true", "1", "yes", "y", "on"]
 
+def parse_existing_articles(html_path: str):
+    if not os.path.exists(html_path):
+        return []
+
+    with open(html_path, "r", encoding="utf-8") as f:
+        soup = BeautifulSoup(f, "html.parser")
+
+    parsed = []
+    news_articles = soup.select("article.news-item")
+
+    if news_articles:
+        for article in news_articles:
+            title_el = article.select_one(".news-title a")
+            summary_el = article.select_one(".news-summary")
+
+            parsed.append({
+                "title": title_el.get_text(strip=True) if title_el else "",
+                "link": title_el.get("href", "") if title_el else "",
+                "summary_html": summary_el.decode_contents().strip() if summary_el else "",
+                "published_display": article.select_one(".published-date").get_text(strip=True) if article.select_one(".published-date") else "",
+                "source_name": article.select_one(".source-link").get_text(strip=True) if article.select_one(".source-link") else "",
+                "image_url": article.select_one(".news-image img").get("src", "") if article.select_one(".news-image img") else "",
+            })
+
+        return parsed
+
+    for row in soup.select("table.styled-table tbody tr"):
+        title_el = row.select_one(".col-title a")
+        parsed.append({
+            "title": title_el.get_text(strip=True) if title_el else "",
+            "link": title_el.get("href", "") if title_el else "",
+            "dept": row.select_one(".col-dept").get_text(strip=True) if row.select_one(".col-dept") else "",
+            "manager": row.select(".col-dept")[-1].get_text(strip=True) if row.select(".col-dept") else "",
+            "date": row.select_one(".col-date").get_text(strip=True) if row.select_one(".col-date") else "",
+        })
+
+    return parsed
+
+def merge_articles(primary_items, secondary_items):
+    merged = []
+    seen_links = set()
+
+    for item in primary_items + secondary_items:
+        link = item.get("link")
+        if link and link in seen_links:
+            continue
+        if link:
+            seen_links.add(link)
+        merged.append(item)
+
+    return merged
+
+def consolidate_daily_archives(config):
+    daily_dir = config.archive_dir
+    if not os.path.isdir(daily_dir):
+        return
+
+    files = [f for f in os.listdir(daily_dir) if f.endswith(".html")]
+    grouped = {}
+
+    for fname in files:
+        date_key = fname.split("_")[0]
+        grouped.setdefault(date_key, []).append(fname)
+
+    for date_key, date_files in grouped.items():
+        if len(date_files) < 2:
+            continue
+
+        date_files.sort()
+        primary = date_files[0]
+        duplicates = date_files[1:]
+
+        combined = []
+        for fname in sorted(date_files, reverse=True):
+            path = os.path.join(daily_dir, fname)
+            combined.extend(parse_existing_articles(path))
+
+        merged_articles = merge_articles(combined, [])
+
+        primary_name = primary.replace(".html", "")
+        try:
+            dt = datetime.datetime.strptime(primary_name, "%Y-%m-%d_%H%M%S")
+            date_str = dt.strftime("%Y-%m-%d")
+            time_str = dt.strftime("%H:%M:%S")
+        except Exception:
+            date_str = date_key
+            time_str = "00:00:00"
+
+        html = render_daily_page(merged_articles, date_str, time_str, config)
+
+        with open(os.path.join(daily_dir, primary), "w", encoding="utf-8") as f:
+            f.write(html)
+
+        for dup in duplicates:
+            try:
+                os.remove(os.path.join(daily_dir, dup))
+            except Exception:
+                pass
+
 def process_category(config, now_utc, kst_timezone_offset=9):
     print(f"[{config.key.upper()}] Processing...")
     
@@ -77,44 +176,6 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         for item in summarized_items:
             item["summary_html"] = markdown_bold_to_highlight(item["summary_html"])
 
-    def parse_existing_articles(html_path: str):
-        if not os.path.exists(html_path):
-            return []
-
-        with open(html_path, "r", encoding="utf-8") as f:
-            soup = BeautifulSoup(f, "html.parser")
-
-        parsed = []
-        news_articles = soup.select("article.news-item")
-
-        if news_articles:
-            for article in news_articles:
-                title_el = article.select_one(".news-title a")
-                summary_el = article.select_one(".news-summary")
-
-                parsed.append({
-                    "title": title_el.get_text(strip=True) if title_el else "",
-                    "link": title_el.get("href", "") if title_el else "",
-                    "summary_html": summary_el.decode_contents().strip() if summary_el else "",
-                    "published_display": article.select_one(".published-date").get_text(strip=True) if article.select_one(".published-date") else "",
-                    "source_name": article.select_one(".source-link").get_text(strip=True) if article.select_one(".source-link") else "",
-                    "image_url": article.select_one(".news-image img").get("src", "") if article.select_one(".news-image img") else "",
-                })
-
-            return parsed
-
-        for row in soup.select("table.styled-table tbody tr"):
-            title_el = row.select_one(".col-title a")
-            parsed.append({
-                "title": title_el.get_text(strip=True) if title_el else "",
-                "link": title_el.get("href", "") if title_el else "",
-                "dept": row.select_one(".col-dept").get_text(strip=True) if row.select_one(".col-dept") else "",
-                "manager": row.select(".col-dept")[-1].get_text(strip=True) if row.select(".col-dept") else "",
-                "date": row.select_one(".col-date").get_text(strip=True) if row.select_one(".col-date") else "",
-            })
-
-        return parsed
-
     def resolve_daily_file(date_str: str, run_id: str):
         os.makedirs(config.archive_dir, exist_ok=True)
         html_files = [
@@ -127,23 +188,6 @@ def process_category(config, now_utc, kst_timezone_offset=9):
             return html_files[0], html_files[1:]
 
         return f"{run_id}.html", []
-
-    def merge_articles(new_items, existing_items):
-        merged = []
-        seen_links = set()
-
-        def add_items(items):
-            for item in items:
-                link = item.get("link")
-                if link and link in seen_links:
-                    continue
-                if link:
-                    seen_links.add(link)
-                merged.append(item)
-
-        add_items(new_items)
-        add_items(existing_items)
-        return merged
 
     # 2. Render Page
     kst_now = now_utc + datetime.timedelta(hours=kst_timezone_offset)
@@ -271,7 +315,7 @@ def load_existing_members_latest(limit=5):
     collected.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
     return collected[:limit]
 
-def rebuild_indexes(categories):
+def rebuild_indexes(categories, consolidate_archives=False):
     # Daily Archives Index Generation
     weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
 
@@ -284,6 +328,9 @@ def rebuild_indexes(categories):
             with open(cfg.index_path, "w", encoding="utf-8") as f:
                 f.write(index_html)
             continue
+
+        if consolidate_archives:
+            consolidate_daily_archives(cfg)
 
         daily_dir = cfg.archive_dir
         if not os.path.exists(daily_dir):
@@ -445,6 +492,11 @@ def main():
     
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=None, help="Limit number of articles per category for testing")
+    parser.add_argument(
+        "--consolidate-archives",
+        action="store_true",
+        help="One-time option to merge duplicate daily files and rebuild indexes without changing defaults"
+    )
     args = parser.parse_args()
 
     dashboard_data = {
@@ -524,7 +576,7 @@ def main():
         dashboard_data["links"]["members"] = "members/index.html"
 
     # 3. Rebuild Indexes
-    rebuild_indexes(categories)
+    rebuild_indexes(categories, consolidate_archives=str_to_bool(os.getenv("CONSOLIDATE_ARCHIVES", "false")) or args.consolidate_archives)
 
     # 4. Render Dashboard
     try:
