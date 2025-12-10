@@ -22,6 +22,10 @@ from src.utils.storage import MemberStorage, GovStorage
 from collections import Counter
 import re
 
+
+def str_to_bool(value: str) -> bool:
+    return str(value).strip().lower() in ["true", "1", "yes", "y", "on"]
+
 def process_category(config, now_utc, kst_timezone_offset=9):
     print(f"[{config.key.upper()}] Processing...")
     
@@ -295,9 +299,20 @@ def main():
         "links": {} # To store latest filenames
     }
 
+    run_flags = {
+        "ai": str_to_bool(os.getenv("RUN_AI", "true")),
+        "xr": str_to_bool(os.getenv("RUN_XR", "true")),
+        "gov": str_to_bool(os.getenv("RUN_GOV", "true")),
+        "members": str_to_bool(os.getenv("RUN_MEMBERS", "true"))
+    }
+
     # 1. Process Categories
     categories = load_categories()
     for key, config in categories.items():
+        if not run_flags.get(key, True):
+            print(f"[{key}] Skipped by configuration.")
+            continue
+
         if args.limit:
             config.max_articles = args.limit
 
@@ -325,14 +340,17 @@ def main():
             dashboard_data["links"]["gov"] = "gov/index.html"
 
     # 2. Process Members
-    try:
-        members_latest = process_members(limit_per_member=1 if args.limit else None)
-        dashboard_data["members"] = members_latest
-        dashboard_data["links"]["members"] = "members/index.html" # Members always goes to index
-    except Exception as e:
-        print(f"[Members] Process failed: {e}")
-        import traceback
-        traceback.print_exc()
+    if run_flags.get("members", True):
+        try:
+            members_latest = process_members(limit_per_member=1 if args.limit else None)
+            dashboard_data["members"] = members_latest
+            dashboard_data["links"]["members"] = "members/index.html" # Members always goes to index
+        except Exception as e:
+            print(f"[Members] Process failed: {e}")
+            import traceback
+            traceback.print_exc()
+    else:
+        print("[Members] Skipped by configuration.")
 
     # 3. Rebuild Indexes
     rebuild_indexes(categories)

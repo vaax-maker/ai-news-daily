@@ -27,6 +27,38 @@ on:
         description: "XR 뉴스 키워드 필터 (콤마로 구분)"
         required: false
         default: ""
+      run_ai:
+        description: "AI 읽을거리 실행 여부"
+        required: false
+        default: "실행"
+        type: choice
+        options:
+          - "실행"
+          - "건너뛰기"
+      run_xr:
+        description: "XR 읽을거리 실행 여부"
+        required: false
+        default: "실행"
+        type: choice
+        options:
+          - "실행"
+          - "건너뛰기"
+      run_gov:
+        description: "정부과제 실행 여부"
+        required: false
+        default: "실행"
+        type: choice
+        options:
+          - "실행"
+          - "건너뛰기"
+      run_members:
+        description: "회원사소식 실행 여부"
+        required: false
+        default: "실행"
+        type: choice
+        options:
+          - "실행"
+          - "건너뛰기"
   schedule:
     - cron: "40 22 * * *"  # 매일 22:40 UTC (한국시간 오전 7시 40분)
 permissions:
@@ -43,6 +75,10 @@ jobs:
       XR_SELECTION_MODE: ${{ github.event.inputs.xr_selection_mode || 'time' }}
       XR_USE_AI_RANKING: ${{ github.event.inputs.xr_use_ai_ranking || 'false' }}
       XR_KEYWORDS: ${{ github.event.inputs.xr_keywords || '' }}
+      RUN_AI: ${{ github.event.inputs.run_ai == '건너뛰기' && 'false' || 'true' }}
+      RUN_XR: ${{ github.event.inputs.run_xr == '건너뛰기' && 'false' || 'true' }}
+      RUN_GOV: ${{ github.event.inputs.run_gov == '건너뛰기' && 'false' || 'true' }}
+      RUN_MEMBERS: ${{ github.event.inputs.run_members == '건너뛰기' && 'false' || 'true' }}
 
     steps:
       - name: Checkout repo
