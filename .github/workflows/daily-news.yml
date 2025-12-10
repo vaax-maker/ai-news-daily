@@ -3,6 +3,14 @@ name: Daily AI News
 on:
   workflow_dispatch:
     inputs:
+      run_ai:
+        description: "AI 읽을거리 실행 여부"
+        required: false
+        default: "실행"
+        type: choice
+        options:
+          - "실행"
+          - "건너뛰기"
       ai_selection_mode:
         description: "AI 뉴스 선택 방식 (time/random/keyword)"
         required: false
@@ -24,6 +32,14 @@ on:
         description: "AI 뉴스 키워드 필터 (콤마로 구분)"
         required: false
         default: "agent,agentic,llm,lam,robot"
+      run_xr:
+        description: "XR 읽을거리 실행 여부"
+        required: false
+        default: "실행"
+        type: choice
+        options:
+          - "실행"
+          - "건너뛰기"
       xr_selection_mode:
         description: "XR 뉴스 선택 방식 (time/random/keyword)"
         required: false
@@ -45,22 +61,6 @@ on:
         description: "XR 뉴스 키워드 필터 (콤마로 구분)"
         required: false
         default: ""
-      run_ai:
-        description: "AI 읽을거리 실행 여부"
-        required: false
-        default: "실행"
-        type: choice
-        options:
-          - "실행"
-          - "건너뛰기"
-      run_xr:
-        description: "XR 읽을거리 실행 여부"
-        required: false
-        default: "실행"
-        type: choice
-        options:
-          - "실행"
-          - "건너뛰기"
       run_gov:
         description: "정부과제 실행 여부"
         required: false
