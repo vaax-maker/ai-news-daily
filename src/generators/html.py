@@ -34,6 +34,16 @@ def render_archive_index(run_entries, config):
     )
 
 
+def render_gov_archive(announcements):
+    template = env.get_template("gov_archive.html")
+    return template.render(
+        announcements=announcements,
+        active_tab="gov",
+        now_year=datetime.datetime.now().year,
+        root_path="..",
+    )
+
+
 
 def render_member_page(member, articles, now_str):
     """

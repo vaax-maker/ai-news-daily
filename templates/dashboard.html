@@ -39,22 +39,6 @@
         </ul>
     </div>
 
-    <!-- Members Section -->
-    <div class="dashboard-section">
-        <h2>
-            회원사 소식
-            <a href="{{ section_links.get('members', 'members/index.html') }}" class="section-more">더보기</a>
-        </h2>
-        <ul class="preview-list">
-            {% for item in members_latest %}
-            <li>
-                <span class="preview-date">{{ item.published_display }} | {{ item.member_name }}</span>
-                <a href="{{ item.link }}" target="_blank" class="preview-title">{{ item.title }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-
     <!-- Gov Section -->
     <div class="dashboard-section">
         <h2>
@@ -65,6 +49,22 @@
             {% for item in gov_latest %}
             <li>
                 <span class="preview-date">{{ item.published_display }} | {{ item.dept or '과기정통부' }}</span>
+                <a href="{{ item.link }}" target="_blank" class="preview-title">{{ item.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Members Section -->
+    <div class="dashboard-section">
+        <h2>
+            회원사 소식
+            <a href="{{ section_links.get('members', 'members/index.html') }}" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            {% for item in members_latest %}
+            <li>
+                <span class="preview-date">{{ item.published_display }} | {{ item.member_name }}</span>
                 <a href="{{ item.link }}" target="_blank" class="preview-title">{{ item.title }}</a>
             </li>
             {% endfor %}
