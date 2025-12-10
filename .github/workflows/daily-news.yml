@@ -3,48 +3,66 @@ name: Daily AI News
 on:
   workflow_dispatch:
     inputs:
+      run_ai:
+        description: "🔵 AI 읽을거리 실행 여부"
+        required: false
+        default: "실행"
+        type: choice
+        options:
+          - "실행"
+          - "건너뛰기"
       ai_selection_mode:
-        description: "AI 뉴스 선택 방식 (time/random/keyword)"
+        description: "  ↳ 🔵 AI 뉴스 선택 방식 (time/random/keyword)"
         required: false
         default: "keyword"
+        type: choice
+        options:
+          - "time"
+          - "random"
+          - "keyword"
       ai_use_ai_ranking:
-        description: "AI 카테고리 AI 랭킹 사용 여부 (true/false)"
+        description: "  ↳ 🔵 AI 카테고리 AI 랭킹 사용 여부 (true/false)"
         required: false
         default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
       ai_keywords:
-        description: "AI 뉴스 키워드 필터 (콤마로 구분)"
+        description: "  ↳ 🔵 AI 뉴스 키워드 필터 (콤마로 구분)"
         required: false
         default: "agent,agentic,llm,lam,robot"
+      run_xr:
+        description: "🟢 XR 읽을거리 실행 여부"
+        required: false
+        default: "실행"
+        type: choice
+        options:
+          - "실행"
+          - "건너뛰기"
       xr_selection_mode:
-        description: "XR 뉴스 선택 방식 (time/random/keyword)"
+        description: "  ↳ 🟢 XR 뉴스 선택 방식 (time/random/keyword)"
         required: false
         default: "random"
+        type: choice
+        options:
+          - "time"
+          - "random"
+          - "keyword"
       xr_use_ai_ranking:
-        description: "XR 카테고리 AI 랭킹 사용 여부 (true/false)"
+        description: "  ↳ 🟢 XR 카테고리 AI 랭킹 사용 여부 (true/false)"
         required: false
         default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
       xr_keywords:
-        description: "XR 뉴스 키워드 필터 (콤마로 구분)"
+        description: "  ↳ 🟢 XR 뉴스 키워드 필터 (콤마로 구분)"
         required: false
         default: ""
-      run_ai:
-        description: "AI 읽을거리 실행 여부"
-        required: false
-        default: "실행"
-        type: choice
-        options:
-          - "실행"
-          - "건너뛰기"
-      run_xr:
-        description: "XR 읽을거리 실행 여부"
-        required: false
-        default: "실행"
-        type: choice
-        options:
-          - "실행"
-          - "건너뛰기"
       run_gov:
-        description: "정부과제 실행 여부"
+        description: "🟣 정부과제 실행 여부"
         required: false
         default: "실행"
         type: choice
@@ -52,7 +70,7 @@ on:
           - "실행"
           - "건너뛰기"
       run_members:
-        description: "회원사소식 실행 여부"
+        description: "🟠 회원사소식 실행 여부"
         required: false
         default: "실행"
         type: choice
