@@ -6,7 +6,7 @@ from src.fetchers.rss import fetch_rss_items
 from src.fetchers.gov import fetch_gov_announcements
 from src.generators.llm import summarize_article, rank_items_with_ai
 from src.generators.html import (
-    render_daily_page, render_archive_index,
+    render_daily_page, render_archive_index, render_gov_archive,
     render_member_page, render_dashboard, render_member_index
 )
 from src.utils.common import (
@@ -113,8 +113,26 @@ def latest_daily_page_path(config):
 def rebuild_indexes(categories):
     # Daily Archives Index Generation
     weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
-    
+
     for key, cfg in categories.items():
+        if key == "gov":
+            storage = GovStorage()
+            announcements = storage.load_announcements()
+
+            def sort_key(item):
+                date_str = item.get("date") or item.get("published_display") or ""
+                try:
+                    return datetime.datetime.strptime(date_str, "%Y-%m-%d")
+                except Exception:
+                    return datetime.datetime.min
+
+            announcements.sort(key=sort_key, reverse=True)
+
+            index_html = render_gov_archive(announcements)
+            with open(cfg.index_path, "w", encoding="utf-8") as f:
+                f.write(index_html)
+            continue
+
         daily_dir = cfg.archive_dir
         if not os.path.exists(daily_dir):
             continue
@@ -302,7 +320,10 @@ def main():
         fallback_path = latest_daily_page_path(config)
         if fallback_path:
             dashboard_data["links"].setdefault(key, fallback_path)
-    
+
+        if key == "gov":
+            dashboard_data["links"]["gov"] = "gov/index.html"
+
     # 2. Process Members
     try:
         members_latest = process_members(limit_per_member=1 if args.limit else None)
