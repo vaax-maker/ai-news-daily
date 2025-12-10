@@ -495,7 +495,7 @@ def main():
     parser.add_argument(
         "--consolidate-archives",
         action="store_true",
-        help="One-time option to merge duplicate daily files and rebuild indexes without changing defaults"
+        help="Merge duplicate daily files and rebuild indexes. Enabled by default via environment flag"
     )
     args = parser.parse_args()
 
@@ -576,7 +576,10 @@ def main():
         dashboard_data["links"]["members"] = "members/index.html"
 
     # 3. Rebuild Indexes
-    rebuild_indexes(categories, consolidate_archives=str_to_bool(os.getenv("CONSOLIDATE_ARCHIVES", "false")) or args.consolidate_archives)
+    rebuild_indexes(
+        categories,
+        consolidate_archives=str_to_bool(os.getenv("CONSOLIDATE_ARCHIVES", "true")) or args.consolidate_archives
+    )
 
     # 4. Render Dashboard
     try:
