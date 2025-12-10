@@ -62,11 +62,6 @@
         </div>
         <div id="popover-run-list" class="popover-list"></div>
     </div>
-    <div class="calendar-nav">
-        <button id="prev-month" class="ghost-btn" aria-label="이전 달 보기">←</button>
-        <div id="current-month-label" class="month-label"></div>
-        <button id="next-month" class="ghost-btn" aria-label="다음 달 보기">→</button>
-    </div>
     <div id="calendar-container" class="calendar-container"></div>
 </section>
 
@@ -114,6 +109,7 @@
     let currentMonthIndex = 0;
     let activeDate = '';
     let activeDisplayIndex = 0;
+    let activeAnchor = null;
     let dateArticleTotals = {};
 
     function buildRunMap() {
@@ -329,7 +325,7 @@
                 runCount.textContent = typeof totalArticles === 'number' && totalArticles > 0 ? totalArticles : runs.length;
                 runCount.setAttribute('aria-label', `${runs.length}회차 · ${totalArticles || 0}개 기사`);
                 cell.appendChild(runCount);
-                cell.addEventListener('click', () => openRunPopover(dateStr));
+                cell.addEventListener('click', () => openRunPopover(dateStr, cell));
             } else {
                 cell.classList.add('empty');
             }
@@ -358,13 +354,39 @@
         renderCalendar();
     }
 
-    async function openRunPopover(dateStr) {
+    function positionPopover(anchorEl) {
+        if (!anchorEl) return;
+
+        const containerRect = calendarContainer.getBoundingClientRect();
+        const anchorRect = anchorEl.getBoundingClientRect();
+
+        const popWidth = popover.offsetWidth;
+        const popHeight = popover.offsetHeight;
+
+        let left = anchorRect.left - containerRect.left + anchorRect.width / 2 - popWidth / 2;
+        const maxLeft = calendarContainer.clientWidth - popWidth - 8;
+        left = Math.max(8, Math.min(left, maxLeft));
+
+        let top = anchorRect.top - containerRect.top - popHeight - 12;
+        if (top < 8) {
+            top = anchorRect.bottom - containerRect.top + 12;
+        }
+
+        popover.style.left = `${left}px`;
+        popover.style.top = `${top}px`;
+        popover.style.visibility = 'visible';
+    }
+
+    async function openRunPopover(dateStr, anchorEl) {
         const runs = runsByDate[dateStr];
         if (!runs || !runs.length) return;
 
+        activeAnchor = anchorEl;
         popoverList.innerHTML = '<p class="empty-msg">회차 정보를 불러오는 중입니다...</p>';
         popoverDateLabel.textContent = formatDateLabel(dateStr);
+        popover.style.visibility = 'hidden';
         popover.classList.remove('hidden');
+        requestAnimationFrame(() => positionPopover(activeAnchor));
 
         const runInfo = [];
         for (const [idx, run] of runs.entries()) {
@@ -374,6 +396,11 @@
 
         updateDateTotals();
         renderCalendar();
+
+        const refreshedAnchor = document.querySelector(`.calendar-cell[data-date="${dateStr}"]`);
+        if (refreshedAnchor) {
+            activeAnchor = refreshedAnchor;
+        }
 
         popoverList.innerHTML = '';
         runInfo.forEach(info => {
@@ -387,10 +414,14 @@
             });
             popoverList.appendChild(button);
         });
+
+        positionPopover(activeAnchor);
     }
 
     function closePopover() {
         popover.classList.add('hidden');
+        popover.style.visibility = '';
+        activeAnchor = null;
     }
 
     function exitSearchMode() {
