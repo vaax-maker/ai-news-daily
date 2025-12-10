@@ -128,3 +128,71 @@ class MemberStorage:
             print(f"[Storage] Failed to save {member_id}: {e}")
 
         return merged
+
+
+class GovStorage:
+    def __init__(self, data_path: str = "data/gov/announcements.json"):
+        self.data_path = data_path
+        os.makedirs(os.path.dirname(self.data_path), exist_ok=True)
+
+    def load_announcements(self) -> List[Dict]:
+        if not os.path.exists(self.data_path):
+            return []
+        try:
+            with open(self.data_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"[Storage] Failed to load gov announcements: {e}")
+            return []
+
+    def save_announcements(self, new_items: List[Dict]) -> List[Dict]:
+        """
+        Accumulate government announcements onto the first captured list while
+        removing duplicates by link or similar normalized titles. Newly fetched
+        items are placed before existing ones so the latest entries appear first.
+        """
+
+        def normalize(text: str) -> str:
+            cleaned = re.sub(r"[^0-9A-Za-z가-힣]", "", text or "")
+            return cleaned.lower()
+
+        def is_similar_title(norm_title: str, seen_titles: List[str], threshold: float = 0.9) -> bool:
+            return any(SequenceMatcher(None, norm_title, seen).ratio() >= threshold for seen in seen_titles)
+
+        def merge_items(existing: List[Dict], incoming: List[Dict]) -> List[Dict]:
+            seen_links = set()
+            seen_titles: List[str] = []
+            merged: List[Dict] = []
+
+            def add_item(item: Dict):
+                link = item.get("link")
+                norm_title = normalize(item.get("title", ""))
+
+                if link and link in seen_links:
+                    return
+                if norm_title and is_similar_title(norm_title, seen_titles):
+                    return
+
+                if link:
+                    seen_links.add(link)
+                if norm_title:
+                    seen_titles.append(norm_title)
+                merged.append(item)
+
+            for item in incoming:
+                add_item(item)
+            for item in existing:
+                add_item(item)
+
+            return merged
+
+        existing_items = self.load_announcements()
+        merged = merge_items(existing_items, new_items)
+
+        try:
+            with open(self.data_path, "w", encoding="utf-8") as f:
+                json.dump(merged, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f"[Storage] Failed to save gov announcements: {e}")
+
+        return merged

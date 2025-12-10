@@ -18,7 +18,7 @@ from src.utils.common import (
     shorten_korean_title,
     trim_summary_lines,
 )
-from src.utils.storage import MemberStorage
+from src.utils.storage import MemberStorage, GovStorage
 from collections import Counter
 import re
 
@@ -28,7 +28,8 @@ def process_category(config, now_utc, kst_timezone_offset=9):
     # 1. Fetch
     if config.key == "gov":
         gov_items = fetch_gov_announcements(limit=30)
-        summarized_items = gov_items
+        storage = GovStorage()
+        summarized_items = storage.save_announcements(gov_items)
     else:
         # RSS Fetch
         raw_items = fetch_rss_items(
