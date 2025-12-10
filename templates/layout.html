@@ -18,16 +18,18 @@
             <a href="{{ root_path | default('.') }}/index.html" class="logo-link">
                 <img src="{{ root_path | default('.') }}/static/images/logo.jpg" alt="VAAX" class="header-logo">
             </a>
-            <a href="{{ root_path | default('.') }}/index.html"
-                class="{% if active_tab == 'home' %}active{% endif %}">Home</a>
-            <a href="{{ root_path | default('.') }}/ai/index.html"
-                class="{% if active_tab == 'ai' %}active{% endif %}">AI News</a>
-            <a href="{{ root_path | default('.') }}/xr/index.html"
-                class="{% if active_tab == 'xr' %}active{% endif %}">XR News</a>
-            <a href="{{ root_path | default('.') }}/gov/index.html"
-                class="{% if active_tab == 'gov' %}active{% endif %}">Gov</a>
-            <a href="{{ root_path | default('.') }}/members/index.html"
-                class="{% if active_tab == 'members' %}active{% endif %}">Members</a>
+            <nav class="nav-links">
+                <a href="{{ root_path | default('.') }}/index.html"
+                    class="{% if active_tab == 'home' %}active{% endif %}">Home</a>
+                <a href="{{ root_path | default('.') }}/ai/index.html"
+                    class="{% if active_tab == 'ai' %}active{% endif %}">AI News</a>
+                <a href="{{ root_path | default('.') }}/xr/index.html"
+                    class="{% if active_tab == 'xr' %}active{% endif %}">XR News</a>
+                <a href="{{ root_path | default('.') }}/gov/index.html"
+                    class="{% if active_tab == 'gov' %}active{% endif %}">Gov</a>
+                <a href="{{ root_path | default('.') }}/members/index.html"
+                    class="{% if active_tab == 'members' %}active{% endif %}">Members</a>
+            </nav>
         </div>
     </header>
 
