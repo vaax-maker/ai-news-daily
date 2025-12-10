@@ -411,3 +411,205 @@ tr:hover {
     color: var(--text-muted);
     font-size: 1.1rem;
 }
+
+/* Archive Enhancements */
+.page-header {
+    margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    margin-bottom: 1.5rem;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.section-heading h2,
+.section-heading h3 {
+    margin-bottom: 0.25rem;
+}
+
+.pill {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.today-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+@media (max-width: 900px) {
+    .today-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.news-card {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    background: #fff;
+}
+
+.news-card-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+}
+
+.news-card-meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.news-card-summary {
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+.news-card-thumb {
+    margin: 0.35rem 0;
+}
+
+.news-card-thumb img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.calendar-container {
+    display: grid;
+    gap: 1rem;
+}
+
+.month-block {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.month-header {
+    padding: 0.75rem 1rem;
+    background: #f1f5f9;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.weekday-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    background: #f8fafc;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.weekday-row div {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+    padding: 0.75rem;
+}
+
+.calendar-cell {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    min-height: 82px;
+    padding: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background: #fff;
+    cursor: pointer;
+}
+
+.calendar-cell.empty {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.calendar-cell.active {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.cell-date {
+    align-self: flex-start;
+    background: transparent;
+    border: none;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+.run-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.run-badge {
+    border: 1px solid var(--border-color);
+    background: #f8fafc;
+    color: var(--text-main);
+    padding: 0.25rem 0.45rem;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.run-badge + .run-badge::before {
+    content: "|";
+    margin-right: 4px;
+    color: var(--text-muted);
+}
+
+.run-badge.active,
+.run-badge:hover {
+    border-color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+}
+
+@media (max-width: 640px) {
+    .calendar-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
