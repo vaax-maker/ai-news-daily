@@ -38,7 +38,7 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         )
         
         # Rankings (if enabled)
-        if config.use_ai_ranking and config.selection_mode != "random":
+        if config.use_ai_ranking:
             print(f"[{config.key.upper()}] AI Ranking...")
             selected_raw = rank_items_with_ai(raw_items, config.max_articles)
         else:
