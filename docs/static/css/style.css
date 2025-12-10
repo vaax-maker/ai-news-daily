@@ -227,13 +227,17 @@ html {
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
-    color: var(--text-main);
+    color: var(--primary-color);
     line-height: 1.3;
+}
+
+.news-title a {
+    color: inherit;
 }
 
 .news-title a:hover {
     text-decoration: underline;
-    color: var(--primary-color);
+    color: var(--primary-color-hover);
 }
 
 .news-meta {
@@ -492,6 +496,14 @@ tr:hover {
     margin-bottom: 0.25rem;
 }
 
+.news-card-title a {
+    color: var(--primary-color);
+}
+
+.news-card-title a:hover {
+    color: var(--primary-color-hover);
+}
+
 .news-card-meta {
     color: var(--text-muted);
     font-size: 0.9rem;
@@ -530,26 +542,6 @@ tr:hover {
     display: grid;
     gap: 1rem;
     position: relative;
-}
-
-.calendar-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-}
-
-.calendar-nav .ghost-btn {
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-weight: 700;
-}
-
-.month-label {
-    font-weight: 800;
-    color: var(--text-main);
 }
 
 .calendar-nav {
@@ -620,6 +612,11 @@ tr:hover {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     background: #fff;
     cursor: pointer;
+}
+
+.calendar-cell.has-articles {
+    background: #e6f8d7;
+    border-color: #b9e3a0;
 }
 
 .calendar-cell.empty {
@@ -770,15 +767,15 @@ tr:hover {
 
 .run-popover {
     position: absolute;
-    top: -0.5rem;
-    left: 50%;
-    transform: translate(-50%, -100%);
+    left: 0;
+    top: 0;
+    transform: none;
     background: #fff;
     border: 1px solid var(--border-color);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     border-radius: 14px;
-    padding: 1rem;
-    width: min(520px, 94vw);
+    padding: 0.75rem;
+    width: min(320px, 90vw);
     z-index: 4;
 }
 
@@ -792,12 +789,21 @@ tr:hover {
 
 .popover-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+    gap: 0.4rem;
+    margin-top: 0.25rem;
 }
 
 .popover-list .modal-run {
     margin: 0;
+}
+
+.modal-run.compact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    padding: 0.6rem 0.4rem;
 }
 
 @media (max-width: 640px) {
@@ -820,10 +826,4 @@ tr:hover {
         font-size: 0.95rem;
     }
 
-    .run-popover {
-        position: fixed;
-        top: 1rem;
-        left: 50%;
-        transform: translateX(-50%);
-    }
 }
