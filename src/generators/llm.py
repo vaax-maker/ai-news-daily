@@ -6,6 +6,20 @@ from google.api_core import exceptions
 import groq as groq_lib
 from typing import List
 
+# Heuristic keyword buckets for lightweight ranking
+IMPORTANT_COMPANIES = [
+    "openai", "google", "alphabet", "apple", "microsoft", "meta",
+    "amazon", "nvidia", "amd", "samsung", "lg", "tesla",
+]
+EVENT_KEYWORDS = ["모델", "model", "출시", "발표", "release", "launch", "upgrade", "v2", "v3"]
+BUSINESS_KEYWORDS = ["인수", "acquisition", "합병", "merger", "m&a", "투자", "ipo", "규제", "policy", "법", "ban"]
+NEGATIVE_KEYWORDS = ["튜토리얼", "tutorial", "가이드", "guide", "how to", "홍보", "sponsor", "sponsored"]
+
+# Pre-lowered keyword lists to avoid repeated lower() calls and to catch case variants
+EVENT_KEYWORDS_LOWER = [kw.lower() for kw in EVENT_KEYWORDS]
+BUSINESS_KEYWORDS_LOWER = [kw.lower() for kw in BUSINESS_KEYWORDS]
+NEGATIVE_KEYWORDS_LOWER = [kw.lower() for kw in NEGATIVE_KEYWORDS]
+
 # Groq Client Initialization
 try:
     Groq = groq_lib.Groq
@@ -24,6 +38,49 @@ def _extract_retry_delay(exc: Exception, default: float = 30.0) -> float:
         except ValueError:
             pass
     return min(default, MAX_GEMINI_RETRY_DELAY)
+
+def _score_title(title: str) -> int:
+    """Lightweight heuristic scoring to reduce LLM usage.
+
+    The goal is to approximate the previous AI ranking intent without
+    spending tokens. Scores favor big-tech launches, AI model updates,
+    and business moves while demoting tutorials or promotional posts.
+    """
+
+    lowered = title.lower()
+    score = 0
+
+    # Company mentions carry the biggest weight
+    for kw in IMPORTANT_COMPANIES:
+        if kw in lowered:
+            score += 3
+
+    # Product/model events
+    for kw in EVENT_KEYWORDS_LOWER:
+        if kw in lowered:
+            score += 2
+
+    # Business / policy changes
+    for kw in BUSINESS_KEYWORDS_LOWER:
+        if kw in lowered:
+            score += 2
+
+    # Penalties for low-value/tutorial-like items
+    for kw in NEGATIVE_KEYWORDS_LOWER:
+        if kw in lowered:
+            score -= 2
+
+    return score
+
+def _rank_with_heuristics(items: List[tuple], limit: int) -> List[tuple]:
+    scored = []
+    for ts, title, *rest in items:
+        score = _score_title(title)
+        scored.append((score, ts, (ts, title, *rest)))
+
+    # Sort by score desc, then by time desc to keep freshness
+    scored.sort(key=lambda x: (x[0], x[1]), reverse=True)
+    return [entry[2] for entry in scored[:limit]]
 
 def _summarize_with_gemini(prompt: str) -> str:
     key = os.environ.get("GEMINI_API_KEY")
@@ -57,7 +114,7 @@ def _summarize_with_grok(prompt: str) -> str:
         raise RuntimeError("GROK_API_KEY is not set.")
     
     if not Groq:
-         raise ImportError("Groq library not installed properly.")
+        raise ImportError("Groq library not installed properly.")
 
     client = Groq(api_key=api_key)
     model = os.getenv("GROK_MODEL", "llama-3.3-70b-versatile")
@@ -92,20 +149,9 @@ def summarize_article(text: str, title: str, display_name: str) -> str:
         # print(f"[LLM] Grok failed ({e}), switching to Gemini...")
         return _summarize_with_gemini(prompt)
 
-def rank_items_with_ai(items: List[tuple], limit: int) -> List[tuple]:
-    if not items:
-        return []
-
-    # Sort by time desc first, take top 60
-    candidates = sorted(items, key=lambda x: x[0], reverse=True)[:60]
-    
-    # Check API usage
-    if not os.environ.get("GEMINI_API_KEY") and not os.environ.get("GROK_API_KEY"):
-        print("[LLM] API Key missing, skipping AI ranking (fallback to time sort).")
-        return candidates[:limit]
-    
+def _rank_with_llm(candidates: List[tuple], limit: int) -> List[tuple]:
     candidates_text = "\n".join([f"{idx}. {t[1]}" for idx, t in enumerate(candidates)])
-    
+
     prompt = f"""
 다음은 다양한 테크 뉴스 기사들의 제목 리스트야.
 이 중에서 오늘날짜 뉴스레터에 포함시킬 가장 '중요하고 의미 있는' 기사 {limit}개를 골라줘.
@@ -123,32 +169,70 @@ def rank_items_with_ai(items: List[tuple], limit: int) -> List[tuple]:
 [기사 목록]
 {candidates_text}
 """
+
     try:
-        # Using summarization function to call LLM
         try:
             resp = _summarize_with_grok(prompt)
-        except:
+        except Exception:
             resp = _summarize_with_gemini(prompt)
 
         matches = re.findall(r"\d+", resp)
         ranked_indices = [int(m) for m in matches]
-        
+
     except Exception as e:
-        print(f"[LLM] Ranking failed ({e}), fallback to time sort.")
-        return candidates[:limit]
+        print(f"[LLM] Ranking failed ({e})")
+        return []
 
     selected = []
     seen = set()
     for idx in ranked_indices:
-        if idx in seen: continue
+        if idx in seen:
+            continue
         if 0 <= idx < len(candidates):
             selected.append(candidates[idx])
             seen.add(idx)
-            
+
     if len(selected) < limit:
         for idx, item in enumerate(candidates):
             if idx not in seen:
                 selected.append(item)
-                if len(selected) >= limit: break
-                
+                if len(selected) >= limit:
+                    break
+
     return selected[:limit]
+
+def rank_items_with_ai(items: List[tuple], limit: int) -> List[tuple]:
+    if not items:
+        return []
+
+    strategy = os.getenv("AI_RANKING_STRATEGY", "heuristic").lower()
+    max_candidates = int(os.getenv("AI_RANKING_CANDIDATES", "40"))
+
+    # Sort by time desc first, take top N
+    candidates = sorted(items, key=lambda x: x[0], reverse=True)[:max_candidates]
+
+    # If strategy is not explicitly LLM-based, use heuristics only
+    if strategy not in ("llm", "hybrid"):
+        return _rank_with_heuristics(candidates, limit)
+
+    llm_available = os.environ.get("GEMINI_API_KEY") or os.environ.get("GROK_API_KEY")
+    if not llm_available:
+        if strategy == "llm":
+            print("[LLM] API Key missing, using heuristic ranking instead.")
+        return _rank_with_heuristics(candidates, limit)
+
+    llm_ranked = _rank_with_llm(candidates, limit)
+
+    # If LLM failed or empty, fall back to heuristics
+    if not llm_ranked:
+        if strategy == "llm":
+            print("[LLM] Ranking unavailable, falling back to heuristic scores.")
+        return _rank_with_heuristics(candidates, limit)
+
+    # Hybrid keeps LLM order but will top up with heuristic order if needed
+    if strategy == "hybrid" and len(llm_ranked) < limit:
+        heuristic_fill = _rank_with_heuristics(candidates, limit)
+        combined = llm_ranked + [i for i in heuristic_fill if i not in llm_ranked]
+        return combined[:limit]
+
+    return llm_ranked[:limit]
