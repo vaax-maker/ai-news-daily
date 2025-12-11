@@ -9,32 +9,11 @@ try:
 except ImportError:
     GoogleTranslator = None
 
-HIGHLIGHT_COLOR = "#9BF52D"
+HIGHLIGHT_COLOR = "#CEFA98"
 
 HIGHLIGHT_STYLE = (
     f"background-color: {HIGHLIGHT_COLOR}; padding: 3px 5px; border-radius: 4px;"
 )
-
-KEYWORD_PATTERNS = [
-    r"\bAI\b",
-    r"\bLLM[s]?\b",
-    r"GPT[-\w.]*",
-    r"Gen[-\w.]+",
-    r"Gemini\d*",
-    r"OpenAI|오픈AI",
-    r"Google|구글",
-    r"Apple|애플",
-    r"Microsoft|마이크로소프트|MS",
-    r"Amazon|아마존",
-    r"Meta|메타",
-    r"삼성|LG",
-    r"쿠버네티스|Kubernetes",
-    r"빅쿼리|BigQuery",
-    r"Compute Engine|컴퓨트 엔진",
-    r"K8s",
-    r"\d{1,3}(?:[,\d]{3})*(?:\.\d+)?(?:조|억|만)?(?:원|달러|%)?",
-    r"출시|발표|투자|인수|업데이트",
-]
 
 
 def _wrap_highlight(text: str) -> str:
@@ -47,36 +26,12 @@ def _wrap_highlight(text: str) -> str:
     )
 
 
-def _highlight_keywords(text: str) -> str:
-    """Shade meaningful keywords with the configured highlight color.
-
-    Uses simple regex heuristics for names, tech terms, and numeric facts while
-    avoiding replacements inside existing HTML tags.
-    """
-
-    segments = re.split(r"(<[^>]+>)", text)
-    highlighted_segments = []
-
-    for segment in segments:
-        if segment.startswith("<") and segment.endswith(">"):
-            highlighted_segments.append(segment)
-            continue
-
-        highlighted = segment
-        for pattern in KEYWORD_PATTERNS:
-            highlighted = re.sub(pattern, lambda m: _wrap_highlight(m.group(0)), highlighted)
-        highlighted_segments.append(highlighted)
-
-    return "".join(highlighted_segments)
-
 def markdown_bold_to_highlight(html_text: str) -> str:
-    """Convert **bold** markers into highlighted phrases and list items with shading."""
+    """Convert important lines to highlighted list items.
 
-    def wrap_highlight(match):
-        text = match.group(1)
-        if len(text.split()) >= 2:
-            return _wrap_highlight(text)
-        return f"<strong>{text}</strong>"
+    Only full lines are shaded to emphasize key sentences. Keywords are
+    intentionally left unstyled to avoid noisy highlighting.
+    """
 
     lines = []
     for idx, raw_line in enumerate(html_text.splitlines()):
@@ -85,10 +40,16 @@ def markdown_bold_to_highlight(html_text: str) -> str:
             continue
 
         cleaned = re.sub(r"^[•□\-]\s*", "", cleaned)
-        converted = re.sub(r"\*\*(.+?)\*\*", wrap_highlight, cleaned)
-        converted = _highlight_keywords(converted)
+        is_important = idx == 0
 
-        if idx == 0 and "class='highlight" not in converted:
+        def strip_bold(match):
+            nonlocal is_important
+            is_important = True
+            return match.group(1)
+
+        converted = re.sub(r"\*\*(.+?)\*\*", strip_bold, cleaned)
+
+        if is_important:
             converted = _wrap_highlight(converted)
 
         lines.append(converted)
