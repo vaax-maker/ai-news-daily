@@ -9,28 +9,88 @@ try:
 except ImportError:
     GoogleTranslator = None
 
-HIGHLIGHT_COLOR = "#fff6b0"
+HIGHLIGHT_COLOR = "#9BF52D"
+
+HIGHLIGHT_STYLE = (
+    f"background-color: {HIGHLIGHT_COLOR}; padding: 3px 5px; border-radius: 4px;"
+)
+
+KEYWORD_PATTERNS = [
+    r"\bAI\b",
+    r"\bLLM[s]?\b",
+    r"GPT[-\w.]*",
+    r"Gen[-\w.]+",
+    r"Gemini\d*",
+    r"OpenAI|오픈AI",
+    r"Google|구글",
+    r"Apple|애플",
+    r"Microsoft|마이크로소프트|MS",
+    r"Amazon|아마존",
+    r"Meta|메타",
+    r"삼성|LG",
+    r"쿠버네티스|Kubernetes",
+    r"빅쿼리|BigQuery",
+    r"Compute Engine|컴퓨트 엔진",
+    r"K8s",
+    r"\d{1,3}(?:[,\d]{3})*(?:\.\d+)?(?:조|억|만)?(?:원|달러|%)?",
+    r"출시|발표|투자|인수|업데이트",
+]
+
+
+def _wrap_highlight(text: str) -> str:
+    return (
+        "<span class='highlight' style='"
+        + HIGHLIGHT_STYLE
+        + "'>"
+        + text
+        + "</span>"
+    )
+
+
+def _highlight_keywords(text: str) -> str:
+    """Shade meaningful keywords with the configured highlight color.
+
+    Uses simple regex heuristics for names, tech terms, and numeric facts while
+    avoiding replacements inside existing HTML tags.
+    """
+
+    segments = re.split(r"(<[^>]+>)", text)
+    highlighted_segments = []
+
+    for segment in segments:
+        if segment.startswith("<") and segment.endswith(">"):
+            highlighted_segments.append(segment)
+            continue
+
+        highlighted = segment
+        for pattern in KEYWORD_PATTERNS:
+            highlighted = re.sub(pattern, lambda m: _wrap_highlight(m.group(0)), highlighted)
+        highlighted_segments.append(highlighted)
+
+    return "".join(highlighted_segments)
 
 def markdown_bold_to_highlight(html_text: str) -> str:
-    """Convert **bold** markers into highlighted phrases and list items."""
+    """Convert **bold** markers into highlighted phrases and list items with shading."""
+
     def wrap_highlight(match):
         text = match.group(1)
         if len(text.split()) >= 2:
-            return (
-                f"<span class='highlight' style='background-color: {HIGHLIGHT_COLOR};"
-                " padding: 3px 5px; border-radius: 4px;'>"
-                f"{text}"
-                "</span>"
-            )
+            return _wrap_highlight(text)
         return f"<strong>{text}</strong>"
 
     lines = []
-    for raw_line in html_text.splitlines():
+    for idx, raw_line in enumerate(html_text.splitlines()):
         cleaned = raw_line.strip()
         if not cleaned:
             continue
+
         cleaned = re.sub(r"^[•□\-]\s*", "", cleaned)
         converted = re.sub(r"\*\*(.+?)\*\*", wrap_highlight, cleaned)
+        converted = _highlight_keywords(converted)
+
+        if idx == 0 and "class='highlight" not in converted:
+            converted = _wrap_highlight(converted)
+
         lines.append(converted)
 
     if not lines:
@@ -123,6 +183,7 @@ def extract_image_url(entry) -> str:
 
 def sanitize_summary(summary: str) -> str:
     cleaned_lines = []
+    seen = set()
     for line in summary.splitlines():
         stripped = line.strip()
         if not stripped:
@@ -133,7 +194,14 @@ def sanitize_summary(summary: str) -> str:
             continue
         if re.search(r"https?://", stripped):
             continue
-        cleaned_lines.append(stripped)
+        cleaned = re.sub(r"[^0-9A-Za-z가-힣\s.,;:!?\"'()\[\]{}<>@#%&*`~\-_/+|=]", "", stripped)
+        cleaned = re.sub(r"\s+", " ", cleaned).strip()
+        if not cleaned:
+            continue
+        if cleaned in seen:
+            continue
+        seen.add(cleaned)
+        cleaned_lines.append(cleaned)
 
     return "\n".join(cleaned_lines)
 
@@ -166,3 +234,45 @@ def shorten_korean_title(title: str, max_length: int = 40) -> str:
     if len(translated) > max_length:
         return translated[: max_length - 1] + "…"
     return translated
+
+
+def parse_article_datetime(article: dict) -> datetime.datetime:
+    """Robust datetime parser for article dictionaries.
+
+    Tries timestamp fields first, then common string date fields used across
+    feeds and generated HTML. Returns datetime.min on failure so sorting keeps
+    unknown dates last.
+    """
+
+    if not article:
+        return datetime.datetime.min
+
+    ts = article.get("timestamp")
+    if ts:
+        try:
+            return datetime.datetime.fromtimestamp(float(ts))
+        except Exception:
+            pass
+
+    candidates = [
+        article.get("published_display"),
+        article.get("published"),
+        article.get("published_at"),
+        article.get("date"),
+    ]
+
+    for value in candidates:
+        if not value:
+            continue
+        cleaned = str(value).replace(".", "-")
+        try:
+            return datetime.datetime.fromisoformat(cleaned.replace("Z", "+00:00"))
+        except Exception:
+            pass
+        for fmt in ("%Y-%m-%d %H:%M", "%Y-%m-%d"):
+            try:
+                return datetime.datetime.strptime(cleaned, fmt)
+            except Exception:
+                continue
+
+    return datetime.datetime.min
