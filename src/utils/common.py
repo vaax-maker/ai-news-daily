@@ -9,7 +9,7 @@ try:
 except ImportError:
     GoogleTranslator = None
 
-HIGHLIGHT_COLOR = "#9BF52D"
+HIGHLIGHT_COLOR = "#E6F8D7"
 
 HIGHLIGHT_STYLE = (
     f"background-color: {HIGHLIGHT_COLOR}; padding: 3px 5px; border-radius: 4px;"
