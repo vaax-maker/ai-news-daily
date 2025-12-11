@@ -306,7 +306,6 @@
     async function prefetchArticleCounts() {
         await Promise.all(
             runEntries.map(async (run) => {
-                if (typeof run.article_count === 'number') return;
                 const { articles } = await fetchRunArticles(run);
                 run.article_count = articles.length;
             })
