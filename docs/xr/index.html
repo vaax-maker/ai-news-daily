@@ -69,13 +69,12 @@
 
 <section class="calendar-section card">
     <div class="section-heading">
-        <div>
-            <p class="eyebrow">날짜별 아카이브</p>
-            <h3>캘린더에서 날짜를 선택하세요</h3>
-            <p class="subtitle">날짜를 누르면 해당 날짜의 기사들이 바로 표시됩니다.</p>
+            <div>
+                <p class="eyebrow">날짜별 아카이브</p>
+                <h3>캘린더에서 날짜를 선택하면 해당 날짜의 기사들이 바로 표시됩니다.</h3>
+            </div>
+            <div id="popover-run-list" class="popover-list"></div>
         </div>
-        <div id="popover-run-list" class="popover-list"></div>
-    </div>
     <div class="calendar-nav">
         <button id="prev-month" class="ghost-btn" aria-label="이전 달 보기">←</button>
         <div id="current-month-label" class="month-label"></div>
@@ -130,6 +129,7 @@
     const todayCard = document.querySelector('.today-section');
 
     const articleCache = {};
+    const holidayCache = {};
     let monthKeys = [];
     let currentMonthIndex = 0;
     let activeDate = '';
@@ -170,8 +170,9 @@
         sortRunEntries();
 
         runEntries.forEach((run, idx) => {
+            run.absolute_index = idx;
             const list = runsByDate[run.date_str] || [];
-            list.push({ ...run, absolute_index: idx });
+            list.push(run);
             runsByDate[run.date_str] = list;
         });
 
@@ -196,9 +197,11 @@
 
     function updateDateTotals() {
         dateArticleTotals = {};
-        Object.entries(runsByDate).forEach(([dateKey, runs]) => {
-            const total = runs.reduce((sum, run) => sum + (run.article_count || 0), 0);
-            dateArticleTotals[dateKey] = total;
+        runEntries.forEach(run => {
+            const key = run.date_str;
+            if (!key) return;
+            const current = dateArticleTotals[key] || 0;
+            dateArticleTotals[key] = current + (run.article_count || 0);
         });
     }
 
@@ -206,6 +209,38 @@
         const parts = dateStr.split('-');
         if (parts.length !== 3) return dateStr;
         return `${parts[0]}년 ${Number(parts[1])}월 ${Number(parts[2])}일`;
+    }
+
+    function getKoreanHolidays(year) {
+        if (!year) return new Set();
+        if (holidayCache[year]) return holidayCache[year];
+
+        const fixed = [
+            `${year}-01-01`, // 새해 첫날
+            `${year}-03-01`, // 삼일절
+            `${year}-05-05`, // 어린이날
+            `${year}-06-06`, // 현충일
+            `${year}-08-15`, // 광복절
+            `${year}-10-03`, // 개천절
+            `${year}-10-09`, // 한글날
+            `${year}-12-25`  // 성탄절
+        ];
+
+        const lunarBased = {
+            2023: ['2023-01-21', '2023-01-22', '2023-01-23', '2023-01-24', '2023-05-27', '2023-09-28', '2023-09-29', '2023-09-30'],
+            2024: ['2024-02-09', '2024-02-10', '2024-02-11', '2024-02-12', '2024-05-15', '2024-09-16', '2024-09-17', '2024-09-18'],
+            2025: ['2025-01-28', '2025-01-29', '2025-01-30', '2025-01-31', '2025-05-05', '2025-10-06', '2025-10-07', '2025-10-08']
+        };
+
+        const holidays = new Set([...fixed, ...(lunarBased[year] || [])]);
+        holidayCache[year] = holidays;
+        return holidays;
+    }
+
+    function isKoreanHoliday(dateStr) {
+        const [year] = dateStr.split('-').map(Number);
+        if (!year) return false;
+        return getKoreanHolidays(year).has(dateStr);
     }
 
     function getMonthKey(dateStr) {
@@ -303,7 +338,6 @@
     async function prefetchArticleCounts() {
         await Promise.all(
             runEntries.map(async (run) => {
-                if (typeof run.article_count === 'number') return;
                 const { articles } = await fetchRunArticles(run);
                 run.article_count = articles.length;
             })
@@ -346,9 +380,12 @@
 
         const weekdayRow = document.createElement('div');
         weekdayRow.className = 'weekday-row';
-        ['일', '월', '화', '수', '목', '금', '토'].forEach(d => {
+        ['월', '화', '수', '목', '금', '토', '일'].forEach((d, idx) => {
             const wd = document.createElement('div');
             wd.textContent = d;
+            if (idx >= 5) {
+                wd.classList.add('weekend');
+            }
             weekdayRow.appendChild(wd);
         });
         monthBlock.appendChild(weekdayRow);
@@ -356,7 +393,8 @@
         const grid = document.createElement('div');
         grid.className = 'calendar-grid';
 
-        for (let i = 0; i < firstDay.getDay(); i++) {
+        const offset = (firstDay.getDay() + 6) % 7;
+        for (let i = 0; i < offset; i++) {
             grid.appendChild(document.createElement('div'));
         }
 
@@ -366,11 +404,20 @@
             cell.className = 'calendar-cell';
             cell.dataset.date = dateStr;
 
+            const dayOfWeek = new Date(dateStr + 'T00:00:00').getDay();
+            const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+            const isHoliday = isKoreanHoliday(dateStr);
+            if (isWeekend) cell.classList.add('weekend');
+            if (isHoliday) cell.classList.add('holiday');
+
             const dateLabel = document.createElement('button');
             dateLabel.type = 'button';
             dateLabel.className = 'cell-date';
             dateLabel.textContent = day;
-            cell.appendChild(dateLabel);
+
+            const header = document.createElement('div');
+            header.className = 'cell-header';
+            header.appendChild(dateLabel);
 
             const runs = runsByDate[dateStr];
             const hasRuns = runs && runs.length;
@@ -381,12 +428,13 @@
                 const totalArticles = dateArticleTotals[dateStr];
                 runCount.textContent = typeof totalArticles === 'number' && totalArticles > 0 ? totalArticles : 0;
                 runCount.setAttribute('aria-label', `${totalArticles || 0}개 기사`);
-                cell.appendChild(runCount);
+                header.appendChild(runCount);
                 cell.addEventListener('click', () => handleDateSelection(dateStr));
             } else {
                 cell.classList.add('empty');
             }
 
+            cell.appendChild(header);
             grid.appendChild(cell);
         }
 
