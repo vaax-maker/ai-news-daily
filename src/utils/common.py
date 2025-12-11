@@ -9,7 +9,7 @@ try:
 except ImportError:
     GoogleTranslator = None
 
-HIGHLIGHT_COLOR = "#CEFA98"
+HIGHLIGHT_COLOR = "#E6F8D7"
 
 HIGHLIGHT_STYLE = (
     f"background-color: {HIGHLIGHT_COLOR}; padding: 3px 5px; border-radius: 4px;"
@@ -27,20 +27,23 @@ def _wrap_highlight(text: str) -> str:
 
 
 def markdown_bold_to_highlight(html_text: str) -> str:
-    """Convert important lines to highlighted list items.
+    """Convert bold-marked sentences to highlighted list items.
 
-    Only full lines are shaded to emphasize key sentences. Keywords are
-    intentionally left unstyled to avoid noisy highlighting.
+    - Bold text (\*\* ... \*\*) marks important sentences.
+    - Highlighting is capped so that highlighted characters stay within 20% of
+      the total summary length to avoid over-highlighting.
     """
 
-    lines = []
-    for idx, raw_line in enumerate(html_text.splitlines()):
+    parsed_lines = []
+    total_chars = 0
+
+    for raw_line in html_text.splitlines():
         cleaned = raw_line.strip()
         if not cleaned:
             continue
 
         cleaned = re.sub(r"^[•□\-]\s*", "", cleaned)
-        is_important = idx == 0
+        is_important = False
 
         def strip_bold(match):
             nonlocal is_important
@@ -49,15 +52,24 @@ def markdown_bold_to_highlight(html_text: str) -> str:
 
         converted = re.sub(r"\*\*(.+?)\*\*", strip_bold, cleaned)
 
-        if is_important:
-            converted = _wrap_highlight(converted)
+        parsed_lines.append((converted, is_important))
+        total_chars += len(converted)
 
-        lines.append(converted)
-
-    if not lines:
+    if not parsed_lines:
         return ""
 
-    items = [f"<li>{line}</li>" for line in lines]
+    highlight_budget = int(total_chars * 0.2)
+    highlighted_chars = 0
+    rendered_lines = []
+
+    for text, is_important in parsed_lines:
+        if is_important and highlighted_chars + len(text) <= highlight_budget:
+            rendered_lines.append(_wrap_highlight(text))
+            highlighted_chars += len(text)
+        else:
+            rendered_lines.append(text)
+
+    items = [f"<li>{line}</li>" for line in rendered_lines]
     return "<ul class='summary-list'>" + "".join(items) + "</ul>"
 
 def contains_korean(text: str) -> bool:
