@@ -29,13 +29,16 @@ def _wrap_highlight(text: str) -> str:
 def markdown_bold_to_highlight(html_text: str) -> str:
     """Convert bold-marked sentences to highlighted list items.
 
-    - Bold text (\*\* ... \*\*) marks important sentences.
+    - Bold text (\*\* ... \*\*) marks important contexts.
     - Highlighting is capped so that highlighted characters stay within 20% of
       the total summary length to avoid over-highlighting.
+    - [제목], [요약], [의미] 라벨은 노출하지 않고, 의미는 별도 영역으로 분리.
     """
 
-    parsed_lines = []
+    main_lines = []
+    meaning_lines = []
     total_chars = 0
+    current_section = None
 
     for raw_line in html_text.splitlines():
         cleaned = raw_line.strip()
@@ -43,6 +46,12 @@ def markdown_bold_to_highlight(html_text: str) -> str:
             continue
 
         cleaned = re.sub(r"^[•□\-]\s*", "", cleaned)
+
+        section_match = re.fullmatch(r"\[?(제목|요약|의미)\]?", cleaned)
+        if section_match:
+            current_section = section_match.group(1)
+            continue
+
         is_important = False
 
         def strip_bold(match):
@@ -52,25 +61,43 @@ def markdown_bold_to_highlight(html_text: str) -> str:
 
         converted = re.sub(r"\*\*(.+?)\*\*", strip_bold, cleaned)
 
-        parsed_lines.append((converted, is_important))
+        target_list = meaning_lines if current_section == "의미" else main_lines
+        target_list.append((converted, is_important))
         total_chars += len(converted)
 
-    if not parsed_lines:
+    if not main_lines and not meaning_lines:
         return ""
 
     highlight_budget = int(total_chars * 0.2)
     highlighted_chars = 0
-    rendered_lines = []
 
-    for text, is_important in parsed_lines:
-        if is_important and highlighted_chars + len(text) <= highlight_budget:
-            rendered_lines.append(_wrap_highlight(text))
-            highlighted_chars += len(text)
-        else:
-            rendered_lines.append(text)
+    def render_lines(lines):
+        nonlocal highlighted_chars
+        rendered = []
+        for text, is_important in lines:
+            if is_important and highlighted_chars + len(text) <= highlight_budget:
+                rendered.append(_wrap_highlight(text))
+                highlighted_chars += len(text)
+            else:
+                rendered.append(text)
+        return rendered
 
-    items = [f"<li>{line}</li>" for line in rendered_lines]
-    return "<ul class='summary-list'>" + "".join(items) + "</ul>"
+    rendered_main = render_lines(main_lines)
+    rendered_meaning = render_lines(meaning_lines)
+
+    main_html = ""
+    if rendered_main:
+        items = [f"<li>{line}</li>" for line in rendered_main]
+        main_html = "<ul class='summary-list'>" + "".join(items) + "</ul>"
+
+    meaning_html = ""
+    if rendered_meaning:
+        meaning_items = "".join(
+            f"<div class='meaning-line'>{line}</div>" for line in rendered_meaning
+        )
+        meaning_html = f"<div class='meaning-box'>{meaning_items}</div>"
+
+    return main_html + meaning_html
 
 def contains_korean(text: str) -> bool:
     return bool(re.search(r"[가-힣]", text))
@@ -180,8 +207,19 @@ def sanitize_summary(summary: str) -> str:
 
 
 def trim_summary_lines(summary: str, min_lines: int = 3, max_lines: int = 5) -> str:
-    """Force summaries to stay within the desired 3~5 line window."""
+    """Force summaries to stay within the desired 3~5 line window.
+
+    The 의미 섹션은 항상 보존하며, 요약 줄 수 보정은 제목/요약 파트에만 적용.
+    """
+
     lines = [line.strip() for line in summary.splitlines() if line.strip()]
+
+    meaning_lines = []
+    for idx, line in enumerate(lines):
+        if re.fullmatch(r"\[?의미\]?", line):
+            meaning_lines = lines[idx + 1 :]
+            lines = lines[:idx]
+            break
 
     if len(lines) < min_lines:
         # Break long sentences to meet the minimum line requirement
@@ -196,6 +234,11 @@ def trim_summary_lines(summary: str, min_lines: int = 3, max_lines: int = 5) -> 
                 break
 
     trimmed = lines[:max_lines] if lines else []
+
+    if meaning_lines:
+        trimmed.append("[의미]")
+        trimmed.extend(meaning_lines)
+
     return "\n".join(trimmed)
 
 
