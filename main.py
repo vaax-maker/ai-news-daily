@@ -15,6 +15,7 @@ from src.utils.common import (
     extract_image_url,
     format_timestamp,
     markdown_bold_to_highlight,
+    parse_article_datetime,
     sanitize_summary,
     shorten_korean_title,
     trim_summary_lines,
@@ -203,6 +204,7 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         archived_articles.extend(parse_existing_articles(path))
 
     merged_items = merge_articles(summarized_items, archived_articles)
+    merged_items = sorted(merged_items, key=parse_article_datetime, reverse=True)
 
     html = render_daily_page(merged_items, date_str, time_str, config)
 

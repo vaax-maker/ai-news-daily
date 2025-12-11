@@ -9,28 +9,49 @@ try:
 except ImportError:
     GoogleTranslator = None
 
-HIGHLIGHT_COLOR = "#fff6b0"
+HIGHLIGHT_COLOR = "#CEFA98"
+
+HIGHLIGHT_STYLE = (
+    f"background-color: {HIGHLIGHT_COLOR}; padding: 3px 5px; border-radius: 4px;"
+)
+
+
+def _wrap_highlight(text: str) -> str:
+    return (
+        "<span class='highlight' style='"
+        + HIGHLIGHT_STYLE
+        + "'>"
+        + text
+        + "</span>"
+    )
+
 
 def markdown_bold_to_highlight(html_text: str) -> str:
-    """Convert **bold** markers into highlighted phrases and list items."""
-    def wrap_highlight(match):
-        text = match.group(1)
-        if len(text.split()) >= 2:
-            return (
-                f"<span class='highlight' style='background-color: {HIGHLIGHT_COLOR};"
-                " padding: 3px 5px; border-radius: 4px;'>"
-                f"{text}"
-                "</span>"
-            )
-        return f"<strong>{text}</strong>"
+    """Convert important lines to highlighted list items.
+
+    Only full lines are shaded to emphasize key sentences. Keywords are
+    intentionally left unstyled to avoid noisy highlighting.
+    """
 
     lines = []
-    for raw_line in html_text.splitlines():
+    for idx, raw_line in enumerate(html_text.splitlines()):
         cleaned = raw_line.strip()
         if not cleaned:
             continue
+
         cleaned = re.sub(r"^[•□\-]\s*", "", cleaned)
-        converted = re.sub(r"\*\*(.+?)\*\*", wrap_highlight, cleaned)
+        is_important = idx == 0
+
+        def strip_bold(match):
+            nonlocal is_important
+            is_important = True
+            return match.group(1)
+
+        converted = re.sub(r"\*\*(.+?)\*\*", strip_bold, cleaned)
+
+        if is_important:
+            converted = _wrap_highlight(converted)
+
         lines.append(converted)
 
     if not lines:
@@ -123,6 +144,7 @@ def extract_image_url(entry) -> str:
 
 def sanitize_summary(summary: str) -> str:
     cleaned_lines = []
+    seen = set()
     for line in summary.splitlines():
         stripped = line.strip()
         if not stripped:
@@ -133,7 +155,14 @@ def sanitize_summary(summary: str) -> str:
             continue
         if re.search(r"https?://", stripped):
             continue
-        cleaned_lines.append(stripped)
+        cleaned = re.sub(r"[^0-9A-Za-z가-힣\s.,;:!?\"'()\[\]{}<>@#%&*`~\-_/+|=]", "", stripped)
+        cleaned = re.sub(r"\s+", " ", cleaned).strip()
+        if not cleaned:
+            continue
+        if cleaned in seen:
+            continue
+        seen.add(cleaned)
+        cleaned_lines.append(cleaned)
 
     return "\n".join(cleaned_lines)
 
@@ -166,3 +195,45 @@ def shorten_korean_title(title: str, max_length: int = 40) -> str:
     if len(translated) > max_length:
         return translated[: max_length - 1] + "…"
     return translated
+
+
+def parse_article_datetime(article: dict) -> datetime.datetime:
+    """Robust datetime parser for article dictionaries.
+
+    Tries timestamp fields first, then common string date fields used across
+    feeds and generated HTML. Returns datetime.min on failure so sorting keeps
+    unknown dates last.
+    """
+
+    if not article:
+        return datetime.datetime.min
+
+    ts = article.get("timestamp")
+    if ts:
+        try:
+            return datetime.datetime.fromtimestamp(float(ts))
+        except Exception:
+            pass
+
+    candidates = [
+        article.get("published_display"),
+        article.get("published"),
+        article.get("published_at"),
+        article.get("date"),
+    ]
+
+    for value in candidates:
+        if not value:
+            continue
+        cleaned = str(value).replace(".", "-")
+        try:
+            return datetime.datetime.fromisoformat(cleaned.replace("Z", "+00:00"))
+        except Exception:
+            pass
+        for fmt in ("%Y-%m-%d %H:%M", "%Y-%m-%d"):
+            try:
+                return datetime.datetime.strptime(cleaned, fmt)
+            except Exception:
+                continue
+
+    return datetime.datetime.min
