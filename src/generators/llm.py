@@ -130,25 +130,42 @@ def summarize_article(text: str, title: str, display_name: str) -> str:
     if not os.environ.get("GEMINI_API_KEY") and not os.environ.get("GROK_API_KEY"):
         return "API Key 미설정으로 AI 요약 생략"
 
+    # === 개선된 프롬프트 적용 ===
     prompt = f"""
-아래 {display_name} 관련 기사를 "한글"로 요약해줘.
-조건:
-1. 스타트업 사업가에게 정보도움이 되도록, 기사의 핵심을 육하원칙에 맞게 요약해줘 (2줄)
-2. 배경, 관련수치,세부내용을 추가해줘(2줄)
-3. 기사내용의 의미와 전망(1줄)
-4. 기사의 제목이 영문일 경우 반드시 **한글로 번역**하여 1줄로 요약할 것.
-5. 명사형 종결 어미(~함, ~임)으로 끝낼 것.
-6. 가장 중요한 문장은 두세 개만 **굵게 표시**해줘.
+너는 스타트업 대표의 의사결정을 지원하는 전문 뉴스 분석 에이전트임.
+아래 규칙에 따라 {display_name} 관련 기사를 "한글"로 구조화해 요약할 것.
+
+[요약 규칙]
+1. 기사의 핵심을 육하원칙(누가·언제·어디·무엇·왜·어떻게)에 따라 3~4줄로 요약할 것.
+2. 배경, 조건/제약, 수치·데이터(금액·비율·규모·일정 등)를 포함할 것.
+3. 중요한 문장 2~3개는 반드시 **굵게** 표시할 것.
+4. 모든 문장은 명사형 종결(~함, ~임, ~되었음 등)으로 끝낼 것.
+5. 제목이 영문일 경우, 최상단에 반드시 한글 번역 제목을 1줄로 제시할 것.
+
+[출력 형식]
+[제목]
+· (영문 제목일 경우) 한글 번역 1줄
+
+[요약]
+· 핵심 3~4줄
+· 가장 중요한 문장은 **굵게**
+
+[의미]
+· 산업구조/경쟁/시장기회 또는 리스크 중 가장 핵심 1줄로 요약
+
+아래 원문을 요약할 것.
 
 제목: {title}
+
 내용:
 {text[:2000]}
 """
+
     try:
         return _summarize_with_grok(prompt)
-    except Exception as e:
-        # print(f"[LLM] Grok failed ({e}), switching to Gemini...")
+    except Exception:
         return _summarize_with_gemini(prompt)
+
 
 def _rank_with_llm(candidates: List[tuple], limit: int) -> List[tuple]:
     candidates_text = "\n".join([f"{idx}. {t[1]}" for idx, t in enumerate(candidates)])
