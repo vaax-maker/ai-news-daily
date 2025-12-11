@@ -69,12 +69,12 @@
 
 <section class="calendar-section card">
     <div class="section-heading">
-            <div>
-                <p class="eyebrow">날짜별 아카이브</p>
-                <h3>캘린더에서 날짜를 선택하면 해당 날짜의 기사들이 바로 표시됩니다.</h3>
-            </div>
-            <div id="popover-run-list" class="popover-list"></div>
+        <div>
+            <p class="eyebrow">날짜별 아카이브</p>
+            <h3>캘린더에서 날짜를 선택하면 해당 날짜의 기사들이 바로 표시됩니다.</h3>
         </div>
+        <div id="popover-run-list" class="popover-list"></div>
+    </div>
     <div class="calendar-nav">
         <button id="prev-month" class="ghost-btn" aria-label="이전 달 보기">←</button>
         <div id="current-month-label" class="month-label"></div>
@@ -393,7 +393,7 @@
         const grid = document.createElement('div');
         grid.className = 'calendar-grid';
 
-        const offset = (firstDay.getDay() + 6) % 7;
+        const offset = (firstDay.getDay() + 6) % 7; // 월요일 시작 기준 오프셋
         for (let i = 0; i < offset; i++) {
             grid.appendChild(document.createElement('div'));
         }
