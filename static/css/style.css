@@ -662,9 +662,25 @@ tr:hover {
 .search-bar input {
     flex: 1;
     padding: 0.75rem 1rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--line-gray);
     border-radius: 10px;
     font-size: 1rem;
+}
+
+.search-bar .primary-btn {
+    padding: 0.75rem 2rem;
+    min-width: 8rem;
+    border: 1px solid var(--line-gray);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--text-main);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.search-bar .primary-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 .search-results.hidden {
