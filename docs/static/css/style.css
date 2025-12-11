@@ -594,6 +594,10 @@ tr:hover {
     border-bottom: 1px solid var(--border-color);
 }
 
+.weekday-row .weekend {
+    color: #e02424;
+}
+
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -612,6 +616,11 @@ tr:hover {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     background: #fff;
     cursor: pointer;
+}
+
+.calendar-cell.weekend .cell-date,
+.calendar-cell.holiday .cell-date {
+    color: #e02424;
 }
 
 .calendar-cell.has-articles {
@@ -639,6 +648,14 @@ tr:hover {
     cursor: pointer;
 }
 
+.cell-header {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+}
+
 .run-count {
     display: inline-flex;
     align-items: center;
@@ -646,7 +663,7 @@ tr:hover {
     padding: 0.35rem 0.5rem;
     border-radius: 6px;
     background: #f1f5f9;
-    color: var(--text-main);
+    color: #2563eb;
     font-weight: 800;
     align-self: flex-start;
     min-width: 36px;
