@@ -221,40 +221,52 @@
 
     function createNewsCard(article, extraMetaParts = []) {
         const card = document.createElement('article');
-        card.className = 'news-card';
+        card.className = 'news-item'; // Use standard class
 
-        const meta = document.createElement('div');
-        meta.className = 'news-card-meta';
-        const metaParts = [...extraMetaParts];
-        if (article.source) metaParts.push(article.source);
-        if (article.published) metaParts.push(article.published);
-        meta.textContent = metaParts.join(' · ');
+        // 1. Header Section
+        const header = document.createElement('div');
+        header.className = 'news-header';
 
-        const title = document.createElement('h3');
-        title.className = 'news-card-title';
+        const title = document.createElement('h3'); // or h2 to match main list, but h3 is fine for search results
+        title.className = 'news-title';
         const link = document.createElement('a');
         link.href = article.link;
         link.target = '_blank';
         link.textContent = article.title;
         title.appendChild(link);
 
-        const summary = document.createElement('div');
-        summary.className = 'news-card-summary';
-        summary.innerHTML = article.summary;
+        const meta = document.createElement('div');
+        meta.className = 'news-meta';
+        const metaParts = [...extraMetaParts];
+        if (article.source) metaParts.push(`<span class='source-link'>${article.source}</span>`);
+        if (article.published) metaParts.push(article.published);
+        meta.innerHTML = metaParts.join(' · '); // Use innerHTML to allow span
 
-        card.appendChild(title);
-        card.appendChild(meta);
+        header.appendChild(title);
+        header.appendChild(meta);
+        card.appendChild(header);
+
+        // 2. Body Section (Image + Summary side-by-side)
+        const body = document.createElement('div');
+        body.className = 'news-body';
+
         if (article.image) {
             const thumb = document.createElement('div');
-            thumb.className = 'news-card-thumb';
+            thumb.className = 'news-image'; // Use standard class
             const img = document.createElement('img');
             img.src = article.image;
             img.alt = 'thumbnail';
             img.loading = 'lazy';
             thumb.appendChild(img);
-            card.appendChild(thumb);
+            body.appendChild(thumb);
         }
-        card.appendChild(summary);
+
+        const summary = document.createElement('div');
+        summary.className = 'news-summary';
+        summary.innerHTML = article.summary;
+        body.appendChild(summary);
+
+        card.appendChild(body);
 
         return card;
     }
