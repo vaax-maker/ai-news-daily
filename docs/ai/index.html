@@ -512,13 +512,18 @@
         todayCard.classList.add('hidden');
         history.pushState({ searching: true }, '', '#search');
 
-        const matches = [];
+        const seenUrls = new Set(); // To prevent duplicates
         for (const run of runEntries) {
             const { articles } = await fetchRunArticles(run);
             articles.forEach(article => {
+                // Deduplicate based on URL (or title if URL is missing/same)
+                const articleId = article.link || article.title;
+                if (seenUrls.has(articleId)) return;
+
                 const haystack = `${article.title} ${stripHtml(article.summary)}`.toLowerCase();
                 if (haystack.includes(normalized)) {
                     matches.push({ article, run });
+                    seenUrls.add(articleId);
                 }
             });
         }
