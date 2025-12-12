@@ -1,5 +1,10 @@
 import os
 import yaml
+from dotenv import load_dotenv
+
+# Load .env file immediately
+load_dotenv()
+
 from dataclasses import dataclass, field
 from typing import List, Dict, Optional
 
