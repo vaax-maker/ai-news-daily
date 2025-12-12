@@ -482,33 +482,39 @@
         todayCard.classList.add('hidden');
         history.pushState({ searching: true }, '', '#search');
 
-        const seenUrls = new Set(); // To prevent duplicates
-        for (const run of runEntries) {
-            const { articles } = await fetchRunArticles(run);
-            articles.forEach(article => {
-                // Deduplicate based on URL (or title if URL is missing/same)
-                const articleId = article.link || article.title;
-                if (seenUrls.has(articleId)) return;
+        const matches = []; // Defined here
+        const seenUrls = new Set();
 
-                const haystack = `${article.title} ${stripHtml(article.summary)}`.toLowerCase();
-                if (haystack.includes(normalized)) {
-                    matches.push({ article, run });
-                    seenUrls.add(articleId);
-                }
+        try {
+            for (const run of runEntries) {
+                const { articles } = await fetchRunArticles(run);
+                articles.forEach(article => {
+                    const articleId = article.link || article.title;
+                    if (seenUrls.has(articleId)) return;
+
+                    const haystack = `${article.title} ${stripHtml(article.summary)}`.toLowerCase();
+                    if (haystack.includes(normalized)) {
+                        matches.push({ article, run });
+                        seenUrls.add(articleId);
+                    }
+                });
+            }
+
+            searchCount.textContent = `${matches.length}건`;
+            if (!matches.length) {
+                searchGrid.innerHTML = '<p class="empty-msg">일치하는 기사가 없습니다.</p>';
+                return;
+            }
+
+            searchGrid.innerHTML = '';
+            matches.forEach(({ article, run }) => {
+                const card = createNewsCard(article, [formatDateLabel(run.date_str), run.time_str]);
+                searchGrid.appendChild(card);
             });
+        } catch (err) {
+            console.error(err);
+            searchGrid.innerHTML = `<p class="empty-msg">검색 중 오류가 발생했습니다: ${err.message || err}</p>`;
         }
-
-        searchCount.textContent = `${matches.length}건`;
-        if (!matches.length) {
-            searchGrid.innerHTML = '<p class="empty-msg">일치하는 기사가 없습니다.</p>';
-            return;
-        }
-
-        searchGrid.innerHTML = '';
-        matches.forEach(({ article, run }) => {
-            const card = createNewsCard(article, [formatDateLabel(run.date_str), run.time_str]);
-            searchGrid.appendChild(card);
-        });
     }
 
     async function initArchivePage() {
