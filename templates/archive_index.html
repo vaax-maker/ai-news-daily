@@ -5,26 +5,20 @@
 {% block extra_css %}{% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <div>
+<div class="page-header header-with-search">
+    <div class="header-titles">
         <p class="eyebrow">Archive</p>
         <h1>{{ category_display_name }} 뉴스 아카이브</h1>
-        <p class="subtitle">AI/XR 읽을거리의 생성 이력을 날짜별로 살펴보고, 원하는 날의 뉴스를 바로 확인하세요.</p>
     </div>
-</div>
-
-{% if run_entries %}
-<section class="search-section card">
-    <div class="section-heading">
-        <div>
-            <p class="eyebrow">기사 검색</p>
-        </div>
-    </div>
-    <form class="search-bar" id="archive-search-form">
+    <form class="search-bar header-search" id="archive-search-form">
         <input type="text" id="archive-search-input" placeholder="검색어를 입력하세요" aria-label="기사 검색">
         <button type="submit" class="primary-btn">여기서 검색</button>
     </form>
-    <div id="search-results-section" class="search-results hidden">
+</div>
+
+{% if run_entries %}
+<section class="search-section-container">
+    <div id="search-results-section" class="search-results hidden card">
         <div class="section-heading compact">
             <div>
                 <p class="eyebrow">검색 결과</p>
@@ -41,7 +35,6 @@
     <div class="section-heading">
         <div>
             <p class="eyebrow">날짜별 아카이브</p>
-            <h3>캘린더에서 날짜를 선택하면 해당 날짜의 기사들이 바로 표시됩니다.</h3>
         </div>
         <div id="popover-run-list" class="popover-list"></div>
     </div>
@@ -50,7 +43,8 @@
         <div id="current-month-label" class="month-label"></div>
         <button id="next-month" class="ghost-btn" aria-label="다음 달 보기">→</button>
     </div>
-    <div id="run-popover" class="run-popover hidden" role="dialog" aria-modal="false" aria-labelledby="popover-date-label">
+    <div id="run-popover" class="run-popover hidden" role="dialog" aria-modal="false"
+        aria-labelledby="popover-date-label">
         <div class="popover-header">
             <div>
                 <p class="eyebrow">회차 선택</p>

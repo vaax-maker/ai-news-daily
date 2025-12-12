@@ -737,23 +737,52 @@ tr:hover {
     white-space: nowrap;
 }
 
+/* Header with Search */
+.header-with-search {
+    display: flex;
+    align-items: flex-end;
+    /* Align bottom to match title baseline roughly */
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.header-search {
+    flex: 1;
+    min-width: 280px;
+    max-width: 400px;
+    margin-top: 0;
+    /* Override default marginTop of .search-bar */
+}
+
+/* Reduced Calendar Width */
+.calendar-section {
+    max-width: 650px;
+    /* Approx 65% of standard 1000-1200px container */
+    margin: 0 auto 1.5rem auto;
+    /* Center it */
+    width: 100%;
+}
+
+/* Adjust search bar specific for header usage */
 .search-bar {
     display: flex;
     gap: 0.5rem;
-    margin-top: 0.75rem;
 }
 
 .search-bar input {
     flex: 1;
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 1rem;
+    /* Slightly compact */
     border: 1px solid var(--line-gray);
     border-radius: 10px;
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
 .search-bar .primary-btn {
-    padding: 0.75rem 1rem;
-    min-width: 5rem;
+    padding: 0.6rem 1rem;
+    /* Slightly compact */
+    min-width: 4.5rem;
     height: auto;
     white-space: normal;
     word-break: keep-all;
