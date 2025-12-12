@@ -82,7 +82,8 @@ header {
 }
 
 .header-logo {
-    height: 4.5rem; /* About 45% of the previous logo height */
+    height: 4.5rem;
+    /* About 45% of the previous logo height */
     width: auto;
     vertical-align: middle;
     margin-right: 0.8rem;
@@ -281,7 +282,8 @@ html {
 
     /* New Gray Line Style */
     background-color: #ffffff;
-    border: 2px solid var(--line-gray); /* Gray border */
+    border: 2px solid var(--line-gray);
+    /* Gray border */
     border-radius: 12px;
     padding: 1.25rem 1.5rem;
     position: relative;
@@ -352,7 +354,8 @@ html {
 .table-responsive {
     overflow-x: auto;
     background: var(--card-bg);
-    border: 1.5px solid var(--line-gray); /* Outer gray border */
+    border: 1.5px solid var(--line-gray);
+    /* Outer gray border */
     border-radius: 10px;
     margin-bottom: 2rem;
 }
@@ -378,12 +381,14 @@ th {
     text-align: left;
     font-weight: 600;
     color: var(--text-muted);
-    border-bottom: 2px solid var(--line-gray); /* Header gray line */
+    border-bottom: 2px solid var(--line-gray);
+    /* Header gray line */
 }
 
 td {
     padding: 1rem;
-    border-bottom: 1px solid var(--line-gray); /* Row gray line */
+    border-bottom: 1px solid var(--line-gray);
+    /* Row gray line */
     color: var(--text-main);
 }
 
@@ -431,9 +436,17 @@ tr:hover {
     font-weight: 600;
 }
 
-.text-decoration-none { text-decoration: none; }
-.text-dark { color: var(--text-main); }
-.fw-bold { font-weight: 700; }
+.text-decoration-none {
+    text-decoration: none;
+}
+
+.text-dark {
+    color: var(--text-main);
+}
+
+.fw-bold {
+    font-weight: 700;
+}
 
 @media (max-width: 640px) {
     .container {
@@ -697,6 +710,7 @@ tr:hover {
     font-size: 1rem;
     color: var(--text-main);
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .cell-header {
@@ -805,7 +819,7 @@ tr:hover {
     border-radius: 14px;
     padding: 1.25rem;
     width: min(500px, 90vw);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
     z-index: 1;
 }
 
@@ -902,12 +916,16 @@ tr:hover {
     }
 
     .calendar-cell {
-        min-height: 30px;
-        padding: 0.35rem;
+        min-height: 36px;
+        padding: 0.25rem 0.2rem;
     }
 
     .cell-date {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
     }
 
+    .run-count {
+        font-size: 0.75rem;
+    }
 }
