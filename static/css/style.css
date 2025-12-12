@@ -531,6 +531,7 @@ tr:hover {
     border-radius: 999px;
     font-weight: 700;
     font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 .today-grid {
@@ -733,6 +734,7 @@ tr:hover {
     font-size: 0.85rem;
     align-self: center;
     margin-left: auto;
+    white-space: nowrap;
 }
 
 .search-bar {
@@ -917,15 +919,25 @@ tr:hover {
 
     .calendar-cell {
         min-height: 36px;
-        padding: 0.25rem 0.2rem;
+        padding: 0.2rem 0.15rem;
+        /* Further reduced padding */
     }
 
     .cell-date {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        /* Smaller font */
         white-space: nowrap;
     }
 
+    .cell-header {
+        gap: 0.1rem;
+        /* Reduce gap between date and count */
+    }
+
     .run-count {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        /* Smaller count font */
+        margin-left: 0;
+        /* Remove auto margin to let them sit tight if needed, though header is space-between. */
     }
 }
