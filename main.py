@@ -21,6 +21,7 @@ from src.utils.common import (
     trim_summary_lines,
 )
 from src.utils.storage import MemberStorage, GovStorage
+from src.utils.wordcloud_generator import extract_weekly_keywords, create_wordcloud_image
 from collections import Counter
 import re
 
@@ -582,6 +583,17 @@ def main():
         categories,
         consolidate_archives=str_to_bool(os.getenv("CONSOLIDATE_ARCHIVES", "true")) or args.consolidate_archives
     )
+
+    # 3.5 Generate Word Cloud
+    print("[WordCloud] Generating weekly word cloud...")
+    try:
+        wc_counts = extract_weekly_keywords(docs_dir="docs", days=7)
+        wc_output_path = "static/images/weekly_wordcloud.png"
+        os.makedirs(os.path.dirname(wc_output_path), exist_ok=True)
+        create_wordcloud_image(wc_counts, wc_output_path)
+    except Exception as e:
+        print(f"[WordCloud] Failed: {e}")
+
 
     # 4. Render Dashboard
     try:

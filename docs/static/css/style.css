@@ -293,16 +293,22 @@ html {
 }
 
 .item-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
 }
 
 .news-item {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    height: 100%;
+    /* Match height */
 }
 
 @media (max-width: 768px) {
+    .item-list {
+        grid-template-columns: 1fr;
+    }
+
     .news-body {
         flex-direction: column;
     }
