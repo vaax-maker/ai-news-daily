@@ -281,20 +281,15 @@ html {
 
 /* Summary Box with Gray Line */
 .news-summary {
+    /* Simplified Summary Box */
     flex: 1;
     font-size: clamp(1rem, 1.9vw, 1.05rem);
     line-height: 1.7;
     color: #334155;
     margin-top: -5px;
-
-    /* New Gray Line Style */
-    background-color: #ffffff;
-    border: 2px solid var(--line-gray);
-    /* Gray border */
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    padding: 0.5rem 0;
+    /* Reduced padding */
+    /* Removed heavy border and box-shadow */
 }
 
 .item-list {
