@@ -62,117 +62,137 @@ if bbox:
     logo = logo.crop(bbox)
 W_logo, H_logo = logo.size
 
-# Typography setup
-# We want 3 lines to equal H_logo.
-# Rough estimate: 3 * (FontSize * 1.2) = H_logo => FontSize = H_logo / 3.6
-font_size = int(H_logo / 3.4) 
-font = None
-if font_path.endswith(".ttc"):
-     font = ImageFont.truetype(font_path, font_size, index=font_index)
-else:
-     font = ImageFont.truetype(font_path, font_size)
+# Typography setup for Slogan
+# Strategy: Calculate font size to be slightly smaller than Logo Height to allow centering.
+# User said "Too high", implies standard top alignment looked high.
+# Center alignment means equal space top and bottom.
+target_text_height = int(H_logo * 0.85) # 85% of height to allow centering and avoid "top heavy" look.
 
-# Calculate exact text size
+# Initial guess
+font_size = int(target_text_height / 2.2) 
+
+# Font loading helper
+def load_font(path, size, index=0):
+    if path.endswith(".ttc"):
+        return ImageFont.truetype(path, size, index=index)
+    return ImageFont.truetype(path, size)
+
+font = load_font(font_path, font_size, font_index)
+
+# Recalculate to match target height
 dummy_draw = ImageDraw.Draw(Image.new("RGBA", (1,1)))
+def get_text_block_size(lines, fnt, spacing):
+    heights = []
+    widths = []
+    for line in lines:
+        lb = dummy_draw.textbbox((0, 0), line, font=fnt)
+        widths.append(lb[2] - lb[0])
+        heights.append(lb[3] - lb[1])
+    total_h = sum(heights) + (spacing * (len(lines) - 1))
+    return max(widths), total_h, heights
 
-line_heights = []
-line_widths = []
-for line in LINES:
-    lb = dummy_draw.textbbox((0, 0), line, font=font)
-    line_widths.append(lb[2] - lb[0])
-    line_heights.append(lb[3] - lb[1])
+line_spacing = int(font_size * 0.15)
+max_w, total_h, line_hs = get_text_block_size(LINES, font, line_spacing)
 
-# Spacing
-line_spacing = int(font_size * 0.2)
-# Correction: Vertical text block should NOT include the "since 2016" in the "Height match" constraint?
-# User said "3 lines text height match logo height". "Since 2016" is separate "below".
-total_text_height = sum(line_heights) + (len(LINES) - 1) * line_spacing
+# Adjust font size to match target_text_height exactly
+scale = target_text_height / total_h
+final_font_size = int(font_size * scale)
+font = load_font(font_path, final_font_size, font_index)
+line_spacing = int(final_font_size * 0.15)
+max_w, total_h, line_hs = get_text_block_size(LINES, font, line_spacing)
 
-# Re-scale factor
-# We want total_text_height == H_logo
-scale_factor = H_logo / total_text_height
-new_font_size = int(font_size * scale_factor * 0.98) # almost exact match
+# Since 2016 setup
+# Target width = Width of "VA".
+# Heuristic: VAAX is 4 chars. VA is first half. Overlap is small.
+# "VA" width approx 45-48% of total logo width.
+target_since_width = int(W_logo * 0.46) 
 
-if font_path.endswith(".ttc"):
-     font = ImageFont.truetype(font_path, new_font_size, index=font_index)
-else:
-     font = ImageFont.truetype(font_path, new_font_size)
+# Find font size for Since 2016
+s_size = int(final_font_size * 0.5) # Start guess
+s_font = load_font(font_path, s_size, font_index)
+s_bbox = dummy_draw.textbbox((0, 0), SINCE_TEXT, font=s_font)
+s_current_w = s_bbox[2] - s_bbox[0]
 
-# Recalculate measurements with new font
-line_heights = []
-line_widths = []
-for line in LINES:
-    lb = dummy_draw.textbbox((0, 0), line, font=font)
-    line_widths.append(lb[2] - lb[0])
-    line_heights.append(lb[3] - lb[1])
-    
-line_spacing = int(new_font_size * 0.2)
-text_block_height = sum(line_heights) + (line_spacing * (len(LINES) - 1))
+# Scale to match target width exactly
+s_scale = target_since_width / s_current_w
+final_s_size = int(s_size * s_scale)
+s_font = load_font(font_path, final_s_size, font_index)
+s_bbox = dummy_draw.textbbox((0, 0), SINCE_TEXT, font=s_font)
+since_w = s_bbox[2] - s_bbox[0]
+since_h = s_bbox[3] - s_bbox[1]
 
-# Since 2016
-since_font_size = int(new_font_size * 0.45)
-if font_path.endswith(".ttc"):
-     since_font = ImageFont.truetype(font_path, since_font_size, index=font_index)
-else:
-     since_font = ImageFont.truetype(font_path, since_font_size)
-since_bbox = dummy_draw.textbbox((0, 0), SINCE_TEXT, font=since_font)
-since_w = since_bbox[2] - since_bbox[0]
-since_h = since_bbox[3] - since_bbox[1]
+# Canvas Sizing
+padding_x = int(final_font_size * 0.4) # Gap between logo and slogan
+total_w = W_logo + padding_x + max_w + 10
+# Height: Logo is anchor. Since text is below.
+# Total height = H_logo + margin + SinceH
+total_h = H_logo + 15 + since_h 
 
-# Canvas
-padding_x = int(new_font_size * 0.4)
-max_text_w = max(line_widths)
-total_w = W_logo + padding_x + max(max_text_w, since_w) + 20
-total_h = max(H_logo, text_block_height + since_h + 10) 
+# Check if Slogan is taller than Logo? (Shouldn't be, based on 0.85 target)
+# But we need canvas to hold everything.
+# Slogan centroid should align with Logo centroid? 
+# Or Slogan vertical center == Logo vertical center.
 
-canvas = Image.new("RGBA", (total_w, total_h + 50), (255, 255, 255, 255))
+canvas = Image.new("RGBA", (total_w, total_h + 20), (255, 255, 255, 255))
 draw = ImageDraw.Draw(canvas)
 
-# Paste Logo
-y_offset = 20
-x_offset = 10
-canvas.paste(logo, (x_offset, y_offset))
+# Paste Logo at (0, 0) relative to content area
+offset_x = 0
+offset_y = 0
+canvas.paste(logo, (offset_x, offset_y))
 
-# Draw Text
-text_x = x_offset + W_logo + padding_x
-text_y = y_offset
+# Draw Since 2016
+# Position: Below logo.
+since_y = offset_y + H_logo + 8 # 8px gap
+draw.text((offset_x, since_y), SINCE_TEXT, font=s_font, fill=COLOR_GRAY)
+# (It should naturally align left with logo)
+
+# Draw Slogan
+# Horizontal: Right of logo
+text_x = offset_x + W_logo + padding_x
+# Vertical: Center of Slogan aligns with Center of Logo.
+# Logo Center Y = offset_y + H_logo / 2
+# Slogan Top Y = Logo_Center_Y - (Slogan_Height / 2)
+slogan_top_y = (offset_y + (H_logo / 2)) - (total_h // 2) 
+# Wait, total_h variable above is CANVAS total height. 
+# We need text block height:
+_, txt_block_h, _ = get_text_block_size(LINES, font, line_spacing)
+slogan_top_y = (offset_y + (H_logo / 2)) - (txt_block_h / 2)
+
+current_y = slogan_top_y
 
 # Line 1
-line1_parts = ["VR-AR-AI-XR", "기술과"]
+line1_parts = ["VR-AR-AI-XR", " 기술과 Biz를"]
+# Manual construction of line 1
 current_x = text_x
-l1_bbox = draw.textbbox((current_x, text_y), line1_parts[0], font=font)
-draw.text((current_x, text_y), line1_parts[0], font=font, fill=COLOR_LIME)
+l1_bbox = draw.textbbox((current_x, current_y), line1_parts[0], font=font)
+draw.text((current_x, current_y), line1_parts[0], font=font, fill=COLOR_LIME)
 current_x += (l1_bbox[2] - l1_bbox[0])
-draw.text((current_x, text_y), line1_parts[1], font=font, fill=COLOR_GRAY)
+draw.text((current_x, current_y), line1_parts[1], font=font, fill=COLOR_GRAY)
 
 # Line 2
-current_y = text_y + line_heights[0] + line_spacing
-draw.text((text_x, current_y), LINES[1], font=font, fill=COLOR_GRAY)
+current_y += line_hs[0] + line_spacing
+line2_parts = ["연결하는 ", "성장나눔", " 커뮤니티"]
 
-# Line 3
-line3_parts = ["성장나눔", " 커뮤니티"]
-current_y += line_heights[1] + line_spacing
 current_x = text_x
-l3_bbox = draw.textbbox((current_x, current_y), line3_parts[0], font=font)
-draw.text((current_x, current_y), line3_parts[0], font=font, fill=COLOR_LIME)
-current_x += (l3_bbox[2] - l3_bbox[0])
-draw.text((current_x, current_y), line3_parts[1], font=font, fill=COLOR_GRAY)
+# Part 1: Gray
+l2_p1_bbox = draw.textbbox((current_x, current_y), line2_parts[0], font=font)
+draw.text((current_x, current_y), line2_parts[0], font=font, fill=COLOR_GRAY)
+current_x += (l2_p1_bbox[2] - l2_p1_bbox[0])
 
-# Since 2016
-# Position: Bottom right of text block? Or just below?
-# Let's put it aligned to the left of the text block, below line 3.
-since_y = current_y + line_heights[2] + int(line_spacing/2)
-draw.text((text_x, since_y), SINCE_TEXT, font=since_font, fill=COLOR_GRAY)
+# Part 2: Lime
+l2_p2_bbox = draw.textbbox((current_x, current_y), line2_parts[1], font=font)
+draw.text((current_x, current_y), line2_parts[1], font=font, fill=COLOR_LIME)
+current_x += (l2_p2_bbox[2] - l2_p2_bbox[0])
+
+# Part 3: Gray
+draw.text((current_x, current_y), line2_parts[2], font=font, fill=COLOR_GRAY)
 
 # Final Crop
 bbox = canvas.getbbox()
 if bbox:
     final_img = canvas.crop(bbox)
-    # Add minimal padding 5px
-    w, h = final_img.size
-    final_canvas = Image.new("RGBA", (w+10, h+10), (255, 255, 255, 255))
-    final_canvas.paste(final_img, (5, 5))
-    final_canvas.save(OUTPUT_PATH)
+    final_img.save(OUTPUT_PATH)
     print(f"Saved to {OUTPUT_PATH}")
 else:
     print("Error: Empty image")

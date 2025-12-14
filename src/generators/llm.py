@@ -166,6 +166,17 @@ def summarize_article(text: str, title: str, display_name: str) -> str:
     except Exception:
         return _summarize_with_gemini(prompt)
 
+def analyze_text_with_llm(prompt: str) -> str:
+    """Generic wrapper to try Grok then Gemini for analysis tasks."""
+    try:
+        try:
+            return _summarize_with_grok(prompt)
+        except Exception:
+            return _summarize_with_gemini(prompt)
+    except Exception as e:
+        print(f"[LLM] Analysis failed: {e}")
+        return ""
+
 
 def _rank_with_llm(candidates: List[tuple], limit: int) -> List[tuple]:
     candidates_text = "\n".join([f"{idx}. {t[1]}" for idx, t in enumerate(candidates)])

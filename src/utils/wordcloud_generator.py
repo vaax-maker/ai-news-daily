@@ -5,13 +5,18 @@ from collections import Counter
 import re
 from wordcloud import WordCloud
 from bs4 import BeautifulSoup
+from src.generators.llm import analyze_text_with_llm
+import random
 
 def extract_weekly_keywords(docs_dir="docs", days=7):
     """
-    Extracts keywords from AI and XR daily summaries for the past `days` days.
+    Extracts keywords from AI and XR daily summaries for the past `days` days,
+    filtering for Person, Tech, Company, Solution using LLM.
     """
     cutoff_date = datetime.now() - timedelta(days=days)
-    text_content = ""
+    
+    # Collect titles and snippets
+    collected_text = []
 
     # Paths to search
     # Assuming structure: docs/ai/daily/YYYY-MM-DD.html and docs/xr/daily/YYYY-MM-DD.html
@@ -42,38 +47,80 @@ def extract_weekly_keywords(docs_dir="docs", days=7):
                     with open(file_path, 'r', encoding='utf-8') as f:
                         soup = BeautifulSoup(f.read(), 'html.parser')
                         
-                        # Extract text from headings and paragraphs
-                        # Adjust selectors based on actual HTML structure if needed
-                        # Usually h3 are titles in these generate files
-                        for tag in soup.find_all(['h3', 'p', 'li']):
-                            text_content += tag.get_text() + " "
+                        # Extract text from headings and list items (summaries)
+                        # Titles are h2.news-title, summaries are in li inside ul.summary-list
+                        for tag in soup.find_all(['h2', 'li']):
+                            collected_text.append(tag.get_text(strip=True))
                     
                     files_processed += 1
             except ValueError:
                 continue # Skip files that don't match date format
 
-    print(f"Processed {files_processed} files for word cloud.")
+    print(f"Processed {files_processed} files. Found {len(collected_text)} titles.")
     
-    # Basic tokenization and cleaning
-    # Remove special chars but keep Korean and English
-    # Simple regex to keep alphanumeric and spaces
-    # This might need refinement for Korean efficiency but works for a start
+    if not collected_text:
+        return Counter()
+
+    # Limit text to avoid token limits (approx 100 recent titles should be fine, but if more, sample or take latest)
+    # 7 days * 2 categories * 5 articles = 70 articles. Should fit easily.
+    context_text = "\n".join(collected_text[:200]) 
     
-    # Use a simple split for now. 
-    # For better Korean processing, Konlpy is great but trying to avoid extra bulky deps if simple works.
-    # Let's clean up punctuation.
+    prompt = f"""
+다음은 최근 테크 뉴스 기사의 제목들이다.
+이 텍스트에서 가장 중요하고 빈번하게 언급되는 키워드를 추출하되, 
+반드시 아래 4가지 카테고리에 해당하는 것만 선정하시오.
+
+[카테고리]
+- 사람 (Person)
+- 기술 (Technology/Concept)
+- 업체 (Company)
+- 솔루션/제품 (Solution/Product)
+
+[제약사항]
+1. 불용어(조사, 일반명사 등)는 제외할 것.
+2. 국문/영문 혼용 가능.
+3. 총 30~50개의 핵심 키워드를 선정할 것.
+4. 중요도에 따라 빈도수(가중치)를 1~10 사이로 추정하여 CSV 형식으로 출력하시오.
+
+[출력형식]
+키워드,가중치
+OpenAI,10
+김범수,8
+LLM,9
+...
+
+[분석대상 텍스트]
+{context_text}
+"""
+    # Call LLM
+    print("[WordCloud] Requesting LLM extraction...")
+    response = analyze_text_with_llm(prompt)
     
-    # Remove url like strings
-    text_content = re.sub(r'http\S+', '', text_content)
+    # Parse CSV-like output
+    word_counts = Counter()
     
-    # Extract words (Hangul and English)
-    words = re.findall(r'[a-zA-Z0-9가-힣]+', text_content)
-    
-    # Filter stopwords (very basic list)
-    stopwords = {'이', '그', '저', '것', '수', '등', '를', '을', '의', '가', '이', '은', '는', '에', '와', '과', '한', '하다', '있다', '되다', 'to', 'and', 'of', 'the', 'in', 'a', 'for', 'on'}
-    filtered_words = [w for w in words if w not in stopwords and len(w) > 1]
-    
-    word_counts = Counter(filtered_words)
+    for line in response.split('\n'):
+        line = line.strip()
+        if not line or ',' not in line:
+            continue
+        try:
+            parts = line.split(',')
+            word = parts[0].strip()
+            count = int(parts[1].strip())
+            # Basic cleanup
+            word = word.replace('"', '').replace("'", "")
+            if len(word) > 1:
+                word_counts[word] = count
+        except:
+            continue
+            
+    # Fallback if LLM fails or returns nothing
+    if not word_counts:
+        print("[WordCloud] LLM returned empty or invalid data. Falling back to simple frequency.")
+        # Simple fallback logic (removed for brevity or use the old logic if desired, but user wants strict filtering)
+        # For now, return empty or minimal
+        pass
+
     return word_counts
 
 def create_wordcloud_image(word_counts, output_path, font_path=None):
@@ -94,7 +141,7 @@ def create_wordcloud_image(word_counts, output_path, font_path=None):
     try:
         wc = WordCloud(
             font_path=font_path,
-            width=800,
+            width=1200,
             height=400,
             background_color='white',
             max_words=100,

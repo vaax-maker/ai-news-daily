@@ -5,17 +5,17 @@
 {% block extra_css %}{% endblock %}
 
 {% block content %}
-<h1>오늘의 볼거리</h1>
+<h1>오늘의 읽을거리</h1>
 <p class="subtitle">매일 오전 7시 45분, 오후 3시 45분에 업데이트 됩니다.</p>
 
-<div class="dashboard-grid">
+<!-- Word Cloud Section -->
+<div style="text-align: center; margin-bottom: 30px; width: 100%;">
+    <h3>지난 7일간의 주요 키워드</h3>
+    <img src="{{ root_path | default('.') }}/static/images/weekly_wordcloud.png" alt="Weekly Word Cloud"
+        style="width: 100%; height: auto; border: 1px solid #eee; border-radius: 8px;">
+</div>
 
-    <!-- Word Cloud Section -->
-    <div style="text-align: center; margin-bottom: 30px; width: 100%;">
-        <h3>지난 7일간의 주요 키워드</h3>
-        <img src="{{ root_path | default('.') }}/static/images/weekly_wordcloud.png" alt="Weekly Word Cloud"
-            style="max-width: 100%; height: auto; border: 1px solid #eee; border-radius: 8px;">
-    </div>
+<div class="dashboard-grid">
     <!-- AI Section -->
     <div class="dashboard-section">
         <h2>
