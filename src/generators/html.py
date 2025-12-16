@@ -7,6 +7,9 @@ from src.utils.common import parse_article_datetime
 TEMPLATE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "templates")
 env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
 
+# Inject GA ID globally
+env.globals["ga_id"] = os.environ.get("GOOGLE_ANALYTICS_ID", "")
+
 def render_daily_page(articles, date_str, time_str, config, active_tab="home"):
     sorted_articles = sorted(articles, key=parse_article_datetime, reverse=True)
 

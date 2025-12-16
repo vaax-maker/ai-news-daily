@@ -12,6 +12,7 @@ def extract_weekly_keywords(docs_dir="docs", days=7):
     """
     Extracts keywords from AI and XR daily summaries for the past `days` days,
     filtering for Person, Tech, Company, Solution using LLM.
+    Returns (word_counts, word_to_category).
     """
     cutoff_date = datetime.now() - timedelta(days=days)
     
@@ -74,19 +75,20 @@ def extract_weekly_keywords(docs_dir="docs", days=7):
 - 사람 (Person)
 - 기술 (Technology/Concept)
 - 업체 (Company)
-- 솔루션/제품 (Solution/Product)
+- 상품 (Product): 구체적인 제품, 서비스, 솔루션의 이름
 
 [제약사항]
 1. 불용어(조사, 일반명사 등)는 제외할 것.
 2. 국문/영문 혼용 가능.
 3. 총 30~50개의 핵심 키워드를 선정할 것.
-4. 중요도에 따라 빈도수(가중치)를 1~10 사이로 추정하여 CSV 형식으로 출력하시오.
+4. 카테고리명은 반드시 Person, Technology, Company, Product 중 하나로 출력할 것.
+5. 중요도에 따라 빈도수(가중치)를 1~10 사이로 추정하여 CSV 형식으로 출력하시오.
 
 [출력형식]
-키워드,가중치
-OpenAI,10
-김범수,8
-LLM,9
+카테고리,키워드,가중치
+Company,OpenAI,10
+Person,김범수,8
+Technology,LLM,9
 ...
 
 [분석대상 텍스트]
@@ -98,6 +100,7 @@ LLM,9
     
     # Parse CSV-like output
     word_counts = Counter()
+    word_to_category = {}
     
     for line in response.split('\n'):
         line = line.strip()
@@ -105,25 +108,33 @@ LLM,9
             continue
         try:
             parts = line.split(',')
-            word = parts[0].strip()
-            count = int(parts[1].strip())
+            if len(parts) >= 3:
+                category = parts[0].strip()
+                word = parts[1].strip()
+                count = int(parts[2].strip())
+            elif len(parts) == 2: # Legacy fallback if LLM messes up
+                category = "Technology" # Default
+                word = parts[0].strip()
+                count = int(parts[1].strip())
+            else:
+                continue
+
             # Basic cleanup
             word = word.replace('"', '').replace("'", "")
             if len(word) > 1:
                 word_counts[word] = count
+                word_to_category[word] = category
         except:
             continue
             
     # Fallback if LLM fails or returns nothing
     if not word_counts:
-        print("[WordCloud] LLM returned empty or invalid data. Falling back to simple frequency.")
-        # Simple fallback logic (removed for brevity or use the old logic if desired, but user wants strict filtering)
-        # For now, return empty or minimal
+        print("[WordCloud] LLM returned empty or invalid data.")
         pass
 
-    return word_counts
+    return word_counts, word_to_category
 
-def create_wordcloud_image(word_counts, output_path, font_path=None):
+def create_wordcloud_image(word_counts, word_to_category, output_path, font_path=None):
     """
     Generates a word cloud image from word counts.
     """
@@ -138,6 +149,28 @@ def create_wordcloud_image(word_counts, output_path, font_path=None):
              # Fallback to standard AppleGothic if Supplemental doesn't exist (older macOS) or try another
             font_path = "/System/Library/Fonts/AppleGothic.ttf"
             
+    # Define colors
+    # Orange, Blue, Green, Purple
+    CATEGORY_COLORS = {
+        "Person": "#FF9F40", # Orange
+        "People": "#FF9F40",
+        "Company": "#36A2EB", # Blue
+        "Technology": "#4BC0C0", # Green
+        "Concept": "#4BC0C0",
+        "Solution": "#9966FF", # Purple
+        "Product": "#9966FF",
+        "Institution": "#36A2EB" # Treat like company
+    }
+    DEFAULT_COLOR = "#999999"
+
+    def color_func(word, font_size, position, orientation, random_state=None, **kwargs):
+        category = word_to_category.get(word, "Technology")
+        # Handle cases where category might be fuzzy
+        for key, color in CATEGORY_COLORS.items():
+            if key.lower() in category.lower():
+                return color
+        return DEFAULT_COLOR
+
     try:
         wc = WordCloud(
             font_path=font_path,
@@ -145,7 +178,8 @@ def create_wordcloud_image(word_counts, output_path, font_path=None):
             height=400,
             background_color='white',
             max_words=100,
-            stopwords=None # Already filtered
+            stopwords=None, # Already filtered
+            color_func=color_func
         )
         
         wc.generate_from_frequencies(word_counts)

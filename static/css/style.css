@@ -82,8 +82,8 @@ header {
 }
 
 .header-logo {
-    height: 5.4rem;
-    /* 120% of 4.5rem */
+    height: 8rem;
+    /* Expanded to match marked area */
     width: auto;
     vertical-align: middle;
     margin-right: 0.8rem;
@@ -127,7 +127,7 @@ header {
     }
 
     .header-logo {
-        height: 4.1rem;
+        height: 6rem;
     }
 }
 

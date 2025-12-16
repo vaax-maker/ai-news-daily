@@ -144,6 +144,11 @@ def process_category(config, now_utc, kst_timezone_offset=9):
             keyword_filters=config.keyword_filters
         )
         
+        if not raw_items:
+            print(f"[{config.key.upper()}] WARNING: No items fetched from RSS feeds.")
+        else:
+            print(f"[{config.key.upper()}] Fetched {len(raw_items)} items.")
+        
         # Rankings (if enabled)
         if config.use_ai_ranking:
             print(f"[{config.key.upper()}] AI Ranking...")
@@ -177,6 +182,9 @@ def process_category(config, now_utc, kst_timezone_offset=9):
     if config.key != "gov":
         for item in summarized_items:
             item["summary_html"] = markdown_bold_to_highlight(item["summary_html"])
+
+    if not summarized_items:
+        print(f"[{config.key.upper()}] WARNING: No items produced after summarization step.")
 
     def resolve_daily_file(date_str: str, run_id: str):
         os.makedirs(config.archive_dir, exist_ok=True)
@@ -587,10 +595,10 @@ def main():
     # 3.5 Generate Word Cloud
     print("[WordCloud] Generating weekly word cloud...")
     try:
-        wc_counts = extract_weekly_keywords(docs_dir="docs", days=7)
+        wc_counts, wc_categories = extract_weekly_keywords(docs_dir="docs", days=7)
         wc_output_path = "static/images/weekly_wordcloud.png"
         os.makedirs(os.path.dirname(wc_output_path), exist_ok=True)
-        create_wordcloud_image(wc_counts, wc_output_path)
+        create_wordcloud_image(wc_counts, wc_categories, wc_output_path)
     except Exception as e:
         print(f"[WordCloud] Failed: {e}")
 

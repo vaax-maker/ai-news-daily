@@ -5,6 +5,7 @@ import google.generativeai as genai
 from google.api_core import exceptions
 import groq as groq_lib
 from typing import List
+from src.utils.usage_logger import log_api_usage
 
 # Heuristic keyword buckets for lightweight ranking
 IMPORTANT_COMPANIES = [
@@ -88,12 +89,24 @@ def _summarize_with_gemini(prompt: str) -> str:
         raise RuntimeError("GEMINI_API_KEY is not set.")
     
     genai.configure(api_key=key)
-    model = genai.GenerativeModel("gemini-2.5-flash-preview-09-2025")
+    model_name = "gemini-2.5-flash-preview-09-2025"
+    model = genai.GenerativeModel(model_name)
     
     last_exc = None
     for attempt in range(3):
         try:
             res = model.generate_content(prompt)
+            
+            # Usage Tracking
+            try:
+                # Gemini usage metadata structure
+                if hasattr(res, 'usage_metadata'):
+                    in_tok = res.usage_metadata.prompt_token_count
+                    out_tok = res.usage_metadata.candidates_token_count
+                    log_api_usage("gemini", model_name, in_tok, out_tok, context="summary")
+            except Exception as e:
+                print(f"[Gemini] Usage tracking failed: {e}")
+
             return res.text.strip()
         except exceptions.ResourceExhausted as exc:
             last_exc = exc
@@ -123,6 +136,16 @@ def _summarize_with_grok(prompt: str) -> str:
         messages=[{"role": "user", "content": prompt}],
         model=model,
     )
+    
+    # Usage Tracking
+    try:
+        if hasattr(res, 'usage'):
+            in_tok = res.usage.prompt_tokens
+            out_tok = res.usage.completion_tokens
+            log_api_usage("grok", model, in_tok, out_tok, context="summary")
+    except Exception as e:
+        print(f"[Grok] Usage tracking failed: {e}")
+
     return res.choices[0].message.content.strip()
 
 def summarize_article(text: str, title: str, display_name: str) -> str:
