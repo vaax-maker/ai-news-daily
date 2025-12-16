@@ -68,6 +68,8 @@ header {
     display: flex;
     align-items: center;
     gap: 1.75rem;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
 }
 
 .gnb a {
