@@ -40,7 +40,8 @@
             <thead>
                 <tr>
                     <th class="col-company">회사명</th>
-                    <th class="col-date">최근기사</th>
+                    <th class="col-title">최근기사</th>
+                    <th class="col-date">날짜</th>
                     <th class="col-count">기사수</th>
                 </tr>
             </thead>
@@ -51,6 +52,14 @@
                         <a href="{{ member.filename }}" class="text-decoration-none text-dark fw-bold">
                             {{ member.name }}
                         </a>
+                    </td>
+                    <td class="col-title">
+                        {% if member.latest_link %}
+                        <a href="{{ member.latest_link }}" target="_blank" rel="noopener">{{ member.latest_title[:40]
+                            }}{% if member.latest_title|length > 40 %}...{% endif %}</a>
+                        {% else %}
+                        -
+                        {% endif %}
                     </td>
                     <td class="col-date">{{ member.latest_date }}</td>
                     <td class="col-count">{{ member.count }}</td>

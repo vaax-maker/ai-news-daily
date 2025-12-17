@@ -466,8 +466,10 @@ def process_members(limit_per_member=None):
         # Safe name
         safe_name = re.sub(r'[<>:"/\\|?*]', '_', m_key).strip()
         
-        # Latest date
+        # Latest date and title
         latest_str = "-"
+        latest_title = ""
+        latest_link = ""
         if history:
             # Sort ensure
             history.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
@@ -479,12 +481,16 @@ def process_members(limit_per_member=None):
                 latest_str = f"{dt.strftime('%Y-%m-%d')}({wd}) {dt.strftime('%H:%M')}"
             else:
                 latest_str = latest.get("published_display", "-")
+            latest_title = latest.get("title", "")
+            latest_link = latest.get("link", "")
 
         member_entries.append({
             "filename": f"{safe_name}.html", 
             "name": member.name, 
             "count": count,
-            "latest_date": latest_str
+            "latest_date": latest_str,
+            "latest_title": latest_title,
+            "latest_link": latest_link
         })
         
     # Sort by Count (Desc)
