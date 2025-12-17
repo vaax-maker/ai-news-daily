@@ -32,6 +32,12 @@ categories:
     - https://news.google.com/rss/search?q=버추얼휴먼&hl=ko&gl=KR&ceid=KR:ko
     - https://news.google.com/rss/search?q=가상아이돌&hl=ko&gl=KR&ceid=KR:ko
     - https://news.google.com/rss/search?q=virtual+idol&hl=en&gl=US&ceid=US:en
+    # Virtual influencers / AI-generated beings
+    - https://news.google.com/rss/search?q=virtual+influencer&hl=en&gl=US&ceid=US:en
+    - https://news.google.com/rss/search?q=AI+generated+influencer&hl=en&gl=US&ceid=US:en
+    - https://news.google.com/rss/search?q=virtual+beings&hl=en&gl=US&ceid=US:en
+    - https://news.google.com/rss/search?q=metahuman&hl=en&gl=US&ceid=US:en
+    - https://news.google.com/rss/search?q=버추얼인플루언서&hl=ko&gl=KR&ceid=KR:ko
     archive_dir: docs/xr/daily
     index_path: docs/xr/index.html
     selection_mode: time
