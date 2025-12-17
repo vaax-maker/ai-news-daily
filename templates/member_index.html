@@ -1,35 +1,63 @@
 {% extends "layout.html" %}
 
-{% block title %}Members Directory{% endblock %}
+{% block title %}회원사 소식{% endblock %}
 
 {% block content %}
-<h1>Members Directory</h1>
-<p class="subtitle">뉴스가 많은 순서로 정렬된 {{ members|length }}개 파트너 목록입니다.</p>
+<h1>회원사 소식</h1>
+<p class="subtitle">{{ members|length }}개 회원사의 최신 뉴스입니다.</p>
 
+<div class="member-news-grid">
+    {% for item in all_news %}
+    <a href="{{ item.link }}" target="_blank" class="member-news-tile">
+        {% if item.image_url %}
+        <div class="tile-image">
+            <img src="{{ item.image_url }}" alt="Thumbnail" loading="lazy">
+        </div>
+        {% endif %}
+        <div class="tile-content">
+            <span class="tile-member-badge">{{ item.member_name }}</span>
+            <h3 class="tile-title">{{ item.title }}</h3>
+            <div class="tile-meta">
+                <span class="tile-source">{{ item.source_name or '출처' }}</span>
+                <span class="tile-date">{{ item.published_display }}</span>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
 
+{% if not all_news %}
+<div class="empty-msg">
+    아직 수집된 뉴스가 없습니다.
+</div>
+{% endif %}
 
-<div class="table-responsive">
-    <table class="styled-table">
-        <thead>
-            <tr>
-                <th class="col-company">회사명</th>
-                <th class="col-date">최근기사 생성날짜(요일)-시간</th>
-                <th class="col-count">누적 기사수</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for member in members %}
-            <tr>
-                <td class="col-company">
-                    <a href="{{ member.filename }}" class="text-decoration-none text-dark fw-bold">
-                        {{ member.name }}
-                    </a>
-                </td>
-                <td class="col-date">{{ member.latest_date }}</td>
-                <td class="col-count">{{ member.count }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="member-directory-section">
+    <h2>회원사 목록</h2>
+    <p class="subtitle">뉴스가 많은 순서로 정렬된 회원사 목록입니다.</p>
+    <div class="table-responsive">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th class="col-company">회사명</th>
+                    <th class="col-date">최근기사</th>
+                    <th class="col-count">기사수</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in members %}
+                <tr>
+                    <td class="col-company">
+                        <a href="{{ member.filename }}" class="text-decoration-none text-dark fw-bold">
+                            {{ member.name }}
+                        </a>
+                    </td>
+                    <td class="col-date">{{ member.latest_date }}</td>
+                    <td class="col-count">{{ member.count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

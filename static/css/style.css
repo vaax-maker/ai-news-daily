@@ -591,6 +591,27 @@ tr:hover {
     white-space: nowrap;
 }
 
+.tile-member-badge {
+    display: inline-block;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.member-directory-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border-color);
+}
+
+.member-directory-section h2 {
+    margin-bottom: 0.5rem;
+}
+
 .empty-msg {
     text-align: center;
     padding: 3rem;
