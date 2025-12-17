@@ -83,7 +83,21 @@ def render_member_index(members_list, all_news=None):
     )
     return html
 
-def render_dashboard(ai_latest, xr_latest, gov_latest, members_latest, section_links=None):
+def render_dashboard(ai_latest, xr_latest, gov_latest, members_latest, 
+                     section_links=None, hero_article=None, all_news=None, keywords=None):
+    """
+    Renders the main dashboard with hybrid design.
+    
+    Args:
+        ai_latest: List of latest AI articles
+        xr_latest: List of latest XR articles
+        gov_latest: List of latest government announcements
+        members_latest: List of latest member news
+        section_links: Dict of section links
+        hero_article: Featured article for hero section
+        all_news: Combined list of all news for cards grid
+        keywords: List of keyword dicts {word, category} for word cloud
+    """
     template = env.get_template("dashboard.html")
     return template.render(
         ai_latest=ai_latest,
@@ -91,6 +105,9 @@ def render_dashboard(ai_latest, xr_latest, gov_latest, members_latest, section_l
         gov_latest=gov_latest,
         members_latest=members_latest,
         section_links=section_links or {},
+        hero_article=hero_article,
+        all_news=all_news or [],
+        keywords=keywords or [],
         now_year=datetime.datetime.now().year,
         active_tab="home",
         root_path="."
