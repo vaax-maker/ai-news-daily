@@ -61,7 +61,7 @@ def render_member_page(member, articles, now_str):
         member=member,
         articles=articles,
         updated_date=now_str,
-        root_path="../..", # doc/members/<Page> -> root is ../..
+        root_path="..",  # docs/members/<Page> -> root is ..
         active_tab="members",
         now_year=datetime.datetime.now().year,
     )
@@ -75,7 +75,7 @@ def render_member_index(members_list):
     template = env.get_template("member_index.html")
     html = template.render(
         members=members_list,
-        root_path="../..", # doc/members/index.html -> root is ../..
+        root_path="..",  # docs/members/index.html -> root is ..
         active_tab="members",
         now_year=datetime.datetime.now().year,
     )
