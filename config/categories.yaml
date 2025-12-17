@@ -3,20 +3,18 @@ categories:
     key: ai
     display_name: AI
     rss_feeds:
+    # 뉴스 사이트
     - https://www.aitimes.com/rss/allArticle.xml
-    - https://www.bloter.net/archives/category/ai/feed
     - https://techcrunch.com/category/artificial-intelligence/feed/
-    - https://a16z.com/feed/
-    - https://www.themiilk.com/feed
     - https://www.technologyreview.com/feed/
     - https://www.technologyreview.com/topic/artificial-intelligence/feed/
     - http://www.aitimes.kr/rss/allArticle.xml
     # YouTube Channels
     - https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg  # Two Minute Papers
-    - https://www.youtube.com/feeds/videos.xml?channel_id=UC4sLlS8FoL9T5r1UYfNbtBQ  # TTimes TV (티타임즈TV)
-    - https://www.youtube.com/feeds/videos.xml?channel_id=UCzT7m7hP5YqB08z5j5n7L7g  # Gadget Seoul (가젯서울)
+    - https://www.youtube.com/feeds/videos.xml?channel_id=UCelFN6fJ6OY6v8pbc_SLiXA  # 티타임즈TV
+    - https://www.youtube.com/feeds/videos.xml?channel_id=UCyWmhgJ3talmk3H5GdmjHfg  # Gadget Seoul (가젯서울)
     - https://www.youtube.com/feeds/videos.xml?channel_id=UCQNE2JmbasNYbjGAcuBiRRg  # Jocoding (조코딩)
-    - https://www.youtube.com/feeds/videos.xml?channel_id=UCbpkMbF-oGSHwNcU2cMp8rQ  # AI코리아커뮤니티
+    - https://www.youtube.com/feeds/videos.xml?channel_id=UCw7FrceFhwPLzIPeu-AFM8A  # AI코리아커뮤니티
     archive_dir: docs/ai/daily
     index_path: docs/ai/index.html
     fallback_image_url: https://placehold.co/800x420/111827/FFFFFF?text=AI+News
