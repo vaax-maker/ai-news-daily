@@ -4,33 +4,24 @@
 
 {% block content %}
 <h1>{{ member.name }} News</h1>
-<p class="subtitle">Latest news related to {{ member.name }}</p>
+<p class="subtitle">{{ member.name }} 관련 뉴스 {{ articles|length }}건</p>
 
-<div class="item-list">
+<div class="member-news-grid">
     {% for article in articles %}
-    <article class="news-item">
-        <div class="news-header">
-            <h2 class="news-title">
-                <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
-            </h2>
-            <div class="news-meta">
-                <a href="{{ article.link }}" target="_blank" class="source-link">{{ article.source_name or 'Source'
-                    }}</a> | {{ article.published_display }}
+    <a href="{{ article.link }}" target="_blank" class="member-news-tile">
+        {% if article.image_url %}
+        <div class="tile-image">
+            <img src="{{ article.image_url }}" alt="Thumbnail" loading="lazy">
+        </div>
+        {% endif %}
+        <div class="tile-content">
+            <h3 class="tile-title">{{ article.title }}</h3>
+            <div class="tile-meta">
+                <span class="tile-source">{{ article.source_name or '출처' }}</span>
+                <span class="tile-date">{{ article.published_display }}</span>
             </div>
         </div>
-
-        <div class="news-body">
-            {% if article.image_url %}
-            <div class="news-image">
-                <img src="{{ article.image_url }}" alt="Thumbnail" loading="lazy">
-            </div>
-            {% endif %}
-
-            <div class="news-summary">
-                {{ article.summary_html | safe }}
-            </div>
-        </div>
-    </article>
+    </a>
     {% endfor %}
 </div>
 
