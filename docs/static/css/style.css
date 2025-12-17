@@ -267,15 +267,20 @@ html {
 
 .news-body {
     display: flex;
-    flex-wrap: wrap;
-    gap: clamp(1rem, 2vw, 1.6rem);
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
     align-items: flex-start;
 }
 
 
-/* Image handling */
+/* Image handling - PC: fixed width beside text */
+.news-image {
+    flex-shrink: 0;
+}
+
 .news-image img {
-    width: min(220px, 38vw);
+    width: 240px;
     height: auto;
     border-radius: 12px;
     object-fit: cover;
@@ -316,13 +321,18 @@ html {
         flex-direction: column;
     }
 
+    .news-image {
+        width: 100%;
+    }
+
     .news-image img {
         width: 100%;
         max-width: 100%;
+        border-radius: 10px;
     }
 
     .news-summary {
-        margin-top: 0;
+        margin-top: 0.5rem;
     }
 }
 
