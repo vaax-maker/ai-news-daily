@@ -11,6 +11,12 @@ categories:
     - https://www.technologyreview.com/feed/
     - https://www.technologyreview.com/topic/artificial-intelligence/feed/
     - http://www.aitimes.kr/rss/allArticle.xml
+    # YouTube Channels
+    - https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg  # Two Minute Papers
+    - https://www.youtube.com/feeds/videos.xml?channel_id=UC4sLlS8FoL9T5r1UYfNbtBQ  # TTimes TV (티타임즈TV)
+    - https://www.youtube.com/feeds/videos.xml?channel_id=UCzT7m7hP5YqB08z5j5n7L7g  # Gadget Seoul (가젯서울)
+    - https://www.youtube.com/feeds/videos.xml?channel_id=UCQNE2JmbasNYbjGAcuBiRRg  # Jocoding (조코딩)
+    - https://www.youtube.com/feeds/videos.xml?channel_id=UCbpkMbF-oGSHwNcU2cMp8rQ  # AI코리아커뮤니티
     archive_dir: docs/ai/daily
     index_path: docs/ai/index.html
     fallback_image_url: https://placehold.co/800x420/111827/FFFFFF?text=AI+News
