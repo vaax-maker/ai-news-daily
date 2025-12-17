@@ -1,11 +1,12 @@
 :root {
-    --primary-color: #2563eb;
-    --secondary-color: #64748b;
-    --background-color: #f8fafc;
+    --primary-color: #1d4ed8;
+    --primary-color-hover: #1e40af;
+    --secondary-color: #475569;
+    --background-color: #ffffff;
     --card-bg: #ffffff;
-    --text-main: #1e293b;
-    --text-muted: #64748b;
-    --border-color: #e2e8f0;
+    --text-main: #111827;
+    --text-muted: #4b5563;
+    --border-color: #d1d5db;
     --line-gray: #9ca3af;
 }
 
@@ -285,13 +286,12 @@ html {
 .news-summary {
     /* Simplified Summary Box */
     flex: 1;
-    font-size: clamp(1rem, 1.9vw, 1.05rem);
-    line-height: 1.7;
-    color: #334155;
+    font-size: clamp(1rem, 1.9vw, 1.08rem);
+    line-height: 1.75;
+    color: #1f2937;
     margin-top: -5px;
     padding: 0.5rem 0;
-    /* Reduced padding */
-    /* Removed heavy border and box-shadow */
+    /* Improved readability */
 }
 
 .item-list {

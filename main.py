@@ -1,6 +1,7 @@
 import os
 import datetime
 import argparse
+import logging
 from src.config import load_categories
 from bs4 import BeautifulSoup
 from src.fetchers.rss import fetch_rss_items
@@ -24,6 +25,15 @@ from src.utils.storage import MemberStorage, GovStorage
 from src.utils.wordcloud_generator import extract_weekly_keywords, create_wordcloud_image
 from collections import Counter
 import re
+
+# Configure logging for the entire application
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+logger = logging.getLogger(__name__)
+
 
 
 def str_to_bool(value: str) -> bool:

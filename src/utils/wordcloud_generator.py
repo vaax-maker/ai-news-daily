@@ -60,7 +60,7 @@ def extract_weekly_keywords(docs_dir="docs", days=7):
     print(f"Processed {files_processed} files. Found {len(collected_text)} titles.")
     
     if not collected_text:
-        return Counter()
+        return Counter(), {}
 
     # Limit text to avoid token limits (approx 100 recent titles should be fine, but if more, sample or take latest)
     # 7 days * 2 categories * 5 articles = 70 articles. Should fit easily.

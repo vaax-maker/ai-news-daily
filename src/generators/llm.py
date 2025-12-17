@@ -89,7 +89,7 @@ def _summarize_with_gemini(prompt: str) -> str:
         raise RuntimeError("GEMINI_API_KEY is not set.")
     
     genai.configure(api_key=key)
-    model_name = "gemini-2.5-flash-preview-09-2025"
+    model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
     model = genai.GenerativeModel(model_name)
     
     last_exc = None
