@@ -2,71 +2,174 @@
 
 {% block title %}회원사 소식{% endblock %}
 
+{% block extra_css %}
+<style>
+    .member-tabs {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    .member-tab {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        transition: color 0.2s;
+    }
+
+    .member-tab:hover {
+        color: var(--primary-color);
+    }
+
+    .member-tab.active {
+        color: var(--primary-color);
+    }
+
+    .member-tab.active::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--primary-color);
+    }
+
+    .member-tab-content {
+        display: none;
+    }
+
+    .member-tab-content.active {
+        display: block;
+    }
+
+    .tab-count {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-left: 0.35rem;
+    }
+
+    @media (max-width: 768px) {
+        .member-tabs {
+            width: 100%;
+        }
+
+        .member-tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.6rem 0.5rem;
+            font-size: 0.9rem;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <h1>회원사 소식</h1>
 <p class="subtitle">{{ members|length }}개 회원사의 최신 뉴스입니다.</p>
 
-<div class="member-news-grid">
-    {% for item in all_news %}
-    <a href="{{ item.link }}" target="_blank" class="member-news-tile">
-        {% if item.image_url %}
-        <div class="tile-image">
-            <img src="{{ item.image_url }}" alt="Thumbnail" loading="lazy">
-        </div>
-        {% endif %}
-        <div class="tile-content">
-            <span class="tile-member-badge">{{ item.member_name }}</span>
-            <h3 class="tile-title">{{ item.title }}</h3>
-            <div class="tile-meta">
-                <span class="tile-source">{{ item.source_name or '출처' }}</span>
-                <span class="tile-date">{{ item.published_display }}</span>
+<!-- Tab Navigation -->
+<div class="member-tabs">
+    <button class="member-tab active" data-tab="latest-news">
+        최신 뉴스<span class="tab-count">({{ all_news|length if all_news else 0 }})</span>
+    </button>
+    <button class="member-tab" data-tab="member-list">
+        회원사 목록<span class="tab-count">({{ members|length }})</span>
+    </button>
+</div>
+
+<!-- Tab Content: Latest News -->
+<div id="latest-news" class="member-tab-content active">
+    {% if all_news %}
+    <div class="member-news-grid">
+        {% for item in all_news %}
+        <a href="{{ item.link }}" target="_blank" rel="noopener" class="member-news-tile">
+            {% if item.image_url %}
+            <div class="tile-image">
+                <img src="{{ item.image_url }}" alt="Thumbnail" loading="lazy">
             </div>
+            {% endif %}
+            <div class="tile-content">
+                <span class="tile-member-badge">{{ item.member_name }}</span>
+                <h3 class="tile-title">{{ item.title }}</h3>
+                <div class="tile-meta">
+                    <span class="tile-source">{{ item.source_name or '출처' }}</span>
+                    <span class="tile-date">{{ item.published_display }}</span>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-msg">
+        아직 수집된 뉴스가 없습니다.
+    </div>
+    {% endif %}
+</div>
+
+<!-- Tab Content: Member Directory -->
+<div id="member-list" class="member-tab-content">
+    <div class="member-directory-section">
+        <div class="table-responsive">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th class="col-company">회사명</th>
+                        <th class="col-title">최근기사</th>
+                        <th class="col-date">날짜</th>
+                        <th class="col-count">기사수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for member in members %}
+                    <tr>
+                        <td class="col-company">
+                            <a href="{{ member.filename }}" class="text-decoration-none text-dark fw-bold">
+                                {{ member.name }}
+                            </a>
+                        </td>
+                        <td class="col-title">
+                            {% if member.latest_link %}
+                            <a href="{{ member.latest_link }}" target="_blank" rel="noopener">{{
+                                member.latest_title[:40] }}{% if member.latest_title|length > 40 %}...{% endif %}</a>
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td class="col-date">{{ member.latest_date }}</td>
+                        <td class="col-count">{{ member.count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-    </a>
-    {% endfor %}
-</div>
-
-{% if not all_news %}
-<div class="empty-msg">
-    아직 수집된 뉴스가 없습니다.
-</div>
-{% endif %}
-
-<div class="member-directory-section">
-    <h2>회원사 목록</h2>
-    <p class="subtitle">뉴스가 많은 순서로 정렬된 회원사 목록입니다.</p>
-    <div class="table-responsive">
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th class="col-company">회사명</th>
-                    <th class="col-title">최근기사</th>
-                    <th class="col-date">날짜</th>
-                    <th class="col-count">기사수</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for member in members %}
-                <tr>
-                    <td class="col-company">
-                        <a href="{{ member.filename }}" class="text-decoration-none text-dark fw-bold">
-                            {{ member.name }}
-                        </a>
-                    </td>
-                    <td class="col-title">
-                        {% if member.latest_link %}
-                        <a href="{{ member.latest_link }}" target="_blank" rel="noopener">{{ member.latest_title[:40]
-                            }}{% if member.latest_title|length > 40 %}...{% endif %}</a>
-                        {% else %}
-                        -
-                        {% endif %}
-                    </td>
-                    <td class="col-date">{{ member.latest_date }}</td>
-                    <td class="col-count">{{ member.count }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabs = document.querySelectorAll('.member-tab');
+        const contents = document.querySelectorAll('.member-tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function () {
+                const targetId = this.getAttribute('data-tab');
+
+                // Remove active from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                // Add active to clicked tab and corresponding content
+                this.classList.add('active');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+    });
+</script>
 {% endblock %}
