@@ -9,12 +9,12 @@
 <p class="subtitle">수집된 정부과제 공고를 날짜순으로 모아둔 표입니다.</p>
 
 {% if announcements %}
-<div class="table-responsive">
+<div class="gov-table-section table-responsive">
     <table class="styled-table">
         <thead>
             <tr>
                 <th class="col-idx">#</th>
-                <th>공고 제목</th>
+                <th class="col-title">공고 제목</th>
                 <th class="col-dept">담당부서</th>
                 <th class="col-dept">담당자</th>
                 <th class="col-date">등록일</th>
@@ -24,9 +24,9 @@
             {% for item in announcements %}
             <tr>
                 <td class="col-idx">{{ loop.index }}</td>
-                <td class="col-title"><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></td>
+                <td class="col-title"><a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a></td>
                 <td class="col-dept">{{ item.dept or '-' }}</td>
-                <td class="col-dept">{{ item.manager or '-' }}</td>
+                <td class="col-dept col-manager">{{ item.manager or '-' }}</td>
                 <td class="col-date">{{ item.date or item.published_display }}</td>
             </tr>
             {% endfor %}

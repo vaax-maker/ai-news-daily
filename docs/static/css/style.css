@@ -1110,3 +1110,133 @@ tr:hover {
         padding: 0.3rem 0.6rem;
     }
 }
+
+/* Mobile Card Layout for Member Directory Table */
+@media (max-width: 768px) {
+    .member-directory-section .styled-table thead {
+        display: none;
+    }
+
+    .member-directory-section .styled-table,
+    .member-directory-section .styled-table tbody,
+    .member-directory-section .styled-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .member-directory-section .styled-table tr {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .member-directory-section .styled-table td {
+        display: block;
+        border: none;
+        padding: 0.25rem 0;
+        text-align: left;
+        width: 100%;
+    }
+
+    .member-directory-section .styled-table td.col-company {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .member-directory-section .styled-table td.col-title {
+        font-size: 0.95rem;
+        color: var(--primary-color);
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+    }
+
+    .member-directory-section .styled-table td.col-title a {
+        display: block;
+    }
+
+    .member-directory-section .styled-table td.col-date {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        width: auto;
+        display: inline-block;
+    }
+
+    .member-directory-section .styled-table td.col-count {
+        font-size: 0.85rem;
+        color: var(--primary-color);
+        width: auto;
+        display: inline-block;
+        text-align: left;
+    }
+
+    .member-directory-section .styled-table td.col-count::before {
+        content: " · ";
+        color: var(--text-muted);
+    }
+
+    /* Gov Table Mobile Card Layout */
+    .gov-table-section .styled-table thead {
+        display: none;
+    }
+
+    .gov-table-section .styled-table,
+    .gov-table-section .styled-table tbody,
+    .gov-table-section .styled-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .gov-table-section .styled-table tr {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .gov-table-section .styled-table td {
+        display: block;
+        border: none;
+        padding: 0.25rem 0;
+        text-align: left;
+        width: 100%;
+    }
+
+    .gov-table-section .styled-table td.col-idx {
+        display: none;
+    }
+
+    .gov-table-section .styled-table td.col-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .gov-table-section .styled-table td.col-dept {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        display: inline-block;
+        width: auto;
+    }
+
+    .gov-table-section .styled-table td.col-manager::before {
+        content: " · ";
+    }
+
+    .gov-table-section .styled-table td.col-date {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        display: block;
+        margin-top: 0.35rem;
+        width: 100%;
+    }
+}
