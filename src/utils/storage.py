@@ -68,24 +68,46 @@ class MemberStorage:
             return cleaned
 
         def is_salrin_noun(title: str) -> bool:
+            """Check if '살린' in title is used as a proper noun (company name), not a verb."""
             if not title or "살린" not in title:
                 return False
 
             # Accept explicit romanization mentions as a proper noun.
             if re.search(r"\bSALIN\b", title, flags=re.IGNORECASE):
                 return True
+            
+            # Accept if title starts with "살린" (likely company name)
+            if title.strip().startswith("살린"):
+                return True
 
+            # Verb-like patterns to EXCLUDE
             verb_like_patterns = [
-                # Object + 살린 + noun (e.g., "김수용 살린 김숙", "생명 살린 의용소방대원")
-                r"[가-힣A-Za-z0-9][\)\]\"'’”]?\s*살린\s+[가-힣0-9]",
-                # Past-tense clause tails such as "살린 뒤", "살린 후", "살린 적"
-                r"살린\s+(뒤|후|채|적|줄|상황|점|것)",
+                # Object + 살린 + noun (e.g., "회사 살린", "생명 살린", "청년 살린")
+                r"[가-힣A-Za-z0-9\)\]\"\''\"]\s*살린\s+[가-힣]",
+                # Common verb usage: X를/을 살린, X가 살린
+                r"[을를이가도은는]\s*살린",
+                # Past-tense clause tails
+                r"살린\s*(뒤|후|채|적|줄|상황|점|것|이|건|덕|힘|게|데|곳)",
+                # Pattern: "~살린 '~'" (describing something saved)
+                r"살린\s*['\"\'']",
+                # Pattern: 불씨/기회/우위/특성 등 + 살린
+                r"(불씨|기회|우위|특성|장점|개성|맛|멋|전통|가치|정신|분위기)\s*살린",
+                # Pattern: ~를 살린, ~을 살린 (object marker before 살린)
+                r"[가-힣]+[를을]\s*살린",
+                # Pattern: 못 살린
+                r"못\s*살린",
+                # Common nouns before 살린 (verb usage)
+                r"(회사|사람|생명|청년|아이|환자|목숨|팀|기업|농어촌|경제|마을|동네)\s*살린",
+                # Article patterns with 살린 as verb
+                r"망해가던.*살린",
+                r"벼랑.*살린",
             ]
 
             for pat in verb_like_patterns:
                 if re.search(pat, title):
                     return False
 
+            # If no verb patterns matched and contains 살린, likely a proper noun
             return True
 
         def apply_member_specific_filters(items: List[Dict]) -> List[Dict]:
