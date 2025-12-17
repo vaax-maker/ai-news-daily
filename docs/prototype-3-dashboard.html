@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>제안 3: 대시보드 + 탭 통합</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1d4ed8;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: var(--primary);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-header h1 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-header p {
+            color: var(--muted);
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Word Cloud Mini */
+        .wordcloud-mini {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .wordcloud-mini h3 {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .word-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .word-tag {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .word-tag.lg {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .word-tag.ai {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .word-tag.xr {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        /* News Section */
+        .news-section {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Tabs */
+        .section-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            background: #f9fafb;
+        }
+
+        .section-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 500;
+            color: var(--muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .section-tab:hover {
+            color: var(--text);
+            background: white;
+        }
+
+        .section-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: white;
+        }
+
+        /* Filter Row */
+        .filter-row {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-left {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: white;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .sort-select {
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        /* News List */
+        .news-list {
+            padding: 0;
+        }
+
+        .news-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
+        }
+
+        .news-item:hover {
+            background: #f9fafb;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-thumb {
+            width: 80px;
+            height: 60px;
+            border-radius: 6px;
+            background: #e5e7eb;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .news-thumb.ai {
+            background: #dbeafe;
+        }
+
+        .news-thumb.xr {
+            background: #d1fae5;
+        }
+
+        .news-thumb.gov {
+            background: #ede9fe;
+        }
+
+        .news-thumb.member {
+            background: #fef3c7;
+        }
+
+        .news-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .news-badges {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .news-badge {
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .news-badge.ai {
+            background: rgba(29, 78, 216, 0.1);
+            color: #1d4ed8;
+        }
+
+        .news-badge.xr {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+        }
+
+        .news-badge.gov {
+            background: rgba(139, 92, 246, 0.1);
+            color: #7c3aed;
+        }
+
+        .news-badge.member {
+            background: rgba(245, 158, 11, 0.1);
+            color: #d97706;
+        }
+
+        .news-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .news-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .news-title a:hover {
+            color: var(--primary);
+        }
+
+        .news-meta {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .news-meta .source {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Pagination */
+        .list-pagination {
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .page-num {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .page-num.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Back Link */
+        .back-link {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section-tab {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">VAAX Daily</div>
+            <nav class="nav">
+                <a href="#" class="active">Home</a>
+                <a href="#">뉴스</a>
+                <a href="#">아카이브</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h1>오늘의 AI/XR 뉴스</h1>
+            <p>2025년 12월 17일 (수) · 매일 오전 7:40, 오후 3:40 업데이트</p>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-number">24</div>
+                <div class="stat-label">오늘의 AI 뉴스</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">18</div>
+                <div class="stat-label">오늘의 XR 뉴스</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">신규 정부과제</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">회원사 소식</div>
+            </div>
+        </div>
+
+        <div class="wordcloud-mini">
+            <h3>🔥 이번 주 핫 키워드</h3>
+            <div class="word-tags">
+                <span class="word-tag ai lg">GPT-5</span>
+                <span class="word-tag xr lg">Quest 3</span>
+                <span class="word-tag ai">에이전트</span>
+                <span class="word-tag xr">Vision Pro</span>
+                <span class="word-tag ai">Claude</span>
+                <span class="word-tag xr">메타버스</span>
+                <span class="word-tag ai">LLM</span>
+                <span class="word-tag xr">AR글래스</span>
+            </div>
+        </div>
+
+        <section class="news-section">
+            <div class="section-tabs">
+                <div class="section-tab active">전체</div>
+                <div class="section-tab">AI 뉴스</div>
+                <div class="section-tab">XR 뉴스</div>
+                <div class="section-tab">정부과제</div>
+                <div class="section-tab">회원사</div>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-left">
+                    <button class="filter-btn active">오늘</button>
+                    <button class="filter-btn">이번 주</button>
+                    <button class="filter-btn">이번 달</button>
+                </div>
+                <select class="sort-select">
+                    <option>최신순</option>
+                    <option>인기순</option>
+                </select>
+            </div>
+
+            <div class="news-list">
+                <article class="news-item">
+                    <div class="news-thumb ai">🤖</div>
+                    <div class="news-content">
+                        <div class="news-badges">
+                            <span class="news-badge ai">AI</span>
+                        </div>
+                        <h3 class="news-title"><a href="#">OpenAI, GPT-5 출시 임박... "2025년 AI 시장 판도 바꿀 것"</a></h3>
+                        <div class="news-meta"><span class="source">TechCrunch</span> · 2025-12-17 09:30</div>
+                    </div>
+                </article>
+
+                <article class="news-item">
+                    <div class="news-thumb xr">🥽</div>
+                    <div class="news-content">
+                        <div class="news-badges">
+                            <span class="news-badge xr">XR</span>
+                        </div>
+                        <h3 class="news-title"><a href="#">Meta Quest 3, 홀리데이 세일로 VR 게임 1000개 대폭 할인</a></h3>
+                        <div class="news-meta"><span class="source">UploadVR</span> · 2025-12-17 08:15</div>
+                    </div>
+                </article>
+
+                <article class="news-item">
+                    <div class="news-thumb gov">📋</div>
+                    <div class="news-content">
+                        <div class="news-badges">
+                            <span class="news-badge gov">정부과제</span>
+                        </div>
+                        <h3 class="news-title"><a href="#">과기정통부, AI 혁신 스타트업 지원사업 500억 규모 공고</a></h3>
+                        <div class="news-meta"><span class="source">과학기술정보통신부</span> · 2025-12-16 18:00</div>
+                    </div>
+                </article>
+
+                <article class="news-item">
+                    <div class="news-thumb member">🏢</div>
+                    <div class="news-content">
+                        <div class="news-badges">
+                            <span class="news-badge member">삼성전자</span>
+                        </div>
+                        <h3 class="news-title"><a href="#">삼성전자, CES 2025에서 신규 XR 디바이스 공개 예정</a></h3>
+                        <div class="news-meta"><span class="source">연합뉴스</span> · 2025-12-16 14:22</div>
+                    </div>
+                </article>
+
+                <article class="news-item">
+                    <div class="news-thumb ai">🧠</div>
+                    <div class="news-content">
+                        <div class="news-badges">
+                            <span class="news-badge ai">AI</span>
+                        </div>
+                        <h3 class="news-title"><a href="#">Google DeepMind, 차세대 AI 에이전트 'Gemini Ultra' 공식 발표</a></h3>
+                        <div class="news-meta"><span class="source">The Verge</span> · 2025-12-16 11:45</div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="list-pagination">
+                <div class="page-num active">1</div>
+                <div class="page-num">2</div>
+                <div class="page-num">3</div>
+                <div class="page-num">4</div>
+                <div class="page-num">→</div>
+            </div>
+        </section>
+    </main>
+
+    <a href="index.html" class="back-link">← 현재 버전으로</a>
+</body>
+
+</html>
