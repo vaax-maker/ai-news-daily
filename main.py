@@ -621,88 +621,16 @@ def main():
 
     # 4. Render Dashboard
     try:
-        # Prepare data for hybrid dashboard
-        ai_list = dashboard_data.get("ai", [])[:10]
-        xr_list = dashboard_data.get("xr", [])[:10]
-        gov_list = dashboard_data.get("gov", [])[:5]
-        members_list = dashboard_data.get("members", [])[:5]
-        
-        # Create all_news list with category info
-        all_news = []
-        category_icons = {"ai": "🤖", "xr": "🥽", "gov": "📋", "member": "🏢"}
-        category_displays = {"ai": "AI", "xr": "XR", "gov": "정부과제", "member": "회원사"}
-        
-        for item in ai_list:
-            item["category"] = "ai"
-            item["category_display"] = "AI"
-            item["icon"] = "🤖"
-            item["published_short"] = item.get("published_display", "")[:10] if item.get("published_display") else ""
-            all_news.append(item)
-        
-        for item in xr_list:
-            item["category"] = "xr"
-            item["category_display"] = "XR"
-            item["icon"] = "🥽"
-            item["published_short"] = item.get("published_display", "")[:10] if item.get("published_display") else ""
-            all_news.append(item)
-        
-        for item in gov_list:
-            item["category"] = "gov"
-            item["category_display"] = "정부과제"
-            item["icon"] = "📋"
-            item["published_short"] = item.get("published_display", "")[:10] if item.get("published_display") else ""
-            all_news.append(item)
-        
-        for item in members_list:
-            item["category"] = "member"
-            item["category_display"] = item.get("member_name", "회원사")
-            item["icon"] = "🏢"
-            item["published_short"] = item.get("published_display", "")[:10] if item.get("published_display") else ""
-            all_news.append(item)
-        
-        # Sort by timestamp/date
-        all_news.sort(key=lambda x: x.get("timestamp", 0) if x.get("timestamp") else 0, reverse=True)
-        
-        # Hero article (first AI or XR article with image)
-        hero_article = None
-        for item in all_news:
-            if item.get("image_url") and item.get("category") in ["ai", "xr"]:
-                hero_article = item.copy()
-                hero_article["summary_text"] = item.get("summary", "")[:200] if item.get("summary") else ""
-                break
-        if not hero_article and all_news:
-            hero_article = all_news[0].copy()
-            hero_article["summary_text"] = ""
-        
-        # Keywords from word cloud
-        keywords = []
-        try:
-            wc_top = sorted(wc_counts.items(), key=lambda x: x[1], reverse=True)[:12]
-            for word, count in wc_top:
-                cat = wc_categories.get(word, "ai")
-                cat_class = "ai" if cat in ["tech", "person"] else "xr"
-                keywords.append({"word": word, "category": cat_class})
-        except:
-            keywords = [
-                {"word": "AI", "category": "ai"},
-                {"word": "XR", "category": "xr"},
-                {"word": "에이전트", "category": "ai"},
-                {"word": "메타버스", "category": "xr"},
-            ]
-        
         dash_html = render_dashboard(
-            ai_latest=ai_list,
-            xr_latest=xr_list,
-            gov_latest=gov_list,
-            members_latest=members_list,
-            section_links=dashboard_data.get("links", {}),
-            hero_article=hero_article,
-            all_news=all_news,
-            keywords=keywords
+            ai_latest=dashboard_data.get("ai", [])[:5],
+            xr_latest=dashboard_data.get("xr", [])[:5],
+            gov_latest=dashboard_data.get("gov", [])[:5],
+            members_latest=dashboard_data.get("members", [])[:5],
+            section_links=dashboard_data.get("links", {})
         )
         with open("docs/index.html", "w", encoding="utf-8") as f:
             f.write(dash_html)
-        print("[Dashboard] Index generated with hybrid design.")
+        print("[Dashboard] Index generated.")
         
         # 5. Asset Deployment
         import shutil
