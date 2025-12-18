@@ -39,6 +39,10 @@ categories:
     - https://news.google.com/rss/search?q=virtual+beings&hl=en&gl=US&ceid=US:en
     - https://news.google.com/rss/search?q=metahuman&hl=en&gl=US&ceid=US:en
     - https://news.google.com/rss/search?q=버추얼인플루언서&hl=ko&gl=KR&ceid=KR:ko
+    # YouTube Channels
+    - https://www.youtube.com/feeds/videos.xml?channel_id=UCSbdMXOI_3HGiFviLZO6kNA  # ThrillSeeker
+    - https://www.youtube.com/feeds/videos.xml?channel_id=UC1xcV34QaE2icXZ21eSvSSw  # SadlyItsBradley
+    - https://www.youtube.com/feeds/videos.xml?channel_id=UC2mgZjuHRDW02mx_ok4wfPw  # MRTV (Mixed Reality TV)
     archive_dir: docs/xr/daily
     index_path: docs/xr/index.html
     selection_mode: time
