@@ -31,18 +31,29 @@
                     class="active">정부과제</a>
                 <a href="../members/index.html"
                     class="">회원사소식</a>
+                <a href="../board/index.html"
+                    class="">게시판</a>
             </nav>
         </div>
     </header>
 
     <div class="container">
         
-<h1>정부과제 누적 표</h1>
-<p class="subtitle">수집된 정부과제 공고를 날짜순으로 모아둔 표입니다.</p>
+<div class="page-header header-with-search">
+    <div class="header-titles">
+        <p class="eyebrow">Government Projects</p>
+        <h1>정부과제 누적 표</h1>
+        <p class="subtitle">수집된 정부과제 공고를 날짜순으로 모아둔 표입니다.</p>
+    </div>
+    <form class="search-bar header-search" id="gov-search-form">
+        <input type="text" id="gov-search-input" placeholder="공고 제목, 부서 검색" aria-label="정부과제 검색">
+        <button type="submit" class="primary-btn">검색</button>
+    </form>
+</div>
 
 
 <div class="gov-table-section table-responsive">
-    <table class="styled-table">
+    <table class="styled-table" id="gov-table">
         <thead>
             <tr>
                 <th class="col-idx">#</th>
@@ -54,105 +65,150 @@
         </thead>
         <tbody>
             
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">1</td>
                 <td class="col-title"><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186356" target="_blank" rel="noopener">「 K-문샷 프로젝트 대국민 공모전 」 공고</a></td>
-                <td class="col-dept">연구개발정책과</td>
+                <td class="col-dept searchable">연구개발정책과</td>
                 <td class="col-dept col-manager">박민희</td>
                 <td class="col-date">2025-12-16</td>
             </tr>
             
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">2</td>
                 <td class="col-title"><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186353" target="_blank" rel="noopener">정보보호제품 성능평가기관 신규 및 재지정에 관한 공고</a></td>
-                <td class="col-dept">정보보호산업과</td>
+                <td class="col-dept searchable">정보보호산업과</td>
                 <td class="col-dept col-manager">김도은</td>
                 <td class="col-date">2025-12-15</td>
             </tr>
             
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">3</td>
                 <td class="col-title"><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186354" target="_blank" rel="noopener">2026년「ICT 학점연계 프로젝트 인턴십」사업 공고</a></td>
-                <td class="col-dept">정보통신산업기반과</td>
+                <td class="col-dept searchable">정보통신산업기반과</td>
                 <td class="col-dept col-manager">문원규</td>
                 <td class="col-date">2025-12-11</td>
             </tr>
             
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">4</td>
                 <td class="col-title"><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186352" target="_blank" rel="noopener">2026년도 양자정보과학 인적기반조성사업 양자정보연구지원센터 공모</a></td>
-                <td class="col-dept">양자혁신기술개발과</td>
+                <td class="col-dept searchable">양자혁신기술개발과</td>
                 <td class="col-dept col-manager">정해일</td>
                 <td class="col-date">2025-12-08</td>
             </tr>
             
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">5</td>
                 <td class="col-title"><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186351" target="_blank" rel="noopener">과학기술 × AI 연구혁신의 실험장, 「2026 AI Co-Scientist Challenge Korea」대회 공고</a></td>
-                <td class="col-dept">과학기술AI확산팀</td>
+                <td class="col-dept searchable">과학기술AI확산팀</td>
                 <td class="col-dept col-manager">호준혁</td>
                 <td class="col-date">2025-12-03</td>
             </tr>
             
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">6</td>
                 <td class="col-title"><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186350" target="_blank" rel="noopener">2025년도 한미 이공분야 학생 인력교류 프로그램(NSF IRES) 운영 지원사업 선정결과 공고</a></td>
-                <td class="col-dept">미주아시아협력담당관</td>
+                <td class="col-dept searchable">미주아시아협력담당관</td>
                 <td class="col-dept col-manager">추은경</td>
                 <td class="col-date">2025-12-02</td>
             </tr>
             
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">7</td>
                 <td class="col-title"><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186349" target="_blank" rel="noopener">2025년도 3차 국민생활안전 긴급대응연구(2단계) 기술개발 및 실증 신규과제 선정결과 공고</a></td>
-                <td class="col-dept">공공융합기술정책과</td>
+                <td class="col-dept searchable">공공융합기술정책과</td>
                 <td class="col-dept col-manager">박정우</td>
                 <td class="col-date">2025-11-28</td>
             </tr>
             
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">8</td>
                 <td class="col-title"><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186347" target="_blank" rel="noopener">2025년도 한-헝가리 공동연구사업 신규과제 선정결과 공고</a></td>
-                <td class="col-dept">구주아프리카협력담당관</td>
+                <td class="col-dept searchable">구주아프리카협력담당관</td>
                 <td class="col-dept col-manager">조윤하</td>
                 <td class="col-date">2025-11-28</td>
             </tr>
             
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">9</td>
                 <td class="col-title"><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186348" target="_blank" rel="noopener">2025년도 극한부품 시험입증지원사업 Track형 실증지원 신규과제 재공모</a></td>
-                <td class="col-dept">공공융합기술정책과</td>
+                <td class="col-dept searchable">공공융합기술정책과</td>
                 <td class="col-dept col-manager">박정우</td>
                 <td class="col-date">2025-11-27</td>
             </tr>
             
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">10</td>
                 <td class="col-title"><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186345" target="_blank" rel="noopener">범부처첨단의료기기연구개발사업 사업단장 선정 공고</a></td>
-                <td class="col-dept">첨단바이오기술과</td>
+                <td class="col-dept searchable">첨단바이오기술과</td>
                 <td class="col-dept col-manager">성상현</td>
                 <td class="col-date">2025-11-19</td>
             </tr>
             
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">11</td>
                 <td class="col-title"><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186344" target="_blank" rel="noopener">2026년도 과학기술정보통신부 기초연구사업 1차 신규과제 공모</a></td>
-                <td class="col-dept">기초연구진흥과</td>
+                <td class="col-dept searchable">기초연구진흥과</td>
                 <td class="col-dept col-manager">허정현</td>
                 <td class="col-date">2025-11-13</td>
             </tr>
             
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">12</td>
                 <td class="col-title"><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186343" target="_blank" rel="noopener">2026년도 과학기술정보통신부 국가연구소(NRL 2.0) 사업 신규과제 공모</a></td>
-                <td class="col-dept">기초연구진흥과</td>
+                <td class="col-dept searchable">기초연구진흥과</td>
                 <td class="col-dept col-manager">김상영</td>
                 <td class="col-date">2025-11-13</td>
             </tr>
             
         </tbody>
     </table>
+    <div id="no-results" class="empty-msg hidden">검색 결과가 없습니다.</div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchForm = document.getElementById('gov-search-form');
+        const searchInput = document.getElementById('gov-search-input');
+        const tableRows = document.querySelectorAll('#gov-table tbody tr');
+        const noResultsMsg = document.getElementById('no-results');
+
+        function performSearch(query) {
+            const normalized = query.toLowerCase().trim();
+            let visibleCount = 0;
+
+            tableRows.forEach(row => {
+                const title = row.querySelector('.col-title').textContent.toLowerCase();
+                const dept = row.querySelector('.col-dept').textContent.toLowerCase();
+                const haystack = title + ' ' + dept;
+
+                if (haystack.includes(normalized)) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            if (visibleCount === 0) {
+                document.querySelector('.styled-table').classList.add('hidden');
+                noResultsMsg.classList.remove('hidden');
+            } else {
+                document.querySelector('.styled-table').classList.remove('hidden');
+                noResultsMsg.classList.add('hidden');
+            }
+        }
+
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            performSearch(searchInput.value);
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            performSearch(e.target.value);
+        });
+    });
+</script>
 
 
     </div>
