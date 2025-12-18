@@ -70,14 +70,18 @@ def fetch_msit_announcements(service_key: str, limit: int = 30) -> List[Dict[str
 
 
 def fetch_koneps_announcements(service_key: str, limit: int = 20) -> List[Dict[str, str]]:
-    """나라장터(조달청) 입찰공고 API 호출 (용역)"""
-    # 입찰공고정보서비스 (용역)
-    url = "http://apis.data.go.kr/1230000/BidPublicInfoService04/getBidPblancListInfoServcPPSSrch"
+    """나라장터(조달청) 입찰공고 API 호출 (다양한 버전 시도)"""
+    
+    # 시도할 API 엔드포인트 목록 (최신 버전부터 역순)
+    endpoints = [
+        "http://apis.data.go.kr/1230000/BidPublicInfoService04/getBidPblancListInfoServcPPSSrch", # v04 (용역 검색)
+        "http://apis.data.go.kr/1230000/BidPublicInfoService03/getBidPblancListInfoServcPPSSrch", # v03
+        "http://apis.data.go.kr/1230000/BidPublicInfoService02/getBidPblancListInfoServcPPSSrch", # v02
+    ]
     
     # 검색할 키워드 목록
     keywords = ["인공지능", "AI", "메타버스", "XR", "가상현실", "증강현실", "디지털트윈"]
     
-    # 조회 기간: 오늘부터 2일 전까지
     now = datetime.datetime.now()
     end_dt = now.strftime("%Y%m%d") + "2359"
     start_dt = (now - datetime.timedelta(days=2)).strftime("%Y%m%d") + "0000"
@@ -86,64 +90,67 @@ def fetch_koneps_announcements(service_key: str, limit: int = 20) -> List[Dict[s
     seen_links = set()
 
     for keyword in keywords:
-        params = {
-            "serviceKey": service_key,
-            "numOfRows": int(limit / 2), # 키워드별로 조금씩 가져옴
-            "pageNo": 1,
-            "inqryDiv": "1", # 1:조회, 2:생략
-            "inqryBgnDt": start_dt,
-            "inqryEndDt": end_dt,
-            "bidNm": keyword, # 공고명 검색
-            "type": "json"    # JSON 지원됨
-        }
+        success_endpoint = False
         
-        # requests will handle urlencoding
-        # Note: serviceKey in data.go.kr often needs to be unquoted if passed in params dict in some libs,
-        # but requests usually handles it. However, data.go.kr keys are tricky. 
-        # Best to construct query string manually for serviceKey if it contains special chars.
-        
-        # Using string construction for safety with data.go.kr keys
-        qs = urlencode({k: v for k, v in params.items() if k != "serviceKey"}, safe="=")
-        full_url = f"{url}?serviceKey={service_key}&{qs}"
-        
-        try:
-            response = requests.get(full_url, timeout=REQUEST_TIMEOUT)
-            response.raise_for_status()
+        for url in endpoints:
+            if success_endpoint: break # 이미 성공했으면 다음 키워드로
             
-            data = response.json()
-            body = data.get("response", {}).get("body", {})
-            items = body.get("items", [])
+            params = {
+                "serviceKey": service_key,
+                "numOfRows": int(limit / 2),
+                "pageNo": 1,
+                "inqryDiv": "1",
+                "inqryBgnDt": start_dt,
+                "inqryEndDt": end_dt,
+                "bidNm": keyword,
+                "type": "json"
+            }
             
-            if not items:
-                continue
+            qs = urlencode({k: v for k, v in params.items() if k != "serviceKey"}, safe="=")
+            full_url = f"{url}?serviceKey={service_key}&{qs}"
+            
+            try:
+                response = requests.get(full_url, timeout=REQUEST_TIMEOUT)
                 
-            for item in items:
-                link = item.get("bidNtceDtlUrl", "")
-                if link in seen_links:
+                # 200 OK가 아니면 다음 버전 시도
+                if response.status_code != 200:
                     continue
-                seen_links.add(link)
+                    
+                data = response.json()
+                body = data.get("response", {}).get("body", {})
+                items = body.get("items", [])
                 
-                # 날짜 포맷팅 (YYYYMMDDHHMM -> YYYY-MM-DD)
-                raw_date = item.get("bidNtceDt", "")
-                fmt_date = f"{raw_date[:4]}-{raw_date[4:6]}-{raw_date[6:8]}" if len(raw_date) >= 8 else raw_date
+                # 성공으로 간주
+                success_endpoint = True
                 
-                items_list.append({
-                    "title": item.get("bidNtceNm", ""),
-                    "link": link,
-                    "dept": item.get("daminsttNm", "") or "조달청", # 수요기관명
-                    "manager": "",
-                    "date": fmt_date,
-                    "source_name": "나라장터",
-                    "image_url": "",
-                    "published_display": fmt_date
-                })
+                if not items:
+                    continue
                 
-        except Exception as e:
-            # 키워드 하나 실패해도 계속 진행
-            # logger.warning(f"[Gov] KONEPS keyword '{keyword}' failed: {e}")
-            pass
+                for item in items:
+                    link = item.get("bidNtceDtlUrl", "")
+                    if link in seen_links:
+                        continue
+                    seen_links.add(link)
+                    
+                    raw_date = item.get("bidNtceDt", "")
+                    fmt_date = f"{raw_date[:4]}-{raw_date[4:6]}-{raw_date[6:8]}" if len(raw_date) >= 8 else raw_date
+                    
+                    items_list.append({
+                        "title": item.get("bidNtceNm", ""),
+                        "link": link,
+                        "dept": item.get("daminsttNm", "") or "조달청",
+                        "manager": "",
+                        "date": fmt_date,
+                        "source_name": "나라장터",
+                        "image_url": "",
+                        "published_display": fmt_date
+                    })
+                    
+            except Exception as e:
+                # 에러 발생 시 다음 버전 시도
+                pass
 
-    logger.info(f"[Gov] Fetched {len(items_list)} KONEPS announcements")
+    logger.info(f"[Gov] Fetched {len(items_list)} KONEPS announcements (Attempted multiple versions)")
     return items_list
 
 
