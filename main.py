@@ -177,7 +177,8 @@ def process_category(config, now_utc, kst_timezone_offset=9):
                 summary = trim_summary_lines(summary)
             except Exception as e:
                 print(f"[{config.key}] Summarization error for '{title[:50]}...': {e}")
-                summary = "요약 실패"
+                # summary = "요약 실패" - 제거
+                continue # 실패한 항목은 제외
 
 
 
