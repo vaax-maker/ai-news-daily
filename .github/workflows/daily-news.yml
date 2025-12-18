@@ -20,10 +20,10 @@ on:
           - "time"
           - "random"
           - "keyword"
-      ai_use_ai_ranking:
-        description: "  ↳ 🔵 AI 카테고리 AI 랭킹 사용 여부 (true/false)"
+      ai_use_llm_ranking:
+        description: "  ↳ 🔵 AI LLM 랭킹 사용 (true=LLM, false=휴리스틱만)"
         required: false
-        default: "true"
+        default: "false"
         type: choice
         options:
           - "true"
@@ -43,14 +43,14 @@ on:
       xr_selection_mode:
         description: "  ↳ 🟢 XR 뉴스 선택 방식 (time/random/keyword)"
         required: false
-        default: "random"
+        default: "time"
         type: choice
         options:
           - "time"
           - "random"
           - "keyword"
-      xr_use_ai_ranking:
-        description: "  ↳ 🟢 XR 카테고리 AI 랭킹 사용 여부 (true/false)"
+      xr_use_llm_ranking:
+        description: "  ↳ 🟢 XR LLM 랭킹 사용 (true=LLM, false=휴리스틱만)"
         required: false
         default: "false"
         type: choice
@@ -77,6 +77,14 @@ on:
         options:
           - "실행"
           - "건너뛰기"
+      filter_max_first_stage:
+        description: "📊 1단계 필터 통과 개수 (기본 30)"
+        required: false
+        default: "30"
+      filter_final_limit:
+        description: "📊 최종 선정 개수 (기본 10)"
+        required: false
+        default: "10"
   schedule:
     - cron: "40 22 * * *"  # 매일 22:40 UTC (한국시간 오전 7시 40분)
     - cron: "40 6 * * *"   # 매일 06:40 UTC (한국시간 오후 3시 40분)
@@ -87,24 +95,33 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # 워크플로 입력(workflow_dispatch) 또는 기본값을 환경 변수로 전달하여 기사 선택 모드/키워드를 제어합니다.
+      # 카테고리별 설정
       AI_SELECTION_MODE: ${{ github.event.inputs.ai_selection_mode || 'keyword' }}
-      AI_USE_AI_RANKING: ${{ github.event.inputs.ai_use_ai_ranking || 'true' }}
+      AI_USE_LLM_RANKING: ${{ github.event.inputs.ai_use_llm_ranking || 'false' }}
       AI_KEYWORDS: ${{ github.event.inputs.ai_keywords || 'agent,agentic,llm,lam,robot' }}
-      XR_SELECTION_MODE: ${{ github.event.inputs.xr_selection_mode || 'random' }}
-      XR_USE_AI_RANKING: ${{ github.event.inputs.xr_use_ai_ranking || 'false' }}
+      XR_SELECTION_MODE: ${{ github.event.inputs.xr_selection_mode || 'time' }}
+      XR_USE_LLM_RANKING: ${{ github.event.inputs.xr_use_llm_ranking || 'false' }}
       XR_KEYWORDS: ${{ github.event.inputs.xr_keywords || '' }}
+      
+      # 실행 여부
       RUN_AI: ${{ github.event.inputs.run_ai == '건너뛰기' && 'false' || 'true' }}
       RUN_XR: ${{ github.event.inputs.run_xr == '건너뛰기' && 'false' || 'true' }}
       RUN_GOV: ${{ github.event.inputs.run_gov == '건너뛰기' && 'false' || 'true' }}
       RUN_MEMBERS: ${{ github.event.inputs.run_members == '건너뛰기' && 'false' || 'true' }}
+      
+      # 필터링 파이프라인 설정
+      FILTER_MAX_FIRST_STAGE: ${{ github.event.inputs.filter_max_first_stage || '30' }}
+      FILTER_FINAL_LIMIT: ${{ github.event.inputs.filter_final_limit || '10' }}
+      
+      # 비용 최적화: 기본적으로 휴리스틱만 사용 (LLM 비용 0)
+      AI_RANKING_STRATEGY: "heuristic"
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
@@ -116,7 +133,14 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROK_API_KEY: ${{ secrets.GROK_API_KEY }}
+          GOV_API_KEY: ${{ secrets.GOV_API_KEY }}
         run: |
+          echo "📰 뉴스 생성 시작"
+          echo "  - AI: $RUN_AI (mode: $AI_SELECTION_MODE, LLM: $AI_USE_LLM_RANKING)"
+          echo "  - XR: $RUN_XR (mode: $XR_SELECTION_MODE, LLM: $XR_USE_LLM_RANKING)"
+          echo "  - 정부과제: $RUN_GOV"
+          echo "  - 회원사: $RUN_MEMBERS"
+          echo "  - 필터: 1단계→$FILTER_MAX_FIRST_STAGE개, 최종→$FILTER_FINAL_LIMIT개"
           python main.py
 
       - name: Commit and Push
