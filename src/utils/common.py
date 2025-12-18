@@ -27,7 +27,7 @@ def _wrap_highlight(text: str) -> str:
 
 
 def markdown_bold_to_highlight(html_text: str) -> str:
-    """Convert bold-marked sentences to highlighted list items.
+    r"""Convert bold-marked sentences to highlighted list items.
 
     - Bold text (\*\* ... \*\*) marks important contexts.
     - Highlighting is capped so that highlighted characters stay within 20% of
@@ -144,23 +144,39 @@ def extract_source_name(entry, link: str) -> str:
         netloc = netloc[4:]
     return netloc or "출처 미상"
 
-def extract_image_url(entry) -> str:
+def extract_image_url(entry, link: str = "") -> str:
+    """Extract image URL from feed entry with YouTube support.
+    
+    - Properly handles YouTube video thumbnails
+    - Falls back through multiple sources
+    """
+    
+    # 1. Try to extract YouTube video ID and get proper thumbnail
+    youtube_id = _extract_youtube_video_id(link or getattr(entry, 'link', ''))
+    if youtube_id:
+        # Use maxresdefault for best quality, falls back automatically on YouTube's side
+        return f"https://img.youtube.com/vi/{youtube_id}/maxresdefault.jpg"
+    
+    # 2. Check media_content
     media_content = getattr(entry, "media_content", None) or []
     if media_content:
         first = media_content[0]
         if isinstance(first, dict) and first.get("url"):
             return first["url"]
 
+    # 3. Check media_thumbnail
     media_thumbnail = getattr(entry, "media_thumbnail", None) or []
     if media_thumbnail:
         thumb = media_thumbnail[0]
         if isinstance(thumb, dict) and thumb.get("url"):
             return thumb["url"]
 
+    # 4. Check image link
     image_link = getattr(entry, "image", None)
     if isinstance(image_link, dict) and image_link.get("href"):
         return image_link["href"]
 
+    # 5. Extract from HTML content
     def extract_from_html(html_text: str) -> str:
         if not html_text:
             return ""
@@ -180,6 +196,42 @@ def extract_image_url(entry) -> str:
         return html_candidate
 
     return ""
+
+
+def _extract_youtube_video_id(url: str) -> str:
+    """Extract YouTube video ID from various URL formats."""
+    if not url:
+        return ""
+    
+    # Standard YouTube URL patterns
+    patterns = [
+        r'youtube\.com/watch\?v=([a-zA-Z0-9_-]{11})',
+        r'youtube\.com/embed/([a-zA-Z0-9_-]{11})',
+        r'youtu\.be/([a-zA-Z0-9_-]{11})',
+        r'youtube\.com/v/([a-zA-Z0-9_-]{11})',
+    ]
+    
+    for pattern in patterns:
+        match = re.search(pattern, url)
+        if match:
+            return match.group(1)
+    
+    return ""
+
+
+# Category-specific fallback images (can be overridden via config)
+FALLBACK_IMAGES = {
+    "ai": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&q=80",  # AI abstract
+    "xr": "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=400&q=80",  # VR headset
+    "gov": "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=400&q=80", # Government building
+    "members": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&q=80", # Business
+    "default": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80" # News
+}
+
+
+def get_fallback_image(category: str = "default") -> str:
+    """Get a fallback image URL for a given category."""
+    return FALLBACK_IMAGES.get(category, FALLBACK_IMAGES["default"])
 
 def sanitize_summary(summary: str) -> str:
     cleaned_lines = []

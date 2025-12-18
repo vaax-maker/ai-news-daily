@@ -14,6 +14,7 @@ from src.generators.html import (
 from src.utils.common import (
     extract_source_name,
     extract_image_url,
+    get_fallback_image,
     format_timestamp,
     markdown_bold_to_highlight,
     parse_article_datetime,
@@ -185,7 +186,7 @@ def process_category(config, now_utc, kst_timezone_offset=9):
                 "summary_html": summary,
                 "published_display": format_timestamp(ts),
                 "source_name": extract_source_name(entry, link),
-                "image_url": extract_image_url(entry),
+                "image_url": extract_image_url(entry, link) or get_fallback_image(config.key),
                 "original_title": title
             })
             
@@ -426,7 +427,7 @@ def process_members(limit_per_member=None):
                     "published_display": format_timestamp(ts),
                     "summary_html": formatted_summary, # Search returns snippet
                     "source_name": extract_source_name(entry, link),
-                    "image_url": extract_image_url(entry),
+                    "image_url": extract_image_url(entry, link) or get_fallback_image("members"),
                     "timestamp": ts,
                     "original_title": title
                 })
