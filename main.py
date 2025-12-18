@@ -509,11 +509,23 @@ def process_members(limit_per_member=None):
                 os.remove(file_path)
             except: pass
     
-    idx_html = render_member_index(member_entries, all_news=all_latest_news)
+    # Filter to only today's news for the "Latest News" tab
+    # Accumulated news can be viewed on individual member pages
+    today_str = datetime.datetime.now().strftime("%Y-%m-%d")
+    today_start = datetime.datetime.strptime(today_str, "%Y-%m-%d").timestamp()
+    
+    todays_news = [
+        item for item in all_latest_news 
+        if item.get("timestamp", 0) >= today_start
+    ]
+    
+    print(f"[Members] Total news: {len(all_latest_news)}, Today's news: {len(todays_news)}")
+    
+    idx_html = render_member_index(member_entries, all_news=todays_news)
     with open("docs/members/index.html", "w", encoding="utf-8") as f:
         f.write(idx_html)
         
-    return all_latest_news[:5]
+    return todays_news[:5]
 
 def main():
     now_utc = datetime.datetime.now(datetime.timezone.utc)
