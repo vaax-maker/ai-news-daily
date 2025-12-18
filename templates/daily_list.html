@@ -26,6 +26,12 @@
             <div class="news-image">
                 <img src="{{ article.image_url }}" alt="Thumbnail" loading="lazy">
             </div>
+            {% elif article.placeholder_type %}
+            <div class="news-image">
+                <div class="image-placeholder {{ article.placeholder_type }}">
+                    {{ article.placeholder_type|upper }}
+                </div>
+            </div>
             {% endif %}
 
             <div class="news-summary">

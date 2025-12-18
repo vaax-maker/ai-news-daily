@@ -180,13 +180,19 @@ def process_category(config, now_utc, kst_timezone_offset=9):
                 summary = "요약 실패"
 
 
+
+            # AI/XR: use image if available, otherwise use placeholder
+            image_url = extract_image_url(entry, link) if config.key in ("ai", "xr") else ""
+            placeholder_type = config.key if (config.key in ("ai", "xr") and not image_url) else ""
+
             summarized_items.append({
                 "title": shorten_korean_title(title),
                 "link": link,
                 "summary_html": summary,
                 "published_display": format_timestamp(ts),
                 "source_name": extract_source_name(entry, link),
-                "image_url": extract_image_url(entry, link) or get_fallback_image(config.key),
+                "image_url": image_url,
+                "placeholder_type": placeholder_type,  # "ai" or "xr" for placeholder box
                 "original_title": title
             })
             
@@ -427,7 +433,7 @@ def process_members(limit_per_member=None):
                     "published_display": format_timestamp(ts),
                     "summary_html": formatted_summary, # Search returns snippet
                     "source_name": extract_source_name(entry, link),
-                    "image_url": extract_image_url(entry, link) or get_fallback_image("members"),
+                    "image_url": extract_image_url(entry, link),
                     "timestamp": ts,
                     "original_title": title
                 })
