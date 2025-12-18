@@ -39,14 +39,6 @@ on:
         description: "📰 카테고리별 기사 수"
         required: false
         default: "10"
-      use_llm_ranking:
-        description: "🤖 LLM 랭킹 사용 (비용 발생)"
-        required: false
-        default: "false"
-        type: choice
-        options:
-          - "false"
-          - "true"
   schedule:
     - cron: "0 23 * * *"   # 매일 23:00 UTC (한국시간 오전 8시)
     - cron: "0 7 * * *"    # 매일 07:00 UTC (한국시간 오후 4시)
@@ -63,13 +55,8 @@ jobs:
       RUN_GOV: ${{ github.event.inputs.run_gov == '건너뛰기' && 'false' || 'true' }}
       RUN_MEMBERS: ${{ github.event.inputs.run_members == '건너뛰기' && 'false' || 'true' }}
       
-      # 기사 수 및 랭킹 설정
+      # 기사 수 설정
       MAX_ARTICLES: ${{ github.event.inputs.max_articles || '10' }}
-      USE_LLM_RANKING: ${{ github.event.inputs.use_llm_ranking || 'false' }}
-      
-      # 필터링 파이프라인 (하드코딩, 보통 변경 불필요)
-      FILTER_MAX_FIRST_STAGE: "30"
-      AI_RANKING_STRATEGY: "heuristic"
 
     steps:
       - name: Checkout repo
@@ -96,7 +83,6 @@ jobs:
           echo "  - 정부과제: $RUN_GOV"
           echo "  - 회원사: $RUN_MEMBERS"
           echo "  - 기사 수: $MAX_ARTICLES개"
-          echo "  - LLM 랭킹: $USE_LLM_RANKING"
           python main.py
 
       - name: Commit and Push
