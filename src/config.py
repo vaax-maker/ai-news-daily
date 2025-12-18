@@ -15,7 +15,7 @@ class CategoryConfig:
     rss_feeds: List[str]
     archive_dir: str
     index_path: str
-    max_articles: int = 15
+    max_articles: int = int(os.getenv("MAX_ARTICLES", "10"))
     fallback_image_url: str = ""
     selection_mode: str = "time"
     keyword_filters: List[str] = field(default_factory=list)
