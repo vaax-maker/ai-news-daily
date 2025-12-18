@@ -4,65 +4,23 @@ on:
   workflow_dispatch:
     inputs:
       run_ai:
-        description: "🔵 AI 읽을거리 실행 여부"
+        description: "🔵 AI 읽을거리"
         required: false
         default: "실행"
         type: choice
         options:
           - "실행"
           - "건너뛰기"
-      ai_selection_mode:
-        description: "  ↳ 🔵 AI 뉴스 선택 방식 (time/random/keyword)"
-        required: false
-        default: "keyword"
-        type: choice
-        options:
-          - "time"
-          - "random"
-          - "keyword"
-      ai_use_llm_ranking:
-        description: "  ↳ 🔵 AI LLM 랭킹 사용 (true=LLM, false=휴리스틱만)"
-        required: false
-        default: "false"
-        type: choice
-        options:
-          - "true"
-          - "false"
-      ai_keywords:
-        description: "  ↳ 🔵 AI 뉴스 키워드 필터 (콤마로 구분)"
-        required: false
-        default: "agent,agentic,llm,lam,robot"
       run_xr:
-        description: "🟢 XR 읽을거리 실행 여부"
+        description: "🟢 XR 읽을거리"
         required: false
         default: "실행"
         type: choice
         options:
           - "실행"
           - "건너뛰기"
-      xr_selection_mode:
-        description: "  ↳ 🟢 XR 뉴스 선택 방식 (time/random/keyword)"
-        required: false
-        default: "time"
-        type: choice
-        options:
-          - "time"
-          - "random"
-          - "keyword"
-      xr_use_llm_ranking:
-        description: "  ↳ 🟢 XR LLM 랭킹 사용 (true=LLM, false=휴리스틱만)"
-        required: false
-        default: "false"
-        type: choice
-        options:
-          - "true"
-          - "false"
-      xr_keywords:
-        description: "  ↳ 🟢 XR 뉴스 키워드 필터 (콤마로 구분)"
-        required: false
-        default: ""
       run_gov:
-        description: "🟣 정부과제 실행 여부"
+        description: "🟣 정부과제"
         required: false
         default: "실행"
         type: choice
@@ -70,7 +28,7 @@ on:
           - "실행"
           - "건너뛰기"
       run_members:
-        description: "🟠 회원사소식 실행 여부"
+        description: "🟠 회원사소식"
         required: false
         default: "실행"
         type: choice
@@ -78,13 +36,17 @@ on:
           - "실행"
           - "건너뛰기"
       max_articles:
-        description: "📰 카테고리별 기사 수 (기본 10)"
+        description: "📰 카테고리별 기사 수"
         required: false
         default: "10"
-      filter_max_first_stage:
-        description: "📊 1단계 필터 통과 개수 (기본 30)"
+      use_llm_ranking:
+        description: "🤖 LLM 랭킹 사용 (비용 발생)"
         required: false
-        default: "30"
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
   schedule:
     - cron: "0 23 * * *"   # 매일 23:00 UTC (한국시간 오전 8시)
     - cron: "0 7 * * *"    # 매일 07:00 UTC (한국시간 오후 4시)
@@ -95,25 +57,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # 카테고리별 설정
-      AI_SELECTION_MODE: ${{ github.event.inputs.ai_selection_mode || 'keyword' }}
-      AI_USE_LLM_RANKING: ${{ github.event.inputs.ai_use_llm_ranking || 'false' }}
-      AI_KEYWORDS: ${{ github.event.inputs.ai_keywords || 'agent,agentic,llm,lam,robot' }}
-      XR_SELECTION_MODE: ${{ github.event.inputs.xr_selection_mode || 'time' }}
-      XR_USE_LLM_RANKING: ${{ github.event.inputs.xr_use_llm_ranking || 'false' }}
-      XR_KEYWORDS: ${{ github.event.inputs.xr_keywords || '' }}
-      
       # 실행 여부
       RUN_AI: ${{ github.event.inputs.run_ai == '건너뛰기' && 'false' || 'true' }}
       RUN_XR: ${{ github.event.inputs.run_xr == '건너뛰기' && 'false' || 'true' }}
       RUN_GOV: ${{ github.event.inputs.run_gov == '건너뛰기' && 'false' || 'true' }}
       RUN_MEMBERS: ${{ github.event.inputs.run_members == '건너뛰기' && 'false' || 'true' }}
       
-      # 기사 수 및 필터링 설정
+      # 기사 수 및 랭킹 설정
       MAX_ARTICLES: ${{ github.event.inputs.max_articles || '10' }}
-      FILTER_MAX_FIRST_STAGE: ${{ github.event.inputs.filter_max_first_stage || '30' }}
+      USE_LLM_RANKING: ${{ github.event.inputs.use_llm_ranking || 'false' }}
       
-      # 비용 최적화: 기본적으로 휴리스틱만 사용 (LLM 비용 0)
+      # 필터링 파이프라인 (하드코딩, 보통 변경 불필요)
+      FILTER_MAX_FIRST_STAGE: "30"
       AI_RANKING_STRATEGY: "heuristic"
 
     steps:
@@ -136,11 +91,12 @@ jobs:
           GOV_API_KEY: ${{ secrets.GOV_API_KEY }}
         run: |
           echo "📰 뉴스 생성 시작"
-          echo "  - AI: $RUN_AI (mode: $AI_SELECTION_MODE, LLM: $AI_USE_LLM_RANKING)"
-          echo "  - XR: $RUN_XR (mode: $XR_SELECTION_MODE, LLM: $XR_USE_LLM_RANKING)"
+          echo "  - AI: $RUN_AI"
+          echo "  - XR: $RUN_XR"
           echo "  - 정부과제: $RUN_GOV"
           echo "  - 회원사: $RUN_MEMBERS"
-          echo "  - 필터: 1단계→$FILTER_MAX_FIRST_STAGE개, 최종→$FILTER_FINAL_LIMIT개"
+          echo "  - 기사 수: $MAX_ARTICLES개"
+          echo "  - LLM 랭킹: $USE_LLM_RANKING"
           python main.py
 
       - name: Commit and Push
@@ -148,14 +104,7 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
       
-          # 1) 원격 변경 먼저 가져오기 (rebase, 로컬 생성 파일 자동 stash)
           git pull --rebase --autostash origin main
-      
-          # 2) 이번에 생성한 파일 추가
           git add docs data
-      
-          # 3) 커밋 (변경 없으면 스킵)
           git commit -m "Update Daily News & Member Data" || echo "No changes to commit"
-      
-          # 4) 푸시
           git push origin HEAD:main
