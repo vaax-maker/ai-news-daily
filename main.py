@@ -509,7 +509,7 @@ def process_members(limit_per_member=None):
                 os.remove(file_path)
             except: pass
     
-    idx_html = render_member_index(member_entries)
+    idx_html = render_member_index(member_entries, all_news=all_latest_news)
     with open("docs/members/index.html", "w", encoding="utf-8") as f:
         f.write(idx_html)
         
