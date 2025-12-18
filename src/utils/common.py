@@ -176,13 +176,26 @@ def extract_image_url(entry, link: str = "") -> str:
     if isinstance(image_link, dict) and image_link.get("href"):
         return image_link["href"]
 
-    # 5. Extract from HTML content
+    # 5. Check links (enclosure type)
+    links = getattr(entry, "links", []) or []
+    for l in links:
+        if isinstance(l, dict) and l.get("type", "").startswith("image/") and l.get("href"):
+            return l["href"]
+        # Some feeds use enclosure without explicit image type but correct rel
+        if isinstance(l, dict) and l.get("rel") == "enclosure" and l.get("href"):
+             # Basic extension check
+             if l["href"].lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.webp')):
+                 return l["href"]
+
+    # 6. Extract from HTML content
     def extract_from_html(html_text: str) -> str:
         if not html_text:
             return ""
-        match = re.search(r"<img[^>]+src=['\"]([^'\"]+)['\"]", html_text, re.IGNORECASE)
+        # Improved regex to handle various attributes and spacing
+        match = re.search(r'<img[^>]+src\s*=\s*["\']([^"\']+)["\']', html_text, re.IGNORECASE)
         return match.group(1) if match else ""
 
+    # Check content (full text)
     contents = getattr(entry, "content", None) or []
     for content in contents:
         val = content.get("value", "") if isinstance(content, dict) else getattr(content, "value", "")
@@ -190,10 +203,19 @@ def extract_image_url(entry, link: str = "") -> str:
         if candidate:
             return candidate
 
+    # Check summary/description
     summary_html = getattr(entry, "summary", "") or getattr(entry, "description", "")
     html_candidate = extract_from_html(summary_html)
     if html_candidate:
         return html_candidate
+
+    # Check summary_detail (common in feedparser)
+    summary_detail = getattr(entry, "summary_detail", None)
+    if summary_detail:
+        val = summary_detail.get("value", "") if isinstance(summary_detail, dict) else getattr(summary_detail, "value", "")
+        candidate = extract_from_html(val)
+        if candidate:
+            return candidate
 
     return ""
 
