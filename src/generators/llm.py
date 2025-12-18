@@ -1,11 +1,75 @@
 import os
 import time
 import re
+import random
 import google.generativeai as genai
 from google.api_core import exceptions
 import groq as groq_lib
 from typing import List
 from src.utils.usage_logger import log_api_usage
+
+# ============================================================================
+# Rate Limiting Configuration (Free Tier Optimization)
+# ============================================================================
+# Groq Free Tier: 30 requests/minute, 14,400 requests/day
+# Gemini Free Tier: 15 requests/minute, 1,500 requests/day
+# 
+# Strategy:
+# 1. Add delay between API calls to stay under rate limits
+# 2. Exponential backoff on rate limit errors
+# 3. Jitter to avoid thundering herd
+# ============================================================================
+
+# Minimum delay between API calls (seconds)
+MIN_REQUEST_DELAY = float(os.getenv("LLM_REQUEST_DELAY", "2.0"))
+
+# Maximum retry attempts
+MAX_RETRIES = int(os.getenv("LLM_MAX_RETRIES", "3"))
+
+# Base delay for exponential backoff (seconds)
+BASE_BACKOFF_DELAY = 5.0
+
+# Last request timestamp for rate limiting
+_last_api_call_time = 0.0
+
+def _rate_limit_delay():
+    """Enforce minimum delay between API calls."""
+    global _last_api_call_time
+    now = time.time()
+    elapsed = now - _last_api_call_time
+    if elapsed < MIN_REQUEST_DELAY:
+        sleep_time = MIN_REQUEST_DELAY - elapsed + random.uniform(0.1, 0.5)  # Add jitter
+        time.sleep(sleep_time)
+    _last_api_call_time = time.time()
+
+def _is_rate_limit_error(error_msg: str) -> bool:
+    """Check if error is a rate limit error."""
+    rate_limit_indicators = [
+        "rate limit", "rate_limit", "quota", "exceeded", 
+        "too many requests", "429", "resource exhausted",
+        "requests per minute", "rpm"
+    ]
+    error_lower = error_msg.lower()
+    return any(indicator in error_lower for indicator in rate_limit_indicators)
+
+def _extract_retry_delay(exc: Exception, default: float = 30.0) -> float:
+    """Extract retry delay from error message or use default."""
+    message = str(exc).lower()
+    # Try to find "retry in Xs" or "retry after Xs" pattern
+    match = re.search(r"retry (?:in|after) ([0-9]+(?:\.[0-9]+)?)\s*s", message)
+    if match:
+        try:
+            return min(float(match.group(1)), 60.0)  # Cap at 60 seconds
+        except ValueError:
+            pass
+    # Try to find just a number of seconds mentioned
+    match = re.search(r"(\d+)\s*seconds?", message)
+    if match:
+        try:
+            return min(float(match.group(1)), 60.0)
+        except ValueError:
+            pass
+    return min(default, 30.0)
 
 # Heuristic keyword buckets for lightweight ranking
 IMPORTANT_COMPANIES = [
@@ -26,19 +90,6 @@ try:
     Groq = groq_lib.Groq
 except ImportError:
     Groq = None
-
-# Gemini Config
-MAX_GEMINI_RETRY_DELAY = 15.0
-
-def _extract_retry_delay(exc: Exception, default: float = 30.0) -> float:
-    message = str(exc).lower()
-    match = re.search(r"retry in ([0-9]+(?:\.[0-9]+)?)s", message)
-    if match:
-        try:
-            return min(float(match.group(1)), MAX_GEMINI_RETRY_DELAY)
-        except ValueError:
-            pass
-    return min(default, MAX_GEMINI_RETRY_DELAY)
 
 def _score_title(title: str) -> int:
     """Lightweight heuristic scoring to reduce LLM usage.
@@ -84,6 +135,7 @@ def _rank_with_heuristics(items: List[tuple], limit: int) -> List[tuple]:
     return [entry[2] for entry in scored[:limit]]
 
 def _summarize_with_gemini(prompt: str) -> str:
+    """Call Gemini API with rate limiting and retry logic."""
     key = os.environ.get("GEMINI_API_KEY")
     if not key:
         raise RuntimeError("GEMINI_API_KEY is not set.")
@@ -93,13 +145,15 @@ def _summarize_with_gemini(prompt: str) -> str:
     model = genai.GenerativeModel(model_name)
     
     last_exc = None
-    for attempt in range(3):
+    for attempt in range(MAX_RETRIES):
         try:
+            # Apply rate limiting
+            _rate_limit_delay()
+            
             res = model.generate_content(prompt)
             
             # Usage Tracking
             try:
-                # Gemini usage metadata structure
                 if hasattr(res, 'usage_metadata'):
                     in_tok = res.usage_metadata.prompt_token_count
                     out_tok = res.usage_metadata.candidates_token_count
@@ -108,20 +162,46 @@ def _summarize_with_gemini(prompt: str) -> str:
                 print(f"[Gemini] Usage tracking failed: {e}")
 
             return res.text.strip()
+            
         except exceptions.ResourceExhausted as exc:
             last_exc = exc
-            if attempt == 2: raise
+            if attempt == MAX_RETRIES - 1: 
+                raise
             delay = _extract_retry_delay(exc)
-            print(f"[Gemini] Quota exceeded, retrying in {delay}s...")
+            print(f"[Gemini] Quota exceeded (attempt {attempt+1}/{MAX_RETRIES}), waiting {delay}s...")
             time.sleep(delay)
+            
         except exceptions.GoogleAPICallError as exc:
             last_exc = exc
-            if attempt == 2: raise
-            time.sleep((attempt + 1) * 5)
+            error_msg = str(exc)
+            
+            if _is_rate_limit_error(error_msg):
+                if attempt == MAX_RETRIES - 1:
+                    raise
+                # Exponential backoff for rate limits
+                delay = BASE_BACKOFF_DELAY * (2 ** attempt) + random.uniform(0, 2)
+                print(f"[Gemini] Rate limited (attempt {attempt+1}/{MAX_RETRIES}), waiting {delay:.1f}s...")
+                time.sleep(delay)
+            else:
+                if attempt == MAX_RETRIES - 1:
+                    raise
+                # Linear backoff for other errors
+                delay = (attempt + 1) * 5
+                print(f"[Gemini] API error (attempt {attempt+1}/{MAX_RETRIES}): {error_msg[:50]}...")
+                time.sleep(delay)
+                
+        except Exception as exc:
+            last_exc = exc
+            if attempt == MAX_RETRIES - 1:
+                raise
+            delay = (attempt + 1) * 3
+            print(f"[Gemini] Unexpected error (attempt {attempt+1}/{MAX_RETRIES}): {str(exc)[:50]}...")
+            time.sleep(delay)
             
     raise last_exc if last_exc else RuntimeError("Gemini summarization failed")
 
 def _summarize_with_grok(prompt: str) -> str:
+    """Call Grok/Groq API with rate limiting and retry logic."""
     api_key = os.getenv("GROK_API_KEY")
     if not api_key:
         raise RuntimeError("GROK_API_KEY is not set.")
@@ -132,23 +212,51 @@ def _summarize_with_grok(prompt: str) -> str:
     client = Groq(api_key=api_key)
     model = os.getenv("GROK_MODEL", "llama-3.3-70b-versatile")
     
-    res = client.chat.completions.create(
-        messages=[{"role": "user", "content": prompt}],
-        model=model,
-    )
-    
-    # Usage Tracking
-    try:
-        if hasattr(res, 'usage'):
-            in_tok = res.usage.prompt_tokens
-            out_tok = res.usage.completion_tokens
-            log_api_usage("grok", model, in_tok, out_tok, context="summary")
-    except Exception as e:
-        print(f"[Grok] Usage tracking failed: {e}")
+    last_exc = None
+    for attempt in range(MAX_RETRIES):
+        try:
+            # Apply rate limiting
+            _rate_limit_delay()
+            
+            res = client.chat.completions.create(
+                messages=[{"role": "user", "content": prompt}],
+                model=model,
+            )
+            
+            # Usage Tracking
+            try:
+                if hasattr(res, 'usage'):
+                    in_tok = res.usage.prompt_tokens
+                    out_tok = res.usage.completion_tokens
+                    log_api_usage("grok", model, in_tok, out_tok, context="summary")
+            except Exception as e:
+                print(f"[Grok] Usage tracking failed: {e}")
 
-    return res.choices[0].message.content.strip()
+            return res.choices[0].message.content.strip()
+            
+        except Exception as exc:
+            last_exc = exc
+            error_msg = str(exc)
+            
+            if _is_rate_limit_error(error_msg):
+                if attempt == MAX_RETRIES - 1:
+                    raise
+                # Exponential backoff for rate limits
+                delay = BASE_BACKOFF_DELAY * (2 ** attempt) + random.uniform(0, 2)
+                print(f"[Grok] Rate limited (attempt {attempt+1}/{MAX_RETRIES}), waiting {delay:.1f}s...")
+                time.sleep(delay)
+            else:
+                if attempt == MAX_RETRIES - 1:
+                    raise
+                # Linear backoff for other errors
+                delay = (attempt + 1) * 3
+                print(f"[Grok] API error (attempt {attempt+1}/{MAX_RETRIES}): {error_msg[:50]}...")
+                time.sleep(delay)
+    
+    raise last_exc if last_exc else RuntimeError("Grok summarization failed")
 
 def summarize_article(text: str, title: str, display_name: str) -> str:
+    """Summarize an article using LLM with fallback and rate limiting."""
     # Check if any API key is available
     if not os.environ.get("GEMINI_API_KEY") and not os.environ.get("GROK_API_KEY"):
         return "API Key 미설정으로 AI 요약 생략"
