@@ -175,8 +175,9 @@ def process_category(config, now_utc, kst_timezone_offset=9):
                 summary = sanitize_summary(summary)
                 summary = trim_summary_lines(summary)
             except Exception as e:
-                print(f"[{config.key}] Summarization error: {e}")
+                print(f"[{config.key}] Summarization error for '{title[:50]}...': {e}")
                 summary = "요약 실패"
+
 
             summarized_items.append({
                 "title": shorten_korean_title(title),

@@ -184,10 +184,26 @@ def summarize_article(text: str, title: str, display_name: str) -> str:
 {text[:2000]}
 """
 
+    # Try Grok first, then Gemini as fallback
+    grok_error = None
+    gemini_error = None
+    
     try:
         return _summarize_with_grok(prompt)
-    except Exception:
+    except Exception as e:
+        grok_error = str(e)
+        print(f"[Grok] Failed: {grok_error[:100]}")
+    
+    try:
         return _summarize_with_gemini(prompt)
+    except Exception as e:
+        gemini_error = str(e)
+        print(f"[Gemini] Failed: {gemini_error[:100]}")
+    
+    # Both failed - return error message instead of raising
+    error_summary = f"Grok: {grok_error[:50] if grok_error else 'N/A'}, Gemini: {gemini_error[:50] if gemini_error else 'N/A'}"
+    print(f"[LLM] Both APIs failed - {error_summary}")
+    raise RuntimeError(f"All LLM providers failed: {error_summary}")
 
 def analyze_text_with_llm(prompt: str) -> str:
     """Generic wrapper to try Grok then Gemini for analysis tasks."""
