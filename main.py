@@ -9,7 +9,7 @@ from src.fetchers.gov import fetch_gov_announcements
 from src.generators.llm import summarize_article, rank_items_with_ai
 from src.generators.html import (
     render_daily_page, render_archive_index, render_gov_archive,
-    render_member_page, render_dashboard, render_member_index
+    render_member_page, render_dashboard, render_member_index, render_board_page
 )
 from src.utils.common import (
     extract_source_name,
@@ -638,6 +638,17 @@ def main():
         create_wordcloud_image(wc_counts, wc_categories, wc_output_path)
     except Exception as e:
         print(f"[WordCloud] Failed: {e}")
+
+    # 3.8 Generate Board Page
+    print("[Board] Generating board page...")
+    try:
+        os.makedirs("docs/board", exist_ok=True)
+        board_html = render_board_page()
+        with open("docs/board/index.html", "w", encoding="utf-8") as f:
+            f.write(board_html)
+        print("[Board] Generated docs/board/index.html")
+    except Exception as e:
+        print(f"[Board] Failed: {e}")
 
 
     # 4. Render Dashboard

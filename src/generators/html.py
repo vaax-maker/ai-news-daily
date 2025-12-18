@@ -96,3 +96,11 @@ def render_dashboard(ai_latest, xr_latest, gov_latest, members_latest, section_l
         root_path="."
     )
 
+
+def render_board_page():
+    template = env.get_template("board.html")
+    return template.render(
+        active_tab="board",
+        now_year=datetime.datetime.now().year,
+        root_path=".." # docs/board/index.html -> root is ..
+    )
