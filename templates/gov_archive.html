@@ -5,12 +5,21 @@
 {% block extra_css %}{% endblock %}
 
 {% block content %}
-<h1>정부과제 누적 표</h1>
-<p class="subtitle">수집된 정부과제 공고를 날짜순으로 모아둔 표입니다.</p>
+<div class="page-header header-with-search">
+    <div class="header-titles">
+        <p class="eyebrow">Government Projects</p>
+        <h1>정부과제 누적 표</h1>
+        <p class="subtitle">수집된 정부과제 공고를 날짜순으로 모아둔 표입니다.</p>
+    </div>
+    <form class="search-bar header-search" id="gov-search-form">
+        <input type="text" id="gov-search-input" placeholder="공고 제목, 부서 검색" aria-label="정부과제 검색">
+        <button type="submit" class="primary-btn">검색</button>
+    </form>
+</div>
 
 {% if announcements %}
 <div class="gov-table-section table-responsive">
-    <table class="styled-table">
+    <table class="styled-table" id="gov-table">
         <thead>
             <tr>
                 <th class="col-idx">#</th>
@@ -22,17 +31,62 @@
         </thead>
         <tbody>
             {% for item in announcements %}
-            <tr>
+            <tr class="gov-item">
                 <td class="col-idx">{{ loop.index }}</td>
                 <td class="col-title"><a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a></td>
-                <td class="col-dept">{{ item.dept or '-' }}</td>
+                <td class="col-dept searchable">{{ item.dept or '-' }}</td>
                 <td class="col-dept col-manager">{{ item.manager or '-' }}</td>
                 <td class="col-date">{{ item.date or item.published_display }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <div id="no-results" class="empty-msg hidden">검색 결과가 없습니다.</div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchForm = document.getElementById('gov-search-form');
+        const searchInput = document.getElementById('gov-search-input');
+        const tableRows = document.querySelectorAll('#gov-table tbody tr');
+        const noResultsMsg = document.getElementById('no-results');
+
+        function performSearch(query) {
+            const normalized = query.toLowerCase().trim();
+            let visibleCount = 0;
+
+            tableRows.forEach(row => {
+                const title = row.querySelector('.col-title').textContent.toLowerCase();
+                const dept = row.querySelector('.col-dept').textContent.toLowerCase();
+                const haystack = title + ' ' + dept;
+
+                if (haystack.includes(normalized)) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            if (visibleCount === 0) {
+                document.querySelector('.styled-table').classList.add('hidden');
+                noResultsMsg.classList.remove('hidden');
+            } else {
+                document.querySelector('.styled-table').classList.remove('hidden');
+                noResultsMsg.classList.add('hidden');
+            }
+        }
+
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            performSearch(searchInput.value);
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            performSearch(e.target.value);
+        });
+    });
+</script>
 {% else %}
 <div class="empty-msg">아직 수집된 정부과제가 없습니다.</div>
 {% endif %}

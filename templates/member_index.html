@@ -71,8 +71,17 @@
 {% endblock %}
 
 {% block content %}
-<h1>회원사 소식</h1>
-<p class="subtitle">{{ members|length }}개 회원사의 최신 뉴스입니다.</p>
+<div class="page-header header-with-search">
+    <div class="header-titles">
+        <p class="eyebrow">Members</p>
+        <h1>회원사 소식</h1>
+        <p class="subtitle">{{ members|length }}개 회원사의 최신 뉴스입니다.</p>
+    </div>
+    <form class="search-bar header-search" id="member-search-form">
+        <input type="text" id="member-search-input" placeholder="뉴스 제목 또는 회원사명 검색" aria-label="회원사 뉴스 검색">
+        <button type="submit" class="primary-btn">검색</button>
+    </form>
+</div>
 
 <!-- Tab Navigation -->
 <div class="member-tabs">
@@ -87,9 +96,10 @@
 <!-- Tab Content: Latest News -->
 <div id="latest-news" class="member-tab-content active">
     {% if all_news %}
-    <div class="member-news-grid">
+    <div class="member-news-grid" id="latest-news-grid">
         {% for item in all_news %}
-        <a href="{{ item.link }}" target="_blank" rel="noopener" class="member-news-tile">
+        <a href="{{ item.link }}" target="_blank" rel="noopener" class="member-news-tile search-target"
+            data-search="{{ item.title }} {{ item.member_name }}">
             {% if item.image_url %}
             <div class="tile-image">
                 <img src="{{ item.image_url }}" alt="Thumbnail" loading="lazy">
@@ -106,6 +116,7 @@
         </a>
         {% endfor %}
     </div>
+    <div id="latest-no-results" class="empty-msg hidden">검색 결과가 없습니다.</div>
     {% else %}
     <div class="empty-msg">
         아직 수집된 뉴스가 없습니다.
@@ -117,7 +128,7 @@
 <div id="member-list" class="member-tab-content">
     <div class="member-directory-section">
         <div class="table-responsive">
-            <table class="styled-table">
+            <table class="styled-table" id="member-table">
                 <thead>
                     <tr>
                         <th class="col-company">회사명</th>
@@ -128,9 +139,9 @@
                 </thead>
                 <tbody>
                     {% for member in members %}
-                    <tr>
+                    <tr class="member-row search-target" data-search="{{ member.name }}">
                         <td class="col-company">
-                            <a href="{{ member.filename }}" class="text-decoration-none text-dark fw-bold">
+                            <a href="{{ member.filename }}" class="text-decoration-none text-dark fw-bold member-name">
                                 {{ member.name }}
                             </a>
                         </td>
@@ -148,6 +159,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <div id="member-no-results" class="empty-msg hidden">검색 결과가 없습니다.</div>
         </div>
     </div>
 </div>
@@ -156,19 +168,76 @@
     document.addEventListener('DOMContentLoaded', function () {
         const tabs = document.querySelectorAll('.member-tab');
         const contents = document.querySelectorAll('.member-tab-content');
+        const searchForm = document.getElementById('member-search-form');
+        const searchInput = document.getElementById('member-search-input');
 
+        // Tab Switching
         tabs.forEach(tab => {
             tab.addEventListener('click', function () {
                 const targetId = this.getAttribute('data-tab');
 
-                // Remove active from all tabs and contents
+                // Remove active from all
                 tabs.forEach(t => t.classList.remove('active'));
                 contents.forEach(c => c.classList.remove('active'));
 
-                // Add active to clicked tab and corresponding content
+                // Add active to clicked
                 this.classList.add('active');
                 document.getElementById(targetId).classList.add('active');
+
+                // Re-run search if input exists
+                if (searchInput.value.trim()) {
+                    performSearch(searchInput.value);
+                }
             });
+        });
+
+        // Search Logic
+        function performSearch(query) {
+            const normalized = query.toLowerCase().trim();
+            const activeTabId = document.querySelector('.member-tab-content.active').id;
+
+            let targets, noResultsMsg, container;
+
+            if (activeTabId === 'latest-news') {
+                targets = document.querySelectorAll('#latest-news-grid .member-news-tile');
+                noResultsMsg = document.getElementById('latest-no-results');
+                container = document.querySelector('#latest-news-grid');
+            } else {
+                targets = document.querySelectorAll('#member-table tbody tr');
+                noResultsMsg = document.getElementById('member-no-results');
+                container = document.querySelector('#member-table');
+            }
+
+            if (!targets) return;
+
+            let visibleCount = 0;
+            targets.forEach(el => {
+                // Use data-search attribute for cleaner search
+                const searchText = el.getAttribute('data-search') || el.textContent;
+                if (searchText.toLowerCase().includes(normalized)) {
+                    el.style.display = '';
+                    visibleCount++;
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+
+            if (visibleCount === 0) {
+                if (container) container.classList.add('hidden');
+                if (noResultsMsg) noResultsMsg.classList.remove('hidden');
+            } else {
+                if (container) container.classList.remove('hidden');
+                if (noResultsMsg) noResultsMsg.classList.add('hidden');
+            }
+        }
+
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            performSearch(searchInput.value);
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            performSearch(e.target.value);
         });
     });
 </script>
