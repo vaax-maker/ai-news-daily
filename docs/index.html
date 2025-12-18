@@ -201,36 +201,31 @@
 </script>
 
 <!-- Word Cloud Section -->
-<div style="text-align: center; margin-bottom: 30px; width: 100%;">
+<div class="wordcloud-section">
     <h3>지난 7일간의 주요 키워드</h3>
 
     <!-- Legend -->
-    <div
-        style="display: flex; justify-content: flex-end; gap: 15px; margin-bottom: 10px; font-size: 0.9rem; color: #555;">
-        <div style="display: flex; align-items: center; gap: 5px;">
-            <span
-                style="width: 10px; height: 10px; border-radius: 50%; background-color: #FF9F40; display: inline-block;"></span>
+    <div class="wordcloud-legend">
+        <div class="legend-item">
+            <span class="legend-dot" style="background-color: #FF9F40;"></span>
             <span>인물</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 5px;">
-            <span
-                style="width: 10px; height: 10px; border-radius: 50%; background-color: #36A2EB; display: inline-block;"></span>
+        <div class="legend-item">
+            <span class="legend-dot" style="background-color: #36A2EB;"></span>
             <span>업체</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 5px;">
-            <span
-                style="width: 10px; height: 10px; border-radius: 50%; background-color: #4BC0C0; display: inline-block;"></span>
+        <div class="legend-item">
+            <span class="legend-dot" style="background-color: #4BC0C0;"></span>
             <span>기술</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 5px;">
-            <span
-                style="width: 10px; height: 10px; border-radius: 50%; background-color: #9966FF; display: inline-block;"></span>
+        <div class="legend-item">
+            <span class="legend-dot" style="background-color: #9966FF;"></span>
             <span>상품</span>
         </div>
     </div>
 
     <img src="./static/images/weekly_wordcloud.png" alt="Weekly Word Cloud"
-        style="width: 100%; height: auto; border: 1px solid #eee; border-radius: 8px;">
+        class="wordcloud-img">
 </div>
 
 <div class="dashboard-grid">
@@ -242,24 +237,24 @@
         </h2>
         <ul class="preview-list">
             <li>
+                <span class="preview-date">2025-12-18 08:52</span>
+                <a href="https://www.aitimes.kr/news/articleView.html?idxno=37767" target="_blank" class="preview-title">NC AI, 산업 특화 AI를 겨냥한 도메인 옵스 플랫폼...WITS …</a>
+            </li>
+            <li>
+                <span class="preview-date">2025-12-18 07:00</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=204861" target="_blank" class="preview-title">[12월17일] 글로벌 증권사들의 내년도 주가와 AI 투자 전망은...…</a>
+            </li>
+            <li>
+                <span class="preview-date">2025-12-18 06:30</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=204884" target="_blank" class="preview-title">구글, '제미나이 3 플래시' 출시...경량 모델로 세계 3위 성능 기록</a>
+            </li>
+            <li>
                 <span class="preview-date">2025-12-18 00:44</span>
                 <a href="https://techcrunch.com/2025/12/17/adobe-hit-with-proposed-class-action-accused-of-misusing-authors-work-in-ai-training/" target="_blank" class="preview-title">Adobe는 AI 교육에서 저자의 작업을 오용한 혐의로 집단 소송을 제…</a>
             </li>
             <li>
                 <span class="preview-date">2025-12-17 21:52</span>
                 <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1pp98wc/so_john_hanke_is_partnering_up_with_dan_smoot_for/" target="_blank" class="preview-title">그래서 John Hanke는 더 많은 로봇 데이터 수집을 위해 Dan …</a>
-            </li>
-            <li>
-                <span class="preview-date">2025-12-17 21:30</span>
-                <a href="http://www.techmeme.com/251217/p43#a251217p43" target="_blank" class="preview-title">영국 가족과 미국 가족이 인스타그램에서 성착취 피해자가 된 후 자살한 …</a>
-            </li>
-            <li>
-                <span class="preview-date">2025-12-17 19:23</span>
-                <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1pp5hc9/accelerated_inorganic_materials_design_with/" target="_blank" class="preview-title">생성 AI 에이전트를 통한 가속화된 무기 재료 설계</a>
-            </li>
-            <li>
-                <span class="preview-date">2025-12-17 19:11</span>
-                <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1pp56v3/the_ai_stop_button_paradox_why_its_unsolvable_for/" target="_blank" class="preview-title">AI "정지 버튼" 역설 – Tesla, OpenAI, Google에서…</a>
             </li>
         </ul>
     </div>
@@ -345,28 +340,28 @@
         <ul class="preview-list">
             
             <li>
-                <span class="preview-date">2025-12-18 01:11 | 삼성전자</span>
-                <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTFA1N2VIWjJfZ2Uxd3dDRENjcDZoTVY0elpydDlGTmlhWFN6UTVxY2pyRXFNQ1FvTDFxZ3NGSVJ4cTVFdGJDVmFLSlpkZWpOS3lfOElfdUlhZG8tWV9kbk5VN2dQazVKeVptNHRQOUN4M3dvUGN5?oc=5" target="_blank" class="preview-title">[오늘의 전자] 삼성전자·LG전자 - 파이낸셜리뷰</a>
+                <span class="preview-date">2025-12-18 01:59 | 글로벌 이코노믹</span>
+                <a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxORG9WbVJZNi1tRkpGOTdGOUhQY3Rrc05WZWNjNlM0b3A1Mk9rYkc4QW1OSmpUb1pGenA1dVhCeFRuMFBTRGlmNnNHRVZhTmhMTWpSblVSOURvRkV4RlQ3UTU0MlFPSEV3aGVTdzg0bm0tQTQtSFBLZThGanhULW5JM01yYl9XekJ4UWVr?oc=5" target="_blank" class="preview-title">용인특례시, 반도체기업 기술보호 지원사업 추진 - 글로벌이코노믹</a>
             </li>
             
             <li>
-                <span class="preview-date">2025-12-18 01:11 | KBS</span>
-                <a href="https://news.google.com/rss/articles/CBMiYkFVX3lxTFBRcTVEeU9JZWczUUZCOGdiZlRmLXhFdU5zTEtGNmphRjJYUnZjNEhhVjRYUklFaTRMd1dwNlFfR2kyek5vckJVQlh2YzU1aF81UlZIa29kbkZNN0ZOaTg0RmF3?oc=5" target="_blank" class="preview-title">조세호 빠진 ‘KBS 연예대상’ 전현무vs박보검, 대상 주인공은? - …</a>
+                <span class="preview-date">2025-12-18 01:58 | 글로벌 이코노믹</span>
+                <a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxQb3NfOHNQTGFfSVNmQUxpQkFnWENRNXY5THhoLXhxQXFqQmhJdW9sTEZKd3pjSlZGZDM2Qkg3S3hWSjhndVlsazhyWWRrZkRGZzZac0lWVlB5VUxIR0JESDhyUkNQelh5ZWU5QnZvRVBRZGE4N1BVejdzYldQTkVEa3ozYmZjdTdmYm5J?oc=5" target="_blank" class="preview-title">전남 학생들, 외교부 ‘코리아즈’ 출연해 “전남 교육 알리다” - 글로…</a>
             </li>
             
             <li>
-                <span class="preview-date">2025-12-18 01:10 | LG유플러스</span>
-                <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFA0Uk0tTDNuUk5odEhDZzhSNlN3RnRPLTFZWTkyLUdvMFRsQWMxNWRSNmQyLXdodk04SjI1SEd0SmFRclpMQTBfZUxhLV9uazNCX3M2ZjMwcWlHSElZbjRYYWI2NTFGUXFjdTNaZ1I0dC3SAXRBVV95cUxNNVZEa3ZtZlZaNWhsR3VqX2NSSThjVDVpeFRwbkRqVlBKMklpUGZsQ2hpN04yWUhtTU16RW9TZkt0RXlZdzA5NGk3X0s1WE9NU0IyZ24zamdhU1RCS1Mwam5KMUdzc01zV0FMM2hqNGtpem5zTw?oc=5" target="_blank" class="preview-title">LG유플러스, 5년 연속 ‘지역사회공헌 인정 기관’ 선정 - 포인트데일리</a>
+                <span class="preview-date">2025-12-18 01:58 | 삼성전자</span>
+                <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9PZXZJdkpEbmFibXhxdDh2RmdySTA2VExlVDRVRmlCczJnWklNQjc4ak16SkFDSXJyd1loX2l3cDI4WllTczEySWhTUEtHZUVWU3RfSnJlR243clktWTNESEN4bmt5dDA?oc=5" target="_blank" class="preview-title">"반도체 슈퍼사이클 속 성과급 최대 쟁점"…삼성전자 노사, 임금 교섭 …</a>
             </li>
             
             <li>
-                <span class="preview-date">2025-12-18 01:10 | CJ제일제당</span>
-                <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE96WmRuVU5Mc0lRU2dtMmZ1UXc4U3VUaTVnb0RmX0xuTFhkeVBCdEVfenpDbGI4RHczYXBCVXdZVDVia0dPQ21DUlNJRENSVTdLWXN1bzd3WnZiR25aR3JmcGl5dkw4NnVEY0FPSHVDRkFEWGFt?oc=5" target="_blank" class="preview-title">CJ제일제당·체인지메이커, ‘햇반 용기’ 업사이클링 봉사 전국 확산 -…</a>
+                <span class="preview-date">2025-12-18 01:55 | KBS</span>
+                <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE9TRjZIazQ2a2RNSGNHR1B6cTcwVVRhZUxQUTljMFhKSTVTSkFuRTlERDQzcDV4YXprZmdiWlZVT2hrbTBoOVlILWM0cFFmcjdxeXhKalNlNllxUdIBWEFVX3lxTFBiOUhRclB4R21ZenI4VDMtaUJjVExnUkhDcVVZdEJkVUJlZGlJVmdSUkVzR0FYaS1CZTgwemVTZE9ucmdEejJFSWhWazQ3eFNRX2xIc2REZ1Y?oc=5" target="_blank" class="preview-title">송백경 KBS 성우 그만두고 새로운 직업 찾을 것 - 아주경제</a>
             </li>
             
             <li>
-                <span class="preview-date">2025-12-18 01:10 | KBS</span>
-                <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE0wVzI1OUFabTV0eTZENmhubzlVSnBnaFdPZGRueDZLX1NVaWZGdHgzXzV2X0tLRjFITkZwdkQ4akFfX19hYW1rSkZjeEtVWVJtS2gw?oc=5" target="_blank" class="preview-title">'YG 저격' 후폭풍? 송백경, KBS 성우 탈퇴 고백 - 네이트</a>
+                <span class="preview-date">2025-12-18 01:52 | KBS</span>
+                <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE1VcEdHaUdPRFJiREtteURkTkNnTDQ0dkJFdjlWTVZXNmJQVE04dVhYeWp2WHQ1cjhrN1RwTU9jbkNRTW4zYVdqamdvZE9ZeWtLMGZz?oc=5" target="_blank" class="preview-title">'YG 저격' 송백경, 이번엔 "혐오했던 KBS" 무슨 일?[셀럽이슈]…</a>
             </li>
             
         </ul>
