@@ -79,6 +79,7 @@ def extract_weekly_keywords(docs_dir="docs", days=7):
 
 [제약사항]
 1. 불용어(조사, 일반명사 등)는 제외할 것.
+2. 너무 일반적인 용어(AI, LLM 등)는 제외하고 구체적인 키워드만 선정할 것.
 2. 국문/영문 혼용 가능.
 3. 총 30~50개의 핵심 키워드를 선정할 것.
 4. 카테고리명은 반드시 Person, Technology, Company, Product 중 하나로 출력할 것.
@@ -121,7 +122,11 @@ Technology,LLM,9
 
             # Basic cleanup
             word = word.replace('"', '').replace("'", "")
-            if len(word) > 1:
+            
+            # 제외 키워드 (너무 일반적이거나 상위 개념)
+            EXCLUDED_WORDS = {'LLM', 'AI', 'llm', 'ai', 'Ai'}
+            
+            if len(word) > 1 and word not in EXCLUDED_WORDS:
                 word_counts[word] = count
                 word_to_category[word] = category
         except:
