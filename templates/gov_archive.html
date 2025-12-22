@@ -24,6 +24,7 @@
             <tr>
                 <th class="col-idx">#</th>
                 <th class="col-title">공고 제목</th>
+                <th class="col-source">과제소스</th>
                 <th class="col-dept">담당부서</th>
                 <th class="col-dept">담당자</th>
                 <th class="col-date">등록일</th>
@@ -34,6 +35,7 @@
             <tr class="gov-item">
                 <td class="col-idx">{{ loop.index }}</td>
                 <td class="col-title"><a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a></td>
+                <td class="col-source">{{ item.source_name or '과기정통부' }}</td>
                 <td class="col-dept searchable">{{ item.dept or '-' }}</td>
                 <td class="col-dept col-manager">{{ item.manager or '-' }}</td>
                 <td class="col-date">{{ item.date or item.published_display }}</td>
@@ -58,7 +60,8 @@
             tableRows.forEach(row => {
                 const title = row.querySelector('.col-title').textContent.toLowerCase();
                 const dept = row.querySelector('.col-dept').textContent.toLowerCase();
-                const haystack = title + ' ' + dept;
+                const source = row.querySelector('.col-source').textContent.toLowerCase();
+                const haystack = title + ' ' + dept + ' ' + source;
 
                 if (haystack.includes(normalized)) {
                     row.style.display = '';
