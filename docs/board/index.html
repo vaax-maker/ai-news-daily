@@ -1,90 +1,113 @@
 <!DOCTYPE html>
-<html lang='ko'>
-
+<html lang="ko">
 <head>
-    <meta charset='utf-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <title>자유 게시판</title>
-    
-    <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자유게시판 - VAAX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/style.css">
-    
-<style>
-    .board-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem 0;
-    }
-
-    .board-header {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .board-intro {
-        color: var(--text-muted);
-        margin-bottom: 2rem;
-        background: #f8fafc;
-        padding: 1rem;
-        border-radius: 8px;
-        font-size: 0.95rem;
-    }
-</style>
-
+    <style>
+        .board-container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .board-header { text-align: center; margin-bottom: 2rem; }
+        .board-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .board-header .subtitle { color: #666; font-size: 1rem; }
+        .post-form-card { background: #f8fafc; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid #e2e8f0; }
+        .post-form-card h2 { font-size: 1.25rem; margin-bottom: 1rem; }
+        .post-form input[type="text"], .post-form textarea { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; margin-bottom: 1rem; box-sizing: border-box; }
+        .post-form textarea { min-height: 120px; resize: vertical; }
+        .file-upload-area { border: 2px dashed #d1d5db; border-radius: 8px; padding: 1.5rem; text-align: center; margin-bottom: 1rem; cursor: pointer; color: #666; }
+        .file-upload-area:hover { border-color: #3b82f6; background: rgba(59,130,246,0.05); }
+        .file-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+        .file-item { background: #e2e8f0; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.875rem; }
+        .file-item .remove-file { cursor: pointer; color: #ef4444; margin-left: 0.5rem; }
+        .btn-primary { background: #3b82f6; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; }
+        .btn-primary:disabled { opacity: 0.6; }
+        .btn-outline { background: white; color: #3b82f6; border: 1px solid #3b82f6; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; }
+        .posts-card { background: white; border-radius: 12px; padding: 1.5rem; border: 1px solid #e2e8f0; }
+        .posts-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .post-list { display: flex; flex-direction: column; gap: 1rem; }
+        .post-card { background: #fafafa; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; }
+        .post-header { display: flex; justify-content: space-between; margin-bottom: 0.75rem; }
+        .post-title { font-size: 1.1rem; font-weight: 600; margin: 0; }
+        .post-meta { font-size: 0.8rem; color: #888; }
+        .post-content { line-height: 1.6; margin-bottom: 1rem; white-space: pre-wrap; }
+        .post-attachments { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+        .attachment-link { background: #e2e8f0; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; color: #3b82f6; text-decoration: none; }
+        .comments-section { border-top: 1px solid #e2e8f0; padding-top: 1rem; margin-top: 1rem; }
+        .comments-toggle { cursor: pointer; color: #3b82f6; font-size: 0.9rem; }
+        .comment-list { display: flex; flex-direction: column; gap: 0.75rem; margin: 1rem 0; }
+        .comment-item { background: #f1f5f9; padding: 0.75rem; border-radius: 8px; }
+        .comment-meta { font-size: 0.75rem; color: #888; margin-bottom: 0.25rem; }
+        .comment-form { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .comment-form input { padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 6px; }
+        .comment-form .nickname-input { width: 100px; }
+        .comment-form .content-input { flex: 1; min-width: 150px; }
+        .btn-sm { padding: 0.5rem 1rem; font-size: 0.85rem; }
+        .pagination { display: flex; justify-content: center; gap: 0.5rem; margin-top: 2rem; }
+        .pagination button { padding: 0.5rem 1rem; border: 1px solid #d1d5db; background: white; border-radius: 6px; cursor: pointer; }
+        .pagination button.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+        .loading-spinner { text-align: center; padding: 2rem; color: #888; }
+    </style>
 </head>
-
 <body>
     <header>
         <div class="gnb">
-            <a href="../index.html" class="logo-link">
-                <img src="../static/images/logo_new.png"
-                    alt="VAAX - VR-AR-AI-XR기술과 Biz.를 연결하는 성장나눔 커뮤니티 since 2016" class="header-logo">
-            </a>
+            <a href="../index.html" class="logo-link"><img src="../static/images/logo_new.png" alt="VAAX" class="header-logo"></a>
             <nav class="nav-links">
-                <a href="../index.html"
-                    class="">Home</a>
-                <a href="../ai/index.html"
-                    class="">AI읽을거리</a>
-                <a href="../xr/index.html"
-                    class="">XR읽을거리</a>
-                <a href="../gov/index.html"
-                    class="">정부과제</a>
-                <a href="../members/index.html"
-                    class="">회원사소식</a>
-                <a href="../board/index.html"
-                    class="active">게시판</a>
+                <a href="../index.html">Home</a>
+                <a href="../ai/index.html">AI읽을거리</a>
+                <a href="../xr/index.html">XR읽을거리</a>
+                <a href="../gov/index.html">정부과제</a>
+                <a href="../members/index.html">회원사소식</a>
+                <a href="../board/index.html" class="active">게시판</a>
             </nav>
         </div>
     </header>
-
     <div class="container">
-        
-<div class="board-container">
-    <div class="board-header">
-        <h1>자유 게시판</h1>
-        <p class="subtitle">누구나 자유롭게 의견을 나누고 자료를 공유하는 공간입니다.</p>
-        <p class="small text-muted" style="font-size: 0.85rem; margin-top: -1.5rem;">
-            * 게시글/댓글 작성 및 파일 업로드를 위해서는 <strong>GitHub 계정 로그인</strong>이 필요합니다.<br>
-            * 📱 <strong>모바일 이미지 업로드:</strong> 갤러리에서 사진을 <strong>'복사'</strong>한 후 입력창에 <strong>'붙여넣기'</strong> 해주세요.
-        </p>
+        <div class="board-container">
+            <div class="board-header">
+                <h1>📋 자유게시판</h1>
+                <p class="subtitle">로그인 없이 자유롭게 의견을 나누고 자료를 공유하세요!</p>
+            </div>
+            <div class="post-form-card">
+                <h2>✏️ 새 글 작성</h2>
+                <form id="post-form" class="post-form">
+                    <input type="text" id="post-nickname" placeholder="닉네임 (선택)" maxlength="20">
+                    <input type="text" id="post-title" placeholder="제목을 입력하세요" maxlength="100" required>
+                    <textarea id="post-content" placeholder="내용을 입력하세요"></textarea>
+                    <div class="file-upload-area" id="file-drop-zone">📎 파일 업로드 (최대 10MB, 5개)<input type="file" id="file-input" multiple hidden></div>
+                    <div class="file-list" id="file-list"></div>
+                    <button type="submit" class="btn-primary" id="submit-btn">📝 게시하기</button>
+                </form>
+            </div>
+            <div class="posts-card">
+                <div class="posts-header"><h2>📋 게시글 목록</h2><button class="btn-outline" onclick="loadPosts()">🔄 새로고침</button></div>
+                <div id="post-list" class="post-list"><div class="loading-spinner">로딩 중...</div></div>
+                <div id="pagination" class="pagination"></div>
+            </div>
+        </div>
     </div>
-
-    <!-- Giscus Comments System -->
-    <div class="giscus"></div>
-    <script src="https://giscus.app/client.js" data-repo="vaax-maker/ai-news-daily" data-repo-id="R_kgDOQgKDLA"
-        data-category="General" data-category-id="DIC_kwDOQgKDLM4Cz8nE" data-mapping="pathname" data-strict="0"
-        data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom"
-        data-theme="preferred_color_scheme" data-lang="ko" crossorigin="anonymous" async>
-        </script>
-</div>
-
-    </div>
-
-    <footer>
-        <p>&copy; 2025 AI News Daily Project. All rights reserved.</p>
-    </footer>
+    <footer><p>© 2025 VAAX. All rights reserved.</p></footer>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    <script>
+        firebase.initializeApp({apiKey:"AIzaSyBsIkLRRblRMQ5Y0_0w2Q8GIKJq2z_Z3QY",authDomain:"keyword-trend-monitor.firebaseapp.com",projectId:"keyword-trend-monitor",storageBucket:"keyword-trend-monitor.firebasestorage.app",messagingSenderId:"654886101493",appId:"1:654886101493:web:c7b0e6c8d9a8b3f2e4d5c6"});
+        const db=firebase.firestore(),storage=firebase.storage();let selectedFiles=[],currentPage=1;const postsPerPage=10;
+        document.addEventListener('DOMContentLoaded',()=>{initFileUpload();document.getElementById('post-form').addEventListener('submit',handlePostSubmit);loadPosts();});
+        function initFileUpload(){const dz=document.getElementById('file-drop-zone'),fi=document.getElementById('file-input');dz.onclick=()=>fi.click();dz.ondragover=e=>{e.preventDefault();dz.style.borderColor='#3b82f6';};dz.ondragleave=()=>{dz.style.borderColor='#d1d5db';};dz.ondrop=e=>{e.preventDefault();dz.style.borderColor='#d1d5db';handleFiles(e.dataTransfer.files);};fi.onchange=e=>handleFiles(e.target.files);}
+        function handleFiles(files){Array.from(files).forEach(f=>{if(f.size>10*1024*1024){alert(f.name+' 10MB 초과');return;}if(selectedFiles.length>=5){alert('최대 5개');return;}selectedFiles.push(f);});renderFileList();}
+        function renderFileList(){document.getElementById('file-list').innerHTML=selectedFiles.map((f,i)=>'<div class="file-item">📄 '+f.name+'<span class="remove-file" onclick="removeFile('+i+')">✕</span></div>').join('');}
+        function removeFile(i){selectedFiles.splice(i,1);renderFileList();}
+        async function handlePostSubmit(e){e.preventDefault();const nn=document.getElementById('post-nickname').value.trim()||'익명',tt=document.getElementById('post-title').value.trim(),cc=document.getElementById('post-content').value.trim();if(!tt){alert('제목 입력');return;}const btn=document.getElementById('submit-btn');btn.disabled=true;btn.textContent='⏳ 업로드 중...';try{const atts=[];for(const f of selectedFiles){const r=storage.ref().child('board/'+Date.now()+'_'+f.name);await r.put(f);atts.push({name:f.name,url:await r.getDownloadURL()});}await db.collection('board').add({nickname:nn,title:tt,content:cc,attachments:atts,createdAt:firebase.firestore.FieldValue.serverTimestamp(),commentCount:0});document.getElementById('post-form').reset();selectedFiles=[];renderFileList();alert('작성 완료!');loadPosts();}catch(err){alert('오류: '+err.message);}finally{btn.disabled=false;btn.textContent='📝 게시하기';}}
+        async function loadPosts(){const el=document.getElementById('post-list');el.innerHTML='<div class="loading-spinner">로딩 중...</div>';try{const snap=await db.collection('board').orderBy('createdAt','desc').get();const posts=snap.docs.map(d=>({id:d.id,...d.data()}));if(!posts.length){el.innerHTML='<div style="text-align:center;color:#888;padding:2rem;">첫 글을 작성해보세요!</div>';return;}const start=(currentPage-1)*postsPerPage;el.innerHTML=posts.slice(start,start+postsPerPage).map(p=>renderPostCard(p)).join('');renderPagination(posts.length);}catch(err){el.innerHTML='<div style="text-align:center;color:#888;">로드 실패</div>';}}
+        function renderPostCard(p){const t=p.createdAt?p.createdAt.toDate().toLocaleString('ko-KR'):'방금 전';const atts=(p.attachments||[]).map(a=>'<a href="'+a.url+'" target="_blank" class="attachment-link">📎 '+a.name+'</a>').join('');return '<div class="post-card"><div class="post-header"><h3 class="post-title">'+esc(p.title)+'</h3><div class="post-meta">'+esc(p.nickname)+' · '+t+'</div></div><div class="post-content">'+esc(p.content)+'</div>'+(atts?'<div class="post-attachments">'+atts+'</div>':'')+'<div class="comments-section"><div class="comments-toggle" onclick="toggleComments(\''+p.id+'\')">�� 댓글 ('+(p.commentCount||0)+')</div><div id="comments-'+p.id+'" style="display:none;"><div class="comment-list" id="comment-list-'+p.id+'"></div><div class="comment-form"><input type="text" class="nickname-input" id="cn-'+p.id+'" placeholder="닉네임"><input type="text" class="content-input" id="ci-'+p.id+'" placeholder="댓글 입력"><button class="btn-primary btn-sm" onclick="addComment(\''+p.id+'\')">등록</button></div></div></div></div>';}
+        function renderPagination(total){const pages=Math.ceil(total/postsPerPage),el=document.getElementById('pagination');if(pages<=1){el.innerHTML='';return;}el.innerHTML=Array.from({length:pages},(_,i)=>'<button class="'+(i+1===currentPage?'active':'')+'" onclick="goToPage('+(i+1)+')">'+(i+1)+'</button>').join('');}
+        function goToPage(p){currentPage=p;loadPosts();window.scrollTo({top:0,behavior:'smooth'});}
+        async function toggleComments(id){const el=document.getElementById('comments-'+id);const h=el.style.display==='none';el.style.display=h?'block':'none';if(h)await loadComments(id);}
+        async function loadComments(id){const el=document.getElementById('comment-list-'+id);el.innerHTML='<div style="color:#888;font-size:0.85rem;">로딩...</div>';try{const snap=await db.collection('board').doc(id).collection('comments').orderBy('createdAt','asc').get();const cs=snap.docs.map(d=>({id:d.id,...d.data()}));if(!cs.length){el.innerHTML='<div style="color:#888;font-size:0.85rem;">댓글 없음</div>';return;}el.innerHTML=cs.map(c=>'<div class="comment-item"><div class="comment-meta">'+esc(c.nickname)+' · '+(c.createdAt?c.createdAt.toDate().toLocaleString('ko-KR'):'방금 전')+'</div><div class="comment-content">'+esc(c.content)+'</div></div>').join('');}catch(err){el.innerHTML='<div style="color:#888;font-size:0.85rem;">로드 실패</div>';}}
+        async function addComment(id){const nn=document.getElementById('cn-'+id).value.trim()||'익명',cc=document.getElementById('ci-'+id).value.trim();if(!cc){alert('댓글 입력');return;}try{await db.collection('board').doc(id).collection('comments').add({nickname:nn,content:cc,createdAt:firebase.firestore.FieldValue.serverTimestamp()});await db.collection('board').doc(id).update({commentCount:firebase.firestore.FieldValue.increment(1)});document.getElementById('ci-'+id).value='';await loadComments(id);loadPosts();}catch(err){alert('오류');}}
+        function esc(t){if(!t)return '';const d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+    </script>
 </body>
-
 </html>
