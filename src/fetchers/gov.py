@@ -54,29 +54,79 @@ def fetch_msit_announcements(service_key: str, limit: int = 30) -> List[Dict[str
     return items_list
 
 
-def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[str, str]]:
+def is_relevant_ai_xr_project(title: str) -> bool:
     """
-    나라장터 입찰공고 API (2025년 최신 엔드포인트)
+    AI/XR 기술 프로젝트 여부 판단
     
-    Base URL: http://apis.data.go.kr/1230000/ad/BidPublicInfoService
+    제외 대상:
+    - 단순 물품 구매 (서버, 장비, 설비)
+    - 시설 관리/유지보수
+    - 일반 행사/홍보
     """
+    title_lower = title.lower()
+    
+    # 제외 키워드 (우선순위 높음)
+    EXCLUDE_KEYWORDS = [
+        '유지관리', '유지보수', '청소', '경비', '시설관리',
+        '설비', '장비 구매', '물품 구매', '납품',
+        '인쇄', '간행물', '홍보물', '현수막',
+        '무인회수기', '자판기', 'CCTV 설치',
+        '보안카메라', '네트워크 장비',
+        '일반 서버', '스토리지 구매'
+    ]
+    
+    for keyword in EXCLUDE_KEYWORDS:
+        if keyword in title:
+            return False
+    
+    # 포함해야 할 핵심 키워드
+    INCLUDE_KEYWORDS = [
+        # AI 관련
+        '인공지능 개발', '머신러닝', '딥러닝', 'AI 모델', 'AI 기술',
+        '자연어처리', '컴퓨터비전', 'AI 플랫폼', 'AI 서비스 개발',
+        '데이터 분석', '빅데이터 분석',
+        
+        # XR 관련  
+        '메타버스 개발', 'VR 콘텐츠', 'AR 콘텐츠', 'XR 콘텐츠',
+        '가상현실 개발', '증강현실 개발', '디지털트윈 구축',
+        '3D 모델링', '실감콘텐츠',
+        
+        # R&D 및 기술개발
+        '기술개발', '연구개발', 'R&D', '실증사업',
+        '플랫폼 개발', '시스템 개발', '솔루션 개발',
+        '스마트시티', 'IoT', '클라우드 서비스',
+        '블록체인', '양자', 'GPU 활용'
+    ]
+    
+    for keyword in INCLUDE_KEYWORDS:
+        if keyword.lower() in title_lower:
+            return True
+    
+    # 포함 키워드가 없으면 제외
+    return False
+
+
+def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[str, str]]:
+    """나라장터 입찰공고 API (AI/XR 기술과제만 필터링)"""
     
     base_url = "http://apis.data.go.kr/1230000/ad/BidPublicInfoService"
     
-    # 사용할 operation: PPS 검색 (나라장터 검색조건 활용)
+    # 용역만 검색 (물품/공사는 단순 구매가 많음)
     operations = {
         "용역": "getBidPblancListInfoServcPPSSrch",
-        "물품": "getBidPblancListInfoThngPPSSrch",
-        "공사": "getBidPblancListInfoCnstwkPPSSrch",
     }
     
-    # AI/XR 관련 키워드
-    keywords = ["인공지능", "AI", "메타버스", "XR", "가상현실", "증강현실", "디지털트윈"]
+    # AI/XR 핵심 키워드만 사용
+    keywords = [
+        "인공지능 개발", "머신러닝", "딥러닝",
+        "메타버스", "가상현실", "증강현실", "디지털트윈",
+        "XR 콘텐츠", "실감콘텐츠"
+    ]
     
-    # 검색 기간: 최근 7일
+    # 검색 기간: 최근 14일
     now = datetime.datetime.now()
     end_dt = now.strftime("%Y%m%d%H%M")
-    start_dt = (now - datetime.timedelta(days=7)).strftime("%Y%m%d") + "0000"
+    start_dt = (now - datetime.timedelta(days=14)).strftime("%Y%m%d") + "0000"
     
     items_list = []
     seen_links = set()
@@ -89,10 +139,10 @@ def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[s
                 "serviceKey": service_key,
                 "numOfRows": 10,
                 "pageNo": 1,
-                "inqryDiv": "1",      # 공고일 기준
+                "inqryDiv": "1",
                 "inqryBgnDt": start_dt,
                 "inqryEndDt": end_dt,
-                "bidNtceNm": keyword,  # 입찰공고명 검색
+                "bidNtceNm": keyword,
                 "type": "json"
             }
             
@@ -102,14 +152,11 @@ def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[s
                 if response.status_code != 200:
                     continue
                 
-                # JSON 파싱
                 try:
                     data = response.json()
                 except:
-                    # JSON이 아니면 skip
                     continue
                 
-                # 응답 구조 확인
                 resp = data.get("response", {})
                 header = resp.get("header", {})
                 result_code = header.get("resultCode", "")
@@ -123,26 +170,32 @@ def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[s
                 if not items:
                     continue
                 
-                # items가 딕셔너리면 리스트로 변환
                 if isinstance(items, dict):
                     items = [items]
                 
                 for item in items:
                     link = item.get("bidNtceDtlUrl", "")
-                    if not link or link in seen_links:
+                    title = item.get("bidNtceNm", "")
+                    
+                    if not link or not title or link in seen_links:
                         continue
+                    
+                    # AI/XR 관련성 필터링
+                    if not is_relevant_ai_xr_project(title):
+                        logger.debug(f"[KONEPS] 필터링 제외: {title[:50]}...")
+                        continue
+                    
                     seen_links.add(link)
                     
-                    # 날짜 파싱: API는 "2025-12-16 09:34:08" 형식으로 반환
+                    # 날짜 파싱
                     raw_date = item.get("bidNtceDt", "")
                     if raw_date and " " in raw_date:
-                        # "2025-12-16 09:34:08" -> "2025-12-16"
                         fmt_date = raw_date.split()[0]
                     else:
                         fmt_date = raw_date
                     
                     items_list.append({
-                        "title": item.get("bidNtceNm", ""),
+                        "title": title,
                         "link": link,
                         "dept": item.get("dminsttNm", "") or item.get("ntceInsttNm", "") or "조달청",
                         "manager": item.get("ntceInsttOfclNm", ""),
@@ -156,10 +209,9 @@ def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[s
                 logger.debug(f"[KONEPS] {keyword} 검색 오류: {e}")
                 continue
     
-    # 날짜순 정렬 (최신순)
     items_list.sort(key=lambda x: x.get("date", ""), reverse=True)
     
-    logger.info(f"[KONEPS] 수집 완료: {len(items_list)}건")
+    logger.info(f"[KONEPS] 수집 완료: {len(items_list)}건 (필터링 후)")
     return items_list[:limit]
 
 
@@ -173,7 +225,7 @@ def fetch_gov_announcements(limit: int = 50) -> List[Dict[str, str]]:
     # 2. 나라장터
     koneps_items = fetch_koneps_announcements(service_key, limit=30)
     
-    # 통합 및 정렬 (최신순)
+    # 통합 및 정렬
     all_items = msit_items + koneps_items
     all_items.sort(key=lambda x: x.get("date", ""), reverse=True)
     
@@ -190,5 +242,5 @@ if __name__ == "__main__":
     
     print(f"\n총 {len(results)}건 수집\n")
     for i, item in enumerate(results[:10], 1):
-        print(f"{i}. [{item['source_name']}] {item['title'][:50]}")
+        print(f"{i}. [{item['source_name']}] {item['title'][:60]}")
         print(f"   {item['date']} | {item['dept']}\n")
