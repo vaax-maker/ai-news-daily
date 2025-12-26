@@ -83,7 +83,7 @@ def render_member_index(members_list, all_news=None):
     )
     return html
 
-def render_dashboard(ai_latest, xr_latest, gov_latest, members_latest, section_links=None):
+def render_dashboard(ai_latest, xr_latest, gov_latest, members_latest, section_links=None, last_updated=None):
     template = env.get_template("dashboard.html")
     return template.render(
         ai_latest=ai_latest,
@@ -91,6 +91,7 @@ def render_dashboard(ai_latest, xr_latest, gov_latest, members_latest, section_l
         gov_latest=gov_latest,
         members_latest=members_latest,
         section_links=section_links or {},
+        last_updated=last_updated or datetime.datetime.now().strftime("%Y년 %m월 %d일 %H시 %M분"),
         now_year=datetime.datetime.now().year,
         active_tab="home",
         root_path="."
