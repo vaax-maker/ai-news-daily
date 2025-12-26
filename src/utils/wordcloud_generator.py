@@ -79,7 +79,7 @@ def extract_weekly_keywords(docs_dir="docs", days=7):
 
 [제약사항]
 1. 불용어(조사, 일반명사 등)는 제외할 것.
-2. **절대 포함하지 말 것**: AI, LLM, llm, ai, 인공지능 (이들은 너무 일반적임)
+2. **절대 포함하지 말 것**: AI, LLM, llm, ai, 인공지능, 인공 지능 (이들은 너무 일반적임)
 3. "ChatGPT", "Gemini", "Claude" 같은 구체적인 AI 제품명은 포함 가능
 4. 국문/영문 혼용 가능.
 5. 총 30~50개의 핵심 키워드를 선정할 것.
@@ -126,8 +126,8 @@ Product,ChatGPT,10
             word = word.replace('"', '').replace("'", "")
             
             # 제외 키워드 (너무 일반적이거나 상위 개념)
-            # LLM, AI와 이들의 모든 변형 (LLMs, LLM., AI., AI's 등)을 제거
-            EXCLUDED_BASES = ['LLM', 'AI']
+            # LLM, AI, 인공지능과 이들의 모든 변형 (LLMs, LLM., AI., AI's 등)을 제거
+            EXCLUDED_BASES = ['LLM', 'AI', '인공지능']
             
             # 단어 정규화 (구두점 제거 후 비교)
             word_normalized = re.sub(r'[^\w가-힣]', '', word).strip()
