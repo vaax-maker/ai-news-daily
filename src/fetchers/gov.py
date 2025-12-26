@@ -121,6 +121,7 @@ def is_relevant_ai_xr_project(title: str) -> bool:
 def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[str, str]]:
     """나라장터 입찰공고 API (AI/XR 기술과제만 필터링)"""
     
+    # 기존 작동하는 API 엔드포인트 유지
     base_url = "http://apis.data.go.kr/1230000/ad/BidPublicInfoService"
     
     # 용역만 검색 (물품/공사는 단순 구매가 많음)
@@ -137,10 +138,10 @@ def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[s
         "IDC", "데이터센터", "클라우드"
     ]
     
-    # 검색 기간: 최근 14일
+    # 검색 기간: 최근 30일로 확대 (안정적인 데이터 수집)
     now = datetime.datetime.now()
     end_dt = now.strftime("%Y%m%d%H%M")
-    start_dt = (now - datetime.timedelta(days=14)).strftime("%Y%m%d") + "0000"
+    start_dt = (now - datetime.timedelta(days=30)).strftime("%Y%m%d") + "0000"
     
     items_list = []
     seen_links = set()

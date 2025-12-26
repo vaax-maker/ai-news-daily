@@ -79,17 +79,19 @@ def extract_weekly_keywords(docs_dir="docs", days=7):
 
 [제약사항]
 1. 불용어(조사, 일반명사 등)는 제외할 것.
-2. 너무 일반적인 용어(AI, LLM 등)는 제외하고 구체적인 키워드만 선정할 것.
-2. 국문/영문 혼용 가능.
-3. 총 30~50개의 핵심 키워드를 선정할 것.
-4. 카테고리명은 반드시 Person, Technology, Company, Product 중 하나로 출력할 것.
-5. 중요도에 따라 빈도수(가중치)를 1~10 사이로 추정하여 CSV 형식으로 출력하시오.
+2. **절대 포함하지 말 것**: AI, LLM, llm, ai, 인공지능 (이들은 너무 일반적임)
+3. "ChatGPT", "Gemini", "Claude" 같은 구체적인 AI 제품명은 포함 가능
+4. 국문/영문 혼용 가능.
+5. 총 30~50개의 핵심 키워드를 선정할 것.
+6. 카테고리명은 반드시 Person, Technology, Company, Product 중 하나로 출력할 것.
+7. 중요도에 따라 빈도수(가중치)를 1~10 사이로 추정하여 CSV 형식으로 출력하시오.
 
 [출력형식]
 카테고리,키워드,가중치
 Company,OpenAI,10
 Person,김범수,8
-Technology,LLM,9
+Technology,트랜스포머,9
+Product,ChatGPT,10
 ...
 
 [분석대상 텍스트]
@@ -124,9 +126,21 @@ Technology,LLM,9
             word = word.replace('"', '').replace("'", "")
             
             # 제외 키워드 (너무 일반적이거나 상위 개념)
-            EXCLUDED_WORDS = {'LLM', 'AI', 'llm', 'ai', 'Ai'}
+            # LLM, AI와 이들의 모든 변형 (LLMs, LLM., AI., AI's 등)을 제거
+            EXCLUDED_BASES = ['LLM', 'AI']
             
-            if len(word) > 1 and word not in EXCLUDED_WORDS:
+            # 단어 정규화 (구두점 제거 후 비교)
+            word_normalized = re.sub(r'[^\w가-힣]', '', word).strip()
+            
+            # 제외 대상인지 확인
+            should_exclude = False
+            for excluded in EXCLUDED_BASES:
+                # 대소문자 구분 없이 정확히 일치하거나, excluded로 시작하는 경우
+                if word_normalized.upper() == excluded.upper() or word_normalized.upper().startswith(excluded.upper() + 'S'):
+                    should_exclude = True
+                    break
+            
+            if len(word) > 1 and not should_exclude:
                 word_counts[word] = count
                 word_to_category[word] = category
         except:
