@@ -1,8 +1,8 @@
 :root {
-    --primary-color: #84cc16;
-    /* 밝은 초록 (Lime 500) */
-    --primary-color-hover: #65a30d;
-    /* 진한 초록 (Lime 600) */
+    --primary-color: #65a30d;
+    /* 더 진한 연두 (Lime 600) */
+    --primary-color-hover: #4d7c0f;
+    /* 아주 진한 연두 (Lime 700) */
     --secondary-color: #475569;
     --background-color: #ffffff;
     --card-bg: #ffffff;
