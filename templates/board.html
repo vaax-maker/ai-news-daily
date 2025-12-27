@@ -120,12 +120,13 @@
     // TODO: 여기에 Firebase 설정을 붙여넣으세요
     // https://console.firebase.google.com/ 에서 프로젝트 생성 후 설정을 가져오세요
     const firebaseConfig = {
-        apiKey: "YOUR_API_KEY",
-        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_PROJECT_ID.appspot.com",
-        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-        appId: "YOUR_APP_ID"
+        apiKey: "AIzaSyANn76u2ZCJ5rq4IOpYaTzFy1JtKoPOM-c",
+        authDomain: "vaax-board.firebaseapp.com",
+        projectId: "vaax-board",
+        storageBucket: "vaax-board.firebasestorage.app",
+        messagingSenderId: "31682907508",
+        appId: "1:31682907508:web:cd3ee4231ec8b3fb75b021",
+        measurementId: "G-XF41VB6W7V"
     };
 
     // Initialize Firebase
@@ -143,7 +144,7 @@
     const writeForm = document.getElementById('writeForm');
     const viewSection = document.getElementById('viewSection');
     const boardListSection = document.querySelector('.board-list-section');
-    
+
     // Elements
     const inputWriter = document.getElementById('inputWriter');
     const inputPassword = document.getElementById('inputPassword');
@@ -159,27 +160,27 @@
     async function loadPosts() {
         if (!db) return;
         boardBody.innerHTML = '<tr><td colspan="5" class="loading-cell">로딩중...</td></tr>';
-        
+
         try {
             // 날짜 내림차순 정렬
             const q = query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(50));
             const querySnapshot = await getDocs(q);
 
             boardBody.innerHTML = '';
-            
+
             if (querySnapshot.empty) {
                 boardBody.innerHTML = '<tr><td colspan="5" class="loading-cell">등록된 게시글이 없습니다.</td></tr>';
                 return;
             }
 
             let index = 1; // 실제로는 전체 개수 - 현재 인덱스로 계산 필요
-            
+
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
                 const row = document.createElement('tr');
                 const dateObj = data.createdAt ? data.createdAt.toDate() : new Date();
                 const dateStr = dateObj.toISOString().split('T')[0];
-                
+
                 row.innerHTML = `
                     <td class="col-num">${index++}</td>
                     <td class="col-subject"><a href="#" data-id="${doc.id}">${escapeHtml(data.title)}</a></td>
@@ -209,7 +210,7 @@
         if (!db) return;
         currentDocId = id;
         showSection('view');
-        
+
         const viewTitle = document.getElementById('viewTitle');
         const viewWriter = document.getElementById('viewWriter');
         const viewDate = document.getElementById('viewDate');
@@ -289,15 +290,15 @@
 
     // 글 삭제
     async function deletePost() {
-        if(!confirm("정말 삭제하시겠습니까?")) return;
-        
+        if (!confirm("정말 삭제하시겠습니까?")) return;
+
         const inputPw = prompt("비밀번호를 입력하세요");
-        if(!inputPw) return;
+        if (!inputPw) return;
 
         try {
             const docRef = doc(db, "posts", currentDocId);
             const docSnap = await getDoc(docRef);
-            if(docSnap.exists() && docSnap.data().password === inputPw) {
+            if (docSnap.exists() && docSnap.data().password === inputPw) {
                 await deleteDoc(docRef);
                 alert("삭제되었습니다.");
                 showSection('list');
@@ -305,7 +306,7 @@
             } else {
                 alert("비밀번호가 일치하지 않습니다.");
             }
-        } catch(e) {
+        } catch (e) {
             console.error("Delete error:", e);
             alert("삭제 실패");
         }
@@ -363,21 +364,21 @@
     });
 
     document.getElementById('btnSave').addEventListener('click', savePost);
-    
+
     // 수정 버튼 클릭 (간단 비번 체크)
     document.getElementById('btnEdit').addEventListener('click', async () => {
         const inputPw = prompt("비밀번호를 입력하세요");
-        if(!inputPw) return;
-        
+        if (!inputPw) return;
+
         const docRef = doc(db, "posts", currentDocId);
         const docSnap = await getDoc(docRef);
-        if(docSnap.exists() && docSnap.data().password === inputPw) {
-             document.getElementById('formTitle').textContent = "게시글 수정";
-             inputWriter.value = docSnap.data().writer;
-             inputPassword.value = docSnap.data().password; // 기존 비번 노출 (데모용)
-             inputTitle.value = docSnap.data().title;
-             inputContent.value = docSnap.data().content;
-             showSection('write');
+        if (docSnap.exists() && docSnap.data().password === inputPw) {
+            document.getElementById('formTitle').textContent = "게시글 수정";
+            inputWriter.value = docSnap.data().writer;
+            inputPassword.value = docSnap.data().password; // 기존 비번 노출 (데모용)
+            inputTitle.value = docSnap.data().title;
+            inputContent.value = docSnap.data().content;
+            showSection('write');
         } else {
             alert("비밀번호가 일치하지 않습니다.");
         }
