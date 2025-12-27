@@ -41,7 +41,7 @@ def fetch_msit_announcements(service_key: str, limit: int = 30) -> List[Dict[str
                 "dept": item.findtext("deptName", "") or "과기정통부",
                 "manager": item.findtext("managerName", ""),
                 "date": item.findtext("pressDt", ""),
-                "source_name": "과기정통부",
+                "source_name": "과기정통부",  # 통일
                 "image_url": "",
                 "published_display": item.findtext("pressDt", ""),
                 "bid_begin_dt": "",    # 과기정통부는 미제공

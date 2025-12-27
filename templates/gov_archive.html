@@ -278,104 +278,89 @@
 </div>
 
 {% if announcements %}
-<!-- 통계 카드 (클릭 가능) -->
+<!-- 통계 테이블 (클릭 가능) -->
 {% set msit_count = announcements|selectattr('source_name', 'equalto', '과기정통부')|list|length %}
 {% set ministry_count = announcements|selectattr('source_name', 'equalto', '과학기술정보통신부')|list|length %}
 {% set combined_msit = msit_count + ministry_count %}
 {% set koneps_count = announcements|length - combined_msit %}
 
-<div class="gov-stats-cards">
-    <div class="stat-card-item active" data-filter="all">
-        <div class="stat-card-icon">📊</div>
-        <div class="stat-card-label">총 과제</div>
-        <div class="stat-card-value">{{ announcements|length }}</div>
-    </div>
-    <div class="stat-card-item" data-filter="과기정통부">
-        <div class="stat-card-icon">🏛️</div>
-        <div class="stat-card-label">과기정통부</div>
-        <div class="stat-card-value">{{ combined_msit }}</div>
-    </div>
-    <div class="stat-card-item" data-filter="나라장터">
-        <div class="stat-card-icon">🛒</div>
-        <div class="stat-card-label">나라장터</div>
-        <div class="stat-card-value">{{ koneps_count }}</div>
-    </div>
+<div class="gov-stats-clickable">
+    <table>
+        <thead>
+            <tr>
+                <th class="stat-filter active" data-filter="all">총 과제</th>
+                <th class="stat-filter" data-filter="과기정통부">과기정통부</th>
+                <th class="stat-filter" data-filter="나라장터">나라장터</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="count-cell">{{ announcements|length }}</td>
+                <td class="count-cell">{{ combined_msit }}</td>
+                <td class="count-cell">{{ koneps_count }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <style>
-    .gov-stats-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1rem;
+    .gov-stats-clickable {
         margin-bottom: 2rem;
-    }
-
-    .stat-card-item {
         background: white;
-        border: 2px solid #e2e8f0;
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
-    .gov-stats-table table {
+    .gov-stats-clickable table {
         width: 100%;
         border-collapse: collapse;
     }
 
-    .gov-stats-table thead {
+    .gov-stats-clickable th {
+        padding: 1.25rem 1rem;
+        text-align: center;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        background: #f8fafc;
+        color: #475569;
+        border-bottom: 2px solid #e2e8f0;
+        transition: all 0.3s ease;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .gov-stats-clickable th:hover {
+        background: #f1f5f9;
+        color: #1e293b;
+    }
+
+    .gov-stats-clickable th.active {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
+        border-bottom-color: #667eea;
     }
 
-    .gov-stats-table th {
-        padding: 1rem;
-        text-align: left;
-        font-weight: 600;
-        font-size: 0.95rem;
-    }
-
-    .gov-stats-table tbody tr {
-        border-bottom: 1px solid #e2e8f0;
-    }
-
-    .gov-stats-table tbody tr:last-child {
-        border-bottom: none;
-    }
-
-    .gov-stats-table tbody tr:hover {
-        background: #f8fafc;
-    }
-
-    .gov-stats-table td {
-        padding: 0.875rem 1rem;
-        font-size: 0.95rem;
-    }
-
-    .gov-stats-table .count-cell {
-        text-align: right;
+    .gov-stats-clickable td {
+        padding: 1.5rem;
+        text-align: center;
+        font-size: 2rem;
         font-weight: 700;
-        font-size: 1.1rem;
         color: #667eea;
     }
 
-    .source-icon {
-        display: inline-block;
-        font-size: 1.2rem;
-        margin-right: 0.5rem;
-        vertical-align: middle;
-    }
-
     @media (max-width: 768px) {
-
-        .gov-stats-table th,
-        .gov-stats-table td {
-            padding: 0.75rem;
-            font-size: 0.9rem;
+        .gov-stats-clickable th {
+            padding: 0.75rem 0.5rem;
+            font-size: 0.85rem;
         }
 
-        .gov-stats-table .count-cell {
-            font-size: 1rem;
+        .gov-stats-clickable td {
+            padding: 1rem;
+            font-size: 1.5rem;
         }
     }
 </style>
@@ -468,7 +453,7 @@
         const searchInput = document.getElementById('gov-search-input');
         const tableRows = document.querySelectorAll('#gov-table tbody tr');
         const cards = document.querySelectorAll('.gov-card');
-        const statCards = document.querySelectorAll('.stat-card-item');
+        const statFilters = document.querySelectorAll('.stat-filter');
         const noResultsMsg = document.getElementById('no-results');
 
         let currentFilter = 'all';
@@ -550,12 +535,12 @@
             }
         }
 
-        // 통계 카드 클릭 이벤트
-        statCards.forEach(card => {
-            card.addEventListener('click', () => {
-                statCards.forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
-                currentFilter = card.dataset.filter;
+        // 통계 테이블 헤더 클릭 이벤트
+        statFilters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                statFilters.forEach(f => f.classList.remove('active'));
+                filter.classList.add('active');
+                currentFilter = filter.dataset.filter;
                 performSearch(searchInput.value);
             });
         });
