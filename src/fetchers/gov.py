@@ -43,7 +43,10 @@ def fetch_msit_announcements(service_key: str, limit: int = 30) -> List[Dict[str
                 "date": item.findtext("pressDt", ""),
                 "source_name": "과기정통부",
                 "image_url": "",
-                "published_display": item.findtext("pressDt", "")
+                "published_display": item.findtext("pressDt", ""),
+                "bid_begin_dt": "",    # 과기정통부는 미제공
+                "bid_close_dt": "",    # 과기정통부는 미제공
+                "openg_dt": ""         # 과기정통부는 미제공
             })
         
         logger.info(f"[MSIT] 수집 완료: {len(items_list)}건")
@@ -209,6 +212,11 @@ def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[s
                     else:
                         fmt_date = raw_date
                     
+                    # 입찰 일정 정보 추가
+                    bid_begin = item.get("bidBeginDt", "")  # 입찰시작
+                    bid_close = item.get("bidClseDt", "")   # 입찰마감
+                    openg = item.get("opengDt", "")         # 개찰
+                    
                     items_list.append({
                         "title": title,
                         "link": link,
@@ -217,7 +225,10 @@ def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[s
                         "date": fmt_date,
                         "source_name": f"나라장터({bid_type})",
                         "image_url": "",
-                        "published_display": fmt_date
+                        "published_display": fmt_date,
+                        "bid_begin_dt": bid_begin,    # 입찰시작일시
+                        "bid_close_dt": bid_close,    # 입찰마감일시
+                        "openg_dt": openg             # 개찰일시
                     })
                     
             except Exception as e:

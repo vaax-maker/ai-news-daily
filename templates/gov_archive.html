@@ -199,6 +199,27 @@
         width: 100px;
     }
 
+    .col-schedule {
+        width: 130px;
+        font-size: 0.85rem;
+        text-align: center;
+    }
+
+    /* 상태별 색상 */
+    .status-active {
+        background-color: #f0fdf4 !important;
+        border-left: 4px solid #16a34a;
+    }
+
+    .status-closed {
+        background-color: #f9fafb !important;
+        color: #9ca3af;
+    }
+
+    .status-closed .col-title a {
+        color: #9ca3af;
+    }
+
     .source-badge {
         display: inline-block;
         padding: 0.25rem 0.75rem;
@@ -395,11 +416,18 @@
                 <th class="col-dept">담당부서</th>
                 <th class="col-dept">담당자</th>
                 <th class="col-date">등록일</th>
+                <th class="col-schedule">입찰시작</th>
+                <th class="col-schedule">입찰마감</th>
+                <th class="col-schedule">개찰</th>
             </tr>
         </thead>
         <tbody>
             {% for item in announcements %}
-            <tr class="gov-item" data-source="{{ item.source_name }}">
+            {% set current_time = now %}
+            {% set is_active = item.bid_close_dt and item.bid_close_dt > current_time.strftime('%Y-%m-%d %H:%M:%S') %}
+            {% set is_closed = item.openg_dt and item.openg_dt < current_time.strftime('%Y-%m-%d %H:%M:%S') %} <tr
+                class="gov-item {% if is_active %}status-active{% elif is_closed %}status-closed{% endif %}"
+                data-source="{{ item.source_name }}">
                 <td class="col-idx">{{ loop.index }}</td>
                 <td class="col-title">
                     <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
@@ -413,8 +441,11 @@
                 <td class="col-dept searchable">{{ item.dept or '-' }}</td>
                 <td class="col-dept col-manager">{{ item.manager or '-' }}</td>
                 <td class="col-date">{{ item.date or item.published_display }}</td>
-            </tr>
-            {% endfor %}
+                <td class="col-schedule">{{ item.bid_begin_dt[:16] if item.bid_begin_dt else '미제공' }}</td>
+                <td class="col-schedule">{{ item.bid_close_dt[:16] if item.bid_close_dt else '미제공' }}</td>
+                <td class="col-schedule">{{ item.openg_dt[:16] if item.openg_dt else '미제공' }}</td>
+                </tr>
+                {% endfor %}
         </tbody>
     </table>
 </div>
@@ -422,7 +453,11 @@
 <!-- 모바일용 카드 -->
 <div class="gov-cards-mobile" id="gov-cards">
     {% for item in announcements %}
-    <div class="gov-card" data-source="{{ item.source_name }}">
+    {% set current_time = now %}
+    {% set is_active = item.bid_close_dt and item.bid_close_dt > current_time.strftime('%Y-%m-%d %H:%M:%S') %}
+    {% set is_closed = item.openg_dt and item.openg_dt < current_time.strftime('%Y-%m-%d %H:%M:%S') %} <div
+        class="gov-card {% if is_active %}status-active{% elif is_closed %}status-closed{% endif %}"
+        data-source="{{ item.source_name }}">
         <div class="card-header">
             <span class="card-badge">{{ item.source_name }}</span>
             <span style="font-size: 0.75rem; color: #718096;">{{ item.date }}</span>
@@ -437,9 +472,17 @@
             <span class="meta-label">담당</span>
             <span>{{ item.manager }}</span>
             {% endif %}
+            {% if item.bid_begin_dt %}
+            <span class="meta-label">입찰시작</span>
+            <span>{{ item.bid_begin_dt[:16] }}</span>
+            <span class="meta-label">입찰마감</span>
+            <span>{{ item.bid_close_dt[:16] }}</span>
+            <span class="meta-label">개찰</span>
+            <span>{{ item.openg_dt[:16] }}</span>
+            {% endif %}
         </div>
-    </div>
-    {% endfor %}
+</div>
+{% endfor %}
 </div>
 
 <div id="no-results" class="empty-msg hidden">검색 결과가 없습니다.</div>

@@ -47,6 +47,7 @@ def render_gov_archive(announcements):
         announcements=announcements,
         active_tab="gov",
         now_year=datetime.datetime.now().year,
+        now=datetime.datetime.now(),  # 현재 시간 전달
         root_path="..",
     )
 
