@@ -101,6 +101,21 @@
     .member-news-grid {
         margin: 0;
     }
+
+    /* 타일 스타일 조정 */
+    .member-news-grid .member-news-tile {
+        cursor: default;
+    }
+
+    .member-news-grid .tile-title a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .member-news-grid .tile-title a:hover {
+        color: var(--primary-color);
+        text-decoration: underline;
+    }
 </style>
 {% endblock %}
 
@@ -138,8 +153,7 @@
         {% if all_news %}
         <div class="member-news-grid" id="latest-news-grid">
             {% for item in all_news %}
-            <a href="{{ item.link }}" target="_blank" rel="noopener" class="member-news-tile search-target"
-                data-search="{{ item.title }} {{ item.member_name }}">
+            <div class="member-news-tile search-target" data-search="{{ item.title }} {{ item.member_name }}">
                 {% if item.image_url %}
                 <div class="tile-image">
                     <img src="{{ item.image_url }}" alt="Thumbnail" loading="lazy">
@@ -147,13 +161,31 @@
                 {% endif %}
                 <div class="tile-content">
                     <span class="tile-member-badge">{{ item.member_name }}</span>
-                    <h3 class="tile-title">{{ item.title }}</h3>
+                    <h3 class="tile-title">
+                        <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
+                    </h3>
                     <div class="tile-meta">
                         <span class="tile-source">{{ item.source_name or '출처' }}</span>
                         <span class="tile-date">{{ item.published_display }}</span>
                     </div>
+                    <div class="news-actions"
+                        style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; gap: 0.5rem;">
+                        <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
+                            class="action-btn discuss-btn" style="font-size: 0.75rem; padding: 0.45rem 0.7rem;">
+                            💬
+                        </a>
+                        <button
+                            onclick="navigator.clipboard.writeText('{{ item.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))"
+                            class="action-btn share-btn" style="font-size: 0.75rem; padding: 0.45rem 0.7rem;">
+                            🔗
+                        </button>
+                        <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer"
+                            class="action-btn source-btn" style="font-size: 0.75rem; padding: 0.45rem 0.7rem;">
+                            📑
+                        </a>
+                    </div>
                 </div>
-            </a>
+            </div>
             {% endfor %}
         </div>
         <div id="latest-no-results" class="empty-msg hidden">검색 결과가 없습니다.</div>
