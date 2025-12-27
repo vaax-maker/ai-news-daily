@@ -630,14 +630,17 @@ def main():
     )
 
     # 3.5 Generate Word Cloud
-    print("[WordCloud] Generating weekly word cloud...")
-    try:
-        wc_counts, wc_categories = extract_weekly_keywords(docs_dir="docs", days=7)
-        wc_output_path = "static/images/weekly_wordcloud.png"
-        os.makedirs(os.path.dirname(wc_output_path), exist_ok=True)
-        create_wordcloud_image(wc_counts, wc_categories, wc_output_path)
-    except Exception as e:
-        print(f"[WordCloud] Failed: {e}")
+    if str_to_bool(os.getenv("SKIP_WORDCLOUD", "false")):
+        print("[WordCloud] Skipped by configuration.")
+    else:
+        print("[WordCloud] Generating weekly word cloud...")
+        try:
+            wc_counts, wc_categories = extract_weekly_keywords(docs_dir="docs", days=7)
+            wc_output_path = "static/images/weekly_wordcloud.png"
+            os.makedirs(os.path.dirname(wc_output_path), exist_ok=True)
+            create_wordcloud_image(wc_counts, wc_categories, wc_output_path)
+        except Exception as e:
+            print(f"[WordCloud] Failed: {e}")
 
     # 3.8 Generate Board Page
     print("[Board] Generating board page...")
