@@ -660,12 +660,26 @@ def main():
             members_latest=dashboard_data.get("members", [])[:5],
             section_links=dashboard_data.get("links", {})
         )
-        with open("docs/index.html", "w", encoding="utf-8") as f:
-            f.write(dash_html)
-        print("[Dashboard] Index generated.")
+        
+        # Write to temporary file first to preserve existing index.html on failure
+        import tempfile
+        temp_fd, temp_path = tempfile.mkstemp(suffix=".html", dir="docs", text=True)
+        
+        try:
+            with os.fdopen(temp_fd, "w", encoding="utf-8") as f:
+                f.write(dash_html)
+            
+            # Only replace the original file if write succeeded
+            import shutil
+            shutil.move(temp_path, "docs/index.html")
+            print("[Dashboard] Index generated successfully.")
+        except Exception as e:
+            # Clean up temp file if it still exists
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
+            raise e
         
         # 5. Asset Deployment
-        import shutil
         src_static = "static"
         dst_static = "docs/static"
         if os.path.exists(src_static):
@@ -676,6 +690,7 @@ def main():
             
     except Exception as e:
         print(f"[Dashboard] Failed to render: {e}")
+        print("[Dashboard] Keeping existing index.html to preserve service availability.")
         import traceback
         traceback.print_exc()
 
