@@ -136,8 +136,9 @@ header {
     display: block;
     /* 한 줄 차지 */
     font-size: 0.85rem;
-    color: #475569;
-    font-weight: 600;
+    color: #9ca3af;
+    /* 회색 */
+    font-weight: 500;
     line-height: 1.2;
     margin-bottom: 0.1rem;
 }
@@ -152,11 +153,9 @@ header {
 }
 
 .slogan-highlight {
-    font-weight: 800;
+    font-weight: 700;
     color: #84cc16;
-    /* 밝은 초록 (Lime) */
-    font-size: 1.35em;
-    letter-spacing: -0.02em;
+    /* 폰트 크기 통일 - 주변 텍스트와 동일 */
 }
 
 .slogan-sub {
