@@ -95,6 +95,11 @@ header {
     vertical-align: middle;
     margin-right: 0.8rem;
     object-fit: contain;
+    /* 세로만 80% 축소 (가로 유지) */
+    transform: scaleY(0.8);
+    transform-origin: center;
+    margin-top: -0.8rem;
+    margin-bottom: -0.8rem;
 }
 
 .logo-link {
