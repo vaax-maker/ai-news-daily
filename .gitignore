@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 .env
+# Local test files
+docs/header_test.html
+*.DS_Store
