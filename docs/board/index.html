@@ -337,6 +337,9 @@
                 // Quill Content (HTML)
                 viewContent.innerHTML = data.content;
 
+                // 텍스트로 된 URL을 자동으로 링크로 변환
+                linkifyElement(viewContent);
+
                 // 댓글 로드 시작
                 loadComments(id);
 
@@ -541,6 +544,42 @@
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
+    }
+
+    function linkifyElement(element) {
+        const urlRegex = /(https?:\/\/[^\s<]+)/g;
+        const treeWalker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+        const nodes = [];
+        while (treeWalker.nextNode()) nodes.push(treeWalker.currentNode);
+
+        nodes.forEach(node => {
+            // 이미 링크나 스크립트 안에 있는 텍스트는 건너뜀
+            if (node.parentNode.tagName === 'A' || node.parentNode.tagName === 'SCRIPT' || node.parentNode.tagName === 'STYLE') return;
+
+            const text = node.nodeValue;
+            if (urlRegex.test(text)) {
+                const fragment = document.createDocumentFragment();
+                let lastIdx = 0;
+                text.replace(urlRegex, (match, url, idx) => {
+                    // 이전 텍스트 추가
+                    fragment.appendChild(document.createTextNode(text.slice(lastIdx, idx)));
+
+                    // 링크 생성
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.target = "_blank";
+                    a.rel = "noopener noreferrer";
+                    a.textContent = url;
+                    a.className = "autolink"; // 스타일 적용을 위해 클래스 추가
+                    fragment.appendChild(a);
+
+                    lastIdx = idx + match.length;
+                });
+                // 남은 텍스트 추가
+                fragment.appendChild(document.createTextNode(text.slice(lastIdx)));
+                node.parentNode.replaceChild(fragment, node);
+            }
+        });
     }
 
     // --- Event Listeners ---
@@ -966,6 +1005,18 @@
             width: 100%;
             margin-top: 0.5rem;
         }
+    }
+
+    /* 본문 링크 스타일 */
+    .ql-editor a,
+    .autolink {
+        color: #2563eb !important;
+        text-decoration: underline !important;
+    }
+
+    .ql-editor a:hover,
+    .autolink:hover {
+        color: #1d4ed8 !important;
     }
 </style>
 
