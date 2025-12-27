@@ -121,14 +121,9 @@
             </div>
 
             <!-- 첨부파일 (URL 입력 방식) -->
-            <div class="form-group">
-                <label>첨부파일 (다운로드 가능한 URL 입력)</label>
-                <input type="url" id="inputFileUrl" placeholder="예: https://example.com/file.zip (구글 드라이브, 드롭박스 등)">
-            </div>
-
             <!-- Quill Editor -->
             <div class="form-group">
-                <label>내용 (상단 툴바의 'Image' 아이콘을 눌러 이미지 URL을 입력하세요)</label>
+                <label>내용 (이미지나 공유할 파일 링크를 본문에 직접 입력하세요)</label>
                 <div id="editor-container" style="height: 300px;"></div>
             </div>
 
@@ -149,12 +144,6 @@
                 </div>
             </div>
 
-            <!-- 첨부파일 다운로드 영역 -->
-            <div id="viewAttachment" class="view-attachment hidden">
-                <span class="attachment-label">📎 첨부파일:</span>
-                <a href="#" id="downloadLink" target="_blank" rel="noopener">다운로드 링크</a>
-            </div>
-
             <div class="view-content ql-editor" id="viewContent">
                 내용
             </div>
@@ -165,8 +154,26 @@
                     <button id="btnDelete" class="danger-btn">삭제</button>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <!-- 댓글 섹션 -->
+            <div class="comment-section">
+                <h3 class="comment-title">댓글</h3>
+                <div id="commentList" class="comment-list">
+                    <!-- 댓글 아이템이 여기에 추가됨 -->
+                    <div class="loading-msg">댓글을 불러오는 중...</div>
+                </div>
+
+                <div class="comment-form-box">
+                    <div class="comment-inputs">
+                        <input type="text" id="cmtWriter" placeholder="닉네임" maxlength="10">
+                        <input type="password" id="cmtPassword" placeholder="비밀번호 (삭제용)" maxlength="20">
+                    </div>
+                    <div class="comment-textarea-wrapper">
+                        <textarea id="cmtContent" placeholder="댓글을 남겨보세요" rows="2"></textarea>
+                        <button id="btnSaveCmt" class="primary-btn sm-btn">등록</button>
+                    </div>
+                </div>
+            </div>
 </section>
 
 <!-- Quill CSS -->
@@ -177,7 +184,7 @@
 <!-- Firebase SDK -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, getDoc, doc, query, orderBy, limit, serverTimestamp, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, getDoc, doc, query, orderBy, limit, serverTimestamp, updateDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     // 사용자 설정
     const firebaseConfig = {
@@ -207,13 +214,13 @@
         placeholder: '내용을 입력하세요. 상단 툴바를 이용해 이미지 URL을 삽입할 수 있습니다.',
         modules: {
             toolbar: [
-                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['bold', 'italic', 'underline', 'strike'],
                 ['blockquote', 'code-block'],
-                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                [{ 'header': 1 }, { 'header': 2 }],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-                ['link', 'image'],                                // link and image, video
-                ['clean']                                         // remove formatting button
+                [{ 'color': [] }, { 'background': [] }],
+                ['link', 'image'],
+                ['clean']
             ]
         }
     });
@@ -223,14 +230,21 @@
     const viewSection = document.getElementById('viewSection');
     const boardListSection = document.querySelector('.board-list-section');
 
-    // Elements
+    // Board Elements
     const inputWriter = document.getElementById('inputWriter');
     const inputPassword = document.getElementById('inputPassword');
     const inputTitle = document.getElementById('inputTitle');
-    const inputFileUrl = document.getElementById('inputFileUrl'); // URL 입력 필드
 
-    let currentMode = 'list'; // list, write, view
+    // Comment Elements
+    const commentList = document.getElementById('commentList');
+    const cmtWriter = document.getElementById('cmtWriter');
+    const cmtPassword = document.getElementById('cmtPassword');
+    const cmtContent = document.getElementById('cmtContent');
+    const btnSaveCmt = document.getElementById('btnSaveCmt');
+
+    let currentMode = 'list';
     let currentDocId = null;
+    let unsubscribeComments = null; // 댓글 리스너 해제용
 
     // --- Functions ---
 
@@ -259,13 +273,11 @@
                 const dateObj = data.createdAt ? data.createdAt.toDate() : new Date();
                 const dateStr = dateObj.toISOString().split('T')[0];
 
-                // 제목에 첨부파일 아이콘 (fileUrl 필드가 있으면 표시)
-                const attachIcon = data.fileUrl ? ' <span title="첨부파일">📎</span>' : '';
-
+                // 제목에 첨부파일 아이콘 (Quill 이미지 존재 여부 등 체크 가능하나 생략)
                 row.innerHTML = `
                     <td class="col-num">${index++}</td>
                     <td class="col-subject">
-                        <a href="#" data-id="${doc.id}">${escapeHtml(data.title)}${attachIcon}</a>
+                        <a href="#" data-id="${doc.id}">${escapeHtml(data.title)}</a>
                     </td>
                     <td class="col-writer">${escapeHtml(data.writer)}</td>
                     <td class="col-date">${dateStr}</td>
@@ -278,7 +290,6 @@
             document.querySelectorAll('.col-subject a').forEach(a => {
                 a.addEventListener('click', (e) => {
                     e.preventDefault();
-                    // 클릭한 요소가 a 태그인지 확인 (아이콘 클릭 시 등 위임 처리)
                     const target = e.target.closest('a');
                     if (target) viewPost(target.dataset.id);
                 });
@@ -300,11 +311,9 @@
         const viewWriter = document.getElementById('viewWriter');
         const viewDate = document.getElementById('viewDate');
         const viewContent = document.getElementById('viewContent');
-        const viewAttachment = document.getElementById('viewAttachment');
-        const downloadLink = document.getElementById('downloadLink');
 
         viewContent.innerHTML = '로딩중...';
-        viewAttachment.classList.add('hidden');
+        commentList.innerHTML = '<div class="loading-msg">댓글을 불러오는 중...</div>';
 
         try {
             const docRef = doc(db, "posts", id);
@@ -320,12 +329,8 @@
                 // Quill Content (HTML)
                 viewContent.innerHTML = data.content;
 
-                // 첨부파일 URL 처리
-                if (data.fileUrl) {
-                    viewAttachment.classList.remove('hidden');
-                    downloadLink.textContent = data.fileUrl; // 혹은 "다운로드"
-                    downloadLink.href = data.fileUrl;
-                }
+                // 댓글 로드 시작
+                loadComments(id);
 
                 // 조회수 증가 (Optional)
                 // updateDoc(docRef, { views: (data.views || 0) + 1 });
@@ -339,6 +344,91 @@
         }
     }
 
+    // 댓글 실시간 로드
+    function loadComments(postId) {
+        if (unsubscribeComments) unsubscribeComments(); // 이전 리스너 해제
+
+        const commentsRef = collection(db, "posts", postId, "comments");
+        const q = query(commentsRef, orderBy("createdAt", "asc"));
+
+        unsubscribeComments = onSnapshot(q, (snapshot) => {
+            commentList.innerHTML = '';
+            if (snapshot.empty) {
+                commentList.innerHTML = '<div class="empty-msg-sm">첫 번째 댓글을 남겨보세요!</div>';
+                return;
+            }
+
+            snapshot.forEach((doc) => {
+                const cmt = doc.data();
+                const cmtDate = cmt.createdAt ? cmt.createdAt.toDate().toLocaleString() : '';
+
+                const div = document.createElement('div');
+                div.className = 'comment-item';
+                div.innerHTML = `
+                    <div class="comment-head">
+                        <span class="cmt-writer">${escapeHtml(cmt.writer)}</span>
+                        <span class="cmt-date">${cmtDate}</span>
+                        <button class="btn-del-cmt" data-id="${doc.id}">x</button>
+                    </div>
+                    <div class="comment-body">${escapeHtml(cmt.content).replace(/\n/g, '<br>')}</div>
+                `;
+                commentList.appendChild(div);
+            });
+
+            // 댓글 삭제 버튼 핸들러
+            document.querySelectorAll('.btn-del-cmt').forEach(btn => {
+                btn.addEventListener('click', () => deleteComment(postId, btn.dataset.id));
+            });
+        });
+    }
+
+    // 댓글 저장
+    async function saveComment() {
+        if (!currentDocId) return;
+        const writer = cmtWriter.value.trim();
+        const password = cmtPassword.value.trim();
+        const content = cmtContent.value.trim();
+
+        if (!writer || !password || !content) {
+            alert("닉네임, 비밀번호, 내용을 모두 입력해주세요.");
+            return;
+        }
+
+        try {
+            await addDoc(collection(db, "posts", currentDocId, "comments"), {
+                writer,
+                password,
+                content,
+                createdAt: serverTimestamp()
+            });
+            cmtContent.value = ''; // 내용만 초기화
+        } catch (e) {
+            console.error("Comment save error:", e);
+            alert("댓글 등록 실패");
+        }
+    }
+
+    // 댓글 삭제
+    async function deleteComment(postId, commentId) {
+        const inputPw = prompt("댓글 비밀번호를 입력하세요");
+        if (!inputPw) return;
+
+        try {
+            const cmtRef = doc(db, "posts", postId, "comments", commentId);
+            const cmtSnap = await getDoc(cmtRef);
+
+            if (cmtSnap.exists() && cmtSnap.data().password === inputPw) {
+                await deleteDoc(cmtRef);
+                alert("댓글이 삭제되었습니다.");
+            } else {
+                alert("비밀번호가 일치하지 않습니다.");
+            }
+        } catch (e) {
+            console.error("Comment delete error:", e);
+            alert("삭제 중 오류 발생");
+        }
+    }
+
     // 글 저장
     async function savePost() {
         if (!db) {
@@ -349,8 +439,7 @@
         const writer = inputWriter.value.trim();
         const password = inputPassword.value.trim();
         const title = inputTitle.value.trim();
-        const content = quill.root.innerHTML; // Quill HTML
-        const fileUrl = inputFileUrl.value.trim(); // 파일 URL
+        const content = quill.root.innerHTML;
 
         // Quill 에디터가 비었는지 확인 (기본적으로 <p><br></p>가 있음)
         const textContent = quill.getText().trim();
@@ -366,7 +455,6 @@
                 writer,
                 title,
                 content,
-                fileUrl, // URL 저장
                 updatedAt: serverTimestamp()
             };
 
@@ -386,17 +474,13 @@
             loadPosts();
         } catch (e) {
             console.error("Error saving:", e);
-            if (e.message.includes("exceeds the maximum size")) {
-                alert("저장 실패: 게시글 전체 용량이 너무 큽니다. (이미지나 첨부파일을 줄여주세요)");
-            } else {
-                alert("저장 중 오류가 발생했습니다: " + e.message);
-            }
+            alert("저장 중 오류가 발생했습니다: " + e.message);
         }
     }
 
     // 글 삭제
     async function deletePost() {
-        if (!confirm("정말 삭제하시겠습니까?")) return;
+        if (!confirm("정말 삭제하시겠습니까? (댓글도 함께 삭제되지 않을 수 있습니다)")) return;
 
         const inputPw = prompt("비밀번호를 입력하세요");
         if (!inputPw) return;
@@ -427,6 +511,7 @@
             viewSection.classList.add('hidden');
             document.getElementById('btnWrite').classList.remove('hidden');
             document.querySelector('.board-controls').classList.remove('hidden');
+            if (unsubscribeComments) unsubscribeComments(); // 리스트로 갈 때 끄기
         } else if (mode === 'write') {
             boardListSection.classList.add('hidden');
             writeForm.classList.remove('hidden');
@@ -458,8 +543,7 @@
         inputPassword.disabled = false;
         inputPassword.value = "";
         inputTitle.value = "";
-        inputFileUrl.value = ""; // 초기화
-        quill.setContents([]); // 에디터 초기화
+        quill.setContents([]);
         showSection('write');
     });
 
@@ -472,6 +556,7 @@
     });
 
     document.getElementById('btnSave').addEventListener('click', savePost);
+    btnSaveCmt.addEventListener('click', saveComment); // 댓글 등록
 
     // 수정 버튼
     document.getElementById('btnEdit').addEventListener('click', async () => {
@@ -484,13 +569,10 @@
             document.getElementById('formTitle').textContent = "게시글 수정";
             inputWriter.value = docSnap.data().writer;
             inputPassword.value = "****";
-            inputPassword.disabled = true; // 비번 수정 불가
+            inputPassword.disabled = true;
             inputTitle.value = docSnap.data().title;
 
-            // Quill 내용 설정
             quill.clipboard.dangerouslyPasteHTML(docSnap.data().content);
-
-            inputFileUrl.value = docSnap.data().fileUrl || "";
 
             showSection('write');
         } else {
@@ -735,6 +817,147 @@
             width: 100%;
         }
     }
+
+    /* 댓글 스타일 */
+    .comment-section {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 2px dashed #e2e8f0;
+    }
+
+    .comment-title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: #2d3748;
+        font-weight: 700;
+    }
+
+    .comment-list {
+        margin-bottom: 2rem;
+    }
+
+    .comment-item {
+        background: #f7fafc;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        border: 1px solid #edf2f7;
+    }
+
+    .comment-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .cmt-writer {
+        font-weight: 600;
+        color: #4a5568;
+    }
+
+    .cmt-date {
+        color: #a0aec0;
+        font-size: 0.75rem;
+        margin-left: 0.5rem;
+        flex: 1;
+    }
+
+    .btn-del-cmt {
+        border: none;
+        background: none;
+        color: #e53e3e;
+        cursor: pointer;
+        padding: 0 0.25rem;
+        font-weight: bold;
+        font-size: 1.1rem;
+        line-height: 1;
+    }
+
+    .btn-del-cmt:hover {
+        color: #c53030;
+    }
+
+    .comment-body {
+        font-size: 0.95rem;
+        color: #2d3748;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+
+    .comment-form-box {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .comment-inputs {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .comment-inputs input {
+        border: 1px solid #e2e8f0;
+        border-radius: 4px;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        width: 150px;
+    }
+
+    .comment-textarea-wrapper {
+        display: flex;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .comment-textarea-wrapper textarea {
+        flex: 1;
+        border: 1px solid #e2e8f0;
+        border-radius: 4px;
+        padding: 0.75rem;
+        font-size: 0.95rem;
+        resize: vertical;
+        min-height: 60px;
+    }
+
+    .sm-btn {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.95rem;
+        height: auto;
+        white-space: nowrap;
+    }
+
+    .empty-msg-sm {
+        color: #a0aec0;
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        background: #f7fafc;
+        border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+        .comment-inputs {
+            flex-direction: column;
+        }
+
+        .comment-inputs input {
+            width: 100%;
+        }
+
+        .comment-textarea-wrapper {
+            flex-direction: column;
+        }
+
+        .comment-textarea-wrapper button {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
 </style>
 
     </div>
