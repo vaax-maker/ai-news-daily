@@ -312,58 +312,41 @@
 </div>
 
 
-<!-- 통계 테이블 -->
-<div class="gov-stats-table">
-    <table>
-        <thead>
-            <tr>
-                <th>구분</th>
-                <th>건수</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <span class="source-icon total">📊</span>
-                    총 과제
-                </td>
-                <td class="count-cell">37</td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="source-icon msit">🏛️</span>
-                    과기정통부
-                </td>
-                <td class="count-cell">14
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="source-icon ministry">🏢</span>
-                    과학기술정보통신부
-                </td>
-                <td class="count-cell">5
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="source-icon koneps">🛒</span>
-                    나라장터
-                </td>
-                <td class="count-cell">
-                    
-                    
-                    18
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<!-- 통계 카드 (클릭 가능) -->
+
+
+
+
+
+<div class="gov-stats-cards">
+    <div class="stat-card-item active" data-filter="all">
+        <div class="stat-card-icon">📊</div>
+        <div class="stat-card-label">총 과제</div>
+        <div class="stat-card-value">37</div>
+    </div>
+    <div class="stat-card-item" data-filter="과기정통부">
+        <div class="stat-card-icon">🏛️</div>
+        <div class="stat-card-label">과기정통부</div>
+        <div class="stat-card-value">19</div>
+    </div>
+    <div class="stat-card-item" data-filter="나라장터">
+        <div class="stat-card-icon">🛒</div>
+        <div class="stat-card-label">나라장터</div>
+        <div class="stat-card-value">18</div>
+    </div>
 </div>
 
 <style>
-    .gov-stats-table {
+    .gov-stats-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
         margin-bottom: 2rem;
+    }
+
+    .stat-card-item {
         background: white;
+        border: 2px solid #e2e8f0;
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -430,13 +413,6 @@
         }
     }
 </style>
-
-<!-- 필터 탭 -->
-<div class="filter-tabs">
-    <button class="filter-tab active" data-filter="all">전체</button>
-    <button class="filter-tab" data-filter="과기정통부">과기정통부</button>
-    <button class="filter-tab" data-filter="나라장터">나라장터</button>
-</div>
 
 <!-- PC용 테이블 -->
 <div class="gov-table-section table-responsive gov-table-desktop">
@@ -2245,7 +2221,7 @@
         const searchInput = document.getElementById('gov-search-input');
         const tableRows = document.querySelectorAll('#gov-table tbody tr');
         const cards = document.querySelectorAll('.gov-card');
-        const filterTabs = document.querySelectorAll('.filter-tab');
+        const statCards = document.querySelectorAll('.stat-card-item');
         const noResultsMsg = document.getElementById('no-results');
 
         let currentFilter = 'all';
@@ -2257,7 +2233,18 @@
             // 테이블 검색
             tableRows.forEach(row => {
                 const source = row.dataset.source;
-                if (currentFilter !== 'all' && !source.includes(currentFilter)) {
+
+                // 필터 적용 (과기정통부와 과학기술정보통신부 통합)
+                let matchFilter = currentFilter === 'all';
+                if (!matchFilter) {
+                    if (currentFilter === '과기정통부') {
+                        matchFilter = source.includes('과기정통부') || source.includes('과학기술정보통신부');
+                    } else if (currentFilter === '나라장터') {
+                        matchFilter = source.includes('나라장터');
+                    }
+                }
+
+                if (!matchFilter) {
                     row.style.display = 'none';
                     return;
                 }
@@ -2277,7 +2264,18 @@
             // 카드 검색
             cards.forEach(card => {
                 const source = card.dataset.source;
-                if (currentFilter !== 'all' && !source.includes(currentFilter)) {
+
+                // 필터 적용 (과기정통부와 과학기술정보통신부 통합)
+                let matchFilter = currentFilter === 'all';
+                if (!matchFilter) {
+                    if (currentFilter === '과기정통부') {
+                        matchFilter = source.includes('과기정통부') || source.includes('과학기술정보통신부');
+                    } else if (currentFilter === '나라장터') {
+                        matchFilter = source.includes('나라장터');
+                    }
+                }
+
+                if (!matchFilter) {
                     card.style.display = 'none';
                     return;
                 }
@@ -2305,12 +2303,12 @@
             }
         }
 
-        // 필터 탭
-        filterTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                filterTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                currentFilter = tab.dataset.filter;
+        // 통계 카드 클릭 이벤트
+        statCards.forEach(card => {
+            card.addEventListener('click', () => {
+                statCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                currentFilter = card.dataset.filter;
                 performSearch(searchInput.value);
             });
         });
