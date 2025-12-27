@@ -714,6 +714,31 @@ tr:hover {
     margin-bottom: 0.35rem;
 }
 
+/* Title Row - 제목과 설명을 한 줄에 배치 (PC) */
+.title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.title-row h1 {
+    margin-bottom: 0;
+}
+
+.title-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    .title-row {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+}
+
 .card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
