@@ -5,12 +5,12 @@
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
     <title>News Dashboard</title>
-
+    
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./static/css/style.css?v=6">
-
+    <link rel="stylesheet" href="./static/css/style.css?v=7">
+    
 </head>
 
 <body>
@@ -18,7 +18,7 @@
         <div class="gnb">
             <!-- Left: Logo -->
             <a href="./index.html" class="logo-link">
-                <img src="./static/images/logo_new.png?v=3" alt="VAAX" class="header-logo">
+                <img src="./static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
             </a>
 
             <!-- Right: Slogan & Nav -->
@@ -31,403 +31,384 @@
                     </span>
                 </div>
                 <nav class="nav-links">
-                    <a href="./index.html" class="active">Home</a>
-                    <a href="./ai/index.html" class="">AI뉴스</a>
-                    <a href="./xr/index.html" class="">XR뉴스</a>
-                    <a href="./gov/index.html" class="">정부과제</a>
-                    <a href="./members/index.html" class="">회원사소식</a>
-                    <a href="./board/index.html" class="">게시판</a>
+                    <a href="./index.html"
+                        class="active">Home</a>
+                    <a href="./ai/index.html"
+                        class="">AI뉴스</a>
+                    <a href="./xr/index.html"
+                        class="">XR뉴스</a>
+                    <a href="./gov/index.html"
+                        class="">정부과제</a>
+                    <a href="./members/index.html"
+                        class="">회원사소식</a>
+                    <a href="./board/index.html"
+                        class="">게시판</a>
                 </nav>
             </div>
         </div>
     </header>
 
     <div class="container">
+        
+<h1>오늘의 뉴스</h1>
+<p class="subtitle">
+    last update <strong style="color: var(--primary-color);">2025년 12월 27일 19시 27분</strong> (정기update 매일 오전8시/오후4시)
+    <a href="#" id="news-source-btn" class="news-source-link">뉴스소스</a>
+</p>
 
-        <h1>오늘의 뉴스</h1>
-        <p class="subtitle">
-            <<<<<<< Updated upstream last update <strong style="color: var(--primary-color);">2025년 12월 27일 16시
-                34분</strong> (정기update 매일 오전8시/오후4시)
-                =======
-                last update <strong style="color: var(--primary-color);">2025년 12월 27일 07시 55분</strong> (정기update 매일
-                오전8시/오후4시)
-                >>>>>>> Stashed changes
-                <a href="#" id="news-source-btn" class="news-source-link">뉴스소스</a>
-        </p>
-
-        <!-- News Source Popup Modal -->
-        <div id="news-source-modal" class="modal-overlay" style="display: none;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>뉴스 소스 목록</h3>
-                    <button class="modal-close" id="modal-close-btn">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="source-category">
-                        <h4>AI 카테고리</h4>
-                        <ul class="source-list">
-                            <li>AI타임스 (aitimes.com)</li>
-                            <li>TechCrunch AI</li>
-                            <li>MIT Technology Review AI</li>
-                            <li>AI타임스 (aitimes.kr)</li>
-                            <li>Two Minute Papers (YouTube)</li>
-                            <li>티타임즈TV (YouTube)</li>
-                            <li>가젯서울 (YouTube)</li>
-                            <li>조코딩 (YouTube)</li>
-                            <li>AI코리아커뮤니티 (YouTube)</li>
-                        </ul>
-                    </div>
-
-                    <div class="source-category">
-                        <h4>XR 카테고리</h4>
-                        <ul class="source-list">
-                            <li>Road to VR</li>
-                            <li>UploadVR</li>
-                            <li>AR Insider</li>
-                            <li>Skarred Ghost</li>
-                            <li>ThrillSeeker (YouTube)</li>
-                            <li>SadlyItsBradley (YouTube)</li>
-                            <li>MRTV (YouTube)</li>
-                            <li>Google News: 가상휴먼, 버추얼휴먼, 가상아이돌</li>
-                            <li>Google News: virtual influencer, metahuman</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<!-- News Source Popup Modal -->
+<div id="news-source-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>뉴스 소스 목록</h3>
+            <button class="modal-close" id="modal-close-btn">&times;</button>
         </div>
-
-        <style>
-            .news-source-link {
-                color: var(--primary-color);
-                text-decoration: none;
-                font-size: 0.85rem;
-                margin-left: 0.75rem;
-                padding: 0.25rem 0.75rem;
-                border: 1px solid var(--border-color);
-                border-radius: 6px;
-                background: var(--card-bg);
-                transition: all 0.2s;
-            }
-
-            .news-source-link:hover {
-                background: var(--primary-color);
-                color: white;
-                border-color: var(--primary-color);
-            }
-
-            .modal-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 1000;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .modal-content {
-                background: var(--card-bg, #fff);
-                border-radius: 12px;
-                max-width: 480px;
-                width: 90%;
-                max-height: 80vh;
-                overflow-y: auto;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-                border: 1px solid var(--border-color);
-            }
-
-            .modal-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1.25rem 1.5rem;
-                border-bottom: 1px solid var(--border-color);
-                background: var(--background-color);
-            }
-
-            .modal-header h3 {
-                margin: 0;
-                font-size: 1.1rem;
-                font-weight: 700;
-                color: var(--text-main);
-            }
-
-            .modal-close {
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                cursor: pointer;
-                color: var(--text-muted);
-                padding: 0;
-                line-height: 1;
-                transition: color 0.2s;
-            }
-
-            .modal-close:hover {
-                color: var(--primary-color);
-            }
-
-            .modal-body {
-                padding: 1.25rem 1.5rem 1.5rem;
-            }
-
-            .source-category {
-                margin-bottom: 1.5rem;
-            }
-
-            .source-category:last-child {
-                margin-bottom: 0;
-            }
-
-            .source-category h4 {
-                margin: 0 0 0.75rem;
-                font-size: 0.9rem;
-                font-weight: 600;
-                color: var(--primary-color);
-                padding-bottom: 0.5rem;
-                border-bottom: 2px solid var(--primary-color);
-            }
-
-            .source-list {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.25rem 1rem;
-            }
-
-            .source-list li {
-                padding: 0.5rem 0;
-                font-size: 0.85rem;
-                color: var(--text-muted);
-            }
-
-            @media (max-width: 480px) {
-                .source-list {
-                    grid-template-columns: 1fr;
-                }
-            }
-        </style>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const btn = document.getElementById('news-source-btn');
-                const modal = document.getElementById('news-source-modal');
-                const closeBtn = document.getElementById('modal-close-btn');
-
-                btn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    modal.style.display = 'flex';
-                });
-
-                closeBtn.addEventListener('click', function () {
-                    modal.style.display = 'none';
-                });
-
-                modal.addEventListener('click', function (e) {
-                    if (e.target === modal) {
-                        modal.style.display = 'none';
-                    }
-                });
-            });
-        </script>
-
-        <!-- Word Cloud Section -->
-        <section class="card wordcloud-section">
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">Weekly Trends</p>
-                    <h3>지난 7일간의 주요 키워드</h3>
-                </div>
-            </div>
-
-            <!-- Legend -->
-            <div class="wordcloud-legend">
-                <div class="legend-item">
-                    <span class="legend-dot" style="background-color: #FF9F40;"></span>
-                    <span>인물</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-dot" style="background-color: #36A2EB;"></span>
-                    <span>업체</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-dot" style="background-color: #4BC0C0;"></span>
-                    <span>기술</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-dot" style="background-color: #9966FF;"></span>
-                    <span>상품</span>
-                </div>
-            </div>
-
-            <img src="./static/images/weekly_wordcloud.png" alt="Weekly Word Cloud" class="wordcloud-img">
-        </section>
-
-        <div class="dashboard-grid">
-            <!-- AI Section -->
-            <div class="dashboard-section">
-                <h2>
-                    AI 뉴스
-                    <a href="ai/daily/2025-12-27_031532.html" class="section-more">더보기</a>
-                </h2>
-                <ul class="preview-list">
-                    <li>
-                        <span class="preview-date">2025-12-27 15:20</span>
-                        <a href="https://www.aitimes.kr/news/articleView.html?idxno=37891" target="_blank"
-                            class="preview-title">"AI 챗봇에도 ‘성격’이 있다" 성격 조작 가능성까지 드러나...케임…</a>
-                    </li>
-                    <li>
-                        <span class="preview-date">2025-12-27 07:10</span>
-                        <a href="https://www.aitimes.com/news/articleView.html?idxno=205124" target="_blank"
-                            class="preview-title">[AI의 역사] 98 인류를 위한 공개되고 안전한 AI라는 약속 – 오…</a>
-                    </li>
-                    <li>
-                        <span class="preview-date">2025-12-27 07:10</span>
-                        <a href="https://www.aitimes.com/news/articleView.html?idxno=205123" target="_blank"
-                            class="preview-title">[AI웹툰] 사랑하면그사람이된다 : 6화</a>
-                    </li>
-                    <li>
-                        <span class="preview-date">2025-12-26 20:33</span>
-                        <a href="https://www.aitimes.kr/news/articleView.html?idxno=37890" target="_blank"
-                            class="preview-title">키사이트코리아, 광운대에 반도체 측정 분석 장비 기증...차세대 반도체…</a>
-                    </li>
-                    <li>
-                        <span class="preview-date">2025-12-26 18:52</span>
-                        <a href="https://www.aitimes.kr/news/articleView.html?idxno=37889" target="_blank"
-                            class="preview-title">삼성전자, CES 2026서 차별화된 AI 체험 제공…단독 전시관에 '…</a>
-                    </li>
+        <div class="modal-body">
+            <div class="source-category">
+                <h4>AI 카테고리</h4>
+                <ul class="source-list">
+                    <li>AI타임스 (aitimes.com)</li>
+                    <li>TechCrunch AI</li>
+                    <li>MIT Technology Review AI</li>
+                    <li>AI타임스 (aitimes.kr)</li>
+                    <li>Two Minute Papers (YouTube)</li>
+                    <li>티타임즈TV (YouTube)</li>
+                    <li>가젯서울 (YouTube)</li>
+                    <li>조코딩 (YouTube)</li>
+                    <li>AI코리아커뮤니티 (YouTube)</li>
                 </ul>
             </div>
 
-            <!-- XR Section -->
-            <div class="dashboard-section">
-                <h2>
-                    XR 뉴스
-                    <a href="xr/daily/2025-12-27_031532.html" class="section-more">더보기</a>
-                </h2>
-                <ul class="preview-list">
-
-                    <li>
-                        <span class="preview-date">2025-12-26 14:15</span>
-                        <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQdVh2Ry1fdTkyRG5lNEp6ZFFIRDFGSlpUMjFFV2pMSWI3V2RMaldfY1pkbVI3cTVJRElyczZDZEIwVmJTcXRyZTZIUjNPS3dUXzBjaThWUXJpRzRiTERmV2VvQ3BLS1BKa0V6WGJ0Z2lMTTRVc19xVkI1dFp2dlQwSHNMVkdlQXhJQVJWc3RfTzJ1ZnZ2VFdfM3dobVRuc2VW?oc=5"
-                            target="_blank" class="preview-title">Korean Himaroo, AI 인플루언서 플랫폼 ReverseTok…</a>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2025-12-26 13:00</span>
-                        <a href="https://arinsider.co/2025/12/26/hands-on-is-sora-the-ultimate-prompt-driven-fantasy-engine/"
-                            target="_blank" class="preview-title">실습: Sora가 궁극적인 프롬프트 기반 판타지 엔진인가요?</a>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2025-12-26 05:41</span>
-                        <a href="https://news.google.com/rss/articles/CBMiVEFVX3lxTFBRQzl6dEpmMUpBQmpRcnZRNjFYYUpQZjJmeEp2dHJBVnFHRGh4YUlOMHRsTVN2ZXNDbWhwOXBrTmJJX08yZW1NZ3VzV3Z6eTVBNFFfMg?oc=5"
-                            target="_blank" class="preview-title">Virtual idol group SKINZ made the Chris…</a>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2025-12-26 05:29</span>
-                        <a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE9qOTZMRnR5TVdDcnp6ZWdORnJ4OFZyNVFFeVVKRmkyanVLSG1KZDNnM3VRTGR5S2hGY0FpR3ZOQXN5Q3ZldzVYbzBoQVRycUZrZUlzUkF5czBnZWJXUndpS1UzdGdXVzBha0thd01n?oc=5"
-                            target="_blank" class="preview-title">플레이브, 스타트렌드 남자 그룹 1위…가상과 현실을 잇는 팬덤의 확장 …</a>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2025-12-25 14:00</span>
-                        <a href="https://www.uploadvr.com/top-25-best-meta-quest-3-games/" target="_blank"
-                            class="preview-title">상위 25개 최고의 메타 퀘스트 3 & 3S 게임 - 2025년…</a>
-                    </li>
-
-                </ul>
-            </div>
-
-            <!-- Gov Section -->
-            <div class="dashboard-section">
-                <h2>
-                    정부과제
-                    <a href="gov/index.html" class="section-more">더보기</a>
-                </h2>
-                <ul class="preview-list">
-
-                    <li>
-                        <span class="preview-date">2025-12-26 | 공공융합기술정책과</span>
-                        <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186362"
-                            target="_blank" class="preview-title">2025년도 극한부품시험입증지원사업(Track형 실증지원) 신규과제 선정결과 공고</a>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2025-12-26 | 공공융합기술정책과</span>
-                        <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186361"
-                            target="_blank" class="preview-title">2025년도 4차 국민생활안전 긴급대응연구(2단계) 기술개발 및 실증 신규과제 선정결과
-                            공고</a>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2025-12-26 | 디지털사회기획과</span>
-                        <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186342"
-                            target="_blank" class="preview-title">2026년 블록체인 융복합 타운 조성 사업 모집 공고</a>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2025-12-26 | 디지털사회기획과</span>
-                        <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186341"
-                            target="_blank" class="preview-title">2026년 블록체인 특화 클러스터 조성 사업 모집 공고</a>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2025-12-26 | 재단법인 화성에프씨</span>
-                        <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01249483&bidPbancOrd=000"
-                            target="_blank" class="preview-title">2026 화성FC 뉴미디어 콘텐츠 제작 대행 용역</a>
-                    </li>
-
-                </ul>
-            </div>
-
-            <!-- Members Section -->
-            <div class="dashboard-section">
-                <h2>
-                    회원사 소식
-                    <a href="members/index.html" class="section-more">더보기</a>
-                </h2>
-                <ul class="preview-list">
-
-                    <li>
-                        <span class="preview-date">2025-12-27 07:11 | 글로벌 이코노믹</span>
-                        <a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE5UZlZGTXdNQnJBNzVhdzFVUTdXdzNqbjkwR3VJXzZKTFBkZ1daVGRFckI5Z0sxQm1Sd1UzdElZWHUzMHdhY0czaG9wY1gtWWtPZnpuYTZKMDNYbS13SU9lUGpYQWZNWG1WMVFJYmpVUE1idjFNNmFROXlqU0cwSzA?oc=5"
-                            target="_blank" class="preview-title">구글, 지메일 주소변경기능 도입 - 글로벌이코노믹</a>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2025-12-27 06:58 | 글로벌 이코노믹</span>
-                        <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxOUlRFOXBUZHpCbWtQRmlVSnVyWUF3R1RlaFZwSE9JVWs3RGoxRGZ6VjFPSjEtWTZ3bGpJQnI2VjIwRVFDelNieHRDamJHQm5faDVsb3ltN0M2MEFSQUdvQVVxT3hVMEZkY25RNXRUTVFzTFZzRjF0ZUlSMEdCVno1Qm9pRUpobEN4?oc=5"
-                            target="_blank" class="preview-title">태국-캄보디아, 교전 재개 20일만에 휴전 협약 체결 - 글로벌이코노믹</a>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2025-12-27 06:56 | 살린</span>
-                        <a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxPejR3MWQ5WXR3LVl5RjRZVXNISlllVF84RERfSEE1Ml9KSjE0TDd5QkpvdDZIdzVyMEpKa3QzcGM2cTA3cVM2dWpwZlV6Ym1RcW42ZkJBYWZiV1ExelFVQlZUNWI4QmRvN2dCMmtfNFd1QzlhN3dCaVcyUEFKVnVtd1VMNEdkaE96eEhrTURmRXRUbUVhWjJCMmg4cW9KMG5ZWFFGWnNxZWQxZ9IBX0FVX3lxTFBmaXRkckFKMUFUTWJaSjFUbHpYT3JVVkszbVh3aGl0RFJqRTZCNmpRLXN6VWxhT0pfX2lfTmZDNjMycC1fNzhSdUlYdGFOb05aVndCMXd6ZTIyLVRGcTVz?oc=5"
-                            target="_blank" class="preview-title">퇴근길 열차서 쓰러진 승객 살린 3년차 간호사 - 경향신문</a>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2025-12-27 06:39 | 삼성전자</span>
-                        <a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxPYXNaMnhZYnBKemkwNUE0blMxNGZia1NSdWtYZngxQ2tzbDJid2NKNEJHSXh5VEplZjlURFZzcXVuY1RIRTFaSXJPY3FlY0h2YWRkcS1sOU5WWHRkdHppSjlkMW9ETWR1djV4Rmd1NXltWEYtZGo0OG45QlhJazFpME5lb9IBlwFBVV95cUxNbFJLU1ZMYlRtYlRUcm5hZGdzQkpHcnRSU2h5eDg2ZnU4MW4wakNESUpYSFozdkpjdmVZN1BiT25YSDN4ZUpGSVVWYmQ5UHNHTndkdVBHZldtS0hiSm5QNGthQmtLb3Z2OWpqa0U5SkFzZ2tWcHpYWldRMGxuWWQyd2dCQjdlZ19uWkRqNEkwQ3hQcEhiTXhv?oc=5"
-                            target="_blank" class="preview-title">삼성전자가 CES 메인 전시장을 떠난 이유는? - 조선일보</a>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2025-12-27 06:37 | JTBC</span>
-                        <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFBvTjlwcUhLUHB3dEFIWWQ5TnNBWnM5dlo5Rk1iUjZDaXppSm9sS1dWbk4yYm91a0E4M3VrbVhhTUp1dEJJN29jUmZicFg3bklxTEFr?oc=5"
-                            target="_blank" class="preview-title">'아는 형님', 오늘(27일) 결방…'뭉쳐야 찬다4'도 1월 컴백 - …</a>
-                    </li>
-
+            <div class="source-category">
+                <h4>XR 카테고리</h4>
+                <ul class="source-list">
+                    <li>Road to VR</li>
+                    <li>UploadVR</li>
+                    <li>AR Insider</li>
+                    <li>Skarred Ghost</li>
+                    <li>ThrillSeeker (YouTube)</li>
+                    <li>SadlyItsBradley (YouTube)</li>
+                    <li>MRTV (YouTube)</li>
+                    <li>Google News: 가상휴먼, 버추얼휴먼, 가상아이돌</li>
+                    <li>Google News: virtual influencer, metahuman</li>
                 </ul>
             </div>
         </div>
+    </div>
+</div>
+
+<style>
+    .news-source-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 0.85rem;
+        margin-left: 0.75rem;
+        padding: 0.25rem 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        background: var(--card-bg);
+        transition: all 0.2s;
+    }
+
+    .news-source-link:hover {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background: var(--card-bg, #fff);
+        border-radius: 12px;
+        max-width: 480px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        border: 1px solid var(--border-color);
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+        background: var(--background-color);
+    }
+
+    .modal-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-main);
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        padding: 0;
+        line-height: 1;
+        transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+        color: var(--primary-color);
+    }
+
+    .modal-body {
+        padding: 1.25rem 1.5rem 1.5rem;
+    }
+
+    .source-category {
+        margin-bottom: 1.5rem;
+    }
+
+    .source-category:last-child {
+        margin-bottom: 0;
+    }
+
+    .source-category h4 {
+        margin: 0 0 0.75rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+    .source-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.25rem 1rem;
+    }
+
+    .source-list li {
+        padding: 0.5rem 0;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+
+    @media (max-width: 480px) {
+        .source-list {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btn = document.getElementById('news-source-btn');
+        const modal = document.getElementById('news-source-modal');
+        const closeBtn = document.getElementById('modal-close-btn');
+
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
+
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+<!-- Word Cloud Section -->
+<section class="card wordcloud-section">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Weekly Trends</p>
+            <h3>지난 7일간의 주요 키워드</h3>
+        </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="wordcloud-legend">
+        <div class="legend-item">
+            <span class="legend-dot" style="background-color: #FF9F40;"></span>
+            <span>인물</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-dot" style="background-color: #36A2EB;"></span>
+            <span>업체</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-dot" style="background-color: #4BC0C0;"></span>
+            <span>기술</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-dot" style="background-color: #9966FF;"></span>
+            <span>상품</span>
+        </div>
+    </div>
+
+    <img src="./static/images/weekly_wordcloud.png" alt="Weekly Word Cloud"
+        class="wordcloud-img">
+</section>
+
+<div class="dashboard-grid">
+    <!-- AI Section -->
+    <div class="dashboard-section">
+        <h2>
+            AI 뉴스
+            <a href="ai/daily/2025-12-27_031532.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            <li>
+                <span class="preview-date">aitimes.kr 2025-12-27 15:20</span>
+                <a href="https://www.aitimes.kr/news/articleView.html?idxno=37891" target="_blank" class="preview-title">"AI 챗봇에도 ‘성격’이 있다" 성격 조작 가능성까지 드러나...케임…</a>
+            </li>
+            <li>
+                <span class="preview-date">aitimes.com 2025-12-27 07:10</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=205124" target="_blank" class="preview-title">[AI의 역사] 98 인류를 위한 공개되고 안전한 AI라는 약속 – 오…</a>
+            </li>
+            <li>
+                <span class="preview-date">aitimes.com 2025-12-27 07:10</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=205123" target="_blank" class="preview-title">[AI웹툰] 사랑하면그사람이된다 : 6화</a>
+            </li>
+            <li>
+                <span class="preview-date">aitimes.kr 2025-12-26 20:33</span>
+                <a href="https://www.aitimes.kr/news/articleView.html?idxno=37890" target="_blank" class="preview-title">키사이트코리아, 광운대에 반도체 측정 분석 장비 기증...차세대 반도체…</a>
+            </li>
+            <li>
+                <span class="preview-date">aitimes.kr 2025-12-26 18:52</span>
+                <a href="https://www.aitimes.kr/news/articleView.html?idxno=37889" target="_blank" class="preview-title">삼성전자, CES 2026서 차별화된 AI 체험 제공…단독 전시관에 '…</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- XR Section -->
+    <div class="dashboard-section">
+        <h2>
+            XR 뉴스
+            <a href="xr/daily/2025-12-27_031532.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            
+            <li>
+                <span class="preview-date">Net Influencer 2025-12-26 14:15</span>
+                <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQdVh2Ry1fdTkyRG5lNEp6ZFFIRDFGSlpUMjFFV2pMSWI3V2RMaldfY1pkbVI3cTVJRElyczZDZEIwVmJTcXRyZTZIUjNPS3dUXzBjaThWUXJpRzRiTERmV2VvQ3BLS1BKa0V6WGJ0Z2lMTTRVc19xVkI1dFp2dlQwSHNMVkdlQXhJQVJWc3RfTzJ1ZnZ2VFdfM3dobVRuc2VW?oc=5" target="_blank" class="preview-title">Korean Himaroo, AI 인플루언서 플랫폼 ReverseTok…</a>
+            </li>
+            
+            <li>
+                <span class="preview-date">arinsider.co 2025-12-26 13:00</span>
+                <a href="https://arinsider.co/2025/12/26/hands-on-is-sora-the-ultimate-prompt-driven-fantasy-engine/" target="_blank" class="preview-title">실습: Sora가 궁극적인 프롬프트 기반 판타지 엔진인가요?</a>
+            </li>
+            
+            <li>
+                <span class="preview-date">매일경제 2025-12-26 05:41</span>
+                <a href="https://news.google.com/rss/articles/CBMiVEFVX3lxTFBRQzl6dEpmMUpBQmpRcnZRNjFYYUpQZjJmeEp2dHJBVnFHRGh4YUlOMHRsTVN2ZXNDbWhwOXBrTmJJX08yZW1NZ3VzV3Z6eTVBNFFfMg?oc=5" target="_blank" class="preview-title">Virtual idol group SKINZ made the Chris…</a>
+            </li>
+            
+            <li>
+                <span class="preview-date">잡포스트 2025-12-26 05:29</span>
+                <a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE9qOTZMRnR5TVdDcnp6ZWdORnJ4OFZyNVFFeVVKRmkyanVLSG1KZDNnM3VRTGR5S2hGY0FpR3ZOQXN5Q3ZldzVYbzBoQVRycUZrZUlzUkF5czBnZWJXUndpS1UzdGdXVzBha0thd01n?oc=5" target="_blank" class="preview-title">플레이브, 스타트렌드 남자 그룹 1위…가상과 현실을 잇는 팬덤의 확장 …</a>
+            </li>
+            
+            <li>
+                <span class="preview-date">uploadvr.com 2025-12-25 14:00</span>
+                <a href="https://www.uploadvr.com/top-25-best-meta-quest-3-games/" target="_blank" class="preview-title">상위 25개 최고의 메타 퀘스트 3 & 3S 게임 - 2025년…</a>
+            </li>
+            
+        </ul>
+    </div>
+
+    <!-- Gov Section -->
+    <div class="dashboard-section">
+        <h2>
+            정부과제
+            <a href="gov/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            
+            <li>
+                <span class="preview-date">2025-12-26 | 공공융합기술정책과</span>
+                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186362" target="_blank" class="preview-title">2025년도 극한부품시험입증지원사업(Track형 실증지원) 신규과제 선정결과 공고</a>
+            </li>
+            
+            <li>
+                <span class="preview-date">2025-12-26 | 공공융합기술정책과</span>
+                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186361" target="_blank" class="preview-title">2025년도 4차 국민생활안전 긴급대응연구(2단계) 기술개발 및 실증 신규과제 선정결과 공고</a>
+            </li>
+            
+            <li>
+                <span class="preview-date">2025-12-26 | 디지털사회기획과</span>
+                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186342" target="_blank" class="preview-title">2026년 블록체인 융복합 타운 조성 사업 모집 공고</a>
+            </li>
+            
+            <li>
+                <span class="preview-date">2025-12-26 | 디지털사회기획과</span>
+                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186341" target="_blank" class="preview-title">2026년 블록체인 특화 클러스터 조성 사업 모집 공고</a>
+            </li>
+            
+            <li>
+                <span class="preview-date">2025-12-26 | 재단법인 화성에프씨</span>
+                <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01249483&bidPbancOrd=000" target="_blank" class="preview-title">2026 화성FC 뉴미디어 콘텐츠 제작 대행 용역</a>
+            </li>
+            
+        </ul>
+    </div>
+
+    <!-- Members Section -->
+    <div class="dashboard-section">
+        <h2>
+            회원사 소식
+            <a href="members/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            
+            <li>
+                <span class="preview-date">2025-12-27 07:11 | 글로벌 이코노믹</span>
+                <a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE5UZlZGTXdNQnJBNzVhdzFVUTdXdzNqbjkwR3VJXzZKTFBkZ1daVGRFckI5Z0sxQm1Sd1UzdElZWHUzMHdhY0czaG9wY1gtWWtPZnpuYTZKMDNYbS13SU9lUGpYQWZNWG1WMVFJYmpVUE1idjFNNmFROXlqU0cwSzA?oc=5" target="_blank" class="preview-title">구글, 지메일 주소변경기능 도입 - 글로벌이코노믹</a>
+            </li>
+            
+            <li>
+                <span class="preview-date">2025-12-27 06:58 | 글로벌 이코노믹</span>
+                <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxOUlRFOXBUZHpCbWtQRmlVSnVyWUF3R1RlaFZwSE9JVWs3RGoxRGZ6VjFPSjEtWTZ3bGpJQnI2VjIwRVFDelNieHRDamJHQm5faDVsb3ltN0M2MEFSQUdvQVVxT3hVMEZkY25RNXRUTVFzTFZzRjF0ZUlSMEdCVno1Qm9pRUpobEN4?oc=5" target="_blank" class="preview-title">태국-캄보디아, 교전 재개 20일만에 휴전 협약 체결 - 글로벌이코노믹</a>
+            </li>
+            
+            <li>
+                <span class="preview-date">2025-12-27 06:56 | 살린</span>
+                <a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxPejR3MWQ5WXR3LVl5RjRZVXNISlllVF84RERfSEE1Ml9KSjE0TDd5QkpvdDZIdzVyMEpKa3QzcGM2cTA3cVM2dWpwZlV6Ym1RcW42ZkJBYWZiV1ExelFVQlZUNWI4QmRvN2dCMmtfNFd1QzlhN3dCaVcyUEFKVnVtd1VMNEdkaE96eEhrTURmRXRUbUVhWjJCMmg4cW9KMG5ZWFFGWnNxZWQxZ9IBX0FVX3lxTFBmaXRkckFKMUFUTWJaSjFUbHpYT3JVVkszbVh3aGl0RFJqRTZCNmpRLXN6VWxhT0pfX2lfTmZDNjMycC1fNzhSdUlYdGFOb05aVndCMXd6ZTIyLVRGcTVz?oc=5" target="_blank" class="preview-title">퇴근길 열차서 쓰러진 승객 살린 3년차 간호사 - 경향신문</a>
+            </li>
+            
+            <li>
+                <span class="preview-date">2025-12-27 06:39 | 삼성전자</span>
+                <a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxPYXNaMnhZYnBKemkwNUE0blMxNGZia1NSdWtYZngxQ2tzbDJid2NKNEJHSXh5VEplZjlURFZzcXVuY1RIRTFaSXJPY3FlY0h2YWRkcS1sOU5WWHRkdHppSjlkMW9ETWR1djV4Rmd1NXltWEYtZGo0OG45QlhJazFpME5lb9IBlwFBVV95cUxNbFJLU1ZMYlRtYlRUcm5hZGdzQkpHcnRSU2h5eDg2ZnU4MW4wakNESUpYSFozdkpjdmVZN1BiT25YSDN4ZUpGSVVWYmQ5UHNHTndkdVBHZldtS0hiSm5QNGthQmtLb3Z2OWpqa0U5SkFzZ2tWcHpYWldRMGxuWWQyd2dCQjdlZ19uWkRqNEkwQ3hQcEhiTXhv?oc=5" target="_blank" class="preview-title">삼성전자가 CES 메인 전시장을 떠난 이유는? - 조선일보</a>
+            </li>
+            
+            <li>
+                <span class="preview-date">2025-12-27 06:37 | JTBC</span>
+                <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFBvTjlwcUhLUHB3dEFIWWQ5TnNBWnM5dlo5Rk1iUjZDaXppSm9sS1dWbk4yYm91a0E4M3VrbVhhTUp1dEJJN29jUmZicFg3bklxTEFr?oc=5" target="_blank" class="preview-title">'아는 형님', 오늘(27일) 결방…'뭉쳐야 찬다4'도 1월 컴백 - …</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
 
     </div>
 

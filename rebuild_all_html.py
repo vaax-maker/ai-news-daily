@@ -233,4 +233,14 @@ if __name__ == "__main__":
         links=links
     )
     
-    print("\n✨ All HTML pages have been rebuild with new templates!")
+    # 5. Asset Deployment (Sync static folders)
+    import shutil
+    src_static = "static"
+    dst_static = "docs/static"
+    if os.path.exists(src_static):
+        if os.path.exists(dst_static):
+            shutil.rmtree(dst_static)
+        shutil.copytree(src_static, dst_static)
+        print(f"[Deployment] Copied {src_static} -> {dst_static}")
+    
+    print("\n✨ All HTML pages have been rebuild with new templates and assets synced!")

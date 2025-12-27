@@ -85,21 +85,15 @@ header {
 
 .gnb a.active {
     color: var(--primary-color);
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
 }
 
 .header-logo {
-    height: 8rem;
-    /* Expanded to match marked area */
+    height: 5.5rem;
     width: auto;
     vertical-align: middle;
-    margin-right: 0.8rem;
+    margin-right: 1.2rem;
     object-fit: contain;
-    /* 세로만 80% 축소 (가로 유지) */
-    transform: scaleY(0.8);
-    transform-origin: center;
-    margin-top: -0.8rem;
-    margin-bottom: -0.8rem;
 }
 
 .logo-link {
@@ -155,7 +149,7 @@ header {
 .slogan-highlight {
     font-weight: 700;
     color: #84cc16;
-    /* 폰트 크기 통일 - 주변 텍스트와 동일 */
+    /* Lime Green */
 }
 
 .slogan-sub {
