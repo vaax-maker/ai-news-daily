@@ -456,19 +456,11 @@
             <span>{{ item.openg_dt[:16] }}</span>
             {% endif %}
         </div>
-        <div class="news-actions">
-            <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
-                class="action-btn discuss-btn">
-                토론 토론하기
-            </a>
-            <button
-                onclick="navigator.clipboard.writeText('{{ item.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))"
-                class="action-btn share-btn">
-                공유 공유
-            </button>
-            <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer" class="action-btn source-btn">
-                 원문 보기
-            </a>
+        <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; display: flex; gap: 0.5rem; justify-content: center;">
+            <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}" 
+               class="discuss-btn-sm">토론</a>
+            <button onclick="navigator.clipboard.writeText('{{ item.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))" 
+                    class="discuss-btn-sm">공유</button>
         </div>
 </div>
 {% endfor %}
