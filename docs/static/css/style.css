@@ -1455,7 +1455,87 @@ tr:hover {
 
 /* ===================================
    Discussion Feature Styles
-   =================================== */
+   ==================================== */
+
+/* 인라인 액션 링크 (제목 옆) */
+.inline-actions {
+    margin-left: 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.action-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.action-link:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+.action-separator {
+    margin: 0 0.5rem;
+    color: var(--text-muted);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .inline-actions {
+        display: block;
+        margin-left: 0;
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* 정부과제용 토론/공유 링크 (테이블 내) */
+.col-discuss {
+    width: 60px;
+    text-align: center;
+}
+
+.discuss-btn-sm {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.discuss-btn-sm:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+/* 토론 게시글 배지 */
+.discuss-badge {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+}
+
+/* 토론 게시글 배경색  */
+.discussion-post {
+    background: linear-gradient(90deg, #f0fdf4 0%, white 100%);
+}
 
 /* 액션 버튼 - 기사 하단 */
 .news-actions {
