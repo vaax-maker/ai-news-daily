@@ -162,28 +162,7 @@
                 <div class="tile-content">
                     <span class="tile-member-badge">{{ item.member_name }}</span>
                     <h3 class="tile-title">
-                        <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
-                    </h3>
-                    <div class="tile-meta">
-                        <span class="tile-source">{{ item.source_name or '출처' }}</span>
-                        <span class="tile-date">{{ item.published_display }}</span>
-                    </div>
-                    <div class="news-actions"
-                        style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; gap: 0.5rem;">
-                        <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
-                            class="action-btn discuss-btn" style="font-size: 0.75rem; padding: 0.45rem 0.7rem;">
-                            💬
-                        </a>
-                        <button
-                            onclick="navigator.clipboard.writeText('{{ item.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))"
-                            class="action-btn share-btn" style="font-size: 0.75rem; padding: 0.45rem 0.7rem;">
-                            🔗
-                        </button>
-                        <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer"
-                            class="action-btn source-btn" style="font-size: 0.75rem; padding: 0.45rem 0.7rem;">
-                            📑
-                        </a>
-                    </div>
+                        </div>
                 </div>
             </div>
             {% endfor %}

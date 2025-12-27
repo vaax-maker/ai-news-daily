@@ -27,20 +27,15 @@
                     <span class="tile-source">{{ article.source_name or '출처' }}</span>
                     <span class="tile-date">{{ article.published_display }}</span>
                 </div>
-                <div class="news-actions"
-                    style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; gap: 0.5rem;">
+                <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; font-size: 0.8rem;">
                     <a href="../board/index.html?mode=discuss&title={{ article.title|urlencode }}&link={{ article.link|urlencode }}&source={{ article.source_name|urlencode }}"
-                        class="action-btn discuss-btn" style="font-size: 0.75rem; padding: 0.45rem 0.7rem;">
-                        💬
-                    </a>
+                        class="action-link">토론</a>
                     <button
                         onclick="navigator.clipboard.writeText('{{ article.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))"
-                        class="action-btn share-btn" style="font-size: 0.75rem; padding: 0.45rem 0.7rem;">
-                        🔗
-                    </button>
+                        class="action-link action-button">공유</button>
                     <a href="{{ article.link }}" target="_blank" rel="noopener noreferrer" class="action-btn source-btn"
                         style="font-size: 0.75rem; padding: 0.45rem 0.7rem;">
-                        📑
+                        
                     </a>
                 </div>
             </div>
