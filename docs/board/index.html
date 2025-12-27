@@ -33,10 +33,12 @@
 <body>
     <header>
         <div class="gnb">
-            <a href="../index.html" class="logo-link">
-                <img src="../static/images/logo_new.png"
-                    alt="VAAX - VR-AR-AI-XR기술과 Biz.를 연결하는 성장나눔 커뮤니티 since 2016" class="header-logo">
-            </a>
+            <div class="logo-group">
+                <a href="../index.html" class="logo-link">
+                    <img src="../static/images/logo_new.png" alt="VAAX" class="header-logo">
+                </a>
+                <span class="header-slogan">VR·AR·AI·XR기술과 Biz.를 연결하는 성장나눔 커뮤니티 since 2016</span>
+            </div>
             <nav class="nav-links">
                 <a href="../index.html"
                     class="">Home</a>
@@ -112,10 +114,19 @@
                 <label>제목</label>
                 <input type="text" id="inputTitle" placeholder="제목을 입력하세요" maxlength="100">
             </div>
+
+            <!-- 첨부파일 (URL 입력 방식) -->
             <div class="form-group">
-                <label>내용</label>
-                <textarea id="inputContent" rows="10" placeholder="내용을 입력하세요."></textarea>
+                <label>첨부파일 (다운로드 가능한 URL 입력)</label>
+                <input type="url" id="inputFileUrl" placeholder="예: https://example.com/file.zip (구글 드라이브, 드롭박스 등)">
             </div>
+
+            <!-- Quill Editor -->
+            <div class="form-group">
+                <label>내용 (상단 툴바의 'Image' 아이콘을 눌러 이미지 URL을 입력하세요)</label>
+                <div id="editor-container" style="height: 300px;"></div>
+            </div>
+
             <div class="form-actions">
                 <button id="btnCancel" class="secondary-btn">취소</button>
                 <button id="btnSave" class="primary-btn">등록</button>
@@ -132,7 +143,14 @@
                     <span id="viewDate">날짜</span>
                 </div>
             </div>
-            <div class="view-content" id="viewContent">
+
+            <!-- 첨부파일 다운로드 영역 -->
+            <div id="viewAttachment" class="view-attachment hidden">
+                <span class="attachment-label">📎 첨부파일:</span>
+                <a href="#" id="downloadLink" target="_blank" rel="noopener">다운로드 링크</a>
+            </div>
+
+            <div class="view-content ql-editor" id="viewContent">
                 내용
             </div>
             <div class="view-actions">
@@ -146,13 +164,17 @@
     </div>
 </section>
 
+<!-- Quill CSS -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<!-- Quill JS -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
 <!-- Firebase SDK -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, getDoc, doc, query, orderBy, limit, serverTimestamp, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    // TODO: 여기에 Firebase 설정을 붙여넣으세요
-    // https://console.firebase.google.com/ 에서 프로젝트 생성 후 설정을 가져오세요
+    // 사용자 설정
     const firebaseConfig = {
         apiKey: "AIzaSyANn76u2ZCJ5rq4IOpYaTzFy1JtKoPOM-c",
         authDomain: "vaax-board.firebaseapp.com",
@@ -174,6 +196,23 @@
         document.querySelector('.loading-cell').textContent = "Firebase 설정이 필요합니다. 코드를 확인해주세요.";
     }
 
+    // Quill Setup
+    var quill = new Quill('#editor-container', {
+        theme: 'snow',
+        placeholder: '내용을 입력하세요. 상단 툴바를 이용해 이미지 URL을 삽입할 수 있습니다.',
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote', 'code-block'],
+                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                ['link', 'image'],                                // link and image, video
+                ['clean']                                         // remove formatting button
+            ]
+        }
+    });
+
     const boardBody = document.getElementById('boardBody');
     const writeForm = document.getElementById('writeForm');
     const viewSection = document.getElementById('viewSection');
@@ -183,7 +222,7 @@
     const inputWriter = document.getElementById('inputWriter');
     const inputPassword = document.getElementById('inputPassword');
     const inputTitle = document.getElementById('inputTitle');
-    const inputContent = document.getElementById('inputContent');
+    const inputFileUrl = document.getElementById('inputFileUrl'); // URL 입력 필드
 
     let currentMode = 'list'; // list, write, view
     let currentDocId = null;
@@ -207,7 +246,7 @@
                 return;
             }
 
-            let index = 1; // 실제로는 전체 개수 - 현재 인덱스로 계산 필요
+            let index = 1;
 
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
@@ -215,9 +254,14 @@
                 const dateObj = data.createdAt ? data.createdAt.toDate() : new Date();
                 const dateStr = dateObj.toISOString().split('T')[0];
 
+                // 제목에 첨부파일 아이콘 (fileUrl 필드가 있으면 표시)
+                const attachIcon = data.fileUrl ? ' <span title="첨부파일">📎</span>' : '';
+
                 row.innerHTML = `
                     <td class="col-num">${index++}</td>
-                    <td class="col-subject"><a href="#" data-id="${doc.id}">${escapeHtml(data.title)}</a></td>
+                    <td class="col-subject">
+                        <a href="#" data-id="${doc.id}">${escapeHtml(data.title)}${attachIcon}</a>
+                    </td>
                     <td class="col-writer">${escapeHtml(data.writer)}</td>
                     <td class="col-date">${dateStr}</td>
                     <td class="col-views">${data.views || 0}</td>
@@ -229,7 +273,9 @@
             document.querySelectorAll('.col-subject a').forEach(a => {
                 a.addEventListener('click', (e) => {
                     e.preventDefault();
-                    viewPost(e.target.dataset.id);
+                    // 클릭한 요소가 a 태그인지 확인 (아이콘 클릭 시 등 위임 처리)
+                    const target = e.target.closest('a');
+                    if (target) viewPost(target.dataset.id);
                 });
             });
 
@@ -249,8 +295,11 @@
         const viewWriter = document.getElementById('viewWriter');
         const viewDate = document.getElementById('viewDate');
         const viewContent = document.getElementById('viewContent');
+        const viewAttachment = document.getElementById('viewAttachment');
+        const downloadLink = document.getElementById('downloadLink');
 
         viewContent.innerHTML = '로딩중...';
+        viewAttachment.classList.add('hidden');
 
         try {
             const docRef = doc(db, "posts", id);
@@ -262,7 +311,16 @@
                 viewWriter.textContent = data.writer;
                 const dateObj = data.createdAt ? data.createdAt.toDate() : new Date();
                 viewDate.textContent = dateObj.toLocaleString();
-                viewContent.innerHTML = escapeHtml(data.content).replace(/\n/g, '<br>');
+
+                // Quill Content (HTML)
+                viewContent.innerHTML = data.content;
+
+                // 첨부파일 URL 처리
+                if (data.fileUrl) {
+                    viewAttachment.classList.remove('hidden');
+                    downloadLink.textContent = data.fileUrl; // 혹은 "다운로드"
+                    downloadLink.href = data.fileUrl;
+                }
 
                 // 조회수 증가 (Optional)
                 // updateDoc(docRef, { views: (data.views || 0) + 1 });
@@ -286,39 +344,48 @@
         const writer = inputWriter.value.trim();
         const password = inputPassword.value.trim();
         const title = inputTitle.value.trim();
-        const content = inputContent.value.trim();
+        const content = quill.root.innerHTML; // Quill HTML
+        const fileUrl = inputFileUrl.value.trim(); // 파일 URL
 
-        if (!writer || !password || !title || !content) {
-            alert("모든 항목을 입력해주세요.");
+        // Quill 에디터가 비었는지 확인 (기본적으로 <p><br></p>가 있음)
+        const textContent = quill.getText().trim();
+        const hasImage = content.includes('<img');
+
+        if (!writer || !password || !title || (!textContent && !hasImage)) {
+            alert("내용을 입력해주세요. (내용 포함)");
             return;
         }
 
         try {
+            const docData = {
+                writer,
+                title,
+                content,
+                fileUrl, // URL 저장
+                updatedAt: serverTimestamp()
+            };
+
             if (currentDocId) {
-                // 수정 TODO: 비밀번호 체크 로직 필요 (클라이언트 사이드라 취약하지만 간단히 구현)
-                // 실제로는 서버(Cloud Functions)에서 하거나, 문서에 비번 저장후 비교
-                await updateDoc(doc(db, "posts", currentDocId), {
-                    writer, title, content, // 비번은 업데이트 안함
-                    updatedAt: serverTimestamp()
-                });
+                // 수정
+                await updateDoc(doc(db, "posts", currentDocId), docData);
                 alert("수정되었습니다.");
             } else {
                 // 신규
-                await addDoc(collection(db, "posts"), {
-                    writer,
-                    password, // 주의: 평문 저장됨 (데모용)
-                    title,
-                    content,
-                    views: 0,
-                    createdAt: serverTimestamp()
-                });
+                docData.password = password;
+                docData.views = 0;
+                docData.createdAt = serverTimestamp();
+                await addDoc(collection(db, "posts"), docData);
                 alert("등록되었습니다.");
             }
             showSection('list');
-            loadPosts(); // 목록 갱신
+            loadPosts();
         } catch (e) {
             console.error("Error saving:", e);
-            alert("저장 중 오류가 발생했습니다.");
+            if (e.message.includes("exceeds the maximum size")) {
+                alert("저장 실패: 게시글 전체 용량이 너무 큽니다. (이미지나 첨부파일을 줄여주세요)");
+            } else {
+                alert("저장 중 오류가 발생했습니다: " + e.message);
+            }
         }
     }
 
@@ -383,9 +450,11 @@
         currentDocId = null;
         document.getElementById('formTitle').textContent = "새 게시글 작성";
         inputWriter.value = "";
+        inputPassword.disabled = false;
         inputPassword.value = "";
         inputTitle.value = "";
-        inputContent.value = "";
+        inputFileUrl.value = ""; // 초기화
+        quill.setContents([]); // 에디터 초기화
         showSection('write');
     });
 
@@ -399,7 +468,7 @@
 
     document.getElementById('btnSave').addEventListener('click', savePost);
 
-    // 수정 버튼 클릭 (간단 비번 체크)
+    // 수정 버튼
     document.getElementById('btnEdit').addEventListener('click', async () => {
         const inputPw = prompt("비밀번호를 입력하세요");
         if (!inputPw) return;
@@ -409,9 +478,15 @@
         if (docSnap.exists() && docSnap.data().password === inputPw) {
             document.getElementById('formTitle').textContent = "게시글 수정";
             inputWriter.value = docSnap.data().writer;
-            inputPassword.value = docSnap.data().password; // 기존 비번 노출 (데모용)
+            inputPassword.value = "****";
+            inputPassword.disabled = true; // 비번 수정 불가
             inputTitle.value = docSnap.data().title;
-            inputContent.value = docSnap.data().content;
+
+            // Quill 내용 설정
+            quill.clipboard.dangerouslyPasteHTML(docSnap.data().content);
+
+            inputFileUrl.value = docSnap.data().fileUrl || "";
+
             showSection('write');
         } else {
             alert("비밀번호가 일치하지 않습니다.");

@@ -79,16 +79,15 @@
                 <input type="text" id="inputTitle" placeholder="제목을 입력하세요" maxlength="100">
             </div>
 
-            <!-- 첨부파일 (Base64 저장, 용량 제한) -->
+            <!-- 첨부파일 (URL 입력 방식) -->
             <div class="form-group">
-                <label>첨부파일 (최대 500KB)</label>
-                <input type="file" id="inputFile">
-                <div id="fileInfo" class="file-info hidden"></div>
+                <label>첨부파일 (다운로드 가능한 URL 입력)</label>
+                <input type="url" id="inputFileUrl" placeholder="예: https://example.com/file.zip (구글 드라이브, 드롭박스 등)">
             </div>
 
             <!-- Quill Editor -->
             <div class="form-group">
-                <label>내용 (이미지 붙여넣기 가능)</label>
+                <label>내용 (상단 툴바의 'Image' 아이콘을 눌러 이미지 URL을 입력하세요)</label>
                 <div id="editor-container" style="height: 300px;"></div>
             </div>
 
@@ -112,7 +111,7 @@
             <!-- 첨부파일 다운로드 영역 -->
             <div id="viewAttachment" class="view-attachment hidden">
                 <span class="attachment-label">📎 첨부파일:</span>
-                <a href="#" id="downloadLink" download>파일명</a>
+                <a href="#" id="downloadLink" target="_blank" rel="noopener">다운로드 링크</a>
             </div>
 
             <div class="view-content ql-editor" id="viewContent">
@@ -164,7 +163,7 @@
     // Quill Setup
     var quill = new Quill('#editor-container', {
         theme: 'snow',
-        placeholder: '내용을 입력하세요. 이미지를 복사해서 붙여넣을 수 있습니다.',
+        placeholder: '내용을 입력하세요. 상단 툴바를 이용해 이미지 URL을 삽입할 수 있습니다.',
         modules: {
             toolbar: [
                 ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -187,20 +186,10 @@
     const inputWriter = document.getElementById('inputWriter');
     const inputPassword = document.getElementById('inputPassword');
     const inputTitle = document.getElementById('inputTitle');
-    const inputFile = document.getElementById('inputFile');
-    const fileInfo = document.getElementById('fileInfo');
+    const inputFileUrl = document.getElementById('inputFileUrl'); // URL 입력 필드
 
     let currentMode = 'list'; // list, write, view
     let currentDocId = null;
-    let currentFileData = null; // { name: "test.txt", data: "base64..." }
-
-    // --- Helper: File to Base64 ---
-    const fileToBase64 = file => new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    });
 
     // --- Functions ---
 
@@ -229,8 +218,8 @@
                 const dateObj = data.createdAt ? data.createdAt.toDate() : new Date();
                 const dateStr = dateObj.toISOString().split('T')[0];
 
-                // 제목에 첨부파일 아이콘 표시
-                const attachIcon = data.file ? ' <span title="첨부파일">📎</span>' : '';
+                // 제목에 첨부파일 아이콘 (fileUrl 필드가 있으면 표시)
+                const attachIcon = data.fileUrl ? ' <span title="첨부파일">📎</span>' : '';
 
                 row.innerHTML = `
                     <td class="col-num">${index++}</td>
@@ -290,12 +279,11 @@
                 // Quill Content (HTML)
                 viewContent.innerHTML = data.content;
 
-                // 첨부파일 처리
-                if (data.file) {
+                // 첨부파일 URL 처리
+                if (data.fileUrl) {
                     viewAttachment.classList.remove('hidden');
-                    downloadLink.textContent = data.file.name;
-                    downloadLink.href = data.file.data;
-                    downloadLink.download = data.file.name;
+                    downloadLink.textContent = data.fileUrl; // 혹은 "다운로드"
+                    downloadLink.href = data.fileUrl;
                 }
 
                 // 조회수 증가 (Optional)
@@ -321,13 +309,14 @@
         const password = inputPassword.value.trim();
         const title = inputTitle.value.trim();
         const content = quill.root.innerHTML; // Quill HTML
+        const fileUrl = inputFileUrl.value.trim(); // 파일 URL
 
         // Quill 에디터가 비었는지 확인 (기본적으로 <p><br></p>가 있음)
         const textContent = quill.getText().trim();
         const hasImage = content.includes('<img');
 
         if (!writer || !password || !title || (!textContent && !hasImage)) {
-            alert("모든 항목을 입력해주세요. (내용 포함)");
+            alert("내용을 입력해주세요. (내용 포함)");
             return;
         }
 
@@ -336,14 +325,9 @@
                 writer,
                 title,
                 content,
+                fileUrl, // URL 저장
                 updatedAt: serverTimestamp()
             };
-
-            // 신규 작성 시에만 비밀번호 저장 (수정 시에는 유지)
-            // 파일 처리
-            if (currentFileData) {
-                docData.file = currentFileData;
-            }
 
             if (currentDocId) {
                 // 수정
@@ -428,14 +412,12 @@
     // --- Event Listeners ---
     document.getElementById('btnWrite').addEventListener('click', () => {
         currentDocId = null;
-        currentFileData = null;
         document.getElementById('formTitle').textContent = "새 게시글 작성";
         inputWriter.value = "";
         inputPassword.disabled = false;
         inputPassword.value = "";
         inputTitle.value = "";
-        inputFile.value = "";
-        fileInfo.classList.add('hidden');
+        inputFileUrl.value = ""; // 초기화
         quill.setContents([]); // 에디터 초기화
         showSection('write');
     });
@@ -467,15 +449,7 @@
             // Quill 내용 설정
             quill.clipboard.dangerouslyPasteHTML(docSnap.data().content);
 
-            currentFileData = docSnap.data().file || null;
-            inputFile.value = ""; // 파일 인풋 초기화
-
-            if (currentFileData) {
-                fileInfo.textContent = `현재 파일: ${currentFileData.name}`;
-                fileInfo.classList.remove('hidden');
-            } else {
-                fileInfo.classList.add('hidden');
-            }
+            inputFileUrl.value = docSnap.data().fileUrl || "";
 
             showSection('write');
         } else {
@@ -484,42 +458,6 @@
     });
 
     document.getElementById('btnDelete').addEventListener('click', deletePost);
-
-    // 파일 업로드 처리
-    inputFile.addEventListener('change', async (e) => {
-        const file = e.target.files[0];
-        if (!file) {
-            currentFileData = null;
-            fileInfo.classList.add('hidden');
-            return;
-        }
-
-        // 용량 제한 체크 (500KB)
-        if (file.size > 500 * 1024) {
-            alert("파일 크기는 500KB 이하여야 합니다.");
-            inputFile.value = "";
-            currentFileData = null;
-            fileInfo.classList.add('hidden');
-            return;
-        }
-
-        try {
-            const base64 = await fileToBase64(file);
-            currentFileData = {
-                name: file.name,
-                type: file.type,
-                data: base64
-            };
-            fileInfo.textContent = `선택된 파일: ${file.name}`;
-            fileInfo.classList.remove('hidden');
-        } catch (err) {
-            console.error(err);
-            alert("파일 처리 중 오류가 발생했습니다.");
-            inputFile.value = "";
-            currentFileData = null;
-            fileInfo.classList.add('hidden');
-        }
-    });
 
     // Initial Load
     loadPosts();

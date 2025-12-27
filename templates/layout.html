@@ -25,10 +25,12 @@
 <body>
     <header>
         <div class="gnb">
-            <a href="{{ root_path | default('.') }}/index.html" class="logo-link">
-                <img src="{{ root_path | default('.') }}/static/images/logo_new.png"
-                    alt="VAAX - VR-AR-AI-XR기술과 Biz.를 연결하는 성장나눔 커뮤니티 since 2016" class="header-logo">
-            </a>
+            <div class="logo-group">
+                <a href="{{ root_path | default('.') }}/index.html" class="logo-link">
+                    <img src="{{ root_path | default('.') }}/static/images/logo_new.png" alt="VAAX" class="header-logo">
+                </a>
+                <span class="header-slogan">VR·AR·AI·XR기술과 Biz.를 연결하는 성장나눔 커뮤니티 since 2016</span>
+            </div>
             <nav class="nav-links">
                 <a href="{{ root_path | default('.') }}/index.html"
                     class="{% if active_tab == 'home' %}active{% endif %}">Home</a>
