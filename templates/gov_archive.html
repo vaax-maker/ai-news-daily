@@ -381,6 +381,7 @@
                 <th class="col-schedule">입찰시작</th>
                 <th class="col-schedule">입찰마감</th>
                 <th class="col-schedule">개찰</th>
+                <th class="col-discuss">토론</th>
             </tr>
         </thead>
         <tbody>
@@ -406,6 +407,12 @@
                 <td class="col-schedule">{{ item.bid_begin_dt[:16] if item.bid_begin_dt else '미제공' }}</td>
                 <td class="col-schedule">{{ item.bid_close_dt[:16] if item.bid_close_dt else '미제공' }}</td>
                 <td class="col-schedule">{{ item.openg_dt[:16] if item.openg_dt else '미제공' }}</td>
+                <td class="col-discuss">
+                    <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
+                        class="discuss-btn-sm">
+                        💬
+                    </a>
+                </td>
                 </tr>
                 {% endfor %}
         </tbody>
@@ -442,6 +449,20 @@
             <span class="meta-label">개찰</span>
             <span>{{ item.openg_dt[:16] }}</span>
             {% endif %}
+        </div>
+        <div class="news-actions">
+            <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
+                class="action-btn discuss-btn">
+                💬 토론하기
+            </a>
+            <button
+                onclick="navigator.clipboard.writeText('{{ item.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))"
+                class="action-btn share-btn">
+                🔗 공유
+            </button>
+            <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer" class="action-btn source-btn">
+                📑 원문 보기
+            </a>
         </div>
 </div>
 {% endfor %}

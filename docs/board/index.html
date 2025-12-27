@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <title>자유 게시판</title>
+    <title>Small Talk</title>
     
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
@@ -63,7 +63,7 @@
                     <a href="../members/index.html"
                         class="">회원사소식</a>
                     <a href="../board/index.html"
-                        class="active">게시판</a>
+                        class="active">Small Talk</a>
                 </nav>
             </div>
         </div>
@@ -75,7 +75,7 @@
     <div class="header-titles">
         <p class="eyebrow">Community</p>
         <div class="title-row">
-            <h1>자유 게시판</h1>
+            <h1>Small Talk</h1>
             <p class="title-desc">누구나 자유롭게 의견을 나누고 자료를 공유하는 공간입니다.</p>
         </div>
     </div>
@@ -283,11 +283,21 @@
                 const dateObj = data.createdAt ? data.createdAt.toDate() : new Date();
                 const dateStr = dateObj.toISOString().split('T')[0];
 
-                // 제목에 첨부파일 아이콘 (Quill 이미지 존재 여부 등 체크 가능하나 생략)
+                // 토론 게시글 판별 (제목이 [토론]으로 시작하면)
+                const isDiscussion = data.title && data.title.startsWith('[토론]');
+                if (isDiscussion) {
+                    row.classList.add('discussion-post');
+                }
+
+                // 제목에 첫부파일 아이콘 (Quill 이미지 존재 여부 등 체크 가능하나 생략)
+                const titleHtml = isDiscussion ?
+                    `<span class="discuss-badge">💬</span>${escapeHtml(data.title)}` :
+                    escapeHtml(data.title);
+
                 row.innerHTML = `
                     <td class="col-num">${index++}</td>
                     <td class="col-subject">
-                        <a href="#" data-id="${doc.id}">${escapeHtml(data.title)}</a>
+                        <a href="#" data-id="${doc.id}">${titleHtml}</a>
                     </td>
                     <td class="col-writer">${escapeHtml(data.writer)}</td>
                     <td class="col-date">${dateStr}</td>
@@ -635,6 +645,48 @@
 
     // Initial Load
     loadPosts();
+
+    // URL 파라미터 처리 (토론 모드)
+    function getUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+            mode: params.get('mode'),
+            title: params.get('title'),
+            link: params.get('link'),
+            source: params.get('source')
+        };
+    }
+
+    // 페이지 로드 시 토론 모드 확인
+    const urlParams = getUrlParams();
+    if (urlParams.mode === 'discuss' && urlParams.title && urlParams.link) {
+        // 글쓰기 모드로 전환
+        showSection('write');
+        currentDocId = null;
+        document.getElementById('formTitle').textContent = '새 토론 게시글 작성';
+        inputWriter.value = '';
+        inputPassword.disabled = false;
+        inputPassword.value = '';
+
+        // 제목 자동 입력
+        inputTitle.value = `[토론] ${decodeURIComponent(urlParams.title)}`;
+
+        // 본문에 기사 링크 자동 삽입
+        const articleLink = decodeURIComponent(urlParams.link);
+        const articleTitle = decodeURIComponent(urlParams.title);
+        const articleSource = urlParams.source ? decodeURIComponent(urlParams.source) : '출처';
+
+        quill.clipboard.dangerouslyPasteHTML(`
+            <p>📰 <strong>관련 기사:</strong> <a href="${articleLink}" target="_blank" rel="noopener">${articleTitle}</a></p>
+            <p><em>출처: ${articleSource}</em></p>
+            <p></p>
+            <p>[이 기사/과제에 대한 의견을 자유롭게 나눠주세요!]</p>
+            <p></p>
+        `);
+
+        // URL 파라미터 제거 (히스토리에 남지 않도록)
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
 
 </script>
 
