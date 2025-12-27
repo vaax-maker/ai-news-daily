@@ -24,10 +24,6 @@
             <div class="tile-content">
                 <h3 class="tile-title">
                     <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
-                    <span class="inline-actions">
-                        <a href="../board/index.html?mode=discuss&title={{ article.title|urlencode }}&link={{ article.link|urlencode }}&source={{ article.source_name|urlencode }}"
-                            class="action-link">토론</a>
-                        <span class="action-separator">|</span>
                         <button
                             onclick="navigator.clipboard.writeText('{{ article.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))"
                             class="action-link action-button">공유</button>

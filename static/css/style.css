@@ -1500,25 +1500,31 @@ tr:hover {
 
 /* 정부과제용 토론/공유 링크 (테이블 내) */
 .col-discuss {
-    width: 60px;
+    width: 80px;
     text-align: center;
 }
 
 .discuss-btn-sm {
-    color: var(--primary-color);
+    display: inline-block;
+    min-width: 60px;
+    padding: 0.5rem 0.8rem;
+    background: var(--primary-color);
+    color: white;
     text-decoration: none;
     font-size: 0.85rem;
-    font-weight: 500;
-    background: none;
+    font-weight: 600;
     border: none;
-    padding: 0;
+    border-radius: 6px;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: all 0.2s;
+    text-align: center;
 }
 
 .discuss-btn-sm:hover {
-    opacity: 0.7;
-    text-decoration: underline;
+    background: var(--primary-color-hover);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(101, 163, 13, 0.3);
 }
 
 /* 토론 게시글 배지 */

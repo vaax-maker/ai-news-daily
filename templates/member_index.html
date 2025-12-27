@@ -163,10 +163,6 @@
                     <span class="tile-member-badge">{{ item.member_name }}</span>
                     <h3 class="tile-title">
                         <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
-                        <span class="inline-actions">
-                            <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
-                                class="action-link">토론</a>
-                            <span class="action-separator">|</span>
                             <button
                                 onclick="navigator.clipboard.writeText('{{ item.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))"
                                 class="action-link action-button">공유</button>

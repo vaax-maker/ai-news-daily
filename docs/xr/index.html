@@ -280,32 +280,7 @@
         link.textContent = article.title;
         title.appendChild(link);
         
-        // Inline actions
-        const inlineActions = document.createElement('span');
-        inlineActions.className = 'inline-actions';
         
-        const discussLink = document.createElement('a');
-        discussLink.href = `../board/index.html?mode=discuss&title=${encodeURIComponent(article.title)}&link=${encodeURIComponent(article.link)}&source=${encodeURIComponent(article.source || '출처')}`;
-        discussLink.className = 'action-link';
-        discussLink.textContent = '토론';
-        inlineActions.appendChild(discussLink);
-        
-        const separator = document.createElement('span');
-        separator.className = 'action-separator';
-        separator.textContent = '|';
-        inlineActions.appendChild(separator);
-        
-        const shareBtn = document.createElement('button');
-        shareBtn.className = 'action-link action-button';
-        shareBtn.textContent = '공유';
-        shareBtn.onclick = () => {
-            navigator.clipboard.writeText(article.link)
-                .then(() => alert('링크가 클립보드에 복사되었습니다!'))
-                .catch(() => alert('복사 실패'));
-        };
-        inlineActions.appendChild(shareBtn);
-        
-        title.appendChild(inlineActions);
 
         const meta = document.createElement('div');
         meta.className = 'news-meta';
