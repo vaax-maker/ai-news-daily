@@ -62,8 +62,10 @@ header {
     padding: 0 1rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
+    justify-content: flex-start;
+    /* 왼쪽 정렬 */
+    gap: 1rem;
+    /* 로고와 텍스트 간격 대폭 축소 (Home 글자 너비 정도) */
     font-weight: 600;
 }
 
@@ -108,8 +110,10 @@ header {
 
 .logo-group {
     display: flex;
-    align-items: center;
-    gap: 1.25rem;
+    flex-direction: column;
+    /* 세로 배치 */
+    align-items: flex-start;
+    gap: 0.5rem;
 }
 
 .header-slogan {
@@ -117,11 +121,11 @@ header {
     color: var(--text-muted);
     font-weight: 500;
     line-height: 1.5;
-    max-width: 420px;
+    max-width: 480px;
     word-break: keep-all;
     display: inline-block;
-    padding-left: 0.8rem;
-    /* 2칸 들여쓰기 효과 */
+    padding-left: 0.2rem;
+    /* 미세한 여백 */
 }
 
 .slogan-highlight {
@@ -148,19 +152,14 @@ header {
         gap: 0.75rem;
     }
 
-    .logo-group {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
+    .header-right-section {
         width: 100%;
-        margin-bottom: 0.5rem;
+        gap: 1rem;
     }
 
-    .header-slogan {
-        font-size: 0.85rem;
-        color: #64748b;
+    .header-slogan-text {
+        font-size: 0.9rem;
         max-width: 100%;
-        margin-left: 0.2rem;
     }
 
     .nav-links {

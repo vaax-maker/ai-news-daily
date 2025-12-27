@@ -1,8 +1,8 @@
 :root {
-    --primary-color: #84cc16;
-    /* 밝은 초록 (Lime 500) */
-    --primary-color-hover: #65a30d;
-    /* 진한 초록 (Lime 600) */
+    --primary-color: #65a30d;
+    /* 더 진한 연두 (Lime 600) */
+    --primary-color-hover: #4d7c0f;
+    /* 아주 진한 연두 (Lime 700) */
     --secondary-color: #475569;
     --background-color: #ffffff;
     --card-bg: #ffffff;
@@ -63,9 +63,9 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    /* 왼쪽 정렬로 변경 */
-    gap: 2.5rem;
-    /* 로고와 우측 섹션 간격 */
+    /* 왼쪽 정렬 */
+    gap: 1rem;
+    /* 로고와 텍스트 간격 대폭 축소 (Home 글자 너비 정도) */
     font-weight: 600;
 }
 
