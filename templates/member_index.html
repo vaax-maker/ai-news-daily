@@ -151,33 +151,24 @@
     <!-- Tab Content: Latest News -->
     <div id="latest-news" class="member-tab-content active">
         {% if all_news %}
-        <div class="member-news-grid" id="latest-news-grid">
+        <div class="simple-news-list" id="latest-news-list">
             {% for item in all_news %}
-            <div class="member-news-tile search-target" data-search="{{ item.title }} {{ item.member_name }}">
-                {% if item.image_url %}
-                <div class="tile-image">
-                    <img src="{{ item.image_url }}" alt="Thumbnail" loading="lazy">
-                </div>
-                {% endif %}
-                <div class="tile-content">
-                    <span class="tile-member-badge">{{ item.member_name }}</span>
-                    <h3 class="tile-title">
+            <div class="news-list-item search-target" data-search="{{ item.title }} {{ item.member_name }}">
+                <div class="list-item-content">
+                    <div class="item-badge">{{ item.member_name }}</div>
+                    <h3 class="list-item-title">
                         <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
                     </h3>
-                    <div class="tile-meta">
-                        <span class="tile-source">{{ item.source_name or '출처' }}</span>
-                        <span class="tile-date">{{ item.published_display }}</span>
+                    <div class="list-item-meta">
+                        <span class="meta-source">{{ item.source_name or '출처' }}</span>
+                        <span class="meta-date">{{ item.published_display }}</span>
                     </div>
-                    <div class="tile-actions">
-                        <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}" 
-                           class="discuss-btn-sm">토론</a>
-                        <button onclick="navigator.clipboard.writeText('{{ item.link }}')" 
-                                class="discuss-btn-sm">공유</button>
-                    </div>
-                    <div class="tile-meta">
-                        <span class="tile-source">{{ item.source_name or '출처' }}</span>
-                        <span class="tile-date">{{ item.published_display }}</span>
-                    </div>
+                </div>
+                <div class="list-item-actions">
+                    <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}" 
+                       class="discuss-btn-sm">토론</a>
+                    <button onclick="navigator.clipboard.writeText('{{ item.link }}')" 
+                            class="discuss-btn-sm">공유</button>
                 </div>
             </div>
             {% endfor %}

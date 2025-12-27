@@ -13,28 +13,22 @@
 
 <section class="card">
     {% if articles %}
-    <div class="member-news-grid">
+    <div class="simple-news-list">
         {% for article in articles %}
-        <div class="member-news-tile">
-            {% if article.image_url %}
-            <div class="tile-image">
-                <img src="{{ article.image_url }}" alt="Thumbnail" loading="lazy">
-            </div>
-            {% endif %}
-            <div class="tile-content">
-                <h3 class="tile-title">
+        <div class="news-list-item">
+            <div class="list-item-content">
+                <h3 class="list-item-title">
                     <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
                 </h3>
-                <div class="tile-meta">
-                    <span class="tile-source">{{ article.source_name or '출처' }}</span>
-                    <span class="tile-date">{{ article.published_display }}</span>
+                <div class="list-item-meta">
+                    <span class="meta-source">{{ article.source_name or '출처' }}</span>
+                    <span class="meta-date">{{ article.published_display }}</span>
                 </div>
-                <div class="tile-actions">
-                    <a href="../board/index.html?mode=discuss&title={{ article.title|urlencode }}&link={{ article.link|urlencode }}&source={{ article.source_name|urlencode }}"
-                        class="discuss-btn-sm">토론</a>
-                    <button onclick="navigator.clipboard.writeText('{{ article.link }}')"
-                        class="discuss-btn-sm">공유</button>
-                </div>
+            </div>
+            <div class="list-item-actions">
+                <a href="../board/index.html?mode=discuss&title={{ article.title|urlencode }}&link={{ article.link|urlencode }}&source={{ article.source_name|urlencode }}"
+                    class="discuss-btn-sm">토론</a>
+                <button onclick="navigator.clipboard.writeText('{{ article.link }}')" class="discuss-btn-sm">공유</button>
             </div>
         </div>
         {% endfor %}

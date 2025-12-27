@@ -1681,23 +1681,6 @@ tr:hover {
     text-align: center;
 }
 
-.discuss-btn-sm {
-    display: inline-block;
-    padding: 0.4rem 0.75rem;
-    background: var(--primary-color);
-    color: white !important;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s ease;
-}
-
-.discuss-btn-sm:hover {
-    background: var(--primary-color-hover);
-    color: white !important;
-    transform: scale(1.05);
-}
 
 /* 게시판 토론 배지 */
 .discuss-badge {
