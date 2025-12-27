@@ -65,21 +65,583 @@
 </div>
 
 <section class="card board-card">
-    <div class="board-intro">
-        <p class="board-intro-text">
-            💡 <strong>안내:</strong> 게시글/댓글 작성 및 파일 업로드를 위해서는 <strong>GitHub 계정 로그인</strong>이 필요합니다.<br>
-            📱 <strong>모바일 이미지 업로드:</strong> 갤러리에서 사진을 <strong>'복사'</strong>한 후 입력창에 <strong>'붙여넣기'</strong> 해주세요.
-        </p>
-    </div>
+    <div class="board-container">
+        <!-- 게시판 컨트롤 (글쓰기 버튼 등) -->
+        <div class="board-controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="검색어를 입력하세요">
+            </div>
+            <button id="btnWrite" class="primary-btn">글쓰기</button>
+        </div>
 
-    <!-- Giscus Comments System -->
-    <div class="giscus"></div>
-    <script src="https://giscus.app/client.js" data-repo="vaax-maker/ai-news-daily" data-repo-id="R_kgDOQgKDLA"
-        data-category="General" data-category-id="DIC_kwDOQgKDLM4Cz8nE" data-mapping="pathname" data-strict="0"
-        data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom"
-        data-theme="preferred_color_scheme" data-lang="ko" crossorigin="anonymous" async>
-        </script>
+        <!-- 게시글 목록 -->
+        <div class="board-list-section">
+            <table class="styled-table board-table">
+                <thead>
+                    <tr>
+                        <th class="col-num">번호</th>
+                        <th class="col-subject">제목</th>
+                        <th class="col-writer">작성자</th>
+                        <th class="col-date">작성일</th>
+                        <th class="col-views">조회</th>
+                    </tr>
+                </thead>
+                <tbody id="boardBody">
+                    <!-- 자바스크립트로 데이터가 로드됩니다 -->
+                    <tr>
+                        <td colspan="5" class="loading-cell">게시글을 불러오는 중...</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 페이지네이션 (추후 구현 가능, 현재는 더보기 방식 또는 전체 로드) -->
+            <div id="loadingIndicator" class="loading-indicator hidden">Loading...</div>
+        </div>
+
+        <!-- 글쓰기/수정 폼 (기본 숨김) -->
+        <div id="writeForm" class="board-form hidden">
+            <h3 id="formTitle">새 게시글 작성</h3>
+            <div class="form-group">
+                <label>작성자</label>
+                <input type="text" id="inputWriter" placeholder="이름/닉네임" maxlength="20">
+            </div>
+            <div class="form-group">
+                <label>비밀번호</label>
+                <input type="password" id="inputPassword" placeholder="수정/삭제용 비밀번호 (4자리 이상)">
+            </div>
+            <div class="form-group">
+                <label>제목</label>
+                <input type="text" id="inputTitle" placeholder="제목을 입력하세요" maxlength="100">
+            </div>
+            <div class="form-group">
+                <label>내용</label>
+                <textarea id="inputContent" rows="10" placeholder="내용을 입력하세요."></textarea>
+            </div>
+            <div class="form-actions">
+                <button id="btnCancel" class="secondary-btn">취소</button>
+                <button id="btnSave" class="primary-btn">등록</button>
+            </div>
+        </div>
+
+        <!-- 게시글 상세 보기 (기본 숨김) -->
+        <div id="viewSection" class="board-view hidden">
+            <div class="view-header">
+                <h2 id="viewTitle">제목</h2>
+                <div class="view-meta">
+                    <span id="viewWriter">작성자</span>
+                    <span class="divider">|</span>
+                    <span id="viewDate">날짜</span>
+                </div>
+            </div>
+            <div class="view-content" id="viewContent">
+                내용
+            </div>
+            <div class="view-actions">
+                <button id="btnList" class="secondary-btn">목록</button>
+                <div class="right-actions">
+                    <button id="btnEdit" class="secondary-btn">수정</button>
+                    <button id="btnDelete" class="danger-btn">삭제</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
+<!-- Firebase SDK -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, getDoc, doc, query, orderBy, limit, serverTimestamp, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    // TODO: 여기에 Firebase 설정을 붙여넣으세요
+    // https://console.firebase.google.com/ 에서 프로젝트 생성 후 설정을 가져오세요
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.appspot.com",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    let db;
+    try {
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+        console.log("Firebase initialized");
+    } catch (e) {
+        console.error("Firebase init error. Check config.", e);
+        document.querySelector('.loading-cell').textContent = "Firebase 설정이 필요합니다. 코드를 확인해주세요.";
+    }
+
+    const boardBody = document.getElementById('boardBody');
+    const writeForm = document.getElementById('writeForm');
+    const viewSection = document.getElementById('viewSection');
+    const boardListSection = document.querySelector('.board-list-section');
+    
+    // Elements
+    const inputWriter = document.getElementById('inputWriter');
+    const inputPassword = document.getElementById('inputPassword');
+    const inputTitle = document.getElementById('inputTitle');
+    const inputContent = document.getElementById('inputContent');
+
+    let currentMode = 'list'; // list, write, view
+    let currentDocId = null;
+
+    // --- Functions ---
+
+    // 목록 불러오기
+    async function loadPosts() {
+        if (!db) return;
+        boardBody.innerHTML = '<tr><td colspan="5" class="loading-cell">로딩중...</td></tr>';
+        
+        try {
+            // 날짜 내림차순 정렬
+            const q = query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(50));
+            const querySnapshot = await getDocs(q);
+
+            boardBody.innerHTML = '';
+            
+            if (querySnapshot.empty) {
+                boardBody.innerHTML = '<tr><td colspan="5" class="loading-cell">등록된 게시글이 없습니다.</td></tr>';
+                return;
+            }
+
+            let index = 1; // 실제로는 전체 개수 - 현재 인덱스로 계산 필요
+            
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const row = document.createElement('tr');
+                const dateObj = data.createdAt ? data.createdAt.toDate() : new Date();
+                const dateStr = dateObj.toISOString().split('T')[0];
+                
+                row.innerHTML = `
+                    <td class="col-num">${index++}</td>
+                    <td class="col-subject"><a href="#" data-id="${doc.id}">${escapeHtml(data.title)}</a></td>
+                    <td class="col-writer">${escapeHtml(data.writer)}</td>
+                    <td class="col-date">${dateStr}</td>
+                    <td class="col-views">${data.views || 0}</td>
+                `;
+                boardBody.appendChild(row);
+            });
+
+            // 클릭 이벤트 연결
+            document.querySelectorAll('.col-subject a').forEach(a => {
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    viewPost(e.target.dataset.id);
+                });
+            });
+
+        } catch (error) {
+            console.error("Error loading posts:", error);
+            boardBody.innerHTML = `<tr><td colspan="5" class="loading-cell">에러 발생: ${error.message}<br>API 키 설정을 확인해주세요.</td></tr>`;
+        }
+    }
+
+    // 게시글 상세 보기
+    async function viewPost(id) {
+        if (!db) return;
+        currentDocId = id;
+        showSection('view');
+        
+        const viewTitle = document.getElementById('viewTitle');
+        const viewWriter = document.getElementById('viewWriter');
+        const viewDate = document.getElementById('viewDate');
+        const viewContent = document.getElementById('viewContent');
+
+        viewContent.innerHTML = '로딩중...';
+
+        try {
+            const docRef = doc(db, "posts", id);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                viewTitle.textContent = data.title;
+                viewWriter.textContent = data.writer;
+                const dateObj = data.createdAt ? data.createdAt.toDate() : new Date();
+                viewDate.textContent = dateObj.toLocaleString();
+                viewContent.innerHTML = escapeHtml(data.content).replace(/\n/g, '<br>');
+
+                // 조회수 증가 (Optional)
+                // updateDoc(docRef, { views: (data.views || 0) + 1 });
+            } else {
+                alert("삭제되거나 없는 게시글입니다.");
+                showSection('list');
+            }
+        } catch (e) {
+            console.error("Error fetching doc:", e);
+            alert("불러오기 실패");
+        }
+    }
+
+    // 글 저장
+    async function savePost() {
+        if (!db) {
+            alert("Firebase 설정 오류");
+            return;
+        }
+
+        const writer = inputWriter.value.trim();
+        const password = inputPassword.value.trim();
+        const title = inputTitle.value.trim();
+        const content = inputContent.value.trim();
+
+        if (!writer || !password || !title || !content) {
+            alert("모든 항목을 입력해주세요.");
+            return;
+        }
+
+        try {
+            if (currentDocId) {
+                // 수정 TODO: 비밀번호 체크 로직 필요 (클라이언트 사이드라 취약하지만 간단히 구현)
+                // 실제로는 서버(Cloud Functions)에서 하거나, 문서에 비번 저장후 비교
+                await updateDoc(doc(db, "posts", currentDocId), {
+                    writer, title, content, // 비번은 업데이트 안함
+                    updatedAt: serverTimestamp()
+                });
+                alert("수정되었습니다.");
+            } else {
+                // 신규
+                await addDoc(collection(db, "posts"), {
+                    writer,
+                    password, // 주의: 평문 저장됨 (데모용)
+                    title,
+                    content,
+                    views: 0,
+                    createdAt: serverTimestamp()
+                });
+                alert("등록되었습니다.");
+            }
+            showSection('list');
+            loadPosts(); // 목록 갱신
+        } catch (e) {
+            console.error("Error saving:", e);
+            alert("저장 중 오류가 발생했습니다.");
+        }
+    }
+
+    // 글 삭제
+    async function deletePost() {
+        if(!confirm("정말 삭제하시겠습니까?")) return;
+        
+        const inputPw = prompt("비밀번호를 입력하세요");
+        if(!inputPw) return;
+
+        try {
+            const docRef = doc(db, "posts", currentDocId);
+            const docSnap = await getDoc(docRef);
+            if(docSnap.exists() && docSnap.data().password === inputPw) {
+                await deleteDoc(docRef);
+                alert("삭제되었습니다.");
+                showSection('list');
+                loadPosts();
+            } else {
+                alert("비밀번호가 일치하지 않습니다.");
+            }
+        } catch(e) {
+            console.error("Delete error:", e);
+            alert("삭제 실패");
+        }
+    }
+
+    // UI 제어
+    function showSection(mode) {
+        currentMode = mode;
+        if (mode === 'list') {
+            boardListSection.classList.remove('hidden');
+            writeForm.classList.add('hidden');
+            viewSection.classList.add('hidden');
+            document.getElementById('btnWrite').classList.remove('hidden');
+            document.querySelector('.board-controls').classList.remove('hidden');
+        } else if (mode === 'write') {
+            boardListSection.classList.add('hidden');
+            writeForm.classList.remove('hidden');
+            viewSection.classList.add('hidden');
+            document.querySelector('.board-controls').classList.add('hidden');
+        } else if (mode === 'view') {
+            boardListSection.classList.add('hidden');
+            writeForm.classList.add('hidden');
+            viewSection.classList.remove('hidden');
+            document.querySelector('.board-controls').classList.add('hidden');
+        }
+    }
+
+    function escapeHtml(text) {
+        if (!text) return "";
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    // --- Event Listeners ---
+    document.getElementById('btnWrite').addEventListener('click', () => {
+        currentDocId = null;
+        document.getElementById('formTitle').textContent = "새 게시글 작성";
+        inputWriter.value = "";
+        inputPassword.value = "";
+        inputTitle.value = "";
+        inputContent.value = "";
+        showSection('write');
+    });
+
+    document.getElementById('btnCancel').addEventListener('click', () => {
+        showSection('list');
+    });
+
+    document.getElementById('btnList').addEventListener('click', () => {
+        showSection('list');
+    });
+
+    document.getElementById('btnSave').addEventListener('click', savePost);
+    
+    // 수정 버튼 클릭 (간단 비번 체크)
+    document.getElementById('btnEdit').addEventListener('click', async () => {
+        const inputPw = prompt("비밀번호를 입력하세요");
+        if(!inputPw) return;
+        
+        const docRef = doc(db, "posts", currentDocId);
+        const docSnap = await getDoc(docRef);
+        if(docSnap.exists() && docSnap.data().password === inputPw) {
+             document.getElementById('formTitle').textContent = "게시글 수정";
+             inputWriter.value = docSnap.data().writer;
+             inputPassword.value = docSnap.data().password; // 기존 비번 노출 (데모용)
+             inputTitle.value = docSnap.data().title;
+             inputContent.value = docSnap.data().content;
+             showSection('write');
+        } else {
+            alert("비밀번호가 일치하지 않습니다.");
+        }
+    });
+
+    document.getElementById('btnDelete').addEventListener('click', deletePost);
+
+    // Initial Load
+    loadPosts();
+
+</script>
+
+<style>
+    /* 게시판 전용 스타일 */
+    .board-container {
+        padding: 1rem;
+    }
+
+    .board-controls {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+    }
+
+    .board-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .styled-table tbody tr {
+        cursor: default;
+    }
+
+    .styled-table .col-subject a {
+        color: #2d3748;
+        text-decoration: none;
+        font-weight: 500;
+        display: block;
+    }
+
+    .styled-table .col-subject a:hover {
+        color: #667eea;
+        text-decoration: underline;
+    }
+
+    .col-num {
+        width: 60px;
+        text-align: center;
+        color: #718096;
+    }
+
+    .col-subject {
+        text-align: left;
+    }
+
+    .col-writer {
+        width: 120px;
+        text-align: center;
+    }
+
+    .col-date {
+        width: 100px;
+        text-align: center;
+        color: #718096;
+    }
+
+    .col-views {
+        width: 70px;
+        text-align: center;
+        color: #718096;
+    }
+
+    .loading-cell {
+        text-align: center;
+        padding: 2rem;
+        color: #718096;
+    }
+
+    /* 폼 스타일 */
+    .board-form {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 1rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background: #f8fafc;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 1rem;
+    }
+
+    .form-group textarea {
+        resize: vertical;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+    }
+
+    /* 상세 보기 스타일 */
+    .board-view {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .view-header {
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .view-header h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: #2d3748;
+    }
+
+    .view-meta {
+        font-size: 0.9rem;
+        color: #718096;
+    }
+
+    .view-content {
+        min-height: 200px;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        color: #4a5568;
+    }
+
+    .view-actions {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 1rem;
+    }
+
+    .right-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    /* 버튼 스타일 오버라이드 및 추가 */
+    .secondary-btn {
+        background: white;
+        border: 1px solid #e2e8f0;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        color: #4a5568;
+        font-weight: 500;
+    }
+
+    .secondary-btn:hover {
+        background: #f7fafc;
+        border-color: #cbd5e0;
+    }
+
+    .danger-btn {
+        background: #fff5f5;
+        border: 1px solid #feb2b2;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        color: #c53030;
+    }
+
+    .danger-btn:hover {
+        background: #fed7d7;
+    }
+
+    /* 모바일 반응형 */
+    @media (max-width: 768px) {
+
+        .col-num,
+        .col-views,
+        .col-date {
+            display: none;
+        }
+
+        .col-writer {
+            width: 80px;
+            font-size: 0.85rem;
+        }
+
+        .col-subject {
+            font-size: 0.95rem;
+        }
+
+        .board-controls {
+            flex-direction: column-reverse;
+            gap: 1rem;
+        }
+
+        .search-box {
+            width: 100%;
+        }
+
+        .search-box input {
+            width: 100%;
+        }
+
+        #btnWrite {
+            width: 100%;
+        }
+    }
+</style>
 
     </div>
 
