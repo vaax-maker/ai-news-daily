@@ -338,6 +338,8 @@
                     </div>
                     <div class="comment-body">${escapeHtml(cmt.content).replace(/\n/g, '<br>')}</div>
                 `;
+                // 댓글 내용 링크 변환
+                linkifyElement(div.querySelector('.comment-body'));
                 commentList.appendChild(div);
             });
 
