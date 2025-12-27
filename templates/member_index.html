@@ -164,7 +164,7 @@
                     <h3 class="tile-title">
                         <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
                             <button
-                                onclick="navigator.clipboard.writeText('{{ item.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))"
+                                onclick="navigator.clipboard.writeText('{{ item.link }}')"
                                 class="action-link action-button">공유</button>
                         </span>
                     </h3>

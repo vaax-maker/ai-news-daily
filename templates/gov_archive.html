@@ -414,7 +414,7 @@
                 </td>
                 <td class="col-discuss">
                     <button
-                        onclick="navigator.clipboard.writeText('{{ item.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))"
+                        onclick="navigator.clipboard.writeText('{{ item.link }}')"
                         class="discuss-btn-sm share-btn">
                         공유
                     </button>
@@ -459,7 +459,7 @@
         <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; display: flex; gap: 0.5rem; justify-content: center;">
             <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}" 
                class="discuss-btn-sm">토론</a>
-            <button onclick="navigator.clipboard.writeText('{{ item.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))" 
+            <button onclick="navigator.clipboard.writeText('{{ item.link }}')" 
                     class="discuss-btn-sm">공유</button>
         </div>
 </div>
