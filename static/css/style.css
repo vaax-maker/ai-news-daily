@@ -1,6 +1,8 @@
 :root {
-    --primary-color: #1d4ed8;
-    --primary-color-hover: #1e40af;
+    --primary-color: #84cc16;
+    /* 밝은 초록 (Lime 500) */
+    --primary-color-hover: #65a30d;
+    /* 진한 초록 (Lime 600) */
     --secondary-color: #475569;
     --background-color: #ffffff;
     --card-bg: #ffffff;
@@ -124,7 +126,8 @@ header {
 
 .slogan-highlight {
     font-weight: 800;
-    color: var(--primary-color);
+    color: #84cc16;
+    /* 밝은 초록 (Lime) */
     font-size: 1.4em;
     /* 3단계 확대 */
     letter-spacing: -0.02em;
