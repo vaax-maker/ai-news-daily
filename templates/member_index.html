@@ -163,11 +163,17 @@
                     <span class="tile-member-badge">{{ item.member_name }}</span>
                     <h3 class="tile-title">
                         <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
-                            <button
-                                onclick="navigator.clipboard.writeText('{{ item.link }}')"
-                                class="action-link action-button">공유</button>
-                        </span>
                     </h3>
+                    <div class="tile-meta">
+                        <span class="tile-source">{{ item.source_name or '출처' }}</span>
+                        <span class="tile-date">{{ item.published_display }}</span>
+                    </div>
+                    <div class="tile-actions">
+                        <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}" 
+                           class="discuss-btn-sm">토론</a>
+                        <button onclick="navigator.clipboard.writeText('{{ item.link }}')" 
+                                class="discuss-btn-sm">공유</button>
+                    </div>
                     <div class="tile-meta">
                         <span class="tile-source">{{ item.source_name or '출처' }}</span>
                         <span class="tile-date">{{ item.published_display }}</span>
