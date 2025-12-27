@@ -64,8 +64,8 @@ header {
     align-items: center;
     justify-content: flex-start;
     /* 왼쪽 정렬 */
-    gap: 1rem;
-    /* 로고와 텍스트 간격 대폭 축소 (Home 글자 너비 정도) */
+    gap: 0.5rem;
+    /* 로고와 텍스트 간격 최소화 */
     font-weight: 600;
 }
 
