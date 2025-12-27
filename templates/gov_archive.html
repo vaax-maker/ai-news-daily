@@ -380,8 +380,9 @@
                 <th class="col-date">등록일</th>
                 <th class="col-schedule">입찰시작</th>
                 <th class="col-schedule">입찰마감</th>
-                <th class="col-schedule">개찰</th>
                 <th class="col-discuss">토론</th>
+                <th class="col-discuss">공유</th>
+                <th class="col-discuss">원문</th>
             </tr>
         </thead>
         <tbody>
@@ -406,11 +407,23 @@
                 <td class="col-date">{{ item.date or item.published_display }}</td>
                 <td class="col-schedule">{{ item.bid_begin_dt[:16] if item.bid_begin_dt else '미제공' }}</td>
                 <td class="col-schedule">{{ item.bid_close_dt[:16] if item.bid_close_dt else '미제공' }}</td>
-                <td class="col-schedule">{{ item.openg_dt[:16] if item.openg_dt else '미제공' }}</td>
                 <td class="col-discuss">
                     <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
                         class="discuss-btn-sm">
                         💬
+                    </a>
+                </td>
+                <td class="col-discuss">
+                    <button
+                        onclick="navigator.clipboard.writeText('{{ item.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))"
+                        class="discuss-btn-sm share-btn">
+                        🔗
+                    </button>
+                </td>
+                <td class="col-discuss">
+                    <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer"
+                        class="discuss-btn-sm source-btn">
+                        📑
                     </a>
                 </td>
                 </tr>

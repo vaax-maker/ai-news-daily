@@ -313,6 +313,39 @@
 
         card.appendChild(body);
 
+        // 3. Actions Section (Discussion, Share, View Source)
+        const actions = document.createElement('div');
+        actions.className = 'news-actions';
+
+        // Discussion button
+        const discussLink = document.createElement('a');
+        discussLink.href = `../board/index.html?mode=discuss&title=${encodeURIComponent(article.title)}&link=${encodeURIComponent(article.link)}&source=${encodeURIComponent(article.source || '출처')}`;
+        discussLink.className = 'action-btn discuss-btn';
+        discussLink.textContent = '💬 토론하기';
+        actions.appendChild(discussLink);
+
+        // Share button
+        const shareBtn = document.createElement('button');
+        shareBtn.className = 'action-btn share-btn';
+        shareBtn.textContent = '🔗 공유';
+        shareBtn.onclick = () => {
+            navigator.clipboard.writeText(article.link)
+                .then(() => alert('링크가 클립보드에 복사되었습니다!'))
+                .catch(() => alert('복사 실패'));
+        };
+        actions.appendChild(shareBtn);
+
+        // Source button
+        const sourceLink = document.createElement('a');
+        sourceLink.href = article.link;
+        sourceLink.target = '_blank';
+        sourceLink.rel = 'noopener noreferrer';
+        sourceLink.className = 'action-btn source-btn';
+        sourceLink.textContent = '📑 원문 보기';
+        actions.appendChild(sourceLink);
+
+        card.appendChild(actions);
+
         return card;
     }
 
