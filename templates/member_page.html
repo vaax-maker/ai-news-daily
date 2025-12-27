@@ -15,31 +15,30 @@
     {% if articles %}
     <div class="member-news-grid">
         {% for article in articles %}
-        <a href="{{ article.link }}" target="_blank" class="member-news-tile">
+        <div class="member-news-tile">
             {% if article.image_url %}
             <div class="tile-image">
                 <img src="{{ article.image_url }}" alt="Thumbnail" loading="lazy">
             </div>
             {% endif %}
             <div class="tile-content">
-                <h3 class="tile-title">{{ article.title }}</h3>
+                <h3 class="tile-title">
+                    <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+                    <span class="inline-actions">
+                        <a href="../board/index.html?mode=discuss&title={{ article.title|urlencode }}&link={{ article.link|urlencode }}&source={{ article.source_name|urlencode }}"
+                            class="action-link">토론</a>
+                        <span class="action-separator">|</span>
+                        <button
+                            onclick="navigator.clipboard.writeText('{{ article.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))"
+                            class="action-link action-button">공유</button>
+                    </span>
+                </h3>
                 <div class="tile-meta">
                     <span class="tile-source">{{ article.source_name or '출처' }}</span>
                     <span class="tile-date">{{ article.published_display }}</span>
                 </div>
-                <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; font-size: 0.8rem;">
-                    <a href="../board/index.html?mode=discuss&title={{ article.title|urlencode }}&link={{ article.link|urlencode }}&source={{ article.source_name|urlencode }}"
-                        class="action-link">토론</a>
-                    <button
-                        onclick="navigator.clipboard.writeText('{{ article.link }}').then(() => alert('링크가 클립보드에 복사되었습니다!')).catch(() => alert('복사 실패'))"
-                        class="action-link action-button">공유</button>
-                    <a href="{{ article.link }}" target="_blank" rel="noopener noreferrer" class="action-btn source-btn"
-                        style="font-size: 0.75rem; padding: 0.45rem 0.7rem;">
-                        
-                    </a>
-                </div>
             </div>
-        </a>
+        </div>
         {% endfor %}
     </div>
     {% else %}
