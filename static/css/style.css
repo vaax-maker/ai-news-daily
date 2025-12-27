@@ -68,7 +68,7 @@ header {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 1.75rem;
+    gap: 2.25rem;
     flex-wrap: nowrap;
     flex-shrink: 0;
 }
@@ -113,7 +113,7 @@ header {
     .nav-links {
         width: 100%;
         flex-wrap: nowrap;
-        gap: 0.75rem;
+        gap: 1rem;
         padding-top: 0.5rem;
         border-top: 1px solid var(--border-color);
         justify-content: space-between;
@@ -471,7 +471,8 @@ tr:hover {
 
 @media (max-width: 640px) {
     .container {
-        padding: 1.25rem 0.5rem 1.5rem; /* Reduced horizontal padding from 1rem to 0.5rem */
+        padding: 1.25rem 0.5rem 1.5rem;
+        /* Reduced horizontal padding from 1rem to 0.5rem */
     }
 
     .preview-list li {
@@ -479,11 +480,13 @@ tr:hover {
     }
 
     .news-summary {
-        padding: 1rem 0.5rem; /* Reduced from 1rem to 0.5rem */
+        padding: 1rem 0.5rem;
+        /* Reduced from 1rem to 0.5rem */
     }
 
     .news-item {
-        padding: 1rem 0.75rem; /* Reduced horizontal padding */
+        padding: 1rem 0.75rem;
+        /* Reduced horizontal padding */
     }
 
     table,
@@ -493,7 +496,8 @@ tr:hover {
 
     th,
     td {
-        padding: 0.75rem 0.4rem; /* Reduced horizontal padding from 0.6rem to 0.4rem */
+        padding: 0.75rem 0.4rem;
+        /* Reduced horizontal padding from 0.6rem to 0.4rem */
         font-size: 0.95rem;
     }
 
