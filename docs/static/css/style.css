@@ -1542,6 +1542,73 @@ tr:hover {
     background: linear-gradient(90deg, #f0fdf4 0%, white 100%);
 }
 
+/* 정부과제 모바일 목록형 */
+.gov-mobile-list {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .gov-mobile-list {
+        display: block;
+    }
+
+    .gov-list-item {
+        padding: 1rem;
+        border-bottom: 1px solid #e2e8f0;
+        background: white;
+    }
+
+    .gov-list-item:hover {
+        background: #f8fafc;
+    }
+
+    .list-item-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .list-item-title a {
+        color: var(--text-primary);
+        text-decoration: none;
+    }
+
+    .list-item-title a:hover {
+        color: var(--primary-color);
+    }
+
+    .list-item-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+
+    .list-item-schedule {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
+
+    .schedule-item {
+        background: #f1f5f9;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+    }
+
+    .list-item-actions {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-start;
+    }
+}
+
+
 /* 액션 버튼 - 기사 하단 */
 .news-actions {
     margin-top: 1.25rem;
