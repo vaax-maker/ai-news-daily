@@ -12,235 +12,242 @@
     <link rel="stylesheet" href="../static/css/style.css">
     
 <style>
-/* 반응형 정부과제 테이블 스타일 */
-.gov-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 12px;
-    color: white;
-}
-
-.stat-card {
-    text-align: center;
-    padding: 1rem;
-}
-
-.stat-card .stat-label {
-    font-size: 0.875rem;
-    opacity: 0.9;
-    margin-bottom: 0.5rem;
-}
-
-.stat-card .stat-value {
-    font-size: 2rem;
-    font-weight: 700;
-}
-
-.filter-tabs {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.filter-tab {
-    padding: 0.5rem 1rem;
-    border: 2px solid #e2e8f0;
-    background: white;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 0.875rem;
-}
-
-.filter-tab:hover {
-    border-color: #667eea;
-    background: #f7fafc;
-}
-
-.filter-tab.active {
-    border-color: #667eea;
-    background: #667eea;
-    color: white;
-}
-
-/* PC용 테이블 */
-.gov-table-desktop {
-    display: table;
-    width: 100%;
-}
-
-/* 모바일용 카드 */
-.gov-cards-mobile {
-    display: none;
-}
-
-.gov-card {
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1.25rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.gov-card .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-    gap: 1rem;
-}
-
-.gov-card .card-badge {
-    background: #667eea;
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    white-space: nowrap;
-}
-
-.gov-card .card-title {
-    font-weight: 600;
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 0.75rem;
-}
-
-.gov-card .card-title a {
-    color: #1a202c;
-    text-decoration: none;
-}
-
-.gov-card .card-title a:hover {
-    color: #667eea;
-}
-
-.gov-card .card-meta {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.5rem 1rem;
-    font-size: 0.875rem;
-    color: #4a5568;
-}
-
-.gov-card .meta-label {
-    font-weight: 500;
-    color: #718096;
-}
-
-/* 반응형 */
-@media (max-width: 768px) {
-    .gov-table-desktop {
-        display: none;
-    }
-    
-    .gov-cards-mobile {
-        display: block;
-    }
-    
-    .page-header.header-with-search {
-        flex-direction: column;
+    /* 반응형 정부과제 테이블 스타일 */
+    .gov-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1rem;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        color: white;
     }
-    
-    .header-search {
+
+    .stat-card {
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .stat-card .stat-label {
+        font-size: 0.875rem;
+        opacity: 0.9;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-card .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .filter-tabs {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .filter-tab {
+        padding: 0.5rem 1rem;
+        border: 2px solid #e2e8f0;
+        background: white;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.875rem;
+    }
+
+    .filter-tab:hover {
+        border-color: #667eea;
+        background: #f7fafc;
+    }
+
+    .filter-tab.active {
+        border-color: #667eea;
+        background: #667eea;
+        color: white;
+    }
+
+    /* PC용 테이블 */
+    .gov-table-desktop {
+        display: table;
         width: 100%;
     }
-    
-    .gov-stats {
-        grid-template-columns: repeat(2, 1fr);
+
+    /* 모바일용 카드 */
+    .gov-cards-mobile {
+        display: none;
     }
-    
-    .stat-card .stat-value {
-        font-size: 1.5rem;
+
+    .gov-card {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
-}
 
-/* 테이블 스타일 개선 */
-.styled-table {
-    border-collapse: collapse;
-    font-size: 0.9rem;
-}
+    .gov-card .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        gap: 1rem;
+    }
 
-.styled-table th {
-    background: #f7fafc;
-    padding: 1rem 0.75rem;
-    text-align: left;
-    font-weight: 600;
-    color: #2d3748;
-    border-bottom: 2px solid #e2e8f0;
-}
+    .gov-card .card-badge {
+        background: #667eea;
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
 
-.styled-table td {
-    padding: 1rem 0.75rem;
-    border-bottom: 1px solid #e2e8f0;
-}
+    .gov-card .card-title {
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 0.75rem;
+    }
 
-.styled-table tbody tr:hover {
-    background: #f7fafc;
-}
+    .gov-card .card-title a {
+        color: #1a202c;
+        text-decoration: none;
+    }
 
-.col-idx {
-    width: 50px;
-    text-align: center;
-}
+    .gov-card .card-title a:hover {
+        color: #667eea;
+    }
 
-.col-title {
-    min-width: 300px;
-}
+    .gov-card .card-meta {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.5rem 1rem;
+        font-size: 0.875rem;
+        color: #4a5568;
+    }
 
-.col-source {
-    width: 120px;
-}
+    .gov-card .meta-label {
+        font-weight: 500;
+        color: #718096;
+    }
 
-.col-dept {
-    width: 150px;
-}
+    /* 반응형 */
+    @media (max-width: 768px) {
+        .gov-table-desktop {
+            display: none;
+        }
 
-.col-date {
-    width: 100px;
-}
+        .gov-cards-mobile {
+            display: block;
+        }
 
-.source-badge {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 500;
-}
+        .page-header.header-with-search {
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-.badge-msit {
-    background: #eef2ff;
-    color: #5a67d8;
-}
+        .header-search {
+            width: 100%;
+        }
 
-.badge-koneps {
-    background: #f0fdf4;
-    color: #16a34a;
-}
+        .gov-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
 
-.new-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 600;
-    padding: 0.15rem 0.4rem;
-    border-radius: 4px;
-    margin-left: 0.5rem;
-    animation: pulse 2s ease-in-out infinite;
-}
+        .stat-card .stat-value {
+            font-size: 1.5rem;
+        }
+    }
 
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-}
+    /* 테이블 스타일 개선 */
+    .styled-table {
+        border-collapse: collapse;
+        font-size: 0.9rem;
+    }
+
+    .styled-table th {
+        background: #f7fafc;
+        padding: 1rem 0.75rem;
+        text-align: left;
+        font-weight: 600;
+        color: #2d3748;
+        border-bottom: 2px solid #e2e8f0;
+    }
+
+    .styled-table td {
+        padding: 1rem 0.75rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .styled-table tbody tr:hover {
+        background: #f7fafc;
+    }
+
+    .col-idx {
+        width: 50px;
+        text-align: center;
+    }
+
+    .col-title {
+        min-width: 300px;
+    }
+
+    .col-source {
+        width: 120px;
+    }
+
+    .col-dept {
+        width: 150px;
+    }
+
+    .col-date {
+        width: 100px;
+    }
+
+    .source-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .badge-msit {
+        background: #eef2ff;
+        color: #5a67d8;
+    }
+
+    .badge-koneps {
+        background: #f0fdf4;
+        color: #16a34a;
+    }
+
+    .new-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.15rem 0.4rem;
+        border-radius: 4px;
+        margin-left: 0.5rem;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.7;
+        }
+    }
 </style>
 
 </head>
@@ -256,9 +263,9 @@
                 <a href="../index.html"
                     class="">Home</a>
                 <a href="../ai/index.html"
-                    class="">AI읽을거리</a>
+                    class="">AI뉴스</a>
                 <a href="../xr/index.html"
-                    class="">XR읽을거리</a>
+                    class="">XR뉴스</a>
                 <a href="../gov/index.html"
                     class="active">정부과제</a>
                 <a href="../members/index.html"
@@ -284,21 +291,124 @@
 </div>
 
 
-<!-- 통계 -->
-<div class="gov-stats">
-    <div class="stat-card">
-        <div class="stat-label">총 과제</div>
-        <div class="stat-value">37</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-label">과기정통부</div>
-        <div class="stat-value">14</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-label">나라장터</div>
-        <div class="stat-value">23</div>
-    </div>
+<!-- 통계 테이블 -->
+<div class="gov-stats-table">
+    <table>
+        <thead>
+            <tr>
+                <th>구분</th>
+                <th>건수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="source-icon total">📊</span>
+                    총 과제
+                </td>
+                <td class="count-cell">37</td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="source-icon msit">🏛️</span>
+                    과기정통부
+                </td>
+                <td class="count-cell">14
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="source-icon ministry">🏢</span>
+                    과학기술정보통신부
+                </td>
+                <td class="count-cell">5
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="source-icon koneps">🛒</span>
+                    나라장터
+                </td>
+                <td class="count-cell">
+                    
+                    
+                    18
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<style>
+    .gov-stats-table {
+        margin-bottom: 2rem;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .gov-stats-table table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .gov-stats-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .gov-stats-table th {
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .gov-stats-table tbody tr {
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .gov-stats-table tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    .gov-stats-table tbody tr:hover {
+        background: #f8fafc;
+    }
+
+    .gov-stats-table td {
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .gov-stats-table .count-cell {
+        text-align: right;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #667eea;
+    }
+
+    .source-icon {
+        display: inline-block;
+        font-size: 1.2rem;
+        margin-right: 0.5rem;
+        vertical-align: middle;
+    }
+
+    @media (max-width: 768px) {
+
+        .gov-stats-table th,
+        .gov-stats-table td {
+            padding: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .gov-stats-table .count-cell {
+            font-size: 1rem;
+        }
+    }
+</style>
 
 <!-- 필터 탭 -->
 <div class="filter-tabs">
@@ -328,7 +438,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186362" target="_blank" rel="noopener">2025년도 극한부품시험입증지원사업(Track형 실증지원) 신규과제 선정결과 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -343,7 +454,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186361" target="_blank" rel="noopener">2025년도 4차 국민생활안전 긴급대응연구(2단계) 기술개발 및 실증 신규과제 선정결과 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -358,7 +470,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186342" target="_blank" rel="noopener">2026년 블록체인 융복합 타운 조성 사업 모집 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -373,7 +486,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186341" target="_blank" rel="noopener">2026년 블록체인 특화 클러스터 조성 사업 모집 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -388,7 +502,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01249483&bidPbancOrd=000" target="_blank" rel="noopener">2026 화성FC 뉴미디어 콘텐츠 제작 대행 용역</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -403,7 +518,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186360" target="_blank" rel="noopener">「첨단 GPU 활용 지원 사업」 베타서비스 참여자 모집 공모 안내 (산학연 지원)</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -418,7 +534,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186359" target="_blank" rel="noopener">「첨단 GPU 활용 지원 사업」 사용자 모집(25-1차) 공모 안내 (산학연 지원)</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -433,7 +550,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186358" target="_blank" rel="noopener">제12기 과학기술전문사관 학사 후보생 최종 합격자 발표</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -448,7 +566,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01244241&bidPbancOrd=000" target="_blank" rel="noopener">25/26 EIPP 필리핀 정부 데이터센터 구축 사업모델 설계 및 예비타당성조사</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -463,7 +582,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186355" target="_blank" rel="noopener">2026년 이공계 연구생활장려금 지원 사업 신규과제 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -478,7 +598,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01241245&bidPbancOrd=000" target="_blank" rel="noopener">뉴미디어 콘텐츠 활성화 - 소셜미디어 콘텐츠 운영 사업</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -493,7 +614,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01241295&bidPbancOrd=000" target="_blank" rel="noopener">뉴미디어 콘텐츠 활성화 - 뉴미디어 영상 콘텐츠 제작 사업  </a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -508,7 +630,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01241322&bidPbancOrd=000" target="_blank" rel="noopener">뉴미디어 콘텐츠 활성화 - 전지훈련 연습경기 중계 콘텐츠 제작 사업  </a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -523,7 +646,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186357" target="_blank" rel="noopener">2026년도『공공기술기반 시장연계 창업탐색 지원사업』시행 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -538,7 +662,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01239258&bidPbancOrd=000" target="_blank" rel="noopener">한국지역난방공사 데이터센터 이전 용역</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -553,7 +678,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01235866&bidPbancOrd=000" target="_blank" rel="noopener">[건국대]2025학년도 실감미디어 혁신융합대학사업단 실감콘텐츠 SHOW-CASE 용역</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -568,7 +694,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186356" target="_blank" rel="noopener">「 K-문샷 프로젝트 대국민 공모전 」 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -583,7 +710,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01233578&bidPbancOrd=000" target="_blank" rel="noopener">2026년도 홈페이지 클라우드 서비스 용역</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -598,7 +726,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186353" target="_blank" rel="noopener">정보보호제품 성능평가기관 신규 및 재지정에 관한 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -613,7 +742,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186354" target="_blank" rel="noopener">2026년「ICT 학점연계 프로젝트 인턴십」사업 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -628,7 +758,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01217962&bidPbancOrd=000" target="_blank" rel="noopener">(재공고) 2026~2027년 스마트경로당 IDC센터 서버임차 및 통신망 운영 용역</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -643,7 +774,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01210097&bidPbancOrd=000" target="_blank" rel="noopener">국민참여예산제도 온라인 플랫폼 운영을 위한 클라우드 서비스 제공</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -658,7 +790,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186352" target="_blank" rel="noopener">2026년도 양자정보과학 인적기반조성사업 양자정보연구지원센터 공모</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -673,7 +806,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01206265&bidPbancOrd=000" target="_blank" rel="noopener">데이터센터 및 교육실 구축이전 안전관리업무 위탁 용역</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -688,7 +822,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01206321&bidPbancOrd=000" target="_blank" rel="noopener">AI기반 학력진단시스템·국가기초학력지원포털  클라우드 서비스 임차 및 운영(KT 클라우드)</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -703,7 +838,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01204842&bidPbancOrd=000" target="_blank" rel="noopener">데이터센터 실내 건축공사 감리 용역</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -718,7 +854,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186351" target="_blank" rel="noopener">과학기술 × AI 연구혁신의 실험장, 「2026 AI Co-Scientist Challenge Korea」대회 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-msit">
+                    <span
+                        class="source-badge badge-msit">
                         과기정통부
                     </span>
                 </td>
@@ -733,7 +870,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01195536&bidPbancOrd=000" target="_blank" rel="noopener">RISE 사업 산학공동 기술개발과제 관련 디지털트윈 체혐형 시뮬레이션 제작 용역</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -748,7 +886,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01197195&bidPbancOrd=000" target="_blank" rel="noopener">경희대학교 중앙도서관 실감미디어 기반 교육·학습 환경 구축 개발업체 선정</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -763,7 +902,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186350" target="_blank" rel="noopener">2025년도 한미 이공분야 학생 인력교류 프로그램(NSF IRES) 운영 지원사업 선정결과 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         과학기술정보통신부
                     </span>
                 </td>
@@ -778,7 +918,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01191950&bidPbancOrd=000" target="_blank" rel="noopener">2026년 광주실감콘텐츠큐브·광주CGI센터 전기안전관리자 선임(상주) 용역</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -793,7 +934,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01193387&bidPbancOrd=000" target="_blank" rel="noopener">서민금융진흥원 데이터소산을 위한 IDC 상면 임차의 건</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -808,7 +950,8 @@
                     <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01192790&bidPbancOrd=000" target="_blank" rel="noopener">안양 데이터센터 시스템 이전 컨설팅 용역</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         나라장터(용역)
                     </span>
                 </td>
@@ -823,7 +966,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186347" target="_blank" rel="noopener">2025년도 한-헝가리 공동연구사업 신규과제 선정결과 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         과학기술정보통신부
                     </span>
                 </td>
@@ -838,7 +982,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186345" target="_blank" rel="noopener">범부처첨단의료기기연구개발사업 사업단장 선정 공고</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         과학기술정보통신부
                     </span>
                 </td>
@@ -853,7 +998,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186344" target="_blank" rel="noopener">2026년도 과학기술정보통신부 기초연구사업 1차 신규과제 공모</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         과학기술정보통신부
                     </span>
                 </td>
@@ -868,7 +1014,8 @@
                     <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186343" target="_blank" rel="noopener">2026년도 과학기술정보통신부 국가연구소(NRL 2.0) 사업 신규과제 공모</a>
                 </td>
                 <td class="col-source">
-                    <span class="source-badge badge-koneps">
+                    <span
+                        class="source-badge badge-koneps">
                         과학기술정보통신부
                     </span>
                 </td>
@@ -1555,90 +1702,90 @@
 <div id="no-results" class="empty-msg hidden">검색 결과가 없습니다.</div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const searchForm = document.getElementById('gov-search-form');
-    const searchInput = document.getElementById('gov-search-input');
-    const tableRows = document.querySelectorAll('#gov-table tbody tr');
-    const cards = document.querySelectorAll('.gov-card');
-    const filterTabs = document.querySelectorAll('.filter-tab');
-    const noResultsMsg = document.getElementById('no-results');
-    
-    let currentFilter = 'all';
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchForm = document.getElementById('gov-search-form');
+        const searchInput = document.getElementById('gov-search-input');
+        const tableRows = document.querySelectorAll('#gov-table tbody tr');
+        const cards = document.querySelectorAll('.gov-card');
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const noResultsMsg = document.getElementById('no-results');
 
-    function performSearch(query) {
-        const normalized = query.toLowerCase().trim();
-        let visibleCount = 0;
+        let currentFilter = 'all';
 
-        // 테이블 검색
-        tableRows.forEach(row => {
-            const source = row.dataset.source;
-            if (currentFilter !== 'all' && !source.includes(currentFilter)) {
-                row.style.display = 'none';
-                return;
-            }
-            
-            const title = row.querySelector('.col-title').textContent.toLowerCase();
-            const dept = row.querySelector('.col-dept').textContent.toLowerCase();
-            const haystack = title + ' ' + dept;
+        function performSearch(query) {
+            const normalized = query.toLowerCase().trim();
+            let visibleCount = 0;
 
-            if (haystack.includes(normalized)) {
-                row.style.display = '';
-                visibleCount++;
+            // 테이블 검색
+            tableRows.forEach(row => {
+                const source = row.dataset.source;
+                if (currentFilter !== 'all' && !source.includes(currentFilter)) {
+                    row.style.display = 'none';
+                    return;
+                }
+
+                const title = row.querySelector('.col-title').textContent.toLowerCase();
+                const dept = row.querySelector('.col-dept').textContent.toLowerCase();
+                const haystack = title + ' ' + dept;
+
+                if (haystack.includes(normalized)) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            // 카드 검색
+            cards.forEach(card => {
+                const source = card.dataset.source;
+                if (currentFilter !== 'all' && !source.includes(currentFilter)) {
+                    card.style.display = 'none';
+                    return;
+                }
+
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const meta = card.querySelector('.card-meta').textContent.toLowerCase();
+                const haystack = title + ' ' + meta;
+
+                if (haystack.includes(normalized)) {
+                    card.style.display = '';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (visibleCount === 0) {
+                document.querySelector('.styled-table')?.classList.add('hidden');
+                document.querySelector('.gov-cards-mobile')?.classList.add('hidden');
+                noResultsMsg.classList.remove('hidden');
             } else {
-                row.style.display = 'none';
+                document.querySelector('.styled-table')?.classList.remove('hidden');
+                document.querySelector('.gov-cards-mobile')?.classList.remove('hidden');
+                noResultsMsg.classList.add('hidden');
             }
-        });
-        
-        // 카드 검색
-        cards.forEach(card => {
-            const source = card.dataset.source;
-            if (currentFilter !== 'all' && !source.includes(currentFilter)) {
-                card.style.display = 'none';
-                return;
-            }
-            
-            const title = card.querySelector('.card-title').textContent.toLowerCase();
-            const meta = card.querySelector('.card-meta').textContent.toLowerCase();
-            const haystack = title + ' ' + meta;
-
-            if (haystack.includes(normalized)) {
-                card.style.display = '';
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
-            }
-        });
-
-        if (visibleCount === 0) {
-            document.querySelector('.styled-table')?.classList.add('hidden');
-            document.querySelector('.gov-cards-mobile')?.classList.add('hidden');
-            noResultsMsg.classList.remove('hidden');
-        } else {
-            document.querySelector('.styled-table')?.classList.remove('hidden');
-            document.querySelector('.gov-cards-mobile')?.classList.remove('hidden');
-            noResultsMsg.classList.add('hidden');
         }
-    }
-    
-    // 필터 탭
-    filterTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            filterTabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            currentFilter = tab.dataset.filter;
+
+        // 필터 탭
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentFilter = tab.dataset.filter;
+                performSearch(searchInput.value);
+            });
+        });
+
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
             performSearch(searchInput.value);
         });
-    });
 
-    searchForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        performSearch(searchInput.value);
+        searchInput.addEventListener('input', (e) => {
+            performSearch(e.target.value);
+        });
     });
-
-    searchInput.addEventListener('input', (e) => {
-        performSearch(e.target.value);
-    });
-});
 </script>
 
 

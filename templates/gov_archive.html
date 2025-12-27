@@ -295,8 +295,12 @@
                     <span class="source-icon koneps">🛒</span>
                     나라장터
                 </td>
-                <td class="count-cell">{{ (announcements|reject('selectattr', 'source_name', 'in', ['과기정통부',
-                    '과학기술정보통신부'])|list)|length }}</td>
+                <td class="count-cell">
+                    {% set msit_count = announcements|selectattr('source_name', 'equalto', '과기정통부')|list|length %}
+                    {% set ministry_count = announcements|selectattr('source_name', 'equalto', '과학기술정보통신부')|list|length
+                    %}
+                    {{ announcements|length - msit_count - ministry_count }}
+                </td>
             </tr>
         </tbody>
     </table>
