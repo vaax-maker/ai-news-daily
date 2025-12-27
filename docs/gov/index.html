@@ -19,7 +19,7 @@
         gap: 1rem;
         margin-bottom: 2rem;
         padding: 1.5rem;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #65a30d 0%, #84cc16 100%);
         border-radius: 12px;
         color: white;
     }
@@ -58,13 +58,13 @@
     }
 
     .filter-tab:hover {
-        border-color: #667eea;
+        border-color: #65a30d;
         background: #f7fafc;
     }
 
     .filter-tab.active {
-        border-color: #667eea;
-        background: #667eea;
+        border-color: #65a30d;
+        background: #65a30d;
         color: white;
     }
 
@@ -97,7 +97,7 @@
     }
 
     .gov-card .card-badge {
-        background: #667eea;
+        background: #65a30d;
         color: white;
         padding: 0.25rem 0.75rem;
         border-radius: 6px;
@@ -118,7 +118,7 @@
     }
 
     .gov-card .card-title a:hover {
-        color: #667eea;
+        color: #65a30d;
     }
 
     .gov-card .card-meta {
@@ -313,8 +313,10 @@
 <div class="page-header header-with-search">
     <div class="header-titles">
         <p class="eyebrow">Government Projects</p>
-        <h1>정부과제 누적 표</h1>
-        <p class="subtitle">AI·XR·영상·IDC 관련 정부과제 및 입찰공고</p>
+        <div class="title-row">
+            <h1>정부과제 누적 표</h1>
+            <p class="title-desc">AI·XR·영상·IDC 관련 정부과제 및 입찰공고</p>
+        </div>
     </div>
     <form class="search-bar header-search" id="gov-search-form">
         <input type="text" id="gov-search-input" placeholder="제목, 부서 검색" aria-label="정부과제 검색">
@@ -384,9 +386,9 @@
     }
 
     .gov-stats-clickable th.active {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #65a30d 0%, #84cc16 100%);
         color: white;
-        border-bottom-color: #667eea;
+        border-bottom-color: #65a30d;
     }
 
     .gov-stats-clickable td {
@@ -394,7 +396,7 @@
         text-align: center;
         font-size: 2rem;
         font-weight: 700;
-        color: #667eea;
+        color: #65a30d;
     }
 
     @media (max-width: 768px) {

@@ -108,8 +108,10 @@
 <div class="page-header header-with-search">
     <div class="header-titles">
         <p class="eyebrow">Members</p>
-        <h1>회원사 소식</h1>
-        <p class="subtitle">{{ members|length }}개 회원사의 최신 뉴스입니다.</p>
+        <div class="title-row">
+            <h1>회원사 소식</h1>
+            <p class="title-desc">{{ members|length }}개 회원사의 최신 뉴스입니다.</p>
+        </div>
     </div>
     <form class="search-bar header-search" id="member-search-form">
         <input type="text" id="member-search-input" placeholder="뉴스 제목 또는 회원사명 검색" aria-label="회원사 뉴스 검색">

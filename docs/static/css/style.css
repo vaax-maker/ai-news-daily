@@ -89,11 +89,14 @@ header {
 }
 
 .header-logo {
-    height: 5.5rem;
+    height: 3.96rem;
+    /* 5.5rem * 0.9 * 0.8 = 3.96rem */
     width: auto;
     vertical-align: middle;
     margin-right: 1.2rem;
     object-fit: contain;
+    transform: scaleX(0.9);
+    /* 가로 90% */
 }
 
 .logo-link {
