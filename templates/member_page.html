@@ -3,31 +3,38 @@
 {% block title %}{{ member.name }} News History{% endblock %}
 
 {% block content %}
-<h1>{{ member.name }} News</h1>
-<p class="subtitle">{{ member.name }} 관련 뉴스 {{ articles|length }}건</p>
+<div class="page-header">
+    <div class="header-titles">
+        <p class="eyebrow">Member History</p>
+        <h1>{{ member.name }}</h1>
+        <p class="subtitle">{{ member.name }} 관련 수집된 뉴스 히스토리입니다. (총 {{ articles|length }}건)</p>
+    </div>
+</div>
 
-<div class="member-news-grid">
-    {% for article in articles %}
-    <a href="{{ article.link }}" target="_blank" class="member-news-tile">
-        {% if article.image_url %}
-        <div class="tile-image">
-            <img src="{{ article.image_url }}" alt="Thumbnail" loading="lazy">
-        </div>
-        {% endif %}
-        <div class="tile-content">
-            <h3 class="tile-title">{{ article.title }}</h3>
-            <div class="tile-meta">
-                <span class="tile-source">{{ article.source_name or '출처' }}</span>
-                <span class="tile-date">{{ article.published_display }}</span>
+<section class="card">
+    {% if articles %}
+    <div class="member-news-grid">
+        {% for article in articles %}
+        <a href="{{ article.link }}" target="_blank" class="member-news-tile">
+            {% if article.image_url %}
+            <div class="tile-image">
+                <img src="{{ article.image_url }}" alt="Thumbnail" loading="lazy">
             </div>
-        </div>
-    </a>
-    {% endfor %}
-</div>
-
-{% if not articles %}
-<div class="empty-msg">
-    아직 수집된 뉴스가 없습니다.
-</div>
-{% endif %}
+            {% endif %}
+            <div class="tile-content">
+                <h3 class="tile-title">{{ article.title }}</h3>
+                <div class="tile-meta">
+                    <span class="tile-source">{{ article.source_name or '출처' }}</span>
+                    <span class="tile-date">{{ article.published_display }}</span>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-msg">
+        아직 수집된 뉴스가 없습니다.
+    </div>
+    {% endif %}
+</section>
 {% endblock %}

@@ -193,8 +193,13 @@
 </script>
 
 <!-- Word Cloud Section -->
-<div class="wordcloud-section">
-    <h3>지난 7일간의 주요 키워드</h3>
+<section class="card wordcloud-section">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Weekly Trends</p>
+            <h3>지난 7일간의 주요 키워드</h3>
+        </div>
+    </div>
 
     <!-- Legend -->
     <div class="wordcloud-legend">
@@ -218,7 +223,7 @@
 
     <img src="{{ root_path | default('.') }}/static/images/weekly_wordcloud.png" alt="Weekly Word Cloud"
         class="wordcloud-img">
-</div>
+</section>
 
 <div class="dashboard-grid">
     <!-- AI Section -->

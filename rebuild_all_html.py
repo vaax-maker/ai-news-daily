@@ -1,0 +1,236 @@
+#!/usr/bin/env python3
+"""
+Rebuild all HTML pages across the site using existing data and updated templates.
+No API calls are made.
+"""
+
+import os
+import re
+import datetime
+import json
+from bs4 import BeautifulSoup
+
+from src.generators.html import (
+    render_member_page, 
+    render_member_index, 
+    render_archive_index, 
+    render_dashboard,
+    render_board_page,
+    render_gov_archive
+)
+from src.config import CategoryConfig, load_members, load_categories
+from src.utils.storage import MemberStorage, GovStorage
+
+def parse_preview_from_html(html_path, limit=5):
+    """HTML 파일에서 제목과 메타 정보를 추출하여 요약 목록 생성"""
+    if not os.path.exists(html_path):
+        return []
+
+    with open(html_path, "r", encoding="utf-8") as f:
+        soup = BeautifulSoup(f, "html.parser")
+
+    previews = []
+    # 최신 템플릿은 .news-item 클래스를 사용함
+    for article in soup.select(".news-item")[:limit]:
+        title_el = article.select_one(".news-title a")
+        meta_el = article.select_one(".news-meta")
+
+        source_name = ""
+        published_display = ""
+
+        if meta_el:
+            # "출처 | 날짜" 형식을 파싱
+            text = meta_el.get_text(" ", strip=True)
+            if "·" in text:
+                parts = text.split("·")
+                source_name = parts[0].strip()
+                published_display = parts[1].strip()
+            elif "|" in text:
+                parts = text.split("|")
+                source_name = parts[0].strip()
+                published_display = parts[1].strip()
+            else:
+                published_display = text
+
+        previews.append({
+            "title": title_el.get_text(strip=True) if title_el else "제목 없음",
+            "link": title_el.get("href") if title_el else "#",
+            "source_name": source_name,
+            "published_display": published_display
+        })
+    return previews
+
+def rebuild_members():
+    print("--- [Members] Rebuilding... ---")
+    members = load_members()
+    storage = MemberStorage()
+    member_page_dir = "docs/members"
+    os.makedirs(member_page_dir, exist_ok=True)
+    
+    member_entries = []
+    all_latest_news = []
+    
+    for m_key, member in members.items():
+        try:
+            history = storage.load_news(m_key)
+            history.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
+            
+            now_str = datetime.datetime.now().strftime("%Y-%m-%d")
+            html = render_member_page(member, history, now_str)
+            
+            safe_name = re.sub(r'[<>:"/\\|?*]', '_', m_key).strip()
+            page_filename = f"{safe_name}.html"
+            
+            with open(os.path.join(member_page_dir, page_filename), "w", encoding="utf-8") as f:
+                f.write(html)
+            
+            # Index data
+            latest_str = "-"
+            latest_title = ""
+            latest_link = ""
+            if history:
+                latest = history[0]
+                latest_str = latest.get("published_display", "-")
+                latest_title = latest.get("title", "")
+                latest_link = latest.get("link", "")
+            
+            member_entries.append({
+                "filename": page_filename,
+                "name": member.name,
+                "count": len(history),
+                "latest_date": latest_str,
+                "latest_title": latest_title,
+                "latest_link": latest_link
+            })
+            all_latest_news.extend(history[:2])
+        except Exception as e:
+            print(f"  Error {member.name}: {e}")
+
+    # Index
+    member_entries.sort(key=lambda x: (-x["count"], x["name"]))
+    all_latest_news.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
+    
+    # Filter today's news for index grid
+    today_str = datetime.datetime.now().strftime("%Y-%m-%d")
+    today_start = datetime.datetime.strptime(today_str, "%Y-%m-%d").timestamp()
+    todays_news = [n for n in all_latest_news if n.get("timestamp", 0) >= today_start]
+    
+    idx_html = render_member_index(member_entries, all_news=todays_news)
+    with open("docs/members/index.html", "w", encoding="utf-8") as f:
+        f.write(idx_html)
+    
+    print(f"✓ Member Index & {len(member_entries)} pages done.")
+    return all_latest_news[:5]
+
+def rebuild_archives():
+    print("\n--- [Archives] Rebuilding... ---")
+    categories = load_categories()
+    dashboard_previews = {}
+    dashboard_links = {}
+
+    for key in ["ai", "xr"]:
+        config = categories.get(key)
+        if not config: continue
+        
+        daily_dir = os.path.join("docs", key, "daily")
+        if not os.path.exists(daily_dir): continue
+        
+        files = sorted([f for f in os.listdir(daily_dir) if f.endswith(".html")], reverse=True)
+        run_entries = []
+        for f in files:
+            parts = f.replace(".html", "").split("_")
+            if len(parts) == 2:
+                run_entries.append({"date_str": parts[0], "time_str": parts[1], "filename": f})
+        
+        # Index
+        idx_html = render_archive_index(run_entries, config)
+        with open(os.path.join("docs", key, "index.html"), "w", encoding="utf-8") as f:
+            f.write(idx_html)
+        
+        # Dashboard previews
+        if files:
+            latest_path = os.path.join(daily_dir, files[0])
+            dashboard_previews[key] = parse_preview_from_html(latest_path)
+            dashboard_links[key] = f"{key}/daily/{files[0]}"
+        
+        print(f"✓ {key.upper()} Index done.")
+    
+    return dashboard_previews, dashboard_links
+
+def rebuild_gov():
+    print("\n--- [Gov] Rebuilding... ---")
+    storage = GovStorage()
+    announcements = storage.load_announcements()
+    # Sort by date desc
+    announcements.sort(key=lambda x: x.get("date", ""), reverse=True)
+    
+    html = render_gov_archive(announcements)
+    with open("docs/gov/index.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    
+    print(f"✓ Gov Index done.")
+    return announcements[:5]
+
+def rebuild_board():
+    print("\n--- [Board] Rebuilding... ---")
+    os.makedirs("docs/board", exist_ok=True)
+    html = render_board_page()
+    with open("docs/board/index.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"✓ Board done.")
+
+def rebuild_dashboard(ai_previews, xr_previews, gov_previews, member_previews, links):
+    print("\n--- [Dashboard] Rebuilding... ---")
+    # Clean up previews for dashboard format
+    # The template expects specific fields
+    
+    # Gov previews formatting
+    gov_formatted = []
+    for item in gov_previews:
+        gov_formatted.append({
+            "title": item.get("title"),
+            "link": item.get("link"),
+            "published_display": item.get("date"),
+            "dept": item.get("dept")
+        })
+
+    # Members previews formatting
+    member_formatted = []
+    for item in member_previews:
+        member_formatted.append({
+            "title": item.get("title"),
+            "link": item.get("link"),
+            "published_display": item.get("published_display"),
+            "member_name": item.get("member_name")
+        })
+
+    html = render_dashboard(
+        ai_latest=ai_previews,
+        xr_latest=xr_previews,
+        gov_latest=gov_formatted,
+        members_latest=member_formatted,
+        section_links=links
+    )
+    with open("docs/index.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"✓ Dashboard done.")
+
+if __name__ == "__main__":
+    m_latest = rebuild_members()
+    a_previews, links = rebuild_archives()
+    g_latest = rebuild_gov()
+    rebuild_board()
+    
+    # Additional links
+    links["members"] = "members/index.html"
+    links["gov"] = "gov/index.html"
+    
+    rebuild_dashboard(
+        ai_previews=a_previews.get("ai", []),
+        xr_previews=a_previews.get("xr", []),
+        gov_previews=g_latest,
+        member_previews=m_latest,
+        links=links
+    )
+    
+    print("\n✨ All HTML pages have been rebuild with new templates!")

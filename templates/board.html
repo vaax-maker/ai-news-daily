@@ -4,36 +4,37 @@
 
 {% block extra_css %}
 <style>
-    .board-container {
-        max-width: 800px;
+    .board-card {
+        max-width: 900px;
         margin: 0 auto;
-        padding: 2rem 0;
-    }
-
-    .board-header {
-        text-align: center;
-        margin-bottom: 2rem;
     }
 
     .board-intro {
-        color: var(--text-muted);
         margin-bottom: 2rem;
-        background: #f8fafc;
-        padding: 1rem;
-        border-radius: 8px;
-        font-size: 0.95rem;
+    }
+
+    .board-intro-text {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: var(--text-muted);
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="board-container">
-    <div class="board-header">
+<div class="page-header">
+    <div class="header-titles">
+        <p class="eyebrow">Community</p>
         <h1>자유 게시판</h1>
         <p class="subtitle">누구나 자유롭게 의견을 나누고 자료를 공유하는 공간입니다.</p>
-        <p class="small text-muted" style="font-size: 0.85rem; margin-top: -1.5rem;">
-            * 게시글/댓글 작성 및 파일 업로드를 위해서는 <strong>GitHub 계정 로그인</strong>이 필요합니다.<br>
-            * 📱 <strong>모바일 이미지 업로드:</strong> 갤러리에서 사진을 <strong>'복사'</strong>한 후 입력창에 <strong>'붙여넣기'</strong> 해주세요.
+    </div>
+</div>
+
+<section class="card board-card">
+    <div class="board-intro">
+        <p class="board-intro-text">
+            💡 <strong>안내:</strong> 게시글/댓글 작성 및 파일 업로드를 위해서는 <strong>GitHub 계정 로그인</strong>이 필요합니다.<br>
+            📱 <strong>모바일 이미지 업로드:</strong> 갤러리에서 사진을 <strong>'복사'</strong>한 후 입력창에 <strong>'붙여넣기'</strong> 해주세요.
         </p>
     </div>
 
@@ -44,5 +45,5 @@
         data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom"
         data-theme="preferred_color_scheme" data-lang="ko" crossorigin="anonymous" async>
         </script>
-</div>
+</section>
 {% endblock %}
