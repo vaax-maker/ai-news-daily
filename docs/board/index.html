@@ -440,6 +440,8 @@
     .board-table {
         width: 100%;
         border-collapse: collapse;
+        table-layout: fixed;
+        /* 줄바꿈 방지 필수 */
     }
 
     .styled-table tbody tr {
@@ -462,27 +464,38 @@
         width: 60px;
         text-align: center;
         color: #718096;
+        white-space: nowrap;
     }
 
     .col-subject {
         text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 0;
+        /* 중요: flex 또는 table-layout: fixed에서 작동 */
     }
 
     .col-writer {
         width: 120px;
         text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .col-date {
-        width: 100px;
+        width: 120px;
         text-align: center;
         color: #718096;
+        white-space: nowrap;
     }
 
     .col-views {
-        width: 70px;
+        width: 80px;
         text-align: center;
         color: #718096;
+        white-space: nowrap;
     }
 
     .loading-cell {

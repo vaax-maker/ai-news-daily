@@ -78,10 +78,20 @@
                 <label>제목</label>
                 <input type="text" id="inputTitle" placeholder="제목을 입력하세요" maxlength="100">
             </div>
+
+            <!-- 첨부파일 (Base64 저장, 용량 제한) -->
             <div class="form-group">
-                <label>내용</label>
-                <textarea id="inputContent" rows="10" placeholder="내용을 입력하세요."></textarea>
+                <label>첨부파일 (최대 500KB)</label>
+                <input type="file" id="inputFile">
+                <div id="fileInfo" class="file-info hidden"></div>
             </div>
+
+            <!-- Quill Editor -->
+            <div class="form-group">
+                <label>내용 (이미지 붙여넣기 가능)</label>
+                <div id="editor-container" style="height: 300px;"></div>
+            </div>
+
             <div class="form-actions">
                 <button id="btnCancel" class="secondary-btn">취소</button>
                 <button id="btnSave" class="primary-btn">등록</button>
@@ -98,7 +108,14 @@
                     <span id="viewDate">날짜</span>
                 </div>
             </div>
-            <div class="view-content" id="viewContent">
+
+            <!-- 첨부파일 다운로드 영역 -->
+            <div id="viewAttachment" class="view-attachment hidden">
+                <span class="attachment-label">📎 첨부파일:</span>
+                <a href="#" id="downloadLink" download>파일명</a>
+            </div>
+
+            <div class="view-content ql-editor" id="viewContent">
                 내용
             </div>
             <div class="view-actions">
@@ -112,13 +129,17 @@
     </div>
 </section>
 
+<!-- Quill CSS -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<!-- Quill JS -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
 <!-- Firebase SDK -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, getDoc, doc, query, orderBy, limit, serverTimestamp, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    // TODO: 여기에 Firebase 설정을 붙여넣으세요
-    // https://console.firebase.google.com/ 에서 프로젝트 생성 후 설정을 가져오세요
+    // 사용자 설정
     const firebaseConfig = {
         apiKey: "AIzaSyANn76u2ZCJ5rq4IOpYaTzFy1JtKoPOM-c",
         authDomain: "vaax-board.firebaseapp.com",
@@ -140,6 +161,23 @@
         document.querySelector('.loading-cell').textContent = "Firebase 설정이 필요합니다. 코드를 확인해주세요.";
     }
 
+    // Quill Setup
+    var quill = new Quill('#editor-container', {
+        theme: 'snow',
+        placeholder: '내용을 입력하세요. 이미지를 복사해서 붙여넣을 수 있습니다.',
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote', 'code-block'],
+                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                ['link', 'image'],                                // link and image, video
+                ['clean']                                         // remove formatting button
+            ]
+        }
+    });
+
     const boardBody = document.getElementById('boardBody');
     const writeForm = document.getElementById('writeForm');
     const viewSection = document.getElementById('viewSection');
@@ -149,10 +187,20 @@
     const inputWriter = document.getElementById('inputWriter');
     const inputPassword = document.getElementById('inputPassword');
     const inputTitle = document.getElementById('inputTitle');
-    const inputContent = document.getElementById('inputContent');
+    const inputFile = document.getElementById('inputFile');
+    const fileInfo = document.getElementById('fileInfo');
 
     let currentMode = 'list'; // list, write, view
     let currentDocId = null;
+    let currentFileData = null; // { name: "test.txt", data: "base64..." }
+
+    // --- Helper: File to Base64 ---
+    const fileToBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
 
     // --- Functions ---
 
@@ -173,7 +221,7 @@
                 return;
             }
 
-            let index = 1; // 실제로는 전체 개수 - 현재 인덱스로 계산 필요
+            let index = 1;
 
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
@@ -181,9 +229,14 @@
                 const dateObj = data.createdAt ? data.createdAt.toDate() : new Date();
                 const dateStr = dateObj.toISOString().split('T')[0];
 
+                // 제목에 첨부파일 아이콘 표시
+                const attachIcon = data.file ? ' <span title="첨부파일">📎</span>' : '';
+
                 row.innerHTML = `
                     <td class="col-num">${index++}</td>
-                    <td class="col-subject"><a href="#" data-id="${doc.id}">${escapeHtml(data.title)}</a></td>
+                    <td class="col-subject">
+                        <a href="#" data-id="${doc.id}">${escapeHtml(data.title)}${attachIcon}</a>
+                    </td>
                     <td class="col-writer">${escapeHtml(data.writer)}</td>
                     <td class="col-date">${dateStr}</td>
                     <td class="col-views">${data.views || 0}</td>
@@ -195,7 +248,9 @@
             document.querySelectorAll('.col-subject a').forEach(a => {
                 a.addEventListener('click', (e) => {
                     e.preventDefault();
-                    viewPost(e.target.dataset.id);
+                    // 클릭한 요소가 a 태그인지 확인 (아이콘 클릭 시 등 위임 처리)
+                    const target = e.target.closest('a');
+                    if (target) viewPost(target.dataset.id);
                 });
             });
 
@@ -215,8 +270,11 @@
         const viewWriter = document.getElementById('viewWriter');
         const viewDate = document.getElementById('viewDate');
         const viewContent = document.getElementById('viewContent');
+        const viewAttachment = document.getElementById('viewAttachment');
+        const downloadLink = document.getElementById('downloadLink');
 
         viewContent.innerHTML = '로딩중...';
+        viewAttachment.classList.add('hidden');
 
         try {
             const docRef = doc(db, "posts", id);
@@ -228,7 +286,17 @@
                 viewWriter.textContent = data.writer;
                 const dateObj = data.createdAt ? data.createdAt.toDate() : new Date();
                 viewDate.textContent = dateObj.toLocaleString();
-                viewContent.innerHTML = escapeHtml(data.content).replace(/\n/g, '<br>');
+
+                // Quill Content (HTML)
+                viewContent.innerHTML = data.content;
+
+                // 첨부파일 처리
+                if (data.file) {
+                    viewAttachment.classList.remove('hidden');
+                    downloadLink.textContent = data.file.name;
+                    downloadLink.href = data.file.data;
+                    downloadLink.download = data.file.name;
+                }
 
                 // 조회수 증가 (Optional)
                 // updateDoc(docRef, { views: (data.views || 0) + 1 });
@@ -252,39 +320,52 @@
         const writer = inputWriter.value.trim();
         const password = inputPassword.value.trim();
         const title = inputTitle.value.trim();
-        const content = inputContent.value.trim();
+        const content = quill.root.innerHTML; // Quill HTML
 
-        if (!writer || !password || !title || !content) {
-            alert("모든 항목을 입력해주세요.");
+        // Quill 에디터가 비었는지 확인 (기본적으로 <p><br></p>가 있음)
+        const textContent = quill.getText().trim();
+        const hasImage = content.includes('<img');
+
+        if (!writer || !password || !title || (!textContent && !hasImage)) {
+            alert("모든 항목을 입력해주세요. (내용 포함)");
             return;
         }
 
         try {
+            const docData = {
+                writer,
+                title,
+                content,
+                updatedAt: serverTimestamp()
+            };
+
+            // 신규 작성 시에만 비밀번호 저장 (수정 시에는 유지)
+            // 파일 처리
+            if (currentFileData) {
+                docData.file = currentFileData;
+            }
+
             if (currentDocId) {
-                // 수정 TODO: 비밀번호 체크 로직 필요 (클라이언트 사이드라 취약하지만 간단히 구현)
-                // 실제로는 서버(Cloud Functions)에서 하거나, 문서에 비번 저장후 비교
-                await updateDoc(doc(db, "posts", currentDocId), {
-                    writer, title, content, // 비번은 업데이트 안함
-                    updatedAt: serverTimestamp()
-                });
+                // 수정
+                await updateDoc(doc(db, "posts", currentDocId), docData);
                 alert("수정되었습니다.");
             } else {
                 // 신규
-                await addDoc(collection(db, "posts"), {
-                    writer,
-                    password, // 주의: 평문 저장됨 (데모용)
-                    title,
-                    content,
-                    views: 0,
-                    createdAt: serverTimestamp()
-                });
+                docData.password = password;
+                docData.views = 0;
+                docData.createdAt = serverTimestamp();
+                await addDoc(collection(db, "posts"), docData);
                 alert("등록되었습니다.");
             }
             showSection('list');
-            loadPosts(); // 목록 갱신
+            loadPosts();
         } catch (e) {
             console.error("Error saving:", e);
-            alert("저장 중 오류가 발생했습니다.");
+            if (e.message.includes("exceeds the maximum size")) {
+                alert("저장 실패: 게시글 전체 용량이 너무 큽니다. (이미지나 첨부파일을 줄여주세요)");
+            } else {
+                alert("저장 중 오류가 발생했습니다: " + e.message);
+            }
         }
     }
 
@@ -347,11 +428,15 @@
     // --- Event Listeners ---
     document.getElementById('btnWrite').addEventListener('click', () => {
         currentDocId = null;
+        currentFileData = null;
         document.getElementById('formTitle').textContent = "새 게시글 작성";
         inputWriter.value = "";
+        inputPassword.disabled = false;
         inputPassword.value = "";
         inputTitle.value = "";
-        inputContent.value = "";
+        inputFile.value = "";
+        fileInfo.classList.add('hidden');
+        quill.setContents([]); // 에디터 초기화
         showSection('write');
     });
 
@@ -365,7 +450,7 @@
 
     document.getElementById('btnSave').addEventListener('click', savePost);
 
-    // 수정 버튼 클릭 (간단 비번 체크)
+    // 수정 버튼
     document.getElementById('btnEdit').addEventListener('click', async () => {
         const inputPw = prompt("비밀번호를 입력하세요");
         if (!inputPw) return;
@@ -375,9 +460,23 @@
         if (docSnap.exists() && docSnap.data().password === inputPw) {
             document.getElementById('formTitle').textContent = "게시글 수정";
             inputWriter.value = docSnap.data().writer;
-            inputPassword.value = docSnap.data().password; // 기존 비번 노출 (데모용)
+            inputPassword.value = "****";
+            inputPassword.disabled = true; // 비번 수정 불가
             inputTitle.value = docSnap.data().title;
-            inputContent.value = docSnap.data().content;
+
+            // Quill 내용 설정
+            quill.clipboard.dangerouslyPasteHTML(docSnap.data().content);
+
+            currentFileData = docSnap.data().file || null;
+            inputFile.value = ""; // 파일 인풋 초기화
+
+            if (currentFileData) {
+                fileInfo.textContent = `현재 파일: ${currentFileData.name}`;
+                fileInfo.classList.remove('hidden');
+            } else {
+                fileInfo.classList.add('hidden');
+            }
+
             showSection('write');
         } else {
             alert("비밀번호가 일치하지 않습니다.");
@@ -385,6 +484,42 @@
     });
 
     document.getElementById('btnDelete').addEventListener('click', deletePost);
+
+    // 파일 업로드 처리
+    inputFile.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) {
+            currentFileData = null;
+            fileInfo.classList.add('hidden');
+            return;
+        }
+
+        // 용량 제한 체크 (500KB)
+        if (file.size > 500 * 1024) {
+            alert("파일 크기는 500KB 이하여야 합니다.");
+            inputFile.value = "";
+            currentFileData = null;
+            fileInfo.classList.add('hidden');
+            return;
+        }
+
+        try {
+            const base64 = await fileToBase64(file);
+            currentFileData = {
+                name: file.name,
+                type: file.type,
+                data: base64
+            };
+            fileInfo.textContent = `선택된 파일: ${file.name}`;
+            fileInfo.classList.remove('hidden');
+        } catch (err) {
+            console.error(err);
+            alert("파일 처리 중 오류가 발생했습니다.");
+            inputFile.value = "";
+            currentFileData = null;
+            fileInfo.classList.add('hidden');
+        }
+    });
 
     // Initial Load
     loadPosts();
@@ -406,6 +541,8 @@
     .board-table {
         width: 100%;
         border-collapse: collapse;
+        table-layout: fixed;
+        /* 줄바꿈 방지 필수 */
     }
 
     .styled-table tbody tr {
@@ -428,27 +565,38 @@
         width: 60px;
         text-align: center;
         color: #718096;
+        white-space: nowrap;
     }
 
     .col-subject {
         text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 0;
+        /* 중요: flex 또는 table-layout: fixed에서 작동 */
     }
 
     .col-writer {
         width: 120px;
         text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .col-date {
-        width: 100px;
+        width: 120px;
         text-align: center;
         color: #718096;
+        white-space: nowrap;
     }
 
     .col-views {
-        width: 70px;
+        width: 80px;
         text-align: center;
         color: #718096;
+        white-space: nowrap;
     }
 
     .loading-cell {
