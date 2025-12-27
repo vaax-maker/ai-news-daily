@@ -103,6 +103,7 @@ header {
     display: flex;
     align-items: center;
     padding: 0 !important;
+    margin-right: 4rem;
 }
 
 .logo-link:hover {
