@@ -166,10 +166,42 @@ def process_category(config, now_utc, kst_timezone_offset=9):
             selected_raw = rank_items_with_ai(raw_items, config.max_articles)
         else:
             selected_raw = raw_items[:config.max_articles]
+        
+        # Load existing articles to avoid re-summarizing (LLM cost optimization)
+        existing_articles = []
+        if os.path.isdir(config.archive_dir):
+            for html_file in os.listdir(config.archive_dir):
+                if html_file.endswith(".html"):
+                    existing_articles.extend(parse_existing_articles(
+                        os.path.join(config.archive_dir, html_file)
+                    ))
+        
+        existing_links = {art.get("link") for art in existing_articles if art.get("link")}
+        existing_by_link = {art.get("link"): art for art in existing_articles if art.get("link")}
+        print(f"[{config.key.upper()}] Found {len(existing_links)} existing articles for dedup check.")
              
         # Summarize
         summarized_items = []
+        skipped_count = 0
         for idx, (ts, title, link, content, entry) in enumerate(selected_raw):
+            # Skip if already summarized (reuse existing summary)
+            if link in existing_links:
+                existing_art = existing_by_link.get(link)
+                if existing_art and existing_art.get("summary_html"):
+                    summarized_items.append({
+                        "title": existing_art.get("title", shorten_korean_title(title)),
+                        "link": link,
+                        "summary_html": existing_art.get("summary_html"),
+                        "published_display": existing_art.get("published_display", format_timestamp(ts)),
+                        "source_name": existing_art.get("source_name", extract_source_name(entry, link)),
+                        "image_url": existing_art.get("image_url", ""),
+                        "placeholder_type": "",
+                        "original_title": title
+                    })
+                    skipped_count += 1
+                    continue
+            
+            # New article - call LLM for summarization
             text_with_url = content + f"\n\nURL: {link}"
             try:
                 summary = summarize_article(text_with_url, title, config.display_name)
@@ -177,8 +209,7 @@ def process_category(config, now_utc, kst_timezone_offset=9):
                 summary = trim_summary_lines(summary)
             except Exception as e:
                 print(f"[{config.key}] Summarization error for '{title[:50]}...': {e}")
-                # summary = "요약 실패" - 제거
-                continue # 실패한 항목은 제외
+                continue # Skip failed items
 
 
 
@@ -193,9 +224,12 @@ def process_category(config, now_utc, kst_timezone_offset=9):
                 "published_display": format_timestamp(ts),
                 "source_name": extract_source_name(entry, link),
                 "image_url": image_url,
-                "placeholder_type": placeholder_type,  # "ai" or "xr" for placeholder box
+                "placeholder_type": placeholder_type,
                 "original_title": title
             })
+        
+        if skipped_count > 0:
+            print(f"[{config.key.upper()}] Reused {skipped_count} existing summaries (LLM calls saved).")
             
     # Markdown processing for AI items
     if config.key != "gov":
