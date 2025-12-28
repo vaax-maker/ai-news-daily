@@ -209,7 +209,7 @@ def _summarize_with_grok(prompt: str) -> str:
     if not Groq:
         raise ImportError("Groq library not installed properly.")
 
-    client = Groq(api_key=api_key, base_url="https://api.groq.com")
+    client = Groq(api_key=api_key)
     model = os.getenv("GROK_MODEL", "llama-3.3-70b-versatile")
     
     last_exc = None
