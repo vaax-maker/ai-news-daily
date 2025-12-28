@@ -209,7 +209,18 @@ def _summarize_with_grok(prompt: str) -> str:
     if not Groq:
         raise ImportError("Groq library not installed properly.")
 
-    client = Groq(api_key=api_key)
+    # Temporarily unset OPENAI_BASE_URL to prevent Groq library from using wrong endpoint
+    openai_base_url = os.environ.pop("OPENAI_BASE_URL", None)
+    openai_api_base = os.environ.pop("OPENAI_API_BASE", None)
+    
+    try:
+        client = Groq(api_key=api_key)
+    finally:
+        # Restore environment variables if they existed
+        if openai_base_url is not None:
+            os.environ["OPENAI_BASE_URL"] = openai_base_url
+        if openai_api_base is not None:
+            os.environ["OPENAI_API_BASE"] = openai_api_base
     model = os.getenv("GROK_MODEL", "llama-3.3-70b-versatile")
     
     last_exc = None
