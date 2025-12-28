@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from src.generators.llm import analyze_text_with_llm
 import random
 
-def extract_weekly_keywords(docs_dir="docs", days=7):
+def extract_weekly_keywords(docs_dir="docs", days=2):
     """
     Extracts keywords from AI and XR daily summaries for the past `days` days,
     filtering for Person, Tech, Company, Solution using LLM.

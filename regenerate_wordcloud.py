@@ -23,7 +23,7 @@ def main():
     
     try:
         # Extract keywords from last 7 days
-        wc_counts, wc_categories = extract_weekly_keywords(docs_dir="docs", days=7)
+        wc_counts, wc_categories = extract_weekly_keywords(docs_dir="docs", days=2)
         
         # Set output path
         wc_output_path = "static/images/weekly_wordcloud.png"

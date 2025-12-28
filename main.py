@@ -635,7 +635,7 @@ def main():
     else:
         print("[WordCloud] Generating weekly word cloud...")
         try:
-            wc_counts, wc_categories = extract_weekly_keywords(docs_dir="docs", days=7)
+            wc_counts, wc_categories = extract_weekly_keywords(docs_dir="docs", days=2)
             wc_output_path = "static/images/weekly_wordcloud.png"
             os.makedirs(os.path.dirname(wc_output_path), exist_ok=True)
             create_wordcloud_image(wc_counts, wc_categories, wc_output_path)
