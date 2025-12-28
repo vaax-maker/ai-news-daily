@@ -261,87 +261,51 @@ def summarize_article(text: str, title: str, display_name: str) -> str:
     if not os.environ.get("GEMINI_API_KEY") and not os.environ.get("GROK_API_KEY"):
         return "API Key 미설정으로 AI 요약 생략"
 
-    # === 개선된 프롬프트 적용 ===
-    prompt = f"""당신은 스타트업 대표의 의사결정을 돕는 전문 뉴스 분석 에이전트입니다.
-{display_name} 관련 기사를 아래 규칙에 따라 **한글**로 요약하세요.
+    # === 간소화된 프롬프트 + Few-shot 예시 ===
+    prompt = f"""뉴스 기사를 아래 형식으로 요약하세요.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋 요약 규칙
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-1. **길이 요구사항**
-   - [요약] 섹션: 3~5개 문장, 각 문장은 30자 내외
-   - 육하원칙(누가·언제·어디·무엇·왜·어떻게)을 포함
-   - 수치·데이터(금액, 비율, 규모, 일정, 인원 등)는 반드시 명시
-
-2. **하이라이트 규칙** ⚠️ 중요
-   - 문장 전체를 강조하지 말 것
-   - **굵게** 처리 대상 (각 요약에 2~4개):
-     • 핵심 기업/기관/인물명
-     • 구체적인 수치/금액/날짜
-     • 핵심 기술/제품/서비스명
-     • 중요한 동작/결정을 나타내는 동사구
-   - 예시: "**삼성전자**는 **2025년 상반기**에 **차세대 AI 칩**을 출시할 예정"
-
-3. **문체**
-   - 모든 문장은 명사형 종결(~함, ~임, ~됨, ~되었음)
-   - 객관적이고 사실 중심으로 작성
-
-4. **영문 제목 처리**
-   - 제목이 영문인 경우, [제목] 섹션에 한글 번역을 1줄로 작성할 것
-
-5. **필수 섹션** 🔴
-   - [제목], [요약], [의미] 세 섹션 모두 필수
-   - 하나라도 누락 시 응답 무효
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📤 출력 형식 (정확히 준수)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-[제목]
-(영문 제목인 경우에만) 한글 번역 1줄
+## 출력 형식 (정확히 따라주세요)
 
 [요약]
-· 첫 번째 핵심 내용 (30자 내외, 핵심 키워드 **굵게**)
-· 두 번째 핵심 내용 (30자 내외, 핵심 키워드 **굵게**)
-· 세 번째 핵심 내용 (30자 내외, 핵심 키워드 **굵게**)
+· **핵심키워드** 포함 핵심 내용 1 (30자 내외)
+· **수치/금액** 포함 핵심 내용 2 (30자 내외)
+· **기업/인물명** 포함 핵심 내용 3 (30자 내외)
 (필요시 4~5번째 문장 추가)
 
 [의미]
-· 산업구조/경쟁/시장기회/리스크 중 핵심 인사이트 1~2문장 (각 30자 내외)
+· 산업/시장에 미치는 영향 (30자 내외)
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ 출력 전 검증 체크리스트
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+## 규칙
+- 총 3~5개 요약 문장 + 1개 의미 문장
+- **굵게**는 키워드/수치/기업명에만 적용 (문장 전체 X)
+- 문장 끝은 ~함, ~임, ~됨 형식
+- 수치(금액, 날짜, 규모)는 반드시 포함
 
-응답하기 전 반드시 확인:
-□ [제목], [요약], [의미] 세 섹션이 모두 포함되었는가?
-□ [요약]의 각 문장이 30자 내외인가?
-□ **굵게** 처리가 핵심 키워드/구문에만 적용되었는가? (문장 전체 X)
-□ 수치·데이터가 구체적으로 포함되었는가?
-□ "제목:" 같은 접두사가 출력에 포함되지 않았는가?
-□ [의미] 섹션이 최소 1문장 이상인가?
+## 예시 (이 형식을 정확히 따라주세요)
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📰 분석할 기사
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[요약]
+· **엔비디아**가 **그록**과 **200억달러**(약 29조원) 규모 기술 라이선스 계약 체결함
+· **LPU** 칩 기술과 핵심 인재를 비독점 방식으로 확보함
+· 창립자 **조나단 로스** 등 주요 팀원이 엔비디아에 합류 예정임
+· **그록클라우드**는 독립 운영 유지, **사이먼 에드워즈**가 신임 CEO로 취임함
 
-{title}
+[의미]
+· **GPU 중심**에서 **추론 특화** AI 하드웨어로 전략 확대되는 신호임
 
-{text[:2500]}
+---
 
-위 기사를 요약하세요.
+## 분석할 기사
+
+제목: {title}
+
+{text[:2000]}
+
+위 기사를 [요약]과 [의미] 형식으로 요약하세요.
 """
 
-    # Try Grok first, then Gemini as fallback
-    grok_error = None
+    # Try Gemini first (한글 형식 준수 우수), then Grok as fallback
     gemini_error = None
-    
-    try:
-        return _summarize_with_grok(prompt)
-    except Exception as e:
-        grok_error = str(e)
-        print(f"[Grok] Failed: {grok_error[:100]}")
+    grok_error = None
     
     try:
         return _summarize_with_gemini(prompt)
@@ -349,8 +313,14 @@ def summarize_article(text: str, title: str, display_name: str) -> str:
         gemini_error = str(e)
         print(f"[Gemini] Failed: {gemini_error[:100]}")
     
+    try:
+        return _summarize_with_grok(prompt)
+    except Exception as e:
+        grok_error = str(e)
+        print(f"[Grok] Failed: {grok_error[:100]}")
+    
     # Both failed - return error message instead of raising
-    error_summary = f"Grok: {grok_error[:50] if grok_error else 'N/A'}, Gemini: {gemini_error[:50] if gemini_error else 'N/A'}"
+    error_summary = f"Gemini: {gemini_error[:50] if gemini_error else 'N/A'}, Grok: {grok_error[:50] if grok_error else 'N/A'}"
     print(f"[LLM] Both APIs failed - {error_summary}")
     raise RuntimeError(f"All LLM providers failed: {error_summary}")
 
