@@ -667,7 +667,7 @@ def main():
     if str_to_bool(os.getenv("SKIP_WORDCLOUD", "false")):
         print("[WordCloud] Skipped by configuration.")
     else:
-        print("[WordCloud] Generating weekly word cloud...")
+        print("[WordCloud] Generating 2-day word cloud...")
         try:
             wc_counts, wc_categories = extract_weekly_keywords(docs_dir="docs", days=2)
             wc_output_path = "static/images/weekly_wordcloud.png"
