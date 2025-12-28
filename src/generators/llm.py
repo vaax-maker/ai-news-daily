@@ -221,7 +221,7 @@ def _summarize_with_grok(prompt: str) -> str:
             os.environ["OPENAI_BASE_URL"] = openai_base_url
         if openai_api_base is not None:
             os.environ["OPENAI_API_BASE"] = openai_api_base
-    model = os.getenv("GROK_MODEL", "qwen-qwq-32b")
+    model = os.getenv("GROK_MODEL", "qwen/qwen3-32b")
     
     last_exc = None
     for attempt in range(MAX_RETRIES):

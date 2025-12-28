@@ -256,6 +256,9 @@ def get_fallback_image(category: str = "default") -> str:
     return FALLBACK_IMAGES.get(category, FALLBACK_IMAGES["default"])
 
 def sanitize_summary(summary: str) -> str:
+    # Remove Qwen's <think>...</think> reasoning blocks
+    summary = re.sub(r'<think>.*?</think>', '', summary, flags=re.DOTALL)
+    
     cleaned_lines = []
     seen = set()
     for line in summary.splitlines():
