@@ -307,7 +307,7 @@ def summarize_article(text: str, title: str, display_name: str) -> str:
 - 각 섹션에 2-4개의 bullet point 포함
 - 수치(금액, 날짜, 비율)는 반드시 명시
 - 문장 끝은 ~함, ~임, ~됨 형식
-- 전체 분량 400-600자
+- 전체 분량 800-1200자
 - 불필요한 섹션은 생략 가능
 </constraint>
 

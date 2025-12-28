@@ -27,14 +27,114 @@ def _wrap_highlight(text: str) -> str:
 
 
 def markdown_bold_to_highlight(html_text: str) -> str:
-    r"""Convert bold-marked sentences to highlighted list items.
+    r"""Convert structured markdown summary to HTML.
 
-    - Bold text (\*\* ... \*\*) marks important contexts.
-    - Highlighting is capped so that highlighted characters stay within 20% of
-      the total summary length to avoid over-highlighting.
-    - [제목], [요약], [의미] 라벨은 노출하지 않고, 의미는 별도 영역으로 분리.
+    Supports two formats:
+    1. New format: ## 1. 핵심 내용, ## 2. 배경 및 맥락, etc. + **한 줄 요약**
+    2. Legacy format: [제목], [요약], [의미]
+    
+    Bold text (\*\* ... \*\*) is converted to highlighted spans.
     """
+    
+    if not html_text or not html_text.strip():
+        return ""
+    
+    # Check if it's new format (has ## headers)
+    is_new_format = "## " in html_text or "**주제**:" in html_text or "**한 줄 요약**:" in html_text
+    
+    if is_new_format:
+        return _render_new_format(html_text)
+    else:
+        return _render_legacy_format(html_text)
 
+
+def _render_new_format(text: str) -> str:
+    """Render new structured format with sections."""
+    
+    sections = []
+    current_section = {"title": "", "items": []}
+    one_line_summary = ""
+    
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        
+        # Check for one-line summary
+        if "**한 줄 요약**:" in stripped or "한 줄 요약:" in stripped:
+            # Extract the summary text after the colon
+            summary_text = re.sub(r"^\*?\*?한 줄 요약\*?\*?:\s*", "", stripped)
+            one_line_summary = summary_text
+            continue
+        
+        # Check for section header (## 1. 핵심 내용)
+        header_match = re.match(r"^##\s*\d*\.?\s*(.+)$", stripped)
+        if header_match:
+            if current_section["title"] or current_section["items"]:
+                sections.append(current_section)
+            current_section = {"title": header_match.group(1).strip(), "items": []}
+            continue
+        
+        # Check for **주제**: line (treat as important)
+        if stripped.startswith("**주제**:") or stripped.startswith("주제:"):
+            topic_text = re.sub(r"^\*?\*?주제\*?\*?:\s*", "", stripped)
+            current_section["items"].append({"text": topic_text, "important": True})
+            continue
+        
+        # Regular bullet point
+        cleaned = re.sub(r"^[-•]\s*", "", stripped)
+        if not cleaned:
+            continue
+        
+        # Check for bold markers
+        is_important = "**" in cleaned
+        cleaned = re.sub(r"\*\*(.+?)\*\*", r"\1", cleaned)  # Remove bold markers
+        
+        current_section["items"].append({"text": cleaned, "important": is_important})
+    
+    # Don't forget the last section
+    if current_section["title"] or current_section["items"]:
+        sections.append(current_section)
+    
+    if not sections and not one_line_summary:
+        return ""
+    
+    # Render HTML
+    html_parts = []
+    
+    for section in sections:
+        if not section["items"]:
+            continue
+        
+        section_html = []
+        if section["title"]:
+            section_html.append(f"<div class='summary-section-title'>{section['title']}</div>")
+        
+        items_html = []
+        for item in section["items"]:
+            if item["important"]:
+                items_html.append(f"<li>{_wrap_highlight(item['text'])}</li>")
+            else:
+                items_html.append(f"<li>{item['text']}</li>")
+        
+        if items_html:
+            section_html.append(f"<ul class='summary-list'>{''.join(items_html)}</ul>")
+        
+        html_parts.append("".join(section_html))
+    
+    main_html = "".join(html_parts)
+    
+    # Add one-line summary at the end
+    meaning_html = ""
+    if one_line_summary:
+        meaning_html = f"<div class='meaning-box'><div class='meaning-line'>{one_line_summary}</div></div>"
+    
+    return main_html + meaning_html
+
+
+def _render_legacy_format(html_text: str) -> str:
+    """Render legacy format with [제목], [요약], [의미] sections."""
+    
     main_lines = []
     meaning_lines = []
     total_chars = 0
