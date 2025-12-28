@@ -425,6 +425,21 @@ html {
     margin-bottom: 0.6rem;
 }
 
+/* New format section titles */
+.summary-section-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--primary-color);
+    margin-top: 0.8rem;
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.summary-section-title:first-child {
+    margin-top: 0;
+}
+
 .meaning-box {
     margin-top: 0.75rem;
     padding: 0.75rem 1rem;
