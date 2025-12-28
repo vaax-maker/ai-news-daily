@@ -348,7 +348,7 @@ def summarize_article(text: str, title: str, display_name: str) -> str:
 <article>
 제목: {title}
 
-{text[:2500]}
+{text[:1500]}
 </article>
 
 위 기사를 구조화된 형식으로 요약하세요.
