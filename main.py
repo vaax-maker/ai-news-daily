@@ -689,6 +689,13 @@ def main():
             wc_output_path = "static/images/weekly_wordcloud.png"
             os.makedirs(os.path.dirname(wc_output_path), exist_ok=True)
             create_wordcloud_image(wc_counts, wc_categories, wc_output_path)
+            
+            # Also copy to docs/static for deployment
+            docs_output_path = "docs/static/images/weekly_wordcloud.png"
+            os.makedirs(os.path.dirname(docs_output_path), exist_ok=True)
+            import shutil
+            shutil.copy(wc_output_path, docs_output_path)
+            print(f"[WordCloud] Saved to {wc_output_path} and {docs_output_path}")
         except Exception as e:
             print(f"[WordCloud] Failed: {e}")
 

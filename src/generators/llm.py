@@ -32,6 +32,35 @@ BASE_BACKOFF_DELAY = 5.0
 # Last request timestamp for rate limiting
 _last_api_call_time = 0.0
 
+# Gemini API key rotation index
+_gemini_key_index = 0
+_gemini_api_keys = []
+
+def _get_gemini_api_keys():
+    """Parse and return list of Gemini API keys from environment."""
+    global _gemini_api_keys
+    if not _gemini_api_keys:
+        keys_str = os.environ.get("GEMINI_API_KEY", "")
+        if keys_str:
+            # Split by comma and strip whitespace
+            _gemini_api_keys = [k.strip() for k in keys_str.split(",") if k.strip()]
+    return _gemini_api_keys
+
+def _get_next_gemini_key():
+    """Get next Gemini API key in round-robin fashion."""
+    global _gemini_key_index
+    keys = _get_gemini_api_keys()
+    if not keys:
+        raise RuntimeError("GEMINI_API_KEY is not set.")
+    
+    key = keys[_gemini_key_index % len(keys)]
+    _gemini_key_index += 1
+    
+    if len(keys) > 1:
+        print(f"[Gemini] Using API key #{(_gemini_key_index - 1) % len(keys) + 1}/{len(keys)}")
+    
+    return key
+
 def _rate_limit_delay():
     """Enforce minimum delay between API calls."""
     global _last_api_call_time
@@ -136,9 +165,8 @@ def _rank_with_heuristics(items: List[tuple], limit: int) -> List[tuple]:
 
 def _summarize_with_gemini(prompt: str) -> str:
     """Call Gemini API with rate limiting and retry logic."""
-    key = os.environ.get("GEMINI_API_KEY")
-    if not key:
-        raise RuntimeError("GEMINI_API_KEY is not set.")
+    # Get next API key in rotation
+    key = _get_next_gemini_key()
     
     genai.configure(api_key=key)
     model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")

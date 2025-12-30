@@ -148,8 +148,94 @@ Product,ChatGPT,10
             
     # Fallback if LLM fails or returns nothing
     if not word_counts:
-        print("[WordCloud] LLM returned empty or invalid data.")
-        pass
+        print("[WordCloud] LLM returned empty or invalid data. Using fallback keyword extraction...")
+        
+        # Simple fallback: Extract keywords using regex patterns
+        try:
+            # Combine all text
+            full_text = " ".join(collected_text[:150])
+            
+            # Extract Korean words (2+ characters) and English words (3+ characters)
+            korean_words = re.findall(r'[가-힣]{2,}', full_text)
+            english_words = re.findall(r'[A-Z][a-zA-Z]{2,}', full_text)  # Capitalized words
+            
+            all_words = korean_words + english_words
+            word_freq = Counter(all_words)
+            
+            # Extensive exclusion list
+            EXCLUDED_WORDS = {
+                'AI', 'LLM', '인공지능', 'ai', 'llm', 'Ai',
+                # Common Korean particles and words
+                '것', '등', '및', '이', '그', '수', '더', '때', '년', '월', '일', '시', '분',
+                '기', '개', '곳', '명', '원', '위', '대', '중', '내', '외', '가지', '번째',
+                '통해', '위해', '다', '제', '점', '매', '전', '후', '간', '만', '여', '약',
+                '오늘', '내일', '어제', '올해', '금년', '내년', '작년', '모레', '그제',
+                '최근', '현재', '당시', '이번', '다음', '지난', '올', '작', '내', '금',
+                '우리', '저희', '여러', '각','모든', '많은', '적은', '큰', '작은',
+                '있는', '없는', '되는', '하는', '말', '따른', '대한', '관련', '같은',
+                '기사', '뉴스', '소식', '발표', '공개', '출시', '이용', '사용', '서비스',
+                '관계자', '업계', '시장', '분야', '부문', '측', '그동안', '앞으로', '이후',
+                '이상', '이하', '정도', '까지', '부터', '마다', '조', '억', '만',
+                # Common English words
+                'The', 'And', 'For', 'With', 'From', 'That', 'This', 'More', 'New',
+                'All', 'How', 'Why', 'What', 'When', 'Where', 'Who', 'Which',
+                'News', 'Today', 'New', 'About', 'After', 'Before', 'Now', 'Later',
+            }
+            
+            # Known tech companies and important keywords (these should be KEPT)
+            IMPORTANT_KEYWORDS = {
+                'OpenAI', 'Google', 'Microsoft', 'Apple', 'Amazon', 'Meta', 'Tesla',
+                'NVIDIA', 'Samsung', 'LG', 'ChatGPT', 'Gemini', 'Claude', '삼성', '엘지',
+                '네이버', '카카오', '구글', '마이크로소프트', '애플', '아마존', '메타',
+                '엔비디아', '테슬라', '바이트댄스', '알리바바', '텐센트',
+            }
+            
+            # Filter and weight keywords
+            for word, count in word_freq.most_common(100):
+                # Skip single character words
+                if len(word) < 2:
+                    continue
+                
+                # Clean the word
+                word_clean = word.strip()
+                
+                # Check if it's in important keywords (case-insensitive)
+                is_important = any(word_clean.lower() == imp.lower() for imp in IMPORTANT_KEYWORDS)
+                
+                # Skip excluded words (unless it's important)
+                if not is_important:
+                    if word_clean in EXCLUDED_WORDS or word_clean.upper() in EXCLUDED_WORDS:
+                        continue
+                    
+                    # Check base exclusions (AI, LLM, etc.)
+                    should_exclude = False
+                    for excluded in ['LLM', 'AI', '인공지능']:
+                        word_upper = word_clean.upper()
+                        if word_upper == excluded or word_upper.startswith(excluded + 'S'):
+                            should_exclude = True
+                            break
+                    
+                    if should_exclude:
+                        continue
+                
+                # Assign weight based on frequency (cap at 10, boost important keywords)
+                weight = min(count, 10)
+                if is_important:
+                    weight = min(weight + 3, 10)  # Boost important keywords
+                
+                word_counts[word_clean] = weight
+                word_to_category[word_clean] = "Technology"  # Default category
+                
+                # Stop when we have enough keywords
+                if len(word_counts) >= 50:
+                    break
+                    
+            print(f"[WordCloud] Extracted {len(word_counts)} keywords using fallback method")
+                    
+        except Exception as e:
+            print(f"[WordCloud] Fallback extraction failed: {e}")
+            import traceback
+            traceback.print_exc()
 
     return word_counts, word_to_category
 
