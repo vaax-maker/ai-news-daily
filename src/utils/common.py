@@ -38,7 +38,11 @@ def markdown_bold_to_highlight(html_text: str) -> str:
     
     if not html_text or not html_text.strip():
         return ""
-    
+
+    # If it's already HTML, don't re-process
+    if "<ul" in html_text or "<li>" in html_text or "<div" in html_text:
+        return html_text
+
     # Check if it's new format (has ## headers)
     is_new_format = "## " in html_text or "**주제**:" in html_text or "**한 줄 요약**:" in html_text
     
@@ -81,8 +85,8 @@ def _render_new_format(text: str) -> str:
             current_section["items"].append({"text": topic_text, "important": True})
             continue
         
-        # Regular bullet point
-        cleaned = re.sub(r"^[-•]\s*", "", stripped)
+        # Regular bullet point - remove all leading bullet characters and spaces
+        cleaned = re.sub(r"^[•\-\.\s\*○●·]+", "", stripped)
         if not cleaned:
             continue
         
@@ -145,7 +149,7 @@ def _render_legacy_format(html_text: str) -> str:
         if not cleaned:
             continue
 
-        cleaned = re.sub(r"^[•□\-]\s*", "", cleaned)
+        cleaned = re.sub(r"^[•□\-\.\s\*○●·]+", "", cleaned)
 
         section_match = re.fullmatch(r"\[?(제목|요약|의미)\]?", cleaned)
         if section_match:
@@ -371,7 +375,7 @@ def sanitize_summary(summary: str) -> str:
             continue
         if re.search(r"https?://", stripped):
             continue
-        cleaned = re.sub(r"[^0-9A-Za-z가-힣\s.,;:!?\"'()\[\]{}<>@#%&*`~\-_/+|=]", "", stripped)
+        cleaned = re.sub(r"[^0-9A-Za-z가-힣\s.,;:!?\"'()\[\]{}<>@#%&*`~\-_/+|=\u2022\u25cf\u25cb\u00b7]", "", stripped)
         cleaned = re.sub(r"\s+", " ", cleaned).strip()
         if not cleaned:
             continue

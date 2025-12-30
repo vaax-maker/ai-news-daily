@@ -51,7 +51,8 @@ class MemberStorage:
             seen_links = set()
             seen_titles: List[str] = []
             cleaned = []
-            for item in sorted(items, key=lambda x: x.get("timestamp", 0), reverse=True):
+            # Sort older to newer to keep the first version of each article
+            for item in sorted(items, key=lambda x: x.get("timestamp", 0)):
                 link = item.get("link")
                 title = item.get("title", "")
                 norm_title = normalize(title)
@@ -201,9 +202,9 @@ class GovStorage:
                     seen_titles.append(norm_title)
                 merged.append(item)
 
-            for item in incoming:
-                add_item(item)
             for item in existing:
+                add_item(item)
+            for item in incoming:
                 add_item(item)
 
             return merged

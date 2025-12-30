@@ -108,18 +108,21 @@ def consolidate_daily_archives(config):
         if len(date_files) < 2:
             continue
 
-        date_files.sort()
+        date_files.sort() # Sorted chronologically
         primary = date_files[0]
         duplicates = date_files[1:]
 
         combined = []
-        for fname in sorted(date_files, reverse=True):
+        # Load oldest to newest to keep the first version of each article
+        for fname in date_files:
             path = os.path.join(daily_dir, fname)
             combined.extend(parse_existing_articles(path))
 
+        # merge_articles(older, newer) keeps older version
         merged_articles = merge_articles(combined, [])
 
         primary_name = primary.replace(".html", "")
+        # ... (rest of logic for time extraction)
         try:
             dt = datetime.datetime.strptime(primary_name, "%Y-%m-%d_%H%M%S")
             date_str = dt.strftime("%Y-%m-%d")
@@ -142,6 +145,12 @@ def consolidate_daily_archives(config):
 def process_category(config, now_utc, kst_timezone_offset=9):
     print(f"[{config.key.upper()}] Processing...")
     
+    # Resolve current day's info
+    kst_now = now_utc + datetime.timedelta(hours=kst_timezone_offset)
+    date_str = kst_now.strftime("%Y-%m-%d")
+    time_str = kst_now.strftime("%H:%M:%S")
+    run_id = kst_now.strftime("%Y-%m-%d_%H%M%S")
+
     # 1. Fetch
     if config.key == "gov":
         gov_items = fetch_gov_announcements(limit=30)
@@ -167,26 +176,40 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         else:
             selected_raw = raw_items[:config.max_articles]
         
-        # Load existing articles to avoid re-summarizing (LLM cost optimization)
-        existing_articles = []
-        if os.path.isdir(config.archive_dir):
-            for html_file in os.listdir(config.archive_dir):
-                if html_file.endswith(".html"):
-                    existing_articles.extend(parse_existing_articles(
-                        os.path.join(config.archive_dir, html_file)
-                    ))
+        # Load ALL existing articles for global dedup
+        all_past_articles = []
+        today_existing_articles = []
         
-        existing_links = {art.get("link") for art in existing_articles if art.get("link")}
-        existing_by_link = {art.get("link"): art for art in existing_articles if art.get("link")}
-        print(f"[{config.key.upper()}] Found {len(existing_links)} existing articles for dedup check.")
+        if os.path.isdir(config.archive_dir):
+            for html_file in sorted(os.listdir(config.archive_dir)):
+                if not html_file.endswith(".html"):
+                    continue
+                
+                path = os.path.join(config.archive_dir, html_file)
+                parsed = parse_existing_articles(path)
+                
+                if html_file.startswith(date_str):
+                    today_existing_articles.extend(parsed)
+                else:
+                    all_past_articles.extend(parsed)
+        
+        past_links = {art.get("link") for art in all_past_articles if art.get("link")}
+        today_links = {art.get("link") for art in today_existing_articles if art.get("link")}
+        today_by_link = {art.get("link"): art for art in today_existing_articles if art.get("link")}
+        
+        print(f"[{config.key.upper()}] Found {len(past_links)} past, {len(today_links)} today articles for dedup check.")
              
         # Summarize
         summarized_items = []
         skipped_count = 0
         for idx, (ts, title, link, content, entry) in enumerate(selected_raw):
-            # Skip if already summarized (reuse existing summary)
-            if link in existing_links:
-                existing_art = existing_by_link.get(link)
+            # 1. Skip if exists on a DIFFERENT day (global dedup)
+            if link in past_links:
+                continue
+            
+            # 2. Reuse if exists in an earlier run TODAY
+            if link in today_links:
+                existing_art = today_by_link.get(link)
                 if existing_art and existing_art.get("summary_html"):
                     summarized_items.append({
                         "title": existing_art.get("title", shorten_korean_title(title)),
@@ -211,9 +234,6 @@ def process_category(config, now_utc, kst_timezone_offset=9):
                 print(f"[{config.key}] Summarization error for '{title[:50]}...': {e}")
                 continue # Skip failed items
 
-
-
-            # AI/XR: use image if available, otherwise use placeholder
             image_url = extract_image_url(entry, link) if config.key in ("ai", "xr") else ""
             placeholder_type = config.key if (config.key in ("ai", "xr") and not image_url) else ""
 
@@ -236,7 +256,7 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         for item in summarized_items:
             item["summary_html"] = markdown_bold_to_highlight(item["summary_html"])
 
-    if not summarized_items:
+    if not summarized_items and config.key != "gov":
         print(f"[{config.key.upper()}] WARNING: No items produced after summarization step.")
 
     def resolve_daily_file(date_str: str, run_id: str):
@@ -253,11 +273,6 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         return f"{run_id}.html", []
 
     # 2. Render Page
-    kst_now = now_utc + datetime.timedelta(hours=kst_timezone_offset)
-    date_str = kst_now.strftime("%Y-%m-%d")
-    time_str = kst_now.strftime("%H:%M:%S")
-    run_id = kst_now.strftime("%Y-%m-%d_%H%M%S")
-
     filename, duplicates = resolve_daily_file(date_str, run_id)
     archived_articles = []
 
@@ -265,7 +280,8 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         path = os.path.join(config.archive_dir, fname)
         archived_articles.extend(parse_existing_articles(path))
 
-    merged_items = merge_articles(summarized_items, archived_articles)
+    # Keep oldest version today (archived_articles first)
+    merged_items = merge_articles(archived_articles, summarized_items)
     merged_items = sorted(merged_items, key=parse_article_datetime, reverse=True)
 
     html = render_daily_page(merged_items, date_str, time_str, config)
