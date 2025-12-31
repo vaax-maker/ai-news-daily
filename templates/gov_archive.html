@@ -413,9 +413,7 @@
                     </a>
                 </td>
                 <td class="col-discuss">
-                    <button
-                        onclick="navigator.clipboard.writeText('{{ item.link }}')"
-                        class="discuss-btn-sm share-btn">
+                    <button onclick="navigator.clipboard.writeText('{{ item.link }}')" class="discuss-btn-sm share-btn">
                         공유
                     </button>
                 </td>
@@ -430,15 +428,22 @@
     {% for item in announcements %}
     {% set current_time = now %}
     {% set is_active = item.bid_close_dt and item.bid_close_dt > current_time.strftime('%Y-%m-%d %H:%M:%S') %}
-    {% set is_closed = item.openg_dt and item.openg_dt < current_time.strftime('%Y-%m-%d %H:%M:%S') %} <div
+    {% set is_closed = item.openg_dt and item.openg_dt < current_time.strftime('%Y-%m-%d %H:%M:%S') %} <div <div
         class="gov-card {% if is_active %}status-active{% elif is_closed %}status-closed{% endif %}"
         data-source="{{ item.source_name }}">
         <div class="card-header">
             <span class="card-badge">{{ item.source_name }}</span>
             <span style="font-size: 0.75rem; color: #718096;">{{ item.date }}</span>
         </div>
-        <div class="card-title">
-            <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
+        <div class="news-header-top">
+            <div class="card-title" style="margin-bottom: 0; flex: 1;">
+                <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
+            </div>
+            <div class="title-actions">
+                <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
+                    class="discuss-btn-sm">토론</a>
+                <button onclick="navigator.clipboard.writeText('{{ item.link }}')" class="discuss-btn-sm">공유</button>
+            </div>
         </div>
         <div class="card-meta">
             <span class="meta-label">부서</span>
@@ -455,12 +460,6 @@
             <span class="meta-label">개찰</span>
             <span>{{ item.openg_dt[:16] }}</span>
             {% endif %}
-        </div>
-        <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; display: flex; gap: 0.5rem; justify-content: center;">
-            <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}" 
-               class="discuss-btn-sm">토론</a>
-            <button onclick="navigator.clipboard.writeText('{{ item.link }}')" 
-                    class="discuss-btn-sm">공유</button>
         </div>
 </div>
 {% endfor %}

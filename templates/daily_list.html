@@ -13,9 +13,17 @@
     {% for article in articles %}
     <article class="news-item">
         <div class="news-header">
-            <h2 class="news-title">
-                <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
-            </h2>
+            <div class="news-header-top">
+                <h2 class="news-title">
+                    <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+                </h2>
+                <div class="title-actions">
+                    <a href="../board/index.html?mode=discuss&title={{ article.title|urlencode }}&link={{ article.link|urlencode }}&source={{ article.source_name|urlencode }}"
+                        class="discuss-btn-sm">토론</a>
+                    <button onclick="navigator.clipboard.writeText('{{ article.link }}')"
+                        class="discuss-btn-sm">공유</button>
+                </div>
+            </div>
             <div class="news-meta">
                 <a href="{{ article.link }}" target="_blank" class="source-link">{{ article.source_name }}</a>
                 <span class="published-date">{{ article.published_display }}</span>
@@ -38,12 +46,6 @@
             <div class="news-summary">
                 {{ article.summary_html | safe }}
             </div>
-        </div>
-
-        <div class="news-actions-bottom">
-            <a href="../board/index.html?mode=discuss&title={{ article.title|urlencode }}&link={{ article.link|urlencode }}&source={{ article.source_name|urlencode }}"
-                class="discuss-btn-sm">토론</a>
-            <button onclick="navigator.clipboard.writeText('{{ article.link }}')" class="discuss-btn-sm">공유</button>
         </div>
     </article>
     {% endfor %}

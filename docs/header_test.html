@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang='ko'>
+
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>Header Layout Test</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --line-gray: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .gnb {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.25rem;
+            flex-wrap: nowrap;
+            flex-shrink: 0;
+        }
+
+        .gnb a {
+            color: var(--text-main);
+            padding: 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        .gnb a.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .header-logo {
+            height: 8rem;
+            width: auto;
+            vertical-align: middle;
+            margin-right: 0.8rem;
+            object-fit: contain;
+            /* 현재 세로만 80% 축소 적용됨 */
+            transform: scaleY(0.8);
+            transform-origin: center;
+            margin-top: -0.8rem;
+            margin-bottom: -0.8rem;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            padding: 0 !important;
+        }
+
+        /* Header Right Section */
+        .header-right-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.25rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .slogan-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0rem;
+        }
+
+        .slogan-since {
+            display: block;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            /* 회색 */
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 0.1rem;
+        }
+
+        .header-slogan-text {
+            display: block;
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .slogan-highlight {
+            font-weight: 700;
+            color: #84cc16;
+            /* 폰트 크기 통일 - 주변 텍스트와 동일 */
+        }
+
+        /* 디버그 가이드라인 */
+        .debug-info {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border: 2px dashed #e2e8f0;
+            border-radius: 8px;
+        }
+
+        .debug-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .debug-info ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+        }
+
+        .debug-info li {
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .debug-info code {
+            background: #e2e8f0;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .gnb {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .header-right-section {
+                width: 100%;
+                gap: 1rem;
+            }
+
+            .header-slogan-text {
+                font-size: 0.9rem;
+                max-width: 100%;
+            }
+
+            .nav-links {
+                width: 100%;
+                flex-wrap: nowrap;
+                gap: 1rem;
+                padding-top: 0.5rem;
+                border-top: 1px solid var(--border-color);
+                justify-content: space-between;
+            }
+
+            .gnb a {
+                font-size: 0.85rem;
+            }
+
+            .header-logo {
+                width: 84%;
+                height: auto;
+                max-height: 7rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="gnb">
+            <!-- Left: Logo -->
+            <a href="./index.html" class="logo-link">
+                <img src="./static/images/logo_new.png?v=3" alt="VAAX" class="header-logo">
+            </a>
+
+            <!-- Right: Slogan & Nav -->
+            <div class="header-right-section">
+                <div class="slogan-container">
+                    <span class="slogan-since">since 2016</span>
+                    <span class="header-slogan-text">
+                        VR-AR-AI-XR <span class="slogan-highlight">기술과 Biz.를 연결하는</span>
+                        성장나눔 <span class="slogan-highlight">커뮤니티</span>
+                    </span>
+                </div>
+                <nav class="nav-links">
+                    <a href="./index.html" class="active">Home</a>
+                    <a href="./ai/index.html">AI뉴스</a>
+                    <a href="./xr/index.html">XR뉴스</a>
+                    <a href="./gov/index.html">정부과제</a>
+                    <a href="./members/index.html">회원사소식</a>
+                    <a href="./board/index.html">게시판</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="debug-info">
+        <h3>🔧 Header Layout Test Page</h3>
+        <p style="margin-bottom: 1rem;">Figma 작업을 위한 참조용 HTML 파일입니다.</p>
+
+        <h4 style="margin-bottom: 0.5rem;">현재 구조:</h4>
+        <ul>
+            <li><strong>Row 1:</strong> "since 2016" <code>.slogan-since</code></li>
+            <li><strong>Row 2:</strong> "VR-AR-AI-XR 기술과 Biz.를 연결하는 성장나눔 커뮤니티" <code>.header-slogan-text</code></li>
+            <li><strong>Row 3:</strong> 메뉴 (Home, AI뉴스, XR뉴스, etc.) <code>.nav-links</code></li>
+        </ul>
+
+        <h4 style="margin: 1rem 0 0.5rem;">현재 로고 CSS:</h4>
+        <ul>
+            <li><code>height: 8rem</code> - 로고 높이</li>
+            <li><code>transform: scaleY(0.8)</code> - 세로 80% 축소 (납작해 보이는 원인)</li>
+            <li><code>margin-right: 0.8rem</code> - 로고와 텍스트 간격</li>
+        </ul>
+
+        <h4 style="margin: 1rem 0 0.5rem;">조정이 필요한 항목:</h4>
+        <ul>
+            <li>로고 비율: <code>transform: scaleY(0.8)</code> 제거 또는 수정</li>
+            <li>로고-텍스트 간격: <code>margin-right</code> 또는 <code>gap</code> 조정</li>
+            <li>텍스트 줄간격: <code>.slogan-container</code>의 <code>gap</code> 조정</li>
+        </ul>
+    </div>
+
+    <div class="debug-info" style="border-color: #65a30d;">
+        <h3 style="color: #65a30d;">📐 측정 가이드</h3>
+        <p>브라우저 개발자 도구(F12)에서 요소의 크기와 간격을 확인할 수 있습니다.</p>
+        <ul>
+            <li>로고 실제 크기 확인</li>
+            <li>각 요소 간 margin/padding 확인</li>
+            <li>반응형 동작 확인 (창 크기 조절)</li>
+        </ul>
+    </div>
+</body>
+
+</html>
+</CodeContent>
+<parameter name="EmptyFile">false

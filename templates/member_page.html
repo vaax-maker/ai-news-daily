@@ -17,18 +17,21 @@
         {% for article in articles %}
         <div class="news-list-item">
             <div class="list-item-content">
-                <h3 class="list-item-title">
-                    <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
-                </h3>
+                <div class="news-header-top">
+                    <h3 class="list-item-title">
+                        <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+                    </h3>
+                    <div class="title-actions">
+                        <a href="../board/index.html?mode=discuss&title={{ article.title|urlencode }}&link={{ article.link|urlencode }}&source={{ article.source_name|urlencode }}"
+                            class="discuss-btn-sm">토론</a>
+                        <button onclick="navigator.clipboard.writeText('{{ article.link }}')"
+                            class="discuss-btn-sm">공유</button>
+                    </div>
+                </div>
                 <div class="list-item-meta">
                     <span class="meta-source">{{ article.source_name or '출처' }}</span>
                     <span class="meta-date">{{ article.published_display }}</span>
                 </div>
-            </div>
-            <div class="list-item-actions">
-                <a href="../board/index.html?mode=discuss&title={{ article.title|urlencode }}&link={{ article.link|urlencode }}&source={{ article.source_name|urlencode }}"
-                    class="discuss-btn-sm">토론</a>
-                <button onclick="navigator.clipboard.writeText('{{ article.link }}')" class="discuss-btn-sm">공유</button>
             </div>
         </div>
         {% endfor %}
