@@ -1,154 +1,220 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang='ko'>
 
-{% block title %}VAAX Daily Briefing{% endblock %}
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>VAAX Daily Briefing</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #65a30d;
+            /* Lime 600 */
+            --bg-color: #f3f4f6;
+            /* Gray 100 */
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            /* Gray 800 */
+            --text-muted: #6b7280;
+            /* Gray 500 */
+            --border-color: #e5e7eb;
+        }
 
-{% block extra_css %}
-<style>
-    .briefing-header {
-        padding: 20px 0;
-        text-align: center;
-        border-bottom: 2px solid var(--border-color);
-        margin-bottom: 20px;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    .briefing-date {
-        color: var(--primary-color);
-        font-weight: bold;
-        font-size: 0.9rem;
-    }
+        body {
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
 
-    .briefing-section {
-        margin-bottom: 40px;
-    }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
 
-    .section-title {
-        font-size: 1.2rem;
-        font-weight: 700;
-        margin-bottom: 15px;
-        padding-left: 10px;
-        border-left: 4px solid var(--primary-color);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+        /* Header */
+        header {
+            text-align: center;
+            padding: 24px 0 20px;
+        }
 
-    .briefing-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 8px;
+        }
 
-    .briefing-item {
-        padding: 12px 0;
-        border-bottom: 1px solid var(--border-color);
-    }
+        .date-badge {
+            display: inline-block;
+            background-color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
 
-    .briefing-item:last-child {
-        border-bottom: none;
-    }
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+                0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
 
-    .briefing-link {
-        text-decoration: none;
-        color: var(--text-color);
-        font-weight: 500;
-        display: block;
-        line-height: 1.4;
-    }
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-color);
+        }
 
-    .briefing-link:hover {
-        color: var(--primary-color);
-    }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
 
-    .more-btn {
-        display: block;
-        width: 100%;
-        text-align: center;
-        background-color: var(--card-bg);
-        border: 1px solid var(--border-color);
-        padding: 12px;
-        border-radius: 8px;
-        color: var(--text-muted);
-        text-decoration: none;
-        margin-top: 10px;
-        font-size: 0.9rem;
-        transition: all 0.2s;
-    }
+        /* Lists */
+        .news-list {
+            list-style: none;
+        }
 
-    .more-btn:hover {
-        background-color: var(--primary-color);
-        color: white;
-        border-color: var(--primary-color);
-    }
+        .news-item {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-    .meta-info {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        margin-top: 4px;
-    }
-</style>
-{% endblock %}
+        .news-item:last-child {
+            border-bottom: none;
+        }
 
-{% block content %}
-<div class="briefing-header">
-    <h1>VAAX Daily Briefing</h1>
-    <div class="briefing-date">{{ date_str }}</div>
-</div>
+        .news-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.4;
+            color: var(--text-main);
+        }
 
-<!-- AI Section -->
-<section class="briefing-section">
-    <div class="section-title">
-        KI (Artificial Intelligence)
+        .news-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .more-link {
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+            padding: 12px;
+            background-color: #f9fafb;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .more-link:active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 32px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <img src="static/images/logo_new.png?v=4" alt="VAAX" class="logo">
+            <div>
+                <span class="date-badge">{{ date_str }}</span>
+            </div>
+        </header>
+
+        <!-- AI Card -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">AI (Artificial Intelligence)</h2>
+            </div>
+            <ul class="news-list">
+                {% for item in ai_items %}
+                <li>
+                    <a href="{{ item.link }}" target="_blank" class="news-item">
+                        <div class="news-title">{{ item.title }}</div>
+                        <div class="news-meta">{{ item.source_name }}</div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{{ links.ai }}" class="more-link">AI 뉴스 더보기 +</a>
+        </div>
+
+        <!-- XR Card -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">XR (Extended Reality)</h2>
+            </div>
+            <ul class="news-list">
+                {% for item in xr_items %}
+                <li>
+                    <a href="{{ item.link }}" target="_blank" class="news-item">
+                        <div class="news-title">{{ item.title }}</div>
+                        <div class="news-meta">{{ item.source_name }}</div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{{ links.xr }}" class="more-link">XR 뉴스 더보기 +</a>
+        </div>
+
+        <!-- Gov Card -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">정부과제 / 입찰공고</h2>
+            </div>
+            <ul class="news-list">
+                {% for item in gov_items %}
+                <li>
+                    <a href="{{ item.link }}" target="_blank" class="news-item">
+                        <div class="news-title">{{ item.title }}</div>
+                        <div class="news-meta">{{ item.dept or '공고' }} | {{ item.date }}</div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{{ links.gov }}" class="more-link">정부과제 전체보기 +</a>
+        </div>
+
+        <footer>
+            &copy; {{ now_year }} VAAX Maker
+        </footer>
     </div>
-    <ul class="briefing-list">
-        {% for item in ai_items %}
-        <li class="briefing-item">
-            <a href="{{ item.link }}" target="_blank" class="briefing-link">
-                {{ item.title }}
-                <div class="meta-info">{{ item.source_name }}</div>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-    <a href="{{ links.ai }}" class="more-btn">AI 뉴스 더보기 +</a>
-</section>
 
-<!-- XR Section -->
-<section class="briefing-section">
-    <div class="section-title">
-        XR (Extended Reality)
-    </div>
-    <ul class="briefing-list">
-        {% for item in xr_items %}
-        <li class="briefing-item">
-            <a href="{{ item.link }}" target="_blank" class="briefing-link">
-                {{ item.title }}
-                <div class="meta-info">{{ item.source_name }}</div>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-    <a href="{{ links.xr }}" class="more-btn">XR 뉴스 더보기 +</a>
-</section>
+</body>
 
-<!-- Gov Section -->
-<section class="briefing-section">
-    <div class="section-title">
-        정부과제 / 입찰공고
-    </div>
-    <ul class="briefing-list">
-        {% for item in gov_items %}
-        <li class="briefing-item">
-            <a href="{{ item.link }}" target="_blank" class="briefing-link">
-                {{ item.title }}
-                <div class="meta-info">{{ item.dept or '공고' }} | {{ item.date }}</div>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-    <a href="{{ links.gov }}" class="more-btn">정부과제 전체보기 +</a>
-</section>
-
-<div style="text-align:center; padding: 20px 0; color: var(--text-muted); font-size: 0.8rem;">
-    VAAX Maker Daily Briefing
-</div>
-{% endblock %}
+</html>
