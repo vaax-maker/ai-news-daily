@@ -113,7 +113,7 @@ def format_daily_briefing(ai_items, xr_items, gov_items, briefing_url, max_chars
         current_length += len(header_line)
 
         for title in valid_items:
-            line = f"-{title}\n"
+            line = f"-{title}\n\n"
             
             if current_length + len(line) > available_chars and added_count > 0:
                 break
@@ -144,8 +144,9 @@ def send_daily_briefing(dashboard_data):
     gov_items = dashboard_data.get("gov", [])
     briefing_url = dashboard_data.get("briefing_url", "https://vaax-maker.github.io/ai-news-daily/index.html")
     
-    # Reduced max_chars to ~450
-    message = format_daily_briefing(ai_items, xr_items, gov_items, briefing_url=briefing_url, max_chars=450)
+    # Increased max_chars to ~550 to accommodate extra newlines (Kakao folding limit is around 500 but flexible)
+    # user asked for readability, so we prioritize spacing over folding risk slightly.
+    message = format_daily_briefing(ai_items, xr_items, gov_items, briefing_url=briefing_url, max_chars=550)
     
     print("--- PREVIEW MESSAGE ---")
     print(message)
