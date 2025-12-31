@@ -77,7 +77,7 @@ def format_daily_briefing(ai_items, xr_items, gov_items, briefing_url, max_chars
     # Short header
     header = f"{now.strftime('%m/%d')}({wd}) {now.strftime('%H:%M')} VAAX\n"
     
-    footer = f"\n\n🔗 전체보기: {briefing_url}"
+    footer = f"\n\n{briefing_url}"
     
     # Calculate available space
     reserved = len(header) + len(footer) + 15
