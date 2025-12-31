@@ -144,9 +144,9 @@ def send_daily_briefing(dashboard_data):
     gov_items = dashboard_data.get("gov", [])
     briefing_url = dashboard_data.get("briefing_url", "https://vaax-maker.github.io/ai-news-daily/index.html")
     
-    # Strict limit: 460 chars (user requested < 500). 
-    # KakaoTalk/Telegram preview limits are tight.
-    message = format_daily_briefing(ai_items, xr_items, gov_items, briefing_url=briefing_url, max_chars=460)
+    # Strict limit: 420 chars (user reported 460 still exceeded).
+    # Reducing further to allow sufficient buffer for Kakao/Telegram folding.
+    message = format_daily_briefing(ai_items, xr_items, gov_items, briefing_url=briefing_url, max_chars=420)
     
     print("--- PREVIEW MESSAGE ---")
     print(message)
