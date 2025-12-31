@@ -182,14 +182,39 @@ Product,ChatGPT,10
                 'News', 'Today', 'New', 'About', 'After', 'Before', 'Now', 'Later',
             }
             
-            # Known tech companies and important keywords (these should be KEPT)
-            IMPORTANT_KEYWORDS = {
+            # Known Lists for Categorization
+            KNOWN_COMPANIES = {
                 'OpenAI', 'Google', 'Microsoft', 'Apple', 'Amazon', 'Meta', 'Tesla',
-                'NVIDIA', 'Samsung', 'LG', 'ChatGPT', 'Gemini', 'Claude', '삼성', '엘지',
-                '네이버', '카카오', '구글', '마이크로소프트', '애플', '아마존', '메타',
-                '엔비디아', '테슬라', '바이트댄스', '알리바바', '텐센트',
+                'NVIDIA', 'NB', 'AMD', 'Intel', 'TSMC', 'Samsung', 'LG', 'SK', 
+                'Kakao', 'Naver', 'Hyundai', 'Baichuan', 'Alibaba', 'Tencent', 'ByteDance',
+                'Anthropic', 'Mistral', 'Cohere', 'HuggingFace', 'Stability', 'Midjourney',
+                'Perplexity', 'Inflection', 'DeepMind', 'SoftBank', 'Qualcomm', 'Broadcom',
+                '삼성', '엘지', '에스케이', '네이버', '카카오', '현대', '엔비디아', '구글',
+                '마이크로소프트', '애플', '아마존', '메타', '테슬라', '인텔', '퀄컴',
+                '오픈AI', '오픈ai', '앤트로픽', '미스트랄'
             }
             
+            KNOWN_PRODUCTS = {
+                'ChatGPT', 'Gemini', 'Claude', 'Llama', 'Grok', 'Qwen', 'Mistral',
+                'Vision', 'Quest', 'Galaxy', 'iPhone', 'Windows', 'Android', 'CUDA',
+                'H100', 'B200', 'GB200', 'MI300', 'Gaudi', 'Exynos', 'Snapdragon',
+                '챗GPT', '제미나이', '클로드', '라마', '아이폰', '갤럭시', '윈도우',
+                'Copilot', '코파일럿', 'Sora', '소라', 'Sun', 'Suno'
+            }
+            
+            KNOWN_PEOPLE = {
+                'Altman', 'Huang', 'Zuckerberg', 'Musk', 'Nadella', 'Pichai', 'Cook',
+                'Lisa', 'Su', 'Gelsinger', 'Gates', 'Bezos', 'Ma', 'Yann', 'Hinton', 'Bengio',
+                '알트만', '젠슨', '황', '저커버그', '머스크', '나델라', '순다르', '피차이', '쿡',
+                '리사수', '겔싱어', '빌게이츠', '베조스', '손정의', '이재용', '최태원', '정의선'
+            }
+            
+            # Fallback for old/legacy important keywords variable
+            if 'IMPORTANT_KEYWORDS' not in locals():
+                IMPORTANT_KEYWORDS = {
+                    'OpenAI', 'Google', 'Microsoft', 'Apple', 'NVIDIA', 'Samsung',
+                }
+
             # Filter and weight keywords
             for word, count in word_freq.most_common(100):
                 # Skip single character words
@@ -199,24 +224,38 @@ Product,ChatGPT,10
                 # Clean the word
                 word_clean = word.strip()
                 
-                # Check if it's in important keywords (case-insensitive)
-                is_important = any(word_clean.lower() == imp.lower() for imp in IMPORTANT_KEYWORDS)
+                # Check exclusion
+                word_upper = word_clean.upper()
+                if word_clean in EXCLUDED_WORDS or word_upper in EXCLUDED_WORDS:
+                    continue
+                    
+                should_exclude = False
+                for excluded in ['LLM', 'AI', '인공지능']:
+                    if word_upper == excluded or word_upper.startswith(excluded + 'S'):
+                        should_exclude = True
+                        break
+                if should_exclude:
+                    continue
+
+                # Determine Category and Weight
+                is_important = False
+                category = "Technology" # Default
                 
-                # Skip excluded words (unless it's important)
-                if not is_important:
-                    if word_clean in EXCLUDED_WORDS or word_clean.upper() in EXCLUDED_WORDS:
-                        continue
-                    
-                    # Check base exclusions (AI, LLM, etc.)
-                    should_exclude = False
-                    for excluded in ['LLM', 'AI', '인공지능']:
-                        word_upper = word_clean.upper()
-                        if word_upper == excluded or word_upper.startswith(excluded + 'S'):
-                            should_exclude = True
-                            break
-                    
-                    if should_exclude:
-                        continue
+                # Check lists
+                if any(k.lower() == word_clean.lower() for k in KNOWN_COMPANIES):
+                    category = "Company"
+                    is_important = True
+                elif any(k.lower() == word_clean.lower() for k in KNOWN_PRODUCTS):
+                    category = "Product"
+                    is_important = True
+                elif any(k.lower() == word_clean.lower() for k in KNOWN_PEOPLE):
+                    category = "Person"
+                    is_important = True
+                elif 'IMPORTANT_KEYWORDS' in locals() and any(k.lower() == word_clean.lower() for k in IMPORTANT_KEYWORDS):
+                    # Fallback for IMPORTANT_KEYWORDS set if not in specific lists
+                     # Try to guess based on standard casing or presence in set
+                    category = "Company" # Most in IMPORTANT_KEYWORDS are companies
+                    is_important = True
                 
                 # Assign weight based on frequency (cap at 10, boost important keywords)
                 weight = min(count, 10)
@@ -224,13 +263,15 @@ Product,ChatGPT,10
                     weight = min(weight + 3, 10)  # Boost important keywords
                 
                 word_counts[word_clean] = weight
-                word_to_category[word_clean] = "Technology"  # Default category
+                word_to_category[word_clean] = category
                 
                 # Stop when we have enough keywords
                 if len(word_counts) >= 50:
                     break
                     
             print(f"[WordCloud] Extracted {len(word_counts)} keywords using fallback method")
+            # Debug log top 5
+            print(f"[WordCloud] Sample categories: {list(word_to_category.items())[:5]}")
                     
         except Exception as e:
             print(f"[WordCloud] Fallback extraction failed: {e}")
