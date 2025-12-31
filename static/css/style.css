@@ -199,9 +199,9 @@ header {
     }
 
     .header-logo {
-        width: 84%;
+        width: 58%;
         height: auto;
-        max-height: 7rem;
+        max-height: 5rem;
     }
 }
 
