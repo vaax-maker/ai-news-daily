@@ -154,10 +154,32 @@ def process_category(config, now_utc, kst_timezone_offset=9):
     run_id = kst_now.strftime("%Y-%m-%d_%H%M%S")
 
     # 1. Fetch
+    new_summarized_count = 0
+    
     if config.key == "gov":
         gov_items = fetch_gov_announcements(limit=30)
         storage = GovStorage()
+        existing_before = storage.load_announcements()
         summarized_items = storage.save_announcements(gov_items)
+        # Simple Logic: Only increase count if total count increased.
+        # This is a safe approximation.
+        if len(summarized_items) > len(existing_before):
+            new_summarized_count = len(summarized_items) - len(existing_before)
+            
+        # Ensure items have timestamp for badge
+        # Gov items usually have "date" string, convert to ts if needed?
+        # Or just let them be without new badge if not robust.
+        # However, plan asked for NEW badge generally.
+        # Gov items are "announcements.json", usually don't have unix timestamp field "timestamp".
+        # We can try to parse date.
+        for item in summarized_items:
+            if "timestamp" not in item:
+                try:
+                    dt = datetime.datetime.strptime(item.get("date", ""), "%Y-%m-%d")
+                    item["timestamp"] = dt.timestamp()
+                except:
+                    item["timestamp"] = 0
+            
     else:
         # RSS Fetch
         raw_items = fetch_rss_items(
@@ -221,7 +243,8 @@ def process_category(config, now_utc, kst_timezone_offset=9):
                         "source_name": existing_art.get("source_name", extract_source_name(entry, link)),
                         "image_url": existing_art.get("image_url", ""),
                         "placeholder_type": "",
-                        "original_title": title
+                        "original_title": title,
+                        "timestamp": ts # Add timestamp for badge
                     })
                     skipped_count += 1
                     continue
@@ -247,8 +270,10 @@ def process_category(config, now_utc, kst_timezone_offset=9):
                 "source_name": extract_source_name(entry, link),
                 "image_url": image_url,
                 "placeholder_type": placeholder_type,
-                "original_title": title
+                "original_title": title,
+                "timestamp": ts # Add timestamp for badge
             })
+            new_summarized_count += 1 # Count this as NEW
         
         if skipped_count > 0:
             print(f"[{config.key.upper()}] Reused {skipped_count} existing summaries (LLM calls saved).")
@@ -303,7 +328,8 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         "filename": filename,
         "date_str": date_str,
         "time_str": time_str,
-        "items": merged_items
+        "items": merged_items,
+        "new_count": new_summarized_count 
     }
 
 
@@ -616,6 +642,7 @@ def main():
 
     # 1. Process Categories
     categories = load_categories()
+    total_new_items = 0
     for key, config in categories.items():
         if not run_flags.get(key, True):
             print(f"[{key}] Skipped by configuration.")
@@ -639,8 +666,9 @@ def main():
 
         try:
             res = process_category(config, now_utc)
-            print(f"[{key}] Generated: {res['filename']}")
+            print(f"[{key}] Generated: {res['filename']} (New Items: {res.get('new_count', 0)})")
             dashboard_data[key] = res.get("items", [])
+            total_new_items += res.get("new_count", 0)
             # Store latest filename relative to docs root
             # docs/ai/daily/xyz.html -> ai/daily/xyz.html
             # config.archive_dir is "docs/ai/daily"
@@ -756,32 +784,35 @@ def main():
         import traceback
         traceback.print_exc()
 
-    # 5.5 Generate Mobile Briefing Page
-    print("[Briefing] Generating mobile landing page...")
-    try:
-        briefing_html = render_mobile_landing(
-            ai_items=dashboard_data.get("ai", [])[:10], # Ensure 2x items (10)
-            xr_items=dashboard_data.get("xr", [])[:10],
-            gov_items=dashboard_data.get("gov", [])[:10],
-            links=dashboard_data.get("links", {})
-        )
-        with open("docs/briefing.html", "w", encoding="utf-8") as f:
-            f.write(briefing_html)
-        
-        # Add briefing URL for notifier
-        dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/briefing.html"
-        print("[Briefing] Generated docs/briefing.html")
-    except Exception as e:
-        print(f"[Briefing] Failed: {e}")
-        # Fallback to index if briefing fails
-        dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/index.html"
+    # 5.5 Generate Mobile Briefing Page (CONDITIONAL)
+    if total_new_items > 0:
+        print(f"[Briefing] Found {total_new_items} new items. Generating mobile landing page...")
+        try:
+            briefing_html = render_mobile_landing(
+                ai_items=dashboard_data.get("ai", [])[:10], # Ensure 2x items (10)
+                xr_items=dashboard_data.get("xr", [])[:10],
+                gov_items=dashboard_data.get("gov", [])[:10],
+                links=dashboard_data.get("links", {})
+            )
+            with open("docs/briefing.html", "w", encoding="utf-8") as f:
+                f.write(briefing_html)
+            
+            # Add briefing URL for notifier
+            dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/briefing.html"
+            print("[Briefing] Generated docs/briefing.html")
+        except Exception as e:
+            print(f"[Briefing] Failed: {e}")
+            # Fallback to index if briefing fails
+            dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/index.html"
 
-    # 6. Send Notifications
-    print("[Notifier] Sending daily briefing...")
-    try:
-        send_daily_briefing(dashboard_data)
-    except Exception as e:
-        print(f"[Notifier] Failed: {e}")
+        # 6. Send Notifications (Only if new items)
+        print("[Notifier] Sending daily briefing...")
+        try:
+            send_daily_briefing(dashboard_data)
+        except Exception as e:
+            print(f"[Notifier] Failed: {e}")
+    else:
+        print("[Briefing] No new items found. Skipping briefing generation and notification.")
 
 if __name__ == "__main__":
     main()

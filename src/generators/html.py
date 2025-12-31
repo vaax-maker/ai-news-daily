@@ -126,5 +126,6 @@ def render_mobile_landing(ai_items, xr_items, gov_items, links=None):
         date_str=date_str,
         now_year=now.year,
         active_tab="home",
-        root_path="." # docs/briefing.html -> root is .
+        root_path=".", # docs/briefing.html -> root is .
+        now_timestamp=now.timestamp() # For NEW badge logic
     )

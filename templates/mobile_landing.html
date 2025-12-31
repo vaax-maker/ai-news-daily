@@ -44,7 +44,7 @@
         /* Header */
         header {
             text-align: center;
-            padding: 24px 0 20px;
+            padding: 20px 0 16px;
         }
 
         .logo {
@@ -68,8 +68,8 @@
         .card {
             background: var(--card-bg);
             border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
+            padding: 16px;
+            margin-bottom: 14px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
                 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
@@ -77,8 +77,8 @@
         .card-header {
             display: flex;
             align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
             border-bottom: 2px solid var(--border-color);
         }
 
@@ -97,7 +97,7 @@
             display: block;
             text-decoration: none;
             color: inherit;
-            padding: 12px 0;
+            padding: 10px 0;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -108,8 +108,8 @@
         .news-title {
             font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 4px;
-            line-height: 1.4;
+            margin-bottom: 3px;
+            line-height: 1.35;
             color: var(--text-main);
         }
 
@@ -121,8 +121,8 @@
         .more-link {
             display: block;
             text-align: center;
-            margin-top: 16px;
-            padding: 12px;
+            margin-top: 12px;
+            padding: 10px;
             background-color: #f9fafb;
             color: var(--text-muted);
             text-decoration: none;
@@ -141,7 +141,21 @@
             text-align: center;
             font-size: 0.75rem;
             color: var(--text-muted);
-            margin-top: 32px;
+            margin-top: 24px;
+        }
+
+        .new-badge {
+            display: inline-block;
+            background-color: #ef4444;
+            /* red-500 */
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+            vertical-align: middle;
+            transform: translateY(-1px);
         }
     </style>
 </head>
@@ -165,7 +179,12 @@
                 {% for item in ai_items %}
                 <li>
                     <a href="{{ item.link }}" target="_blank" class="news-item">
-                        <div class="news-title">{{ item.title }}</div>
+                        <div class="news-title">
+                            {{ item.title }}
+                            {% if item.timestamp and now_timestamp and (now_timestamp - item.timestamp) < 86400 %} <span
+                                class="new-badge">NEW</span>
+                                {% endif %}
+                        </div>
                         <div class="news-meta">{{ item.source_name }}</div>
                     </a>
                 </li>
@@ -183,7 +202,12 @@
                 {% for item in xr_items %}
                 <li>
                     <a href="{{ item.link }}" target="_blank" class="news-item">
-                        <div class="news-title">{{ item.title }}</div>
+                        <div class="news-title">
+                            {{ item.title }}
+                            {% if item.timestamp and now_timestamp and (now_timestamp - item.timestamp) < 86400 %} <span
+                                class="new-badge">NEW</span>
+                                {% endif %}
+                        </div>
                         <div class="news-meta">{{ item.source_name }}</div>
                     </a>
                 </li>
@@ -201,7 +225,12 @@
                 {% for item in gov_items %}
                 <li>
                     <a href="{{ item.link }}" target="_blank" class="news-item">
-                        <div class="news-title">{{ item.title }}</div>
+                        <div class="news-title">
+                            {{ item.title }}
+                            {% if item.timestamp and now_timestamp and (now_timestamp - item.timestamp) < 86400 %} <span
+                                class="new-badge">NEW</span>
+                                {% endif %}
+                        </div>
                         <div class="news-meta">{{ item.dept or '공고' }} | {{ item.date }}</div>
                     </a>
                 </li>
