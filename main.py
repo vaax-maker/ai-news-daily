@@ -9,7 +9,8 @@ from src.fetchers.gov import fetch_gov_announcements
 from src.generators.llm import summarize_article, rank_items_with_ai
 from src.generators.html import (
     render_daily_page, render_archive_index, render_gov_archive,
-    render_member_page, render_dashboard, render_member_index, render_board_page
+    render_member_page, render_dashboard, render_member_index, render_board_page,
+    render_mobile_landing
 )
 from src.utils.common import (
     extract_source_name,
@@ -22,6 +23,7 @@ from src.utils.common import (
     shorten_korean_title,
     trim_summary_lines,
 )
+from src.utils.notifier import send_daily_briefing
 from src.utils.storage import MemberStorage, GovStorage
 from src.utils.wordcloud_generator import extract_weekly_keywords, create_wordcloud_image
 from collections import Counter
@@ -753,6 +755,33 @@ def main():
         print("[Dashboard] Keeping existing index.html to preserve service availability.")
         import traceback
         traceback.print_exc()
+
+    # 5.5 Generate Mobile Briefing Page
+    print("[Briefing] Generating mobile landing page...")
+    try:
+        briefing_html = render_mobile_landing(
+            ai_items=dashboard_data.get("ai", [])[:10], # Ensure 2x items (10)
+            xr_items=dashboard_data.get("xr", [])[:10],
+            gov_items=dashboard_data.get("gov", [])[:10],
+            links=dashboard_data.get("links", {})
+        )
+        with open("docs/briefing.html", "w", encoding="utf-8") as f:
+            f.write(briefing_html)
+        
+        # Add briefing URL for notifier
+        dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/briefing.html"
+        print("[Briefing] Generated docs/briefing.html")
+    except Exception as e:
+        print(f"[Briefing] Failed: {e}")
+        # Fallback to index if briefing fails
+        dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/index.html"
+
+    # 6. Send Notifications
+    print("[Notifier] Sending daily briefing...")
+    try:
+        send_daily_briefing(dashboard_data)
+    except Exception as e:
+        print(f"[Notifier] Failed: {e}")
 
 if __name__ == "__main__":
     main()

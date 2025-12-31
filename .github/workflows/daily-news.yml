@@ -90,6 +90,9 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROK_API_KEY: ${{ secrets.GROK_API_KEY }}
           GOV_API_KEY: ${{ secrets.GOV_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ENABLE_NOTIFICATION: "true"
         run: |
           echo "📰 뉴스 생성 시작"
           echo "  - AI: $RUN_AI"
