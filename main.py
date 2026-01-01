@@ -57,14 +57,18 @@ def parse_existing_articles(html_path: str):
             title_el = article.select_one(".news-title a")
             summary_el = article.select_one(".news-summary")
 
-            parsed.append({
+            item = {
                 "title": title_el.get_text(strip=True) if title_el else "",
                 "link": title_el.get("href", "") if title_el else "",
                 "summary_html": summary_el.decode_contents().strip() if summary_el else "",
                 "published_display": article.select_one(".published-date").get_text(strip=True) if article.select_one(".published-date") else "",
                 "source_name": article.select_one(".source-link").get_text(strip=True) if article.select_one(".source-link") else "",
                 "image_url": article.select_one(".news-image img").get("src", "") if article.select_one(".news-image img") else "",
-            })
+            }
+            dt = parse_article_datetime(item)
+            if dt != datetime.datetime.min:
+                item["timestamp"] = dt.timestamp()
+            parsed.append(item)
 
         return parsed
 
