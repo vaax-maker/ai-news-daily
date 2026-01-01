@@ -85,16 +85,30 @@ def _render_new_format(text: str) -> str:
             current_section["items"].append({"text": topic_text, "important": True})
             continue
         
-        # Regular bullet point - remove all leading bullet characters and spaces
-        cleaned = re.sub(r"^[•\-\.\s\*○●·]+", "", stripped)
+        # Regular bullet point - remove common bullet characters (dash, dot, circle, etc.)
+        # CAUTION: Do NOT remove '*' greedily, as it might be part of **Bold** syntax at the start.
+        # Only remove '*' if followed by space, or just rely on other bullet types.
+        # Safest: Remove specific bullet chars, then leading whitespace.
+        cleaned = re.sub(r"^[•\-○●·\u2022\u25cf\u25cb]+", "", stripped)
+        cleaned = re.sub(r"^\s+", "", cleaned)
+        
+        # Handle star bullet separately: '* ' at start of line
+        cleaned = re.sub(r"^\*\s+", "", cleaned)
+        
+        # Now cleaned should preserve '**' if it was '**Keyword**'
         if not cleaned:
             continue
         
-        # Check for bold markers
-        is_important = "**" in cleaned
-        cleaned = re.sub(r"\*\*(.+?)\*\*", r"\1", cleaned)  # Remove bold markers
+        # Check for bold markers and wrap them in highlight span directly
+        # Regex: replace **content** with <span class='highlight' ...>content</span>
         
-        current_section["items"].append({"text": cleaned, "important": is_important})
+        def replace_bold(match):
+            content = match.group(1)
+            return _wrap_highlight(content)
+            
+        cleaned = re.sub(r"\*\*(.+?)\*\*", replace_bold, cleaned)
+        
+        current_section["items"].append({"text": cleaned, "important": False})
     
     # Don't forget the last section
     if current_section["title"] or current_section["items"]:
@@ -116,10 +130,8 @@ def _render_new_format(text: str) -> str:
         
         items_html = []
         for item in section["items"]:
-            if item["important"]:
-                items_html.append(f"<li>{_wrap_highlight(item['text'])}</li>")
-            else:
-                items_html.append(f"<li>{item['text']}</li>")
+            # 'text' already contains <span class='highlight'>...</span>
+            items_html.append(f"<li>{item['text']}</li>")
         
         if items_html:
             section_html.append(f"<ul class='summary-list'>{''.join(items_html)}</ul>")
@@ -149,25 +161,19 @@ def _render_legacy_format(html_text: str) -> str:
         if not cleaned:
             continue
 
-        cleaned = re.sub(r"^[•□\-\.\s\*○●·]+", "", cleaned)
+        # Remove bullets but preserve bold markers
+        cleaned = re.sub(r"^[•□\-○●·\u2022\u25cf\u25cb]+", "", cleaned)
+        cleaned = re.sub(r"^\s+", "", cleaned)
+        cleaned = re.sub(r"^\*\s+", "", cleaned)
 
         section_match = re.fullmatch(r"\[?(제목|요약|의미)\]?", cleaned)
         if section_match:
             current_section = section_match.group(1)
             continue
 
-        is_important = False
-
-        def strip_bold(match):
-            nonlocal is_important
-            is_important = True
-            return match.group(1)
-
-        converted = re.sub(r"\*\*(.+?)\*\*", strip_bold, cleaned)
-
         target_list = meaning_lines if current_section == "의미" else main_lines
-        target_list.append((converted, is_important))
-        total_chars += len(converted)
+        target_list.append(cleaned)
+        total_chars += len(cleaned)
 
     if not main_lines and not meaning_lines:
         return ""
@@ -176,14 +182,15 @@ def _render_legacy_format(html_text: str) -> str:
     highlighted_chars = 0
 
     def render_lines(lines):
-        nonlocal highlighted_chars
         rendered = []
-        for text, is_important in lines:
-            if is_important and highlighted_chars + len(text) <= highlight_budget:
-                rendered.append(_wrap_highlight(text))
-                highlighted_chars += len(text)
-            else:
-                rendered.append(text)
+        for text in lines:
+            # Inline bold handling for legacy
+            def replace_bold(match):
+                return _wrap_highlight(match.group(1))
+            
+            # Highlight **bold** sections inline
+            processed = re.sub(r"\*\*(.+?)\*\*", replace_bold, text)
+            rendered.append(processed)
         return rendered
 
     rendered_main = render_lines(main_lines)
