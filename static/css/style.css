@@ -205,6 +205,16 @@ header {
     }
 }
 
+.header-announcement {
+    max-width: 1200px;
+    margin: 0.5rem auto 0;
+    padding: 0 1rem;
+    color: #ef4444;
+    font-size: 0.85rem;
+    text-align: left;
+    font-weight: 500;
+}
+
 /* General Styles */
 h1 {
     font-size: clamp(1.6rem, 3vw, 2rem);
