@@ -187,7 +187,7 @@ class GovStorage:
             seen_titles: List[str] = []
             merged: List[Dict] = []
 
-            def add_item(item: Dict):
+            def add_item(item: Dict, is_new: bool):
                 link = item.get("link")
                 norm_title = normalize(item.get("title", ""))
 
@@ -200,12 +200,14 @@ class GovStorage:
                     seen_links.add(link)
                 if norm_title:
                     seen_titles.append(norm_title)
+                
+                item["is_new"] = is_new  # 🚀 Flag for notifier
                 merged.append(item)
 
             for item in existing:
-                add_item(item)
+                add_item(item, is_new=False)
             for item in incoming:
-                add_item(item)
+                add_item(item, is_new=True)
 
             return merged
 

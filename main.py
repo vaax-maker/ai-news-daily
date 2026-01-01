@@ -244,7 +244,8 @@ def process_category(config, now_utc, kst_timezone_offset=9):
                         "image_url": existing_art.get("image_url", ""),
                         "placeholder_type": "",
                         "original_title": title,
-                        "timestamp": ts # Add timestamp for badge
+                        "timestamp": ts, # Add timestamp for badge
+                        "is_new": False  # 🚀 Reused items are NOT new for notification
                     })
                     skipped_count += 1
                     continue
@@ -271,7 +272,10 @@ def process_category(config, now_utc, kst_timezone_offset=9):
                 "image_url": image_url,
                 "placeholder_type": placeholder_type,
                 "original_title": title,
-                "timestamp": ts # Add timestamp for badge
+                "placeholder_type": placeholder_type,
+                "original_title": title,
+                "timestamp": ts, # Add timestamp for badge
+                "is_new": True   # 🚀 Summarized (Fetched) items ARE new
             })
             new_summarized_count += 1 # Count this as NEW
         

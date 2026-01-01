@@ -144,9 +144,24 @@ def send_daily_briefing(dashboard_data):
     gov_items = dashboard_data.get("gov", [])
     briefing_url = dashboard_data.get("briefing_url", "https://vaax-maker.github.io/ai-news-daily/index.html")
     
-    # Strict limit: 420 chars (user reported 460 still exceeded).
-    # Reducing further to allow sufficient buffer for Kakao/Telegram folding.
-    message = format_daily_briefing(ai_items, xr_items, gov_items, briefing_url=briefing_url, max_chars=420)
+    # Filter for ONLY new items to avoid repetition
+    # main.py/storage.py now tag items with 'is_new' boolean.
+    # If key is missing (e.g. legacy data), treat as False to be safe (or True? Safe is False to avoid spam)
+    # User requested: "Compare with previous... exclude repetitive".
+    
+    def filter_new(items):
+        return [item for item in items if item.get("is_new", False)]
+
+    new_ai = filter_new(ai_items)
+    new_xr = filter_new(xr_items)
+    new_gov = filter_new(gov_items)
+    
+    # If all empty, maybe we shouldn't send? 
+    # But main.py checks total_new_items > 0. 
+    # So at least one list should have something.
+    
+    # Strict limit: 420 chars
+    message = format_daily_briefing(new_ai, new_xr, new_gov, briefing_url=briefing_url, max_chars=420)
     
     print("--- PREVIEW MESSAGE ---")
     print(message)
