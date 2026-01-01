@@ -380,8 +380,6 @@
                 <th class="col-date">등록일</th>
                 <th class="col-schedule">입찰시작</th>
                 <th class="col-schedule">입찰마감</th>
-                <th class="col-discuss">토론</th>
-                <th class="col-discuss">공유</th>
             </tr>
         </thead>
         <tbody>
@@ -393,7 +391,17 @@
                 data-source="{{ item.source_name }}">
                 <td class="col-idx">{{ loop.index }}</td>
                 <td class="col-title">
-                    <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
+                    <div class="news-header-top">
+                        <div style="flex: 1;">
+                            <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
+                        </div>
+                        <div class="title-actions">
+                            <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
+                                class="discuss-btn-sm">토론</a>
+                            <button onclick="navigator.clipboard.writeText('{{ item.link }}')"
+                                class="discuss-btn-sm">공유</button>
+                        </div>
+                    </div>
                 </td>
                 <td class="col-source">
                     <span
@@ -406,17 +414,6 @@
                 <td class="col-date">{{ item.date or item.published_display }}</td>
                 <td class="col-schedule">{{ item.bid_begin_dt[:16] if item.bid_begin_dt else '미제공' }}</td>
                 <td class="col-schedule">{{ item.bid_close_dt[:16] if item.bid_close_dt else '미제공' }}</td>
-                <td class="col-discuss">
-                    <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
-                        class="discuss-btn-sm">
-                        토론
-                    </a>
-                </td>
-                <td class="col-discuss">
-                    <button onclick="navigator.clipboard.writeText('{{ item.link }}')" class="discuss-btn-sm share-btn">
-                        공유
-                    </button>
-                </td>
                 </tr>
                 {% endfor %}
         </tbody>

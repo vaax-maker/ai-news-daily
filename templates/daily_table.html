@@ -23,7 +23,19 @@
             {% for item in articles %}
             <tr>
                 <td class="col-idx">{{ loop.index }}</td>
-                <td class="col-title"><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></td>
+                <td class="col-title">
+                    <div class="news-header-top">
+                        <div style="flex: 1;">
+                            <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                        </div>
+                        <div class="title-actions">
+                            <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
+                                class="discuss-btn-sm">토론</a>
+                            <button onclick="navigator.clipboard.writeText('{{ item.link }}')"
+                                class="discuss-btn-sm">공유</button>
+                        </div>
+                    </div>
+                </td>
                 <td class="col-dept">{{ item.dept }}</td>
                 <td class="col-dept">{{ item.manager }}</td>
                 <td class="col-date">{{ item.date }}</td>
