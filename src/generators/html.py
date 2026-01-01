@@ -26,7 +26,8 @@ def render_daily_page(articles, date_str, time_str, config, active_tab="home"):
         active_tab=config.key,
         now_year=datetime.datetime.now().year,
         config=config,
-        root_path="../.." 
+        root_path="../..",
+        now_timestamp=datetime.datetime.now().timestamp() 
     )
 
 def render_archive_index(run_entries, config):

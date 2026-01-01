@@ -227,6 +227,10 @@
         const header = document.createElement('div');
         header.className = 'news-header';
 
+        // Header Top (Title + Actions)
+        const headerTop = document.createElement('div');
+        headerTop.className = 'news-header-top';
+
         const title = document.createElement('h3');
         title.className = 'news-title';
         const link = document.createElement('a');
@@ -235,7 +239,29 @@
         link.textContent = article.title;
         title.appendChild(link);
 
+        // Actions (토론/공유 버튼)
+        const actions = document.createElement('div');
+        actions.className = 'title-actions';
 
+        // Discussion button
+        const discussLink = document.createElement('a');
+        discussLink.href = `../board/index.html?mode=discuss&title=${encodeURIComponent(article.title)}&link=${encodeURIComponent(article.link)}&source=${encodeURIComponent(article.source || '출처')}`;
+        discussLink.className = 'discuss-btn-sm';
+        discussLink.textContent = '토론';
+        actions.appendChild(discussLink);
+
+        // Share button
+        const shareBtn = document.createElement('button');
+        shareBtn.className = 'discuss-btn-sm';
+        shareBtn.textContent = '공유';
+        shareBtn.onclick = () => {
+            navigator.clipboard.writeText(article.link);
+        };
+        actions.appendChild(shareBtn);
+
+        headerTop.appendChild(title);
+        headerTop.appendChild(actions);
+        header.appendChild(headerTop);
 
         const meta = document.createElement('div');
         meta.className = 'news-meta';
@@ -244,7 +270,6 @@
         if (article.published) metaParts.push(article.published);
         meta.innerHTML = metaParts.join(' · ');
 
-        header.appendChild(title);
         header.appendChild(meta);
         card.appendChild(header);
 
@@ -270,27 +295,7 @@
 
         card.appendChild(body);
 
-        // 3. Actions Section (토론/공유 버튼)
-        const actions = document.createElement('div');
-        actions.className = 'news-actions-bottom';
-
-        // Discussion button
-        const discussLink = document.createElement('a');
-        discussLink.href = `../board/index.html?mode=discuss&title=${encodeURIComponent(article.title)}&link=${encodeURIComponent(article.link)}&source=${encodeURIComponent(article.source || '출처')}`;
-        discussLink.className = 'discuss-btn-sm';
-        discussLink.textContent = '토론';
-        actions.appendChild(discussLink);
-
-        // Share button
-        const shareBtn = document.createElement('button');
-        shareBtn.className = 'discuss-btn-sm';
-        shareBtn.textContent = '공유';
-        shareBtn.onclick = () => {
-            navigator.clipboard.writeText(article.link);
-        };
-        actions.appendChild(shareBtn);
-
-        card.appendChild(actions);
+        // Removed separate actions bottom section
 
         return card;
     }
