@@ -451,5 +451,31 @@
     "source_name": "과학기술정보통신부",
     "image_url": "",
     "published_display": "2025-11-13"
+  },
+  {
+    "title": "2026년도 기초연구사업 핵심연구 유형A(정책형) 신규과제 공모",
+    "link": "https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186363",
+    "dept": "기초연구진흥과",
+    "manager": "허정현",
+    "date": "2025-12-29",
+    "source_name": "과기정통부",
+    "image_url": "",
+    "published_display": "2025-12-29",
+    "bid_begin_dt": "",
+    "bid_close_dt": "",
+    "openg_dt": ""
+  },
+  {
+    "title": "디지털 트윈을 위한 3D 모델링 및 렌더링 용역",
+    "link": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01210259&bidPbancOrd=000",
+    "dept": "재단법인 포항테크노파크",
+    "manager": "손지민",
+    "date": "2025-12-08",
+    "source_name": "나라장터(용역)",
+    "image_url": "",
+    "published_display": "2025-12-08",
+    "bid_begin_dt": "2025-12-10 13:00:00",
+    "bid_close_dt": "2025-12-10 15:00:00",
+    "openg_dt": "2025-12-10 16:00:00"
   }
 ]
