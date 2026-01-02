@@ -146,18 +146,12 @@
         display: block;
     }
 
-    /* Live Preview */
-    .preview-box {
-        margin-top: 1rem;
-        padding: 1rem;
-        background: #f3f4f6;
-        border-radius: 8px;
-        border: 1px dashed var(--border-color);
-        font-size: 0.9rem;
-        white-space: pre-wrap;
-        word-break: break-all;
-        min-height: 50px;
-        color: var(--text-main);
+    /* Character Counter */
+    .char-counter {
+        margin-top: 0.5rem;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-align: right;
     }
 
     /* Status List */
@@ -280,7 +274,7 @@
         <div class="form-group">
             <label for="msgBody">Message Content</label>
             <textarea id="msgBody" rows="6" placeholder="Type your message here..."></textarea>
-            <div id="msgPreview" class="preview-box">Preview will appear here...</div>
+            <div id="charCounter" class="char-counter">0 characters</div>
         </div>
 
         <div class="form-group">
@@ -340,7 +334,7 @@
     const loginStatus = document.getElementById('loginStatus');
 
     const msgBody = document.getElementById('msgBody');
-    const msgPreview = document.getElementById('msgPreview');
+    const charCounter = document.getElementById('charCounter');
     const sendOption = document.getElementById('sendOption');
     const scheduleOptions = document.getElementById('scheduleOptions');
     const scheduleTime = document.getElementById('scheduleTime');
@@ -349,11 +343,10 @@
     const panelStatus = document.getElementById('panelStatus');
     const historyList = document.getElementById('historyList');
 
-    // Live Preview
+    // Character Counter
     msgBody.addEventListener('input', () => {
-        const val = msgBody.value.trim();
-        msgPreview.innerText = val || "Preview will appear here...";
-        msgPreview.style.color = val ? 'var(--text-main)' : '#9ca3af';
+        const count = msgBody.value.length;
+        charCounter.innerText = `${count} characters`;
     });
 
     // Login Logic
@@ -467,7 +460,7 @@
                 panelStatus.innerText = "Message scheduled successfully!";
             }
             msgBody.value = "";
-            msgPreview.innerText = "Preview will appear here...";
+            charCounter.innerText = "0 characters";
         } catch (e) {
             console.error(e);
             panelStatus.classList.add('error');
