@@ -30,32 +30,6 @@ class TelegramNotifier:
             logger.error(f"[Notifier] Failed to send message: {e}")
             return False
 
-def format_daily_briefing(ai_items, xr_items, gov_items, links=None, max_chars=800):
-    """
-    Format:
-    [Header]
-    [AI] ...
-    AI_LINK
-    
-    [XR] ...
-    XR_LINK
-    
-    [Gov] ...
-    GOV_LINK
-    """
-    if links is None:
-        links = {}
-        
-    base_url = "https://vaax-maker.github.io/ai-news-daily"
-    
-    now = datetime.datetime.now()
-    weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
-    wd = weekday_map[now.weekday()]
-    
-    now = datetime.datetime.now()
-    weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
-    wd = weekday_map[now.weekday()]
-    
 def format_daily_briefing(ai_items, xr_items, gov_items, briefing_url, max_chars=450):
     """
     Format:
