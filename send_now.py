@@ -10,8 +10,9 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Set the service account path
+script_dir = os.path.dirname(os.path.abspath(__file__))
 os.environ["FIREBASE_SERVICE_ACCOUNT"] = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    script_dir,
     "vaax-board-firebase-adminsdk-fbsvc-67b91f8d90.json"
 )
 
