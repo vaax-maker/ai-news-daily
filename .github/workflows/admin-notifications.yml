@@ -2,8 +2,10 @@ name: Admin Notifications
 
 on:
   schedule:
-    - cron: "* * * * *" # Every 1 minute for immediate delivery
+    - cron: "*/5 * * * *" # Every 5 minutes (GitHub Actions minimum)
   workflow_dispatch: # Allow manual trigger
+  repository_dispatch:
+    types: [send-notification] # Instant trigger from admin panel
 
 jobs:
   process:
