@@ -252,6 +252,24 @@
 
         <div id="panelStatus" class="status-msg"></div>
 
+        <!-- Instant Send Section -->
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                <h3 style="margin: 0; font-size: 1rem;">Quick Actions</h3>
+                <div id="serverStatus" style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem;">
+                    <span id="statusDot"
+                        style="width: 8px; height: 8px; border-radius: 50%; background: #94a3b8;"></span>
+                    <span id="statusText" style="color: var(--text-muted);">Checking server...</span>
+                </div>
+            </div>
+            <button id="btnSendNow" class="admin-btn" style="background: #0ea5e9; margin-bottom: 0.5rem;">
+                ⚡ Send Pending Messages Now
+            </button>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+                Click to instantly send all pending messages without waiting for the scheduled check.
+            </p>
+        </div>
+
         <!-- History Section -->
         <div id="notifHistory" class="notif-history">
             <h2>Recent History</h2>
@@ -314,6 +332,7 @@
                 panelSection.classList.add('active');
                 sessionStorage.setItem('vaaxAdmin', 'true');
                 loadHistory();
+                checkServerStatus();
             } else {
                 loginStatus.classList.add('error');
                 loginStatus.innerText = "Invalid password. Access denied.";
@@ -330,7 +349,65 @@
         loginSection.classList.remove('active');
         panelSection.classList.add('active');
         setTimeout(loadHistory, 100);
+        setTimeout(checkServerStatus, 100);
     }
+
+    const btnSendNow = document.getElementById('btnSendNow');
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+
+    // Check if local admin server is running
+    async function checkServerStatus() {
+        try {
+            const response = await fetch('http://localhost:5555/health');
+            if (response.ok) {
+                statusDot.style.background = '#10b981';
+                statusText.innerText = 'Server ready';
+                btnSendNow.disabled = false;
+            } else {
+                throw new Error('Server not responding');
+            }
+        } catch (e) {
+            statusDot.style.background = '#ef4444';
+            statusText.innerText = 'Server offline';
+            btnSendNow.disabled = true;
+        }
+    }
+
+    // Instant send button handler
+    btnSendNow.addEventListener('click', async () => {
+        if (btnSendNow.disabled) {
+            alert('Admin server is not running. Please start it first:\n\npython3 admin_server.py');
+            return;
+        }
+
+        btnSendNow.disabled = true;
+        btnSendNow.innerText = '⏳ Sending...';
+
+        try {
+            const response = await fetch('http://localhost:5555/trigger-send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                panelStatus.className = 'status-msg success';
+                panelStatus.innerText = '✅ All pending messages sent successfully!';
+                setTimeout(() => loadHistory(), 500);
+            } else {
+                throw new Error(result.message);
+            }
+        } catch (e) {
+            panelStatus.className = 'status-msg error';
+            panelStatus.innerText = '❌ Error: ' + e.message;
+        } finally {
+            btnSendNow.disabled = false;
+            btnSendNow.innerText = '⚡ Send Pending Messages Now';
+            setTimeout(() => checkServerStatus(), 1000);
+        }
+    });
 
     function loadHistory() {
         const q = query(collection(db, "admin_notifications"), orderBy("createdAt", "desc"), limit(10));
