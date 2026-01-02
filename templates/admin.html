@@ -393,7 +393,7 @@
                     createdAt: serverTimestamp()
                 });
                 panelStatus.classList.add('success');
-                panelStatus.innerText = "Message queued! It will be sent shortly (wait for GitHub Action).";
+                panelStatus.innerText = "Message queued! It will be sent within 1 minute.";
             } else {
                 const targetTime = scheduleTime.value;
                 if (!targetTime) {
