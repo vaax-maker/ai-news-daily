@@ -58,15 +58,19 @@
         border: 1px solid var(--border-color);
         border-radius: 8px;
         font-size: 1rem;
-        background: #f9fafb;
+        background: #ffffff;
+        /* Brighter background */
+        color: #111827;
+        /* Explicit dark text color */
         transition: border-color 0.2s;
+        font-family: inherit;
     }
 
     .form-group input:focus,
     .form-group textarea:focus {
         outline: none;
         border-color: var(--primary-color);
-        background: #fff;
+        box-shadow: 0 0 0 3px rgba(101, 163, 13, 0.1);
     }
 
     .admin-btn {
@@ -133,6 +137,71 @@
     .schedule-options.active {
         display: block;
     }
+
+    /* Live Preview */
+    .preview-box {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f3f4f6;
+        border-radius: 8px;
+        border: 1px dashed var(--border-color);
+        font-size: 0.9rem;
+        white-space: pre-wrap;
+        word-break: break-all;
+        min-height: 50px;
+        color: var(--text-main);
+    }
+
+    /* Status List */
+    .notif-history {
+        margin-top: 3rem;
+        border-top: 1px solid var(--border-color);
+        padding-top: 2rem;
+    }
+
+    .notif-history h2 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .history-item {
+        padding: 0.75rem;
+        border-bottom: 1px solid #f3f4f6;
+        font-size: 0.85rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .history-item .notif-body {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-right: 1rem;
+    }
+
+    .badge {
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .badge.pending {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    .badge.sent {
+        background: #d1fae5;
+        color: #065f46;
+    }
+
+    .badge.error {
+        background: #fee2e2;
+        color: #991b1b;
+    }
 </style>
 {% endblock %}
 
@@ -141,7 +210,7 @@
     <!-- Login Section -->
     <div id="loginSection" class="admin-login-section active">
         <div class="admin-header">
-            <h1>Admin Access</h1>
+            <h1 style="color: #111827;">Admin Access</h1>
             <p>Enter password to enter the VAAX Notifier Panel</p>
         </div>
         <div class="form-group">
@@ -155,19 +224,20 @@
     <!-- Panel Section -->
     <div id="panelSection" class="admin-panel-section">
         <div class="admin-header">
-            <h1>VAAX Notifier Pro</h1>
+            <h1 style="color: #111827;">VAAX Notifier Pro</h1>
             <p>Compose and send/schedule Telegram notifications</p>
         </div>
 
         <div class="form-group">
             <label for="msgBody">Message Content</label>
-            <textarea id="msgBody" rows="8" placeholder="Type your message here..."></textarea>
+            <textarea id="msgBody" rows="6" placeholder="Type your message here..."></textarea>
+            <div id="msgPreview" class="preview-box">Preview will appear here...</div>
         </div>
 
         <div class="form-group">
             <label>Send Option</label>
             <select id="sendOption"
-                style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color); background: white; color: #111827;">
                 <option value="immediate">Send Immediately</option>
                 <option value="scheduled">Schedule for Later</option>
             </select>
@@ -176,7 +246,7 @@
         <div id="scheduleOptions" class="schedule-options">
             <div class="form-group">
                 <label for="scheduleTime">Target Time</label>
-                <input type="datetime-local" id="scheduleTime">
+                <input type="datetime-local" id="scheduleTime" style="background: white; color: #111827;">
             </div>
         </div>
 
@@ -187,13 +257,19 @@
         <button id="btnLogout" class="admin-btn secondary">Logout</button>
 
         <div id="panelStatus" class="status-msg"></div>
+
+        <!-- History Section -->
+        <div id="notifHistory" class="notif-history">
+            <h2>Recent History</h2>
+            <div id="historyList">Loading history...</div>
+        </div>
     </div>
 </div>
 
 <!-- Firebase SDK -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, doc, getDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyANn76u2ZCJ5rq4IOpYaTzFy1JtKoPOM-c",
@@ -215,12 +291,21 @@
     const loginStatus = document.getElementById('loginStatus');
 
     const msgBody = document.getElementById('msgBody');
+    const msgPreview = document.getElementById('msgPreview');
     const sendOption = document.getElementById('sendOption');
     const scheduleOptions = document.getElementById('scheduleOptions');
     const scheduleTime = document.getElementById('scheduleTime');
     const btnSend = document.getElementById('btnSend');
     const btnLogout = document.getElementById('btnLogout');
     const panelStatus = document.getElementById('panelStatus');
+    const historyList = document.getElementById('historyList');
+
+    // Live Preview
+    msgBody.addEventListener('input', () => {
+        const val = msgBody.value.trim();
+        msgPreview.innerText = val || "Preview will appear here...";
+        msgPreview.style.color = val ? 'var(--text-main)' : '#9ca3af';
+    });
 
     // Login Logic
     btnLogin.addEventListener('click', async () => {
@@ -235,6 +320,7 @@
                 loginSection.classList.remove('active');
                 panelSection.classList.add('active');
                 sessionStorage.setItem('vaaxAdmin', 'true');
+                loadHistory();
             } else {
                 loginStatus.classList.add('error');
                 loginStatus.innerText = "Invalid password. Access denied.";
@@ -250,6 +336,28 @@
     if (sessionStorage.getItem('vaaxAdmin') === 'true') {
         loginSection.classList.remove('active');
         panelSection.classList.add('active');
+        setTimeout(loadHistory, 100);
+    }
+
+    function loadHistory() {
+        const q = query(collection(db, "admin_notifications"), orderBy("createdAt", "desc"), limit(10));
+        onSnapshot(q, (snapshot) => {
+            historyList.innerHTML = "";
+            if (snapshot.empty) {
+                historyList.innerText = "No history found.";
+                return;
+            }
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                const item = document.createElement('div');
+                item.className = 'history-item';
+                item.innerHTML = `
+                    <div class="notif-body" title="${data.body}">${data.body}</div>
+                    <span class="badge ${data.status}">${data.status}</span>
+                `;
+                historyList.appendChild(item);
+            });
+        });
     }
 
     // Logout
@@ -292,7 +400,7 @@
                     createdAt: serverTimestamp()
                 });
                 panelStatus.classList.add('success');
-                panelStatus.innerText = "Message queued for immediate delivery! (Wait ~1 min)";
+                panelStatus.innerText = "Message queued! It will be sent shortly (wait for GitHub Action).";
             } else {
                 const targetTime = scheduleTime.value;
                 if (!targetTime) {
@@ -310,6 +418,7 @@
                 panelStatus.innerText = "Message scheduled successfully!";
             }
             msgBody.value = "";
+            msgPreview.innerText = "Preview will appear here...";
         } catch (e) {
             console.error(e);
             panelStatus.classList.add('error');

@@ -13,6 +13,7 @@ from src.utils.notifier import TelegramNotifier
 load_dotenv()
 
 def main():
+    print(f"[{datetime.datetime.now()}] Starting Notification Processor...")
     # 1. Initialize Firebase
     try:
         sa_json = os.getenv("FIREBASE_SERVICE_ACCOUNT")
