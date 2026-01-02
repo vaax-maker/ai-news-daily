@@ -813,6 +813,15 @@ def main():
             # Fallback to index if briefing fails
             dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/index.html"
 
+        # 6. Send Notifications (Only if new items)
+        print("[Notifier] Sending daily briefing...")
+        try:
+            send_daily_briefing(dashboard_data)
+        except Exception as e:
+            print(f"[Notifier] Failed: {e}")
+    else:
+        print("[Briefing] No new items found. Skipping briefing generation and notification.")
+
     # 5.6 Generate Admin Notifier Page (Always generate for admin access)
     print("[Admin] Generating admin notifier page...")
     try:
@@ -823,15 +832,6 @@ def main():
         print("[Admin] Generated docs/admin.html")
     except Exception as e:
         print(f"[Admin] Failed: {e}")
-
-        # 6. Send Notifications (Only if new items)
-        print("[Notifier] Sending daily briefing...")
-        try:
-            send_daily_briefing(dashboard_data)
-        except Exception as e:
-            print(f"[Notifier] Failed: {e}")
-    else:
-        print("[Briefing] No new items found. Skipping briefing generation and notification.")
 
 if __name__ == "__main__":
     main()
