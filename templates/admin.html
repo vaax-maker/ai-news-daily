@@ -1,0 +1,321 @@
+{% extends "layout.html" %}
+
+{% block title %}VAAX Admin Notifier{% endblock %}
+
+{% block extra_css %}
+<style>
+    .admin-container {
+        max-width: 600px;
+        margin: 4rem auto;
+        padding: 2rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .admin-login-section,
+    .admin-panel-section {
+        display: none;
+    }
+
+    .admin-login-section.active,
+    .admin-panel-section.active {
+        display: block;
+    }
+
+    .admin-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .admin-header h1 {
+        font-size: 1.5rem;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
+    }
+
+    .admin-header p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 1rem;
+        background: #f9fafb;
+        transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        background: #fff;
+    }
+
+    .admin-btn {
+        width: 100%;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 8px;
+        background: var(--primary-color);
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .admin-btn:hover {
+        background: var(--primary-color-hover);
+    }
+
+    .admin-btn.secondary {
+        background: var(--secondary-color);
+        margin-top: 0.5rem;
+    }
+
+    .status-msg {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        display: none;
+    }
+
+    .status-msg.success {
+        display: block;
+        background: #ecfdf5;
+        color: #065f46;
+        border: 1px solid #10b981;
+    }
+
+    .status-msg.error {
+        display: block;
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #ef4444;
+    }
+
+    .control-row {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .control-row .admin-btn {
+        flex: 1;
+    }
+
+    .schedule-options {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f3f4f6;
+        border-radius: 8px;
+        display: none;
+    }
+
+    .schedule-options.active {
+        display: block;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <!-- Login Section -->
+    <div id="loginSection" class="admin-login-section active">
+        <div class="admin-header">
+            <h1>Admin Access</h1>
+            <p>Enter password to enter the VAAX Notifier Panel</p>
+        </div>
+        <div class="form-group">
+            <label for="adminPass">Password</label>
+            <input type="password" id="adminPass" placeholder="Enter password...">
+        </div>
+        <button id="btnLogin" class="admin-btn">Login</button>
+        <div id="loginStatus" class="status-msg"></div>
+    </div>
+
+    <!-- Panel Section -->
+    <div id="panelSection" class="admin-panel-section">
+        <div class="admin-header">
+            <h1>VAAX Notifier Pro</h1>
+            <p>Compose and send/schedule Telegram notifications</p>
+        </div>
+
+        <div class="form-group">
+            <label for="msgBody">Message Content</label>
+            <textarea id="msgBody" rows="8" placeholder="Type your message here..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Send Option</label>
+            <select id="sendOption"
+                style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                <option value="immediate">Send Immediately</option>
+                <option value="scheduled">Schedule for Later</option>
+            </select>
+        </div>
+
+        <div id="scheduleOptions" class="schedule-options">
+            <div class="form-group">
+                <label for="scheduleTime">Target Time</label>
+                <input type="datetime-local" id="scheduleTime">
+            </div>
+        </div>
+
+        <div class="control-row">
+            <button id="btnSend" class="admin-btn">Send / Schedule</button>
+        </div>
+
+        <button id="btnLogout" class="admin-btn secondary">Logout</button>
+
+        <div id="panelStatus" class="status-msg"></div>
+    </div>
+</div>
+
+<!-- Firebase SDK -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, doc, getDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyANn76u2ZCJ5rq4IOpYaTzFy1JtKoPOM-c",
+        authDomain: "vaax-board.firebaseapp.com",
+        projectId: "vaax-board",
+        storageBucket: "vaax-board.firebasestorage.app",
+        messagingSenderId: "31682907508",
+        appId: "1:31682907508:web:cd3ee4231ec8b3fb75b021",
+        measurementId: "G-XF41VB6W7V"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const loginSection = document.getElementById('loginSection');
+    const panelSection = document.getElementById('panelSection');
+    const adminPass = document.getElementById('adminPass');
+    const btnLogin = document.getElementById('btnLogin');
+    const loginStatus = document.getElementById('loginStatus');
+
+    const msgBody = document.getElementById('msgBody');
+    const sendOption = document.getElementById('sendOption');
+    const scheduleOptions = document.getElementById('scheduleOptions');
+    const scheduleTime = document.getElementById('scheduleTime');
+    const btnSend = document.getElementById('btnSend');
+    const btnLogout = document.getElementById('btnLogout');
+    const panelStatus = document.getElementById('panelStatus');
+
+    // Login Logic
+    btnLogin.addEventListener('click', async () => {
+        const pass = adminPass.value;
+        if (!pass) return;
+
+        try {
+            const adminDoc = await getDoc(doc(db, "config", "admin"));
+            if (adminDoc.exists() && adminDoc.data().password === pass) {
+                loginStatus.classList.remove('error');
+                loginStatus.innerText = "";
+                loginSection.classList.remove('active');
+                panelSection.classList.add('active');
+                sessionStorage.setItem('vaaxAdmin', 'true');
+            } else {
+                loginStatus.classList.add('error');
+                loginStatus.innerText = "Invalid password. Access denied.";
+            }
+        } catch (e) {
+            console.error(e);
+            loginStatus.classList.add('error');
+            loginStatus.innerText = "Error connecting to Firebase.";
+        }
+    });
+
+    // Check session
+    if (sessionStorage.getItem('vaaxAdmin') === 'true') {
+        loginSection.classList.remove('active');
+        panelSection.classList.add('active');
+    }
+
+    // Logout
+    btnLogout.addEventListener('click', () => {
+        sessionStorage.removeItem('vaaxAdmin');
+        location.reload();
+    });
+
+    // Send Option Toggle
+    sendOption.addEventListener('change', () => {
+        if (sendOption.value === 'scheduled') {
+            scheduleOptions.classList.add('active');
+        } else {
+            scheduleOptions.classList.remove('active');
+        }
+    });
+
+    // Send / Schedule Logic
+    btnSend.addEventListener('click', async () => {
+        const body = msgBody.value.trim();
+        if (!body) {
+            alert("Please enter message body.");
+            return;
+        }
+
+        const option = sendOption.value;
+        panelStatus.className = 'status-msg'; // Reset
+        panelStatus.innerText = "Processing...";
+
+        try {
+            if (option === 'immediate') {
+                // For Immediate, we write to a 'priority_notifications' collection
+                // A Cloud Function or a very fast polling script will handle this.
+                // Alternatively, we call a Cloud Function URL directly if setup.
+                // For now, let's write to Firestore with priority: 'high'
+                await addDoc(collection(db, "admin_notifications"), {
+                    body,
+                    type: 'immediate',
+                    status: 'pending',
+                    createdAt: serverTimestamp()
+                });
+                panelStatus.classList.add('success');
+                panelStatus.innerText = "Message queued for immediate delivery! (Wait ~1 min)";
+            } else {
+                const targetTime = scheduleTime.value;
+                if (!targetTime) {
+                    alert("Please select target time.");
+                    return;
+                }
+                await addDoc(collection(db, "admin_notifications"), {
+                    body,
+                    type: 'scheduled',
+                    status: 'pending',
+                    targetTime: new Date(targetTime),
+                    createdAt: serverTimestamp()
+                });
+                panelStatus.classList.add('success');
+                panelStatus.innerText = "Message scheduled successfully!";
+            }
+            msgBody.value = "";
+        } catch (e) {
+            console.error(e);
+            panelStatus.classList.add('error');
+            panelStatus.innerText = "Error: " + e.message;
+        }
+    });
+
+</script>
+{% endblock %}

@@ -4,3 +4,4 @@ __pycache__/
 # Local test files
 docs/header_test.html
 *.DS_Store
+*.json

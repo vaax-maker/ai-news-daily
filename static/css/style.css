@@ -40,6 +40,18 @@ a:hover {
     color: var(--primary-color);
 }
 
+/* Admin Link (Footer) */
+.admin-link {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.admin-link:hover {
+    color: var(--primary-color) !important;
+    text-decoration: underline !important;
+}
+
 /* Layout */
 .container {
     max-width: 1200px;

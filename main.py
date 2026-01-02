@@ -813,6 +813,17 @@ def main():
             # Fallback to index if briefing fails
             dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/index.html"
 
+    # 5.6 Generate Admin Notifier Page (Always generate for admin access)
+    print("[Admin] Generating admin notifier page...")
+    try:
+        from src.generators.html import render_admin_page
+        admin_html = render_admin_page()
+        with open("docs/admin.html", "w", encoding="utf-8") as f:
+            f.write(admin_html)
+        print("[Admin] Generated docs/admin.html")
+    except Exception as e:
+        print(f"[Admin] Failed: {e}")
+
         # 6. Send Notifications (Only if new items)
         print("[Notifier] Sending daily briefing...")
         try:

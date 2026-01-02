@@ -16,7 +16,8 @@ from src.generators.html import (
     render_archive_index, 
     render_dashboard,
     render_board_page,
-    render_gov_archive
+    render_gov_archive,
+    render_admin_page
 )
 from src.config import CategoryConfig, load_members, load_categories
 from src.utils.storage import MemberStorage, GovStorage
@@ -215,11 +216,19 @@ def rebuild_dashboard(ai_previews, xr_previews, gov_previews, member_previews, l
         f.write(html)
     print(f"✓ Dashboard done.")
 
+def rebuild_admin():
+    print("\n--- [Admin] Rebuilding... ---")
+    html = render_admin_page()
+    with open("docs/admin.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"✓ Admin done.")
+
 if __name__ == "__main__":
     m_latest = rebuild_members()
     a_previews, links = rebuild_archives()
     g_latest = rebuild_gov()
     rebuild_board()
+    rebuild_admin()
     
     # Additional links
     links["members"] = "members/index.html"

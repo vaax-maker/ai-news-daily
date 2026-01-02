@@ -130,3 +130,13 @@ def render_mobile_landing(ai_items, xr_items, gov_items, links=None):
         root_path=".", # docs/briefing.html -> root is .
         now_timestamp=now.timestamp() # For NEW badge logic
     )
+def render_admin_page():
+    """
+    Renders the admin notifier panel.
+    """
+    template = env.get_template("admin.html")
+    return template.render(
+        active_tab="home",
+        now_year=datetime.datetime.now().year,
+        root_path=".", # docs/admin.html -> root is .
+    )
