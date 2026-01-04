@@ -763,7 +763,6 @@
                 content: ''
             };
 
-            // Fetch content from URL using a proxy service
             // Fetch content from URL using a proxy service with fallback
             async function fetchUrlContent(url) {
                 // List of proxies to try
@@ -846,12 +845,6 @@
 
                 return { title, content: textContent };
             }
-            throw new Error('콘텐츠를 가져올 수 없습니다.');
-            } catch (error) {
-                throw new Error(`URL 접근 오류: ${error.message}`);
-            }
-            }
-
             // Generate summary using Gemini API
             async function generateSummary(title, content, url) {
                 const prompt = `다음 콘텐츠를 요약해주세요.
