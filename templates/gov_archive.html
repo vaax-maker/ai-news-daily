@@ -394,6 +394,7 @@
                     <div class="news-header-top">
                         <div style="flex: 1;">
                             <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
+                            {% if item.is_new %}<span class="new-badge">NEW</span>{% endif %}
                         </div>
                         <div class="title-actions">
                             <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
@@ -435,6 +436,7 @@
         <div class="news-header-top">
             <div class="card-title" style="margin-bottom: 0; flex: 1;">
                 <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
+                {% if item.is_new %}<span class="new-badge">NEW</span>{% endif %}
             </div>
             <div class="title-actions">
                 <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
