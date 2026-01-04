@@ -158,18 +158,16 @@
         .summarizer-section {
             margin-bottom: 2rem;
             padding: 1.5rem;
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border: 1px solid #f59e0b;
+            background: var(--card-bg);
+            border: 1.5px solid var(--line-gray);
             border-radius: 12px;
         }
 
         .summarizer-section h3 {
             margin: 0 0 1rem 0;
             font-size: 1.1rem;
-            color: #92400e;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
         }
 
         .url-input-group {
@@ -181,7 +179,7 @@
         .url-input-group input {
             flex: 1;
             padding: 0.75rem;
-            border: 1px solid #f59e0b;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 0.9rem;
             background: white;
@@ -190,13 +188,19 @@
 
         .url-input-group input:focus {
             outline: none;
-            border-color: #d97706;
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(101, 163, 13, 0.2);
+        }
+
+        .summarizer-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0 0 1rem 0;
         }
 
         .btn-generate {
             padding: 0.75rem 1.25rem;
-            background: #f59e0b;
+            background: var(--primary-color);
             color: white;
             border: none;
             border-radius: 8px;
@@ -207,7 +211,7 @@
         }
 
         .btn-generate:hover {
-            background: #d97706;
+            background: var(--primary-color-hover);
         }
 
         .btn-generate:disabled {
@@ -221,193 +225,225 @@
             padding: 1rem;
             background: white;
             border-radius: 8px;
-            border: 1px solid #e5e7eb;
-        }
 
-        .summary-result.active {
-            display: block;
-        }
-
-        .summary-result textarea {
-            width: 100%;
-            min-height: 120px;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            resize: vertical;
-            background: #fafafa;
-            color: #111827;
-            font-family: inherit;
-        }
-
-        .summary-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-        }
-
-        .btn-use-summary {
-            flex: 1;
-            padding: 0.6rem 1rem;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-use-summary:hover {
-            background: var(--primary-color-hover);
-        }
-
-        .btn-copy-summary {
-            padding: 0.6rem 1rem;
-            background: #6b7280;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-copy-summary:hover {
-            background: #4b5563;
-        }
-
-        .summary-char-info {
-            font-size: 0.8rem;
-            color: #6b7280;
-            margin-top: 0.5rem;
-        }
-
-        /* Category Badge */
-        .category-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-right: 0.5rem;
-        }
-
-        .category-badge.ai {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-        }
-
-        .category-badge.xr {
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-            color: white;
-        }
-
-        .category-display {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .category-display .title-text {
-            flex: 1;
-            font-weight: 600;
-            color: #374151;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .btn-save-archive {
-            padding: 0.6rem 1rem;
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn-save-archive:hover {
-            background: linear-gradient(135deg, #059669, #047857);
-            transform: translateY(-1px);
-        }
-
-        .btn-save-archive:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid #ffffff;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
+            .summary-result {
+                display: none;
+                margin-top: 1rem;
+                padding: 1rem;
+                background: white;
+                border-radius: 8px;
+                border: 1px solid var(--border-color);
             }
-        }
 
-        /* Status List */
-        .notif-history {
-            margin-top: 3rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 2rem;
-        }
+            .summary-result.active {
+                display: block;
+            }
 
-        .notif-history h2 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
+            .summary-result textarea {
+                width: 100%;
+                min-height: 120px;
+                padding: 0.75rem;
+                width: 100%;
+                min-height: 120px;
+                padding: 0.75rem;
+                border: 1px solid var(--border-color);
+                border-radius: 6px;
+                font-size: 0.9rem;
+                line-height: 1.5;
+                resize: vertical;
+                background: #fafafa;
+                color: #111827;
+                font-family: inherit;
+            }
 
-        .history-item {
-            padding: 0.75rem;
-            border-bottom: 1px solid #f3f4f6;
-            font-size: 0.85rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+            .summary-actions {
+                display: flex;
+                gap: 0.5rem;
+                margin-top: 0.75rem;
+            }
 
-        .history-item .notif-body {
-            flex: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            margin-right: 1rem;
-        }
+            .btn-use-summary {
+                flex: 1;
+                padding: 0.6rem 1rem;
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
 
-        .badge {
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
+            .btn-use-summary:hover {
+                background: var(--primary-color-hover);
+            }
 
-        .badge.pending {
-            background: #fef3c7;
-            color: #92400e;
-        }
+            .btn-copy-summary {
+                padding: 0.6rem 1rem;
+                background: #6b7280;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
 
-        .badge.sent {
-            background: #d1fae5;
-            color: #065f46;
-        }
+            .btn-copy-summary:hover {
+                background: #4b5563;
+            }
 
-        .badge.error {
-            background: #fee2e2;
-            color: #991b1b;
-        }
+            .summary-char-info {
+                font-size: 0.8rem;
+                color: #6b7280;
+                margin-top: 0.5rem;
+            }
+
+            /* Category Badge */
+            .category-badge {
+                display: inline-block;
+                padding: 4px 10px;
+                border-radius: 12px;
+                font-size: 0.75rem;
+                font-weight: 700;
+                margin-right: 0.5rem;
+            }
+
+            .category-badge.ai {
+                background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+                color: white;
+            }
+
+            .category-badge.xr {
+                background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+                color: white;
+            }
+
+            .category-display {
+                display: flex;
+                align-items: center;
+                margin-bottom: 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .category-display .title-text {
+                flex: 1;
+                font-weight: 600;
+
+                .category-display .title-text {
+                    flex: 1;
+                    font-weight: 600;
+                    color: var(--text-muted);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .btn-save-archive {
+                padding: 0.6rem 1rem;
+
+                .btn-save-archive {
+                    padding: 0.6rem 1rem;
+                    background: var(--primary-color);
+                    color: white;
+                    border: none;
+                    border-radius: 6px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+
+                .btn-save-archive:hover {
+                    .btn-save-archive:hover {
+                        background: var(--primary-color-hover);
+                        transform: translateY(-1px);
+                    }
+
+                    .btn-save-archive:disabled {
+                        background: #9ca3af;
+                        cursor: not-allowed;
+                        transform: none;
+                    }
+
+                    .loading-spinner {
+                        display: inline-block;
+                        width: 16px;
+                        height: 16px;
+                        border: 2px solid #ffffff;
+                        border-radius: 50%;
+                        border-top-color: transparent;
+                        animation: spin 1s linear infinite;
+                    }
+
+                    @keyframes spin {
+                        to {
+                            transform: rotate(360deg);
+                        }
+                    }
+
+                    /* Status List */
+                    .notif-history {
+                        margin-top: 3rem;
+                        border-top: 1px solid var(--border-color);
+                        padding-top: 2rem;
+                    }
+
+                    .notif-history h2 {
+                        font-size: 1.1rem;
+                        margin-bottom: 1rem;
+                    }
+
+                    .history-item {
+                        padding: 0.75rem;
+
+                        .history-item {
+                            padding: 0.75rem;
+                            border-bottom: 1px solid #f3f4f6;
+                            font-size: 0.85rem;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+
+                        font-size: 0.85rem;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+
+                    .history-item .notif-body {
+                        flex: 1;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        margin-right: 1rem;
+                    }
+
+                    .badge {
+                        padding: 2px 8px;
+                        border-radius: 12px;
+                        font-size: 0.75rem;
+                        font-weight: 600;
+                    }
+
+                    .badge.pending {
+                        background: #fef3c7;
+                        color: #92400e;
+                    }
+
+                    .badge.sent {
+                        background: #d1fae5;
+                        color: #065f46;
+                    }
+
+                    .badge.error {
+                        background: #fee2e2;
+                        color: #991b1b;
+                    }
     </style>
 
 </head>
@@ -471,9 +507,9 @@
 
                 <!-- URL Summarizer Section -->
                 <div class="summarizer-section">
-                    <h3>📝 URL 요약 생성기</h3>
-                    <p style="font-size: 0.85rem; color: #78716c; margin: 0 0 1rem 0;">
-                        뉴스기사, 블로그, 유튜브 URL을 입력하면 440자 미만의 요약 메시지를 생성합니다.
+                    <h3>URL 요약 생성기</h3>
+                    <p class="summarizer-desc">
+                        뉴스기사, 블로그, 유튜브 URL을 입력하면 400~440자 범위의 요약 메시지를 생성합니다.
                     </p>
                     <div class="url-input-group">
                         <input type="url" id="urlInput" placeholder="https://example.com/article..." />
@@ -489,9 +525,9 @@
                             <span id="articleTitle" class="title-text"></span>
                         </div>
                         <div class="summary-actions">
-                            <button id="btnUseSummary" class="btn-use-summary">📤 메시지로 전송</button>
-                            <button id="btnSaveArchive" class="btn-save-archive">📚 아카이브 저장</button>
-                            <button id="btnCopySummary" class="btn-copy-summary">📋 복사</button>
+                            <button id="btnUseSummary" class="btn-use-summary">메시지로 전송</button>
+                            <button id="btnSaveArchive" class="btn-save-archive">아카이브 저장</button>
+                            <button id="btnCopySummary" class="btn-copy-summary">복사</button>
                         </div>
                     </div>
                     <div id="summaryStatus" class="status-msg"></div>
@@ -934,16 +970,16 @@ ${content}
                     summaryStatus.style.background = '#f0f9ff';
                     summaryStatus.style.color = '#0369a1';
                     summaryStatus.style.border = '1px solid #0ea5e9';
-                    summaryStatus.innerText = '📡 콘텐츠를 가져오는 중...';
+                    summaryStatus.innerText = '콘텐츠를 가져오는 중...';
 
                     const { title, content } = await fetchUrlContent(url);
 
-                    summaryStatus.innerText = '🤖 AI가 요약을 생성하는 중...';
+                    summaryStatus.innerText = 'AI가 요약을 생성하는 중...';
 
                     // Generate summary
                     const summary = await generateSummary(title, content, url);
 
-                    summaryStatus.innerText = '🏷️ 카테고리를 분류하는 중...';
+                    summaryStatus.innerText = '카테고리를 분류하는 중...';
 
                     // Classify category
                     const category = await classifyCategory(title, content);
@@ -975,24 +1011,24 @@ ${content}
                         summaryStatus.style.background = '#fef3c7';
                         summaryStatus.style.color = '#92400e';
                         summaryStatus.style.border = '1px solid #f59e0b';
-                        summaryStatus.innerText = '⚠️ 요약이 440자를 초과했습니다. 수정이 필요합니다.';
+                        summaryStatus.innerText = '요약이 440자를 초과했습니다. 수정이 필요합니다.';
                     } else if (summary.length < 400) {
                         summaryCharCount.style.color = '#f59e0b';
                         summaryStatus.className = 'status-msg';
                         summaryStatus.style.background = '#fef3c7';
                         summaryStatus.style.color = '#92400e';
                         summaryStatus.style.border = '1px solid #f59e0b';
-                        summaryStatus.innerText = `⚠️ 요약이 ${summary.length}자로 너무 짧습니다. 400자 이상 권장. [${category.toUpperCase()}]`;
+                        summaryStatus.innerText = `요약이 ${summary.length}자로 너무 짧습니다. 400자 이상 권장. [${category.toUpperCase()}]`;
                     } else {
                         summaryCharCount.style.color = '#059669';
                         summaryStatus.className = 'status-msg success';
-                        summaryStatus.innerText = `✅ 요약이 생성되었습니다! (${summary.length}자) [${category.toUpperCase()}]`;
+                        summaryStatus.innerText = `요약이 생성되었습니다! (${summary.length}자) [${category.toUpperCase()}]`;
                     }
 
                 } catch (error) {
                     console.error('Summary generation error:', error);
                     summaryStatus.className = 'status-msg error';
-                    summaryStatus.innerText = `❌ 오류: ${error.message}`;
+                    summaryStatus.innerText = `오류: ${error.message}`;
                 } finally {
                     btnGenerate.disabled = false;
                     btnGenerate.innerHTML = '요약 생성';
@@ -1011,7 +1047,7 @@ ${content}
                     msgBody.focus();
 
                     summaryStatus.className = 'status-msg success';
-                    summaryStatus.innerText = '✅ 메시지 입력란으로 전송되었습니다!';
+                    summaryStatus.innerText = '메시지 입력란으로 전송되었습니다!';
                 }
             });
 
@@ -1021,17 +1057,17 @@ ${content}
                 if (summary) {
                     try {
                         await navigator.clipboard.writeText(summary);
-                        btnCopySummary.innerText = '✓ 복사됨!';
+                        btnCopySummary.innerText = '복사 완료';
                         setTimeout(() => {
-                            btnCopySummary.innerText = '📋 복사';
+                            btnCopySummary.innerText = '복사';
                         }, 2000);
                     } catch {
                         // Fallback for older browsers
                         generatedSummary.select();
                         document.execCommand('copy');
-                        btnCopySummary.innerText = '✓ 복사됨!';
+                        btnCopySummary.innerText = '복사 완료';
                         setTimeout(() => {
-                            btnCopySummary.innerText = '📋 복사';
+                            btnCopySummary.innerText = '복사';
                         }, 2000);
                     }
                 }
@@ -1057,7 +1093,7 @@ ${content}
             btnSaveArchive.addEventListener('click', async () => {
                 if (!currentArticle.url) {
                     summaryStatus.className = 'status-msg error';
-                    summaryStatus.innerText = '❌ 먼저 URL을 입력하고 요약을 생성해주세요.';
+                    summaryStatus.innerText = '먼저 URL을 입력하고 요약을 생성해주세요.';
                     return;
                 }
 
@@ -1098,7 +1134,7 @@ ${content}
                     });
 
                     summaryStatus.className = 'status-msg success';
-                    summaryStatus.innerText = `✅ [${currentArticle.category.toUpperCase()}] 아카이브에 저장되었습니다! 다음 빌드 시 반영됩니다.`;
+                    summaryStatus.innerText = `[${currentArticle.category.toUpperCase()}] 아카이브에 저장되었습니다! 다음 빌드 시 반영됩니다.`;
 
                     // Reset current article
                     currentArticle = { url: '', title: '', category: 'ai', summary: '', content: '' };
@@ -1106,10 +1142,10 @@ ${content}
                 } catch (error) {
                     console.error('Archive save error:', error);
                     summaryStatus.className = 'status-msg error';
-                    summaryStatus.innerText = `❌ 저장 오류: ${error.message}`;
+                    summaryStatus.innerText = `저장 오류: ${error.message}`;
                 } finally {
                     btnSaveArchive.disabled = false;
-                    btnSaveArchive.innerHTML = '📚 아카이브 저장';
+                    btnSaveArchive.innerHTML = '아카이브 저장';
                 }
             });
 
