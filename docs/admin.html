@@ -774,56 +774,92 @@
             };
 
             // Fetch content from URL using a proxy service
+            // Fetch content from URL using a proxy service with fallback
             async function fetchUrlContent(url) {
-                // Use AllOrigins proxy to bypass CORS
-                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+                // List of proxies to try
+                const proxies = [
+                    { name: 'AllOrigins', url: `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`, type: 'json' },
+                    { name: 'CorsProxy', url: `https://corsproxy.io/?${encodeURIComponent(url)}`, type: 'text' }
+                ];
 
-                try {
-                    const response = await fetch(proxyUrl);
-                    const data = await response.json();
+                let lastError = null;
 
-                    if (data.contents) {
-                        // Extract text from HTML
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(data.contents, 'text/html');
+                for (const proxy of proxies) {
+                    try {
+                        console.log(`Trying proxy: ${proxy.name}`);
+                        const response = await fetch(proxy.url);
 
-                        // Remove script, style tags
-                        doc.querySelectorAll('script, style, nav, header, footer, aside').forEach(el => el.remove());
+                        if (!response.ok) {
+                            throw new Error(`Proxy ${proxy.name} responded with ${response.status}`);
+                        }
 
-                        // Try to get main content
-                        let textContent = '';
-                        const mainSelectors = ['article', 'main', '.content', '#content', '.post', '.article-body'];
-                        for (const selector of mainSelectors) {
-                            const main = doc.querySelector(selector);
-                            if (main) {
-                                textContent = main.textContent;
-                                break;
+                        let htmlContent = '';
+                        if (proxy.type === 'json') {
+                            const data = await response.json();
+                            if (data.contents) {
+                                htmlContent = data.contents;
+                            } else {
+                                throw new Error('No content in JSON response');
                             }
+                        } else {
+                            htmlContent = await response.text();
                         }
 
-                        // Fallback to body
-                        if (!textContent) {
-                            textContent = doc.body?.textContent || '';
+                        if (htmlContent) {
+                            return parseHtmlContent(htmlContent);
                         }
-
-                        // Get title
-                        const title = doc.querySelector('title')?.textContent ||
-                            doc.querySelector('h1')?.textContent ||
-                            'Unknown Title';
-
-                        // Clean up text
-                        textContent = textContent
-                            .replace(/\s+/g, ' ')
-                            .replace(/\n+/g, '\n')
-                            .trim()
-                            .substring(0, 3000); // Limit length
-
-                        return { title, content: textContent };
+                    } catch (error) {
+                        console.warn(`Proxy ${proxy.name} failed:`, error);
+                        lastError = error;
+                        // Continue to next proxy
                     }
-                    throw new Error('콘텐츠를 가져올 수 없습니다.');
-                } catch (error) {
-                    throw new Error(`URL 접근 오류: ${error.message}`);
                 }
+
+                throw new Error(`모든 프록시 시도 실패: ${lastError ? lastError.message : 'Unknown error'}`);
+            }
+
+            // Helper function to parse HTML content
+            function parseHtmlContent(html) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+
+                // Remove script, style tags
+                doc.querySelectorAll('script, style, nav, header, footer, aside, iframe, noscript').forEach(el => el.remove());
+
+                // Try to get main content
+                let textContent = '';
+                const mainSelectors = ['article', 'main', '.content', '#content', '.post', '.article-body'];
+                for (const selector of mainSelectors) {
+                    const main = doc.querySelector(selector);
+                    if (main) {
+                        textContent = main.textContent;
+                        break;
+                    }
+                }
+
+                // Fallback to body
+                if (!textContent) {
+                    textContent = doc.body?.textContent || '';
+                }
+
+                // Get title
+                const title = doc.querySelector('title')?.textContent ||
+                    doc.querySelector('h1')?.textContent ||
+                    'Unknown Title';
+
+                // Clean up text
+                textContent = textContent
+                    .replace(/\s+/g, ' ')
+                    .replace(/\n+/g, '\n')
+                    .trim()
+                    .substring(0, 3000); // Limit length
+
+                return { title, content: textContent };
+            }
+            throw new Error('콘텐츠를 가져올 수 없습니다.');
+            } catch (error) {
+                throw new Error(`URL 접근 오류: ${error.message}`);
+            }
             }
 
             // Generate summary using Gemini API
