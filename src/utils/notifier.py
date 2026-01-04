@@ -44,7 +44,8 @@ def format_daily_briefing(ai_items, xr_items, gov_items, briefing_url, max_chars
     
     [Full Report Link]
     """
-    now = datetime.datetime.now()
+    from src.utils.common import get_kst_now
+    now = get_kst_now()
     weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
     wd = weekday_map[now.weekday()]
     

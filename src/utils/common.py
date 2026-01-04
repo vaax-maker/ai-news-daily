@@ -26,6 +26,13 @@ def _wrap_highlight(text: str) -> str:
     )
 
 
+def get_kst_now() -> datetime.datetime:
+    """Returns current time in KST (UTC+9)."""
+    utc_now = datetime.datetime.utcnow()
+    kst_timezone = datetime.timezone(datetime.timedelta(hours=9))
+    return utc_now.replace(tzinfo=datetime.timezone.utc).astimezone(kst_timezone)
+
+
 def markdown_bold_to_highlight(html_text: str) -> str:
     r"""Convert structured markdown summary to HTML.
 

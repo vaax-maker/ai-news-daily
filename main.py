@@ -749,8 +749,9 @@ def main():
         print(f"[Board] Failed: {e}")
 
     # 4. Save actual news update timestamp (only when there are NEW articles)
+    from src.utils.common import get_kst_now
     if total_new_items > 0:
-        news_update_time = datetime.datetime.now().strftime("%Y년 %m월 %d일 %H시 %M분")
+        news_update_time = get_kst_now().strftime("%Y년 %m월 %d일 %H시 %M분")
         with open("docs/last_update.txt", "w", encoding="utf-8") as f:
             f.write(news_update_time)
         print(f"[Update] New articles found ({total_new_items}). Saved update time: {news_update_time}")
