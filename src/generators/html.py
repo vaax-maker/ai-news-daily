@@ -117,7 +117,10 @@ def render_mobile_landing(ai_items, xr_items, gov_items, links=None):
     template = env.get_template("mobile_landing.html")
     now = datetime.datetime.now()
     weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
-    date_str = f"{now.strftime('%Y년 %m월 %d일')} ({weekday_map[now.weekday()]})"
+    wd = weekday_map[now.weekday()]
+    
+    # Match telegram message format: "01/04(토) 20:23"
+    date_str = f"{now.strftime('%m/%d')}({wd}) {now.strftime('%H:%M')}"
     
     return template.render(
         ai_items=ai_items,
