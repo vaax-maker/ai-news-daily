@@ -748,15 +748,21 @@ def main():
     except Exception as e:
         print(f"[Board] Failed: {e}")
 
+    # 4. Save actual news update timestamp (only when main.py runs for real data update)
+    news_update_time = datetime.datetime.now().strftime("%Y년 %m월 %d일 %H시 %M분")
+    with open("docs/last_update.txt", "w", encoding="utf-8") as f:
+        f.write(news_update_time)
+    print(f"[Update] Saved news update time: {news_update_time}")
 
-    # 4. Render Dashboard
+    # 5. Render Dashboard
     try:
         dash_html = render_dashboard(
             ai_latest=dashboard_data.get("ai", [])[:5],
             xr_latest=dashboard_data.get("xr", [])[:5],
             gov_latest=dashboard_data.get("gov", [])[:5],
             members_latest=dashboard_data.get("members", [])[:5],
-            section_links=dashboard_data.get("links", {})
+            section_links=dashboard_data.get("links", {}),
+            last_updated=news_update_time
         )
         
         # Write to temporary file first to preserve existing index.html on failure

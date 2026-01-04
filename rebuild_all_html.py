@@ -205,12 +205,21 @@ def rebuild_dashboard(ai_previews, xr_previews, gov_previews, member_previews, l
             "member_name": item.get("member_name")
         })
 
+    # Read saved news update time (from main.py's last run)
+    last_update_file = "docs/last_update.txt"
+    if os.path.exists(last_update_file):
+        with open(last_update_file, "r", encoding="utf-8") as f:
+            saved_update_time = f.read().strip()
+    else:
+        saved_update_time = "정보 없음"
+
     html = render_dashboard(
         ai_latest=ai_previews,
         xr_latest=xr_previews,
         gov_latest=gov_formatted,
         members_latest=member_formatted,
-        section_links=links
+        section_links=links,
+        last_updated=saved_update_time
     )
     with open("docs/index.html", "w", encoding="utf-8") as f:
         f.write(html)
