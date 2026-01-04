@@ -748,11 +748,20 @@ def main():
     except Exception as e:
         print(f"[Board] Failed: {e}")
 
-    # 4. Save actual news update timestamp (only when main.py runs for real data update)
-    news_update_time = datetime.datetime.now().strftime("%Y년 %m월 %d일 %H시 %M분")
-    with open("docs/last_update.txt", "w", encoding="utf-8") as f:
-        f.write(news_update_time)
-    print(f"[Update] Saved news update time: {news_update_time}")
+    # 4. Save actual news update timestamp (only when there are NEW articles)
+    if total_new_items > 0:
+        news_update_time = datetime.datetime.now().strftime("%Y년 %m월 %d일 %H시 %M분")
+        with open("docs/last_update.txt", "w", encoding="utf-8") as f:
+            f.write(news_update_time)
+        print(f"[Update] New articles found ({total_new_items}). Saved update time: {news_update_time}")
+    else:
+        # Read existing time if no new articles
+        if os.path.exists("docs/last_update.txt"):
+            with open("docs/last_update.txt", "r", encoding="utf-8") as f:
+                news_update_time = f.read().strip()
+        else:
+            news_update_time = "정보 없음"
+        print(f"[Update] No new articles. Keeping existing time: {news_update_time}")
 
     # 5. Render Dashboard
     try:
