@@ -167,6 +167,18 @@
             grid-template-columns: 1fr;
         }
     }
+
+    .new-badge {
+        display: inline-block;
+        background-color: #ef4444;
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 2px 5px;
+        border-radius: 3px;
+        margin-left: 4px;
+        vertical-align: middle;
+    }
 </style>
 
 <script>
@@ -236,6 +248,7 @@
             <li>
                 <span class="preview-date">{{ item.published_display }}</span>
                 <a href="{{ item.link }}" target="_blank" class="preview-title">{{ item.title }}</a>
+                {% if item.is_new %}<span class="new-badge">NEW</span>{% endif %}
             </li>{% endfor %}
         </ul>
     </div>
@@ -251,6 +264,7 @@
             <li>
                 <span class="preview-date">{{ item.published_display }}</span>
                 <a href="{{ item.link }}" target="_blank" class="preview-title">{{ item.title }}</a>
+                {% if item.is_new %}<span class="new-badge">NEW</span>{% endif %}
             </li>
             {% endfor %}
         </ul>
@@ -267,6 +281,7 @@
             <li>
                 <span class="preview-date">{{ item.published_display }} | {{ item.dept or '과기정통부' }}</span>
                 <a href="{{ item.link }}" target="_blank" class="preview-title">{{ item.title }}</a>
+                {% if item.is_new %}<span class="new-badge">NEW</span>{% endif %}
             </li>
             {% endfor %}
         </ul>
@@ -283,6 +298,7 @@
             <li>
                 <span class="preview-date">{{ item.published_display }} | {{ item.member_name }}</span>
                 <a href="{{ item.link }}" target="_blank" class="preview-title">{{ item.title }}</a>
+                {% if item.is_new %}<span class="new-badge">NEW</span>{% endif %}
             </li>
             {% endfor %}
         </ul>

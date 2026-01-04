@@ -16,11 +16,9 @@
             <div class="news-header-top">
                 <h2 class="news-title">
                     <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
-                    {% if article.timestamp and now_timestamp and (now_timestamp - article.timestamp) < 86400 %} <span
-                        class="new-badge"
+                    {% if article.is_new %} <span class="new-badge"
                         style="display: inline-block; background-color: #ef4444; color: white; font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; transform: translateY(-3px);">
-                        NEW</span>
-                        {% endif %}
+                        NEW</span>{% endif %}
                 </h2>
                 <div class="title-actions">
                     <a href="../board/index.html?mode=discuss&title={{ article.title|urlencode }}&link={{ article.link|urlencode }}&source={{ article.source_name|urlencode }}"

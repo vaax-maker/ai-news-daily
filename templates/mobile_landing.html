@@ -181,9 +181,7 @@
                     <a href="{{ item.link }}" target="_blank" class="news-item">
                         <div class="news-title">
                             {{ item.title }}
-                            {% if item.timestamp and now_timestamp and (now_timestamp - item.timestamp) < 86400 %} <span
-                                class="new-badge">NEW</span>
-                                {% endif %}
+                            {% if item.is_new %} <span class="new-badge">NEW</span>{% endif %}
                         </div>
                         <div class="news-meta">{{ item.source_name }}</div>
                     </a>
@@ -204,9 +202,7 @@
                     <a href="{{ item.link }}" target="_blank" class="news-item">
                         <div class="news-title">
                             {{ item.title }}
-                            {% if item.timestamp and now_timestamp and (now_timestamp - item.timestamp) < 86400 %} <span
-                                class="new-badge">NEW</span>
-                                {% endif %}
+                            {% if item.is_new %} <span class="new-badge">NEW</span>{% endif %}
                         </div>
                         <div class="news-meta">{{ item.source_name }}</div>
                     </a>
@@ -227,9 +223,7 @@
                     <a href="{{ item.link }}" target="_blank" class="news-item">
                         <div class="news-title">
                             {{ item.title }}
-                            {% if item.timestamp and now_timestamp and (now_timestamp - item.timestamp) < 86400 %} <span
-                                class="new-badge">NEW</span>
-                                {% endif %}
+                            {% if item.is_new %} <span class="new-badge">NEW</span>{% endif %}
                         </div>
                         <div class="news-meta">{{ item.dept or '공고' }} | {{ item.date }}</div>
                     </a>
