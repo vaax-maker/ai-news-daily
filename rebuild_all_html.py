@@ -141,7 +141,20 @@ def rebuild_archives():
         for f in files:
             parts = f.replace(".html", "").split("_")
             if len(parts) == 2:
-                run_entries.append({"date_str": parts[0], "time_str": parts[1], "filename": f})
+                # Calculate day of week
+                try:
+                    dt = datetime.datetime.strptime(parts[0], "%Y-%m-%d")
+                    weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
+                    day_of_week = weekday_map[dt.weekday()]
+                except:
+                    day_of_week = ""
+                
+                run_entries.append({
+                    "date_str": parts[0], 
+                    "time_str": parts[1], 
+                    "filename": f,
+                    "day_of_week": day_of_week
+                })
         
         # Index
         idx_html = render_archive_index(run_entries, config)
