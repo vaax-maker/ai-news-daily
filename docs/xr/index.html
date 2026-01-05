@@ -400,16 +400,36 @@
 
     async function loadRun(dateStr, runIndex = 0) {
         const runList = runsByDate[dateStr];
-        if (!runList || !runList[runIndex]) return;
+        if (!runList || runList.length === 0) return;
 
-        const run = runList[runIndex];
         todayGrid.innerHTML = '<p class="empty-msg">뉴스를 불러오는 중입니다...</p>';
 
         try {
-            const { articles } = await fetchRunArticles(run);
-            renderNewsCards(todayGrid, articles, () => [], '이 날짜에는 뉴스가 없습니다.');
-            updateTodayHeader(articles, run);
-            highlightActive(run.date_str);
+            // Merge all articles from all runs on the same date
+            const allArticlesPromises = runList.map(run => fetchRunArticles(run));
+            const allResults = await Promise.all(allArticlesPromises);
+
+            // Combine and deduplicate articles by link
+            const seenLinks = new Set();
+            const mergedArticles = [];
+            allResults.forEach(({ articles }) => {
+                articles.forEach(article => {
+                    if (!seenLinks.has(article.link)) {
+                        seenLinks.add(article.link);
+                        mergedArticles.push(article);
+                    }
+                });
+            });
+
+            // Sort merged articles by published date
+            const sortedArticles = sortArticlesByPublished(mergedArticles);
+
+            // Use the first run for header info (earliest time)
+            const primaryRun = runList[runList.length - 1]; // earliest time
+
+            renderNewsCards(todayGrid, sortedArticles, () => [], '이 날짜에는 뉴스가 없습니다.');
+            updateTodayHeader(sortedArticles, primaryRun);
+            highlightActive(dateStr);
         } catch (err) {
             todayGrid.innerHTML = `<p class="empty-msg">뉴스를 불러오지 못했습니다: ${err}</p>`;
         }
