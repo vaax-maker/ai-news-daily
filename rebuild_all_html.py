@@ -53,11 +53,17 @@ def parse_preview_from_html(html_path, limit=5):
             else:
                 published_display = text
 
+        # "NEW" 뱃지 확인 (process_manual_articles.py 등에서 생성된 마크업)
+        is_new = False
+        if article.select_one(".new-badge"):
+            is_new = True
+
         previews.append({
             "title": title_el.get_text(strip=True) if title_el else "제목 없음",
             "link": title_el.get("href") if title_el else "#",
             "source_name": source_name,
-            "published_display": published_display
+            "published_display": published_display,
+            "is_new": is_new
         })
     return previews
 

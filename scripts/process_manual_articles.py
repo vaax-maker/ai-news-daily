@@ -4,13 +4,53 @@ from firebase_admin import credentials, firestore
 import os
 import sys
 import datetime
+import requests
+from bs4 import BeautifulSoup
+import re
 
 # Add project root to sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.generators.html import render_daily_page
+from src.generators.llm import summarize_article
 from src.config import load_categories
-from rebuild_all_html import rebuild_archives, rebuild_dashboard
+from src.utils.common import markdown_bold_to_highlight, extract_source_name, sanitize_summary, trim_summary_lines
+from rebuild_all_html import rebuild_archives
+
+def scrape_article_content(url):
+    """Scrape title, text, and image from a URL."""
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}
+        resp = requests.get(url, headers=headers, timeout=10)
+        resp.raise_for_status()
+        
+        soup = BeautifulSoup(resp.content, 'html.parser')
+        
+        # Extract title (fallback if needed)
+        og_title = soup.find("meta", property="og:title")
+        title = og_title["content"] if og_title else soup.title.string if soup.title else ""
+        
+        # Extract image
+        og_image = soup.find("meta", property="og:image")
+        image_url = og_image["content"] if og_image else ""
+        
+        # Extract text (simple heuristic)
+        # Remove scripts and styles
+        for script in soup(["script", "style", "nav", "footer", "header", "noscript"]):
+            script.decompose()
+            
+        text = soup.get_text(separator="\n", strip=True)
+        # Basic cleanup: take first 3000 chars roughly
+        text = text[:4000]
+        
+        return {
+            "title": title,
+            "text": text,
+            "image": image_url
+        }
+    except Exception as e:
+        print(f"Scraping failed for {url}: {e}")
+        return None
 
 def process_manual_articles():
     print("--- [Manual Archive Processing] Started ---")
@@ -50,14 +90,67 @@ def process_manual_articles():
             
         config = categories[category]
         
+        url = data.get('url')
+        current_title = data.get('title')
+        current_summary = data.get('summary')
+        current_image = data.get('image')
+        
+        scraped_data = None
+        
+        # If components are missing, try to scrape
+        if url and (not current_summary or not current_image):
+            print(f"Scraping content for: {url}")
+            scraped_data = scrape_article_content(url)
+        
+        # Title fallback
+        final_title = current_title
+        if not final_title and scraped_data:
+            final_title = scraped_data['title']
+            
+        # Image fallback
+        final_image = current_image
+        if not final_image and scraped_data:
+            final_image = scraped_data['image']
+            
+        # Summary generation
+        final_summary = current_summary
+        if not final_summary and scraped_data and scraped_data['text']:
+            print("Generating summary via LLM...")
+            try:
+                final_summary = summarize_article(
+                    text=scraped_data['text'],
+                    title=final_title or "Untitled",
+                    display_name="Manual Entry"
+                )
+            except Exception as e:
+                print(f"LLM Summary generation failed: {e}")
+                final_summary = "요약을 생성할 수 없습니다."
+        
+        if final_summary:
+            final_summary = sanitize_summary(final_summary)
+            # trim_summary_lines is intended for single-paragraph summaries usually,
+            # but if LLM output is structured (headings etc), trim might break it 
+            # or it might be fine. sanitize_summary removes <think>.
+            # Let's trust sanitize_summary is enough for <think> removal.
+            # We can optionally use trim if we want strictly 3-5 lines, but
+            # summarize_article returns formatted text with bullets. 
+            # If we trim it naively, we might lose structure.
+            # Let's just use sanitize_summary first.
+
+
         # Prepare article data for template
+        # Must match keys used in daily_list.html
         article = {
-            "title": data.get('title'),
-            "link": data.get('url'),
-            "summary": data.get('summary'),
+            "title": final_title,
+            "link": url,
+            "summary": final_summary,
+            "summary_html": markdown_bold_to_highlight(final_summary) if final_summary else "",
             "source": data.get('source'),
+            "source_name": data.get('source') or "Direct Link",
             "published": data.get('published'), # "YYYY-MM-DD HH:MM"
-            "image": "" # No image for manual summary currently
+            "published_display": data.get('published') or datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+            "image_url": final_image,
+            "is_new": True 
         }
         
         date_str = data.get('dateStr') # "YYYY-MM-DD"
@@ -92,6 +185,9 @@ def process_manual_articles():
         # Update Firebase status
         doc.reference.update({
             'status': 'success',
+            'title': final_title,         # Update DB with populated values
+            'summary': final_summary,
+            'image': final_image,
             'archivePath': output_path,
             'processedAt': firestore.SERVER_TIMESTAMP
         })
@@ -100,14 +196,10 @@ def process_manual_articles():
     if processed_count > 0:
         print("--- Rebuilding Indexes ---")
         # Update Archive Indexes
-        a_previews, links = rebuild_archives()
-        
-        # Note: We are NOT fully rebuilding dashboard here (rebuild_dashboard arg list is complex).
-        # But rebuild_archives() updates the category index pages (docs/ai/index.html) which is what user checks.
-        # Ideally we should run rebuild_dashboard too, but let's stick to archives for now or mock args.
-        # Actually rebuild_all_html.py main block does everything.
-        # For now, let's trust rebuild_archives() to update the specific category page.
-        
+        rebuild_archives()
+        # Note: Ideally running full rebuild_dashboard is good too, but verifying based on user request "Archive Loading"
+        # The archive index update should facilitate valid display.
+
     print("--- [Manual Archive Processing] Complete ---")
 
 if __name__ == "__main__":

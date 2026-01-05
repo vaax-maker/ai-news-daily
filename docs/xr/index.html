@@ -371,7 +371,7 @@
     async function fetchRunArticles(run) {
         if (articleCache[run.filename]) return articleCache[run.filename];
 
-        const response = await fetch(`daily/${run.filename}`);
+        const response = await fetch(`daily/${run.filename}?v=${new Date().getTime()}`);
         const html = await response.text();
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const articles = Array.from(doc.querySelectorAll('.news-item')).map(item => ({
