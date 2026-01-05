@@ -855,7 +855,7 @@ ${text.slice(0, 3000)}`;
 
             quickviewStatus.className = 'status-msg success';
             quickviewStatus.innerHTML = sendTelegram
-                ? `✅ 퀵뷰 생성 및 텔레그램 전송 예약 완료!<br><a href="${pageUrl}" target="_blank">${pageUrl}</a>`
+                ? `✅ 퀵뷰 생성 및 텔레그램 전송 예약 완료!<br><a href="${pageUrl}" target="_blank">${pageUrl}</a><br><small style="color: #0369a1;">💡 즉시 전송하려면: python3 send_now.py</small>`
                 : `✅ 퀵뷰 생성 완료!<br><a href="${pageUrl}" target="_blank">${pageUrl}</a>`;
 
             // Clear inputs
