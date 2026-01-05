@@ -516,5 +516,47 @@
     "bid_close_dt": "2025-12-10 15:00:00",
     "openg_dt": "2025-12-10 16:00:00",
     "is_new": false
+  },
+  {
+    "title": "2026년 AX혁신기업창의기술개발 및 ICT전략융합R&D바우처지원 신규사업 지원과제 공고",
+    "link": "https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186366",
+    "dept": "정보통신산업기반과",
+    "manager": "문원규",
+    "date": "2026-01-03",
+    "source_name": "과기정통부",
+    "image_url": "",
+    "published_display": "2026-01-03",
+    "bid_begin_dt": "",
+    "bid_close_dt": "",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년도 「고성능컴퓨팅지원 사업」 운영기관 모집 공모",
+    "link": "https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186365",
+    "dept": "인공지능기술기반정책과",
+    "manager": "고현정",
+    "date": "2026-01-02",
+    "source_name": "과기정통부",
+    "image_url": "",
+    "published_display": "2026-01-02",
+    "bid_begin_dt": "",
+    "bid_close_dt": "",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년도 제1차 정보통신·방송 기술개발사업 및 표준개발지원사업 신규지원 대상과제 공고",
+    "link": "https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186367",
+    "dept": "정보통신방송기술정책과",
+    "manager": "장재욱",
+    "date": "2026-01-02",
+    "source_name": "과기정통부",
+    "image_url": "",
+    "published_display": "2026-01-02",
+    "bid_begin_dt": "",
+    "bid_close_dt": "",
+    "openg_dt": "",
+    "is_new": false
   }
 ]

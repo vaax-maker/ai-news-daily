@@ -34,9 +34,9 @@
                     <a href="../index.html"
                         class="">Home</a>
                     <a href="../ai/index.html"
-                        class="">AI뉴스</a>
-                    <a href="../xr/index.html"
-                        class="active">XR뉴스</a>
+                        class="active">AI/XR뉴스</a>
+                    <a href="../quickview/index.html"
+                        class="">퀵뷰</a>
                     <a href="../gov/index.html"
                         class="">정부과제</a>
                     <a href="../members/index.html"
@@ -57,12 +57,20 @@
 <div class="page-header header-with-search">
     <div class="header-titles">
         <p class="eyebrow">Archive</p>
-        <h1>XR 뉴스 아카이브</h1>
+        <h1>AI/XR 뉴스 아카이브</h1>
     </div>
     <form class="search-bar header-search" id="archive-search-form">
         <input type="text" id="archive-search-input" placeholder="검색어를 입력하세요" aria-label="기사 검색">
         <button type="submit" class="primary-btn">여기서 검색</button>
     </form>
+</div>
+
+<!-- Category Tabs -->
+<div class="category-tabs">
+    <button type="button" class="category-tab " data-category="ai">AI
+        뉴스</button>
+    <button type="button" class="category-tab active" data-category="xr">XR
+        뉴스</button>
 </div>
 
 
@@ -636,6 +644,18 @@
         if (!event.state || !event.state.searching) {
             exitSearchMode();
         }
+    });
+
+    // Category Tab Switching
+    document.querySelectorAll('.category-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const category = tab.dataset.category;
+            const currentPath = window.location.pathname;
+            const basePath = currentPath.includes('/ai/') || currentPath.includes('/xr/')
+                ? currentPath.replace(/\/(ai|xr)\//, `/${category}/`)
+                : `../${category}/index.html`;
+            window.location.href = basePath;
+        });
     });
 </script>
 

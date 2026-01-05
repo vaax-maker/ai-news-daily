@@ -766,11 +766,23 @@ def main():
 
     # 5. Render Dashboard
     try:
+        # Load quickview pages from Firestore
+        quickview_latest = []
+        try:
+            from generate_quickview import get_latest_quickviews, process_quickview_pages
+            # Generate quickview HTML pages
+            process_quickview_pages()
+            # Get latest for dashboard
+            quickview_latest = get_latest_quickviews(limit=5)
+            dashboard_data["links"]["quickview"] = "quickview/index.html"
+        except Exception as e:
+            print(f"[Quickview] Error loading quickview data: {e}")
+        
         dash_html = render_dashboard(
             ai_latest=dashboard_data.get("ai", [])[:5],
             xr_latest=dashboard_data.get("xr", [])[:5],
             gov_latest=dashboard_data.get("gov", [])[:5],
-            members_latest=dashboard_data.get("members", [])[:5],
+            quickview_latest=quickview_latest,
             section_links=dashboard_data.get("links", {}),
             last_updated=news_update_time
         )

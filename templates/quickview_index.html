@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}퀵뷰{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <p class="eyebrow">Quickview</p>
+    <h1>퀵뷰</h1>
+    <p class="subtitle">빠르게 공유하는 콘텐츠 모음</p>
+</div>
+
+{% if pages %}
+<section class="card">
+    <div class="news-grid">
+        {% for page in pages %}
+        <article class="news-item">
+            <div class="news-header">
+                <div class="news-header-top">
+                    <h3 class="news-title">
+                        <a href="{{ page.id }}.html">{{ page.title }}</a>
+                    </h3>
+                    {% if page.is_new %}
+                    <span class="new-badge">NEW</span>
+                    {% endif %}
+                    <div class="title-actions">
+                        <a href="../board/index.html?mode=discuss&title={{ page.title | urlencode }}&link={{ page.id }}.html&source=퀵뷰"
+                            class="discuss-btn-sm">토론</a>
+                        <button type="button" class="discuss-btn-sm"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/{{ page.id }}.html'); alert('URL이 복사되었습니다!');">공유</button>
+                    </div>
+                </div>
+                <div class="news-meta">
+                    <span class="published-date">📅 {{ page.created_display }}</span>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% else %}
+<div class="empty-msg">아직 등록된 퀵뷰가 없습니다.</div>
+{% endif %}
+{% endblock %}

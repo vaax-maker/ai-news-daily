@@ -85,14 +85,14 @@ def render_member_index(members_list, all_news=None):
     )
     return html
 
-def render_dashboard(ai_latest, xr_latest, gov_latest, members_latest, section_links=None, last_updated=None):
+def render_dashboard(ai_latest, xr_latest, gov_latest, quickview_latest=None, section_links=None, last_updated=None):
     from src.utils.common import get_kst_now
     template = env.get_template("dashboard.html")
     return template.render(
         ai_latest=ai_latest,
         xr_latest=xr_latest,
         gov_latest=gov_latest,
-        members_latest=members_latest,
+        quickview_latest=quickview_latest or [],
         section_links=section_links or {},
         last_updated=last_updated or get_kst_now().strftime("%Y년 %m월 %d일 %H시 %M분"),
         now_year=datetime.datetime.now().year,
@@ -144,4 +144,32 @@ def render_admin_page():
         active_tab="home",
         now_year=datetime.datetime.now().year,
         root_path=".", # docs/admin.html -> root is .
+    )
+
+def render_quickview_index(pages):
+    """
+    Renders the quickview index page with list of all quickview pages.
+    pages: list of dict { "id": ..., "title": ..., "created_at": ..., "created_display": ..., "is_new": ... }
+    """
+    template = env.get_template("quickview_index.html")
+    return template.render(
+        pages=pages,
+        active_tab="quickview",
+        now_year=datetime.datetime.now().year,
+        root_path=".."  # docs/quickview/index.html -> root is ..
+    )
+
+def render_quickview_page(title, content, created_display, page_url=""):
+    """
+    Renders an individual quickview page with the provided HTML content.
+    """
+    template = env.get_template("quickview_page.html")
+    return template.render(
+        title=title,
+        content=content,
+        created_display=created_display,
+        page_url=page_url,
+        active_tab="quickview",
+        now_year=datetime.datetime.now().year,
+        root_path=".."  # docs/quickview/page.html -> root is ..
     )

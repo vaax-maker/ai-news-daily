@@ -287,19 +287,21 @@
         </ul>
     </div>
 
-    <!-- Members Section -->
+    <!-- Quickview Section -->
     <div class="dashboard-section">
         <h2>
-            회원사 소식
-            <a href="{{ section_links.get('members', 'members/index.html') }}" class="section-more">더보기</a>
+            퀵뷰
+            <a href="{{ section_links.get('quickview', 'quickview/index.html') }}" class="section-more">더보기</a>
         </h2>
         <ul class="preview-list">
-            {% for item in members_latest %}
+            {% for item in quickview_latest %}
             <li>
-                <span class="preview-date">{{ item.published_display }} | {{ item.member_name }}</span>
-                <a href="{{ item.link }}" target="_blank" class="preview-title">{{ item.title }}</a>
+                <span class="preview-date">{{ item.created_display }}</span>
+                <a href="{{ item.url }}" target="_blank" class="preview-title">{{ item.title }}</a>
                 {% if item.is_new %}<span class="new-badge">NEW</span>{% endif %}
             </li>
+            {% else %}
+            <li style="color: var(--text-muted);">아직 등록된 퀵뷰가 없습니다.</li>
             {% endfor %}
         </ul>
     </div>
