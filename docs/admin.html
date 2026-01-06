@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang='ko'>
+{% extends "layout.html" %}
 
-<head>
-    <meta charset='utf-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <title>VAAX Admin Notifier</title>
-    
-    <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="./static/css/style.css?v=8">
-    
+{% block title %}VAAX Admin Notifier{% endblock %}
+
+{% block extra_css %}
 <style>
     .admin-container {
         max-width: 600px;
@@ -205,50 +197,9 @@
         color: #991b1b;
     }
 </style>
+{% endblock %}
 
-</head>
-
-<body>
-    <header>
-        <div class="gnb">
-            <!-- Left: Logo -->
-            <a href="./index.html" class="logo-link">
-                <img src="./static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
-            </a>
-
-            <!-- Right: Slogan & Nav -->
-            <div class="header-right-section">
-                <div class="slogan-container">
-                    <span class="slogan-since">since 2016</span>
-                    <span class="header-slogan-text">
-                        VR-AR-AI-XR <span class="slogan-highlight">기술과 Biz.를 연결하는</span>
-                        성장나눔 <span class="slogan-highlight">커뮤니티</span>
-                    </span>
-                </div>
-                <nav class="nav-links">
-                    <a href="./index.html"
-                        class="active">Home</a>
-                    <a href="./ai/index.html"
-                        class="">AI/XR뉴스</a>
-                    <a href="./quickview/index.html"
-                        class="">퀵뷰</a>
-                    <a href="./gov/index.html"
-                        class="">정부과제</a>
-                    <a href="./members/index.html"
-                        class="">회원사소식</a>
-                    <a href="./board/index.html"
-                        class="">Small Talk</a>
-                </nav>
-            </div>
-        </div>
-        <!-- Announcement Message -->
-        <div class="header-announcement">
-            이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요
-        </div>
-    </header>
-
-    <div class="container">
-        
+{% block content %}
 <div class="admin-container">
     <!-- Login Section -->
     <div id="loginSection" class="admin-login-section active">
@@ -341,6 +292,16 @@
                 </button>
             </div>
             <div id="quickviewStatus" class="status-msg" style="margin-top: 0.5rem;"></div>
+
+            <!-- Quickview Deploy Command -->
+            <div
+                style="margin-top: 1rem; padding: 0.75rem; background: #fefce8; border: 1px dashed #ca8a04; border-radius: 6px;">
+                <p style="margin: 0 0 0.5rem 0; font-size: 0.85rem; color: #854d0e;">📦 생성 후 즉시 배포하려면:</p>
+                <div id="quickviewCopyCmd"
+                    style="background: #1e293b; padding: 0.5rem 0.75rem; border-radius: 4px; font-family: monospace; color: #10b981; font-size: 0.75rem; overflow-x: auto; cursor: pointer;">
+                    python3 generate_quickview.py && git add . && git commit -m "Update quickview" && git push
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
@@ -757,6 +718,14 @@ ${text.slice(0, 3000)}`;
     const btnQuickviewSave = document.getElementById('btnQuickviewSave');
     const btnQuickviewSend = document.getElementById('btnQuickviewSend');
     const quickviewStatus = document.getElementById('quickviewStatus');
+    const quickviewCopyCmd = document.getElementById('quickviewCopyCmd');
+
+    // Copy command on click
+    quickviewCopyCmd.addEventListener('click', () => {
+        const cmd = 'cd /Users/fovea/Documents/vsc-codex/VAAXfinal && python3 generate_quickview.py && git add . && git commit -m "Update quickview" && git push';
+        navigator.clipboard.writeText(cmd);
+        alert('명령어가 복사되었습니다! 터미널에 붙여넣기 하세요.');
+    });
 
     // Generate quickview page ID
     function generateQuickviewId() {
@@ -773,7 +742,12 @@ ${text.slice(0, 3000)}`;
         const doc = parser.parseFromString(htmlContent, 'text/html');
         const text = doc.body.textContent.trim().slice(0, 2000);
 
-        const prompt = `다음 콘텐츠를 한국어로 2-3줄로 간결하게 요약해주세요. 요약문만 출력하세요.
+        const prompt = `다음 콘텐츠를 한국어로 개조식(불릿 포인트)으로 요약해주세요.
+규칙:
+- 3-4개의 핵심 포인트로 정리
+- 각 포인트는 "• "로 시작
+- 각 포인트 사이에는 반드시 빈 줄(줄넘김)을 넣어주세요
+- 요약문만 출력하세요
 
 제목: ${title}
 본문: ${text}`;
@@ -880,13 +854,4 @@ ${text.slice(0, 3000)}`;
 
 
 </script>
-
-    </div>
-
-    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
-        <p>&copy; 2026 VAAX rebuild Project by <a href="./admin.html"
-                class="admin-link">Fovea</a>. All rights reserved.</p>
-    </footer>
-</body>
-
-</html>
+{% endblock %}
