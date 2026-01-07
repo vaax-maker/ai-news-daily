@@ -69,11 +69,13 @@ def process_quickview_pages():
         if not page_id or not html_content:
             continue
         
-        # Format display date
+        # Format display date (convert UTC to KST)
         if created_at:
-            dt = created_at
-            created_display = dt.strftime("%Y년 %m월 %d일 %H:%M")
-            created_ts = dt.timestamp()
+            # Firestore timestamp is in UTC, convert to KST (+9 hours)
+            kst_offset = datetime.timedelta(hours=9)
+            dt_kst = created_at + kst_offset
+            created_display = dt_kst.strftime("%Y년 %m월 %d일 %H:%M")
+            created_ts = created_at.timestamp()
         else:
             created_display = "날짜 없음"
             created_ts = 0
@@ -136,7 +138,10 @@ def get_latest_quickviews(limit=5):
         
         if created_at:
             created_ts = created_at.timestamp()
-            created_display = created_at.strftime("%Y년 %m월 %d일")
+            # Convert UTC to KST (+9 hours)
+            kst_offset = datetime.timedelta(hours=9)
+            dt_kst = created_at + kst_offset
+            created_display = dt_kst.strftime("%Y년 %m월 %d일")
         else:
             created_ts = 0
             created_display = ""
