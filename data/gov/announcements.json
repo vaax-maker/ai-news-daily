@@ -558,5 +558,47 @@
     "bid_close_dt": "",
     "openg_dt": "",
     "is_new": false
+  },
+  {
+    "title": "사이버지식교육원 학점은행제 원격교육 IDC 코로케이션 서비스",
+    "link": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01260645&bidPbancOrd=001",
+    "dept": "삼육보건대학",
+    "manager": "김성원",
+    "date": "2026-01-07",
+    "source_name": "나라장터(용역)",
+    "image_url": "",
+    "published_display": "2026-01-07",
+    "bid_begin_dt": "2026-01-07 11:00:00",
+    "bid_close_dt": "2026-01-23 10:00:00",
+    "openg_dt": "2026-01-23 13:00:00",
+    "is_new": false
+  },
+  {
+    "title": "AICOSS 2025 산학협력 실습중심 딥러닝 겨울부트캠프&경진대회",
+    "link": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01260927&bidPbancOrd=000",
+    "dept": "서울특별시 서울시립대학교 산학협력단",
+    "manager": "황석현",
+    "date": "2026-01-06",
+    "source_name": "나라장터(용역)",
+    "image_url": "",
+    "published_display": "2026-01-06",
+    "bid_begin_dt": "2026-01-06 16:00:00",
+    "bid_close_dt": "2026-01-06 18:00:00",
+    "openg_dt": "2026-01-06 19:00:00",
+    "is_new": false
+  },
+  {
+    "title": "2026년도 과학기술정보통신부 기초연구사업 신규과제 공모(개인연구-글로벌 매칭형(독일))",
+    "link": "https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186368",
+    "dept": "기초연구진흥과",
+    "manager": "허정현",
+    "date": "2026-01-07",
+    "source_name": "과기정통부",
+    "image_url": "",
+    "published_display": "2026-01-07",
+    "bid_begin_dt": "",
+    "bid_close_dt": "",
+    "openg_dt": "",
+    "is_new": true
   }
 ]

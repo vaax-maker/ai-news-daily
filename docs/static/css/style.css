@@ -1,15 +1,31 @@
+/* ===================================
+   VAAX Design System
+   Breakpoints: 
+   - Mobile: max-width 767px
+   - Tablet: 768px - 1023px  
+   - Desktop: 1024px+
+   =================================== */
+
 :root {
+    /* Brand Colors */
     --primary-color: #65a30d;
-    /* 더 진한 연두 (Lime 600) */
     --primary-color-hover: #4d7c0f;
-    /* 아주 진한 연두 (Lime 700) */
     --secondary-color: #475569;
+
+    /* Background & Surface */
     --background-color: #ffffff;
     --card-bg: #ffffff;
+
+    /* Text */
     --text-main: #111827;
     --text-muted: #4b5563;
+
+    /* Borders */
     --border-color: #d1d5db;
     --line-gray: #9ca3af;
+
+    /* Touch Target (minimum 44px for mobile) */
+    --touch-target-min: 44px;
 }
 
 * {
@@ -1948,4 +1964,375 @@ tr:hover {
     border-radius: 3px;
     margin-left: 4px;
     vertical-align: middle;
+}
+
+/* ===================================
+   RESPONSIVE STYLES - CONSOLIDATED
+   =================================== */
+
+/* --- TABLET BREAKPOINT (768px - 1023px) --- */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        padding: 1.5rem 1rem;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    .gnb a {
+        font-size: 1rem;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
+
+    .news-image img {
+        width: 180px;
+    }
+}
+
+/* --- MOBILE BREAKPOINT (max-width: 767px) --- */
+@media (max-width: 767px) {
+
+    /* Base Typography - Ensure readable font sizes */
+    body {
+        font-size: 1rem;
+        /* 16px base */
+        line-height: 1.65;
+    }
+
+    /* Container */
+    .container {
+        padding: 1rem 0.75rem;
+    }
+
+    /* Header - Mobile Optimized */
+    header {
+        padding: 0.75rem 0;
+        margin-bottom: 1rem;
+    }
+
+    .gnb {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        padding: 0 0.75rem;
+    }
+
+    .logo-link {
+        margin-right: 0;
+        justify-content: center;
+    }
+
+    .header-logo {
+        width: 50%;
+        max-width: 180px;
+        height: auto;
+    }
+
+    .header-right-section {
+        width: 100%;
+        gap: 0.75rem;
+    }
+
+    /* Navigation - Horizontal Scroll */
+    .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        gap: 0;
+        padding: 0.5rem 0;
+        border-top: 1px solid var(--border-color);
+        justify-content: flex-start;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-links a {
+        flex-shrink: 0;
+        padding: 0.6rem 0.85rem;
+        min-height: var(--touch-target-min);
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        /* Increased from 0.9rem */
+        white-space: nowrap;
+    }
+
+    .gnb a {
+        font-size: 1rem;
+        /* Increased from 0.9rem */
+    }
+
+    /* Slogan - Hide on Mobile */
+    .slogan-container {
+        display: none;
+    }
+
+    /* Dashboard Grid - Single Column */
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .dashboard-section {
+        padding: 1rem;
+    }
+
+    .dashboard-section h2 {
+        font-size: 1.2rem;
+        /* Increased from 1.1rem */
+    }
+
+    /* Preview List - Readable text */
+    .preview-list li {
+        padding: 0.85rem 0;
+        min-height: var(--touch-target-min);
+    }
+
+    .preview-list li a,
+    .preview-title {
+        font-size: 1rem;
+        /* Ensure readable size */
+        display: block;
+        padding: 0.25rem 0;
+        line-height: 1.5;
+    }
+
+    .preview-date {
+        font-size: 0.9rem;
+        /* Slightly smaller for meta info */
+    }
+
+    /* News Items */
+    .news-item {
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .news-body {
+        flex-direction: column;
+    }
+
+    .news-image {
+        width: 100%;
+        order: -1;
+        margin-bottom: 0.75rem;
+    }
+
+    .news-image img {
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+    }
+
+    .news-title {
+        font-size: 1.15rem;
+        /* Increased from 1.1rem */
+        line-height: 1.4;
+    }
+
+    .news-summary {
+        font-size: 1rem;
+        /* Increased from 0.95rem */
+        padding: 0.5rem 0;
+        line-height: 1.7;
+    }
+
+    .news-meta {
+        font-size: 0.9rem;
+        /* Meta info slightly smaller */
+    }
+
+    /* Tables - Card View */
+    .table-responsive {
+        border: none;
+        background: transparent;
+    }
+
+    /* Touch-Friendly Buttons */
+    .action-btn,
+    .primary-btn,
+    .ghost-btn {
+        min-height: var(--touch-target-min);
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+        /* Ensure readable button text */
+    }
+
+    .discuss-btn-sm {
+        min-height: 36px;
+        padding: 0.5rem 0.85rem;
+        font-size: 0.9rem;
+        /* Increased from 0.8rem */
+    }
+
+    /* Category Tabs - Full Width */
+    .category-tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .category-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .category-tab {
+        flex: none;
+        padding: 0.75rem 1rem;
+        min-height: var(--touch-target-min);
+        font-size: 1rem;
+        /* Ensure readable tab text */
+    }
+
+    /* Cards */
+    .card {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 10px;
+    }
+
+    /* Modal */
+    .modal-body {
+        width: 95vw;
+        max-height: 85vh;
+    }
+
+    /* Word Cloud */
+    .wordcloud-section h3 {
+        font-size: 1.1rem;
+        /* Increased from 1rem */
+    }
+
+    /* Page Titles */
+    .title-row {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+    }
+
+    .subtitle,
+    .title-desc {
+        font-size: 0.95rem;
+        /* Readable subtitle */
+    }
+
+    /* Eyebrow text */
+    .eyebrow {
+        font-size: 0.8rem;
+    }
+
+    /* Footer */
+    footer {
+        padding: 1.5rem 0.75rem;
+        font-size: 0.85rem;
+        /* Increased from 0.8rem */
+    }
+
+    /* Table text in card mode */
+    .styled-table td,
+    .styled-table th {
+        font-size: 0.95rem;
+    }
+
+    /* Member news tiles */
+    .tile-title {
+        font-size: 1rem;
+        /* Increased from 0.95rem */
+    }
+
+    .tile-meta {
+        font-size: 0.85rem;
+    }
+
+    /* === MOBILE CONTENT WIDTH OPTIMIZATION === */
+
+    /* Reduce container padding for more content space */
+    .container {
+        padding: 0.75rem 0.5rem;
+    }
+
+    /* News item - less padding for wider content */
+    .news-item {
+        padding: 0.75rem 0.5rem;
+        margin-bottom: 0.5rem;
+        border-radius: 8px;
+    }
+
+    /* Summary section title - reduce border width */
+    .summary-section-title {
+        font-size: 1rem;
+        padding-left: 0.5rem;
+        border-left: 3px solid var(--primary-color);
+        border-bottom: none;
+        margin-top: 0.6rem;
+        margin-bottom: 0.3rem;
+    }
+
+    /* Summary list - reduce left padding for more text space */
+    .summary-list {
+        padding-left: 0.75rem;
+        margin: 0;
+    }
+
+    .summary-list li {
+        margin-bottom: 0.5rem;
+        padding-left: 0.25rem;
+    }
+
+    /* Meaning box - reduce padding and border */
+    .meaning-box {
+        padding: 0.5rem 0.6rem;
+        margin-top: 0.5rem;
+        border-left-width: 3px;
+        border-radius: 6px;
+    }
+
+    /* Highlight spans - less padding */
+    .highlight {
+        padding: 1px 3px;
+    }
+
+    /* News header - tighter layout */
+    .news-header {
+        margin-bottom: 0.5rem;
+    }
+
+    .news-header-top {
+        gap: 0.5rem;
+        margin-bottom: 0.35rem;
+    }
+
+    /* News meta - more compact */
+    .news-meta {
+        gap: 0.25rem;
+    }
+
+    /* News body - less gap */
+    .news-body {
+        gap: 0.75rem;
+    }
+
+    /* Page header - less margin */
+    h1 {
+        font-size: 1.35rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+    }
 }
