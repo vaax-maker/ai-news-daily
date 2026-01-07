@@ -9,7 +9,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/style.css?v=11">
+    <link rel="stylesheet" href="../static/css/style.css?v=12">
     
 <style>
     .quickview-content {
@@ -103,9 +103,13 @@
     /* === MOBILE RESPONSIVE === */
     @media (max-width: 767px) {
         .quickview-content {
-            padding: 0.75rem;
+            /* Remove outer card styling on mobile - match daily article pages */
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
             margin-bottom: 1rem;
-            border-radius: 8px;
+            border-radius: 0;
         }
 
         .quickview-header {
