@@ -1,17 +1,56 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang='ko'>
 
-{% block title %}VAAX Admin Notifier{% endblock %}
-
-{% block extra_css %}
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>VAAX Admin Notifier</title>
+    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/style.css?v=8">
+    
 <style>
     .admin-container {
-        max-width: 600px;
-        margin: 4rem auto;
-        padding: 2rem;
+        max-width: 1400px;
+        margin: 2rem auto;
+        padding: 1.5rem;
         background: var(--card-bg);
         border: 1px solid var(--border-color);
         border-radius: 16px;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    /* 3-Column Grid Layout */
+    .notifier-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 1200px) {
+        .notifier-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .notifier-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .notifier-section {
+        padding: 1.25rem;
+        border-radius: 12px;
+        height: fit-content;
+    }
+
+    .notifier-section h3 {
+        margin: 0 0 1rem 0;
+        font-size: 1rem;
     }
 
     .admin-login-section,
@@ -197,9 +236,50 @@
         color: #991b1b;
     }
 </style>
-{% endblock %}
 
-{% block content %}
+</head>
+
+<body>
+    <header>
+        <div class="gnb">
+            <!-- Left: Logo -->
+            <a href="./index.html" class="logo-link">
+                <img src="./static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
+            </a>
+
+            <!-- Right: Slogan & Nav -->
+            <div class="header-right-section">
+                <div class="slogan-container">
+                    <span class="slogan-since">since 2016</span>
+                    <span class="header-slogan-text">
+                        VR-AR-AI-XR <span class="slogan-highlight">기술과 Biz.를 연결하는</span>
+                        성장나눔 <span class="slogan-highlight">커뮤니티</span>
+                    </span>
+                </div>
+                <nav class="nav-links">
+                    <a href="./index.html"
+                        class="active">Home</a>
+                    <a href="./ai/index.html"
+                        class="">AI/XR뉴스</a>
+                    <a href="./quickview/index.html"
+                        class="">퀵뷰</a>
+                    <a href="./gov/index.html"
+                        class="">정부과제</a>
+                    <a href="./members/index.html"
+                        class="">회원사소식</a>
+                    <a href="./board/index.html"
+                        class="">Small Talk</a>
+                </nav>
+            </div>
+        </div>
+        <!-- Announcement Message -->
+        <div class="header-announcement">
+            이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요
+        </div>
+    </header>
+
+    <div class="container">
+        
 <div class="admin-container">
     <!-- Login Section -->
     <div id="loginSection" class="admin-login-section active">
@@ -222,117 +302,121 @@
             <p>Compose and send/schedule Telegram notifications</p>
         </div>
 
-        <!-- URL Summarization Section -->
-        <div class="url-section"
-            style="margin-bottom: 1.5rem; padding: 1.25rem; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px;">
-            <div class="form-group" style="margin-bottom: 1rem;">
-                <label for="articleUrl" style="display: flex; align-items: center; gap: 0.5rem;">
-                    <span>Article URL</span>
-                    <span id="detectedCategory"
-                        style="font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; display: none;"></span>
-                </label>
-                <div style="display: flex; gap: 0.5rem;">
-                    <input type="url" id="articleUrl" placeholder="https://example.com/article..."
-                        style="flex: 1; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 8px; background: white; color: #111827;">
-                    <button type="button" id="btnSummarize" class="admin-btn"
-                        style="width: auto; padding: 0.75rem 1.25rem;">Summarize</button>
-                </div>
-            </div>
+        <!-- 3-Column Grid: HTML | URL | Manual -->
+        <div class="notifier-grid">
+            <!-- 1. HTML 메시지 처리 (퀵뷰 생성) - 좌측 -->
+            <div class="notifier-section" style="background: #fef3c7; border: 1px solid #f59e0b;">
+                <h3 style="color: #92400e;">📄 HTML 메시지 (퀵뷰)</h3>
 
-            <div id="summaryResult" style="display: none;">
                 <div class="form-group" style="margin-bottom: 1rem;">
-                    <label for="articleTitle">Article Title (editable)</label>
-                    <input type="text" id="articleTitle" placeholder="Article title..."
+                    <label for="quickviewTitle">페이지 제목</label>
+                    <input type="text" id="quickviewTitle" placeholder="퀵뷰 페이지 제목..."
                         style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 8px; background: white; color: #111827;">
                 </div>
 
                 <div class="form-group" style="margin-bottom: 1rem;">
-                    <label>Summary Preview</label>
-                    <div id="summaryPreview"
-                        style="padding: 0.75rem; background: white; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.9rem; line-height: 1.5; max-height: 150px; overflow-y: auto;">
+                    <label for="quickviewHtml">HTML 본문</label>
+                    <textarea id="quickviewHtml" rows="6" placeholder="HTML 코드를 입력하세요..."
+                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 8px; background: white; color: #111827; font-family: monospace; font-size: 0.85rem;"></textarea>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <button type="button" id="btnQuickviewSave" class="admin-btn" style="background: #f59e0b;">
+                        URL + 웹페이지 생성 (저장포함)
+                    </button>
+                    <button type="button" id="btnQuickviewSend" class="admin-btn" style="background: #22c55e;">
+                        URL + 요약 + 텔레그램 전송
+                    </button>
+                </div>
+                <div id="quickviewStatus" class="status-msg" style="margin-top: 0.5rem;"></div>
+
+                <!-- Quickview Deploy Command -->
+                <div
+                    style="margin-top: 1rem; padding: 0.5rem; background: #fefce8; border: 1px dashed #ca8a04; border-radius: 6px;">
+                    <p style="margin: 0 0 0.25rem 0; font-size: 0.75rem; color: #854d0e;">📦 즉시 배포:</p>
+                    <div id="quickviewCopyCmd"
+                        style="background: #1e293b; padding: 0.35rem 0.5rem; border-radius: 4px; font-family: monospace; color: #10b981; font-size: 0.65rem; overflow-x: auto; cursor: pointer; word-break: break-all;">
+                        python3 generate_quickview.py && git add . && git commit -m "Update quickview" && git push
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. URL 메시지 처리 (기사 요약) - 중간 -->
+            <div class="notifier-section" style="background: #f8fafc; border: 1px solid var(--border-color);">
+                <h3 style="color: #0369a1;">🔗 URL 메시지 (기사 요약)</h3>
+
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="articleUrl" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span>Article URL</span>
+                        <span id="detectedCategory"
+                            style="font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; display: none;"></span>
+                    </label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="url" id="articleUrl" placeholder="https://example.com/article..."
+                            style="flex: 1; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 8px; background: white; color: #111827;">
+                        <button type="button" id="btnSummarize" class="admin-btn"
+                            style="width: auto; padding: 0.75rem 1rem;">요약</button>
                     </div>
                 </div>
 
-                <div style="display: flex; gap: 0.5rem;">
-                    <button type="button" id="btnAddToMessage" class="admin-btn" style="flex: 1;">Add to
-                        Message</button>
-                    <button type="button" id="btnSaveArchive" class="admin-btn" style="flex: 1; background: #0ea5e9;">
-                        Save to Archive (<span id="archiveCategory">AI</span>)
-                    </button>
+                <div id="summaryResult" style="display: none;">
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label for="articleTitle">제목 (편집 가능)</label>
+                        <input type="text" id="articleTitle" placeholder="Article title..."
+                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 8px; background: white; color: #111827;">
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label>요약 미리보기</label>
+                        <div id="summaryPreview"
+                            style="padding: 0.75rem; background: white; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; line-height: 1.5; max-height: 120px; overflow-y: auto; white-space: pre-wrap;">
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <button type="button" id="btnAddToMessage" class="admin-btn">수기 메시지에 추가</button>
+                        <button type="button" id="btnSaveArchive" class="admin-btn" style="background: #0ea5e9;">
+                            아카이브 저장 (<span id="archiveCategory">AI</span>)
+                        </button>
+                    </div>
+                    <div id="archiveStatus" class="status-msg" style="margin-top: 0.5rem;"></div>
                 </div>
-                <div id="archiveStatus" class="status-msg" style="margin-top: 0.5rem;"></div>
+
+                <div id="summarizeStatus" class="status-msg"></div>
             </div>
 
-            <div id="summarizeStatus" class="status-msg"></div>
-        </div>
+            <!-- 3. 수기 메시지 처리 (직접 입력) - 우측 -->
+            <div class="notifier-section" style="background: #f0f9ff; border: 1px solid #0ea5e9;">
+                <h3 style="color: #0369a1;">✍️ 수기 메시지 (직접 입력)</h3>
 
-        <!-- Quickview Creation Section -->
-        <div class="url-section"
-            style="margin-bottom: 1.5rem; padding: 1.25rem; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 12px;">
-            <h3 style="margin: 0 0 1rem 0; font-size: 1rem; color: #92400e;">📄 퀵뷰 페이지 생성</h3>
-
-            <div class="form-group" style="margin-bottom: 1rem;">
-                <label for="quickviewTitle">페이지 제목</label>
-                <input type="text" id="quickviewTitle" placeholder="퀵뷰 페이지 제목..."
-                    style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 8px; background: white; color: #111827;">
-            </div>
-
-            <div class="form-group" style="margin-bottom: 1rem;">
-                <label for="quickviewHtml">HTML 본문</label>
-                <textarea id="quickviewHtml" rows="8" placeholder="HTML 코드를 입력하세요..."
-                    style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 8px; background: white; color: #111827; font-family: monospace; font-size: 0.9rem;"></textarea>
-            </div>
-
-            <div style="display: flex; gap: 0.5rem;">
-                <button type="button" id="btnQuickviewSave" class="admin-btn" style="flex: 1; background: #f59e0b;">
-                    URL + 요약 생성 (저장만)
-                </button>
-                <button type="button" id="btnQuickviewSend" class="admin-btn" style="flex: 1; background: #22c55e;">
-                    URL + 요약 + 텔레그램 전송
-                </button>
-            </div>
-            <div id="quickviewStatus" class="status-msg" style="margin-top: 0.5rem;"></div>
-
-            <!-- Quickview Deploy Command -->
-            <div
-                style="margin-top: 1rem; padding: 0.75rem; background: #fefce8; border: 1px dashed #ca8a04; border-radius: 6px;">
-                <p style="margin: 0 0 0.5rem 0; font-size: 0.85rem; color: #854d0e;">📦 생성 후 즉시 배포하려면:</p>
-                <div id="quickviewCopyCmd"
-                    style="background: #1e293b; padding: 0.5rem 0.75rem; border-radius: 4px; font-family: monospace; color: #10b981; font-size: 0.75rem; overflow-x: auto; cursor: pointer;">
-                    python3 generate_quickview.py && git add . && git commit -m "Update quickview" && git push
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="msgBody">메시지 내용</label>
+                    <textarea id="msgBody" rows="6" placeholder="메시지를 입력하세요..."></textarea>
+                    <div id="charCounter" class="char-counter">0 / 500 characters</div>
                 </div>
+
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label>전송 옵션</label>
+                    <select id="sendOption"
+                        style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color); background: white; color: #111827;">
+                        <option value="immediate">즉시 전송</option>
+                        <option value="scheduled">예약 전송</option>
+                    </select>
+                </div>
+
+                <div id="scheduleOptions" class="schedule-options">
+                    <div class="form-group">
+                        <label for="scheduleTime">예약 시간</label>
+                        <input type="datetime-local" id="scheduleTime" style="background: white; color: #111827;">
+                    </div>
+                </div>
+
+                <button id="btnSend" class="admin-btn">전송 / 예약</button>
+                <div id="panelStatus" class="status-msg" style="margin-top: 0.5rem;"></div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="msgBody">Message Content</label>
-            <textarea id="msgBody" rows="6" placeholder="Type your message here..."></textarea>
-            <div id="charCounter" class="char-counter">0 / 500 characters</div>
-        </div>
-
-        <div class="form-group">
-            <label>Send Option</label>
-            <select id="sendOption"
-                style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color); background: white; color: #111827;">
-                <option value="immediate">Send Immediately</option>
-                <option value="scheduled">Schedule for Later</option>
-            </select>
-        </div>
-
-        <div id="scheduleOptions" class="schedule-options">
-            <div class="form-group">
-                <label for="scheduleTime">Target Time</label>
-                <input type="datetime-local" id="scheduleTime" style="background: white; color: #111827;">
-            </div>
-        </div>
-
-        <div class="control-row">
-            <button id="btnSend" class="admin-btn">Send / Schedule</button>
-        </div>
-
-        <button id="btnLogout" class="admin-btn secondary">Logout</button>
-
-        <div id="panelStatus" class="status-msg"></div>
+        <button id="btnLogout" class="admin-btn secondary" style="margin-top: 1rem;">Logout</button>
 
         <!-- Quick Send Instructions -->
         <div
@@ -476,10 +560,23 @@
 
     // Summarize with Gemini API
     async function summarizeWithGemini(text, title) {
-        const prompt = `다음 뉴스 기사를 한국어로 3-4줄로 간결하게 요약해주세요. 핵심 내용과 시사점을 포함해주세요. 요약문만 출력하고 다른 설명은 하지 마세요.
+        const prompt = `다음 뉴스 기사를 한국어 개조식(불릿)으로 요약하세요.
+
+[필수 형식]
+• 첫번째 포인트
+
+• 두번째 포인트
+
+• 세번째 포인트
+
+[규칙]
+1. 반드시 3-4개 핵심 포인트로 정리
+2. 각 포인트는 "• "로 시작 (다른 기호 사용 금지)
+3. 각 포인트 사이 빈 줄 필수
+4. 전체 400자 이내
+5. 요약문만 출력
 
 제목: ${title}
-
 본문:
 ${text.slice(0, 3000)}`;
 
@@ -742,12 +839,21 @@ ${text.slice(0, 3000)}`;
         const doc = parser.parseFromString(htmlContent, 'text/html');
         const text = doc.body.textContent.trim().slice(0, 2000);
 
-        const prompt = `다음 콘텐츠를 한국어로 개조식(불릿 포인트)으로 요약해주세요.
-규칙:
-- 3-4개의 핵심 포인트로 정리
-- 각 포인트는 "• "로 시작
-- 각 포인트 사이에는 반드시 빈 줄(줄넘김)을 넣어주세요
-- 요약문만 출력하세요
+        const prompt = `다음 콘텐츠를 한국어 개조식(불릿)으로 요약하세요.
+
+[필수 형식]
+• 첫번째 포인트
+
+• 두번째 포인트
+
+• 세번째 포인트
+
+[규칙]
+1. 반드시 3-4개 핵심 포인트
+2. 각 포인트는 "• "로 시작
+3. 각 포인트 사이 빈 줄 필수
+4. 전체 300자 이내
+5. 요약문만 출력
 
 제목: ${title}
 본문: ${text}`;
@@ -821,7 +927,7 @@ ${text.slice(0, 3000)}`;
                 const message = `📄 ${title}\n\n${summary}\n\n👉 ${pageUrl}`;
                 await addDoc(collection(db, "admin_notifications"), {
                     body: message,
-                    type: 'immediate',
+                    type: 'queued',
                     status: 'pending',
                     createdAt: serverTimestamp()
                 });
@@ -854,4 +960,13 @@ ${text.slice(0, 3000)}`;
 
 
 </script>
-{% endblock %}
+
+    </div>
+
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 VAAX rebuild Project by <a href="./admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
