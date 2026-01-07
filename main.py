@@ -841,12 +841,17 @@ def main():
             # Fallback to index if briefing fails
             dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/index.html"
 
-        # 6. Send Notifications (Only if new items)
-        print("[Notifier] Sending daily briefing...")
-        try:
-            send_daily_briefing(dashboard_data)
-        except Exception as e:
-            print(f"[Notifier] Failed: {e}")
+        # 6. Send Notifications (Only if new items AND explicitly enabled)
+        # ENABLE_NOTIFICATION must be set to "true" (GitHub Actions sets this)
+        # This prevents accidental notifications during local/manual runs
+        if str_to_bool(os.getenv("ENABLE_NOTIFICATION", "false")):
+            print("[Notifier] Sending daily briefing...")
+            try:
+                send_daily_briefing(dashboard_data)
+            except Exception as e:
+                print(f"[Notifier] Failed: {e}")
+        else:
+            print("[Notifier] Skipped (ENABLE_NOTIFICATION not set). Set ENABLE_NOTIFICATION=true to send.")
     else:
         print("[Briefing] No new items found. Skipping briefing generation and notification.")
 
