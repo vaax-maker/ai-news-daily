@@ -2335,4 +2335,46 @@ tr:hover {
         margin-bottom: 1rem;
         font-size: 0.85rem;
     }
+
+    /* === GLOBAL CONTENT AREA SPACING === */
+
+    /* All cards and content boxes - tighter padding */
+    .card,
+    .dashboard-section,
+    .news-item,
+    article {
+        padding: 0.75rem !important;
+    }
+
+    /* All lists - reduced indentation */
+    ul,
+    ol {
+        padding-left: 1rem;
+    }
+
+    li {
+        margin-bottom: 0.4rem;
+    }
+
+    /* Section titles with left border */
+    h2,
+    h3,
+    h4 {
+        font-size: 1.1rem;
+    }
+
+    /* Paragraphs - tighter spacing */
+    p {
+        margin-bottom: 0.75rem;
+    }
+
+    /* Table responsive wrapper */
+    .table-responsive {
+        margin-bottom: 1rem;
+    }
+
+    /* Archive pages */
+    .page-header {
+        margin-bottom: 1rem;
+    }
 }
