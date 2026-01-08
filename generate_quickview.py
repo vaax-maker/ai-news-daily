@@ -103,9 +103,20 @@ def process_quickview_pages():
             created_display = "날짜 없음"
             created_ts = 0
         
+        # Remove duplicate title from HTML content
+        # If the first h1 or h2 matches the title, remove it
+        import re
+        cleaned_html = html_content
+        heading_match = re.match(r'^(\s*<h[12][^>]*>)(.*?)(</h[12]>)', html_content, re.IGNORECASE | re.DOTALL)
+        if heading_match:
+            heading_text = re.sub(r'<[^>]+>', '', heading_match.group(2)).strip()
+            if heading_text == title.strip():
+                # Remove the duplicate heading
+                cleaned_html = html_content[heading_match.end():].strip()
+        
         # Generate individual page HTML
         page_url = f"https://vaax-maker.github.io/ai-news-daily/quickview/{page_id}.html"
-        page_html = render_quickview_page(title, html_content, created_display, page_url)
+        page_html = render_quickview_page(title, cleaned_html, created_display, page_url)
         page_path = os.path.join(quickview_dir, f"{page_id}.html")
         
         with open(page_path, "w", encoding="utf-8") as f:
