@@ -83,11 +83,10 @@ header {
     margin-bottom: 2rem;
 }
 
-
 .gnb {
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -95,20 +94,23 @@ header {
     gap: 0.5rem;
     /* 로고와 텍스트 간격 최소화 */
     font-weight: 600;
+    flex-wrap: nowrap;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 2.25rem;
+    gap: 1.5rem;
     flex-wrap: nowrap;
     flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .gnb a {
     color: var(--text-main);
     padding: 0.5rem 0;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    white-space: nowrap;
 }
 
 .gnb a.active {
