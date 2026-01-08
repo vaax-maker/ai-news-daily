@@ -92,6 +92,7 @@ jobs:
           GOV_API_KEY: ${{ secrets.GOV_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           ENABLE_NOTIFICATION: "true"
         run: |
           echo "📰 뉴스 생성 시작"

@@ -28,13 +28,36 @@ def get_firestore_client():
         return None
     
     if not firebase_admin._apps:
-        cred_path = os.path.join(os.path.dirname(__file__), 'vaax-board-firebase-adminsdk-fbsvc-67b91f8d90.json')
-        if os.path.exists(cred_path):
-            cred = credentials.Certificate(cred_path)
-            firebase_admin.initialize_app(cred)
+        # Try environment variable first (for GitHub Actions)
+        sa_json = os.getenv("FIREBASE_SERVICE_ACCOUNT")
+        if sa_json:
+            import tempfile
+            import json
+            try:
+                # sa_json is a JSON string from GitHub Secrets
+                if sa_json.startswith('{'):
+                    with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix=".json") as f:
+                        f.write(sa_json)
+                        temp_path = f.name
+                    cred = credentials.Certificate(temp_path)
+                    firebase_admin.initialize_app(cred)
+                    print("[Quickview] Firebase initialized from environment variable")
+                else:
+                    cred = credentials.Certificate(sa_json)
+                    firebase_admin.initialize_app(cred)
+            except Exception as e:
+                print(f"[Quickview] Failed to init Firebase from env: {e}")
+                return None
         else:
-            print(f"[Quickview] Firebase credentials not found at {cred_path}")
-            return None
+            # Fall back to local file
+            cred_path = os.path.join(os.path.dirname(__file__), 'vaax-board-firebase-adminsdk-fbsvc-67b91f8d90.json')
+            if os.path.exists(cred_path):
+                cred = credentials.Certificate(cred_path)
+                firebase_admin.initialize_app(cred)
+                print("[Quickview] Firebase initialized from local file")
+            else:
+                print(f"[Quickview] Firebase credentials not found at {cred_path}")
+                return None
     
     return firestore.client()
 
