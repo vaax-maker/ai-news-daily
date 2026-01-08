@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang='ko'>
+
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 '뉴 아틀라스' - 퀵뷰</title>
+    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css?v=12">
+    
+<style>
+    .quickview-content {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .quickview-header {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .quickview-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
+    }
+
+    .quickview-meta {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
+    .quickview-body {
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+
+    .quickview-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    .quickview-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Flatten nested content structure for better readability */
+    .quickview-body .card {
+        padding: 1.25rem !important;
+        /* Reduce padding from default 1.5rem */
+        box-shadow: none !important;
+        /* Remove shadow to reduce "depth" feeling */
+        background: #f8fafc;
+        /* Light background for contrast without depth */
+        border: 1px solid var(--border-color);
+        margin-bottom: 1.5rem;
+    }
+
+    .quickview-body ul,
+    .quickview-body ol {
+        padding-left: 1.25rem;
+        /* Reduce list indentation */
+        margin-bottom: 1rem;
+    }
+
+    .quickview-body li {
+        margin-bottom: 0.25rem;
+    }
+
+    /* Ensure code blocks don't add too much visual weight */
+    .quickview-body pre {
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    /* === MOBILE RESPONSIVE === */
+    @media (max-width: 767px) {
+        .quickview-content {
+            /* Remove outer card styling on mobile - match daily article pages */
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 1rem;
+            border-radius: 0;
+        }
+
+        .quickview-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .quickview-title {
+            font-size: 1.35rem;
+            line-height: 1.3;
+        }
+
+        .quickview-meta {
+            font-size: 0.85rem;
+        }
+
+        .quickview-body {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .quickview-body .card {
+            padding: 0.75rem !important;
+            margin-bottom: 1rem;
+        }
+
+        .quickview-body ul,
+        .quickview-body ol {
+            padding-left: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .quickview-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        .quickview-body h2,
+        .quickview-body h3 {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quickview-actions {
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            gap: 0.5rem;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+    <header>
+        <div class="gnb">
+            <!-- Left: Logo -->
+            <a href="../index.html" class="logo-link">
+                <img src="../static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
+            </a>
+
+            <!-- Right: Slogan & Nav -->
+            <div class="header-right-section">
+                <div class="slogan-container">
+                    <span class="slogan-since">since 2016</span>
+                    <span class="header-slogan-text">
+                        VR-AR-AI-XR <span class="slogan-highlight">기술과 Biz.를 연결하는</span>
+                        성장나눔 <span class="slogan-highlight">커뮤니티</span>
+                    </span>
+                </div>
+                <nav class="nav-links">
+                    <a href="../index.html"
+                        class="">Home</a>
+                    <a href="../ai/index.html"
+                        class="">AI/XR뉴스</a>
+                    <a href="../quickview/index.html"
+                        class="active">퀵뷰</a>
+                    <a href="../gov/index.html"
+                        class="">정부과제</a>
+                    <a href="../members/index.html"
+                        class="">회원사소식</a>
+                    <a href="../board/index.html"
+                        class="">Small Talk</a>
+                </nav>
+            </div>
+        </div>
+        <!-- Announcement Message -->
+        <div class="header-announcement">
+            이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요
+        </div>
+    </header>
+
+    <div class="container">
+        
+<div class="quickview-content">
+    <div class="quickview-header">
+        <h1 class="quickview-title">CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 '뉴 아틀라스'</h1>
+        <div class="quickview-meta">📅 2026년 01월 08일 12:05</div>
+    </div>
+
+    <div class="quickview-body">
+        <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 '뉴 아틀라스' 공개</title>
+    <style>
+        /* vaax-theme.css - 외부 제공용 */
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --line-gray: #9ca3af;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            color: var(--text-main);
+            font-size: 24px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 비율 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 24px;
+            background-color: var(--primary-color);
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight {
+            background-color: #CEFA98;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .tags {
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background-color: #f3f4f6;
+            color: var(--text-muted);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .tag:hover {
+            background-color: #e5e7eb;
+            color: var(--text-main);
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--line-gray);
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .comparison-table th, .comparison-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            text-align: center;
+        }
+
+        .comparison-table th {
+            background-color: #f9fafb;
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 '뉴 아틀라스'</h1>
+    <div class="date">2026년 1월 8일 12:02</div>
+
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/-5KXVudFXxM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="section">
+        <div class="section-title">핵심 요약: 최강의 '조별 과제' 팀 결성</div>
+        <p>현대차그룹이 CES 2026 미디어 데이에서 <span class="highlight">완전 전동식 '뉴 아틀라스'</span>를 공개했습니다. 이번 발표의 핵심은 현대차(제조/자본), 보스턴 다이내믹스(로봇 하드웨어), 구글 딥마인드(AI 두뇌)가 결합한 3자 협력 모델입니다.</p>
+        
+        <ul>
+            <li><strong>하드웨어 혁신:</strong> 기존 유압식에서 전동식으로 변경. 360도 회전 관절로 복잡한 동작 가능, 소음 및 유지보수 이점 확보.</li>
+            <li><strong>AI 두뇌 탑재:</strong> 구글 딥마인드의 <span class="highlight">제미나이(Gemini) 로보틱스</span> 적용. 로봇이 시각/언어를 이해하고 논리적 의사결정을 수행.</li>
+            <li><strong>Lab to Fab:</strong> 연구실용 로봇을 넘어 실제 제조 현장(Factory) 투입을 목표로 함.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">뉴 아틀라스(New Atlas) 주요 스펙</div>
+        <ul>
+            <li><strong>작업 능력:</strong> 최대 <span class="highlight">50kg</span> 중량 리프팅 가능 (사람보다 강력한 근력).</li>
+            <li><strong>신체 조건:</strong> 키 1.9m, 팔 리치 2.3m로 넓은 작업 반경 확보.</li>
+            <li><strong>환경 적응:</strong> 방수 기능 지원, -20도~40도 환경 작동 (혹한/혹서 공장 환경 대응).</li>
+            <li><strong>자율 관리:</strong> 배터리 소진 시 <span class="highlight">스스로 배터리를 교체</span>하여 24시간 가동률 확보 목표.</li>
+            <li><strong>제어 방식:</strong> 완전 자율, 원격 제어, 태블릿 간편 조작 등 하이브리드 운영 지원.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">경쟁 구도: 현대차 연합 vs 테슬라</div>
+        <p>휴머노이드 로봇 시장의 접근 방식 차이가 뚜렷해졌습니다.</p>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>현대차 그룹 (보스턴 다이내믹스)</th>
+                    <th>테슬라 (옵티머스)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>전략</strong></td>
+                    <td><span class="highlight">연합 모델 (Android/Galaxy 방식)</span></td>
+                    <td>수직 계열화 (Apple 방식)</td>
+                </tr>
+                <tr>
+                    <td><strong>구성</strong></td>
+                    <td>현대(공장) + BD(로봇) + 구글(AI)</td>
+                    <td>자체 칩, OS, 로봇, 공장 독자 개발</td>
+                </tr>
+                <tr>
+                    <td><strong>특징</strong></td>
+                    <td>고하중(50kg), 고난이도 동작 특화</td>
+                    <td>양산성, 가격 경쟁력, 범용성 중시</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">향후 계획 및 전망</div>
+        <ul>
+            <li><strong>투입 계획:</strong> 미국 조지아주 '현대차그룹 메타플랜트'에 단계적 투입 예정.</li>
+            <li><strong>초기 임무:</strong> 부품 시퀀싱(순서 배열) 등 단순 작업부터 시작하여 2030년경 조립 등 복잡한 작업으로 확대.</li>
+            <li><strong>운영 시스템:</strong> '보스턴 다이내믹스 오빗(Orbit)' 플랫폼을 통해 다수의 로봇 통합 관제 및 안전 관리 수행.</li>
+            <li><strong>시장 전망:</strong> 단순한 데모가 아닌, 실제 공장 환경에서의 신뢰성과 안전성 확보가 승부처가 될 것.</li>
+        </ul>
+    </div>
+
+    <div class="tags">
+        <span class="tag">#CES2026</span>
+        <span class="tag">#현대자동차</span>
+        <span class="tag">#보스턴다이내믹스</span>
+        <span class="tag">#구글딥마인드</span>
+        <span class="tag">#아틀라스</span>
+        <span class="tag">#휴머노이드</span>
+        <span class="tag">#로봇</span>
+        <span class="tag">#Gemini</span>
+    </div>
+
+    <footer>
+        2026 Fovea
+    </footer>
+
+</body>
+</html>
+    </div>
+
+    <div class="quickview-actions">
+        <a href="index.html" class="back-link">← 퀵뷰 목록으로</a>
+        <div style="flex: 1;"></div>
+        <a href="../board/index.html?mode=discuss&title=CES%202026%3A%20%ED%98%84%EB%8C%80%EC%B0%A8%20x%20%EA%B5%AC%EA%B8%80%20x%20%EB%B3%B4%EC%8A%A4%ED%84%B4%20%EB%8B%A4%EC%9D%B4%EB%82%B4%EB%AF%B9%EC%8A%A4%20%27%EB%89%B4%20%EC%95%84%ED%8B%80%EB%9D%BC%EC%8A%A4%27&link=https%3A//vaax-maker.github.io/ai-news-daily/quickview/20260108_aje3v7.html&source=퀵뷰"
+            class="discuss-btn-sm">토론</a>
+        <button type="button" class="discuss-btn-sm"
+            onclick="navigator.clipboard.writeText('https://vaax-maker.github.io/ai-news-daily/quickview/20260108_aje3v7.html'); alert('URL이 복사되었습니다!');">공유</button>
+    </div>
+</div>
+
+    </div>
+
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 VAAX rebuild Project by <a href="../admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
