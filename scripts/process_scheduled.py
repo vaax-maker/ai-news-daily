@@ -63,6 +63,9 @@ def main():
             
             if notif_type == "immediate":
                 should_send = True
+            elif notif_type == "queued":
+                # Queued messages are sent on the next processor run
+                should_send = True
             elif notif_type == "scheduled":
                 target_time = data.get("targetTime")
                 if target_time:
