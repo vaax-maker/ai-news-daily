@@ -69,16 +69,18 @@ def render_member_page(member, articles, now_str):
     )
     return html
 
-def render_member_index(members_list, all_news=None):
+def render_member_index(members_list, all_news=None, profiles=None):
     """
     Renders the members index page.
     members_list: list of dict { "name": ..., "filename": ... }
     all_news: list of all member news articles for the grid display
+    profiles: dict of company profiles for the profile tab
     """
     template = env.get_template("member_index.html")
     html = template.render(
         members=members_list,
         all_news=all_news or [],
+        profiles=profiles or {},
         root_path="..",  # docs/members/index.html -> root is ..
         active_tab="members",
         now_year=datetime.datetime.now().year,

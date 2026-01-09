@@ -1,0 +1,3009 @@
+알체라:
+  category: 중소기업
+  category_code: sme
+  collect_news: true
+  info:
+    representative: 황영규
+    industry: AI 영상인식 소프트웨어
+    employees: 181명
+    description: AI 기반 안면인식 및 영상인식 솔루션 전문 기업. 토스 얼굴결제, 인천공항 스마트패스 등에 기술 적용. NIST 얼굴인식
+      테스트 99.99% 정확도 달성.
+    products: 안면인식 SDK/API, 산불감지 AI(파이어스카우트), eKYC 솔루션
+  financials:
+    revenue: 172억원 (2024)
+    operating_profit: 영업손실
+    market_cap: 코스닥 상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: 미국 의료AI 시장 진출, 금융권 eKYC 수요 증가
+포니이엔티:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 강민호
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+한국능률협회:
+  category: 협회/공공기관
+  category_code: association
+  collect_news: false
+  info:
+    representative: 강석
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+에스와이코마드:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 강선영
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+대교:
+  category: 중견기업
+  category_code: mid
+  collect_news: false
+  info:
+    representative: 강순천
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+시니스트:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 강신래
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+믹스콘엔터테인먼트:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 강영수
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+에쓰핀테크놀로지:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 강지원
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+비브스튜디오스:
+  category: 중소기업
+  category_code: sme
+  collect_news: true
+  info:
+    representative: 김세규
+    industry: XR/AR/AI 콘텐츠 제작
+    employees: 50명
+    description: XR, AR, AI 융합 기술 기반 콘텐츠 제작사. MBC '너를 만났다' VR 다큐 제작. 2023년 예비유니콘 선정.
+    products: 버추얼 프로덕션 VIT, 버추얼휴먼 VIPLE, AI 포토 SNAPAI
+  financials:
+    revenue: 92억원 (2023)
+    operating_profit: '-'
+    market_cap: 비상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: 버추얼 프로덕션 수요 증가, AI 콘텐츠 시장 성장
+하남디지털캠프:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 고명
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+콘크리에이트:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 고명미
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+위치스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 고미아
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+케타버스:
+  category: 소기업
+  category_code: small
+  collect_news: true
+  info:
+    representative: 고욱
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+비햅틱스:
+  category: 소기업
+  category_code: small
+  collect_news: true
+  info:
+    representative: 곽기욱
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+유니브이알:
+  category: 소기업
+  category_code: small
+  collect_news: true
+  info:
+    representative: 곽태진
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+포스트미디어:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 국현규
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+앰버린:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 권기석
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+젠스템:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 권순재
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+LG유플러스:
+  category: 대기업
+  category_code: large
+  collect_news: false
+  info:
+    representative: 권순홍
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+헉미디어:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 권오철
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+아테크넷:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 권정열
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+스튜디오메타케이:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김광집
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+서강대학교:
+  category: 대학/연구기관
+  category_code: academic
+  collect_news: false
+  info:
+    representative: 김군주
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+레디메이드:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김기홍
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+미래시티 글로벌:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김동우
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+AIX랩:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김민균
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+이노 법률사무소:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김민기
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+트러스테이:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김백선
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+하나금융TI:
+  category: 중견기업
+  category_code: mid
+  collect_news: false
+  info:
+    representative: 김병근
+    industry: 금융 IT
+    employees: '-'
+    description: 하나금융그룹 IT 서비스 자회사. 금융 시스템 개발 및 운영.
+    products: 금융 IT 서비스, 시스템 개발/운영
+  financials:
+    revenue: 3,439억원 (2024)
+    operating_profit: '-'
+    market_cap: 비상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: 디지털 금융 전환 수요 증가
+로코:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김수련
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+메타키움:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김영수
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+덱스터스튜디오:
+  category: 중소기업
+  category_code: sme
+  collect_news: true
+  info:
+    representative: 김용화
+    industry: VFX(시각특수효과)/콘텐츠 제작
+    employees: 350명
+    description: 대한민국 1세대 VFX 전문 기업. 신과함께, 기생충, 오징어게임 등 참여. 아시아 최고 수준 VFX 기술력 보유.
+    products: VFX 제작, DI(색보정), 사운드, 버추얼 프로덕션
+  financials:
+    revenue: 537억원 (2024)
+    operating_profit: 영업손실 89억원
+    market_cap: 코스닥 상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: K-콘텐츠 글로벌 수요, VFX 아웃소싱 증가
+엠라인스튜디오:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김윤필
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+도도스튜디오:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김은진
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+블라우비트:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김의선
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+살린:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김재현
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+SM엔터테인먼트:
+  category: 중견기업
+  category_code: mid
+  collect_news: false
+  info:
+    representative: 장철혁
+    industry: 엔터테인먼트
+    employees: '-'
+    description: K-pop 4대 기획사. NCT, 에스파, EXO, 레드벨벳 등 소속. 엔터 부문 매출 91.3%.
+    products: 음원/앨범, 콘서트/투어, 굿즈, IP 라이선스
+  financials:
+    revenue: 9,897억원 (2024)
+    operating_profit: 873억원
+    market_cap: 코스닥 상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: 글로벌 K-pop 수요, 신인 아티스트 라인업
+우신정보시스템:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김진영
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+니에프스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김창배
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+대신증권:
+  category: 대기업
+  category_code: large
+  collect_news: false
+  info:
+    representative: 양홍석
+    industry: 금융/증권
+    employees: '-'
+    description: 대한민국 종합 증권사. 위탁매매, IB, 자산운용 등 금융 서비스 제공.
+    products: 증권 위탁매매, 투자은행(IB), 자산관리
+  financials:
+    revenue: 4조 875억원 (2024)
+    operating_profit: '-'
+    market_cap: 코스피 상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: 안정적 금융 서비스 수요
+갤럭시코퍼레이션:
+  category: 중소기업
+  category_code: sme
+  collect_news: true
+  info:
+    representative: 박지현
+    industry: 엔터테인먼트/매니지먼트
+    employees: '-'
+    description: 미디어, IP, 커머스, 테크 융복합 엔터테인먼트 기업. 지드래곤 매니지먼트. 1박2일, 미스터트롯3 등 400편 이상
+      제작.
+    products: 예능 제작, 아티스트 매니지먼트, IP 커머스(피스마이너스원 하이볼)
+  financials:
+    revenue: 400억원 (2024)
+    operating_profit: '흑자전환 (2025H1: 120억)'
+    market_cap: 코스닥 상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: 지드래곤 월드투어, 신규 IP 확보로 성장 전망
+콕스스페이스:
+  category: 소기업
+  category_code: small
+  collect_news: true
+  info:
+    representative: 김호연
+    industry: 웨어러블/XR 디바이스
+    employees: 12명
+    description: 제스처 인식 반지형 마우스 VANZY 개발. XR 플랫폼 및 원격협업 솔루션 제공. CES 2025 참가.
+    products: VANZY(제스처 반지마우스), 콕스 메타스페이스(XR 원격 플랫폼)
+  financials:
+    revenue: 12억원 (누적)
+    operating_profit: '-'
+    market_cap: 비상장 (스타트업)
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: XR 하드웨어 시장 성장, 유럽 진출 모색
+스토익엔터테인먼트:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 김홍석
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+한국열린사이버대학교:
+  category: 대학/연구기관
+  category_code: academic
+  collect_news: false
+  info:
+    representative: 남희양
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+MBC:
+  category: 중견기업
+  category_code: mid
+  collect_news: false
+  info:
+    representative: 박성제
+    industry: 방송/미디어
+    employees: '-'
+    description: 대한민국 지상파 방송사. 뉴스데스크, 드라마, 예능 콘텐츠 제작.
+    products: 지상파 방송, 콘텐츠 제작, 광고
+  financials:
+    revenue: 7,480억원 (2024)
+    operating_profit: 66억원
+    market_cap: 비상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: 5년 연속 흑자, 콘텐츠 수익 다변화 필요
+메타뷰:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 노진송
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+스코넥엔터테인먼트:
+  category: 중소기업
+  category_code: sme
+  collect_news: true
+  info:
+    representative: 노충현
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+스튜디오 엠버스703 (MBUS703):
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 노치욱 盧致煜 Chiwook Nho
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+네오컨버전스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 류내원
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+벤처스퀘어:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 명승은
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+대진대학교:
+  category: 대학/연구기관
+  category_code: academic
+  collect_news: false
+  info:
+    representative: 문수지
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+플레이파크:
+  category: 소기업
+  category_code: small
+  collect_news: true
+  info:
+    representative: 박건웅
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+(재)전남정보문화산업진흥원:
+  category: 협회/공공기관
+  category_code: association
+  collect_news: false
+  info:
+    representative: 박근아
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+와이엠엑스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 박근영
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+세계미디어:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 박동선
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+두리번:
+  category: 소기업
+  category_code: small
+  collect_news: true
+  info:
+    representative: 박두환
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+데이터킹:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 박선규
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+다이브엑스알:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 박선영
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+KT이엔지코어:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 박성배
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+에이치엔아이엑스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 박성우
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+페어엑스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 박세안
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+루디벨:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 박인혜
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+유니티테크놀로지스코리아(유):
+  category: 중견기업
+  category_code: mid
+  collect_news: false
+  info:
+    representative: 박중현
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+리앤팍스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 박지호
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+에이아이파크:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 박철민
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+이솔정보통신:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 박평호
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+아이피버스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 박희석
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+비빔블:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 방준영
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+에이치오 엔터테인먼트:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 백성실
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+HTC:
+  category: 대기업
+  category_code: large
+  collect_news: false
+  info:
+    representative: 백승배
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+빅토리아프로덕션:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 빅토리아 한
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+칸:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 서국한
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+삼성전자:
+  category: 대기업
+  category_code: large
+  collect_news: false
+  info:
+    representative: 서영근
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+드림브이알:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 서영수
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+베스트텍:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 서우승
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+유디포엠:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 서정협
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+에스아이오티인포텍:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 서형준
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+딥다이버스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 성기봉
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+이노시뮬레이션:
+  category: 중소기업
+  category_code: sme
+  collect_news: true
+  info:
+    representative: 성인제
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+스튜디오쇼:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 성지환
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+슈퍼브이알:
+  category: 중소기업
+  category_code: sme
+  collect_news: true
+  info:
+    representative: 송민철
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+홍익과학기술:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 송영남
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+삼우이머션:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 송영진
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+코드리치:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 송진우
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+디티:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 신원호
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+에이아이콘:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 신준우
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+한국항공우주산업:
+  category: 대기업
+  category_code: large
+  collect_news: false
+  info:
+    representative: 강구영
+    industry: 방위산업/항공
+    employees: '-'
+    description: 대한민국 유일 완제기 항공기 제작 기업. FA-50, KF-21, 수리온 등 제작. 방위산업 핵심 기업.
+    products: 전투기(KF-21, FA-50), 헬기(수리온), 항공 정비
+  financials:
+    revenue: 3조 6,337억원 (2024)
+    operating_profit: '-'
+    market_cap: 코스피 상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: KF-21 양산, 해외 수출 확대
+펄스나인:
+  category: 소기업
+  category_code: small
+  collect_news: true
+  info:
+    representative: 양병석
+    industry: AI 버추얼휴먼
+    employees: '-'
+    description: 딥리얼 AI 기술 기반 버추얼 휴먼 제작 전문 기업. 가상 아이돌 그룹 이터니티(ETERN!TY) 제작. 49개국 팬덤
+      보유.
+    products: 딥리얼 AI, 버추얼 아이돌 이터니티, 아이아팹(AI 콘텐츠 제작소)
+  financials:
+    revenue: 비공개 (스타트업)
+    operating_profit: '-'
+    market_cap: 비상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: 버추얼 휴먼 시장 성장, 글로벌 K-pop 수요
+원유니버스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 양보근
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+시공테크:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 양성준
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+에어에이알:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 오성훈
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+지캠:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 오세광
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+이퀄소울:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 오제욱
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+디오비스튜디오:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 우성천
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+한국과학기술원:
+  category: 대학/연구기관
+  category_code: academic
+  collect_news: false
+  info:
+    representative: 우운택
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+크리에이터버스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 유승우
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+맘모식스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 유철호
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+엔피니티세븐:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 윤승훈
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+제이원스페이스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 윤영철
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+쓰리디타다:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 윤현모
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+메타버스쇼:
+  category: 소기업
+  category_code: small
+  collect_news: true
+  info:
+    representative: 이경용
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+오버더핸드:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이규승
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+ST마이크로일렉트로닉스:
+  category: 중견기업
+  category_code: mid
+  collect_news: false
+  info:
+    representative: 이규진
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+피앤씨솔루션:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이상윤
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+플레이큐리오:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이상준
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+메타로켓:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이상헌
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+탕카:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이석민
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+JTBC:
+  category: 중소기업
+  category_code: sme
+  collect_news: true
+  info:
+    representative: '-'
+    industry: 방송/미디어
+    employees: '-'
+    description: 중앙일보 계열 종합편성채널. 뉴스룸, 드라마, 예능 콘텐츠 제작 및 방송.
+    products: 뉴스, 드라마, 예능 콘텐츠
+  financials:
+    revenue: 3,801억원 (2024)
+    operating_profit: 영업손실 286억원
+    market_cap: 비상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: 광고시장 위축, 수익성 개선 과제
+스토리타코:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이승종
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+국회미래연구원:
+  category: 대학/연구기관
+  category_code: academic
+  collect_news: false
+  info:
+    representative: 이승환
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+콘텐츠클라우드:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이시윤
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+프리다츠:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이용환
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+글로벌 이코노믹:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이원용
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+이노베이션시스템:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이유섭
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+브이런치:
+  category: 소기업
+  category_code: small
+  collect_news: true
+  info:
+    representative: 이윤우
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+휴멜로:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이자룡
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+메타팩토리코퍼레이션:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이재일
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+가우스랩:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이정근
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+한국전자통신연구원:
+  category: 대학/연구기관
+  category_code: academic
+  collect_news: false
+  info:
+    representative: 이정익
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+한국공학대학교:
+  category: 대학/연구기관
+  category_code: academic
+  collect_news: false
+  info:
+    representative: 이정준
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+호텔롯데:
+  category: 대기업
+  category_code: large
+  collect_news: false
+  info:
+    representative: 이정중
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+친구친구티비:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이정환
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+세종일렉트릭:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이종석
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+버넥트:
+  category: 중소기업
+  category_code: sme
+  collect_news: true
+  info:
+    representative: 하태진
+    industry: XR(확장현실) 솔루션
+    employees: 91명
+    description: 산업용 XR 솔루션 전문 기업. 제조, 에너지, 건설, 국방 등 산업현장 디지털 전환 지원. 2023년 코스닥 상장.
+    products: VIRNECT Remote(원격협업), VIRNECT Make(XR저작도구), VIRNECT View, VisionX(AI스마트고글)
+  financials:
+    revenue: 65억원 (2024)
+    operating_profit: 영업손실
+    market_cap: 코스닥 상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: 산업용 XR 수요 증가, 글로벌 시장 확대
+시너스텍:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이진학
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+브이리스브이알:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이창수
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+딥인스펙션:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이철희
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+전략과 실행:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 이혁수
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+클라이어스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 임문수
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+에스원:
+  category: 중견기업
+  category_code: mid
+  collect_news: false
+  info:
+    representative: '-'
+    industry: 보안/시큐리티
+    employees: '-'
+    description: 삼성그룹 계열 종합 보안 서비스 기업. 시큐리티, 빌딩관리, 스마트솔루션 제공.
+    products: 보안 경비, CCTV, 출입통제, 무인매장 솔루션
+  financials:
+    revenue: 2조 8,047억원 (2024)
+    operating_profit: 2,092억원
+    market_cap: 코스피 상장
+    stock_price: '-'
+    per: '-'
+    pbr: '-'
+    outlook: AI/IoT 기반 보안 서비스 확대
+미라클:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 임용진
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+콘텐츠코리아:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 임충순
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+이모션웨이브:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 장순철
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+새만금 메타버스체험관:
+  category: 협회/공공기관
+  category_code: association
+  collect_news: false
+  info:
+    representative: 장호영
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+다올자산운용:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 전우석
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+벤타엑스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 전우열
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+애니펜:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 전재웅
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+볼드스텝:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 전진수
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+비주얼라이트:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 정성근
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+리타:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 정승희
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+특허법인 위더피플:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 정연용
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+제이앤컴퍼니:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 정철화
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+스페이스엘비스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 조성호
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+스카이터틀:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 조정식
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+한국메타버스산업협회:
+  category: 협회/공공기관
+  category_code: association
+  collect_news: false
+  info:
+    representative: 주정현
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+스튜디오리얼라이브 / STUDIOREALIVE:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 지명구
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+라이크코퍼레이션:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 최강배
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+스페이스에이디:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 최돈출
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+데이터마케팅코리아:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 최석흠
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+브이알크루:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 최성광
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+CJ제일제당:
+  category: 대기업
+  category_code: large
+  collect_news: false
+  info:
+    representative: 최성원
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+한국교육학술정보원:
+  category: 협회/공공기관
+  category_code: association
+  collect_news: false
+  info:
+    representative: 최창우
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+케이브이알 인터랙티브:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 최태철
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+퓨처디자이너스 | 라이프스퀘어:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 최형욱 Hugh Choi
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+이머시브캐스트:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 한장희
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+밀당:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 허명건
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+한국전자정보통신산업진흥회:
+  category: 협회/공공기관
+  category_code: association
+  collect_news: false
+  info:
+    representative: 홍원기
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+엑스알텍:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 황창선
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+(사)한국메타버스산업협회:
+  category: 협회/공공기관
+  category_code: association
+  collect_news: false
+  info:
+    representative: 황철호
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+패러블엔터테인먼트:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: 함정훈
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+어드밴스드RF:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: ANDREW JUN PhD
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+직스테크놀로지:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: Choi, Jongbok Andrew
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+숭실대학교:
+  category: 대학/연구기관
+  category_code: academic
+  collect_news: false
+  info:
+    representative: Jeong-A Park
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+뷰덱스:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: Seok. Namkoong
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+KBS:
+  category: 중견기업
+  category_code: mid
+  collect_news: false
+  info:
+    representative: Seong-Jik KIM
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+미스트플레이:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: Suzie Insuk Kim
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''
+브이브이알:
+  category: 미분류
+  category_code: unknown
+  collect_news: true
+  info:
+    representative: YoungHoon Mok
+    industry: ''
+    employees: ''
+    description: ''
+    products: ''
+  financials:
+    revenue: ''
+    operating_profit: ''
+    market_cap: ''
+    stock_price: ''
+    per: ''
+    pbr: ''
+    outlook: ''

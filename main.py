@@ -615,7 +615,16 @@ def process_members(limit_per_member=None):
     
     print(f"[Members] Total news: {len(all_latest_news)}, Today's news: {len(todays_news)}")
     
-    idx_html = render_member_index(member_entries, all_news=todays_news)
+    # Load company profiles if available
+    profiles = {}
+    profiles_path = "config/company_profiles.yaml"
+    if os.path.exists(profiles_path):
+        import yaml
+        with open(profiles_path, "r", encoding="utf-8") as f:
+            profiles = yaml.safe_load(f) or {}
+        print(f"[Members] Loaded {len(profiles)} company profiles")
+    
+    idx_html = render_member_index(member_entries, all_news=todays_news, profiles=profiles)
     with open("docs/members/index.html", "w", encoding="utf-8") as f:
         f.write(idx_html)
         

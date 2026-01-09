@@ -116,6 +116,162 @@
         color: var(--primary-color);
         text-decoration: underline;
     }
+
+    /* Company Profile Styles */
+    .profile-filter-bar {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .filter-select {
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 0.9rem;
+        background: white;
+        cursor: pointer;
+        min-width: 140px;
+    }
+
+    .filter-select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+    }
+
+    .profile-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+    }
+
+    .profile-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.25rem;
+        transition: all 0.2s;
+    }
+
+    .profile-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .profile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        gap: 0.5rem;
+    }
+
+    .profile-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0;
+        flex: 1;
+    }
+
+    .category-badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.6rem;
+        border-radius: 20px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .category-badge.large {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .category-badge.mid {
+        background: #fef3c7;
+        color: #d97706;
+    }
+
+    .category-badge.sme {
+        background: #dbeafe;
+        color: #2563eb;
+    }
+
+    .category-badge.small {
+        background: #d1fae5;
+        color: #059669;
+    }
+
+    .category-badge.academic {
+        background: #ede9fe;
+        color: #7c3aed;
+    }
+
+    .category-badge.association {
+        background: #e0e7ff;
+        color: #4338ca;
+    }
+
+    .category-badge.unknown {
+        background: #f3f4f6;
+        color: #6b7280;
+    }
+
+    .profile-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .profile-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+    }
+
+    .info-label {
+        color: var(--text-muted);
+    }
+
+    .info-value {
+        font-weight: 500;
+        color: var(--text-dark);
+        text-align: right;
+    }
+
+    .news-badge {
+        margin-top: 0.5rem;
+        text-align: center;
+        padding: 0.4rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .news-badge.active {
+        background: #d1fae5;
+        color: #059669;
+    }
+
+    .news-badge.inactive {
+        background: #f3f4f6;
+        color: #9ca3af;
+    }
+
+    @media (max-width: 768px) {
+        .profile-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .profile-filter-bar {
+            flex-direction: column;
+        }
+
+        .filter-select {
+            width: 100%;
+        }
+    }
 </style>
 {% endblock %}
 
@@ -145,6 +301,9 @@
             <button class="member-tab" data-tab="member-list">
                 회원사 목록 <span class="tab-count">{{ members|length }}</span>
             </button>
+            <button class="member-tab" data-tab="company-profile">
+                기업 프로필 <span class="tab-count">{{ profiles|length if profiles else 0 }}</span>
+            </button>
         </div>
     </div>
 
@@ -165,10 +324,10 @@
                     </div>
                 </div>
                 <div class="list-item-actions">
-                    <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}" 
-                       class="discuss-btn-sm">토론</a>
-                    <button onclick="navigator.clipboard.writeText('{{ item.link }}')" 
-                            class="discuss-btn-sm">공유</button>
+                    <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
+                        class="discuss-btn-sm">토론</a>
+                    <button onclick="navigator.clipboard.writeText('{{ item.link }}')"
+                        class="discuss-btn-sm">공유</button>
                 </div>
             </div>
             {% endfor %}
@@ -217,6 +376,65 @@
             </table>
             <div id="member-no-results" class="empty-msg hidden">검색 결과가 없습니다.</div>
         </div>
+    </div>
+
+    <!-- Tab Content: Company Profile -->
+    <div id="company-profile" class="member-tab-content">
+        <!-- Category Filter -->
+        <div class="profile-filter-bar">
+            <select id="category-filter" class="filter-select">
+                <option value="all">전체 분류</option>
+                <option value="large">대기업</option>
+                <option value="mid">중견기업</option>
+                <option value="sme">중소기업</option>
+                <option value="small">소기업/스타트업</option>
+                <option value="academic">대학/연구기관</option>
+                <option value="association">협회/공공기관</option>
+                <option value="unknown">미분류</option>
+            </select>
+            <select id="news-filter" class="filter-select">
+                <option value="all">전체</option>
+                <option value="collect">뉴스수집 O</option>
+                <option value="exclude">뉴스수집 X</option>
+            </select>
+        </div>
+
+        <!-- Profile Grid -->
+        <div class="profile-grid" id="profile-grid">
+            {% if profiles %}
+            {% for name, profile in profiles.items() %}
+            <div class="profile-card" data-category="{{ profile.category_code }}"
+                data-news="{{ 'collect' if profile.collect_news else 'exclude' }}">
+                <div class="profile-header">
+                    <h3 class="profile-name">{{ name }}</h3>
+                    <span class="category-badge {{ profile.category_code }}">{{ profile.category }}</span>
+                </div>
+                <div class="profile-body">
+                    <div class="profile-info">
+                        <span class="info-label">대표</span>
+                        <span class="info-value">{{ profile.info.representative or '-' }}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="info-label">업종</span>
+                        <span class="info-value">{{ profile.info.industry or '-' }}</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="info-label">직원수</span>
+                        <span class="info-value">{{ profile.info.employees or '-' }}</span>
+                    </div>
+                    {% if profile.collect_news %}
+                    <div class="news-badge active">뉴스 수집 대상</div>
+                    {% else %}
+                    <div class="news-badge inactive">뉴스 수집 제외</div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="empty-msg">기업 프로필 데이터가 없습니다.</div>
+            {% endif %}
+        </div>
+        <div id="profile-no-results" class="empty-msg hidden">검색 결과가 없습니다.</div>
     </div>
 </section>
 
@@ -295,6 +513,45 @@
         searchInput.addEventListener('input', (e) => {
             performSearch(e.target.value);
         });
+
+        // Profile Filter Logic
+        const categoryFilter = document.getElementById('category-filter');
+        const newsFilter = document.getElementById('news-filter');
+
+        function filterProfiles() {
+            const categoryVal = categoryFilter ? categoryFilter.value : 'all';
+            const newsVal = newsFilter ? newsFilter.value : 'all';
+            const cards = document.querySelectorAll('#profile-grid .profile-card');
+            const noResultsMsg = document.getElementById('profile-no-results');
+            const grid = document.getElementById('profile-grid');
+
+            let visibleCount = 0;
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                const cardNews = card.getAttribute('data-news');
+
+                const categoryMatch = categoryVal === 'all' || cardCategory === categoryVal;
+                const newsMatch = newsVal === 'all' || cardNews === newsVal;
+
+                if (categoryMatch && newsMatch) {
+                    card.style.display = '';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (visibleCount === 0) {
+                if (grid) grid.classList.add('hidden');
+                if (noResultsMsg) noResultsMsg.classList.remove('hidden');
+            } else {
+                if (grid) grid.classList.remove('hidden');
+                if (noResultsMsg) noResultsMsg.classList.add('hidden');
+            }
+        }
+
+        if (categoryFilter) categoryFilter.addEventListener('change', filterProfiles);
+        if (newsFilter) newsFilter.addEventListener('change', filterProfiles);
     });
 </script>
 {% endblock %}
