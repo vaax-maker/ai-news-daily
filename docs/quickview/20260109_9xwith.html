@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang='ko'>
+
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>믿을 정보가 없다? AI '슬롭(Slop)'의 습격과 데이터 전쟁 - 퀵뷰</title>
+    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css?v=12">
+    
+<style>
+    .quickview-content {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .quickview-header {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .quickview-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
+    }
+
+    .quickview-meta {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
+    .quickview-body {
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+
+    .quickview-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    .quickview-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Flatten nested content structure for better readability */
+    .quickview-body .card {
+        padding: 1.25rem !important;
+        /* Reduce padding from default 1.5rem */
+        box-shadow: none !important;
+        /* Remove shadow to reduce "depth" feeling */
+        background: #f8fafc;
+        /* Light background for contrast without depth */
+        border: 1px solid var(--border-color);
+        margin-bottom: 1.5rem;
+    }
+
+    .quickview-body ul,
+    .quickview-body ol {
+        padding-left: 1.25rem;
+        /* Reduce list indentation */
+        margin-bottom: 1rem;
+    }
+
+    .quickview-body li {
+        margin-bottom: 0.25rem;
+    }
+
+    /* Ensure code blocks don't add too much visual weight */
+    .quickview-body pre {
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    /* === MOBILE RESPONSIVE === */
+    @media (max-width: 767px) {
+        .quickview-content {
+            /* Remove outer card styling on mobile - match daily article pages */
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 1rem;
+            border-radius: 0;
+        }
+
+        .quickview-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .quickview-title {
+            font-size: 1.35rem;
+            line-height: 1.3;
+        }
+
+        .quickview-meta {
+            font-size: 0.85rem;
+        }
+
+        .quickview-body {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .quickview-body .card {
+            padding: 0.75rem !important;
+            margin-bottom: 1rem;
+        }
+
+        .quickview-body ul,
+        .quickview-body ol {
+            padding-left: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .quickview-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        .quickview-body h2,
+        .quickview-body h3 {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quickview-actions {
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            gap: 0.5rem;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+    <header>
+        <div class="gnb">
+            <!-- Left: Logo -->
+            <a href="../index.html" class="logo-link">
+                <img src="../static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
+            </a>
+
+            <!-- Right: Slogan & Nav -->
+            <div class="header-right-section">
+                <div class="slogan-container">
+                    <span class="slogan-since">since 2016</span>
+                    <span class="header-slogan-text">
+                        VR-AR-AI-XR <span class="slogan-highlight">기술과 Biz.를 연결하는</span>
+                        성장나눔 <span class="slogan-highlight">커뮤니티</span>
+                    </span>
+                </div>
+                <nav class="nav-links">
+                    <a href="../index.html"
+                        class="">Home</a>
+                    <a href="../ai/index.html"
+                        class="">AI/XR뉴스</a>
+                    <a href="../quickview/index.html"
+                        class="active">퀵뷰</a>
+                    <a href="../gov/index.html"
+                        class="">정부과제</a>
+                    <a href="../members/index.html"
+                        class="">회원사소식</a>
+                    <a href="../board/index.html"
+                        class="">Small Talk</a>
+                </nav>
+            </div>
+        </div>
+        <!-- Announcement Message -->
+        <div class="header-announcement">
+            이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요
+        </div>
+    </header>
+
+    <div class="container">
+        
+<div class="quickview-content">
+    <div class="quickview-header">
+        <h1 class="quickview-title">믿을 정보가 없다? AI '슬롭(Slop)'의 습격과 데이터 전쟁</h1>
+        <div class="quickview-meta">📅 2026년 01월 09일 16:19</div>
+    </div>
+
+    <div class="quickview-body">
+        <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 쓰레기(Slop)의 역습과 휴먼 데이터의 가치</title>
+    <style>
+        /* vaax-theme.css - 외부 제공용 */
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --line-gray: #9ca3af;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--text-main);
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .meta-info {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            text-align: right;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            background-color: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 20px;
+            background-color: var(--primary-color);
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight {
+            background-color: #CEFA98;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .stock-guide {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .stock-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stock-item:last-child {
+            border-bottom: none;
+        }
+
+        .stock-name {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .stock-price {
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        .trend-up {
+            color: #ef4444; /* 한국식 상승 표기 */
+        }
+
+        .trend-down {
+            color: #3b82f6; /* 한국식 하락 표기 */
+        }
+
+        .tags {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background-color: #f3f4f6;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--line-gray);
+            border-top: 1px solid #f3f4f6;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>믿을 정보가 없다? AI '슬롭(Slop)'의 습격과 데이터 전쟁</h1>
+    <div class="meta-info">2026년 1월 9일 생성</div>
+
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/swLpVk5GkJ0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="section">
+        <div class="section-title">핵심 요약 : AI 쓰레기 정보의 산업화</div>
+        <ul>
+            <li><strong>AI 슬롭(Slop)의 범람 :</strong> AI가 기계적으로 찍어낸 저품질 영상(일명 AI 슬롭)의 누적 조회수가 84억 회를 돌파. 한 AI 영상 채널은 연간 57억 원의 수익을 올리며 '자동화 산업'으로 변질됨.</li>
+            <li><strong>알고리즘의 모순 :</strong> 유튜브/구글 알고리즘은 진실성보다 <span class="highlight">체류 시간과 클릭률</span>에 반응함. 자극적인 AI 생성물은 이 약점을 파고들어 확산됨.</li>
+            <li><strong>플랫폼의 딜레마 :</strong> 구글은 플랫폼의 관리자(정원사)이면서 동시에 슬롭을 만드는 AI 도구의 판매자임. 수익 구조상 AI 콘텐츠 생성을 막기 어려운 상황.</li>
+            <li><strong>사회적 비용 증가 :</strong> 정보 검증 비용 급증(금융 사기, 딥페이크). AI가 AI 데이터를 학습하며 지능이 퇴보하는 <span class="highlight">모델 붕괴(Model Collapse)</span> 현상 경고.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">미래 전망 : '진짜 인간 데이터'의 가치 급등</div>
+        <ul>
+            <li><strong>데이터 고갈과 가치 재평가 :</strong> 고품질의 인간 텍스트 데이터가 고갈 위기. AI가 흉내 낼 수 없는 '인간 고유의 데이터'가 기업의 핵심 경쟁력이 됨.</li>
+            <li><strong>데이터 유료화 :</strong> 레딧(Reddit), 뉴욕타임스 등은 자사 플랫폼에 축적된 인간 데이터를 AI 기업에 판매하며 막대한 수익 요구.</li>
+            <li><strong>제도적 변화 :</strong> 한국 AI 기본법 시행 등 AI 생성물에 대한 표기 의무화 및 규제 강화 추세.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">투자 가이드 : 관련 종목 현황 (2026.01.09 기준)</div>
+        <div class="stock-guide">
+            <div class="stock-item">
+                <span class="stock-name">Alphabet A (GOOGL)</span>
+                <div style="text-align: right;">
+                    <span class="stock-price trend-up">$326.01 (+1.11%)</span><br>
+                    <small style="color: var(--text-muted);">AI 도구 판매와 광고 수익의 양날의 검. 52주 신고가 근접하며 상승 추세.</small>
+                </div>
+            </div>
+            <div class="stock-item">
+                <span class="stock-name">Reddit (RDDT)</span>
+                <div style="text-align: right;">
+                    <span class="stock-price trend-down">$253.64 (-0.72%)</span><br>
+                    <small style="color: var(--text-muted);">모델 붕괴의 대안인 '휴먼 데이터'의 최대 수혜주. 최근 1년 36% 이상 급등 후 숨 고르기.</small>
+                </div>
+            </div>
+            <div class="stock-item">
+                <span class="stock-name">Meta Platforms (META)</span>
+                <div style="text-align: right;">
+                    <span class="stock-price trend-down">$646.06 (-0.41%)</span><br>
+                    <small style="color: var(--text-muted);">사기 광고 등 비용 증가 이슈 있으나 견조한 펀더멘털 유지. 장기 상승 추세 유효.</small>
+                </div>
+            </div>
+        </div>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">* 주가 정보는 장중/마감 기준 변동될 수 있으며 투자 판단의 책임은 개인에게 있습니다.</p>
+    </div>
+
+    <div class="tags">
+        <span class="tag">#AI슬롭</span>
+        <span class="tag">#모델붕괴</span>
+        <span class="tag">#데이터전쟁</span>
+        <span class="tag">#휴먼데이터</span>
+        <span class="tag">#가짜뉴스</span>
+        <span class="tag">#머니인사이드</span>
+    </div>
+
+    <footer>
+        2026 Fovea
+    </footer>
+</div>
+
+</body>
+</html>
+    </div>
+
+    <div class="quickview-actions">
+        <a href="index.html" class="back-link">← 퀵뷰 목록으로</a>
+        <div style="flex: 1;"></div>
+        <a href="../board/index.html?mode=discuss&title=%EB%AF%BF%EC%9D%84%20%EC%A0%95%EB%B3%B4%EA%B0%80%20%EC%97%86%EB%8B%A4%3F%20AI%20%27%EC%8A%AC%EB%A1%AD%28Slop%29%27%EC%9D%98%20%EC%8A%B5%EA%B2%A9%EA%B3%BC%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A0%84%EC%9F%81&link=https%3A//vaax-maker.github.io/ai-news-daily/quickview/20260109_9xwith.html&source=퀵뷰"
+            class="discuss-btn-sm">토론</a>
+        <button type="button" class="discuss-btn-sm"
+            onclick="navigator.clipboard.writeText('https://vaax-maker.github.io/ai-news-daily/quickview/20260109_9xwith.html'); alert('URL이 복사되었습니다!');">공유</button>
+    </div>
+</div>
+
+    </div>
+
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 VAAX rebuild Project by <a href="../admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
