@@ -214,7 +214,7 @@
         <div class="quickview-meta">📅 2026년 01월 11일 20:15</div>
     </div>
 
-    <div class="quickview-body">
+    <div class="quickview-body" id="quickview-body-content">
         <!DOCTYPE html>
 
 <html lang="ko"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>미루는 습관, 의지가 아니라 '감정'의 문제입니다</title> <style> /* vaax-theme.css - 외부 제공용 */ :root { --primary-color: #65a30d; --primary-color-hover: #4d7c0f; --secondary-color: #475569; --background-color: #ffffff; --card-bg: #ffffff; --text-main: #111827; --text-muted: #4b5563; --border-color: #d1d5db; --line-gray: #9ca3af; }
@@ -443,6 +443,41 @@
 
 </body> </html>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('quickview-body-content');
+            const pageTitle = "아무리 미루던 사람도 오늘부터 달라집니다".trim();
+            
+            // 1. Remove duplicate H1/H2 if it matches page title or is the first element
+            const headings = container.querySelectorAll('h1, h2');
+            if (headings.length > 0) {
+                const firstHeading = headings[0];
+                // Check if text is similar or it's at the very top
+                if (firstHeading.innerText.trim() === pageTitle || container.firstElementChild === firstHeading) {
+                    firstHeading.style.display = 'none';
+                }
+            }
+            
+            // 2. Unwrap or flatten nested cards
+            // If the content is wrapped in a .card, remove the class to avoid double-boxing
+            const nestedCards = container.querySelectorAll('.card');
+            nestedCards.forEach(card => {
+                // Remove card styling but keep content
+                card.style.boxShadow = 'none';
+                card.style.border = 'none';
+                card.style.background = 'transparent';
+                card.style.padding = '0';
+                card.classList.remove('card');
+            });
+            
+            // 3. Remove any HR that appears at the very top
+            const firstEl = container.firstElementChild;
+            if (firstEl && firstEl.tagName === 'HR') {
+                firstEl.style.display = 'none';
+            }
+        });
+    </script>
 
     <div class="quickview-actions">
         <a href="index.html" class="back-link">← 퀵뷰 목록으로</a>

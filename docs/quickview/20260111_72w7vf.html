@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <title>AI 시대의 교육 : 변하지 않는 가치를 찾아서 - 퀵뷰</title>
+    <title>제발 버티지 마세요: 송길영이 경고하는 2026년 생존법 - 퀵뷰</title>
     
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
@@ -210,8 +210,8 @@
         
 <div class="quickview-content">
     <div class="quickview-header">
-        <h1 class="quickview-title">AI 시대의 교육 : 변하지 않는 가치를 찾아서</h1>
-        <div class="quickview-meta">📅 2026년 01월 11일 19:59</div>
+        <h1 class="quickview-title">제발 버티지 마세요: 송길영이 경고하는 2026년 생존법</h1>
+        <div class="quickview-meta">📅 2026년 01월 11일 20:19</div>
     </div>
 
     <div class="quickview-body" id="quickview-body-content">
@@ -220,7 +220,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 시대, 무엇을 가르쳐야 하는가? - 김상욱 교수</title>
+    <title>제발 버티지 마세요: 송길영이 경고하는 2026년 생존법 (경량문명의 탄생)</title>
     <style>
         /* vaax-theme.css - 외부 제공용 */
         :root {
@@ -237,7 +237,7 @@
 
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-            background-color: #f3f4f6;
+            background-color: var(--background-color);
             color: var(--text-main);
             margin: 0;
             padding: 20px;
@@ -249,58 +249,83 @@
             margin: 0 auto;
             background-color: var(--card-bg);
             padding: 40px;
-            border-radius: 12px;
+            border-radius: 8px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border-color);
         }
 
         h1 {
-            font-size: 2.2rem;
             color: var(--text-main);
-            margin-bottom: 10px;
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
             border-bottom: 3px solid var(--primary-color);
             padding-bottom: 15px;
-            line-height: 1.3;
         }
 
         .meta-info {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 30px;
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         h2 {
+            color: var(--text-main);
             font-size: 1.5rem;
-            color: var(--secondary-color);
-            margin-top: 40px;
-            margin-bottom: 15px;
-            border-left: 5px solid var(--primary-color);
-            padding-left: 15px;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 24px;
+            background-color: var(--primary-color);
+            margin-right: 10px;
+            border-radius: 2px;
         }
 
         h3 {
-            font-size: 1.2rem;
-            color: var(--text-main);
-            margin-top: 25px;
-            margin-bottom: 10px;
-            font-weight: 700;
+            color: var(--secondary-color);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
         }
 
         p {
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
             color: var(--text-muted);
         }
 
         ul {
-            margin-bottom: 20px;
-            padding-left: 20px;
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 1.5rem;
         }
 
         li {
-            margin-bottom: 8px;
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
             color: var(--text-muted);
+        }
+
+        li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
         }
 
         .highlight {
@@ -311,152 +336,178 @@
             color: var(--text-main);
         }
 
-        .timestamp-link {
+        a.timestamp {
             display: inline-block;
-            font-size: 0.85rem;
             color: var(--primary-color);
             text-decoration: none;
-            margin-left: 8px;
+            font-size: 0.85rem;
             font-weight: 600;
-            background-color: #f0fdf4;
+            border: 1px solid var(--primary-color);
             padding: 2px 8px;
             border-radius: 12px;
-            border: 1px solid var(--primary-color);
+            margin-left: 8px;
             transition: all 0.2s;
         }
 
-        .timestamp-link:hover {
+        a.timestamp:hover {
             background-color: var(--primary-color);
             color: white;
         }
 
-        .summary-box {
-            background-color: #f8fafc;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-
         .tag-container {
-            margin-top: 50px;
-            padding-top: 20px;
+            margin-top: 3rem;
+            padding-top: 1rem;
             border-top: 1px solid var(--border-color);
         }
 
         .tag {
             display: inline-block;
-            background-color: #e2e8f0;
+            background-color: #f3f4f6;
             color: var(--secondary-color);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.875rem;
             margin-right: 8px;
             margin-bottom: 8px;
         }
 
         footer {
+            margin-top: 4rem;
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
             color: var(--line-gray);
-            font-size: 0.9rem;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
         
-        strong {
-            color: var(--text-main);
+        .summary-box {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>AI 시대의 교육 : 변하지 않는 가치를 찾아서</h1>
-    
+    <h1>제발 버티지 마세요: 송길영이 경고하는 2026년 생존법</h1>
     <div class="meta-info">
-        <span>강연자: 김상욱 교수 (경희대 물리학과)</span>
-        <span>2026년 1월 11일 생성</span>
+        <span>Source: 세바시 강연 (송길영 작가)</span>
+        <span>Date: 2026-01-11</span>
     </div>
 
     <div class="summary-box">
-        <h3>⚡ 퀵뷰 (핵심 요약)</h3>
-        <ul>
-            <li><strong>현상:</strong> 생성형 AI의 발전 속도는 예측 불가능하며 인간 고유 영역을 넘보고 있음.</li>
-            <li><strong>통찰:</strong> 미래 예측은 불가능(카오스). 따라서 <strong>'변하지 않는 것(보존 법칙)'</strong>에 집중해야 함.</li>
-            <li><strong>교육의 본질:</strong> 유행하는 코딩/툴 교육보다 <strong>역사, 철학, 예술, 기초과학(수학/물리)</strong> 등 근본 역량이 중요.</li>
-            <li><strong>목표 재설정:</strong> 교육의 목표는 '행복'이 아닌 아이의 <strong>'완전한 독립'</strong>과 <strong>'공동체 기여'</strong>여야 함.</li>
-        </ul>
+        <strong>핵심 요약</strong>
+        <p style="margin-bottom:0;">
+            AI의 도입으로 거대한 조직과 관료제 중심의 사회가 무너지고 있습니다. 송길영 작가는 이를 <span class="highlight">경량 문명(Lightweight Civilization)</span>이라 정의하며, 개인이 AI를 통해 조직 없이도 거대 가치를 창출할 수 있는 '증강된 핵개인'의 시대가 도래했음을 경고하고 조언합니다.
+        </p>
     </div>
 
-    <h2>1. AI의 현주소와 인간과의 차이</h2>
-    <p>알파고(판별형 AI)를 넘어 챗GPT, 제미나이 등 생성형 AI가 등장했습니다. 이들은 수능 만점을 받을 정도로 발전했지만, 인간과는 근본적으로 다른 방식으로 작동합니다.</p>
+    <h2>1. 다가오는 충격: 교육과 전문직의 붕괴</h2>
     
-    <h3>1-1. 확률적 생성 vs 맥락적 사고</h3>
+    <h3>교육 현장의 혼란</h3>
+    <p>중고등학교 수행평가에서 이미 생성형 AI가 깊숙이 개입하고 있습니다. 학생들은 AI를 활용해 과제를 수행하고, 교사는 이를 평가하기 어려운 상황에 직면했습니다.</p>
     <ul>
-        <li><strong>AI의 방식:</strong> 방대한 데이터를 기반으로 다음 단어가 나올 <span class="highlight">확률을 계산</span>하여 문장을 생성합니다. 이는 '생각'이 아니라 거대한 데이터 연산의 결과입니다. <a href="https://youtu.be/U4fwugv9nYY?t=252" class="timestamp-link" target="_blank">00:04:12</a></li>
-        <li><strong>인간의 방식:</strong> 인간은 '원샷 러닝(One-shot learning)'이 가능합니다. 방대한 데이터 없이도 <span class="highlight">맥락(Context)을 파악</span>하여 한두 번의 경험만으로 행동을 결정합니다. <a href="https://youtu.be/U4fwugv9nYY?t=488" class="timestamp-link" target="_blank">00:08:08</a></li>
+        <li>중1 과학 수행평가 수준이 고도화되어 부모나 학생 스스로 해결하기 어려운 수준 도달 <a href="https://www.youtube.com/watch?v=bKbo8Rr5Y_0&t=89s" class="timestamp">00:01:29</a></li>
+        <li>학생들이 ChatGPT를 활용해 과제를 수행하고, 심지어 채점도 AI가 가능한 역설적 상황 발생</li>
+        <li>결과물(Written)에 대한 신뢰도 하락으로 인해 대면 면접(Oral)의 중요성이 다시 부각됨</li>
     </ul>
 
-    <h3>1-2. 신체의 유무와 욕망</h3>
+    <h3>전문직의 위기 (법률 및 사무직)</h3>
+    <p>고도의 전문 지식이 필요했던 법률 및 사무 영역이 AI로 대체되고 있습니다.</p>
     <ul>
-        <li>인간의 판단은 신체 내부 신호(기분, 감각)의 영향을 받으며, 유한한 신체로 인해 욕망과 한계를 가집니다. 반면 AI는 신체가 없어 '기분'이나 진정한 의미의 '욕심'이 없습니다.</li>
-        <li>AI가 현실 세계에 영향을 미치려면 반드시 인간이나 기계 장치(인터페이스)를 거쳐야 합니다. 이것이 우리가 AI를 통제할 수 있는 지점입니다. <a href="https://youtu.be/U4fwugv9nYY?t=728" class="timestamp-link" target="_blank">00:12:08</a></li>
+        <li>해외 로펌들이 패럴리걸(Paralegal, 법률 보조원) 채용을 중단하기 시작함 <a href="https://www.youtube.com/watch?v=bKbo8Rr5Y_0&t=269s" class="timestamp">00:04:29</a></li>
+        <li>복잡한 영문 계약서의 독소 조항 분석 및 수정 레터 작성을 AI가 3분 만에 처리</li>
+        <li>아마존 등 빅테크 기업에서 화이트칼라 3만 명 감원 등 구조 조정이 현실화됨</li>
     </ul>
 
-    <h2>2. 미래 예측의 허와 실 : 물리학자의 관점</h2>
-    <p>기술 혁신이 가져올 미래를 인간은 제대로 예측한 적이 없습니다. 플라스틱(폴리에틸렌)은 전쟁용 절연체로 개발되었으나 환경 오염의 주범이 되었고, 엔진은 기후 위기를 불렀습니다.</p>
+    <h2>2. 미디어와 광고 산업의 지각변동</h2>
 
-    <h3>2-1. 예측 불가능성 (카오스 이론)</h3>
+    <h3>중간 단계의 소멸</h3>
+    <p>광고주와 매체 사이에 존재했던 복잡한 대행 및 제작 과정이 AI와 직거래 플랫폼에 의해 사라지고 있습니다.</p>
     <ul>
-        <li>1900년대 사람들이 상상한 2000년은 '고래가 끄는 잠수함' 수준이었습니다. 인터넷과 스마트폰의 등장은 아무도 예측하지 못했습니다.</li>
-        <li>특히 스마트폰 도입 이후 서구권 청소년의 정신 건강이 급격히 악화된 사례는 기술의 부작용을 예측하기 어려움을 보여줍니다. <a href="https://youtu.be/U4fwugv9nYY?t=1336" class="timestamp-link" target="_blank">00:22:16</a></li>
+        <li>사례: 메타(Meta)가 광고주(노홍철)와 직접 접촉하여 광고 제작 <a href="https://www.youtube.com/watch?v=bKbo8Rr5Y_0&t=303s" class="timestamp">00:05:03</a></li>
+        <li>기존 6단계 프로세스(광고주-대행사-제작사-포스트프로덕션-미디어렙-매체)가 매체 직거래로 단축</li>
+        <li>촬영 시간 1시간으로 단축 (얼굴만 촬영 후 나머지는 AI 생성)</li>
+        <li>결과: 광고 대행사, 제작사, 현장 스태프, 메이크업 아티스트 등의 일자리 소멸 위험</li>
     </ul>
 
-    <h3>2-2. 불확실할 때 해야 할 일 : 보존 법칙 찾기</h3>
+    <h3>가상 모델과 효율성</h3>
+    <p>AI 기술의 발전으로 물리적 제약이 사라진 광고 제작이 가능해졌습니다.</p>
     <ul>
-        <li>물리학에서는 예측 불가능한 카오스 상황(이중 진자 운동 등)에서도 절대 변하지 않는 <strong>'에너지 보존 법칙'</strong>을 먼저 찾습니다.</li>
-        <li>미래가 불확실할수록 "무엇이 변할까?"(예측)를 묻지 말고, <span class="highlight">"무엇이 변하지 않을까?"(본질)</span>를 물어야 합니다. <a href="https://youtu.be/U4fwugv9nYY?t=1924" class="timestamp-link" target="_blank">00:32:04</a></li>
+        <li>모델이 해외에 있어도 AI로 광고 제작 가능 (촬영 불필요) <a href="https://www.youtube.com/watch?v=bKbo8Rr5Y_0&t=390s" class="timestamp">00:06:30</a></li>
+        <li>광고 모델의 영향력(팔로워)이 필수 조건화됨</li>
     </ul>
 
-    <h2>3. AI 시대, 변하지 않는 교육의 핵심</h2>
-    <p>제프 베조스의 말처럼, 전략은 변하지 않는 것에 토대를 두어야 합니다. 10년 후에도 유효할 교육 내용은 다음과 같습니다.</p>
+    <h2>3. 경량 문명(Lightweight Civilization)의 탄생</h2>
 
-    <h3>3-1. 인문학적 소양 (Humanity)</h3>
+    <h3>생산 시스템의 진화</h3>
+    <p>인류의 생산 시스템은 분업과 관료제를 거쳐 AI 기반의 개인화 생산으로 진화했습니다.</p>
     <ul>
-        <li><strong>역사:</strong> 진화심리학적으로 인간의 본성은 5만 년간 변하지 않았습니다. 역사를 배우는 것은 <span class="highlight">변하지 않는 인간의 행동 양식</span>을 배우는 것입니다.</li>
-        <li><strong>철학:</strong> 인간이란 무엇인가에 대한 근본적 탐구는 AI가 대체할 수 없습니다.</li>
-        <li><strong>예술:</strong> 직업으로서가 아니라 삶을 풍요롭게 즐기는 수단으로서 예술은 영원할 것입니다. <a href="https://youtu.be/U4fwugv9nYY?t=2187" class="timestamp-link" target="_blank">00:36:27</a></li>
+        <li><strong>아담 스미스의 분업:</strong> 생산 속도 향상을 위해 공정을 쪼개고 단순화 <a href="https://www.youtube.com/watch?v=bKbo8Rr5Y_0&t=510s" class="timestamp">00:08:30</a></li>
+        <li><strong>막스 베버의 관료제:</strong> 품질 관리를 위해 관리자(김부장) 등장, 그러나 관료화의 폐해 발생</li>
+        <li><strong>AI의 도입:</strong> 기계가 생산 시스템에 직접 개입하며 조직 구조를 다시 극도로 단순화(경량화) 시킴</li>
     </ul>
 
-    <h3>3-2. 문해력과 기초 과학 (STEM)</h3>
+    <h3>지식 비용의 하락과 평준화</h3>
+    <p>과거에는 지식 습득에 큰 비용과 노력이 필요했으나, 이제는 저렴한 비용으로 누구나 고도의 지능을 빌릴 수 있습니다.</p>
     <ul>
-        <li><strong>읽기/쓰기/말하기:</strong> AI에게 지시를 내리고 결과를 검증하려면, 인간이 먼저 그 내용을 이해하고 구성할 능력이 있어야 합니다. 이것이 지식인의 핵심 업무입니다.</li>
-        <li><strong>수학/물리:</strong> 모든 산업혁명(1~4차)의 기반은 물리학과 수학이었습니다. "1+1=2"는 10년 후에도 변하지 않습니다. 유행하는 툴(특정 코딩 언어)보다 <span class="highlight">원리(Basic)</span>를 가르쳐야 합니다. <a href="https://youtu.be/U4fwugv9nYY?t=2385" class="timestamp-link" target="_blank">00:39:45</a></li>
+        <li>과거: 책, 교육 등 지식 접근 비용이 높아 정보 비대칭이 경쟁력이었음</li>
+        <li>현재: 월 20달러(약 2만 원)로 최고 수준의 AI 지능 활용 가능 <a href="https://www.youtube.com/watch?v=bKbo8Rr5Y_0&t=681s" class="timestamp">00:11:21</a></li>
+        <li>모두가 현명해지는 시대, 단순 지식으로는 우위를 점할 수 없음</li>
     </ul>
 
-    <h2>4. 교육의 진정한 목표 재설정</h2>
-    <p>단순히 '아이의 행복'을 목표로 하면 부모의 욕망이 투영될 수 있습니다. 생물학적 관점과 아인슈타인의 견해를 빌려 교육 목표를 재정의해야 합니다.</p>
+    <h2>4. 증강된 핵개인의 부상 (Augmented Individual)</h2>
 
+    <h3>조직 없는 생산의 시대</h3>
+    <p>거대 자본이나 조직 없이도 개인의 아이디어와 AI 도구만으로 글로벌 비즈니스가 가능합니다.</p>
     <ul>
-        <li><strong>첫째, 완전한 독립:</strong> 동물의 교육 목표와 같이, 부모 없이도 경제적/정신적으로 스스로 살아갈 수 있는 능력을 키우는 것. AI가 아이의 독립성을 해친다면 사용을 제어해야 합니다. <a href="https://youtu.be/U4fwugv9nYY?t=2911" class="timestamp-link" target="_blank">00:48:31</a></li>
-        <li><strong>둘째, 공동체 기여:</strong> 독립적 개인이 되어 공동체를 위해 일하는 것을 고귀하게 여기는 태도. AI는 인간을 고립시킬 수 있으므로, 학교에서는 인간 대 인간의 접촉과 협력을 강화해야 합니다. <a href="https://youtu.be/U4fwugv9nYY?t=2977" class="timestamp-link" target="_blank">00:49:37</a></li>
+        <li>10대 창업자가 친구들과 만든 앱으로 월 매출 10억 달성</li>
+        <li>노트북 하나만 있으면 '게러지(창고) 창업'조차 필요 없는 시대 도래</li>
+    </ul>
+
+    <h3>사례: 19세 뮤지션의 홀로서기</h3>
+    <p>기획사나 자본 없이 AI 툴만을 활용해 글로벌 아티스트로 성장한 사례입니다. <a href="https://www.youtube.com/watch?v=bKbo8Rr5Y_0&t=750s" class="timestamp">00:12:30</a></p>
+    <ul>
+        <li><strong>디자인:</strong> Paint.net, Procreate 활용 (앨범 커버)</li>
+        <li><strong>음악 제작:</strong> FL Studio, Splice(샘플링), Serum(신디사이저) 활용</li>
+        <li><strong>유통/홍보:</strong> DistroKid(글로벌 음원 유통), 유튜브, 디스코드(팬덤 관리)</li>
+        <li>결과: 기획사 없이 스포티파이/애플뮤직 진출 및 5,000달러 수익 창출</li>
+    </ul>
+
+    <h2>5. 결론: 흐름에 올라타라</h2>
+
+    <h3>저항하지 말고 활용하라</h3>
+    <p>시대의 흐름(해류)을 거스르는 노력은 무의미합니다. 새로운 기술을 적극적으로 수용해야 합니다.</p>
+    <ul>
+        <li>변화는 이미 시작되었으며, 이를 외면하는 것은 '무동력 요트로 해류를 거스르는 것'과 같음 <a href="https://www.youtube.com/watch?v=bKbo8Rr5Y_0&t=1012s" class="timestamp">00:16:52</a></li>
+        <li>인생의 항해 도구 업그레이드: 해도, 나침반을 넘어 <span class="highlight">AI라는 GPS</span>를 장착해야 함</li>
+    </ul>
+
+    <h3>지금 바로 시작하라</h3>
+    <p>경량 문명은 누구에게나 기회가 열려 있는 따뜻한 문명이 될 수 있습니다. 과거의 실패나 제약 때문에 포기했던 꿈을 AI의 도움으로 다시 시작할 때입니다.</p>
+    <ul>
+        <li>조직에 들어가지 못해(입시, 취업 실패) 좌절했던 꿈을 개인의 힘으로 실현 가능</li>
+        <li>증강된 핵개인으로서 조직과 대등하게 경쟁하거나 협력할 수 있는 시대</li>
+        <li><strong>"변화를 알고도 행하지 않는 것은 크나큰 과오입니다."</strong></li>
     </ul>
 
     <div class="tag-container">
-        <span class="tag">#김상욱교수</span>
-        <span class="tag">#AI시대교육</span>
-        <span class="tag">#물리학적통찰</span>
-        <span class="tag">#변하지않는것</span>
-        <span class="tag">#교육의본질</span>
-        <span class="tag">#문해력</span>
-        <span class="tag">#기초과학</span>
-        <span class="tag">#자녀교육</span>
+        <span class="tag">#송길영</span>
+        <span class="tag">#경량문명</span>
+        <span class="tag">#AI미래</span>
+        <span class="tag">#핵개인</span>
+        <span class="tag">#시대예보</span>
+        <span class="tag">#세바시</span>
+        <span class="tag">#자기계발</span>
+        <span class="tag">#인공지능</span>
+        <span class="tag">#2026트렌드</span>
     </div>
-</div>
 
-<footer>
-    2026 Fovea
-</footer>
+    <footer>
+        2026 Fovea
+    </footer>
+</div>
 
 </body>
 </html>
@@ -465,7 +516,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const container = document.getElementById('quickview-body-content');
-            const pageTitle = "AI 시대의 교육 : 변하지 않는 가치를 찾아서".trim();
+            const pageTitle = "제발 버티지 마세요: 송길영이 경고하는 2026년 생존법".trim();
             
             // 1. Remove duplicate H1/H2 if it matches page title or is the first element
             const headings = container.querySelectorAll('h1, h2');
@@ -500,10 +551,10 @@
     <div class="quickview-actions">
         <a href="index.html" class="back-link">← 퀵뷰 목록으로</a>
         <div style="flex: 1;"></div>
-        <a href="../board/index.html?mode=discuss&title=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%EA%B5%90%EC%9C%A1%20%3A%20%EB%B3%80%ED%95%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EA%B0%80%EC%B9%98%EB%A5%BC%20%EC%B0%BE%EC%95%84%EC%84%9C&link=https%3A//vaax-maker.github.io/ai-news-daily/quickview/20260111_jmqopm.html&source=퀵뷰"
+        <a href="../board/index.html?mode=discuss&title=%EC%A0%9C%EB%B0%9C%20%EB%B2%84%ED%8B%B0%EC%A7%80%20%EB%A7%88%EC%84%B8%EC%9A%94%3A%20%EC%86%A1%EA%B8%B8%EC%98%81%EC%9D%B4%20%EA%B2%BD%EA%B3%A0%ED%95%98%EB%8A%94%202026%EB%85%84%20%EC%83%9D%EC%A1%B4%EB%B2%95&link=https%3A//vaax-maker.github.io/ai-news-daily/quickview/20260111_72w7vf.html&source=퀵뷰"
             class="discuss-btn-sm">토론</a>
         <button type="button" class="discuss-btn-sm"
-            onclick="navigator.clipboard.writeText('https://vaax-maker.github.io/ai-news-daily/quickview/20260111_jmqopm.html'); alert('URL이 복사되었습니다!');">공유</button>
+            onclick="navigator.clipboard.writeText('https://vaax-maker.github.io/ai-news-daily/quickview/20260111_72w7vf.html'); alert('URL이 복사되었습니다!');">공유</button>
     </div>
 </div>
 

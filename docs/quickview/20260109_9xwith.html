@@ -214,7 +214,7 @@
         <div class="quickview-meta">📅 2026년 01월 09일 16:19</div>
     </div>
 
-    <div class="quickview-body">
+    <div class="quickview-body" id="quickview-body-content">
         <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -475,6 +475,41 @@
 </body>
 </html>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('quickview-body-content');
+            const pageTitle = "믿을 정보가 없다? AI '슬롭(Slop)'의 습격과 데이터 전쟁".trim();
+            
+            // 1. Remove duplicate H1/H2 if it matches page title or is the first element
+            const headings = container.querySelectorAll('h1, h2');
+            if (headings.length > 0) {
+                const firstHeading = headings[0];
+                // Check if text is similar or it's at the very top
+                if (firstHeading.innerText.trim() === pageTitle || container.firstElementChild === firstHeading) {
+                    firstHeading.style.display = 'none';
+                }
+            }
+            
+            // 2. Unwrap or flatten nested cards
+            // If the content is wrapped in a .card, remove the class to avoid double-boxing
+            const nestedCards = container.querySelectorAll('.card');
+            nestedCards.forEach(card => {
+                // Remove card styling but keep content
+                card.style.boxShadow = 'none';
+                card.style.border = 'none';
+                card.style.background = 'transparent';
+                card.style.padding = '0';
+                card.classList.remove('card');
+            });
+            
+            // 3. Remove any HR that appears at the very top
+            const firstEl = container.firstElementChild;
+            if (firstEl && firstEl.tagName === 'HR') {
+                firstEl.style.display = 'none';
+            }
+        });
+    </script>
 
     <div class="quickview-actions">
         <a href="index.html" class="back-link">← 퀵뷰 목록으로</a>
