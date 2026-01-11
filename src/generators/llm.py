@@ -634,7 +634,7 @@ def generate_key_message_and_keywords(ai_articles: list, xr_articles: list) -> d
 - 한글로 작성, 이모지 금지, 각 줄 60자 이내
 
 [작업 2] 워드클라우드 키워드 추출
-- 기사에서 중요한 키워드 10~15개 추출
+- 기사에서 중요한 키워드 30~40개 추출 (최대한 다양하게)
 - 각 키워드의 카테고리 지정: Person(인물), Tech(기술), Company(기업/기관), Solution(솔루션/제품)
 - 형식: 키워드|카테고리
 
@@ -651,6 +651,7 @@ KEYWORDS:
 엔비디아|Company
 피지컬AI|Tech
 젠슨황|Person
+... (30개 이상)
 
 출력:"""
 
@@ -688,7 +689,7 @@ KEYWORDS:
             
             return {
                 "key_message": key_message_html,
-                "keywords": keywords_list[:15]  # Max 15 keywords
+                "keywords": keywords_list[:40]  # Max 40 keywords (increased from 15)
             }
             
     except Exception as e:

@@ -369,10 +369,10 @@ def create_wordcloud_image(word_counts, word_to_category, output_path, font_path
             stopwords=None,
             color_func=color_func,
             prefer_horizontal=0.95,
-            margin=1,  # 간격 최소화
-            relative_scaling=0.4,  # 빈도 차이 덜 강조 (공간 효율)
-            min_font_size=10, # 작은 글씨도 허용
-            max_font_size=60, # 너무 큰 글씨 방지
+            margin=1,
+            relative_scaling=0.4,
+            min_font_size=10,
+            max_font_size=50, # 더 많은 단어를 위해 축소
             scale=2
         )
         
