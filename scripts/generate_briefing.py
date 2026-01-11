@@ -13,6 +13,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.config import load_categories
 from src.generators.html import render_daily_briefing, render_briefing_archive
 from src.generators.llm import generate_key_message_and_keywords
+from src.utils.wordcloud_generator import extract_weekly_keywords, create_wordcloud_image
 from src.utils.common import get_kst_now
 from bs4 import BeautifulSoup
 
@@ -200,6 +201,24 @@ def generate_briefing():
     os.makedirs(os.path.dirname(keywords_path), exist_ok=True)
     with open(keywords_path, "w", encoding="utf-8") as f:
         json.dump({"keywords": briefing_keywords, "date": now.strftime("%Y-%m-%d")}, f, ensure_ascii=False, indent=2)
+
+    # Generate WordCloud Image
+    print("[Briefing] Generating WordCloud image...")
+    wordcloud_filename = f"wordcloud_{now.strftime('%Y%m%d')}.png"
+    wordcloud_path = os.path.join("docs", "static", "images", "daily_wordclouds", wordcloud_filename)
+    os.makedirs(os.path.dirname(wordcloud_path), exist_ok=True)
+    
+    # Use the extracted keywords to generate the image
+    # We convert the list of (word, category) to word_counts and word_to_category format
+    # extract_weekly_keywords handles this from json if use_cached=True
+    wc_counts, wc_categories = extract_weekly_keywords(docs_dir="docs", use_cached=True)
+    
+    wordcloud_generated = False
+    if wc_counts:
+        wordcloud_generated = create_wordcloud_image(wc_counts, wc_categories, wordcloud_path)
+    
+    wordcloud_rel_path = f"static/images/daily_wordclouds/{wordcloud_filename}" if wordcloud_generated else None
+
     
     # Fetch Government Projects (new)
     from src.fetchers.gov import fetch_gov_announcements
@@ -229,7 +248,8 @@ def generate_briefing():
         afternoon_ai=afternoon_ai,
         afternoon_xr=afternoon_xr,
         gov_items=gov_items,
-        date_display=date_display
+        date_display=date_display,
+        wordcloud_image=wordcloud_rel_path
     )
     
     # Save briefing file

@@ -284,12 +284,24 @@
         </header>
 
         <!-- Key Message -->
+        <!-- Key Message -->
         <div class="key-message">
             <div class="key-message-title">📌 Key Message</div>
             <div class="key-message-content">
                 {{ key_message | safe }}
             </div>
         </div>
+
+        <!-- Word Cloud -->
+        {% if wordcloud_image %}
+        <div class="section-card" style="text-align: center; padding: 20px;">
+            <div class="section-header" style="justify-content: center; border-bottom: none;">
+                <span class="section-title" style="font-size: 1rem;">🔥 오늘의 키워드</span>
+            </div>
+            <img src="{{ root_path }}/{{ wordcloud_image }}" alt="Word Cloud"
+                style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+        {% endif %}
 
         <!-- 16시 섹션 (위로) -->
         {% if afternoon_ai or afternoon_xr %}
