@@ -270,7 +270,7 @@
         <p class="eyebrow">Government Projects</p>
         <div class="title-row">
             <h1>정부과제 누적 표</h1>
-            <p class="title-desc">AI·XR·영상·IDC 관련 정부과제 및 입찰공고</p>
+            <p class="title-desc">과기정통부 · 나라장터 · IITP · NIA 공고</p>
         </div>
     </div>
     <form class="search-bar header-search" id="gov-search-form">
@@ -284,15 +284,19 @@
 {% set msit_count = announcements|selectattr('source_name', 'equalto', '과기정통부')|list|length %}
 {% set ministry_count = announcements|selectattr('source_name', 'equalto', '과학기술정보통신부')|list|length %}
 {% set combined_msit = msit_count + ministry_count %}
-{% set koneps_count = announcements|length - combined_msit %}
+{% set koneps_count = announcements|selectattr('source_name', 'containing', '나라장터')|list|length %}
+{% set iitp_count = announcements|selectattr('source_name', 'equalto', 'IITP')|list|length %}
+{% set nia_count = announcements|selectattr('source_name', 'equalto', 'NIA')|list|length %}
 
 <div class="gov-stats-clickable">
     <table>
         <thead>
             <tr>
-                <th class="stat-filter active" data-filter="all">총 과제</th>
+                <th class="stat-filter active" data-filter="all">전체</th>
                 <th class="stat-filter" data-filter="과기정통부">과기정통부</th>
                 <th class="stat-filter" data-filter="나라장터">나라장터</th>
+                <th class="stat-filter" data-filter="IITP">IITP</th>
+                <th class="stat-filter" data-filter="NIA">NIA</th>
             </tr>
         </thead>
         <tbody>
@@ -300,6 +304,8 @@
                 <td class="count-cell">{{ announcements|length }}</td>
                 <td class="count-cell">{{ combined_msit }}</td>
                 <td class="count-cell">{{ koneps_count }}</td>
+                <td class="count-cell">{{ iitp_count }}</td>
+                <td class="count-cell">{{ nia_count }}</td>
             </tr>
         </tbody>
     </table>
@@ -492,6 +498,10 @@
                         matchFilter = source.includes('과기정통부') || source.includes('과학기술정보통신부');
                     } else if (currentFilter === '나라장터') {
                         matchFilter = source.includes('나라장터');
+                    } else if (currentFilter === 'IITP') {
+                        matchFilter = source === 'IITP';
+                    } else if (currentFilter === 'NIA') {
+                        matchFilter = source === 'NIA';
                     }
                 }
 
@@ -523,6 +533,10 @@
                         matchFilter = source.includes('과기정통부') || source.includes('과학기술정보통신부');
                     } else if (currentFilter === '나라장터') {
                         matchFilter = source.includes('나라장터');
+                    } else if (currentFilter === 'IITP') {
+                        matchFilter = source === 'IITP';
+                    } else if (currentFilter === 'NIA') {
+                        matchFilter = source === 'NIA';
                     }
                 }
 
