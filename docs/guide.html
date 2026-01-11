@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang='ko'>
+
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>VAAX 이용가이드</title>
+    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/style.css?v=12">
+    
+<style>
+    .guide-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .guide-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .guide-header h1 {
+        font-size: 2.2rem;
+        color: var(--text-main);
+        margin-bottom: 10px;
+    }
+
+    .guide-header p {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+    }
+
+    .guide-section {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .guide-section h2 {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .guide-section h3 {
+        font-size: 1.15rem;
+        color: var(--text-main);
+        margin: 25px 0 10px;
+    }
+
+    .guide-section ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .guide-section li {
+        margin-bottom: 8px;
+        position: relative;
+        padding-left: 20px;
+        color: var(--text-main);
+        line-height: 1.6;
+    }
+
+    .guide-section li::before {
+        content: "•";
+        color: var(--primary-color);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+    }
+
+    .info-tag {
+        display: inline-block;
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary-color);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-right: 6px;
+    }
+
+    .update-schedule {
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+        border-left: 4px solid var(--primary-color);
+    }
+
+    .update-schedule strong {
+        color: var(--text-main);
+    }
+</style>
+
+</head>
+
+<body>
+    <header>
+        <div class="gnb">
+            <!-- Left: Logo -->
+            <a href="./index.html" class="logo-link">
+                <img src="./static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
+            </a>
+
+            <!-- Right: Slogan & Nav -->
+            <div class="header-right-section">
+                <div class="slogan-container">
+                    <span class="slogan-since">since 2016</span>
+                    <span class="header-slogan-text">
+                        VR-AR-AI-XR <span class="slogan-highlight">기술과 Biz.를 연결하는</span>
+                        성장나눔 <span class="slogan-highlight">커뮤니티</span>
+                    </span>
+                </div>
+                <nav class="nav-links">
+                    <a href="./index.html"
+                        class="">Home</a>
+                    <a href="./ai/index.html"
+                        class="">AI/XR뉴스</a>
+                    <a href="./quickview/index.html"
+                        class="">퀵뷰</a>
+                    <a href="./gov/index.html"
+                        class="">정부과제</a>
+                    <a href="./members/index.html"
+                        class="">회원사소식</a>
+                    <a href="./board/index.html"
+                        class="">Small Talk</a>
+                    <a href="./guide.html"
+                        class="active"
+                        style="font-size: 0.85rem; color: var(--text-muted); margin-left: 10px;">이용가이드</a>
+                </nav>
+            </div>
+        </div>
+        <!-- Announcement Message -->
+        <div class="header-announcement">
+            이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요
+        </div>
+    </header>
+
+    <div class="container">
+        
+<div class="guide-container">
+    <div class="guide-header">
+        <h1>VAAX 서비스 이용가이드</h1>
+        <p>어떤 정보를, 어디서, 어떻게 얻을 수 있는지 안내해 드립니다.</p>
+    </div>
+
+    <!-- 1. AI/XR 뉴스 -->
+    <div class="guide-section">
+        <h2 id="ai-xr">🤖 AI / XR 뉴스</h2>
+        <p>최신 기술 트렌드와 산업 동향을 파악할 수 있는 국내외 핵심 뉴스를 선별하여 제공합니다.</p>
+
+        <h3>제공 정보</h3>
+        <ul>
+            <li><strong>AI 뉴스</strong>: 인공지능 모델, 생성형 AI, LLM, 머신러닝 기술 및 비즈니스 동향</li>
+            <li><strong>XR 뉴스</strong>: VR/AR/MR 기기, 메타버스 플랫폼, 실감형 콘텐츠 산업 동향</li>
+            <li><strong>요약 서비스</strong>: AI가 분석한 '3줄 핵심 요약' 제공 (주요 기사 한정)</li>
+        </ul>
+
+        <h3>수집 출처 및 조건</h3>
+        <ul>
+            <li><span class="info-tag">출처</span> 국내외 주요 테크 미디어 (AI타임스, TechCrunch, MIT Tech Review 등) + YouTube 주요 채널
+            </li>
+            <li><span class="info-tag">조건</span> '인공지능', '메타버스', 'XR' 등 핵심 키워드 기반 필터링</li>
+        </ul>
+
+        <div class="update-schedule">
+            <strong>📅 업데이트 주기</strong>: 매일 2회 (오전 8시 / 오후 4시) 자동 갱신
+        </div>
+    </div>
+
+    <!-- 2. 정부 과제 -->
+    <div class="guide-section">
+        <h2 id="gov">🏛️ 정부 과제 (R&D 및 지원사업)</h2>
+        <p>AI, XR, 메타버스 분야의 국가 연구개발(R&D) 과제와 기업 지원 사업 공고를 통합 제공합니다.</p>
+
+        <h3>제공 정보</h3>
+        <ul>
+            <li>과학기술정보통신부, 중소벤처기업부 등 주요 부처의 사업 공고</li>
+            <li>나라장터(조달청) 기술 용역 입찰 공고</li>
+            <li>기업마당 중소기업 지원 사업 공고</li>
+        </ul>
+
+        <h3>수집 출처 및 조건</h3>
+        <ul>
+            <li><span class="info-tag">출처</span> <strong>과기정통부</strong>, <strong>나라장터(입찰)</strong>,
+                <strong>기업마당(지원)</strong> Open API</li>
+            <li><span class="info-tag">조건</span> '인공지능 개발', '디지털트윈', '콘텐츠 제작' 등 관련 핵심 키워드가 포함된 공고만 엄선</li>
+            <li><span class="info-tag">특징</span> 마감일이 지나지 않은 최신 공고 위주로 노출 (과거 이력은 아카이브에서 확인 가능)</li>
+        </ul>
+
+        <div class="update-schedule">
+            <strong>📅 업데이트 주기</strong>: 매일 2회 (오전 8시 / 오후 4시) 자동 갱신
+        </div>
+    </div>
+
+    <!-- 3. 회원사 소식 -->
+    <div class="guide-section">
+        <h2 id="members">🤝 회원사 소식</h2>
+        <p>VAAX 회원사들의 보도자료, 성과, 인터뷰 등 최신 소식을 모니터링합니다.</p>
+
+        <h3>제공 정보</h3>
+        <ul>
+            <li>회원 기업명 및 주요 브랜드 키워드가 포함된 언론 보도</li>
+            <li>최신 뉴스 리스트 및 링크 제공</li>
+        </ul>
+
+        <h3>수집 조건</h3>
+        <ul>
+            <li><span class="info-tag">조건</span> 등록된 회원사명(국/영문) 및 별칭이 제목 또는 본문에 포함된 뉴스</li>
+            <li><span class="info-tag">출처</span> 네이버 뉴스 API, 구글 뉴스 등</li>
+        </ul>
+    </div>
+
+    <!-- 4. 이용 안내 -->
+    <div class="guide-section">
+        <h2 id="usage">💡 이용 팁</h2>
+        <ul>
+            <li><strong>퀵뷰(Quickview)</strong>: 중요한 외부 아티클이나 리포트를 빠르게 요약해서 보고 싶을 때 유용합니다.</li>
+            <li><strong>Small Talk</strong>: 사이트 개선 요청이나 자유로운 의견을 남길 수 있는 게시판입니다.</li>
+            <li><strong>데일리 브리핑</strong>: 매일 아침/오후 주요 소식을 요약된 리포트 형태(`briefing.html`)로도 확인 가능합니다. (Telegram 알림 연동 시)
+            </li>
+        </ul>
+    </div>
+</div>
+
+    </div>
+
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 VAAX rebuild Project by <a href="./admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

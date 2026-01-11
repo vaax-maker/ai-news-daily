@@ -10,6 +10,12 @@ env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
 # Inject GA ID globally
 env.globals["ga_id"] = os.environ.get("GOOGLE_ANALYTICS_ID", "")
 
+# Custom Tests
+def containing(value, search):
+    return search in value
+
+env.tests["containing"] = containing
+
 def render_daily_page(articles, date_str, time_str, config, active_tab="home"):
     sorted_articles = sorted(articles, key=parse_article_datetime, reverse=True)
 
@@ -87,7 +93,7 @@ def render_member_index(members_list, all_news=None, profiles=None):
     )
     return html
 
-def render_dashboard(ai_latest, xr_latest, gov_latest, quickview_latest=None, section_links=None, last_updated=None):
+def render_dashboard(ai_latest, xr_latest, gov_latest, quickview_latest=None, members_latest=None, section_links=None, last_updated=None):
     from src.utils.common import get_kst_now
     template = env.get_template("dashboard.html")
     return template.render(
@@ -227,4 +233,15 @@ def render_briefing_archive(entries: list):
         entries=entries,
         now_year=datetime.datetime.now().year,
         root_path=".."  # docs/briefing/index.html -> root is ..
+    )
+
+def render_guide_page():
+    """
+    Renders the service guide page.
+    """
+    template = env.get_template("guide.html")
+    return template.render(
+        active_tab="guide",
+        now_year=datetime.datetime.now().year,
+        root_path="."  # docs/guide.html -> root is .
     )

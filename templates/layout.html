@@ -52,6 +52,9 @@
                         class="{% if active_tab == 'members' %}active{% endif %}">회원사소식</a>
                     <a href="{{ root_path | default('.') }}/board/index.html"
                         class="{% if active_tab == 'board' %}active{% endif %}">Small Talk</a>
+                    <a href="{{ root_path | default('.') }}/guide.html"
+                        class="{% if active_tab == 'guide' %}active{% endif %}"
+                        style="font-size: 0.85rem; color: var(--text-muted); margin-left: 10px;">이용가이드</a>
                 </nav>
             </div>
         </div>

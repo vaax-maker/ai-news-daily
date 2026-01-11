@@ -11,13 +11,14 @@ import json
 from bs4 import BeautifulSoup
 
 from src.generators.html import (
-    render_member_page, 
-    render_member_index, 
-    render_archive_index, 
+    render_member_page,
+    render_member_index,
+    render_archive_index,
     render_dashboard,
     render_board_page,
     render_gov_archive,
-    render_admin_page
+    render_admin_page,
+    render_guide_page
 )
 from src.config import CategoryConfig, load_members, load_categories
 from src.utils.storage import MemberStorage, GovStorage
@@ -251,12 +252,22 @@ def rebuild_admin():
         f.write(html)
     print(f"✓ Admin done.")
 
+def rebuild_guide():
+    """가이드 페이지 생성"""
+    print("\n--- [Guide] Rebuilding... ---")
+    html = render_guide_page()
+    output_path = os.path.join("docs", "guide.html")
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(html)
+    print("✓ Guide Page done.")
+
 if __name__ == "__main__":
     m_latest = rebuild_members()
     a_previews, links = rebuild_archives()
     g_latest = rebuild_gov()
     rebuild_board()
     rebuild_admin()
+    rebuild_guide()
     
     # Additional links
     links["members"] = "members/index.html"
