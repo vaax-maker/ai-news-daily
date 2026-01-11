@@ -241,8 +241,144 @@ def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[s
     return items_list[:limit]
 
 
+def fetch_iitp_announcements(limit: int = 20) -> List[Dict[str, str]]:
+    """IITP 정보통신기획평가원 사업공고 스크래핑"""
+    from bs4 import BeautifulSoup
+    
+    url = "https://www.iitp.kr/kr/1/notice/businessAnnouncements.it"
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; AINewsDailyBot/1.0)"}
+    
+    items_list = []
+    try:
+        response = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT)
+        response.raise_for_status()
+        
+        soup = BeautifulSoup(response.content, "html.parser")
+        
+        # IITP 공고 목록 파싱
+        rows = soup.select("table.board-list tbody tr, ul.board-list > li")
+        
+        for row in rows[:limit]:
+            # 제목/링크 추출
+            title_el = row.select_one("a")
+            if not title_el:
+                continue
+            
+            title = title_el.get_text(strip=True)
+            href = title_el.get("href", "")
+            
+            # 상대 경로를 절대 경로로 변환
+            if href and not href.startswith("http"):
+                link = f"https://www.iitp.kr{href}"
+            else:
+                link = href
+            
+            # 날짜 추출
+            date_el = row.select_one("td.date, span.date, .regist-date")
+            date = date_el.get_text(strip=True) if date_el else ""
+            
+            # AI/XR 관련성 필터링
+            if not is_relevant_ai_xr_project(title):
+                continue
+            
+            items_list.append({
+                "title": title,
+                "link": link,
+                "dept": "IITP",
+                "manager": "",
+                "date": date,
+                "source_name": "IITP",
+                "image_url": "",
+                "published_display": date,
+                "bid_begin_dt": "",
+                "bid_close_dt": "",
+                "openg_dt": ""
+            })
+        
+        logger.info(f"[IITP] 수집 완료: {len(items_list)}건")
+        
+    except Exception as e:
+        logger.error(f"[IITP] 오류: {e}")
+    
+    return items_list
+
+
+def fetch_nia_announcements(limit: int = 20) -> List[Dict[str, str]]:
+    """NIA 한국지능정보사회진흥원 입찰공고 스크래핑"""
+    from bs4 import BeautifulSoup
+    
+    # NIA 입찰공고 페이지 (API 형태로 호출)
+    url = "https://www.nia.or.kr/site/nia_kor/ex/bbs/List.do"
+    params = {
+        "cbIdx": "82106",  # 입찰공고 게시판 ID
+        "sdate": "",
+        "edate": "",
+        "searchCnd": "0",
+        "searchWrd": ""
+    }
+    headers = {
+        "User-Agent": "Mozilla/5.0 (compatible; AINewsDailyBot/1.0)",
+        "Referer": "https://www.nia.or.kr"
+    }
+    
+    items_list = []
+    try:
+        response = requests.get(url, params=params, headers=headers, timeout=REQUEST_TIMEOUT)
+        
+        # NIA는 접근 제한이 있을 수 있음
+        if response.status_code != 200:
+            logger.warning(f"[NIA] 접근 제한: {response.status_code}")
+            return []
+        
+        soup = BeautifulSoup(response.content, "html.parser")
+        
+        # NIA 공고 목록 파싱
+        rows = soup.select("table tbody tr, ul.board-list > li")
+        
+        for row in rows[:limit]:
+            title_el = row.select_one("a")
+            if not title_el:
+                continue
+            
+            title = title_el.get_text(strip=True)
+            href = title_el.get("href", "")
+            
+            if href and not href.startswith("http"):
+                link = f"https://www.nia.or.kr{href}"
+            else:
+                link = href
+            
+            date_el = row.select_one("td.date, span.date")
+            date = date_el.get_text(strip=True) if date_el else ""
+            
+            # AI/XR 관련성 필터링
+            if not is_relevant_ai_xr_project(title):
+                continue
+            
+            items_list.append({
+                "title": title,
+                "link": link,
+                "dept": "NIA",
+                "manager": "",
+                "date": date,
+                "source_name": "NIA",
+                "image_url": "",
+                "published_display": date,
+                "bid_begin_dt": "",
+                "bid_close_dt": "",
+                "openg_dt": ""
+            })
+        
+        logger.info(f"[NIA] 수집 완료: {len(items_list)}건")
+        
+    except Exception as e:
+        logger.error(f"[NIA] 오류: {e}")
+    
+    return items_list
+
+
 def fetch_gov_announcements(limit: int = 50) -> List[Dict[str, str]]:
-    """정부 과제 통합 수집"""
+    """정부 과제 통합 수집 (과기정통부 + 나라장터 + IITP + NIA)"""
     service_key = os.getenv("GOV_API_KEY", DEFAULT_GOV_API_KEY)
     
     # 1. 과기정통부
@@ -251,12 +387,26 @@ def fetch_gov_announcements(limit: int = 50) -> List[Dict[str, str]]:
     # 2. 나라장터
     koneps_items = fetch_koneps_announcements(service_key, limit=30)
     
-    # 통합 및 정렬
-    all_items = msit_items + koneps_items
+    # 3. IITP (정보통신기획평가원)
+    iitp_items = fetch_iitp_announcements(limit=20)
+    
+    # 4. NIA (한국지능정보사회진흥원)
+    nia_items = fetch_nia_announcements(limit=20)
+    
+    # 통합 및 중복 제거
+    seen_links = set()
+    all_items = []
+    
+    for item in msit_items + koneps_items + iitp_items + nia_items:
+        link = item.get("link", "")
+        if link and link not in seen_links:
+            seen_links.add(link)
+            all_items.append(item)
+    
+    # 날짜 정렬
     all_items.sort(key=lambda x: x.get("date", ""), reverse=True)
     
-    total = len(all_items)
-    logger.info(f"[Gov] 통합 수집: 과기정통부 {len(msit_items)}건 + 나라장터 {len(koneps_items)}건 = 총 {total}건")
+    logger.info(f"[Gov] 통합 수집: 과기정통부 {len(msit_items)}건 + 나라장터 {len(koneps_items)}건 + IITP {len(iitp_items)}건 + NIA {len(nia_items)}건 = 총 {len(all_items)}건")
     
     return all_items[:limit]
 
@@ -264,9 +414,10 @@ def fetch_gov_announcements(limit: int = 50) -> List[Dict[str, str]]:
 # 테스트
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    results = fetch_gov_announcements(limit=20)
+    results = fetch_gov_announcements(limit=30)
     
     print(f"\n총 {len(results)}건 수집\n")
-    for i, item in enumerate(results[:10], 1):
+    for i, item in enumerate(results[:15], 1):
         print(f"{i}. [{item['source_name']}] {item['title'][:60]}")
         print(f"   {item['date']} | {item['dept']}\n")
+
