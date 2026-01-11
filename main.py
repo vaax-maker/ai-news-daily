@@ -225,19 +225,55 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         today_links = {art.get("link") for art in today_existing_articles if art.get("link")}
         today_by_link = {art.get("link"): art for art in today_existing_articles if art.get("link")}
         
+        # Title-based dedup: collect normalized titles for similarity check
+        from difflib import SequenceMatcher
+        
+        def normalize_title(title):
+            """Normalize title for comparison"""
+            if not title:
+                return ""
+            # Remove special chars, lowercase
+            cleaned = re.sub(r"[^0-9A-Za-z가-힣\s]", "", title)
+            return cleaned.lower().strip()
+        
+        def is_similar_title(new_title, existing_titles, threshold=0.80):
+            """Check if new_title is similar to any existing title"""
+            norm_new = normalize_title(new_title)
+            if not norm_new:
+                return False
+            for existing in existing_titles:
+                norm_existing = normalize_title(existing)
+                if norm_existing:
+                    ratio = SequenceMatcher(None, norm_new, norm_existing).ratio()
+                    if ratio >= threshold:
+                        return True
+            return False
+        
+        past_titles = [art.get("title", "") for art in all_past_articles if art.get("title")]
+        today_titles = [art.get("title", "") for art in today_existing_articles if art.get("title")]
+        all_existing_titles = past_titles + today_titles
+        
         print(f"[{config.key.upper()}] Found {len(past_links)} past, {len(today_links)} today articles for dedup check.")
+        print(f"[{config.key.upper()}] Title dedup enabled with {len(all_existing_titles)} existing titles.")
              
         # Summarize
         summarized_items = []
         skipped_count = 0
+        title_skipped_count = 0
         for idx, (ts, title, link, content, entry) in enumerate(selected_raw):
-            # 1. Skip if exists on a DIFFERENT day (global dedup)
+            # 1. Skip if link exists on a DIFFERENT day (global dedup)
             if link in past_links:
                 continue
             
-            # 2. Skip if exists in an earlier run TODAY (8시 → 16시 완전 분리)
+            # 2. Skip if link exists in an earlier run TODAY
             if link in today_links:
                 skipped_count += 1
+                continue
+            
+            # 3. Skip if title is similar to any existing article (NEW!)
+            if is_similar_title(title, all_existing_titles):
+                title_skipped_count += 1
+                print(f"[{config.key.upper()}] Title dedup: '{title[:50]}...'")
                 continue
             
             # New article - call LLM for summarization
@@ -271,6 +307,8 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         
         if skipped_count > 0:
             print(f"[{config.key.upper()}] Reused {skipped_count} existing summaries (LLM calls saved).")
+        if title_skipped_count > 0:
+            print(f"[{config.key.upper()}] Skipped {title_skipped_count} articles by title similarity.")
             
     # Markdown processing for AI items
     if config.key != "gov":

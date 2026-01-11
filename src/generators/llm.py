@@ -591,7 +591,7 @@ def generate_key_message(ai_articles: list, xr_articles: list) -> str:
         xr_articles: List of XR article dicts with 'title' key
         
     Returns:
-        HTML formatted 3-line Key Message with emojis
+        HTML formatted bullet list Key Message with emojis
     """
     # Collect top titles
     ai_titles = [art.get("title", "") for art in ai_articles[:5]]
@@ -600,32 +600,40 @@ def generate_key_message(ai_articles: list, xr_articles: list) -> str:
     all_titles = "\n".join([f"- {t}" for t in ai_titles + xr_titles if t])
     
     if not all_titles:
-        return "<p>📰 오늘의 AI/XR 뉴스를 확인하세요!</p>"
+        return "<ul><li>📰 오늘의 AI/XR 뉴스를 확인하세요!</li></ul>"
     
     prompt = f"""다음은 오늘의 AI/XR 뉴스 기사 제목 목록입니다.
-이 기사들을 기반으로 독자의 호기심을 자극하는 "Key Message" 3줄을 작성하세요.
+이 기사들을 기반으로 독자의 호기심을 자극하는 "Key Message" 3~5개를 작성하세요.
 
 [규칙]
-1. 구어체로 친근하게 작성 (예: "~했대요", "~라고 해요", "~인 거 알아요?")
-2. 각 줄 앞에 적절한 이모지 1개 추가
-3. 호기심을 자극하는 hooking 문장으로 작성
-4. 각 줄 50자 이내
-5. 정확히 3줄만 출력 (번호 없이)
+1. 한글로 작성
+2. 이모지 사용 금지
+3. 호기심을 자극하는 문장으로 작성
+4. 각 줄 60자 이내
+5. 3~5개 작성 (번호 없이)
 6. 줄바꿈으로 구분
+7. <think> 태그나 설명 없이 결과만 출력
 
 [기사 목록]
 {all_titles}
 
-Key Message 3줄:"""
+Key Message:"""
 
     try:
         response = analyze_text_with_llm(prompt)
         if response:
-            # Convert to HTML paragraphs
-            lines = [line.strip() for line in response.strip().split("\n") if line.strip()][:3]
-            return "\n".join([f"<p>{line}</p>" for line in lines])
+            # Remove any <think> tags and their content
+            import re
+            response = re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL)
+            response = re.sub(r'<[^>]+>', '', response)  # Remove any HTML-like tags
+            
+            # Convert to HTML bullet list
+            lines = [line.strip() for line in response.strip().split("\n") if line.strip()][:5]
+            if lines:
+                li_items = "\n".join([f"<li>{line}</li>" for line in lines])
+                return f"<ul>\n{li_items}\n</ul>"
     except Exception as e:
         print(f"[KeyMessage] Generation failed: {e}")
     
     # Fallback
-    return "<p>📰 오늘의 AI/XR 뉴스를 확인하세요!</p>"
+    return "<ul><li>📰 오늘의 AI/XR 뉴스를 확인하세요!</li></ul>"

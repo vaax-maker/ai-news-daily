@@ -84,12 +84,24 @@
             line-height: 1.8;
         }
 
-        .key-message-content p {
-            margin-bottom: 8px;
+        .key-message-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .key-message-content p:last-child {
+        .key-message-content li {
+            margin-bottom: 12px;
+            padding-left: 0;
+        }
+
+        .key-message-content li:last-child {
             margin-bottom: 0;
+        }
+
+        .key-message-content li::before {
+            content: "• ";
+            margin-right: 4px;
         }
 
         /* Section Cards */
@@ -184,6 +196,33 @@
             color: var(--text-muted);
             line-height: 1.5;
             margin-bottom: 6px;
+            background: #f9fafb;
+            border-left: 3px solid var(--primary-color);
+            padding: 12px 14px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 8px;
+        }
+
+        .article-summary .summary-section-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .article-summary ul {
+            list-style: disc;
+            padding-left: 18px;
+            margin: 0;
+        }
+
+        .article-summary li {
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+
+        .article-summary li:last-child {
+            margin-bottom: 0;
         }
 
         .article-meta {
@@ -234,8 +273,10 @@
     <div class="container">
         <header>
             <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px;">
-                <img src="{{ root_path }}/static/images/logo_transparent.png" alt="VAAX" class="logo"
-                    style="margin-bottom: 0;">
+                <a href="{{ root_path }}/index.html">
+                    <img src="{{ root_path }}/static/images/logo_transparent.png" alt="VAAX" class="logo"
+                        style="margin-bottom: 0;">
+                </a>
                 <a href="{{ root_path }}/index.html"
                     style="font-size: 0.85rem; color: var(--primary-color); text-decoration: none; font-weight: 500;">
                     VAAX홈 이동 &rarr;
@@ -269,10 +310,12 @@
                         <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
                         {% if article.is_new %}<span class="new-badge">NEW</span>{% endif %}
                     </div>
-                    {% if article.summary_html %}
-                    <div class="article-summary">{{ article.summary_html | striptags | truncate(150) }}</div>
-                    {% endif %}
                     <div class="article-meta">{{ article.source_name }}</div>
+                    {% if article.summary_html %}
+                    <div class="article-summary">
+                        {{ article.summary_html | safe }}
+                    </div>
+                    {% endif %}
                 </li>
                 {% endfor %}
             </ul>
@@ -292,10 +335,12 @@
                         <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
                         {% if article.is_new %}<span class="new-badge">NEW</span>{% endif %}
                     </div>
-                    {% if article.summary_html %}
-                    <div class="article-summary">{{ article.summary_html | striptags | truncate(150) }}</div>
-                    {% endif %}
                     <div class="article-meta">{{ article.source_name }}</div>
+                    {% if article.summary_html %}
+                    <div class="article-summary">
+                        {{ article.summary_html | safe }}
+                    </div>
+                    {% endif %}
                 </li>
                 {% endfor %}
             </ul>
@@ -317,10 +362,12 @@
                     <div class="article-title">
                         <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
                     </div>
-                    {% if article.summary_html %}
-                    <div class="article-summary">{{ article.summary_html | striptags | truncate(150) }}</div>
-                    {% endif %}
                     <div class="article-meta">{{ article.source_name }}</div>
+                    {% if article.summary_html %}
+                    <div class="article-summary">
+                        {{ article.summary_html | safe }}
+                    </div>
+                    {% endif %}
                 </li>
                 {% endfor %}
             </ul>
@@ -339,10 +386,12 @@
                     <div class="article-title">
                         <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
                     </div>
-                    {% if article.summary_html %}
-                    <div class="article-summary">{{ article.summary_html | striptags | truncate(150) }}</div>
-                    {% endif %}
                     <div class="article-meta">{{ article.source_name }}</div>
+                    {% if article.summary_html %}
+                    <div class="article-summary">
+                        {{ article.summary_html | safe }}
+                    </div>
+                    {% endif %}
                 </li>
                 {% endfor %}
             </ul>
