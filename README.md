@@ -143,4 +143,4 @@ streamlit run admin/app.py
 - **서비스 가이드 재빌드**: `python rebuild_all_html.py` 실행 시 자동으로 가이드 페이지도 재생성됩니다.
 
 ## 라이선스
-MIT License © 2024 VAAX
+MIT License © 2026 VAAX
