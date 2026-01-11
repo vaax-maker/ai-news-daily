@@ -190,7 +190,8 @@ def render_daily_briefing(
     afternoon_ai: list,
     afternoon_xr: list,
     date_display: str,
-    gov_items: list = None
+    gov_items: list = None,
+    root_path: str = ".."
 ):
     """
     Renders the daily briefing page with Key Message, AI/XR articles, and Gov projects.
@@ -203,6 +204,7 @@ def render_daily_briefing(
         afternoon_xr: XR articles from 4PM run
         date_display: Display date string (e.g., "2026년 01월 11일")
         gov_items: List of government announcements
+        root_path: Relative path to docs root (default ".." for docs/briefing/)
     """
     if gov_items is None:
         gov_items = []
@@ -217,7 +219,7 @@ def render_daily_briefing(
         gov_items=gov_items,
         date_display=date_display,
         now_year=datetime.datetime.now().year,
-        root_path=".."  # docs/briefing/xxx.html -> root is ..
+        root_path=root_path
     )
 
 

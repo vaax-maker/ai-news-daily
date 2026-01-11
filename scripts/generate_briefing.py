@@ -245,10 +245,20 @@ def generate_briefing():
     # Update briefing index
     update_briefing_archive(briefing_dir)
     
-    # Also update main briefing.html symlink/copy
+    # Also update main briefing.html (at docs root level, needs root_path=".")
     main_briefing = "docs/briefing.html"
+    html_root = render_daily_briefing(
+        key_message=key_message,
+        morning_ai=morning_ai,
+        morning_xr=morning_xr,
+        afternoon_ai=afternoon_ai,
+        afternoon_xr=afternoon_xr,
+        gov_items=gov_items,
+        date_display=date_display,
+        root_path="."  # docs/briefing.html -> root is .
+    )
     with open(main_briefing, "w", encoding="utf-8") as f:
-        f.write(html)
+        f.write(html_root)
     print(f"[Briefing] Updated: {main_briefing}")
     
     return briefing_path
