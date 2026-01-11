@@ -246,6 +246,12 @@
         color: #16a34a;
     }
 
+    .badge-bizinfo {
+        background: #fff7ed;
+        color: #c2410c;
+        border: 1px solid #ffedd5;
+    }
+
     .new-badge {
         display: inline-block;
         background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
@@ -319,7 +325,7 @@
         <p class="eyebrow">Government Projects</p>
         <div class="title-row">
             <h1>정부과제 누적 표</h1>
-            <p class="title-desc">AI·XR·영상·IDC 관련 정부과제 및 입찰공고</p>
+            <p class="title-desc">과기정통부 · 나라장터 · 기업마당 공고</p>
         </div>
     </div>
     <form class="search-bar header-search" id="gov-search-form">
@@ -335,13 +341,16 @@
 
 
 
+
 <div class="gov-stats-clickable">
     <table>
         <thead>
             <tr>
-                <th class="stat-filter active" data-filter="all">총 과제</th>
+                <th class="stat-filter active" data-filter="all">전체</th>
                 <th class="stat-filter" data-filter="과기정통부">과기정통부</th>
                 <th class="stat-filter" data-filter="나라장터">나라장터</th>
+                <!-- Force Bizinfo Display -->
+                <th class="stat-filter" data-filter="기업마당">기업마당</th>
             </tr>
         </thead>
         <tbody>
@@ -349,6 +358,7 @@
                 <td class="count-cell">45</td>
                 <td class="count-cell">24</td>
                 <td class="count-cell">21</td>
+                <td class="count-cell">0</td>
             </tr>
         </tbody>
     </table>
@@ -3441,6 +3451,8 @@
                         matchFilter = source.includes('과기정통부') || source.includes('과학기술정보통신부');
                     } else if (currentFilter === '나라장터') {
                         matchFilter = source.includes('나라장터');
+                    } else if (currentFilter === '기업마당') {
+                        matchFilter = source === '기업마당';
                     }
                 }
 
@@ -3472,6 +3484,8 @@
                         matchFilter = source.includes('과기정통부') || source.includes('과학기술정보통신부');
                     } else if (currentFilter === '나라장터') {
                         matchFilter = source.includes('나라장터');
+                    } else if (currentFilter === '기업마당') {
+                        matchFilter = source === '기업마당';
                     }
                 }
 
