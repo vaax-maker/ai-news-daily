@@ -9,7 +9,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./static/css/style.css?v=12">
+    <link rel="stylesheet" href="../static/css/style.css?v=12">
     
 <style>
     .quickview-content {
@@ -167,8 +167,8 @@
     <header>
         <div class="gnb">
             <!-- Left: Logo -->
-            <a href="./index.html" class="logo-link">
-                <img src="./static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
+            <a href="../index.html" class="logo-link">
+                <img src="../static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
             </a>
 
             <!-- Right: Slogan & Nav -->
@@ -181,17 +181,17 @@
                     </span>
                 </div>
                 <nav class="nav-links">
-                    <a href="./index.html"
+                    <a href="../index.html"
                         class="">Home</a>
-                    <a href="./ai/index.html"
+                    <a href="../ai/index.html"
                         class="">AI/XR뉴스</a>
-                    <a href="./quickview/index.html"
-                        class="">퀵뷰</a>
-                    <a href="./gov/index.html"
+                    <a href="../quickview/index.html"
+                        class="active">퀵뷰</a>
+                    <a href="../gov/index.html"
                         class="">정부과제</a>
-                    <a href="./members/index.html"
+                    <a href="../members/index.html"
                         class="">회원사소식</a>
-                    <a href="./board/index.html"
+                    <a href="../board/index.html"
                         class="">Small Talk</a>
 
                 </nav>
@@ -201,7 +201,7 @@
         <div class="header-announcement"
             style="display: flex; justify-content: center; align-items: center; gap: 15px;">
             <span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
-            <a href="./guide.html"
+            <a href="../guide.html"
                 style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
         </div>
     </header>
@@ -216,15 +216,13 @@
 
     <!-- Raw content container (hidden) -->
     <template id="quickview-raw-content">
-        
-<!DOCTYPE html>
-
+        <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Lovable AI 웹사이트 제작 가이드</title>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lovable AI 웹사이트 제작 가이드</title>
+    <style>
         /* vaax-theme.css - 외부 제공용 스타일 준용 */
         :root {
             --primary-color: #65a30d;
@@ -367,44 +365,52 @@
     </style>
 </head>
 <body>
+
 <div class="container">
-<h1>Lovable: 코딩 없이 만드는 전문가급 웹사이트 (제작부터 배포까지)</h1>
-<div class="date">2026-01-06 15:27 Generated</div>
-<div class="video-wrapper">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" src="https://www.youtube.com/embed/qoFFrrUhXCU" title="YouTube video player"></iframe>
+    <h1>Lovable: 코딩 없이 만드는 전문가급 웹사이트 (제작부터 배포까지)</h1>
+    
+    <div class="date">2026-01-06 15:27 Generated</div>
+
+    <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/qoFFrrUhXCU" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <h2>1. Lovable 개요 및 기본 제작</h2>
+    <ul>
+        <li><span class="highlight">Lovable</span>: 텍스트 프롬프트만으로 프론트엔드, 백엔드, DB가 포함된 웹사이트를 자동 생성하는 AI 도구.</li>
+        <li><strong>제작 프로세스</strong>: 아이디어 구상 → ChatGPT를 활용해 구체적인 프롬프트 작성(예: 데크 시공 전문가 사이트) → Lovable에 입력 → 1분 내 사이트 초안 완성.</li>
+        <li><strong>편집 기능</strong>: 텍스트, 마진, 패딩 등은 직접 클릭하여 수정 가능하며, 이미지 변경이나 섹션 수정은 AI 채팅을 통해 대화형으로 처리.</li>
+    </ul>
+
+    <h2>2. 고급 기능 구현 (핵심 차별점)</h2>
+    <ul>
+        <li>단순 정적 페이지가 아닌 <span class="highlight">동적 기능</span> 추가 가능.</li>
+        <li><strong>실시간 견적 계산기</strong>: 면적과 색상 선택 시 예상 시공 비용이 자동 계산되는 로직 구현.</li>
+        <li><strong>Supabase 연동</strong>: 데이터 저장을 위해 Supabase와 연동하여 사용자 관리 및 데이터베이스 구축.</li>
+        <li><strong>이메일 자동 발송</strong>: <span class="highlight">Resend API</span>를 활용하여 고객이 견적 요청 시 관리자에게 이메일이 자동 발송되도록 설정.</li>
+    </ul>
+
+    <h2>3. 배포 및 관리</h2>
+    <ul>
+        <li><strong>즉시 배포</strong>: 무료 도메인을 사용하여 제작 즉시 웹에 게시 가능.</li>
+        <li><strong>도메인 연결</strong>: 커스텀 도메인 연결을 통해 브랜딩 강화 가능 (유료 플랜).</li>
+        <li><strong>비용 효율성</strong>: 개발 지식 없이도 크레딧 시스템을 통해 저렴하고 빠르게 MVP 제작 및 서비스 런칭 가능.</li>
+    </ul>
+
+    <div class="tag-container">
+        <span class="tag">#Lovable</span>
+        <span class="tag">#NoCode</span>
+        <span class="tag">#AI웹제작</span>
+        <span class="tag">#Supabase</span>
+        <span class="tag">#Resend</span>
+        <span class="tag">#웹개발자동화</span>
+    </div>
+
+    <footer>2026 Fovea</footer>
 </div>
-<h2>1. Lovable 개요 및 기본 제작</h2>
-<ul>
-<li><span class="highlight">Lovable</span>: 텍스트 프롬프트만으로 프론트엔드, 백엔드, DB가 포함된 웹사이트를 자동 생성하는 AI 도구.</li>
-<li><strong>제작 프로세스</strong>: 아이디어 구상 → ChatGPT를 활용해 구체적인 프롬프트 작성(예: 데크 시공 전문가 사이트) → Lovable에 입력 → 1분 내 사이트 초안 완성.</li>
-<li><strong>편집 기능</strong>: 텍스트, 마진, 패딩 등은 직접 클릭하여 수정 가능하며, 이미지 변경이나 섹션 수정은 AI 채팅을 통해 대화형으로 처리.</li>
-</ul>
-<h2>2. 고급 기능 구현 (핵심 차별점)</h2>
-<ul>
-<li>단순 정적 페이지가 아닌 <span class="highlight">동적 기능</span> 추가 가능.</li>
-<li><strong>실시간 견적 계산기</strong>: 면적과 색상 선택 시 예상 시공 비용이 자동 계산되는 로직 구현.</li>
-<li><strong>Supabase 연동</strong>: 데이터 저장을 위해 Supabase와 연동하여 사용자 관리 및 데이터베이스 구축.</li>
-<li><strong>이메일 자동 발송</strong>: <span class="highlight">Resend API</span>를 활용하여 고객이 견적 요청 시 관리자에게 이메일이 자동 발송되도록 설정.</li>
-</ul>
-<h2>3. 배포 및 관리</h2>
-<ul>
-<li><strong>즉시 배포</strong>: 무료 도메인을 사용하여 제작 즉시 웹에 게시 가능.</li>
-<li><strong>도메인 연결</strong>: 커스텀 도메인 연결을 통해 브랜딩 강화 가능 (유료 플랜).</li>
-<li><strong>비용 효율성</strong>: 개발 지식 없이도 크레딧 시스템을 통해 저렴하고 빠르게 MVP 제작 및 서비스 런칭 가능.</li>
-</ul>
-<div class="tag-container">
-<span class="tag">#Lovable</span>
-<span class="tag">#NoCode</span>
-<span class="tag">#AI웹제작</span>
-<span class="tag">#Supabase</span>
-<span class="tag">#Resend</span>
-<span class="tag">#웹개발자동화</span>
-</div>
-<footer>2026 Fovea</footer>
-</div>
+
 </body>
 </html>
-
     </template>
 
     <!-- Shadow Wrapper -->
@@ -501,7 +507,7 @@
     </div>
 
     <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
-        <p>&copy;  VAAX rebuild Project by <a href="./admin.html"
+        <p>&copy; 2026 VAAX rebuild Project by <a href="../admin.html"
                 class="admin-link">Fovea</a>. All rights reserved.</p>
     </footer>
 </body>
