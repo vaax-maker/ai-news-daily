@@ -114,6 +114,21 @@ def process_quickview_pages():
                 # Remove the duplicate heading
                 cleaned_html = html_content[heading_match.end():].strip()
         
+        # Sanitize malformed Markdown links in HTML attributes
+        # Pattern: src="[url](url)" or href="[url](url)"
+        # Regex to catch [url](url) where text is same as url (common Notion/Obsidian export issue)
+        # Also handles [url](url) generally if it's inside quotes
+        import re
+        # Fix 1: attribute="[url](url)" -> attribute="url"
+        cleaned_html = re.sub(r'="\[([^\]]+)\]\(([^)]+)\)"', r'="\2"', cleaned_html)
+        # Fix 2: attribute='[url](url)' -> attribute='url'
+        cleaned_html = re.sub(r"='\[([^\]]+)\]\(([^)]+)\)'", r"='\2'", cleaned_html)
+        # Fix 3: tag.src = "[url](url)" (JS)
+        cleaned_html = re.sub(r'= "\[([^\]]+)\]\(([^)]+)\)"', r'= "\2"', cleaned_html)
+        
+        # Fix 4: Handle HTML entities (&quot;)
+        cleaned_html = re.sub(r'=&quot;\[([^\]]+)\]\(([^)]+)\)&quot;', r'=&quot;\2&quot;', cleaned_html)
+        
         # Generate individual page HTML
         page_url = f"https://vaax-maker.github.io/ai-news-daily/quickview/{page_id}.html"
         page_html = render_quickview_page(title, cleaned_html, created_display, page_url, created_at=created_ts)

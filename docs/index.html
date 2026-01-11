@@ -278,12 +278,29 @@
         list-style: none;
         padding: 0;
         margin: 0;
+        /* Grid Layout: 2 Columns on PC */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px 40px;
+    }
+
+    /* Mobile Responsive: 1 Column */
+    @media (max-width: 768px) {
+        .key-message-content ul {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
     }
 
     .key-message-content li {
-        margin-bottom: 10px;
+        margin-bottom: 0px;
         padding-left: 0;
         position: relative;
+        /* Typography Update: Larger & Bold */
+        font-size: 1.15rem;
+        /* ~120% of base */
+        font-weight: 700;
+        line-height: 1.5;
     }
 
     .key-message-content li::before {
