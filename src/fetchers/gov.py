@@ -392,14 +392,17 @@ def fetch_gov_announcements(limit: int = 50) -> List[Dict[str, str]]:
     """정부 과제 통합 수집 (과기정통부 + 나라장터 + 기업마당)"""
     service_key = os.getenv("GOV_API_KEY", DEFAULT_GOV_API_KEY)
     
+    # 상위 limit에 비례하여 개별 수집 개수 설정 (각각 40% 정도 여유 있게 수집)
+    per_source_limit = int(limit * 0.5) + 10
+    
     # 1. 과기정통부
-    msit_items = fetch_msit_announcements(service_key, limit=30)
+    msit_items = fetch_msit_announcements(service_key, limit=per_source_limit)
     
     # 2. 나라장터
-    koneps_items = fetch_koneps_announcements(service_key, limit=30)
+    koneps_items = fetch_koneps_announcements(service_key, limit=per_source_limit)
     
     # 3. 기업마당 (중소벤처기업부 등 지원사업)
-    bizinfo_items = fetch_bizinfo_announcements(limit=20)
+    bizinfo_items = fetch_bizinfo_announcements(limit=per_source_limit)
     
     # 통합 및 중복 제거
     seen_links = set()
