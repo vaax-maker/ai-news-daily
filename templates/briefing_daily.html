@@ -129,6 +129,12 @@
             color: var(--xr-color);
         }
 
+        .section-badge.gov {
+            background-color: #fff7ed;
+            color: #c2410c;
+            border: 1px solid #ffedd5;
+        }
+
         .section-title {
             font-size: 1.1rem;
             font-weight: 700;
@@ -227,7 +233,14 @@
 <body>
     <div class="container">
         <header>
-            <img src="{{ root_path }}/static/images/logo_transparent.png" alt="VAAX" class="logo">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px;">
+                <img src="{{ root_path }}/static/images/logo_transparent.png" alt="VAAX" class="logo"
+                    style="margin-bottom: 0;">
+                <a href="{{ root_path }}/index.html"
+                    style="font-size: 0.85rem; color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                    VAAX홈 이동 &rarr;
+                </a>
+            </div>
             <div>
                 <span class="date-badge">{{ date_display }}</span>
             </div>
@@ -335,6 +348,30 @@
             </ul>
         </div>
         {% endif %}
+        {% endif %}
+
+        <!-- Government Projects Section -->
+        {% if gov_items %}
+        <div class="section-card">
+            <div class="section-header">
+                <span class="section-badge gov">GOV</span>
+                <span class="section-title">정부 과제</span>
+                <span class="section-time">신규 공고</span>
+            </div>
+            <ul class="article-list">
+                {% for item in gov_items %}
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                        {% if item.is_new %}<span class="new-badge">NEW</span>{% endif %}
+                    </div>
+                    <div class="article-meta">
+                        {{ item.source_name }} | {{ item.dept or '-' }} | {{ item.date }}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
         {% endif %}
 
         <footer>

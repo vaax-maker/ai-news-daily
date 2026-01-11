@@ -192,6 +192,26 @@ def generate_briefing():
     )
     print(f"[Briefing] Key Message: {key_message[:100]}...")
     
+    # Fetch Government Projects (new)
+    from src.fetchers.gov import fetch_gov_announcements
+    print("[Briefing] Fetching government announcements...")
+    raw_gov_items = fetch_gov_announcements(limit=50)
+    
+    # Filter for recent items (last 3 days to cover weekends)
+    gov_items = []
+    threshold_date = (now - datetime.timedelta(days=3)).strftime("%Y-%m-%d")
+    today_str = now.strftime("%Y-%m-%d")
+    
+    for item in raw_gov_items:
+        if item.get("date", "") >= threshold_date:
+            # Set is_new flag for today's items
+            item["is_new"] = (item.get("date") == today_str)
+            gov_items.append(item)
+            
+    # Limit to top 10 after filtering
+    gov_items = gov_items[:10]
+    print(f"[Briefing] Found {len(gov_items)} recent government items.")
+    
     # Render briefing page
     html = render_daily_briefing(
         key_message=key_message,
@@ -199,6 +219,7 @@ def generate_briefing():
         morning_xr=morning_xr,
         afternoon_ai=afternoon_ai,
         afternoon_xr=afternoon_xr,
+        gov_items=gov_items,
         date_display=date_display
     )
     

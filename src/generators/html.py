@@ -183,10 +183,11 @@ def render_daily_briefing(
     morning_xr: list,
     afternoon_ai: list,
     afternoon_xr: list,
-    date_display: str
+    date_display: str,
+    gov_items: list = None
 ):
     """
-    Renders the daily briefing page with Key Message and AI/XR articles.
+    Renders the daily briefing page with Key Message, AI/XR articles, and Gov projects.
     
     Args:
         key_message: HTML formatted 3-line Key Message
@@ -195,7 +196,11 @@ def render_daily_briefing(
         afternoon_ai: AI articles from 4PM run
         afternoon_xr: XR articles from 4PM run
         date_display: Display date string (e.g., "2026년 01월 11일")
+        gov_items: List of government announcements
     """
+    if gov_items is None:
+        gov_items = []
+        
     template = env.get_template("briefing_daily.html")
     return template.render(
         key_message=key_message,
@@ -203,6 +208,7 @@ def render_daily_briefing(
         morning_xr=morning_xr,
         afternoon_ai=afternoon_ai,
         afternoon_xr=afternoon_xr,
+        gov_items=gov_items,
         date_display=date_display,
         now_year=datetime.datetime.now().year,
         root_path=".."  # docs/briefing/xxx.html -> root is ..
