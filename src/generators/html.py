@@ -93,7 +93,7 @@ def render_member_index(members_list, all_news=None, profiles=None):
     )
     return html
 
-def render_dashboard(ai_latest, xr_latest, gov_latest, quickview_latest=None, members_latest=None, section_links=None, last_updated=None):
+def render_dashboard(ai_latest, xr_latest, gov_latest, quickview_latest=None, members_latest=None, section_links=None, last_updated=None, key_message=None):
     from src.utils.common import get_kst_now
     template = env.get_template("dashboard.html")
     return template.render(
@@ -101,8 +101,10 @@ def render_dashboard(ai_latest, xr_latest, gov_latest, quickview_latest=None, me
         xr_latest=xr_latest,
         gov_latest=gov_latest,
         quickview_latest=quickview_latest or [],
+        members_latest=members_latest or [],
         section_links=section_links or {},
         last_updated=last_updated or get_kst_now().strftime("%Y년 %m월 %d일 %H시 %M분"),
+        key_message=key_message,
         now_year=datetime.datetime.now().year,
         active_tab="home",
         root_path="."

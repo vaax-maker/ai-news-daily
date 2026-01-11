@@ -56,6 +56,18 @@ def main():
             'quickview': 'quickview/index.html'
         }
         
+        # Load Key Message
+        key_message = None
+        key_message_file = "data/latest_key_message.json"
+        if os.path.exists(key_message_file):
+            try:
+                import json
+                with open(key_message_file, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    key_message = data.get("key_message")
+            except Exception as e:
+                print(f"[Quickview Update] Error loading key message: {e}")
+
         # Render dashboard
         dash_html = render_dashboard(
             ai_latest=ai_latest,
@@ -63,7 +75,8 @@ def main():
             gov_latest=gov_latest,
             quickview_latest=quickview_latest,
             section_links=links,
-            last_updated=news_update_time
+            last_updated=news_update_time,
+            key_message=key_message
         )
         
         with open('docs/index.html', 'w', encoding='utf-8') as f:

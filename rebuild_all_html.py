@@ -320,6 +320,18 @@ def rebuild_dashboard(ai_previews, xr_previews, gov_previews, member_previews, q
     else:
         saved_update_time = "정보 없음"
 
+    # Load Key Message
+    key_message = None
+    key_message_file = "data/latest_key_message.json"
+    if os.path.exists(key_message_file):
+        try:
+            with open(key_message_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                key_message = data.get("key_message")
+                # Optional: Check date if needed, but showing latest available is usually better
+        except Exception as e:
+            print(f"Error loading key message: {e}")
+
     html = render_dashboard(
         ai_latest=ai_previews,
         xr_latest=xr_previews,
@@ -327,7 +339,8 @@ def rebuild_dashboard(ai_previews, xr_previews, gov_previews, member_previews, q
         quickview_latest=quickview_previews,
         members_latest=member_formatted,
         section_links=links,
-        last_updated=saved_update_time
+        last_updated=saved_update_time,
+        key_message=key_message
     )
     with open("docs/index.html", "w", encoding="utf-8") as f:
         f.write(html)

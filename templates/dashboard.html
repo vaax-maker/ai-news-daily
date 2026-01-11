@@ -204,37 +204,46 @@
     });
 </script>
 
-<!-- Word Cloud Section -->
-<section class="card wordcloud-section">
-    <div class="section-heading" style="margin-bottom: 5px;">
+<!-- Key Message Section (Replacing Word Cloud) -->
+<section class="card key-message-section">
+    <div class="section-heading" style="margin-bottom: 15px;">
         <div>
-            <p class="eyebrow" style="font-size: 1.1rem; font-weight: 700;">오늘 키워드</p>
+            <p class="eyebrow" style="font-size: 1.1rem; font-weight: 700;">📌 Key Message</p>
         </div>
     </div>
 
-    <!-- Legend -->
-    <div class="wordcloud-legend">
-        <div class="legend-item">
-            <span class="legend-dot" style="background-color: #FF9F40;"></span>
-            <span>인물</span>
-        </div>
-        <div class="legend-item">
-            <span class="legend-dot" style="background-color: #36A2EB;"></span>
-            <span>업체</span>
-        </div>
-        <div class="legend-item">
-            <span class="legend-dot" style="background-color: #4BC0C0;"></span>
-            <span>기술</span>
-        </div>
-        <div class="legend-item">
-            <span class="legend-dot" style="background-color: #9966FF;"></span>
-            <span>상품</span>
-        </div>
+    <div class="key-message-content" style="font-size: 1rem; line-height: 1.8; color: var(--text-main);">
+        {% if key_message %}
+        {{ key_message | safe }}
+        {% else %}
+        <p style="color: var(--text-muted);">오늘의 핵심 요약이 아직 생성되지 않았습니다.</p>
+        {% endif %}
     </div>
-
-    <img src="{{ root_path | default('.') }}/static/images/weekly_wordcloud.png" alt="Weekly Word Cloud"
-        class="wordcloud-img">
 </section>
+
+<style>
+    /* Styling for Key Message List */
+    .key-message-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .key-message-content li {
+        margin-bottom: 10px;
+        padding-left: 0;
+        position: relative;
+    }
+
+    .key-message-content li::before {
+        content: "•";
+        color: var(--primary-color);
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+    }
+</style>
 
 <div class="dashboard-grid">
     <!-- AI Section -->

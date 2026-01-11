@@ -196,49 +196,22 @@ def generate_briefing():
     print(f"[Briefing] Key Message: {key_message[:100]}...")
     print(f"[Briefing] Keywords extracted: {len(briefing_keywords)}")
     
-    # Save keywords for wordcloud
+    # Save keywords for wordcloud (legacy, kept for reference if needed)
     keywords_path = "data/briefing_keywords.json"
     os.makedirs(os.path.dirname(keywords_path), exist_ok=True)
     with open(keywords_path, "w", encoding="utf-8") as f:
         json.dump({"keywords": briefing_keywords, "date": now.strftime("%Y-%m-%d")}, f, ensure_ascii=False, indent=2)
 
-    # Generate WordCloud Image
-    print("[Briefing] Generating WordCloud image...")
-    wordcloud_filename = f"wordcloud_{now.strftime('%Y%m%d')}.png"
-    # Save to local static directory (source of truth)
-    wordcloud_base_dir = os.path.join("static", "images", "daily_wordclouds")
-    wordcloud_path = os.path.join(wordcloud_base_dir, wordcloud_filename)
-    os.makedirs(wordcloud_base_dir, exist_ok=True)
-    
-    # Also define docs path for immediate usage if needed before rebuild
-    docs_wordcloud_path = os.path.join("docs", "static", "images", "daily_wordclouds", wordcloud_filename)
-    os.makedirs(os.path.dirname(docs_wordcloud_path), exist_ok=True)
-    
-    # Use the extracted keywords to generate the image
-    # We convert the list of (word, category) to word_counts and word_to_category format
-    # extract_weekly_keywords handles this from json if use_cached=True
-    wc_counts, wc_categories = extract_weekly_keywords(docs_dir="docs", use_cached=True)
-    
-    wordcloud_generated = False
-    if wc_counts:
-        wordcloud_generated = create_wordcloud_image(wc_counts, wc_categories, wordcloud_path)
-        
-        if wordcloud_generated:
-            import shutil
-            # Copy to docs folder (for immediate serving)
-            shutil.copy2(wordcloud_path, docs_wordcloud_path)
-            
-            # Also update the dashboard wordcloud image in STATIC root
-            dashboard_wc_path = os.path.join("static", "images", "weekly_wordcloud.png")
-            shutil.copy2(wordcloud_path, dashboard_wc_path)
-            
-            # And copy to DOCS static for dashboard
-            docs_dashboard_wc_path = os.path.join("docs", "static", "images", "weekly_wordcloud.png")
-            shutil.copy2(wordcloud_path, docs_dashboard_wc_path)
-            
-            print(f"[Briefing] Update wordclouds: {wordcloud_path} -> {dashboard_wc_path}")
-    
-    wordcloud_rel_path = f"static/images/daily_wordclouds/{wordcloud_filename}" if wordcloud_generated else None
+    # Save Key Message for Dashboard (New)
+    key_message_path = "data/latest_key_message.json"
+    with open(key_message_path, "w", encoding="utf-8") as f:
+        json.dump({"key_message": key_message, "date": now.strftime("%Y-%m-%d")}, f, ensure_ascii=False, indent=2)
+    print(f"[Briefing] Saved Key Message to {key_message_path}")
+
+    # WordCloud Generation Disabled (Replaced by Key Message on Dashboard)
+    wordcloud_rel_path = None
+    # print("[Briefing] Generating WordCloud image...")
+    # ... (Logic removed/commented out) ...
 
     
     # Fetch Government Projects (new)
