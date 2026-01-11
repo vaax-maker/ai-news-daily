@@ -175,3 +175,50 @@ def render_quickview_page(title, content, created_display, page_url=""):
         now_year=datetime.datetime.now().year,
         root_path=".."  # docs/quickview/page.html -> root is ..
     )
+
+
+def render_daily_briefing(
+    key_message: str,
+    morning_ai: list,
+    morning_xr: list,
+    afternoon_ai: list,
+    afternoon_xr: list,
+    date_display: str
+):
+    """
+    Renders the daily briefing page with Key Message and AI/XR articles.
+    
+    Args:
+        key_message: HTML formatted 3-line Key Message
+        morning_ai: AI articles from 8AM run
+        morning_xr: XR articles from 8AM run
+        afternoon_ai: AI articles from 4PM run
+        afternoon_xr: XR articles from 4PM run
+        date_display: Display date string (e.g., "2026년 01월 11일")
+    """
+    template = env.get_template("briefing_daily.html")
+    return template.render(
+        key_message=key_message,
+        morning_ai=morning_ai,
+        morning_xr=morning_xr,
+        afternoon_ai=afternoon_ai,
+        afternoon_xr=afternoon_xr,
+        date_display=date_display,
+        now_year=datetime.datetime.now().year,
+        root_path=".."  # docs/briefing/xxx.html -> root is ..
+    )
+
+
+def render_briefing_archive(entries: list):
+    """
+    Renders the briefing archive index page.
+    
+    Args:
+        entries: List of dict { "filename": ..., "date_str": ..., "date_display": ... }
+    """
+    template = env.get_template("briefing_archive.html")
+    return template.render(
+        entries=entries,
+        now_year=datetime.datetime.now().year,
+        root_path=".."  # docs/briefing/index.html -> root is ..
+    )

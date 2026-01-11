@@ -784,13 +784,18 @@ ${text.slice(0, 3000)}`;
     }
 
     // Summarize HTML content with Gemini
-    async function summarizeHtmlContent(title, htmlContent) {
+    async function summarizeHtmlContent(title, htmlContent, maxChars = 300, isRetry = false) {
         // Extract text from HTML
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlContent, 'text/html');
         const text = doc.body.textContent.trim().slice(0, 2000);
 
-        const prompt = `다음 콘텐츠를 한국어 개조식(불릿)으로 요약하세요.
+        // Add retry warning to prompt if this is a re-summarization
+        const retryNote = isRetry
+            ? `\n\n⚠️ 주의: 이전 요약이 글자 수를 초과했습니다. 반드시 ${maxChars}자 이내로 더 짧게 요약하세요!`
+            : '';
+
+        const prompt = `다음 콘텐츠를 한국어 개조식(불릿)으로 요약하세요.${retryNote}
 
 [필수 형식]
 • 첫번째 포인트
@@ -800,11 +805,11 @@ ${text.slice(0, 3000)}`;
 • 세번째 포인트
 
 [규칙]
-1. 반드시 3-4개 핵심 포인트
+1. 반드시 3개 핵심 포인트만
 2. 각 포인트는 "• "로 시작
-3. 각 포인트 사이 빈 줄 필수
-4. 전체 300자 이내
-5. 요약문만 출력
+3. 각 포인트 사이 빈 줄 1개
+4. ⚠️ 전체 요약문 ${maxChars}자 이내 (엄수)
+5. 요약문만 출력 (제목, 서론 없이)
 
 제목: ${title}
 본문: ${text}`;
@@ -814,7 +819,7 @@ ${text.slice(0, 3000)}`;
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 contents: [{ parts: [{ text: prompt }] }],
-                generationConfig: { temperature: 0.3, maxOutputTokens: 200 }
+                generationConfig: { temperature: 0.2, maxOutputTokens: Math.min(maxChars, 300) }
             })
         });
 
@@ -823,6 +828,11 @@ ${text.slice(0, 3000)}`;
             return data.candidates[0].content.parts[0].text.trim();
         }
         throw new Error('Failed to generate summary');
+    }
+
+    // Build telegram message
+    function buildTelegramMessage(title, summary, pageUrl) {
+        return `📄 ${title}\n\n${summary}\n\n👉 ${pageUrl}`;
     }
 
     // Create quickview page
@@ -856,9 +866,41 @@ ${text.slice(0, 3000)}`;
             const pageId = generateQuickviewId();
             const pageUrl = `https://vaax-maker.github.io/ai-news-daily/quickview/${pageId}.html`;
 
-            // Generate summary
+            // Generate summary with 500-char total message limit check
             quickviewStatus.innerText = '🤖 AI 요약 생성 중...';
-            const summary = await summarizeHtmlContent(title, html);
+            let summary = await summarizeHtmlContent(title, html, 300, false);
+
+            // Check total message length (for Telegram: title + summary + URL + formatting)
+            let message = buildTelegramMessage(title, summary, pageUrl);
+            const MAX_TOTAL_CHARS = 500;
+
+            if (message.length > MAX_TOTAL_CHARS) {
+                // Calculate how much shorter the summary needs to be
+                const excess = message.length - MAX_TOTAL_CHARS;
+                const newMaxChars = Math.max(100, 300 - excess - 20); // 20 chars safety margin
+
+                quickviewStatus.innerText = `⚠️ ${message.length}자 초과! 재요약 중 (${newMaxChars}자 이내)...`;
+                summary = await summarizeHtmlContent(title, html, newMaxChars, true);
+                message = buildTelegramMessage(title, summary, pageUrl);
+
+                // Final check - if still over, truncate ONLY the summary (never URL)
+                if (message.length > MAX_TOTAL_CHARS) {
+                    // Calculate fixed parts that cannot be truncated
+                    const fixedParts = `📄 ${title}\n\n\n\n👉 ${pageUrl}`.length; // title + URL + formatting
+                    const maxSummaryLength = MAX_TOTAL_CHARS - fixedParts - 3; // -3 for "..."
+
+                    if (maxSummaryLength > 50) {
+                        summary = summary.slice(0, maxSummaryLength) + '...';
+                    } else {
+                        // If even summary space is too small, just take first 100 chars
+                        summary = summary.slice(0, 100) + '...';
+                    }
+                    message = buildTelegramMessage(title, summary, pageUrl);
+                    console.log(`[Quickview] Force truncated summary to fit ${MAX_TOTAL_CHARS} chars`);
+                }
+            }
+
+            console.log(`[Quickview] Final message length: ${message.length} chars`);
 
             // Save to Firestore
             quickviewStatus.innerText = '💾 Firestore에 저장 중...';
@@ -875,7 +917,6 @@ ${text.slice(0, 3000)}`;
             if (sendTelegram) {
                 // Also add to admin_notifications for telegram sending
                 quickviewStatus.innerText = '📤 텔레그램 전송 예약 중...';
-                const message = `📄 ${title}\n\n${summary}\n\n👉 ${pageUrl}`;
                 await addDoc(collection(db, "admin_notifications"), {
                     body: message,
                     type: 'queued',

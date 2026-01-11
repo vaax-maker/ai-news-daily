@@ -5,6 +5,11 @@ import random
 import google.generativeai as genai
 from google.api_core import exceptions
 import groq as groq_lib
+try:
+    import openai
+    OPENAI_AVAILABLE = True
+except ImportError:
+    OPENAI_AVAILABLE = False
 from typing import List
 from src.utils.usage_logger import log_api_usage
 
@@ -228,6 +233,62 @@ def _summarize_with_gemini(prompt: str) -> str:
             
     raise last_exc if last_exc else RuntimeError("Gemini summarization failed")
 
+def _summarize_with_openai(prompt: str) -> str:
+    """Call OpenAI API (GPT-5.2) with rate limiting and retry logic."""
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise RuntimeError("OPENAI_API_KEY is not set.")
+    
+    if not OPENAI_AVAILABLE:
+        raise ImportError("OpenAI library not installed.")
+    
+    client = openai.OpenAI(api_key=api_key)
+    model = os.getenv("OPENAI_MODEL", "gpt-5.2")
+    
+    last_exc = None
+    for attempt in range(MAX_RETRIES):
+        try:
+            # Apply rate limiting
+            _rate_limit_delay()
+            
+            res = client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=2000,
+                temperature=0.3
+            )
+            
+            # Usage Tracking
+            try:
+                if hasattr(res, 'usage'):
+                    in_tok = res.usage.prompt_tokens
+                    out_tok = res.usage.completion_tokens
+                    log_api_usage("openai", model, in_tok, out_tok, context="summary")
+            except Exception as e:
+                print(f"[OpenAI] Usage tracking failed: {e}")
+            
+            return res.choices[0].message.content.strip()
+            
+        except Exception as exc:
+            last_exc = exc
+            error_msg = str(exc)
+            
+            if _is_rate_limit_error(error_msg):
+                if attempt == MAX_RETRIES - 1:
+                    raise
+                delay = BASE_BACKOFF_DELAY * (2 ** attempt) + random.uniform(0, 2)
+                print(f"[OpenAI] Rate limited (attempt {attempt+1}/{MAX_RETRIES}), waiting {delay:.1f}s...")
+                time.sleep(delay)
+            else:
+                if attempt == MAX_RETRIES - 1:
+                    raise
+                delay = (attempt + 1) * 3
+                print(f"[OpenAI] API error (attempt {attempt+1}/{MAX_RETRIES}): {error_msg[:50]}...")
+                time.sleep(delay)
+    
+    raise last_exc if last_exc else RuntimeError("OpenAI summarization failed")
+
+
 def _summarize_with_grok(prompt: str) -> str:
     """Call Grok/Groq API with rate limiting and retry logic."""
     api_key = os.getenv("GROK_API_KEY")
@@ -384,34 +445,47 @@ def summarize_article(text: str, title: str, display_name: str) -> str:
 위 기사를 구조화된 형식으로 요약하세요.
 """
 
-    # Try Grok first, then Gemini as fallback
+    # Try OpenAI (GPT-5.2) first, then Grok, then Gemini as fallback
+    openai_error = None
     grok_error = None
     gemini_error = None
     
+    # 1st: OpenAI GPT-5.2
+    try:
+        return _summarize_with_openai(prompt)
+    except Exception as e:
+        openai_error = str(e)
+        print(f"[OpenAI] Failed: {openai_error[:100]}")
+    
+    # 2nd: Groq
     try:
         return _summarize_with_grok(prompt)
     except Exception as e:
         grok_error = str(e)
         print(f"[Grok] Failed: {grok_error[:100]}")
     
+    # 3rd: Gemini
     try:
         return _summarize_with_gemini(prompt)
     except Exception as e:
         gemini_error = str(e)
         print(f"[Gemini] Failed: {gemini_error[:100]}")
     
-    # Both failed - return error message instead of raising
-    error_summary = f"Grok: {grok_error[:50] if grok_error else 'N/A'}, Gemini: {gemini_error[:50] if gemini_error else 'N/A'}"
-    print(f"[LLM] Both APIs failed - {error_summary}")
+    # All failed - return error message instead of raising
+    error_summary = f"OpenAI: {openai_error[:30] if openai_error else 'N/A'}, Grok: {grok_error[:30] if grok_error else 'N/A'}, Gemini: {gemini_error[:30] if gemini_error else 'N/A'}"
+    print(f"[LLM] All APIs failed - {error_summary}")
     raise RuntimeError(f"All LLM providers failed: {error_summary}")
 
 def analyze_text_with_llm(prompt: str) -> str:
-    """Generic wrapper to try Grok then Gemini for analysis tasks."""
+    """Generic wrapper to try OpenAI, then Grok, then Gemini for analysis tasks."""
     try:
         try:
-            return _summarize_with_grok(prompt)
+            return _summarize_with_openai(prompt)
         except Exception:
-            return _summarize_with_gemini(prompt)
+            try:
+                return _summarize_with_grok(prompt)
+            except Exception:
+                return _summarize_with_gemini(prompt)
     except Exception as e:
         print(f"[LLM] Analysis failed: {e}")
         return ""
@@ -428,7 +502,9 @@ def _rank_with_llm(candidates: List[tuple], limit: int) -> List[tuple]:
 1. 주요 기술 기업(OpenAI, Google, Apple, 삼성, LG 등)의 새로운 제품/모델 출시
 2. AI 분야의 획기적인 연구 성과나 논문
 3. 업계의 큰 인수합병이나 정책 변화
-4. 단순 튜토리얼이나 홍보성 기사는 제외
+4. AI, XR 기술과 서비스에 대한 고객 반응 및 시장 평가
+5. 새로운 비즈니스 모델 소개 및 성공 사례
+6. 단순 튜토리얼이나 홍보성 기사는 제외
 
 응답 형식:
 - 가장 중요하다고 생각되는 기사의 '인덱스 번호'만 쉼표(,)로 나열해줘.
@@ -504,3 +580,52 @@ def rank_items_with_ai(items: List[tuple], limit: int) -> List[tuple]:
         return combined[:limit]
 
     return llm_ranked[:limit]
+
+
+def generate_key_message(ai_articles: list, xr_articles: list) -> str:
+    """
+    Generate a hooking 3-line Key Message summary for the daily briefing.
+    
+    Args:
+        ai_articles: List of AI article dicts with 'title' key
+        xr_articles: List of XR article dicts with 'title' key
+        
+    Returns:
+        HTML formatted 3-line Key Message with emojis
+    """
+    # Collect top titles
+    ai_titles = [art.get("title", "") for art in ai_articles[:5]]
+    xr_titles = [art.get("title", "") for art in xr_articles[:3]]
+    
+    all_titles = "\n".join([f"- {t}" for t in ai_titles + xr_titles if t])
+    
+    if not all_titles:
+        return "<p>📰 오늘의 AI/XR 뉴스를 확인하세요!</p>"
+    
+    prompt = f"""다음은 오늘의 AI/XR 뉴스 기사 제목 목록입니다.
+이 기사들을 기반으로 독자의 호기심을 자극하는 "Key Message" 3줄을 작성하세요.
+
+[규칙]
+1. 구어체로 친근하게 작성 (예: "~했대요", "~라고 해요", "~인 거 알아요?")
+2. 각 줄 앞에 적절한 이모지 1개 추가
+3. 호기심을 자극하는 hooking 문장으로 작성
+4. 각 줄 50자 이내
+5. 정확히 3줄만 출력 (번호 없이)
+6. 줄바꿈으로 구분
+
+[기사 목록]
+{all_titles}
+
+Key Message 3줄:"""
+
+    try:
+        response = analyze_text_with_llm(prompt)
+        if response:
+            # Convert to HTML paragraphs
+            lines = [line.strip() for line in response.strip().split("\n") if line.strip()][:3]
+            return "\n".join([f"<p>{line}</p>" for line in lines])
+    except Exception as e:
+        print(f"[KeyMessage] Generation failed: {e}")
+    
+    # Fallback
+    return "<p>📰 오늘의 AI/XR 뉴스를 확인하세요!</p>"

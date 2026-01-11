@@ -6,18 +6,21 @@ import logging
 import requests
 import feedparser
 from typing import List, Optional, Tuple, Any
+from collections import defaultdict
 
 logger = logging.getLogger(__name__)
 
 # User-Agent to bypass bot blocking on some RSS feeds
 USER_AGENT = "Mozilla/5.0 (compatible; AINewsDailyBot/1.0; +https://vaax.github.io)"
 REQUEST_TIMEOUT = 30
+MAX_PER_SOURCE = 3  # Maximum articles per source/feed
 
 
 def fetch_rss_items(
     feeds: List[str],
     selection_mode: str = "time",
-    keyword_filters: Optional[List[str]] = None
+    keyword_filters: Optional[List[str]] = None,
+    max_per_source: int = MAX_PER_SOURCE
 ) -> List[Tuple[float, str, str, str, Any]]:
     """
     Fetch items from multiple RSS feeds.
@@ -26,6 +29,7 @@ def fetch_rss_items(
         feeds: List of RSS feed URLs
         selection_mode: 'time', 'random', or 'keyword'
         keyword_filters: Optional list of keywords to filter by
+        max_per_source: Maximum articles per source (default: 3)
         
     Returns:
         List of tuples: (timestamp, title, link, content, entry)
@@ -48,7 +52,12 @@ def fetch_rss_items(
             else:
                 logger.info(f"[RSS] Fetched {entries_count} entries from {feed_url}")
             
+            # Limit per source: take only first max_per_source from each feed
+            source_count = 0
             for entry in d.entries:
+                if source_count >= max_per_source:
+                    break
+                    
                 title = getattr(entry, "title", "")
                 link = getattr(entry, "link", "")
                 content = getattr(entry, "summary", "") or getattr(entry, "description", "")
@@ -57,6 +66,10 @@ def fetch_rss_items(
                 ts = time.mktime(published) if published else 0
                 
                 raw_items.append((ts, title, link, content, entry))
+                source_count += 1
+            
+            if source_count < entries_count:
+                logger.info(f"[RSS] Limited to {source_count}/{entries_count} from {feed_url}")
                 
         except requests.RequestException as e:
             logger.error(f"[RSS] Request error for {feed_url}: {e}")

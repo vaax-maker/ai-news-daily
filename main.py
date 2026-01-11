@@ -235,24 +235,10 @@ def process_category(config, now_utc, kst_timezone_offset=9):
             if link in past_links:
                 continue
             
-            # 2. Reuse if exists in an earlier run TODAY
+            # 2. Skip if exists in an earlier run TODAY (8시 → 16시 완전 분리)
             if link in today_links:
-                existing_art = today_by_link.get(link)
-                if existing_art and existing_art.get("summary_html"):
-                    summarized_items.append({
-                        "title": existing_art.get("title", shorten_korean_title(title)),
-                        "link": link,
-                        "summary_html": existing_art.get("summary_html"),
-                        "published_display": existing_art.get("published_display", format_timestamp(ts)),
-                        "source_name": existing_art.get("source_name", extract_source_name(entry, link)),
-                        "image_url": existing_art.get("image_url", ""),
-                        "placeholder_type": "",
-                        "original_title": title,
-                        "timestamp": ts, # Add timestamp for badge
-                        "is_new": False  # 🚀 Reused items are NOT new for notification
-                    })
-                    skipped_count += 1
-                    continue
+                skipped_count += 1
+                continue
             
             # New article - call LLM for summarization
             text_with_url = content + f"\n\nURL: {link}"
@@ -829,24 +815,20 @@ def main():
         import traceback
         traceback.print_exc()
 
-    # 5.5 Generate Mobile Briefing Page (CONDITIONAL)
+    # 5.5 Generate Daily Briefing Page with Key Message (CONDITIONAL)
     if total_new_items > 0:
-        print(f"[Briefing] Found {total_new_items} new items. Generating mobile landing page...")
+        print(f"[Briefing] Found {total_new_items} new items. Generating daily briefing...")
         try:
-            briefing_html = render_mobile_landing(
-                ai_items=dashboard_data.get("ai", [])[:10], # Ensure 2x items (10)
-                xr_items=dashboard_data.get("xr", [])[:10],
-                gov_items=dashboard_data.get("gov", [])[:10],
-                links=dashboard_data.get("links", {})
-            )
-            with open("docs/briefing.html", "w", encoding="utf-8") as f:
-                f.write(briefing_html)
+            from scripts.generate_briefing import generate_briefing
+            briefing_path = generate_briefing()
             
             # Add briefing URL for notifier
             dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/briefing.html"
-            print("[Briefing] Generated docs/briefing.html")
+            print(f"[Briefing] Generated {briefing_path}")
         except Exception as e:
             print(f"[Briefing] Failed: {e}")
+            import traceback
+            traceback.print_exc()
             # Fallback to index if briefing fails
             dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/index.html"
 
