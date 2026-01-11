@@ -362,16 +362,16 @@ def create_wordcloud_image(word_counts, word_to_category, output_path, font_path
     try:
         wc = WordCloud(
             font_path=font_path,
-            width=1000,
-            height=350,  # 세로폭 축소
+            width=900,
+            height=250,  # 세로폭 대폭 축소
             background_color='white',
             max_words=100,
             stopwords=None,
             color_func=color_func,
-            prefer_horizontal=0.95,  # 가로쓰기 선호
-            margin=2,  # 여백 최소화
-            relative_scaling=0.5,  # 단어 크기와 빈도 관계
-            scale=2  # 고해상도
+            prefer_horizontal=0.95,
+            margin=2,
+            relative_scaling=0.5,
+            scale=2
         )
         
         wc.generate_from_frequencies(word_counts)
