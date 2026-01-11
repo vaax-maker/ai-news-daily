@@ -627,7 +627,7 @@
     "bid_begin_dt": "20260107",
     "bid_close_dt": "20260119",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 관광플러스테크 참여기업 모집 공고",
@@ -641,7 +641,7 @@
     "bid_begin_dt": "20260105",
     "bid_close_dt": "20260126",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "[경북] 2025년 로컬 맞춤형 R&D: 방위 R&D Spin-On 방산기업 제품 고도화 지원 참여기업 추가 모집 공고",
@@ -655,7 +655,7 @@
     "bid_begin_dt": "20260105",
     "bid_close_dt": "20260111",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "[전남] 2026년 중소기업 육성자금(사회적경제 (특별)경영안정자금) 지원계획 공고",
@@ -669,7 +669,7 @@
     "bid_begin_dt": "예산 소진시까지",
     "bid_close_dt": "예산 소진시까지",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "물산업 구매연계 기술개발사업 시행계획 공고",
@@ -683,7 +683,7 @@
     "bid_begin_dt": "20260202",
     "bid_close_dt": "20260203",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "[전남] 2026년 중소기업 육성자금(건설업 (특별)경영안정자금) 지원계획 공고",
@@ -697,7 +697,7 @@
     "bid_begin_dt": "예산 소진시까지",
     "bid_close_dt": "예산 소진시까지",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 메디바이오 핵심소재 서비스 실증시험지원 참여기업 모집 공고",
@@ -711,7 +711,7 @@
     "bid_begin_dt": "20260102",
     "bid_close_dt": "20260130",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 노지스마트농업활용모델개발사업 시행계획 공고",
@@ -725,7 +725,7 @@
     "bid_begin_dt": "20260112",
     "bid_close_dt": "20260210",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 첨단정밀육종활용고부가산업화기술개발사업 시행계획 공고",
@@ -739,7 +739,7 @@
     "bid_begin_dt": "20260112",
     "bid_close_dt": "20260205",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 AX기반지능형농작업협업산업화기술개발사업 시행계획 공고",
@@ -753,7 +753,7 @@
     "bid_begin_dt": "20260112",
     "bid_close_dt": "20260210",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 첨단바이오기술기반수요연계형 그린바이오소재산업화기술개발 시행계획 공고",
@@ -767,7 +767,7 @@
     "bid_begin_dt": "20260112",
     "bid_close_dt": "20260210",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 지속가능한 저탄소축산 확산을 위한 기술개발사업 시행계획 공고",
@@ -781,7 +781,7 @@
     "bid_begin_dt": "세부사업별 상이",
     "bid_close_dt": "세부사업별 상이",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 공동기술개발(상생협력 기술지원) 사업 공고",
@@ -795,7 +795,7 @@
     "bid_begin_dt": "20260106",
     "bid_close_dt": "20260123",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 공동기술개발(기술사업화지원) 사업 공고",
@@ -809,6 +809,6 @@
     "bid_begin_dt": "20260106",
     "bid_close_dt": "20260123",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   }
 ]
