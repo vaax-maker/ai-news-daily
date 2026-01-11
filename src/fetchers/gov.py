@@ -347,6 +347,10 @@ def fetch_bizinfo_announcements(limit: int = 20) -> List[Dict[str, str]]:
                 if not title or not link:
                     continue
                 
+                # Make link absolute if it's relative
+                if link and not link.startswith("http"):
+                    link = f"https://www.bizinfo.go.kr{link}"
+                
                 # AI/XR 관련성 필터링 (제목 + 본문 요약)
                 # 본문 요약까지 검사하면 정확도가 높아짐
                 full_text = f"{title} {summary}"
