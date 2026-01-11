@@ -9,7 +9,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/style.css?v=12">
+    <link rel="stylesheet" href="./static/css/style.css?v=12">
     
 <style>
     .quickview-content {
@@ -167,8 +167,8 @@
     <header>
         <div class="gnb">
             <!-- Left: Logo -->
-            <a href="../index.html" class="logo-link">
-                <img src="../static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
+            <a href="./index.html" class="logo-link">
+                <img src="./static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
             </a>
 
             <!-- Right: Slogan & Nav -->
@@ -181,17 +181,17 @@
                     </span>
                 </div>
                 <nav class="nav-links">
-                    <a href="../index.html"
+                    <a href="./index.html"
                         class="">Home</a>
-                    <a href="../ai/index.html"
+                    <a href="./ai/index.html"
                         class="">AI/XR뉴스</a>
-                    <a href="../quickview/index.html"
-                        class="active">퀵뷰</a>
-                    <a href="../gov/index.html"
+                    <a href="./quickview/index.html"
+                        class="">퀵뷰</a>
+                    <a href="./gov/index.html"
                         class="">정부과제</a>
-                    <a href="../members/index.html"
+                    <a href="./members/index.html"
                         class="">회원사소식</a>
-                    <a href="../board/index.html"
+                    <a href="./board/index.html"
                         class="">Small Talk</a>
 
                 </nav>
@@ -201,7 +201,7 @@
         <div class="header-announcement"
             style="display: flex; justify-content: center; align-items: center; gap: 15px;">
             <span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
-            <a href="../guide.html"
+            <a href="./guide.html"
                 style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
         </div>
     </header>
@@ -216,13 +216,15 @@
 
     <!-- Raw content container (hidden) -->
     <template id="quickview-raw-content">
-        <!DOCTYPE html>
+        
+<!DOCTYPE html>
+
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 '뉴 아틀라스' 공개</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 '뉴 아틀라스' 공개</title>
+<style>
         /* vaax-theme.css - 외부 제공용 */
         :root {
             --primary-color: #65a30d;
@@ -386,94 +388,85 @@
     </style>
 </head>
 <body>
-
-    <h1>CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 '뉴 아틀라스'</h1>
-    <div class="date">2026년 1월 8일 12:02</div>
-
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/-5KXVudFXxM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-
-    <div class="section">
-        <div class="section-title">핵심 요약: 최강의 '조별 과제' 팀 결성</div>
-        <p>현대차그룹이 CES 2026 미디어 데이에서 <span class="highlight">완전 전동식 '뉴 아틀라스'</span>를 공개했습니다. 이번 발표의 핵심은 현대차(제조/자본), 보스턴 다이내믹스(로봇 하드웨어), 구글 딥마인드(AI 두뇌)가 결합한 3자 협력 모델입니다.</p>
-        
-        <ul>
-            <li><strong>하드웨어 혁신:</strong> 기존 유압식에서 전동식으로 변경. 360도 회전 관절로 복잡한 동작 가능, 소음 및 유지보수 이점 확보.</li>
-            <li><strong>AI 두뇌 탑재:</strong> 구글 딥마인드의 <span class="highlight">제미나이(Gemini) 로보틱스</span> 적용. 로봇이 시각/언어를 이해하고 논리적 의사결정을 수행.</li>
-            <li><strong>Lab to Fab:</strong> 연구실용 로봇을 넘어 실제 제조 현장(Factory) 투입을 목표로 함.</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <div class="section-title">뉴 아틀라스(New Atlas) 주요 스펙</div>
-        <ul>
-            <li><strong>작업 능력:</strong> 최대 <span class="highlight">50kg</span> 중량 리프팅 가능 (사람보다 강력한 근력).</li>
-            <li><strong>신체 조건:</strong> 키 1.9m, 팔 리치 2.3m로 넓은 작업 반경 확보.</li>
-            <li><strong>환경 적응:</strong> 방수 기능 지원, -20도~40도 환경 작동 (혹한/혹서 공장 환경 대응).</li>
-            <li><strong>자율 관리:</strong> 배터리 소진 시 <span class="highlight">스스로 배터리를 교체</span>하여 24시간 가동률 확보 목표.</li>
-            <li><strong>제어 방식:</strong> 완전 자율, 원격 제어, 태블릿 간편 조작 등 하이브리드 운영 지원.</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <div class="section-title">경쟁 구도: 현대차 연합 vs 테슬라</div>
-        <p>휴머노이드 로봇 시장의 접근 방식 차이가 뚜렷해졌습니다.</p>
-        <table class="comparison-table">
-            <thead>
-                <tr>
-                    <th>구분</th>
-                    <th>현대차 그룹 (보스턴 다이내믹스)</th>
-                    <th>테슬라 (옵티머스)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>전략</strong></td>
-                    <td><span class="highlight">연합 모델 (Android/Galaxy 방식)</span></td>
-                    <td>수직 계열화 (Apple 방식)</td>
-                </tr>
-                <tr>
-                    <td><strong>구성</strong></td>
-                    <td>현대(공장) + BD(로봇) + 구글(AI)</td>
-                    <td>자체 칩, OS, 로봇, 공장 독자 개발</td>
-                </tr>
-                <tr>
-                    <td><strong>특징</strong></td>
-                    <td>고하중(50kg), 고난이도 동작 특화</td>
-                    <td>양산성, 가격 경쟁력, 범용성 중시</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="section">
-        <div class="section-title">향후 계획 및 전망</div>
-        <ul>
-            <li><strong>투입 계획:</strong> 미국 조지아주 '현대차그룹 메타플랜트'에 단계적 투입 예정.</li>
-            <li><strong>초기 임무:</strong> 부품 시퀀싱(순서 배열) 등 단순 작업부터 시작하여 2030년경 조립 등 복잡한 작업으로 확대.</li>
-            <li><strong>운영 시스템:</strong> '보스턴 다이내믹스 오빗(Orbit)' 플랫폼을 통해 다수의 로봇 통합 관제 및 안전 관리 수행.</li>
-            <li><strong>시장 전망:</strong> 단순한 데모가 아닌, 실제 공장 환경에서의 신뢰성과 안전성 확보가 승부처가 될 것.</li>
-        </ul>
-    </div>
-
-    <div class="tags">
-        <span class="tag">#CES2026</span>
-        <span class="tag">#현대자동차</span>
-        <span class="tag">#보스턴다이내믹스</span>
-        <span class="tag">#구글딥마인드</span>
-        <span class="tag">#아틀라스</span>
-        <span class="tag">#휴머노이드</span>
-        <span class="tag">#로봇</span>
-        <span class="tag">#Gemini</span>
-    </div>
-
-    <footer>
+<h1>CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 '뉴 아틀라스'</h1>
+<div class="date">2026년 1월 8일 12:02</div>
+<div class="video-container">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/-5KXVudFXxM" title="YouTube video player"></iframe>
+</div>
+<div class="section">
+<div class="section-title">핵심 요약: 최강의 '조별 과제' 팀 결성</div>
+<p>현대차그룹이 CES 2026 미디어 데이에서 <span class="highlight">완전 전동식 '뉴 아틀라스'</span>를 공개했습니다. 이번 발표의 핵심은 현대차(제조/자본), 보스턴 다이내믹스(로봇 하드웨어), 구글 딥마인드(AI 두뇌)가 결합한 3자 협력 모델입니다.</p>
+<ul>
+<li><strong>하드웨어 혁신:</strong> 기존 유압식에서 전동식으로 변경. 360도 회전 관절로 복잡한 동작 가능, 소음 및 유지보수 이점 확보.</li>
+<li><strong>AI 두뇌 탑재:</strong> 구글 딥마인드의 <span class="highlight">제미나이(Gemini) 로보틱스</span> 적용. 로봇이 시각/언어를 이해하고 논리적 의사결정을 수행.</li>
+<li><strong>Lab to Fab:</strong> 연구실용 로봇을 넘어 실제 제조 현장(Factory) 투입을 목표로 함.</li>
+</ul>
+</div>
+<div class="section">
+<div class="section-title">뉴 아틀라스(New Atlas) 주요 스펙</div>
+<ul>
+<li><strong>작업 능력:</strong> 최대 <span class="highlight">50kg</span> 중량 리프팅 가능 (사람보다 강력한 근력).</li>
+<li><strong>신체 조건:</strong> 키 1.9m, 팔 리치 2.3m로 넓은 작업 반경 확보.</li>
+<li><strong>환경 적응:</strong> 방수 기능 지원, -20도~40도 환경 작동 (혹한/혹서 공장 환경 대응).</li>
+<li><strong>자율 관리:</strong> 배터리 소진 시 <span class="highlight">스스로 배터리를 교체</span>하여 24시간 가동률 확보 목표.</li>
+<li><strong>제어 방식:</strong> 완전 자율, 원격 제어, 태블릿 간편 조작 등 하이브리드 운영 지원.</li>
+</ul>
+</div>
+<div class="section">
+<div class="section-title">경쟁 구도: 현대차 연합 vs 테슬라</div>
+<p>휴머노이드 로봇 시장의 접근 방식 차이가 뚜렷해졌습니다.</p>
+<table class="comparison-table">
+<thead>
+<tr>
+<th>구분</th>
+<th>현대차 그룹 (보스턴 다이내믹스)</th>
+<th>테슬라 (옵티머스)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>전략</strong></td>
+<td><span class="highlight">연합 모델 (Android/Galaxy 방식)</span></td>
+<td>수직 계열화 (Apple 방식)</td>
+</tr>
+<tr>
+<td><strong>구성</strong></td>
+<td>현대(공장) + BD(로봇) + 구글(AI)</td>
+<td>자체 칩, OS, 로봇, 공장 독자 개발</td>
+</tr>
+<tr>
+<td><strong>특징</strong></td>
+<td>고하중(50kg), 고난이도 동작 특화</td>
+<td>양산성, 가격 경쟁력, 범용성 중시</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<div class="section-title">향후 계획 및 전망</div>
+<ul>
+<li><strong>투입 계획:</strong> 미국 조지아주 '현대차그룹 메타플랜트'에 단계적 투입 예정.</li>
+<li><strong>초기 임무:</strong> 부품 시퀀싱(순서 배열) 등 단순 작업부터 시작하여 2030년경 조립 등 복잡한 작업으로 확대.</li>
+<li><strong>운영 시스템:</strong> '보스턴 다이내믹스 오빗(Orbit)' 플랫폼을 통해 다수의 로봇 통합 관제 및 안전 관리 수행.</li>
+<li><strong>시장 전망:</strong> 단순한 데모가 아닌, 실제 공장 환경에서의 신뢰성과 안전성 확보가 승부처가 될 것.</li>
+</ul>
+</div>
+<div class="tags">
+<span class="tag">#CES2026</span>
+<span class="tag">#현대자동차</span>
+<span class="tag">#보스턴다이내믹스</span>
+<span class="tag">#구글딥마인드</span>
+<span class="tag">#아틀라스</span>
+<span class="tag">#휴머노이드</span>
+<span class="tag">#로봇</span>
+<span class="tag">#Gemini</span>
+</div>
+<footer>
         2026 Fovea
     </footer>
-
 </body>
 </html>
+
     </template>
 
     <!-- Shadow Wrapper -->
@@ -570,7 +563,7 @@
     </div>
 
     <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
-        <p>&copy; 2026 VAAX rebuild Project by <a href="../admin.html"
+        <p>&copy;  VAAX rebuild Project by <a href="./admin.html"
                 class="admin-link">Fovea</a>. All rights reserved.</p>
     </footer>
 </body>
