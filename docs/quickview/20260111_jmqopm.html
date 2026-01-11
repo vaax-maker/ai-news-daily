@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang='ko'>
+
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>AI 시대의 교육 : 변하지 않는 가치를 찾아서 - 퀵뷰</title>
+    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css?v=12">
+    
+<style>
+    .quickview-content {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .quickview-header {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .quickview-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
+    }
+
+    .quickview-meta {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
+    .quickview-body {
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+
+    .quickview-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    .quickview-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Flatten nested content structure for better readability */
+    .quickview-body .card {
+        padding: 1.25rem !important;
+        /* Reduce padding from default 1.5rem */
+        box-shadow: none !important;
+        /* Remove shadow to reduce "depth" feeling */
+        background: #f8fafc;
+        /* Light background for contrast without depth */
+        border: 1px solid var(--border-color);
+        margin-bottom: 1.5rem;
+    }
+
+    .quickview-body ul,
+    .quickview-body ol {
+        padding-left: 1.25rem;
+        /* Reduce list indentation */
+        margin-bottom: 1rem;
+    }
+
+    .quickview-body li {
+        margin-bottom: 0.25rem;
+    }
+
+    /* Ensure code blocks don't add too much visual weight */
+    .quickview-body pre {
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    /* === MOBILE RESPONSIVE === */
+    @media (max-width: 767px) {
+        .quickview-content {
+            /* Remove outer card styling on mobile - match daily article pages */
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 1rem;
+            border-radius: 0;
+        }
+
+        .quickview-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .quickview-title {
+            font-size: 1.35rem;
+            line-height: 1.3;
+        }
+
+        .quickview-meta {
+            font-size: 0.85rem;
+        }
+
+        .quickview-body {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .quickview-body .card {
+            padding: 0.75rem !important;
+            margin-bottom: 1rem;
+        }
+
+        .quickview-body ul,
+        .quickview-body ol {
+            padding-left: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .quickview-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        .quickview-body h2,
+        .quickview-body h3 {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quickview-actions {
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            gap: 0.5rem;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+    <header>
+        <div class="gnb">
+            <!-- Left: Logo -->
+            <a href="../index.html" class="logo-link">
+                <img src="../static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
+            </a>
+
+            <!-- Right: Slogan & Nav -->
+            <div class="header-right-section">
+                <div class="slogan-container">
+                    <span class="slogan-since">since 2016</span>
+                    <span class="header-slogan-text">
+                        VR-AR-AI-XR <span class="slogan-highlight">기술과 Biz.를 연결하는</span>
+                        성장나눔 <span class="slogan-highlight">커뮤니티</span>
+                    </span>
+                </div>
+                <nav class="nav-links">
+                    <a href="../index.html"
+                        class="">Home</a>
+                    <a href="../ai/index.html"
+                        class="">AI/XR뉴스</a>
+                    <a href="../quickview/index.html"
+                        class="active">퀵뷰</a>
+                    <a href="../gov/index.html"
+                        class="">정부과제</a>
+                    <a href="../members/index.html"
+                        class="">회원사소식</a>
+                    <a href="../board/index.html"
+                        class="">Small Talk</a>
+
+                </nav>
+            </div>
+        </div>
+        <!-- Announcement Message -->
+        <div class="header-announcement"
+            style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
+            <a href="../guide.html"
+                style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+<div class="quickview-content">
+    <div class="quickview-header">
+        <h1 class="quickview-title">AI 시대의 교육 : 변하지 않는 가치를 찾아서</h1>
+        <div class="quickview-meta">📅 2026년 01월 11일 19:59</div>
+    </div>
+
+    <div class="quickview-body">
+        <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 시대, 무엇을 가르쳐야 하는가? - 김상욱 교수</title>
+    <style>
+        /* vaax-theme.css - 외부 제공용 */
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --line-gray: #9ca3af;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: #f3f4f6;
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .meta-info {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .highlight {
+            background-color: #CEFA98;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .timestamp-link {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-left: 8px;
+            font-weight: 600;
+            background-color: #f0fdf4;
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid var(--primary-color);
+            transition: all 0.2s;
+        }
+
+        .timestamp-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .summary-box {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .tag-container {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #e2e8f0;
+            color: var(--secondary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            color: var(--line-gray);
+            font-size: 0.9rem;
+        }
+        
+        strong {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>AI 시대의 교육 : 변하지 않는 가치를 찾아서</h1>
+    
+    <div class="meta-info">
+        <span>강연자: 김상욱 교수 (경희대 물리학과)</span>
+        <span>2026년 1월 11일 생성</span>
+    </div>
+
+    <div class="summary-box">
+        <h3>⚡ 퀵뷰 (핵심 요약)</h3>
+        <ul>
+            <li><strong>현상:</strong> 생성형 AI의 발전 속도는 예측 불가능하며 인간 고유 영역을 넘보고 있음.</li>
+            <li><strong>통찰:</strong> 미래 예측은 불가능(카오스). 따라서 <strong>'변하지 않는 것(보존 법칙)'</strong>에 집중해야 함.</li>
+            <li><strong>교육의 본질:</strong> 유행하는 코딩/툴 교육보다 <strong>역사, 철학, 예술, 기초과학(수학/물리)</strong> 등 근본 역량이 중요.</li>
+            <li><strong>목표 재설정:</strong> 교육의 목표는 '행복'이 아닌 아이의 <strong>'완전한 독립'</strong>과 <strong>'공동체 기여'</strong>여야 함.</li>
+        </ul>
+    </div>
+
+    <h2>1. AI의 현주소와 인간과의 차이</h2>
+    <p>알파고(판별형 AI)를 넘어 챗GPT, 제미나이 등 생성형 AI가 등장했습니다. 이들은 수능 만점을 받을 정도로 발전했지만, 인간과는 근본적으로 다른 방식으로 작동합니다.</p>
+    
+    <h3>1-1. 확률적 생성 vs 맥락적 사고</h3>
+    <ul>
+        <li><strong>AI의 방식:</strong> 방대한 데이터를 기반으로 다음 단어가 나올 <span class="highlight">확률을 계산</span>하여 문장을 생성합니다. 이는 '생각'이 아니라 거대한 데이터 연산의 결과입니다. <a href="https://youtu.be/U4fwugv9nYY?t=252" class="timestamp-link" target="_blank">00:04:12</a></li>
+        <li><strong>인간의 방식:</strong> 인간은 '원샷 러닝(One-shot learning)'이 가능합니다. 방대한 데이터 없이도 <span class="highlight">맥락(Context)을 파악</span>하여 한두 번의 경험만으로 행동을 결정합니다. <a href="https://youtu.be/U4fwugv9nYY?t=488" class="timestamp-link" target="_blank">00:08:08</a></li>
+    </ul>
+
+    <h3>1-2. 신체의 유무와 욕망</h3>
+    <ul>
+        <li>인간의 판단은 신체 내부 신호(기분, 감각)의 영향을 받으며, 유한한 신체로 인해 욕망과 한계를 가집니다. 반면 AI는 신체가 없어 '기분'이나 진정한 의미의 '욕심'이 없습니다.</li>
+        <li>AI가 현실 세계에 영향을 미치려면 반드시 인간이나 기계 장치(인터페이스)를 거쳐야 합니다. 이것이 우리가 AI를 통제할 수 있는 지점입니다. <a href="https://youtu.be/U4fwugv9nYY?t=728" class="timestamp-link" target="_blank">00:12:08</a></li>
+    </ul>
+
+    <h2>2. 미래 예측의 허와 실 : 물리학자의 관점</h2>
+    <p>기술 혁신이 가져올 미래를 인간은 제대로 예측한 적이 없습니다. 플라스틱(폴리에틸렌)은 전쟁용 절연체로 개발되었으나 환경 오염의 주범이 되었고, 엔진은 기후 위기를 불렀습니다.</p>
+
+    <h3>2-1. 예측 불가능성 (카오스 이론)</h3>
+    <ul>
+        <li>1900년대 사람들이 상상한 2000년은 '고래가 끄는 잠수함' 수준이었습니다. 인터넷과 스마트폰의 등장은 아무도 예측하지 못했습니다.</li>
+        <li>특히 스마트폰 도입 이후 서구권 청소년의 정신 건강이 급격히 악화된 사례는 기술의 부작용을 예측하기 어려움을 보여줍니다. <a href="https://youtu.be/U4fwugv9nYY?t=1336" class="timestamp-link" target="_blank">00:22:16</a></li>
+    </ul>
+
+    <h3>2-2. 불확실할 때 해야 할 일 : 보존 법칙 찾기</h3>
+    <ul>
+        <li>물리학에서는 예측 불가능한 카오스 상황(이중 진자 운동 등)에서도 절대 변하지 않는 <strong>'에너지 보존 법칙'</strong>을 먼저 찾습니다.</li>
+        <li>미래가 불확실할수록 "무엇이 변할까?"(예측)를 묻지 말고, <span class="highlight">"무엇이 변하지 않을까?"(본질)</span>를 물어야 합니다. <a href="https://youtu.be/U4fwugv9nYY?t=1924" class="timestamp-link" target="_blank">00:32:04</a></li>
+    </ul>
+
+    <h2>3. AI 시대, 변하지 않는 교육의 핵심</h2>
+    <p>제프 베조스의 말처럼, 전략은 변하지 않는 것에 토대를 두어야 합니다. 10년 후에도 유효할 교육 내용은 다음과 같습니다.</p>
+
+    <h3>3-1. 인문학적 소양 (Humanity)</h3>
+    <ul>
+        <li><strong>역사:</strong> 진화심리학적으로 인간의 본성은 5만 년간 변하지 않았습니다. 역사를 배우는 것은 <span class="highlight">변하지 않는 인간의 행동 양식</span>을 배우는 것입니다.</li>
+        <li><strong>철학:</strong> 인간이란 무엇인가에 대한 근본적 탐구는 AI가 대체할 수 없습니다.</li>
+        <li><strong>예술:</strong> 직업으로서가 아니라 삶을 풍요롭게 즐기는 수단으로서 예술은 영원할 것입니다. <a href="https://youtu.be/U4fwugv9nYY?t=2187" class="timestamp-link" target="_blank">00:36:27</a></li>
+    </ul>
+
+    <h3>3-2. 문해력과 기초 과학 (STEM)</h3>
+    <ul>
+        <li><strong>읽기/쓰기/말하기:</strong> AI에게 지시를 내리고 결과를 검증하려면, 인간이 먼저 그 내용을 이해하고 구성할 능력이 있어야 합니다. 이것이 지식인의 핵심 업무입니다.</li>
+        <li><strong>수학/물리:</strong> 모든 산업혁명(1~4차)의 기반은 물리학과 수학이었습니다. "1+1=2"는 10년 후에도 변하지 않습니다. 유행하는 툴(특정 코딩 언어)보다 <span class="highlight">원리(Basic)</span>를 가르쳐야 합니다. <a href="https://youtu.be/U4fwugv9nYY?t=2385" class="timestamp-link" target="_blank">00:39:45</a></li>
+    </ul>
+
+    <h2>4. 교육의 진정한 목표 재설정</h2>
+    <p>단순히 '아이의 행복'을 목표로 하면 부모의 욕망이 투영될 수 있습니다. 생물학적 관점과 아인슈타인의 견해를 빌려 교육 목표를 재정의해야 합니다.</p>
+
+    <ul>
+        <li><strong>첫째, 완전한 독립:</strong> 동물의 교육 목표와 같이, 부모 없이도 경제적/정신적으로 스스로 살아갈 수 있는 능력을 키우는 것. AI가 아이의 독립성을 해친다면 사용을 제어해야 합니다. <a href="https://youtu.be/U4fwugv9nYY?t=2911" class="timestamp-link" target="_blank">00:48:31</a></li>
+        <li><strong>둘째, 공동체 기여:</strong> 독립적 개인이 되어 공동체를 위해 일하는 것을 고귀하게 여기는 태도. AI는 인간을 고립시킬 수 있으므로, 학교에서는 인간 대 인간의 접촉과 협력을 강화해야 합니다. <a href="https://youtu.be/U4fwugv9nYY?t=2977" class="timestamp-link" target="_blank">00:49:37</a></li>
+    </ul>
+
+    <div class="tag-container">
+        <span class="tag">#김상욱교수</span>
+        <span class="tag">#AI시대교육</span>
+        <span class="tag">#물리학적통찰</span>
+        <span class="tag">#변하지않는것</span>
+        <span class="tag">#교육의본질</span>
+        <span class="tag">#문해력</span>
+        <span class="tag">#기초과학</span>
+        <span class="tag">#자녀교육</span>
+    </div>
+</div>
+
+<footer>
+    2026 Fovea
+</footer>
+
+</body>
+</html>
+    </div>
+
+    <div class="quickview-actions">
+        <a href="index.html" class="back-link">← 퀵뷰 목록으로</a>
+        <div style="flex: 1;"></div>
+        <a href="../board/index.html?mode=discuss&title=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%EA%B5%90%EC%9C%A1%20%3A%20%EB%B3%80%ED%95%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EA%B0%80%EC%B9%98%EB%A5%BC%20%EC%B0%BE%EC%95%84%EC%84%9C&link=https%3A//vaax-maker.github.io/ai-news-daily/quickview/20260111_jmqopm.html&source=퀵뷰"
+            class="discuss-btn-sm">토론</a>
+        <button type="button" class="discuss-btn-sm"
+            onclick="navigator.clipboard.writeText('https://vaax-maker.github.io/ai-news-daily/quickview/20260111_jmqopm.html'); alert('URL이 복사되었습니다!');">공유</button>
+    </div>
+</div>
+
+    </div>
+
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 VAAX rebuild Project by <a href="../admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
