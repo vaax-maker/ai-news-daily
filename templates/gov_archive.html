@@ -238,6 +238,12 @@
         color: #16a34a;
     }
 
+    .badge-bizinfo {
+        background: #fff7ed;
+        color: #c2410c;
+        border: 1px solid #ffedd5;
+    }
+
     .new-badge {
         display: inline-block;
         background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
@@ -409,7 +415,7 @@
                 </td>
                 <td class="col-source">
                     <span
-                        class="source-badge {% if '과기정통부' in item.source_name %}badge-msit{% else %}badge-koneps{% endif %}">
+                        class="source-badge {% if '과기정통부' in item.source_name %}badge-msit{% elif '기업마당' in item.source_name %}badge-bizinfo{% else %}badge-koneps{% endif %}">
                         {{ item.source_name }}
                     </span>
                 </td>
