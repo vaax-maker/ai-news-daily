@@ -18,7 +18,8 @@ from src.generators.html import (
     render_board_page,
     render_gov_archive,
     render_admin_page,
-    render_guide_page
+    render_guide_page,
+    render_quickview_index
 )
 from src.config import CategoryConfig, load_members, load_categories
 from src.utils.storage import MemberStorage, GovStorage
@@ -200,7 +201,86 @@ def rebuild_board():
         f.write(html)
     print(f"✓ Board done.")
 
-def rebuild_dashboard(ai_previews, xr_previews, gov_previews, member_previews, links):
+def rebuild_admin():
+    print("\n--- [Admin] Rebuilding... ---")
+    html = render_admin_page()
+    with open("docs/admin.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"✓ Admin done.")
+
+def rebuild_guide():
+    print("\n--- [Guide] Rebuilding... ---")
+    html = render_guide_page()
+    with open("docs/guide.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print("✓ Guide Page done.")
+
+def rebuild_quickview():
+    print("\n--- [Quickview] Rebuilding... ---")
+    qv_dir = "docs/quickview"
+    if not os.path.exists(qv_dir):
+        print("No quickview directory found.")
+        return []
+    
+    files = [f for f in os.listdir(qv_dir) if f.endswith(".html") and f != "index.html"]
+    pages = []
+    
+    for f in files:
+        path = os.path.join(qv_dir, f)
+        try:
+            with open(path, "r", encoding="utf-8") as file:
+                soup = BeautifulSoup(file, "html.parser")
+                
+            title_el = soup.select_one(".quickview-title")
+            meta_el = soup.select_one(".quickview-meta")
+            
+            title = title_el.get_text(strip=True) if title_el else "제목 없음"
+            date_str = meta_el.get_text(strip=True).replace("📅", "").strip() if meta_el else ""
+            
+            # Parse date for sorting
+            # Format: 2026년 01월 09일 12:44
+            created_at = 0
+            if date_str:
+                try:
+                    # Remove " AM" or " PM" if present (some files might have it based on previous view)
+                    clean_date = date_str.replace(" PM", "").replace(" AM", "")
+                    # Try various formats
+                    dt = datetime.datetime.strptime(clean_date, "%Y년 %m월 %d일 %H:%M")
+                    created_at = dt.timestamp()
+                except:
+                    # Fallback for "2026년 01월 09일 12:40 PM" format saw in file view
+                    # PM logic might be tricky with strptime %p if Korean chars are mixed, manual parsing often safer
+                    created_at = os.path.getmtime(path)
+            else:
+                 created_at = os.path.getmtime(path)
+            
+            # If parsing failed, use file mtime as fallback
+            if created_at == 0:
+                created_at = os.path.getmtime(path)
+
+            pages.append({
+                "id": f.replace(".html", ""),
+                "url": f"quickview/{f}", # Dashboard link relative to docs root
+                "title": title,
+                "created_at": created_at,
+                "created_display": date_str,
+                "is_new": False # Logic for new could be added if needed
+            })
+        except Exception as e:
+            print(f"Error parsing {f}: {e}")
+            
+    # Sort by date desc
+    pages.sort(key=lambda x: x["created_at"], reverse=True)
+    
+    # Render Index
+    idx_html = render_quickview_index(pages)
+    with open(os.path.join("docs/quickview/index.html"), "w", encoding="utf-8") as f:
+        f.write(idx_html)
+    print(f"✓ Quickview Index done. ({len(pages)} pages)")
+    
+    return pages
+
+def rebuild_dashboard(ai_previews, xr_previews, gov_previews, member_previews, quickview_previews, links):
     print("\n--- [Dashboard] Rebuilding... ---")
     # Clean up previews for dashboard format
     # The template expects specific fields
@@ -237,6 +317,7 @@ def rebuild_dashboard(ai_previews, xr_previews, gov_previews, member_previews, l
         ai_latest=ai_previews,
         xr_latest=xr_previews,
         gov_latest=gov_formatted,
+        quickview_latest=quickview_previews,
         members_latest=member_formatted,
         section_links=links,
         last_updated=saved_update_time
@@ -245,22 +326,6 @@ def rebuild_dashboard(ai_previews, xr_previews, gov_previews, member_previews, l
         f.write(html)
     print(f"✓ Dashboard done.")
 
-def rebuild_admin():
-    print("\n--- [Admin] Rebuilding... ---")
-    html = render_admin_page()
-    with open("docs/admin.html", "w", encoding="utf-8") as f:
-        f.write(html)
-    print(f"✓ Admin done.")
-
-def rebuild_guide():
-    """가이드 페이지 생성"""
-    print("\n--- [Guide] Rebuilding... ---")
-    html = render_guide_page()
-    output_path = os.path.join("docs", "guide.html")
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(html)
-    print("✓ Guide Page done.")
-
 if __name__ == "__main__":
     m_latest = rebuild_members()
     a_previews, links = rebuild_archives()
@@ -268,16 +333,19 @@ if __name__ == "__main__":
     rebuild_board()
     rebuild_admin()
     rebuild_guide()
+    qv_latest = rebuild_quickview()
     
     # Additional links
     links["members"] = "members/index.html"
     links["gov"] = "gov/index.html"
+    links["quickview"] = "quickview/index.html"
     
     rebuild_dashboard(
         ai_previews=a_previews.get("ai", []),
         xr_previews=a_previews.get("xr", []),
         gov_previews=g_latest,
         member_previews=m_latest,
+        quickview_previews=qv_latest[:5],
         links=links
     )
     
