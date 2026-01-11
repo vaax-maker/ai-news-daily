@@ -8,12 +8,54 @@ from bs4 import BeautifulSoup
 from src.generators.llm import analyze_text_with_llm
 import random
 
-def extract_weekly_keywords(docs_dir="docs", days=2):
+import json
+
+def extract_weekly_keywords(docs_dir="docs", days=2, use_cached=True):
     """
     Extracts keywords from AI and XR daily summaries for the past `days` days,
     filtering for Person, Tech, Company, Solution using LLM.
+    
+    If use_cached=True and data/briefing_keywords.json exists, uses cached keywords
+    from the unified LLM call (saves tokens).
+    
     Returns (word_counts, word_to_category).
     """
+    # Try to use cached keywords from briefing generation (unified LLM call)
+    keywords_path = os.path.join(os.path.dirname(docs_dir), "data", "briefing_keywords.json")
+    if not os.path.exists(keywords_path):
+        keywords_path = "data/briefing_keywords.json"  # Fallback for different working dirs
+    
+    if use_cached and os.path.exists(keywords_path):
+        try:
+            with open(keywords_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            
+            keywords = data.get("keywords", [])
+            if keywords:
+                word_counts = Counter()
+                word_to_category = {}
+                
+                # Map category names to standard format
+                category_map = {
+                    "Person": "Person",
+                    "Tech": "Technology", 
+                    "Company": "Company",
+                    "Solution": "Product"  # Map Solution to Product for color consistency
+                }
+                
+                for i, (word, category) in enumerate(keywords):
+                    # Weight: first keywords are more important
+                    weight = max(10 - i, 3)
+                    word_counts[word] = weight
+                    word_to_category[word] = category_map.get(category, category)
+                
+                print(f"[WordCloud] Loaded {len(word_counts)} cached keywords from {keywords_path}")
+                return word_counts, word_to_category
+        except Exception as e:
+            print(f"[WordCloud] Failed to load cached keywords: {e}")
+    
+    # Fallback: Original LLM extraction logic
+    print("[WordCloud] Using fallback LLM extraction...")
     cutoff_date = datetime.now() - timedelta(days=days)
     
     # Collect titles and snippets
