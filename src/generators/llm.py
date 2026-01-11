@@ -661,22 +661,53 @@ KEYWORDS:
             # Remove any <think> tags and their content
             response = re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL)
             
-            # Parse KEY_MESSAGE section
+            # Robust REGEX parsing
+            # Search for KEY_MESSAGE section
+            key_msg_match = re.search(r'(?:KEY_MESSAGE|KEY MESSAGE|Key Message)[:：](.*?)(?:KEYWORDS|KEYWORDS|Keywords)[:：]', response, re.DOTALL | re.IGNORECASE)
+            
+            # Search for KEYWORDS section (until end of string)
+            keywords_match = re.search(r'(?:KEYWORDS|KEYWORDS|Keywords)[:：](.*)', response, re.DOTALL | re.IGNORECASE)
+            
             key_message_html = fallback_result["key_message"]
             keywords_list = []
-            
-            if "KEY_MESSAGE:" in response and "KEYWORDS:" in response:
-                parts = response.split("KEYWORDS:")
-                key_message_part = parts[0].replace("KEY_MESSAGE:", "").strip()
-                keywords_part = parts[1].strip() if len(parts) > 1 else ""
+
+            # 1. Parse Key Message
+            if key_msg_match:
+                key_message_part = key_msg_match.group(1).strip()
+            elif "KEY_MESSAGE:" in response:
+                 # Fallback to split if regex fails but keyword exists (simple split)
+                 parts = response.split("KEY_MESSAGE:")
+                 if len(parts) > 1:
+                     # Take until next keyword or end
+                     temp = parts[1].split("KEYWORDS:")[0]
+                     key_message_part = temp.strip()
+                 else:
+                     key_message_part = ""
+            else:
+                key_message_part = ""
+
+            if key_message_part:
+                lines = [line.strip() for line in key_message_part.split("\n") if line.strip() and not line.strip().startswith("KEY_MESSAGE")][:5]
+                # Remove dashes or bullets if present
+                clean_lines = []
+                for line in lines:
+                    line = re.sub(r'^[-*•]\s*', '', line)
+                    clean_lines.append(line)
                 
-                # Parse Key Message
-                lines = [line.strip() for line in key_message_part.split("\n") if line.strip()][:5]
-                if lines:
-                    li_items = "\n".join([f"<li>{line}</li>" for line in lines])
+                if clean_lines:
+                    li_items = "\n".join([f"<li>{line}</li>" for line in clean_lines])
                     key_message_html = f"<ul>\n{li_items}\n</ul>"
-                
-                # Parse Keywords
+            
+            # 2. Parse Keywords
+            keywords_part = ""
+            if keywords_match:
+                keywords_part = keywords_match.group(1).strip()
+            elif "KEYWORDS:" in response:
+                parts = response.split("KEYWORDS:")
+                if len(parts) > 1:
+                    keywords_part = parts[1].strip()
+
+            if keywords_part:
                 for line in keywords_part.split("\n"):
                     line = line.strip()
                     if "|" in line:
@@ -684,12 +715,16 @@ KEYWORDS:
                         if len(parts) >= 2:
                             word = parts[0].strip()
                             category = parts[1].strip()
+                            # Strip markdown bold/italic
+                            word = re.sub(r'[*_]', '', word)
+                            category = re.sub(r'[*_]', '', category)
+                            
                             if word and category in ["Person", "Tech", "Company", "Solution"]:
                                 keywords_list.append((word, category))
             
             return {
                 "key_message": key_message_html,
-                "keywords": keywords_list[:40]  # Max 40 keywords (increased from 15)
+                "keywords": keywords_list[:40]
             }
             
     except Exception as e:

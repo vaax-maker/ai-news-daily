@@ -238,23 +238,30 @@ def rebuild_quickview():
             date_str = meta_el.get_text(strip=True).replace("📅", "").strip() if meta_el else ""
             
             # Parse date for sorting
-            # Format: 2026년 01월 09일 12:44
+            # Parse date for sorting
             created_at = 0
-            if date_str:
+            
+            # 1. Try to read from meta tag first (most reliable)
+            meta_ts = soup.select_one("meta[name='created-at']")
+            if meta_ts and meta_ts.get("content"):
                 try:
-                    # Remove " AM" or " PM" if present (some files might have it based on previous view)
+                    created_at = float(meta_ts.get("content"))
+                except ValueError:
+                    pass
+
+            # 2. Fallback to text parsing if meta tag missing
+            if created_at == 0 and date_str:
+                try:
+                    # Remove " AM" or " PM" if present
                     clean_date = date_str.replace(" PM", "").replace(" AM", "")
                     # Try various formats
                     dt = datetime.datetime.strptime(clean_date, "%Y년 %m월 %d일 %H:%M")
                     created_at = dt.timestamp()
                 except:
-                    # Fallback for "2026년 01월 09일 12:40 PM" format saw in file view
-                    # PM logic might be tricky with strptime %p if Korean chars are mixed, manual parsing often safer
-                    created_at = os.path.getmtime(path)
-            else:
-                 created_at = os.path.getmtime(path)
+                    # Fallback for other formats
+                    pass
             
-            # If parsing failed, use file mtime as fallback
+            # 3. Last resort: file mtime
             if created_at == 0:
                 created_at = os.path.getmtime(path)
 

@@ -167,7 +167,7 @@ def render_quickview_index(pages):
         root_path=".."  # docs/quickview/index.html -> root is ..
     )
 
-def render_quickview_page(title, content, created_display, page_url=""):
+def render_quickview_page(title, content, created_display, page_url="", created_at=0):
     """
     Renders an individual quickview page with the provided HTML content.
     """
@@ -176,6 +176,7 @@ def render_quickview_page(title, content, created_display, page_url=""):
         title=title,
         content=content,
         created_display=created_display,
+        created_at=created_at,
         page_url=page_url,
         active_tab="quickview",
         now_year=datetime.datetime.now().year,

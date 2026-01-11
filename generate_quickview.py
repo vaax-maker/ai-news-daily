@@ -116,7 +116,7 @@ def process_quickview_pages():
         
         # Generate individual page HTML
         page_url = f"https://vaax-maker.github.io/ai-news-daily/quickview/{page_id}.html"
-        page_html = render_quickview_page(title, cleaned_html, created_display, page_url)
+        page_html = render_quickview_page(title, cleaned_html, created_display, page_url, created_at=created_ts)
         page_path = os.path.join(quickview_dir, f"{page_id}.html")
         
         with open(page_path, "w", encoding="utf-8") as f:
