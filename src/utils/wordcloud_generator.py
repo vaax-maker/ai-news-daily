@@ -363,14 +363,16 @@ def create_wordcloud_image(word_counts, word_to_category, output_path, font_path
         wc = WordCloud(
             font_path=font_path,
             width=900,
-            height=250,  # 세로폭 대폭 축소
+            height=250,
             background_color='white',
             max_words=100,
             stopwords=None,
             color_func=color_func,
             prefer_horizontal=0.95,
-            margin=2,
-            relative_scaling=0.5,
+            margin=1,  # 간격 최소화
+            relative_scaling=0.4,  # 빈도 차이 덜 강조 (공간 효율)
+            min_font_size=10, # 작은 글씨도 허용
+            max_font_size=60, # 너무 큰 글씨 방지
             scale=2
         )
         
