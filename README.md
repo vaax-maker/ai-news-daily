@@ -138,5 +138,9 @@ streamlit run admin/app.py
 - **Streamlit**: 관리자 대시보드
 - **SQLite**: API 사용량 로깅
 
+## 유지보수 가이드
+- **기능 추가 시**: 새로운 기능이나 데이터 소스가 추가되면 반드시 `templates/guide.html` 내용을 최신화하여 방문자에게 정확한 정보를 제공해야 합니다.
+- **서비스 가이드 재빌드**: `python rebuild_all_html.py` 실행 시 자동으로 가이드 페이지도 재생성됩니다.
+
 ## 라이선스
 MIT License © 2024 VAAX
