@@ -254,7 +254,7 @@ def _summarize_with_openai(prompt: str) -> str:
             res = client.chat.completions.create(
                 model=model,
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=2000,
+                max_completion_tokens=2000,
                 temperature=0.3
             )
             
@@ -585,55 +585,113 @@ def rank_items_with_ai(items: List[tuple], limit: int) -> List[tuple]:
 def generate_key_message(ai_articles: list, xr_articles: list) -> str:
     """
     Generate a hooking 3-line Key Message summary for the daily briefing.
+    (Legacy function - for backward compatibility, calls the unified function)
     
     Args:
         ai_articles: List of AI article dicts with 'title' key
         xr_articles: List of XR article dicts with 'title' key
         
     Returns:
-        HTML formatted bullet list Key Message with emojis
+        HTML formatted bullet list Key Message
     """
+    result = generate_key_message_and_keywords(ai_articles, xr_articles)
+    return result["key_message"]
+
+
+def generate_key_message_and_keywords(ai_articles: list, xr_articles: list) -> dict:
+    """
+    Generate Key Message AND wordcloud keywords in a single LLM call.
+    
+    Args:
+        ai_articles: List of AI article dicts with 'title' key
+        xr_articles: List of XR article dicts with 'title' key
+        
+    Returns:
+        dict with:
+            - key_message: HTML formatted bullet list
+            - keywords: list of (word, category) tuples for wordcloud
+    """
+    import re
+    
     # Collect top titles
     ai_titles = [art.get("title", "") for art in ai_articles[:5]]
     xr_titles = [art.get("title", "") for art in xr_articles[:3]]
     
     all_titles = "\n".join([f"- {t}" for t in ai_titles + xr_titles if t])
     
+    fallback_result = {
+        "key_message": "<ul><li>오늘의 AI/XR 뉴스를 확인하세요!</li></ul>",
+        "keywords": []
+    }
+    
     if not all_titles:
-        return "<ul><li>📰 오늘의 AI/XR 뉴스를 확인하세요!</li></ul>"
+        return fallback_result
     
     prompt = f"""다음은 오늘의 AI/XR 뉴스 기사 제목 목록입니다.
-이 기사들을 기반으로 독자의 호기심을 자극하는 "Key Message" 3~5개를 작성하세요.
 
-[규칙]
-1. 한글로 작성
-2. 이모지 사용 금지
-3. 호기심을 자극하는 문장으로 작성
-4. 각 줄 60자 이내
-5. 3~5개 작성 (번호 없이)
-6. 줄바꿈으로 구분
-7. <think> 태그나 설명 없이 결과만 출력
+[작업 1] Key Message 생성
+- 독자의 호기심을 자극하는 문장 3~5개 작성
+- 한글로 작성, 이모지 금지, 각 줄 60자 이내
+
+[작업 2] 워드클라우드 키워드 추출
+- 기사에서 중요한 키워드 10~15개 추출
+- 각 키워드의 카테고리 지정: Person(인물), Tech(기술), Company(기업/기관), Solution(솔루션/제품)
+- 형식: 키워드|카테고리
 
 [기사 목록]
 {all_titles}
 
-Key Message:"""
+[출력 형식 - 아래 형식 정확히 따르기]
+KEY_MESSAGE:
+첫번째 메시지
+두번째 메시지
+세번째 메시지
+
+KEYWORDS:
+엔비디아|Company
+피지컬AI|Tech
+젠슨황|Person
+
+출력:"""
 
     try:
         response = analyze_text_with_llm(prompt)
         if response:
             # Remove any <think> tags and their content
-            import re
             response = re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL)
-            response = re.sub(r'<[^>]+>', '', response)  # Remove any HTML-like tags
             
-            # Convert to HTML bullet list
-            lines = [line.strip() for line in response.strip().split("\n") if line.strip()][:5]
-            if lines:
-                li_items = "\n".join([f"<li>{line}</li>" for line in lines])
-                return f"<ul>\n{li_items}\n</ul>"
+            # Parse KEY_MESSAGE section
+            key_message_html = fallback_result["key_message"]
+            keywords_list = []
+            
+            if "KEY_MESSAGE:" in response and "KEYWORDS:" in response:
+                parts = response.split("KEYWORDS:")
+                key_message_part = parts[0].replace("KEY_MESSAGE:", "").strip()
+                keywords_part = parts[1].strip() if len(parts) > 1 else ""
+                
+                # Parse Key Message
+                lines = [line.strip() for line in key_message_part.split("\n") if line.strip()][:5]
+                if lines:
+                    li_items = "\n".join([f"<li>{line}</li>" for line in lines])
+                    key_message_html = f"<ul>\n{li_items}\n</ul>"
+                
+                # Parse Keywords
+                for line in keywords_part.split("\n"):
+                    line = line.strip()
+                    if "|" in line:
+                        parts = line.split("|")
+                        if len(parts) >= 2:
+                            word = parts[0].strip()
+                            category = parts[1].strip()
+                            if word and category in ["Person", "Tech", "Company", "Solution"]:
+                                keywords_list.append((word, category))
+            
+            return {
+                "key_message": key_message_html,
+                "keywords": keywords_list[:15]  # Max 15 keywords
+            }
+            
     except Exception as e:
-        print(f"[KeyMessage] Generation failed: {e}")
+        print(f"[KeyMessage+Keywords] Generation failed: {e}")
     
-    # Fallback
-    return "<ul><li>📰 오늘의 AI/XR 뉴스를 확인하세요!</li></ul>"
+    return fallback_result

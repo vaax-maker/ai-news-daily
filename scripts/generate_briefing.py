@@ -12,7 +12,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.config import load_categories
 from src.generators.html import render_daily_briefing, render_briefing_archive
-from src.generators.llm import generate_key_message
+from src.generators.llm import generate_key_message_and_keywords
 from src.utils.common import get_kst_now
 from bs4 import BeautifulSoup
 
@@ -183,14 +183,23 @@ def generate_briefing():
         afternoon_ai = [a for a in afternoon_ai if a.get("link") not in morning_links]
         afternoon_xr = [a for a in afternoon_xr if a.get("link") not in morning_links]
     
-    # Generate Key Message
-    print("[Briefing] Generating Key Message...")
+    # Generate Key Message and Keywords (unified LLM call)
+    print("[Briefing] Generating Key Message and Keywords...")
     all_articles = afternoon_ai + afternoon_xr + morning_ai + morning_xr
-    key_message = generate_key_message(
+    result = generate_key_message_and_keywords(
         afternoon_ai + morning_ai,  # All AI articles
         afternoon_xr + morning_xr   # All XR articles
     )
+    key_message = result["key_message"]
+    briefing_keywords = result["keywords"]
     print(f"[Briefing] Key Message: {key_message[:100]}...")
+    print(f"[Briefing] Keywords extracted: {len(briefing_keywords)}")
+    
+    # Save keywords for wordcloud
+    keywords_path = "data/briefing_keywords.json"
+    os.makedirs(os.path.dirname(keywords_path), exist_ok=True)
+    with open(keywords_path, "w", encoding="utf-8") as f:
+        json.dump({"keywords": briefing_keywords, "date": now.strftime("%Y-%m-%d")}, f, ensure_ascii=False, indent=2)
     
     # Fetch Government Projects (new)
     from src.fetchers.gov import fetch_gov_announcements
