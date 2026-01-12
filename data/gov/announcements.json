@@ -810,5 +810,47 @@
     "bid_close_dt": "20260123",
     "openg_dt": "",
     "is_new": false
+  },
+  {
+    "title": "2026년 상반기 민관공동기술사업화R&D(기술이전사업화 및 구매연계ㆍ상생협력) 시행계획 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117315",
+    "dept": "중소벤처기업부",
+    "manager": "",
+    "date": "2026-01-12",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-01-12",
+    "bid_begin_dt": "20260129",
+    "bid_close_dt": "20260212",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년 산학연 Collabo R&D사업 시행계획 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117313",
+    "dept": "중소벤처기업부",
+    "manager": "",
+    "date": "2026-01-12",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-01-12",
+    "bid_begin_dt": "20260126",
+    "bid_close_dt": "20260212",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "[경남] 창녕군 2026년 상반기 중소기업 육성자금 융자지원 계획 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117298",
+    "dept": "경상남도",
+    "manager": "",
+    "date": "2026-01-12",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-01-12",
+    "bid_begin_dt": "예산 소진시까지",
+    "bid_close_dt": "예산 소진시까지",
+    "openg_dt": "",
+    "is_new": false
   }
 ]
