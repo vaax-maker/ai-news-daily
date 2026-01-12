@@ -9,7 +9,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/style.css?v=12">
+    <link rel="stylesheet" href="../static/css/style.css?v=8">
     
 </head>
 
@@ -34,25 +34,17 @@
                     <a href="../index.html"
                         class="">Home</a>
                     <a href="../ai/index.html"
-                        class="active">AI/XR뉴스</a>
-                    <a href="../quickview/index.html"
-                        class="">퀵뷰</a>
+                        class="active">AI뉴스</a>
+                    <a href="../xr/index.html"
+                        class="">XR뉴스</a>
                     <a href="../gov/index.html"
                         class="">정부과제</a>
                     <a href="../members/index.html"
                         class="">회원사소식</a>
                     <a href="../board/index.html"
                         class="">Small Talk</a>
-
                 </nav>
             </div>
-        </div>
-        <!-- Announcement Message -->
-        <div class="header-announcement"
-            style="display: flex; justify-content: center; align-items: center; gap: 15px;">
-            <span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
-            <a href="../guide.html"
-                style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
         </div>
     </header>
 
@@ -61,20 +53,12 @@
 <div class="page-header header-with-search">
     <div class="header-titles">
         <p class="eyebrow">Archive</p>
-        <h1>AI/XR 뉴스 아카이브</h1>
+        <h1>AI 뉴스 아카이브</h1>
     </div>
     <form class="search-bar header-search" id="archive-search-form">
         <input type="text" id="archive-search-input" placeholder="검색어를 입력하세요" aria-label="기사 검색">
         <button type="submit" class="primary-btn">여기서 검색</button>
     </form>
-</div>
-
-<!-- Category Tabs -->
-<div class="category-tabs">
-    <button type="button" class="category-tab active" data-category="ai">AI
-        뉴스</button>
-    <button type="button" class="category-tab " data-category="xr">XR
-        뉴스</button>
 </div>
 
 
@@ -133,7 +117,7 @@
 </section>
 
 <script>
-    const runEntries = [{"date_str": "2026-01-12", "day_of_week": "\uc6d4", "filename": "2026-01-12_081011.html", "time_str": "08:10:11"}, {"date_str": "2026-01-11", "day_of_week": "\uc77c", "filename": "2026-01-11_080942.html", "time_str": "08:09:42"}, {"date_str": "2026-01-10", "day_of_week": "\ud1a0", "filename": "2026-01-10_081005.html", "time_str": "08:10:05"}, {"date_str": "2026-01-09", "day_of_week": "\uae08", "filename": "2026-01-09_080957.html", "time_str": "08:09:57"}, {"date_str": "2026-01-08", "day_of_week": "\ubaa9", "filename": "2026-01-08_081018.html", "time_str": "08:10:18"}, {"date_str": "2026-01-07", "day_of_week": "\uc218", "filename": "2026-01-07_081011.html", "time_str": "08:10:11"}, {"date_str": "2026-01-06", "day_of_week": "\ud654", "filename": "2026-01-06_080955.html", "time_str": "08:09:55"}, {"date_str": "2026-01-05", "day_of_week": "\uc6d4", "filename": "2026-01-05_080936.html", "time_str": "08:09:36"}, {"date_str": "2026-01-04", "day_of_week": "\uc77c", "filename": "2026-01-04_080940.html", "time_str": "08:09:40"}, {"date_str": "2026-01-03", "day_of_week": "\ud1a0", "filename": "2026-01-03_080934.html", "time_str": "08:09:34"}, {"date_str": "2026-01-02", "day_of_week": "\uae08", "filename": "2026-01-02_080952.html", "time_str": "08:09:52"}, {"date_str": "2026-01-01", "day_of_week": "\ubaa9", "filename": "2026-01-01_080941.html", "time_str": "08:09:41"}, {"date_str": "2025-12-31", "day_of_week": "\uc218", "filename": "2025-12-31_080912.html", "time_str": "08:09:12"}, {"date_str": "2025-12-30", "day_of_week": "\ud654", "filename": "2025-12-30_080943.html", "time_str": "08:09:43"}, {"date_str": "2025-12-29", "day_of_week": "\uc6d4", "filename": "2025-12-29_080948.html", "time_str": "08:09:48"}, {"date_str": "2025-12-28", "day_of_week": "\uc77c", "filename": "2025-12-28_080941.html", "time_str": "08:09:41"}, {"date_str": "2025-12-27", "day_of_week": "\ud1a0", "filename": "2025-12-27_031532.html", "time_str": "03:15:32"}, {"date_str": "2025-12-26", "day_of_week": "\uae08", "filename": "2025-12-26_080945.html", "time_str": "08:09:45"}, {"date_str": "2025-12-25", "day_of_week": "\ubaa9", "filename": "2025-12-25_080941.html", "time_str": "08:09:41"}, {"date_str": "2025-12-24", "day_of_week": "\uc218", "filename": "2025-12-24_080937.html", "time_str": "08:09:37"}, {"date_str": "2025-12-23", "day_of_week": "\ud654", "filename": "2025-12-23_080946.html", "time_str": "08:09:46"}, {"date_str": "2025-12-22", "day_of_week": "\uc6d4", "filename": "2025-12-22_080926.html", "time_str": "08:09:26"}, {"date_str": "2025-12-21", "day_of_week": "\uc77c", "filename": "2025-12-21_080923.html", "time_str": "08:09:23"}, {"date_str": "2025-12-20", "day_of_week": "\ud1a0", "filename": "2025-12-20_081007.html", "time_str": "08:10:07"}, {"date_str": "2025-12-19", "day_of_week": "\uae08", "filename": "2025-12-19_081012.html", "time_str": "08:10:12"}, {"date_str": "2025-12-18", "day_of_week": "\ubaa9", "filename": "2025-12-18_074845.html", "time_str": "07:48:45"}, {"date_str": "2025-12-17", "day_of_week": "\uc218", "filename": "2025-12-17_114030.html", "time_str": "11:40:30"}, {"date_str": "2025-12-16", "day_of_week": "\ud654", "filename": "2025-12-16_074912.html", "time_str": "07:49:12"}, {"date_str": "2025-12-15", "day_of_week": "\uc6d4", "filename": "2025-12-15_074538.html", "time_str": "07:45:38"}, {"date_str": "2025-12-14", "day_of_week": "\uc77c", "filename": "2025-12-14_074552.html", "time_str": "07:45:52"}, {"date_str": "2025-12-13", "day_of_week": "\ud1a0", "filename": "2025-12-13_074806.html", "time_str": "07:48:06"}, {"date_str": "2025-12-12", "day_of_week": "\uae08", "filename": "2025-12-12_074810.html", "time_str": "07:48:10"}, {"date_str": "2025-12-11", "day_of_week": "\ubaa9", "filename": "2025-12-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_001627.html", "time_str": "00:16:27"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-07", "day_of_week": "\uc77c", "filename": "2025-12-07_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-06", "day_of_week": "\ud1a0", "filename": "2025-12-06_074528.html", "time_str": "07:45:28"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_074629.html", "time_str": "07:46:29"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-03", "day_of_week": "\uc218", "filename": "2025-12-03_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-02", "day_of_week": "\ud654", "filename": "2025-12-02_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-01", "day_of_week": "\uc6d4", "filename": "2025-12-01_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-30", "day_of_week": "\uc77c", "filename": "2025-11-30_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-29", "day_of_week": "\ud1a0", "filename": "2025-11-29_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-28", "day_of_week": "\uae08", "filename": "2025-11-28_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-27", "day_of_week": "\ubaa9", "filename": "2025-11-27_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-26", "day_of_week": "\uc218", "filename": "2025-11-26_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-25", "day_of_week": "\ud654", "filename": "2025-11-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-24", "day_of_week": "\uc6d4", "filename": "2025-11-24_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-23", "day_of_week": "\uc77c", "filename": "2025-11-23_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-22", "day_of_week": "\ud1a0", "filename": "2025-11-22_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-21", "day_of_week": "\uae08", "filename": "2025-11-21_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-20", "day_of_week": "\ubaa9", "filename": "2025-11-20_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-19", "day_of_week": "\uc218", "filename": "2025-11-19_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-18", "day_of_week": "\ud654", "filename": "2025-11-18_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-17", "day_of_week": "\uc6d4", "filename": "2025-11-17_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-16", "day_of_week": "\uc77c", "filename": "2025-11-16_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-15", "day_of_week": "\ud1a0", "filename": "2025-11-15_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-14", "day_of_week": "\uae08", "filename": "2025-11-14_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-13", "day_of_week": "\ubaa9", "filename": "2025-11-13_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-12", "day_of_week": "\uc218", "filename": "2025-11-12_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-11", "day_of_week": "\ud654", "filename": "2025-11-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-10", "day_of_week": "\uc6d4", "filename": "2025-11-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-09", "day_of_week": "\uc77c", "filename": "2025-11-09_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-08", "day_of_week": "\ud1a0", "filename": "2025-11-08_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-07", "day_of_week": "\uae08", "filename": "2025-11-07_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-06", "day_of_week": "\ubaa9", "filename": "2025-11-06_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-05", "day_of_week": "\uc218", "filename": "2025-11-05_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-04", "day_of_week": "\ud654", "filename": "2025-11-04_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-03", "day_of_week": "\uc6d4", "filename": "2025-11-03_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-02", "day_of_week": "\uc77c", "filename": "2025-11-02_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-01", "day_of_week": "\ud1a0", "filename": "2025-11-01_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-31", "day_of_week": "\uae08", "filename": "2025-10-31_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-30", "day_of_week": "\ubaa9", "filename": "2025-10-30_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-29", "day_of_week": "\uc218", "filename": "2025-10-29_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-28", "day_of_week": "\ud654", "filename": "2025-10-28_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-27", "day_of_week": "\uc6d4", "filename": "2025-10-27_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-26", "day_of_week": "\uc77c", "filename": "2025-10-26_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-25", "day_of_week": "\ud1a0", "filename": "2025-10-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-24", "day_of_week": "\uae08", "filename": "2025-10-24_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-23", "day_of_week": "\ubaa9", "filename": "2025-10-23_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-22", "day_of_week": "\uc218", "filename": "2025-10-22_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-21", "day_of_week": "\ud654", "filename": "2025-10-21_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-20", "day_of_week": "\uc6d4", "filename": "2025-10-20_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-19", "day_of_week": "\uc77c", "filename": "2025-10-19_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-18", "day_of_week": "\ud1a0", "filename": "2025-10-18_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-17", "day_of_week": "\uae08", "filename": "2025-10-17_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-16", "day_of_week": "\ubaa9", "filename": "2025-10-16_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-15", "day_of_week": "\uc218", "filename": "2025-10-15_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-14", "day_of_week": "\ud654", "filename": "2025-10-14_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-13", "day_of_week": "\uc6d4", "filename": "2025-10-13_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-12", "day_of_week": "\uc77c", "filename": "2025-10-12_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-11", "day_of_week": "\ud1a0", "filename": "2025-10-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-10", "day_of_week": "\uae08", "filename": "2025-10-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-09", "day_of_week": "\ubaa9", "filename": "2025-10-09_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-08", "day_of_week": "\uc218", "filename": "2025-10-08_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-07", "day_of_week": "\ud654", "filename": "2025-10-07_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-06", "day_of_week": "\uc6d4", "filename": "2025-10-06_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-05", "day_of_week": "\uc77c", "filename": "2025-10-05_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-04", "day_of_week": "\ud1a0", "filename": "2025-10-04_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-03", "day_of_week": "\uae08", "filename": "2025-10-03_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-02", "day_of_week": "\ubaa9", "filename": "2025-10-02_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-01", "day_of_week": "\uc218", "filename": "2025-10-01_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-30", "day_of_week": "\ud654", "filename": "2025-09-30_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-29", "day_of_week": "\uc6d4", "filename": "2025-09-29_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-28", "day_of_week": "\uc77c", "filename": "2025-09-28_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-27", "day_of_week": "\ud1a0", "filename": "2025-09-27_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-26", "day_of_week": "\uae08", "filename": "2025-09-26_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-25", "day_of_week": "\ubaa9", "filename": "2025-09-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-24", "day_of_week": "\uc218", "filename": "2025-09-24_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-23", "day_of_week": "\ud654", "filename": "2025-09-23_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-22", "day_of_week": "\uc6d4", "filename": "2025-09-22_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-21", "day_of_week": "\uc77c", "filename": "2025-09-21_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-20", "day_of_week": "\ud1a0", "filename": "2025-09-20_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-19", "day_of_week": "\uae08", "filename": "2025-09-19_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-18", "day_of_week": "\ubaa9", "filename": "2025-09-18_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-17", "day_of_week": "\uc218", "filename": "2025-09-17_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-16", "day_of_week": "\ud654", "filename": "2025-09-16_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-15", "day_of_week": "\uc6d4", "filename": "2025-09-15_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-14", "day_of_week": "\uc77c", "filename": "2025-09-14_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-13", "day_of_week": "\ud1a0", "filename": "2025-09-13_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-12", "day_of_week": "\uae08", "filename": "2025-09-12_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-11", "day_of_week": "\ubaa9", "filename": "2025-09-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-10", "day_of_week": "\uc218", "filename": "2025-09-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-09", "day_of_week": "\ud654", "filename": "2025-09-09_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-08", "day_of_week": "\uc6d4", "filename": "2025-09-08_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-07", "day_of_week": "\uc77c", "filename": "2025-09-07_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-06", "day_of_week": "\ud1a0", "filename": "2025-09-06_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-05", "day_of_week": "\uae08", "filename": "2025-09-05_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-04", "day_of_week": "\ubaa9", "filename": "2025-09-04_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-03", "day_of_week": "\uc218", "filename": "2025-09-03_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-02", "day_of_week": "\ud654", "filename": "2025-09-02_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-01", "day_of_week": "\uc6d4", "filename": "2025-09-01_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-31", "day_of_week": "\uc77c", "filename": "2025-08-31_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-30", "day_of_week": "\ud1a0", "filename": "2025-08-30_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-29", "day_of_week": "\uae08", "filename": "2025-08-29_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-28", "day_of_week": "\ubaa9", "filename": "2025-08-28_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-27", "day_of_week": "\uc218", "filename": "2025-08-27_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-26", "day_of_week": "\ud654", "filename": "2025-08-26_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-25", "day_of_week": "\uc6d4", "filename": "2025-08-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-24", "day_of_week": "\uc77c", "filename": "2025-08-24_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-23", "day_of_week": "\ud1a0", "filename": "2025-08-23_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-22", "day_of_week": "\uae08", "filename": "2025-08-22_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-21", "day_of_week": "\ubaa9", "filename": "2025-08-21_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-20", "day_of_week": "\uc218", "filename": "2025-08-20_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-19", "day_of_week": "\ud654", "filename": "2025-08-19_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-18", "day_of_week": "\uc6d4", "filename": "2025-08-18_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-17", "day_of_week": "\uc77c", "filename": "2025-08-17_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-16", "day_of_week": "\ud1a0", "filename": "2025-08-16_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-15", "day_of_week": "\uae08", "filename": "2025-08-15_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-14", "day_of_week": "\ubaa9", "filename": "2025-08-14_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-13", "day_of_week": "\uc218", "filename": "2025-08-13_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-12", "day_of_week": "\ud654", "filename": "2025-08-12_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-11", "day_of_week": "\uc6d4", "filename": "2025-08-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-10", "day_of_week": "\uc77c", "filename": "2025-08-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-09", "day_of_week": "\ud1a0", "filename": "2025-08-09_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-08", "day_of_week": "\uae08", "filename": "2025-08-08_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-07", "day_of_week": "\ubaa9", "filename": "2025-08-07_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-06", "day_of_week": "\uc218", "filename": "2025-08-06_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-05", "day_of_week": "\ud654", "filename": "2025-08-05_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-04", "day_of_week": "\uc6d4", "filename": "2025-08-04_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-03", "day_of_week": "\uc77c", "filename": "2025-08-03_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-02", "day_of_week": "\ud1a0", "filename": "2025-08-02_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-01", "day_of_week": "\uae08", "filename": "2025-08-01_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-31", "day_of_week": "\ubaa9", "filename": "2025-07-31_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-30", "day_of_week": "\uc218", "filename": "2025-07-30_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-29", "day_of_week": "\ud654", "filename": "2025-07-29_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-28", "day_of_week": "\uc6d4", "filename": "2025-07-28_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-27", "day_of_week": "\uc77c", "filename": "2025-07-27_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-26", "day_of_week": "\ud1a0", "filename": "2025-07-26_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-25", "day_of_week": "\uae08", "filename": "2025-07-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-24", "day_of_week": "\ubaa9", "filename": "2025-07-24_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-23", "day_of_week": "\uc218", "filename": "2025-07-23_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-22", "day_of_week": "\ud654", "filename": "2025-07-22_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-21", "day_of_week": "\uc6d4", "filename": "2025-07-21_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-20", "day_of_week": "\uc77c", "filename": "2025-07-20_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-19", "day_of_week": "\ud1a0", "filename": "2025-07-19_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-18", "day_of_week": "\uae08", "filename": "2025-07-18_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-17", "day_of_week": "\ubaa9", "filename": "2025-07-17_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-16", "day_of_week": "\uc218", "filename": "2025-07-16_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-15", "day_of_week": "\ud654", "filename": "2025-07-15_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-14", "day_of_week": "\uc6d4", "filename": "2025-07-14_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-13", "day_of_week": "\uc77c", "filename": "2025-07-13_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-12", "day_of_week": "\ud1a0", "filename": "2025-07-12_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-11", "day_of_week": "\uae08", "filename": "2025-07-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-10", "day_of_week": "\ubaa9", "filename": "2025-07-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-09", "day_of_week": "\uc218", "filename": "2025-07-09_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-08", "day_of_week": "\ud654", "filename": "2025-07-08_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-07", "day_of_week": "\uc6d4", "filename": "2025-07-07_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-06", "day_of_week": "\uc77c", "filename": "2025-07-06_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-05", "day_of_week": "\ud1a0", "filename": "2025-07-05_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-04", "day_of_week": "\uae08", "filename": "2025-07-04_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-03", "day_of_week": "\ubaa9", "filename": "2025-07-03_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-02", "day_of_week": "\uc218", "filename": "2025-07-02_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-01", "day_of_week": "\ud654", "filename": "2025-07-01_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-30", "day_of_week": "\uc6d4", "filename": "2025-06-30_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-29", "day_of_week": "\uc77c", "filename": "2025-06-29_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-28", "day_of_week": "\ud1a0", "filename": "2025-06-28_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-27", "day_of_week": "\uae08", "filename": "2025-06-27_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-26", "day_of_week": "\ubaa9", "filename": "2025-06-26_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-25", "day_of_week": "\uc218", "filename": "2025-06-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-23", "day_of_week": "\uc6d4", "filename": "2025-06-23_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-22", "day_of_week": "\uc77c", "filename": "2025-06-22_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-21", "day_of_week": "\ud1a0", "filename": "2025-06-21_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-20", "day_of_week": "\uae08", "filename": "2025-06-20_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-19", "day_of_week": "\ubaa9", "filename": "2025-06-19_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-18", "day_of_week": "\uc218", "filename": "2025-06-18_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-17", "day_of_week": "\ud654", "filename": "2025-06-17_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-16", "day_of_week": "\uc6d4", "filename": "2025-06-16_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-15", "day_of_week": "\uc77c", "filename": "2025-06-15_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-14", "day_of_week": "\ud1a0", "filename": "2025-06-14_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-13", "day_of_week": "\uae08", "filename": "2025-06-13_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-12", "day_of_week": "\ubaa9", "filename": "2025-06-12_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-11", "day_of_week": "\uc218", "filename": "2025-06-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-10", "day_of_week": "\ud654", "filename": "2025-06-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-05", "day_of_week": "\ubaa9", "filename": "2025-06-05_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-03-25", "day_of_week": "\ud654", "filename": "2025-03-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2024-07-18", "day_of_week": "\ubaa9", "filename": "2024-07-18_100000.html", "time_str": "10:00:00"}];
+    const runEntries = [{"date_str": "2025-12-31", "day_of_week": "\uc218", "filename": "2025-12-31_080912.html", "time_str": "08:09:12"}, {"date_str": "2025-12-30", "day_of_week": "\ud654", "filename": "2025-12-30_080943.html", "time_str": "08:09:43"}, {"date_str": "2025-12-29", "day_of_week": "\uc6d4", "filename": "2025-12-29_080948.html", "time_str": "08:09:48"}, {"date_str": "2025-12-28", "day_of_week": "\uc77c", "filename": "2025-12-28_080941.html", "time_str": "08:09:41"}, {"date_str": "2025-12-27", "day_of_week": "\ud1a0", "filename": "2025-12-27_031532.html", "time_str": "03:15:32"}, {"date_str": "2025-12-26", "day_of_week": "\uae08", "filename": "2025-12-26_080945.html", "time_str": "08:09:45"}, {"date_str": "2025-12-25", "day_of_week": "\ubaa9", "filename": "2025-12-25_080941.html", "time_str": "08:09:41"}, {"date_str": "2025-12-24", "day_of_week": "\uc218", "filename": "2025-12-24_080937.html", "time_str": "08:09:37"}, {"date_str": "2025-12-23", "day_of_week": "\ud654", "filename": "2025-12-23_080946.html", "time_str": "08:09:46"}, {"date_str": "2025-12-22", "day_of_week": "\uc6d4", "filename": "2025-12-22_080926.html", "time_str": "08:09:26"}, {"date_str": "2025-12-21", "day_of_week": "\uc77c", "filename": "2025-12-21_080923.html", "time_str": "08:09:23"}, {"date_str": "2025-12-20", "day_of_week": "\ud1a0", "filename": "2025-12-20_081007.html", "time_str": "08:10:07"}, {"date_str": "2025-12-19", "day_of_week": "\uae08", "filename": "2025-12-19_081012.html", "time_str": "08:10:12"}, {"date_str": "2025-12-18", "day_of_week": "\ubaa9", "filename": "2025-12-18_074845.html", "time_str": "07:48:45"}, {"date_str": "2025-12-17", "day_of_week": "\uc218", "filename": "2025-12-17_114030.html", "time_str": "11:40:30"}, {"date_str": "2025-12-16", "day_of_week": "\ud654", "filename": "2025-12-16_074912.html", "time_str": "07:49:12"}, {"date_str": "2025-12-15", "day_of_week": "\uc6d4", "filename": "2025-12-15_074538.html", "time_str": "07:45:38"}, {"date_str": "2025-12-14", "day_of_week": "\uc77c", "filename": "2025-12-14_074552.html", "time_str": "07:45:52"}, {"date_str": "2025-12-13", "day_of_week": "\ud1a0", "filename": "2025-12-13_074806.html", "time_str": "07:48:06"}, {"date_str": "2025-12-12", "day_of_week": "\uae08", "filename": "2025-12-12_074810.html", "time_str": "07:48:10"}, {"date_str": "2025-12-11", "day_of_week": "\ubaa9", "filename": "2025-12-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-10", "day_of_week": "\uc218", "filename": "2025-12-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-09", "day_of_week": "\ud654", "filename": "2025-12-09_001627.html", "time_str": "00:16:27"}, {"date_str": "2025-12-08", "day_of_week": "\uc6d4", "filename": "2025-12-08_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-07", "day_of_week": "\uc77c", "filename": "2025-12-07_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-06", "day_of_week": "\ud1a0", "filename": "2025-12-06_074528.html", "time_str": "07:45:28"}, {"date_str": "2025-12-05", "day_of_week": "\uae08", "filename": "2025-12-05_074629.html", "time_str": "07:46:29"}, {"date_str": "2025-12-04", "day_of_week": "\ubaa9", "filename": "2025-12-04_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-03", "day_of_week": "\uc218", "filename": "2025-12-03_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-02", "day_of_week": "\ud654", "filename": "2025-12-02_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-12-01", "day_of_week": "\uc6d4", "filename": "2025-12-01_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-30", "day_of_week": "\uc77c", "filename": "2025-11-30_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-29", "day_of_week": "\ud1a0", "filename": "2025-11-29_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-28", "day_of_week": "\uae08", "filename": "2025-11-28_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-27", "day_of_week": "\ubaa9", "filename": "2025-11-27_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-26", "day_of_week": "\uc218", "filename": "2025-11-26_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-25", "day_of_week": "\ud654", "filename": "2025-11-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-24", "day_of_week": "\uc6d4", "filename": "2025-11-24_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-23", "day_of_week": "\uc77c", "filename": "2025-11-23_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-22", "day_of_week": "\ud1a0", "filename": "2025-11-22_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-21", "day_of_week": "\uae08", "filename": "2025-11-21_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-20", "day_of_week": "\ubaa9", "filename": "2025-11-20_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-19", "day_of_week": "\uc218", "filename": "2025-11-19_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-18", "day_of_week": "\ud654", "filename": "2025-11-18_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-17", "day_of_week": "\uc6d4", "filename": "2025-11-17_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-16", "day_of_week": "\uc77c", "filename": "2025-11-16_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-15", "day_of_week": "\ud1a0", "filename": "2025-11-15_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-14", "day_of_week": "\uae08", "filename": "2025-11-14_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-13", "day_of_week": "\ubaa9", "filename": "2025-11-13_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-12", "day_of_week": "\uc218", "filename": "2025-11-12_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-11", "day_of_week": "\ud654", "filename": "2025-11-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-10", "day_of_week": "\uc6d4", "filename": "2025-11-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-09", "day_of_week": "\uc77c", "filename": "2025-11-09_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-08", "day_of_week": "\ud1a0", "filename": "2025-11-08_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-07", "day_of_week": "\uae08", "filename": "2025-11-07_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-06", "day_of_week": "\ubaa9", "filename": "2025-11-06_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-05", "day_of_week": "\uc218", "filename": "2025-11-05_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-04", "day_of_week": "\ud654", "filename": "2025-11-04_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-03", "day_of_week": "\uc6d4", "filename": "2025-11-03_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-02", "day_of_week": "\uc77c", "filename": "2025-11-02_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-11-01", "day_of_week": "\ud1a0", "filename": "2025-11-01_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-31", "day_of_week": "\uae08", "filename": "2025-10-31_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-30", "day_of_week": "\ubaa9", "filename": "2025-10-30_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-29", "day_of_week": "\uc218", "filename": "2025-10-29_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-28", "day_of_week": "\ud654", "filename": "2025-10-28_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-27", "day_of_week": "\uc6d4", "filename": "2025-10-27_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-26", "day_of_week": "\uc77c", "filename": "2025-10-26_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-25", "day_of_week": "\ud1a0", "filename": "2025-10-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-24", "day_of_week": "\uae08", "filename": "2025-10-24_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-23", "day_of_week": "\ubaa9", "filename": "2025-10-23_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-22", "day_of_week": "\uc218", "filename": "2025-10-22_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-21", "day_of_week": "\ud654", "filename": "2025-10-21_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-20", "day_of_week": "\uc6d4", "filename": "2025-10-20_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-19", "day_of_week": "\uc77c", "filename": "2025-10-19_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-18", "day_of_week": "\ud1a0", "filename": "2025-10-18_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-17", "day_of_week": "\uae08", "filename": "2025-10-17_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-16", "day_of_week": "\ubaa9", "filename": "2025-10-16_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-15", "day_of_week": "\uc218", "filename": "2025-10-15_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-14", "day_of_week": "\ud654", "filename": "2025-10-14_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-13", "day_of_week": "\uc6d4", "filename": "2025-10-13_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-12", "day_of_week": "\uc77c", "filename": "2025-10-12_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-11", "day_of_week": "\ud1a0", "filename": "2025-10-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-10", "day_of_week": "\uae08", "filename": "2025-10-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-09", "day_of_week": "\ubaa9", "filename": "2025-10-09_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-08", "day_of_week": "\uc218", "filename": "2025-10-08_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-07", "day_of_week": "\ud654", "filename": "2025-10-07_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-06", "day_of_week": "\uc6d4", "filename": "2025-10-06_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-05", "day_of_week": "\uc77c", "filename": "2025-10-05_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-04", "day_of_week": "\ud1a0", "filename": "2025-10-04_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-03", "day_of_week": "\uae08", "filename": "2025-10-03_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-02", "day_of_week": "\ubaa9", "filename": "2025-10-02_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-10-01", "day_of_week": "\uc218", "filename": "2025-10-01_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-30", "day_of_week": "\ud654", "filename": "2025-09-30_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-29", "day_of_week": "\uc6d4", "filename": "2025-09-29_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-28", "day_of_week": "\uc77c", "filename": "2025-09-28_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-27", "day_of_week": "\ud1a0", "filename": "2025-09-27_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-26", "day_of_week": "\uae08", "filename": "2025-09-26_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-25", "day_of_week": "\ubaa9", "filename": "2025-09-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-24", "day_of_week": "\uc218", "filename": "2025-09-24_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-23", "day_of_week": "\ud654", "filename": "2025-09-23_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-22", "day_of_week": "\uc6d4", "filename": "2025-09-22_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-21", "day_of_week": "\uc77c", "filename": "2025-09-21_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-20", "day_of_week": "\ud1a0", "filename": "2025-09-20_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-19", "day_of_week": "\uae08", "filename": "2025-09-19_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-18", "day_of_week": "\ubaa9", "filename": "2025-09-18_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-17", "day_of_week": "\uc218", "filename": "2025-09-17_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-16", "day_of_week": "\ud654", "filename": "2025-09-16_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-15", "day_of_week": "\uc6d4", "filename": "2025-09-15_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-14", "day_of_week": "\uc77c", "filename": "2025-09-14_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-13", "day_of_week": "\ud1a0", "filename": "2025-09-13_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-12", "day_of_week": "\uae08", "filename": "2025-09-12_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-11", "day_of_week": "\ubaa9", "filename": "2025-09-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-10", "day_of_week": "\uc218", "filename": "2025-09-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-09", "day_of_week": "\ud654", "filename": "2025-09-09_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-08", "day_of_week": "\uc6d4", "filename": "2025-09-08_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-07", "day_of_week": "\uc77c", "filename": "2025-09-07_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-06", "day_of_week": "\ud1a0", "filename": "2025-09-06_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-05", "day_of_week": "\uae08", "filename": "2025-09-05_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-04", "day_of_week": "\ubaa9", "filename": "2025-09-04_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-03", "day_of_week": "\uc218", "filename": "2025-09-03_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-02", "day_of_week": "\ud654", "filename": "2025-09-02_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-09-01", "day_of_week": "\uc6d4", "filename": "2025-09-01_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-31", "day_of_week": "\uc77c", "filename": "2025-08-31_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-30", "day_of_week": "\ud1a0", "filename": "2025-08-30_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-29", "day_of_week": "\uae08", "filename": "2025-08-29_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-28", "day_of_week": "\ubaa9", "filename": "2025-08-28_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-27", "day_of_week": "\uc218", "filename": "2025-08-27_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-26", "day_of_week": "\ud654", "filename": "2025-08-26_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-25", "day_of_week": "\uc6d4", "filename": "2025-08-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-24", "day_of_week": "\uc77c", "filename": "2025-08-24_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-23", "day_of_week": "\ud1a0", "filename": "2025-08-23_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-22", "day_of_week": "\uae08", "filename": "2025-08-22_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-21", "day_of_week": "\ubaa9", "filename": "2025-08-21_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-20", "day_of_week": "\uc218", "filename": "2025-08-20_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-19", "day_of_week": "\ud654", "filename": "2025-08-19_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-18", "day_of_week": "\uc6d4", "filename": "2025-08-18_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-17", "day_of_week": "\uc77c", "filename": "2025-08-17_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-16", "day_of_week": "\ud1a0", "filename": "2025-08-16_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-15", "day_of_week": "\uae08", "filename": "2025-08-15_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-14", "day_of_week": "\ubaa9", "filename": "2025-08-14_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-13", "day_of_week": "\uc218", "filename": "2025-08-13_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-12", "day_of_week": "\ud654", "filename": "2025-08-12_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-11", "day_of_week": "\uc6d4", "filename": "2025-08-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-10", "day_of_week": "\uc77c", "filename": "2025-08-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-09", "day_of_week": "\ud1a0", "filename": "2025-08-09_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-08", "day_of_week": "\uae08", "filename": "2025-08-08_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-07", "day_of_week": "\ubaa9", "filename": "2025-08-07_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-06", "day_of_week": "\uc218", "filename": "2025-08-06_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-05", "day_of_week": "\ud654", "filename": "2025-08-05_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-04", "day_of_week": "\uc6d4", "filename": "2025-08-04_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-03", "day_of_week": "\uc77c", "filename": "2025-08-03_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-02", "day_of_week": "\ud1a0", "filename": "2025-08-02_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-08-01", "day_of_week": "\uae08", "filename": "2025-08-01_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-31", "day_of_week": "\ubaa9", "filename": "2025-07-31_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-30", "day_of_week": "\uc218", "filename": "2025-07-30_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-29", "day_of_week": "\ud654", "filename": "2025-07-29_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-28", "day_of_week": "\uc6d4", "filename": "2025-07-28_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-27", "day_of_week": "\uc77c", "filename": "2025-07-27_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-26", "day_of_week": "\ud1a0", "filename": "2025-07-26_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-25", "day_of_week": "\uae08", "filename": "2025-07-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-24", "day_of_week": "\ubaa9", "filename": "2025-07-24_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-23", "day_of_week": "\uc218", "filename": "2025-07-23_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-22", "day_of_week": "\ud654", "filename": "2025-07-22_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-21", "day_of_week": "\uc6d4", "filename": "2025-07-21_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-20", "day_of_week": "\uc77c", "filename": "2025-07-20_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-19", "day_of_week": "\ud1a0", "filename": "2025-07-19_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-18", "day_of_week": "\uae08", "filename": "2025-07-18_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-17", "day_of_week": "\ubaa9", "filename": "2025-07-17_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-16", "day_of_week": "\uc218", "filename": "2025-07-16_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-15", "day_of_week": "\ud654", "filename": "2025-07-15_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-14", "day_of_week": "\uc6d4", "filename": "2025-07-14_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-13", "day_of_week": "\uc77c", "filename": "2025-07-13_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-12", "day_of_week": "\ud1a0", "filename": "2025-07-12_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-11", "day_of_week": "\uae08", "filename": "2025-07-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-10", "day_of_week": "\ubaa9", "filename": "2025-07-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-09", "day_of_week": "\uc218", "filename": "2025-07-09_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-08", "day_of_week": "\ud654", "filename": "2025-07-08_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-07", "day_of_week": "\uc6d4", "filename": "2025-07-07_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-06", "day_of_week": "\uc77c", "filename": "2025-07-06_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-05", "day_of_week": "\ud1a0", "filename": "2025-07-05_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-04", "day_of_week": "\uae08", "filename": "2025-07-04_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-03", "day_of_week": "\ubaa9", "filename": "2025-07-03_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-02", "day_of_week": "\uc218", "filename": "2025-07-02_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-07-01", "day_of_week": "\ud654", "filename": "2025-07-01_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-30", "day_of_week": "\uc6d4", "filename": "2025-06-30_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-29", "day_of_week": "\uc77c", "filename": "2025-06-29_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-28", "day_of_week": "\ud1a0", "filename": "2025-06-28_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-27", "day_of_week": "\uae08", "filename": "2025-06-27_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-26", "day_of_week": "\ubaa9", "filename": "2025-06-26_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-25", "day_of_week": "\uc218", "filename": "2025-06-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-23", "day_of_week": "\uc6d4", "filename": "2025-06-23_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-22", "day_of_week": "\uc77c", "filename": "2025-06-22_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-21", "day_of_week": "\ud1a0", "filename": "2025-06-21_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-20", "day_of_week": "\uae08", "filename": "2025-06-20_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-19", "day_of_week": "\ubaa9", "filename": "2025-06-19_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-18", "day_of_week": "\uc218", "filename": "2025-06-18_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-17", "day_of_week": "\ud654", "filename": "2025-06-17_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-16", "day_of_week": "\uc6d4", "filename": "2025-06-16_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-15", "day_of_week": "\uc77c", "filename": "2025-06-15_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-14", "day_of_week": "\ud1a0", "filename": "2025-06-14_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-13", "day_of_week": "\uae08", "filename": "2025-06-13_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-12", "day_of_week": "\ubaa9", "filename": "2025-06-12_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-11", "day_of_week": "\uc218", "filename": "2025-06-11_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-10", "day_of_week": "\ud654", "filename": "2025-06-10_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-06-05", "day_of_week": "\ubaa9", "filename": "2025-06-05_100000.html", "time_str": "10:00:00"}, {"date_str": "2025-03-25", "day_of_week": "\ud654", "filename": "2025-03-25_100000.html", "time_str": "10:00:00"}, {"date_str": "2024-07-18", "day_of_week": "\ubaa9", "filename": "2024-07-18_100000.html", "time_str": "10:00:00"}];
     const runsByDate = {};
     const todayGrid = document.getElementById('today-news-grid');
     const dateLabel = document.getElementById('selected-date-label');
@@ -288,10 +272,6 @@
         const header = document.createElement('div');
         header.className = 'news-header';
 
-        // Header Top (Title + Actions)
-        const headerTop = document.createElement('div');
-        headerTop.className = 'news-header-top';
-
         const title = document.createElement('h3');
         title.className = 'news-title';
         const link = document.createElement('a');
@@ -300,29 +280,7 @@
         link.textContent = article.title;
         title.appendChild(link);
 
-        // Actions (토론/공유 버튼)
-        const actions = document.createElement('div');
-        actions.className = 'title-actions';
 
-        // Discussion button
-        const discussLink = document.createElement('a');
-        discussLink.href = `../board/index.html?mode=discuss&title=${encodeURIComponent(article.title)}&link=${encodeURIComponent(article.link)}&source=${encodeURIComponent(article.source || '출처')}`;
-        discussLink.className = 'discuss-btn-sm';
-        discussLink.textContent = '토론';
-        actions.appendChild(discussLink);
-
-        // Share button
-        const shareBtn = document.createElement('button');
-        shareBtn.className = 'discuss-btn-sm';
-        shareBtn.textContent = '공유';
-        shareBtn.onclick = () => {
-            navigator.clipboard.writeText(article.link);
-        };
-        actions.appendChild(shareBtn);
-
-        headerTop.appendChild(title);
-        headerTop.appendChild(actions);
-        header.appendChild(headerTop);
 
         const meta = document.createElement('div');
         meta.className = 'news-meta';
@@ -331,6 +289,7 @@
         if (article.published) metaParts.push(article.published);
         meta.innerHTML = metaParts.join(' · ');
 
+        header.appendChild(title);
         header.appendChild(meta);
         card.appendChild(header);
 
@@ -356,7 +315,27 @@
 
         card.appendChild(body);
 
-        // Removed separate actions bottom section
+        // 3. Actions Section (토론/공유 버튼)
+        const actions = document.createElement('div');
+        actions.className = 'news-actions-bottom';
+
+        // Discussion button
+        const discussLink = document.createElement('a');
+        discussLink.href = `../board/index.html?mode=discuss&title=${encodeURIComponent(article.title)}&link=${encodeURIComponent(article.link)}&source=${encodeURIComponent(article.source || '출처')}`;
+        discussLink.className = 'discuss-btn-sm';
+        discussLink.textContent = '토론';
+        actions.appendChild(discussLink);
+
+        // Share button
+        const shareBtn = document.createElement('button');
+        shareBtn.className = 'discuss-btn-sm';
+        shareBtn.textContent = '공유';
+        shareBtn.onclick = () => {
+            navigator.clipboard.writeText(article.link);
+        };
+        actions.appendChild(shareBtn);
+
+        card.appendChild(actions);
 
         return card;
     }
@@ -383,7 +362,7 @@
     async function fetchRunArticles(run) {
         if (articleCache[run.filename]) return articleCache[run.filename];
 
-        const response = await fetch(`daily/${run.filename}?v=${new Date().getTime()}`);
+        const response = await fetch(`daily/${run.filename}`);
         const html = await response.text();
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const articles = Array.from(doc.querySelectorAll('.news-item')).map(item => ({
@@ -412,36 +391,16 @@
 
     async function loadRun(dateStr, runIndex = 0) {
         const runList = runsByDate[dateStr];
-        if (!runList || runList.length === 0) return;
+        if (!runList || !runList[runIndex]) return;
 
+        const run = runList[runIndex];
         todayGrid.innerHTML = '<p class="empty-msg">뉴스를 불러오는 중입니다...</p>';
 
         try {
-            // Merge all articles from all runs on the same date
-            const allArticlesPromises = runList.map(run => fetchRunArticles(run));
-            const allResults = await Promise.all(allArticlesPromises);
-
-            // Combine and deduplicate articles by link
-            const seenLinks = new Set();
-            const mergedArticles = [];
-            allResults.forEach(({ articles }) => {
-                articles.forEach(article => {
-                    if (!seenLinks.has(article.link)) {
-                        seenLinks.add(article.link);
-                        mergedArticles.push(article);
-                    }
-                });
-            });
-
-            // Sort merged articles by published date
-            const sortedArticles = sortArticlesByPublished(mergedArticles);
-
-            // Use the first run for header info (earliest time)
-            const primaryRun = runList[runList.length - 1]; // earliest time
-
-            renderNewsCards(todayGrid, sortedArticles, () => [], '이 날짜에는 뉴스가 없습니다.');
-            updateTodayHeader(sortedArticles, primaryRun);
-            highlightActive(dateStr);
+            const { articles } = await fetchRunArticles(run);
+            renderNewsCards(todayGrid, articles, () => [], '이 날짜에는 뉴스가 없습니다.');
+            updateTodayHeader(articles, run);
+            highlightActive(run.date_str);
         } catch (err) {
             todayGrid.innerHTML = `<p class="empty-msg">뉴스를 불러오지 못했습니다: ${err}</p>`;
         }
@@ -649,105 +608,14 @@
             exitSearchMode();
         }
     });
-
-    // Category Tab Switching
-    document.querySelectorAll('.category-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            const category = tab.dataset.category;
-            const currentPath = window.location.pathname;
-            const basePath = currentPath.includes('/ai/') || currentPath.includes('/xr/')
-                ? currentPath.replace(/\/(ai|xr)\//, `/${category}/`)
-                : `../${category}/index.html`;
-            window.location.href = basePath;
-        });
-    });
 </script>
 
 
     </div>
 
     <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
-        <p>&copy; 2026 VAAX rebuild Project by <a href="../admin.html"
-                class="admin-link">Fovea</a>. All rights reserved.</p>
-        <div id="page-visit-counter" style="margin-top: 5px; font-size: 0.8rem; color: var(--primary-color);">
-            <span id="visit-count">Visits: ...</span>
-        </div>
+        <p>&copy; 2026 VAAX rebuild Project by Fovea. All rights reserved.</p>
     </footer>
-
-    <!-- Firebase SDK & Visit Counter -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        // Reuse config from board.html
-        const firebaseConfig = {
-            apiKey: "AIzaSyANn76u2ZCJ5rq4IOpYaTzFy1JtKoPOM-c",
-            authDomain: "vaax-board.firebaseapp.com",
-            projectId: "vaax-board",
-            storageBucket: "vaax-board.firebasestorage.app",
-            messagingSenderId: "31682907508",
-            appId: "1:31682907508:web:cd3ee4231ec8b3fb75b021",
-            measurementId: "G-XF41VB6W7V"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        async function trackVisit() {
-            try {
-                // Determine page ID from URL (e.g., "index.html", "ai/index.html")
-                let path = window.location.pathname;
-
-                // Remove leading slash and repo name if hosted on GitHub Pages
-                // e.g. "/ai-news-daily/ai/index.html" -> "ai/index.html"
-                if (path.startsWith('/ai-news-daily/')) {
-                    path = path.replace('/ai-news-daily/', '');
-                }
-                if (path.startsWith('/')) {
-                    path = path.substring(1);
-                }
-                if (!path || path === "") {
-                    path = "index.html";  // root
-                }
-
-                // Firestore document ID cannot contain slashes. Replace / with _
-                const docId = path.replace(/\//g, '_').replace(/\./g, '_');
-
-                const docRef = doc(db, "page_visits", docId);
-
-                // 1. Get current count (optimistic UI or wait?)
-                // Let's just update and then get, or get then update?
-                // Incrementing blindly is better for performance, then listening or getting.
-
-                // Use setDoc with merge to ensure document exists
-                await setDoc(docRef, {
-                    path: path,
-                    lastVisited: serverTimestamp()
-                }, { merge: true });
-
-                // Increment count
-                await updateDoc(docRef, {
-                    count: increment(1)
-                });
-
-                // Get updated count to display
-                const snap = await getDoc(docRef);
-                if (snap.exists()) {
-                    const data = snap.data();
-                    const countSpan = document.getElementById('visit-count');
-                    if (countSpan && data.count) {
-                        countSpan.textContent = `Total Visits: ${data.count.toLocaleString()}`;
-                    }
-                }
-
-            } catch (e) {
-                console.error("Visit tracking failed:", e);
-            }
-        }
-
-        // Execute tracking
-        trackVisit();
-    </script>
 </body>
 
 </html>
