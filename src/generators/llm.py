@@ -630,8 +630,11 @@ def generate_key_message_and_keywords(ai_articles: list, xr_articles: list) -> d
     prompt = f"""다음은 오늘의 AI/XR 뉴스 기사 제목 목록입니다.
 
 [작업 1] Key Message 생성
-- 독자의 호기심을 자극하는 문장 3~5개 작성
-- 한글로 작성, 이모지 금지, 각 줄 60자 이내
+- 독자의 호기심을 강렬하게 자극하는 문장 **정확히 2개**만 작성
+- 짧고 임팩트 있는 문장, 도발적인 질문이나 놀라운 사실 형태로 작성
+- 문장 속 **핵심 키워드 1~2개**를 <em> 태그로 감싸서 강조
+- 한글로 작성, 이모지 금지, 각 줄 50자 이내
+- 예시: "<em>엔비디아</em>가 CES에서 공개한 AI 칩이 모든 것을 바꾼다"
 
 [작업 2] 워드클라우드 키워드 추출
 - 기사에서 중요한 키워드 30~40개 추출 (최대한 다양하게)
@@ -643,9 +646,8 @@ def generate_key_message_and_keywords(ai_articles: list, xr_articles: list) -> d
 
 [출력 형식 - 아래 형식 정확히 따르기]
 KEY_MESSAGE:
-첫번째 메시지
-두번째 메시지
-세번째 메시지
+<em>핵심키워드</em>가 포함된 첫번째 강렬한 문장
+<em>핵심키워드</em>가 포함된 두번째 강렬한 문장
 
 KEYWORDS:
 엔비디아|Company
@@ -687,7 +689,7 @@ KEYWORDS:
                 key_message_part = ""
 
             if key_message_part:
-                lines = [line.strip() for line in key_message_part.split("\n") if line.strip() and not line.strip().startswith("KEY_MESSAGE")][:5]
+                lines = [line.strip() for line in key_message_part.split("\n") if line.strip() and not line.strip().startswith("KEY_MESSAGE")][:2]
                 # Remove dashes or bullets if present
                 clean_lines = []
                 for line in lines:

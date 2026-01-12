@@ -227,18 +227,10 @@
         list-style: none;
         padding: 0;
         margin: 0;
-        /* Grid Layout: 2 Columns on PC */
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 15px 40px;
-    }
-
-    /* Mobile Responsive: 1 Column */
-    @media (max-width: 768px) {
-        .key-message-content ul {
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
+        /* Single column layout for 2 items */
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
     }
 
     .key-message-content li {
@@ -259,6 +251,13 @@
         display: inline-block;
         width: 1em;
         margin-left: -1em;
+    }
+
+    /* Highlight style for emphasized keywords */
+    .key-message-content em {
+        font-style: normal;
+        color: var(--primary-color);
+        font-weight: 800;
     }
 </style>
 
