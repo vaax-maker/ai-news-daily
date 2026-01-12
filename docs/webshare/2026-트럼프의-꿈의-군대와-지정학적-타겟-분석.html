@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 트럼프의 '꿈의 군대'와 지정학적 타겟 분석</title>
+<style>
+/* vaax-theme.css 준용 */
+:root {
+  --primary-color: #65a30d;
+  --primary-color-hover: #4d7c0f;
+  --secondary-color: #475569;
+  --background-color: #ffffff;
+  --card-bg: #ffffff;
+  --text-main: #111827;
+  --text-muted: #4b5563;
+  --border-color: #d1d5db;
+  --line-gray: #9ca3af;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--text-main);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+p {
+  margin-bottom: 1.5em;
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5em;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2.5em;
+  margin-bottom: 1em;
+  color: var(--text-main);
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meta-info {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.highlight {
+  background-color: #CEFA98;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  color: #1a2e05;
+}
+
+/* 타임스탬프 버튼 스타일 */
+.timestamp-btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: #f1f5f9;
+  color: var(--primary-color);
+  border: 1px solid var(--border-color);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  margin-left: auto; /* 제목 우측 정렬 */
+}
+.timestamp-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+.timestamp-btn::before {
+  content: "▶";
+  font-size: 0.7rem;
+  margin-right: 4px;
+}
+
+/* 비디오 컨테이너 */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 비율 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  margin-top: 3em; 
+  margin-bottom: 2em;
+  background-color: #000;
+}
+.video-wrapper iframe, .video-wrapper div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 요약 박스 */
+.summary-box {
+  background-color: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-left: 5px solid var(--primary-color);
+  padding: 1.5em;
+  border-radius: 8px;
+  margin-bottom: 3em;
+}
+.summary-title {
+  display: block;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+/* 테이블 스타일 */
+.stock-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 3em;
+  font-size: 0.95rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.stock-table th, .stock-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+.stock-table th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+.stock-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* 태그 및 푸터 */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 3em;
+}
+.tag {
+  background-color: #ecfccb;
+  color: #365314;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+footer {
+  margin-top: 3em;
+  padding-top: 2em;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+</style>
+</head>
+<body>
+
+  <h1>트럼프의 '꿈의 군대' 선언과<br>지정학적 타겟 (그린란드/드론/우주)</h1>
+  
+  <div class="meta-info">
+    <span>SOURCE: 소수몽키 (YouTube)</span>
+    <span>DATE: 2026.01.12</span>
+  </div>
+
+  <div class="summary-box">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <span class="summary-title">Executive Summary</span>
+      <button class="timestamp-btn" onclick="playVideo(0)">00:00</button>
+    </div>
+    트럼프 행정부가 국방 예산을 GDP 5%(약 1.5조 달러)로 증액하며 <span class="highlight">꿈의 군대(Dream Military)</span> 구축을 선언했습니다. 이와 동시에 베네수엘라, 이란, 그린란드 등 동시다발적인 지정학적 개입을 시사하며 관련 방산, 우주, 에너지 섹터가 강력한 시장 주도주로 부상하고 있습니다. 특히 2월부터 시작되는 드론 서바이벌 프로젝트 '건틀릿'이 핵심 모멘텀으로 작용할 전망입니다.
+  </div>
+
+  <h2>
+    1. 트럼프의 지정학적 타겟 (Whac-a-Mole)
+    <button class="timestamp-btn" onclick="playVideo(220)">03:40</button>
+  </h2>
+  <p>
+    트럼프 대통령이 전 세계 주요 지역에 동시다발적으로 개입하며 지정학적 긴장감을 높이고 있습니다. 이는 협상력을 극대화하기 위한 전형적인 압박 전술로 해석되나, 실제 군사/경제적 조치로 이어지고 있어 시장의 변동성을 키우고 있습니다.
+  </p>
+  <ul>
+    <li><strong>베네수엘라(진행중):</strong> 마두로 정권 축출 및 에너지 인프라 재건 추진. 미국 에너지 기업(엑손모빌 등)의 참여 종용.</li>
+    <li><strong>그린란드(매입 시도):</strong> <span class="highlight">북극 패권과 희토류 확보</span>를 위한 매입 재추진. 루비오 국무장관이 덴마크와 회담 예정이며, 트럼프는 "조약보다 소유권이 확실하다"며 강력한 매입 의지를 천명함.</li>
+    <li><strong>이란(강경 대응):</strong> 대규모 시위 발생 및 인터넷 차단 사태에 대해 스타링크 지원 및 공중 타격 옵션 검토 시사.</li>
+    <li><strong>멕시코/콜롬비아:</strong> 마약 카르텔 소탕을 명분으로 한 군사 작전 가능성 언급 후, 유화책(백악관 초청)을 병행하는 강온 양면 전략 구사.</li>
+  </ul>
+
+  <h2>
+    2. '꿈의 군대'와 3대 핵심 섹터
+    <button class="timestamp-btn" onclick="playVideo(488)">08:08</button>
+  </h2>
+  <p>
+    트럼프는 기존 국방비(GDP 3%)를 5% 수준인 <span class="highlight">1조 5천억 달러</span>까지 증액하겠다고 밝혔습니다. 관세 수입으로 충당하겠다는 계획이며, 이 예산은 과거의 재래식 무기가 아닌 첨단 기술 중심의 '3대 황금 전력'에 집중됩니다.
+  </p>
+  
+  <h3>
+    ① 드론 도미넌스 (Drone Dominance)와 '건틀릿'
+    <button class="timestamp-btn" onclick="playVideo(800)">13:20</button>
+  </h3>
+  <p>
+    미 국방부는 2027년까지 34만 대의 드론을 배치하는 계획을 수립했습니다. 핵심은 2026년 2월부터 시작되는 <span class="highlight">건틀릿(Gauntlet) 프로젝트</span>입니다. 이는 오디션 형태의 서바이벌 경쟁 입찰로, 4단계에 걸쳐 최종 5개 업체를 선정하여 막대한 물량을 몰아주는 구조입니다. 중국산 드론 퇴출과 맞물려 미국 드론 기업들의 폭발적인 수주가 예상됩니다.
+  </p>
+
+  <h3>
+    ② 우주 패권 (Golden Dome)
+    <button class="timestamp-btn" onclick="playVideo(915)">15:15</button>
+  </h3>
+  <p>
+    "하늘의 눈(우주) 없이는 장님과 같다." 국방부 장관이 이례적으로 록히드마틴이 아닌 <span class="highlight">로켓랩(Rocket Lab)</span> 공장을 방문해 연설한 것은 상징적입니다. 미사일 방어 시스템(골든 돔)과 정찰 위성망 구축을 위해 기존 방산 공룡보다 스페이스X, 로켓랩과 같은 민간 혁신 기업을 적극 기용하겠다는 의지입니다.
+  </p>
+
+  <h3>
+    ③ 황금 함대 (Golden Fleet)
+    <button class="timestamp-btn" onclick="playVideo(1175)">19:35</button>
+  </h3>
+  <p>
+    중국의 해군력 증강에 맞서 조선업 재건과 함대 현대화를 추진합니다. 이는 미국 내 조선소뿐만 아니라, 선박 수리 및 유지보수(MRO) 협력이 가능한 한국 조선업계에도 기회 요인으로 작용할 수 있습니다.
+  </p>
+
+  <h2>3. 투자 가이드 및 시장 데이터 (2026.01.09 종가 기준)</h2>
+  <p>
+    관련 주식들은 최근 1개월간 급등세를 보여 <span class="highlight">단기 과열권</span>에 진입했습니다. 추격 매수보다는 조정 시 진입하거나 보유자의 영역으로 판단됩니다.
+  </p>
+
+  <table class="stock-table">
+    <thead>
+      <tr>
+        <th style="width: 15%">구분</th>
+        <th style="width: 35%">종목명 (티커)</th>
+        <th style="width: 50%">가이드 및 전략</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>우주</strong></td>
+        <td>로켓랩 (RKLB)<br>ARK Space (ARKX)</td>
+        <td>국방 장관 방문 수혜로 모멘텀 지속. 목표가 상향 중이나 단기 급등 부담. 조정 시 분할 매수 유효.</td>
+      </tr>
+      <tr>
+        <td><strong>드론</strong></td>
+        <td>에이로바이런먼트 (AVAV)<br>크라토스 (KTOS)</td>
+        <td><span class="highlight">건틀릿 프로젝트</span> 핵심 수혜주. 현재가가 목표가를 상회하는 과열 구간. 보유자 영역.</td>
+      </tr>
+      <tr>
+        <td><strong>에너지</strong></td>
+        <td>센트러스에너지 (LEU)<br>비스트라 (VST)</td>
+        <td>러시아산 의존 탈피 및 AI 데이터센터 전력 수요. 구조적 성장주이나 변동성 확대 주의.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary-box" style="background-color: #ecfdf5; border-left-color: #10b981; margin-bottom: 0;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="summary-title" style="color: #059669; margin-bottom: 0;">Weekly Checkpoints</span>
+        <button class="timestamp-btn" onclick="playVideo(1482)">24:42</button>
+    </div>
+    <ul style="margin-top: 10px;">
+      <li><strong>1/13~14:</strong> 트럼프 관세 합헌/위헌 판결 (시장 불확실성 해소 여부)</li>
+      <li><strong>실적 시즌 개막:</strong> 금융주(JP모건 등) 및 TSMC 실적 발표</li>
+      <li><strong>JP모건 헬스케어 컨퍼런스:</strong> 제약/바이오 섹터 모멘텀 주목</li>
+    </ul>
+  </div>
+
+  <div class="tags">
+    <span class="tag">#트럼프2기</span>
+    <span class="tag">#방산주</span>
+    <span class="tag">#우주항공</span>
+    <span class="tag">#드론</span>
+    <span class="tag">#그린란드</span>
+    <span class="tag">#건틀릿프로젝트</span>
+  </div>
+
+  <div class="video-wrapper">
+    <div id="player"></div>
+  </div>
+
+  <footer>
+    2026 Fovea
+  </footer>
+
+  <script>
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '100%',
+        width: '100%',
+        videoId: 'uImxnpLaKtg',
+        playerVars: {
+          'playsinline': 1
+        }
+      });
+    }
+
+    function playVideo(seconds) {
+      if (player && player.seekTo) {
+        player.seekTo(seconds, true);
+        player.playVideo();
+        // 플레이어로 스크롤 이동
+        document.querySelector('.video-wrapper').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  </script>
+
+</body>
+</html>
