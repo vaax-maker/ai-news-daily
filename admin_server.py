@@ -111,31 +111,40 @@ def save_webshare_index(index_data):
 
 
 def git_push(message):
-    """Execute git pull, add, commit, and push."""
+    """Execute git add, commit, pull --rebase, and push."""
     try:
-        # First pull any remote changes to avoid conflicts
-        subprocess.run(["git", "pull", "--rebase"], cwd=PROJECT_ROOT, check=True, 
-                      capture_output=True, timeout=30)
-        
-        # Add webshare files and .gitignore
+        # 1. Add webshare files and .gitignore
         subprocess.run(["git", "add", "docs/webshare/", ".gitignore"], cwd=PROJECT_ROOT, check=True)
         
-        # Commit (may fail if nothing to commit, which is OK)
+        # 2. Commit (may fail if nothing to commit, which is OK)
         result = subprocess.run(["git", "commit", "-m", message], cwd=PROJECT_ROOT, 
                                capture_output=True, text=True)
         
-        if result.returncode != 0 and "nothing to commit" in result.stdout:
-            return True, "No changes to commit"
-        elif result.returncode != 0:
-            return False, f"Commit failed: {result.stderr}"
+        commit_success = True
+        if result.returncode != 0:
+            if "nothing to commit" in result.stdout:
+                print("Nothing to commit, proceeding to push...")
+                commit_success = False  # Nothing committed, but might need to push previous commits
+            else:
+                return False, f"Commit failed: {result.stderr}"
         
-        # Push
+        # 3. Pull any remote changes (rebase)
+        # This works even if we just committed, as it replays our commit on top of remote
+        subprocess.run(["git", "pull", "--rebase"], cwd=PROJECT_ROOT, check=True, 
+                      capture_output=True, timeout=60)
+        
+        # 4. Push
         subprocess.run(["git", "push"], cwd=PROJECT_ROOT, check=True, timeout=60)
         return True, "Git push successful"
+
     except subprocess.TimeoutExpired:
         return False, "Git operation timed out"
     except subprocess.CalledProcessError as e:
-        return False, f"Git error: {e}"
+        # Try to capture stderr if available
+        error_msg = str(e)
+        if hasattr(e, 'stderr') and e.stderr:
+             error_msg += f": {e.stderr.decode('utf-8') if isinstance(e.stderr, bytes) else e.stderr}"
+        return False, f"Git error: {error_msg}"
 
 
 @app.route('/trigger-send', methods=['POST'])
