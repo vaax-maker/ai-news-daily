@@ -770,7 +770,7 @@ ${text.slice(0, 3000)}`;
 
     // Copy command on click
     quickviewCopyCmd.addEventListener('click', () => {
-        const cmd = 'cd /Users/fovea/Documents/vsc-codex/VAAXfinal && python3 generate_quickview.py && git add . && git commit -m "Update quickview" && git push';
+        const cmd = 'cd /Users/fovea/Documents/vsc-codex/VAAXfinal && python3 scripts/deploy_quickview.py';
         navigator.clipboard.writeText(cmd);
         alert('명령어가 복사되었습니다! 터미널에 붙여넣기 하세요.');
     });

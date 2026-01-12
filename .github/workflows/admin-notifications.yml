@@ -26,14 +26,6 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Process Pending Notifications
-        env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          python scripts/process_scheduled.py
-
       - name: Generate Quickview Pages
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
@@ -48,3 +40,11 @@ jobs:
           git add docs/quickview docs/index.html
           git diff --staged --quiet || git commit -m "Update quickview pages [auto]"
           git push || echo "Nothing to push"
+
+      - name: Process Pending Notifications
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python scripts/process_scheduled.py
