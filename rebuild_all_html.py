@@ -9,6 +9,9 @@ import re
 import datetime
 import json
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from src.generators.html import (
     render_member_page,

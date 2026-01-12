@@ -19,6 +19,9 @@ except ImportError:
     FIREBASE_AVAILABLE = False
     print("[Quickview] firebase_admin not installed. Skipping Firestore sync.")
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from src.generators.html import render_quickview_index, render_quickview_page
 
 

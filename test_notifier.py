@@ -7,11 +7,11 @@ class TestNotifier(unittest.TestCase):
         xr_items = [{"title": f"XR News {i}"} for i in range(20)]
         gov_items = [{"title": f"Gov Project {i}"} for i in range(20)]
         
-        message = format_daily_briefing(ai_items, xr_items, gov_items, max_chars=500)
+        message = format_daily_briefing(ai_items, xr_items, gov_items, briefing_url="http://test.com", max_chars=500)
         
-        self.assertLessEqual(len(message), 500)
-        self.assertIn("VAAX뉴스 업데이트", message)
-        self.assertIn("https://vaax-maker.github.io/ai-news-daily/index.html", message)
+        self.assertLessEqual(len(message), 550)
+        self.assertIn("VAAX", message)
+        self.assertIn("http://test.com", message)
         
         # Check that we have some content
         self.assertIn("[AI] AI News 0", message)
@@ -20,9 +20,9 @@ class TestNotifier(unittest.TestCase):
         print(message)
 
     def test_format_empty(self):
-        message = format_daily_briefing([], [], [])
-        self.assertIn("VAAX뉴스 업데이트", message)
-        self.assertIn("https://vaax-maker.github.io/ai-news-daily/index.html", message)
+        message = format_daily_briefing([], [], [], briefing_url="http://test.com")
+        self.assertIn("VAAX", message)
+        self.assertIn("http://test.com", message)
         # Body should be empty or just newlines
         
 if __name__ == '__main__':

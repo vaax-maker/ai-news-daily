@@ -4,6 +4,9 @@ import argparse
 import logging
 from src.config import load_categories
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+
+load_dotenv()
 from src.fetchers.rss import fetch_rss_items
 from src.fetchers.gov import fetch_gov_announcements
 from src.generators.llm import summarize_article, rank_items_with_ai
