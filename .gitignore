@@ -5,3 +5,4 @@ __pycache__/
 docs/header_test.html
 *.DS_Store
 *.json
+!data/latest_key_message.json
