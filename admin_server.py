@@ -28,8 +28,16 @@ WEBSHARE_DIR = os.path.join(PROJECT_ROOT, "docs", "webshare")
 WEBSHARE_INDEX = os.path.join(WEBSHARE_DIR, "index.json")
 WEBSHARE_BASE_URL = "https://vaax-maker.github.io/ai-news-daily/webshare"
 
-app = Flask(__name__)
+# Configure Flask to serve static files from 'docs' folder
+app = Flask(__name__, static_folder='docs', static_url_path='')
 CORS(app)  # Enable CORS for admin panel access
+
+@app.route('/')
+@app.route('/admin')
+@app.route('/admin.html')
+def serve_admin():
+    """Serve the admin.html page directly."""
+    return app.send_static_file('admin.html')
 
 
 class TitleExtractor(HTMLParser):

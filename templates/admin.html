@@ -987,7 +987,11 @@ ${text.slice(0, 3000)}`;
     // ============================================
     // QUICKWEB (퀵웹게시) FUNCTIONALITY
     // ============================================
-    const ADMIN_SERVER_URL = 'http://localhost:5555';
+    // If on localhost, use current origin (relative), otherwise try localhost:5555
+    const ADMIN_SERVER_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? ''
+        : 'http://localhost:5555';
+
     const webshareHtml = document.getElementById('webshareHtml');
     const btnWebsharePost = document.getElementById('btnWebsharePost');
     const webshareStatus = document.getElementById('webshareStatus');
