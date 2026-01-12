@@ -111,12 +111,29 @@ def save_webshare_index(index_data):
 
 
 def git_push(message):
-    """Execute git add, commit, and push."""
+    """Execute git pull, add, commit, and push."""
     try:
-        subprocess.run(["git", "add", "docs/webshare/"], cwd=PROJECT_ROOT, check=True)
-        subprocess.run(["git", "commit", "-m", message], cwd=PROJECT_ROOT, check=True)
-        subprocess.run(["git", "push"], cwd=PROJECT_ROOT, check=True)
+        # First pull any remote changes to avoid conflicts
+        subprocess.run(["git", "pull", "--rebase"], cwd=PROJECT_ROOT, check=True, 
+                      capture_output=True, timeout=30)
+        
+        # Add webshare files and .gitignore
+        subprocess.run(["git", "add", "docs/webshare/", ".gitignore"], cwd=PROJECT_ROOT, check=True)
+        
+        # Commit (may fail if nothing to commit, which is OK)
+        result = subprocess.run(["git", "commit", "-m", message], cwd=PROJECT_ROOT, 
+                               capture_output=True, text=True)
+        
+        if result.returncode != 0 and "nothing to commit" in result.stdout:
+            return True, "No changes to commit"
+        elif result.returncode != 0:
+            return False, f"Commit failed: {result.stderr}"
+        
+        # Push
+        subprocess.run(["git", "push"], cwd=PROJECT_ROOT, check=True, timeout=60)
         return True, "Git push successful"
+    except subprocess.TimeoutExpired:
+        return False, "Git operation timed out"
     except subprocess.CalledProcessError as e:
         return False, f"Git error: {e}"
 
