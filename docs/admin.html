@@ -22,15 +22,15 @@
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     }
 
-    /* 3-Column Grid Layout */
+    /* 4-Column Grid Layout */
     .notifier-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 1.5rem;
         margin-bottom: 1.5rem;
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1400px) {
         .notifier-grid {
             grid-template-columns: repeat(2, 1fr);
         }
@@ -306,9 +306,43 @@
             <p>Compose and send/schedule Telegram notifications</p>
         </div>
 
-        <!-- 3-Column Grid: HTML | URL | Manual -->
+        <!-- 4-Column Grid: Webshare | HTML | URL | Manual -->
         <div class="notifier-grid">
-            <!-- 1. HTML 메시지 처리 (퀵뷰 생성) - 좌측 -->
+            <!-- 0. 퀵웹게시 (Quick Web Post) - 최좌측 -->
+            <div class="notifier-section" style="background: #ecfdf5; border: 1px solid #10b981;">
+                <h3 style="color: #047857;">🌐 퀵웹게시</h3>
+
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="webshareHtml">HTML 코드</label>
+                    <textarea id="webshareHtml" rows="8"
+                        placeholder="전체 HTML 코드를 붙여넣으세요...\n\n<!DOCTYPE html>\n<html>\n<head><title>제목</title></head>\n<body>내용</body>\n</html>"
+                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 8px; background: white; color: #111827; font-family: monospace; font-size: 0.8rem;"></textarea>
+                </div>
+
+                <button type="button" id="btnWebsharePost" class="admin-btn" style="background: #10b981;">
+                    🚀 게시하기
+                </button>
+                <div id="webshareStatus" class="status-msg" style="margin-top: 0.5rem;"></div>
+
+                <!-- Generated URL Display -->
+                <div id="webshareUrlBox"
+                    style="display: none; margin-top: 1rem; padding: 0.75rem; background: white; border: 1px solid #10b981; border-radius: 8px;">
+                    <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; color: #047857; font-weight: 600;">✅ 생성된 URL:</p>
+                    <a id="webshareUrl" href="#" target="_blank"
+                        style="word-break: break-all; font-size: 0.85rem; color: #0369a1;"></a>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.7rem; color: #6b7280;">⏱️ 배포 중... 1-2분 후 접속 가능</p>
+                </div>
+
+                <!-- History List -->
+                <div style="margin-top: 1rem; border-top: 1px solid #d1fae5; padding-top: 0.75rem;">
+                    <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; color: #047857; font-weight: 600;">📁 최근 게시물</p>
+                    <div id="webshareHistory" style="max-height: 150px; overflow-y: auto; font-size: 0.8rem;">
+                        <span style="color: #9ca3af;">로딩 중...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1. HTML 메시지 처리 (퀵뷰 생성) -->
             <div class="notifier-section" style="background: #fef3c7; border: 1px solid #f59e0b;">
                 <h3 style="color: #92400e;">📄 HTML 메시지 (퀵뷰)</h3>
 
@@ -1003,6 +1037,110 @@ ${text.slice(0, 3000)}`;
     btnQuickviewSave.addEventListener('click', () => createQuickview(false));
     btnQuickviewSend.addEventListener('click', () => createQuickview(true));
 
+    // ============================================
+    // QUICKWEB (퀵웹게시) FUNCTIONALITY
+    // ============================================
+    const ADMIN_SERVER_URL = 'http://localhost:5555';
+    const webshareHtml = document.getElementById('webshareHtml');
+    const btnWebsharePost = document.getElementById('btnWebsharePost');
+    const webshareStatus = document.getElementById('webshareStatus');
+    const webshareUrlBox = document.getElementById('webshareUrlBox');
+    const webshareUrl = document.getElementById('webshareUrl');
+    const webshareHistory = document.getElementById('webshareHistory');
+
+    // Load webshare history on page load
+    async function loadWebshareHistory() {
+        try {
+            const response = await fetch(`${ADMIN_SERVER_URL}/webshare/history`);
+            const data = await response.json();
+
+            if (data.success && data.pages && data.pages.length > 0) {
+                webshareHistory.innerHTML = data.pages.slice(0, 10).map(page => `
+                    <div style="padding: 0.35rem 0; border-bottom: 1px solid #e5e7eb;">
+                        <a href="${page.url}" target="_blank" style="color: #047857; text-decoration: none;">
+                            ${page.title}
+                        </a>
+                        <span style="color: #9ca3af; font-size: 0.7rem; margin-left: 0.5rem;">
+                            ${new Date(page.createdAt).toLocaleDateString('ko-KR')}
+                        </span>
+                    </div>
+                `).join('');
+            } else {
+                webshareHistory.innerHTML = '<span style="color: #9ca3af;">게시물이 없습니다</span>';
+            }
+        } catch (e) {
+            console.warn('Failed to load webshare history:', e.message);
+            webshareHistory.innerHTML = '<span style="color: #ef4444;">서버 연결 실패 (python3 admin_server.py 실행 필요)</span>';
+        }
+    }
+
+    // Create webshare page
+    async function createWebshare() {
+        const html = webshareHtml.value.trim();
+
+        if (!html) {
+            alert('HTML 코드를 입력해주세요.');
+            return;
+        }
+
+        // Disable button and show loading
+        btnWebsharePost.disabled = true;
+        const originalText = btnWebsharePost.innerText;
+        btnWebsharePost.innerText = '⏳ 처리 중...';
+
+        webshareStatus.className = 'status-msg';
+        webshareStatus.style.display = 'block';
+        webshareStatus.innerText = '📤 서버로 전송 중...';
+        webshareUrlBox.style.display = 'none';
+
+        try {
+            const response = await fetch(`${ADMIN_SERVER_URL}/webshare`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ html })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                webshareStatus.className = 'status-msg success';
+                webshareStatus.innerText = data.gitPushed
+                    ? `✅ ${data.title} 게시 완료!`
+                    : `⚠️ 파일 생성됨, Git 푸시 필요`;
+
+                // Show URL
+                webshareUrlBox.style.display = 'block';
+                webshareUrl.href = data.url;
+                webshareUrl.innerText = data.url;
+
+                // Clear input
+                webshareHtml.value = '';
+
+                // Reload history
+                loadWebshareHistory();
+            } else {
+                throw new Error(data.message || 'Unknown error');
+            }
+        } catch (e) {
+            console.error(e);
+            webshareStatus.className = 'status-msg error';
+            if (e.message.includes('Failed to fetch')) {
+                webshareStatus.innerText = '❌ 서버 연결 실패! python3 admin_server.py 실행 필요';
+            } else {
+                webshareStatus.innerText = '❌ Error: ' + e.message;
+            }
+        } finally {
+            btnWebsharePost.disabled = false;
+            btnWebsharePost.innerText = originalText;
+        }
+    }
+
+    btnWebsharePost.addEventListener('click', createWebshare);
+
+    // Load history when panel becomes visible
+    if (sessionStorage.getItem('vaaxAdmin') === 'true') {
+        setTimeout(loadWebshareHistory, 500);
+    }
 
 </script>
 
