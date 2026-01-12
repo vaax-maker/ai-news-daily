@@ -9,7 +9,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./static/css/style.css?v=8">
+    <link rel="stylesheet" href="./static/css/style.css?v=12">
     
 </head>
 
@@ -34,17 +34,25 @@
                     <a href="./index.html"
                         class="active">Home</a>
                     <a href="./ai/index.html"
-                        class="">AI뉴스</a>
-                    <a href="./xr/index.html"
-                        class="">XR뉴스</a>
+                        class="">AI/XR뉴스</a>
+                    <a href="./quickview/index.html"
+                        class="">퀵뷰</a>
                     <a href="./gov/index.html"
                         class="">정부과제</a>
                     <a href="./members/index.html"
                         class="">회원사소식</a>
                     <a href="./board/index.html"
                         class="">Small Talk</a>
+
                 </nav>
             </div>
+        </div>
+        <!-- Announcement Message -->
+        <div class="header-announcement"
+            style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
+            <a href="./guide.html"
+                style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
         </div>
     </header>
 
@@ -52,7 +60,7 @@
         
 <h1>오늘의 뉴스</h1>
 <p class="subtitle">
-    last update <strong style="color: var(--primary-color);">2026년 01월 01일 08시 21분</strong> (정기update 매일 오전8시/오후4시)
+    last update <strong style="color: var(--primary-color);">2026년 01월 12일 16시 28분</strong> (정기update 매일 오전8시/오후4시)
     <a href="#" id="news-source-btn" class="news-source-link">뉴스소스</a>
 </p>
 
@@ -212,6 +220,18 @@
             grid-template-columns: 1fr;
         }
     }
+
+    .new-badge {
+        display: inline-block;
+        background-color: #ef4444;
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 2px 5px;
+        border-radius: 3px;
+        margin-left: 4px;
+        vertical-align: middle;
+    }
 </style>
 
 <script>
@@ -237,66 +257,96 @@
     });
 </script>
 
-<!-- Word Cloud Section -->
-<section class="card wordcloud-section">
-    <div class="section-heading">
+<!-- Key Message Section (Replacing Word Cloud) -->
+<section class="card key-message-section">
+    <div class="section-heading" style="margin-bottom: 15px;">
         <div>
-            <p class="eyebrow">Recent Trends</p>
-            <h3>최근 2일간의 주요 키워드</h3>
+            <p class="eyebrow" style="font-size: 1.1rem; font-weight: 700;">📌 Key Message</p>
         </div>
     </div>
 
-    <!-- Legend -->
-    <div class="wordcloud-legend">
-        <div class="legend-item">
-            <span class="legend-dot" style="background-color: #FF9F40;"></span>
-            <span>인물</span>
-        </div>
-        <div class="legend-item">
-            <span class="legend-dot" style="background-color: #36A2EB;"></span>
-            <span>업체</span>
-        </div>
-        <div class="legend-item">
-            <span class="legend-dot" style="background-color: #4BC0C0;"></span>
-            <span>기술</span>
-        </div>
-        <div class="legend-item">
-            <span class="legend-dot" style="background-color: #9966FF;"></span>
-            <span>상품</span>
-        </div>
+    <div class="key-message-content" style="font-size: 1rem; line-height: 1.8; color: var(--text-main);">
+        
+        <ul>
+<li><em>구글</em>의 AI 에이전트가 쇼핑 체계를 뒤바꾼다</li>
+<li><em>유니트리</em> 휴머노이드, 산업 자동화 시대 연다</li>
+</ul>
+        
     </div>
-
-    <img src="./static/images/weekly_wordcloud.png" alt="Weekly Word Cloud"
-        class="wordcloud-img">
 </section>
+
+<style>
+    /* Styling for Key Message List */
+    .key-message-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        /* Single column layout for 2 items */
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .key-message-content li {
+        margin-bottom: 0px;
+        padding-left: 0;
+        position: relative;
+        /* Typography Update: Larger & Bold */
+        font-size: 1.15rem;
+        /* ~120% of base */
+        font-weight: 700;
+        line-height: 1.5;
+    }
+
+    .key-message-content li::before {
+        content: "•";
+        color: var(--primary-color);
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+    }
+
+    /* Highlight style for emphasized keywords */
+    .key-message-content em {
+        font-style: normal;
+        color: var(--primary-color);
+        font-weight: 800;
+    }
+</style>
 
 <div class="dashboard-grid">
     <!-- AI Section -->
     <div class="dashboard-section">
         <h2>
             AI 뉴스
-            <a href="ai/daily/2025-12-31_080912.html" class="section-more">더보기</a>
+            <a href="ai/index.html" class="section-more">더보기</a>
         </h2>
         <ul class="preview-list">
             <li>
-                <span class="preview-date">aitimes.com 2025-12-31 12:17</span>
-                <a href="https://www.aitimes.com/news/articleView.html?idxno=205197" target="_blank" class="preview-title">중국, 반도체 제조업체에 국산 장비 50% 의무화</a>
+                <span class="preview-date">aitimes.com 2026-01-12 16:01</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=205492" target="_blank" class="preview-title">구글, 제미나이·AI 검색에 에이전트 쇼핑 기능 강화</a>
+                
             </li>
             <li>
-                <span class="preview-date">aitimes.com 2025-12-31 12:11</span>
-                <a href="https://www.aitimes.com/news/articleView.html?idxno=205201" target="_blank" class="preview-title">﻿이스트소프트, 에이전틱 AI ‘앨런’·AI 휴먼 ‘페르소’ 시연...…</a>
+                <span class="preview-date">aitimes.com 2026-01-12 15:44</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=205508" target="_blank" class="preview-title">롯데이노베이트, 산업용 휴머노이드 구축...유니트리 'G1'에 자체 A…</a>
+                
             </li>
             <li>
-                <span class="preview-date">aitimes.com 2025-12-31 12:07</span>
-                <a href="https://www.aitimes.com/news/articleView.html?idxno=205207" target="_blank" class="preview-title">[인사] 광주과학기술원(GIST)</a>
+                <span class="preview-date">aitimes.com 2026-01-12 15:20</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=205511" target="_blank" class="preview-title">﻿에티버스, 보스턴 다이내믹스와 로보틱스 DX 파트너십 체결</a>
+                
             </li>
             <li>
-                <span class="preview-date">aitimes.com 2025-12-31 11:59</span>
-                <a href="https://www.aitimes.com/news/articleView.html?idxno=205196" target="_blank" class="preview-title">소프트뱅크, 오픈AI 57조 투자 완료로 지분 10% 확보</a>
+                <span class="preview-date">aitimes.kr 2026-01-12 14:43</span>
+                <a href="https://www.aitimes.kr/news/articleView.html?idxno=38102" target="_blank" class="preview-title">오라클, AI 기반 공급망 협업 솔루션 공개… 리테일 공급망 리스크 대…</a>
+                
             </li>
             <li>
-                <span class="preview-date">aitimes.com 2025-12-31 11:49</span>
-                <a href="https://www.aitimes.com/news/articleView.html?idxno=205198" target="_blank" class="preview-title">﻿NC AI, 산업 특화 AI 파운데이션 모델 ‘배키’ 오픈 소스로 공개</a>
+                <span class="preview-date">aitimes.kr 2026-01-12 14:33</span>
+                <a href="https://www.aitimes.kr/news/articleView.html?idxno=38101" target="_blank" class="preview-title">파파존스, 음성·텍스트 아우르는 'AI 에이전트'...AI로 음식 주문…</a>
+                
             </li>
         </ul>
     </div>
@@ -305,28 +355,32 @@
     <div class="dashboard-section">
         <h2>
             XR 뉴스
-            <a href="xr/daily/2025-12-31_080912.html" class="section-more">더보기</a>
+            <a href="xr/index.html" class="section-more">더보기</a>
         </h2>
         <ul class="preview-list">
             
             <li>
-                <span class="preview-date">vocal.media 2025-12-30 20:44</span>
-                <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE1OMzFTRlJGN0k4QTNRWEIzanQzWTJrci1HVnZxcXliN1NpV0FxZTdyVlVobUhSakoxcVBhR2o1aTBTLXlHN2FqcC1rWlJRbm9hMzBzTjctM0ZXaTRiOTFDQmtQZDRHVmhhWFJJWHVYUVUwTzF4NW9hWQ?oc=5" target="_blank" class="preview-title">아이언마우스와 VShojo의 몰락 - vocal.media</a>
+                <span class="preview-date">youtube.com 2026-01-11 19:30</span>
+                <a href="https://www.youtube.com/watch?v=p6GSIsd5gVQ" target="_blank" class="preview-title">Meganex vs Dream Air: 어떤 4K MicroOLED 헤…</a>
+                
             </li>
             
             <li>
-                <span class="preview-date">Messari 2025-12-30 17:07</span>
-                <a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE9RUGxCT1pnNzlzQ3AzbnNpZVlGdkFLTkRnYS15NEk1N0R5WS1BUE9qWkRyVVV0NE5FQVVFeDM5T1hiWXZLbnpsTzJzel9iS0lvc01sa2cyeFh2UXJLR3FjWG82emhDYm9MWmlfSXZBX1VZTmplMzUzN3lBSQ?oc=5" target="_blank" class="preview-title">MEET48 이해: 종합 개요 - Messari</a>
+                <span class="preview-date">uploadvr.com 2026-01-11 17:51</span>
+                <a href="https://www.uploadvr.com/vr-game-developers-shock-2026/" target="_blank" class="preview-title">플랫폼 우선순위 변경에 충격을 받은 VR 게임 개발자들</a>
+                
             </li>
             
             <li>
-                <span class="preview-date">국민일보 2025-12-30 15:26</span>
-                <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQNmQyVWJnN3l5RWl1YkJxMXZBbTNYeVg2RU1yZVBjVWNmeWxwcXFZTnVORmFMNWp0bmo0SzhWdUVrMDhBMUdlaGdlTEZEU0NtbExJNnRpRW5xVjRVZnVhbkFGb3Z4SVFVeXdMeDVQb2xxTS1NWTFkUUlBaWVqVnB4UXRlTUtYQdIBbEFVX3lxTE5mMHBjTDZTSHlEa2RPUDljdERIbXZrUlZZMWllSEFDRURWRkpNeVQxREFzV0hzcTAwQ3MwWlVQWlpMZ1lwLWVvQndncnl0Ml9sbTVIcGJXcDFvZ21zM2o3aEMyWGlwUTdYZXlQVg?oc=5" target="_blank" class="preview-title">더 인간 같은 ‘버추얼 휴먼’의 시대… 홈쇼핑부터 공항까지 활약 - 국…</a>
+                <span class="preview-date">The Providence Journal 2026-01-11 16:54</span>
+                <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxON25FUDhzUFBYZXBPT2xvTVJ2d185R2ZuUTRIOWtYV1A0dElwVDdsTGRJNUR0R1RGZVM3b2xIRXNMY1R2eEd0cThiWmlVbWk0WGZ5MFA5MVoyZ2pXYVhGN2oweldWMjhUZHZjdWZSNWxLeXFGY0ZoV3BGb19mU0pRZkpHYUJFMk9DXzh3WHhaYWRKbzJtYms5aVR1NTBHek1JTDIwY2xnQkN6clFDOW8xS0V1UDAyRjRoQ3BXbUZVeDNrNFV3b3pUMGhpbmc5Zw?oc=5" target="_blank" class="preview-title">인플루언서 마케팅의 아버지, AI 우선 미디어 기술 회사 공개 - 프로…</a>
+                
             </li>
             
             <li>
-                <span class="preview-date">arinsider.co 2025-12-30 13:00</span>
-                <a href="https://arinsider.co/2025/12/30/new-study-projects-headworn-ar-revenue-to-reach-14-billion-by-2029-2/" target="_blank" class="preview-title">새로운 연구에서는 2029년까지 헤드원 AR 수익이 140억 달러에 이…</a>
+                <span class="preview-date">MSN 2026-01-11 06:50</span>
+                <a href="https://news.google.com/rss/articles/CBMiqwNBVV95cUxPdTFZeTFIM2cyWlplM1hDVkhQTVBMVXRNMktzbE5wN0hua3dPcHFtN2dlOWlzUV94bV8yTnF0T0habURpTlpmMEFSekdrUm1FcHliMFJMZ0cxcXhJeG5ITF8tTGZJbGx5ZEl5RVFrSUhxVC1sakZHVHg1T0psWmtPYUM5THBib2JzSmpJYVVDRDdLUmJENFU4RXdVZUZReDFpTnVCUnZLRGxGNGdoNzNoa05KSktzbFZoNGJCdXdteWF3MUJjZVA2WllyeVgyRzJ6X1pPWndzY2dqdnhUaXQxQVFQTnNXSDZDeUNQeXZYRVA1SWhFM3NsQnlYRzh1RGlvTHd4Q18xRGhvaHNPejRPWXp4UUhVRGJ5b2pPSnYtODN0MDlnNEcwNjYxWTJOa0V3aEpVUkFEd3FmNUZFMXFiXzk2N0RaT2dLY3FBMUhZdDVOaGx2TEhLN0wwakQ3VGRCbFh2ZnNIUXc5RzMxRHo1U3RUOGdqcDVjSVZmcDhYUjl3ZHVub3BfZm9UTlFUaUpCbmt2T2lVVFlDMVdzeWk1VXVuQUNZWEZkWHdr?oc=5" target="_blank" class="preview-title">“3250만원? 50만원이 적당”…‘가상 아이돌’ 플레이브 모욕 손해배…</a>
+                
             </li>
             
         </ul>
@@ -341,64 +395,74 @@
         <ul class="preview-list">
             
             <li>
-                <span class="preview-date">2025-12-26 | 공공융합기술정책과</span>
-                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186362" target="_blank" class="preview-title">2025년도 극한부품시험입증지원사업(Track형 실증지원) 신규과제 선정결과 공고</a>
+                <span class="preview-date">2026-01-09 | 미래전략기술정책과</span>
+                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186377" target="_blank" class="preview-title">2026년도 미래치안도전기술개발사업  신규과제 선정계획 공고</a>
+                
             </li>
             
             <li>
-                <span class="preview-date">2025-12-26 | 공공융합기술정책과</span>
-                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186361" target="_blank" class="preview-title">2025년도 4차 국민생활안전 긴급대응연구(2단계) 기술개발 및 실증 신규과제 선정결과 공고</a>
+                <span class="preview-date">2026-01-09 | 미래전략기술정책과</span>
+                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186376" target="_blank" class="preview-title">2026년도 치안현장 맞춤형 연구개발사업(폴리스랩3.0)  신규과제(현안대응, 국제협력) 선정계획 공고</a>
+                
             </li>
             
             <li>
-                <span class="preview-date">2025-12-26 | 디지털사회기획과</span>
-                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186342" target="_blank" class="preview-title">2026년 블록체인 융복합 타운 조성 사업 모집 공고</a>
+                <span class="preview-date">2026-01-09 | 첨단바이오기술과</span>
+                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186372" target="_blank" class="preview-title">2026년도 생체노화 리프로그래밍 원천기술 개발사업 신규과제 공모</a>
+                
             </li>
             
             <li>
-                <span class="preview-date">2025-12-26 | 디지털사회기획과</span>
-                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186341" target="_blank" class="preview-title">2026년 블록체인 특화 클러스터 조성 사업 모집 공고</a>
+                <span class="preview-date">2026-01-09 | 첨단바이오기술과</span>
+                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186375" target="_blank" class="preview-title">2026년도 바이오·의료기술개발 사업 신규과제 제1차 공모</a>
+                
             </li>
             
             <li>
-                <span class="preview-date">2025-12-26 | 재단법인 화성에프씨</span>
-                <a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R25BK01249483&bidPbancOrd=000" target="_blank" class="preview-title">2026 화성FC 뉴미디어 콘텐츠 제작 대행 용역</a>
+                <span class="preview-date">2026-01-09 | 첨단바이오기술과</span>
+                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186374" target="_blank" class="preview-title">2026년도 AI-네이티브 첨단바이오 자율실험실 사업 신규과제 공모</a>
+                
             </li>
             
         </ul>
     </div>
 
-    <!-- Members Section -->
+    <!-- Quickview Section -->
     <div class="dashboard-section">
         <h2>
-            회원사 소식
-            <a href="members/index.html" class="section-more">더보기</a>
+            퀵뷰
+            <a href="quickview/index.html" class="section-more">더보기</a>
         </h2>
         <ul class="preview-list">
             
             <li>
-                <span class="preview-date">2025-12-30 23:06 | 삼성전자</span>
-                <a href="https://news.google.com/rss/articles/CBMiYkFVX3lxTFBBTTFRdjZTdTcwaE9kUUxMLVFRRDZvYzdzNXpyaFhVZWtZamYtaEFjY01CMmxPSXowS3NyeEtJWUtEUUhNLVRySG8tajZVT2d1YUJtRDlmSDJzZDVFMXMtYXB3?oc=5" target="_blank" class="preview-title">'역대급 신고가' 삼성전자…통 큰 성과급 '장전'[신Go가] - 이코노…</a>
+                <span class="preview-date">2026년 01월 12일</span>
+                <a href="quickview/20260112_ut14cj.html" target="_blank" class="preview-title">IT 뉴스 - 2026년 AI 트렌드 및 CES 완전 정복 (심층 요약)</a>
+                <span class="new-badge">NEW</span>
             </li>
             
             <li>
-                <span class="preview-date">2025-12-30 23:06 | 호텔롯데</span>
-                <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE10djJkM1VZbktCUC10dUJ5MWROaHpsWjZ5alEwOFlFY0tXQXBfWXdXRXp4cjVGeXAyN3VOdHhSVEdpdS1SRkZQQkh5eG1TcE1TbEZfMXVDZEo5R09vX1ZOZ1EyQ1NmMlVDMWo3MjJSUmpUZC1LM3B2WQ?oc=5" target="_blank" class="preview-title">롯데호텔, 새해 맞이 프로모션 '플래시 딜' 선봬 - 네이트</a>
+                <span class="preview-date">2026년 01월 12일</span>
+                <a href="quickview/20260112_7kta0a.html" target="_blank" class="preview-title">팝콘 브레인: 게이머가 떠나는 이유와 게임 산업의 위기 분석</a>
+                <span class="new-badge">NEW</span>
             </li>
             
             <li>
-                <span class="preview-date">2025-12-30 23:06 | CJ제일제당</span>
-                <a href="https://news.google.com/rss/articles/CBMifEFVX3lxTFBsNEdCSzE3Rl9GazdMdmxpcUs1OWJaV2dvWDVTbXg4WTlKaFZlbHRkNzAweFVrSzY2S2UzdE9zWnQ3dC04bk44bzY2RzdpT09Xb0cyTEF3c0dEZE9ER1hIdVA0YUpfZ1JEemlRNjV3LWRsSW5iRkhNZDRUQzQ?oc=5" target="_blank" class="preview-title">CJ제일제당, 간편식 브랜드평판 2025년 12월...1위 - 비욘드포…</a>
+                <span class="preview-date">2026년 01월 11일</span>
+                <a href="quickview/20260111_idmes1.html" target="_blank" class="preview-title">그록 4.1로 무제한 길이 AI 애니메이션 만들기</a>
+                <span class="new-badge">NEW</span>
             </li>
             
             <li>
-                <span class="preview-date">2025-12-30 23:04 | KBS</span>
-                <a href="https://news.google.com/rss/articles/CBMi7AJBVV95cUxNSzdnNjZqZmR5cF90RS1Gc1lveXRMSVRURlRfR1M0ejZSRmtfN2F1SHkzLWlSYW1vd25xTGNNZ0xGdFFFZ1ZETTFxNmxpeWl6MEthT2xYMGg2U1prRHNONFBxcjRBdjdLY0Z6MzRvRlo4OGNiVGxCQkdRdzNETWlTYzhkZEprZFhiQUltTXlTb0dGOTU1VHlXZnROckNsQWtyc1FNTERVNzFkSVFUaFN4NzJtSXN5aUJKMm1TQTBLNkQwZmRnZXppR09ta2JrZGxaTTJhUWxBVTZUa0tEMHZhSXV3RC1vbWhVVE5xN3BDMXhEU1BoaGlMREtlWG53MWkzbVhwRGpSZ1pNdnlMT0E3QmtkYUIzMWZySzJDaXQxTFpzbkxXSWQzZXFIV0tmU3duVU9SZHQ4NS1BZ1czUHFpRTFfM2VndTVQbU5YeHBYTVVYNmFYZDRhNHRpbEhEOEd3Z0hzRWFCOEJxSVo3?oc=5" target="_blank" class="preview-title">강풍에 밀려난 호수 물…세밑 한파에 미국 곳곳 몸살 / KBS 2025…</a>
+                <span class="preview-date">2026년 01월 11일</span>
+                <a href="quickview/20260111_6j618j.html" target="_blank" class="preview-title">CES 2026 K-스타트업 혁신: 일상에 스며든 앰비언트 AI 기술</a>
+                
             </li>
             
             <li>
-                <span class="preview-date">2025-12-30 22:57 | 삼성전자</span>
-                <a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTFBfQmNNb2lfbEgyNjlmSlJsbkFBR1dIOTRIV1Z1cVpaMlB3eEdta1JLcHcwamhYVFZWZlBFUHFZNDlYS2E1TVBtbkFMdllySFU?oc=5" target="_blank" class="preview-title">삼성은 0a D램을 어떻게 만들까 (feat. IGO) [강해령의 테크…</a>
+                <span class="preview-date">2026년 01월 11일</span>
+                <a href="quickview/20260111_y5905q.html" target="_blank" class="preview-title">[CES 2026] AI가 결합된 XR 글래스의 일상화: 주요 기업 및 기술 분석</a>
+                
             </li>
             
         </ul>
@@ -408,8 +472,87 @@
     </div>
 
     <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
-        <p>&copy; 2026 VAAX rebuild Project by Fovea. All rights reserved.</p>
+        <p>&copy; 2026 VAAX rebuild Project by <a href="./admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
+        <div id="page-visit-counter" style="margin-top: 5px; font-size: 0.8rem; color: var(--primary-color);">
+            <span id="visit-count">Visits: ...</span>
+        </div>
     </footer>
+
+    <!-- Firebase SDK & Visit Counter -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Reuse config from board.html
+        const firebaseConfig = {
+            apiKey: "AIzaSyANn76u2ZCJ5rq4IOpYaTzFy1JtKoPOM-c",
+            authDomain: "vaax-board.firebaseapp.com",
+            projectId: "vaax-board",
+            storageBucket: "vaax-board.firebasestorage.app",
+            messagingSenderId: "31682907508",
+            appId: "1:31682907508:web:cd3ee4231ec8b3fb75b021",
+            measurementId: "G-XF41VB6W7V"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function trackVisit() {
+            try {
+                // Determine page ID from URL (e.g., "index.html", "ai/index.html")
+                let path = window.location.pathname;
+
+                // Remove leading slash and repo name if hosted on GitHub Pages
+                // e.g. "/ai-news-daily/ai/index.html" -> "ai/index.html"
+                if (path.startsWith('/ai-news-daily/')) {
+                    path = path.replace('/ai-news-daily/', '');
+                }
+                if (path.startsWith('/')) {
+                    path = path.substring(1);
+                }
+                if (!path || path === "") {
+                    path = "index.html";  // root
+                }
+
+                // Firestore document ID cannot contain slashes. Replace / with _
+                const docId = path.replace(/\//g, '_').replace(/\./g, '_');
+
+                const docRef = doc(db, "page_visits", docId);
+
+                // 1. Get current count (optimistic UI or wait?)
+                // Let's just update and then get, or get then update?
+                // Incrementing blindly is better for performance, then listening or getting.
+
+                // Use setDoc with merge to ensure document exists
+                await setDoc(docRef, {
+                    path: path,
+                    lastVisited: serverTimestamp()
+                }, { merge: true });
+
+                // Increment count
+                await updateDoc(docRef, {
+                    count: increment(1)
+                });
+
+                // Get updated count to display
+                const snap = await getDoc(docRef);
+                if (snap.exists()) {
+                    const data = snap.data();
+                    const countSpan = document.getElementById('visit-count');
+                    if (countSpan && data.count) {
+                        countSpan.textContent = `Total Visits: ${data.count.toLocaleString()}`;
+                    }
+                }
+
+            } catch (e) {
+                console.error("Visit tracking failed:", e);
+            }
+        }
+
+        // Execute tracking
+        trackVisit();
+    </script>
 </body>
 
 </html>
