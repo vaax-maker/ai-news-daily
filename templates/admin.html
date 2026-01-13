@@ -1135,7 +1135,7 @@
     async function loadWebshareHistory() {
         webshareHistory.innerHTML = '<span style="color: #9ca3af;">불러오는 중...</span>';
         try {
-            const fileData = await getGithubFile('docs/webshare/index.json');
+            const fileData = await getGithubFile('docs/webshare/data_x9k3.json');
 
             if (fileData) {
                 const indexData = JSON.parse(fileData.content);
@@ -1193,7 +1193,7 @@
 
             // 2. Update index.json
             webshareStatus.innerText = '3/3. 목록 업데이트 중...';
-            const indexFile = await getGithubFile('docs/webshare/index.json');
+            const indexFile = await getGithubFile('docs/webshare/data_x9k3.json');
 
             let indexData = { pages: [] };
             let sha = null;
@@ -1210,7 +1210,7 @@
                 createdAt: new Date().toISOString()
             });
 
-            await createGithubFile('docs/webshare/index.json', JSON.stringify(indexData, null, 2), `Update webshare index: ${title}`, sha);
+            await createGithubFile('docs/webshare/data_x9k3.json', JSON.stringify(indexData, null, 2), `Update webshare index: ${title}`, sha);
 
             // Success
             webshareStatus.className = 'status-msg success';
