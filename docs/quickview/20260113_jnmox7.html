@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang='ko'>
+
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기 - 퀵뷰</title>
+    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css?v=12">
+    
+<style>
+    .quickview-content {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .quickview-header {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .quickview-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
+    }
+
+    .quickview-meta {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
+    .quickview-body {
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+
+    .quickview-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    .quickview-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Flatten nested content structure for better readability */
+    .quickview-body .card {
+        padding: 1.25rem !important;
+        /* Reduce padding from default 1.5rem */
+        box-shadow: none !important;
+        /* Remove shadow to reduce "depth" feeling */
+        background: #f8fafc;
+        /* Light background for contrast without depth */
+        border: 1px solid var(--border-color);
+        margin-bottom: 1.5rem;
+    }
+
+    .quickview-body ul,
+    .quickview-body ol {
+        padding-left: 1.25rem;
+        /* Reduce list indentation */
+        margin-bottom: 1rem;
+    }
+
+    .quickview-body li {
+        margin-bottom: 0.25rem;
+    }
+
+    /* Ensure code blocks don't add too much visual weight */
+    .quickview-body pre {
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    /* === MOBILE RESPONSIVE === */
+    @media (max-width: 767px) {
+        .quickview-content {
+            /* Remove outer card styling on mobile - match daily article pages */
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 1rem;
+            border-radius: 0;
+        }
+
+        .quickview-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .quickview-title {
+            font-size: 1.35rem;
+            line-height: 1.3;
+        }
+
+        .quickview-meta {
+            font-size: 0.85rem;
+        }
+
+        .quickview-body {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .quickview-body .card {
+            padding: 0.75rem !important;
+            margin-bottom: 1rem;
+        }
+
+        .quickview-body ul,
+        .quickview-body ol {
+            padding-left: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .quickview-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        .quickview-body h2,
+        .quickview-body h3 {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quickview-actions {
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            gap: 0.5rem;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+    <header>
+        <div class="gnb">
+            <!-- Left: Logo -->
+            <a href="../index.html" class="logo-link">
+                <img src="../static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
+            </a>
+
+            <!-- Right: Slogan & Nav -->
+            <div class="header-right-section">
+                <div class="slogan-container">
+                    <span class="slogan-since">since 2016</span>
+                    <span class="header-slogan-text">
+                        VR-AR-AI-XR <span class="slogan-highlight">기술과 Biz.를 연결하는</span>
+                        성장나눔 <span class="slogan-highlight">커뮤니티</span>
+                    </span>
+                </div>
+                <nav class="nav-links">
+                    <a href="../index.html"
+                        class="">Home</a>
+                    <a href="../ai/index.html"
+                        class="">AI/XR뉴스</a>
+                    <a href="../quickview/index.html"
+                        class="active">퀵뷰</a>
+                    <a href="../gov/index.html"
+                        class="">정부과제</a>
+                    <a href="../members/index.html"
+                        class="">회원사소식</a>
+                    <a href="../board/index.html"
+                        class="">Small Talk</a>
+
+                </nav>
+            </div>
+        </div>
+        <!-- Announcement Message -->
+        <div class="header-announcement"
+            style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
+            <a href="../guide.html"
+                style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+<div class="quickview-content">
+    <div class="quickview-header">
+        <h1 class="quickview-title">구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기</h1>
+        <div class="quickview-meta">📅 2026년 01월 13일 16:43</div>
+    </div>
+
+    <!-- Raw content container (hidden) -->
+    <template id="quickview-raw-content">
+        <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기 (통합 가이드)</title>
+    <style>
+        /* vaax-theme.css - 외부 제공용 스타일 적용 */
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --line-gray: #9ca3af;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+        }
+
+        p {
+            margin-bottom: 1.5em;
+            color: #374151;
+        }
+
+        h1, h2, h3 {
+            color: var(--text-main);
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-top: 1em;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            background-color: #f7fee7;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #111827;
+        }
+
+        /* 참고 링크 박스 스타일 */
+        .ref-links {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 1.5em;
+            font-size: 0.95rem;
+        }
+
+        .ref-links strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #166534;
+        }
+
+        .ref-links ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .ref-links li {
+            margin-bottom: 5px;
+        }
+
+        .ref-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .ref-links a:hover {
+            text-decoration: underline;
+            color: var(--primary-color-hover);
+        }
+
+        .meta-info {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 2em;
+            padding: 15px;
+            background-color: #f3f4f6;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* 비디오 컨테이너 스타일 (하단 배치) */
+        .video-container {
+            width: 100%;
+            background: #000;
+            margin-top: 4em;
+            margin-bottom: 2em;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 비율 유지 */
+            height: 0;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .step-container {
+            border-left: 3px solid var(--line-gray);
+            padding-left: 25px;
+            margin-left: 5px;
+            margin-bottom: 3em;
+        }
+
+        .highlight {
+            background-color: #CEFA98;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #1a2e05;
+        }
+
+        .model-badge {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        .timestamp-link {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            background-color: #ecfccb;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            margin-top: 8px;
+            transition: all 0.2s;
+            border: 1px solid #bef264;
+        }
+
+        .timestamp-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .action-step {
+            margin-bottom: 2.5em;
+        }
+
+        .action-title {
+            font-weight: 700;
+            font-size: 1.15em;
+            margin-bottom: 0.8em;
+            color: #1f2937;
+        }
+
+        .detail-list {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            color: #4b5563;
+        }
+        
+        .detail-list li {
+            margin-bottom: 8px;
+        }
+
+        .tag-container {
+            margin-top: 1em;
+            margin-bottom: 2em;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .note {
+            background-color: #fffbeb;
+            border: 1px solid #fcd34d;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            color: #92400e;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2em;
+            padding: 2em 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기 (통합 가이드)</h1>
+        
+        <div class="ref-links">
+            <strong>📚 참고 자료</strong>
+            <ul>
+                <li>블로그 리뷰: <a href="https://insight.infograb.net/blog/2025/10/15/google-opal-review/" target="_blank">Google Opal Review (InfoGrab)</a></li>
+                <li>유튜브 (꿘샘AI): <a href="https://youtu.be/9Afc-p8t-Hc" target="_blank">이제는 구글의 Opal 시대!!</a></li>
+                <li>유튜브 (영어 리뷰): <a href="https://www.youtube.com/watch?v=w6tnu0Hmi9w" target="_blank">Google Opal review: Is This a Zapier / n8n Killer?</a></li>
+            </ul>
+        </div>
+
+        <div class="meta-info">
+            <strong>출처:</strong> 꿘샘AI YouTube, InfoGrab Blog, No Code MBA<br>
+            <strong>작성일:</strong> 2026년 01월 13일<br>
+            <strong>개요:</strong> 구글의 노코드 도구 'Opal'의 기본 사용법부터 최신 모델(Gemini 2.5) 활용 및 업무 자동화(DevOps) 사례까지 망라한 통합 핸즈온 가이드입니다.
+        </div>
+    </header>
+
+    <main>
+        <div class="tag-container">
+            <span class="tag">#구글Opal</span>
+            <span class="tag">#노코드개발</span>
+            <span class="tag">#Gemini2.5</span>
+            <span class="tag">#업무자동화</span>
+            <span class="tag">#멀티모달</span>
+        </div>
+
+        <section>
+            <h2>1. 기본 개념: Gems와 Opal의 차이</h2>
+            <p>Gemini 생태계 내에서 대화형 봇과 작업형 앱의 역할을 명확히 구분합니다.</p>
+            
+            <div class="step-container">
+                <div class="action-step">
+                    <div class="action-title">STEP 1: Gems vs Opal 구분하기</div>
+                    <ul class="detail-list">
+                        <li><strong>Gems:</strong> 사용자와 대화하며 답을 주는 '맞춤형 챗봇' (ChatGPT의 GPTS 유사).</li>
+                        <li><strong>Opal:</strong> 입력값을 받아 특정 작업을 수행하고 결과를 내는 <span class="highlight">미니 앱(App)</span> 도구입니다. 반복 업무 자동화에 최적화되어 있습니다.</li>
+                    </ul>
+                    <a class="timestamp-link" onclick="seekTo(94)">▶ [00:01:34] Gems와 Opal의 결정적 차이 설명</a>
+                </div>
+                
+                <div class="action-step">
+                    <div class="action-title">STEP 2: 프로젝트 시작 (Remix 활용)</div>
+                    <ul class="detail-list">
+                        <li>초보자는 'New Gem'으로 바닥부터 시작하기보다, 구글이 제공하는 샘플을 <strong>Remix(복제)</strong>하여 구조를 익히는 것이 효율적입니다.</li>
+                        <li>'New Gem' 클릭 시 나타나는 영어 메뉴에 당황하지 말고 자연어로 명령을 입력하면 됩니다.</li>
+                    </ul>
+                    <a class="timestamp-link" onclick="seekTo(145)">▶ [00:02:25] 기존 샘플 활용(Remix) 방법</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. 앱 설계 및 구조화 (Workflow)</h2>
+            <p>자연어 프롬프트로 앱의 흐름을 정의하고, Opal의 강력한 기능인 '병렬 처리'를 이해합니다.</p>
+
+            <div class="step-container">
+                <div class="action-step">
+                    <div class="action-title">STEP 1: 자연어로 기능 정의 및 시각화</div>
+                    <ul class="detail-list">
+                        <li>프롬프트 창에 "주제와 대상을 입력하면 퀴즈와 인포그래픽을 생성해 줘"와 같이 입력합니다.</li>
+                        <li>Opal은 이를 분석하여 <strong>입력(노란색) → 처리(하늘색) → 출력(녹색)</strong>의 흐름도로 자동 변환합니다.</li>
+                        <li><span class="highlight">Tip:</span> 복잡한 화면은 스페이스바를 누른 채 드래그하여 이동할 수 있습니다.</li>
+                    </ul>
+                    <a class="timestamp-link" onclick="seekTo(269)">▶ [00:04:29] 교육용 앱 생성 프롬프트 예시</a><br>
+                    <a class="timestamp-link" onclick="seekTo(1133)">▶ [00:18:53] 화면 이동(스페이스바) 꿀팁</a>
+                </div>
+
+                <div class="action-step">
+                    <div class="action-title">STEP 2: 병렬 처리(Parallel Processing) 구조 확인</div>
+                    <p>Opal의 큰 장점은 여러 작업을 동시에 수행하는 것입니다.</p>
+                    <ul class="detail-list">
+                        <li><strong>단일 입력, 다중 작업:</strong> 하나의 주제 입력으로 '블로그 글 작성', '요약문 생성', '이미지 생성'을 동시에 진행할 수 있습니다.</li>
+                        <li>흐름도에서 하나의 입력 노드가 여러 개의 처리 노드로 갈래 쳐 나가는 것을 확인하세요. 이는 전체 작업 시간을 획기적으로 단축시킵니다.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. 디테일 설정: 멀티모달 모델 및 한글화</h2>
+            <p>InfoGrab 리뷰에 기반하여 최신 AI 모델을 선택하고, 한국어 사용 환경을 최적화합니다.</p>
+
+            <div class="step-container">
+                <div class="action-step">
+                    <div class="action-title">STEP 1: 최신 멀티모달 모델 선택</div>
+                    <p>단순 텍스트 외에 이미지, 영상, 오디오까지 생성할 수 있는 모델을 노드별로 지정합니다.</p>
+                    <ul class="detail-list">
+                        <li><span class="model-badge">Gemini 2.5 Flash/Pro</span> 텍스트 생성 및 분석 (업그레이드 됨)</li>
+                        <li><span class="model-badge">Imagen 4</span> 고품질 텍스트-이미지 변환</li>
+                        <li><span class="model-badge">Veo</span> 텍스트/이미지 기반 영상 생성</li>
+                        <li><span class="model-badge">AudioLM</span> 텍스트를 음성으로 변환</li>
+                        <li><span class="model-badge">Lyria 2</span> 배경 음악 및 음악 생성</li>
+                    </ul>
+                    <a class="timestamp-link" onclick="seekTo(980)">▶ [00:16:20] 모델 변경 방법 및 고급 설정</a>
+                </div>
+
+                <div class="action-step">
+                    <div class="action-title">STEP 2: 프롬프트 한글화 및 번역</div>
+                    <div class="note">
+                        <strong>주의:</strong> 결과물이 영어로 나오는 것을 막기 위해 프롬프트 끝에 <strong>"모든 출력물은 반드시 한글로 작성해 줘"</strong>라는 문구를 꼭 포함해야 합니다.
+                    </div>
+                    <ul class="detail-list">
+                        <li>각 단계의 'Editor'에서 영어 프롬프트를 번역기(파파고 등)를 이용해 한글로 교체합니다.</li>
+                        <li>UI 라벨(User Input)도 'Input Topic' 대신 '주제 입력' 등으로 변경하여 사용자 편의성을 높입니다.</li>
+                    </ul>
+                    <a class="timestamp-link" onclick="seekTo(880)">▶ [00:14:40] 번역기를 활용한 프롬프트 수정 팁</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. 고급 활용: 외부 연동 및 실전 사례</h2>
+            <p>단순 생성을 넘어 실제 업무(DevOps, 블로그 운영)에 적용하는 방법입니다.</p>
+
+            <div class="step-container">
+                <div class="action-step">
+                    <div class="action-title">STEP 1: 구글 서비스 및 외부 API 연동</div>
+                    <ul class="detail-list">
+                        <li><strong>Google Sheets/Drive:</strong> 생성된 데이터를 구글 시트에 자동으로 저장하거나, 드라이브의 문서를 불러와 요약할 수 있습니다. (일부 기능 실험적 지원)</li>
+                        <li><strong>External API:</strong> 인증 설정을 통해 외부 서비스의 API를 호출하여 확장된 기능을 구현할 수 있습니다.</li>
+                    </ul>
+                </div>
+
+                <div class="action-step">
+                    <div class="action-title">STEP 2: 실전 사례 - 기술 블로그 자동화</div>
+                    <p>DevOps 팀이나 마케터가 반복 업무를 자동화하는 대표적인 워크플로입니다.</p>
+                    <ul class="detail-list">
+                        <li><strong>입력:</strong> 최신 기술 문서 URL 또는 핵심 키워드</li>
+                        <li><strong>처리 (병렬):</strong> 
+                            1. 내용 요약 및 초안 작성 (Gemini 2.5) <br>
+                            2. 썸네일 이미지 생성 (Imagen 4) <br>
+                            3. SEO 태그 추출
+                        </li>
+                        <li><strong>출력:</strong> 완성된 블로그 포스트 초안 (HTML 또는 마크다운)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>5. 테스트 및 배포</h2>
+            <p>완성된 앱을 검증하고 링크로 공유하거나 파일로 저장합니다.</p>
+
+            <div class="step-container">
+                <div class="action-step">
+                    <div class="action-title">STEP 1: 미리보기 및 디버깅</div>
+                    <p>우측 상단의 'Start' 버튼으로 앱을 실행합니다. 오류 발생 시 어떤 노드에서 멈췄는지 시각적으로 확인할 수 있어 디버깅이 빠릅니다.</p>
+                    <a class="timestamp-link" onclick="seekTo(769)">▶ [00:12:49] 앱 실행 및 데이터 입력 테스트</a>
+                </div>
+
+                <div class="action-step">
+                    <div class="action-title">STEP 2: 공유(Share) 및 다운로드</div>
+                    <ul class="detail-list">
+                        <li>별도의 호스팅 서버 없이 <span class="highlight">Share</span> 버튼 하나로 앱을 링크 형태로 배포할 수 있습니다.</li>
+                        <li>HTML 파일로 다운로드하여 로컬 환경에서 실행하거나 재활용할 수도 있습니다.</li>
+                    </ul>
+                    <a class="timestamp-link" onclick="seekTo(1586)">▶ [00:26:26] 앱 공유 링크 생성 및 HTML 다운로드</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="video-container">
+        <div class="video-wrapper">
+            <div id="player"></div>
+        </div>
+    </div>
+
+    <footer>
+        2026 Fovea
+    </footer>
+
+    <script>
+        // YouTube IFrame API 로드
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                videoId: '9Afc-p8t-Hc', // 영상 ID
+                playerVars: {
+                    'playsinline': 1,
+                    'rel': 0
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // 플레이어 준비 완료 상태
+        }
+
+        function seekTo(seconds) {
+            if (player && player.seekTo) {
+                // 비디오 위치로 스크롤 이동
+                document.querySelector('.video-container').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+
+                // 스크롤 이동 후 재생 (지연 시간 0.6초)
+                setTimeout(() => {
+                    player.seekTo(seconds, true);
+                    player.playVideo();
+                }, 600);
+            }
+        }
+    </script>
+</body>
+</html>
+    </template>
+
+    <!-- Shadow Wrapper -->
+    <div id="quickview-shadow-host"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const rawContent = document.getElementById('quickview-raw-content').content;
+            const host = document.getElementById('quickview-shadow-host');
+
+            // Create Shadow DOM
+            const shadow = host.attachShadow({ mode: 'open' });
+
+            // Clone content
+            shadow.appendChild(rawContent.cloneNode(true));
+
+            // Inject Override Styles causing the layout issues
+            const style = document.createElement('style');
+            style.textContent = `
+                /* Reset Body/HTML defaults if they exist in content */
+                :host {
+                    display: block;
+                    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+                    line-height: 1.6;
+                    color: var(--text-main, #111827);
+                }
+                body {
+                    margin: 0;
+                    padding: 0;
+                    background: transparent !important;
+                    font-family: inherit;
+                }
+                
+                /* Hide duplicate titles */
+                h1 { display: none !important; }
+                
+                /* Flatten Container/Card styles */
+                .container, .card, .summary-box {
+                    box-shadow: none !important;
+                    border: none !important;
+                    background: transparent !important;
+                    padding: 0 !important;
+                    margin: 0 !important;
+                    max-width: 100% !important;
+                    border-radius: 0 !important;
+                }
+                
+                /* Adjust headings inside */
+                h2 { 
+                    font-size: 1.4rem; 
+                    margin-top: 1.5rem; 
+                    margin-bottom: 1rem;
+                    color: #333;
+                }
+                h3 {
+                    font-size: 1.15rem;
+                    margin-top: 1.2rem;
+                    color: #444;
+                }
+                
+                /* Hide internal footer/meta */
+                footer, .meta-date { display: none !important; }
+                
+                /* Links */
+                a { color: #65a30d; text-decoration: none; }
+                a:hover { text-decoration: underline; }
+                
+                /* Tags */
+                .tag {
+                    display: inline-block;
+                    background-color: #475569;
+                    color: white;
+                    padding: 4px 10px;
+                    border-radius: 15px;
+                    font-size: 0.8rem;
+                    margin-right: 6px;
+                    margin-top: 6px;
+                }
+            `;
+            shadow.appendChild(style);
+        });
+    </script>
+
+    <div class="quickview-actions">
+        <a href="index.html" class="back-link">← 퀵뷰 목록으로</a>
+        <div style="flex: 1;"></div>
+        <a href="../board/index.html?mode=discuss&title=%EA%B5%AC%EA%B8%80%20Opal%20%EC%82%AC%EC%9A%A9%EB%B2%95%3A%20%EC%BD%94%EB%94%A9%20%EC%97%86%EC%9D%B4%20%EB%82%98%EB%A7%8C%EC%9D%98%20AI%20%EC%95%B1%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https%3A//vaax-maker.github.io/ai-news-daily/quickview/20260113_jnmox7.html&source=퀵뷰"
+            class="discuss-btn-sm">토론</a>
+        <button type="button" class="discuss-btn-sm"
+            onclick="navigator.clipboard.writeText('https://vaax-maker.github.io/ai-news-daily/quickview/20260113_jnmox7.html'); alert('URL이 복사되었습니다!');">공유</button>
+    </div>
+</div>
+
+    </div>
+
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 VAAX rebuild Project by <a href="../admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
+        <div id="page-visit-counter" style="margin-top: 5px; font-size: 0.8rem; color: var(--primary-color);">
+            <span id="visit-count">Visits: ...</span>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK & Visit Counter -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Reuse config from board.html
+        const firebaseConfig = {
+            apiKey: "AIzaSyANn76u2ZCJ5rq4IOpYaTzFy1JtKoPOM-c",
+            authDomain: "vaax-board.firebaseapp.com",
+            projectId: "vaax-board",
+            storageBucket: "vaax-board.firebasestorage.app",
+            messagingSenderId: "31682907508",
+            appId: "1:31682907508:web:cd3ee4231ec8b3fb75b021",
+            measurementId: "G-XF41VB6W7V"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function trackVisit() {
+            try {
+                // Determine page ID from URL (e.g., "index.html", "ai/index.html")
+                let path = window.location.pathname;
+
+                // Remove leading slash and repo name if hosted on GitHub Pages
+                // e.g. "/ai-news-daily/ai/index.html" -> "ai/index.html"
+                if (path.startsWith('/ai-news-daily/')) {
+                    path = path.replace('/ai-news-daily/', '');
+                }
+                if (path.startsWith('/')) {
+                    path = path.substring(1);
+                }
+                if (!path || path === "") {
+                    path = "index.html";  // root
+                }
+
+                // Firestore document ID cannot contain slashes. Replace / with _
+                const docId = path.replace(/\//g, '_').replace(/\./g, '_');
+
+                const docRef = doc(db, "page_visits", docId);
+
+                // 1. Get current count (optimistic UI or wait?)
+                // Let's just update and then get, or get then update?
+                // Incrementing blindly is better for performance, then listening or getting.
+
+                // Use setDoc with merge to ensure document exists
+                await setDoc(docRef, {
+                    path: path,
+                    lastVisited: serverTimestamp()
+                }, { merge: true });
+
+                // Increment count
+                await updateDoc(docRef, {
+                    count: increment(1)
+                });
+
+                // Get updated count to display
+                const snap = await getDoc(docRef);
+                if (snap.exists()) {
+                    const data = snap.data();
+                    const countSpan = document.getElementById('visit-count');
+                    if (countSpan && data.count) {
+                        countSpan.textContent = `Total Visits: ${data.count.toLocaleString()}`;
+                    }
+                }
+
+            } catch (e) {
+                console.error("Visit tracking failed:", e);
+            }
+        }
+
+        // Execute tracking
+        trackVisit();
+    </script>
+</body>
+
+</html>
