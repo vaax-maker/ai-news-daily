@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기 (통합 가이드)</title>
+    <style>
+        /* vaax-theme.css - 외부 제공용 스타일 적용 */
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --line-gray: #9ca3af;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+        }
+
+        p {
+            margin-bottom: 1.5em;
+            color: #374151;
+        }
+
+        h1, h2, h3 {
+            color: var(--text-main);
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-top: 1em;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            background-color: #f7fee7;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #111827;
+        }
+
+        /* 참고 링크 박스 스타일 */
+        .ref-links {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 1.5em;
+            font-size: 0.95rem;
+        }
+
+        .ref-links strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #166534;
+        }
+
+        .ref-links ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .ref-links li {
+            margin-bottom: 5px;
+        }
+
+        .ref-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .ref-links a:hover {
+            text-decoration: underline;
+            color: var(--primary-color-hover);
+        }
+
+        .meta-info {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 2em;
+            padding: 15px;
+            background-color: #f3f4f6;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* 비디오 컨테이너 스타일 (하단 배치) */
+        .video-container {
+            width: 100%;
+            background: #000;
+            margin-top: 4em;
+            margin-bottom: 2em;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 비율 유지 */
+            height: 0;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .step-container {
+            border-left: 3px solid var(--line-gray);
+            padding-left: 25px;
+            margin-left: 5px;
+            margin-bottom: 3em;
+        }
+
+        .highlight {
+            background-color: #CEFA98;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #1a2e05;
+        }
+
+        .model-badge {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        .timestamp-link {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            background-color: #ecfccb;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            margin-top: 8px;
+            transition: all 0.2s;
+            border: 1px solid #bef264;
+        }
+
+        .timestamp-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .action-step {
+            margin-bottom: 2.5em;
+        }
+
+        .action-title {
+            font-weight: 700;
+            font-size: 1.15em;
+            margin-bottom: 0.8em;
+            color: #1f2937;
+        }
+
+        .detail-list {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            color: #4b5563;
+        }
+        
+        .detail-list li {
+            margin-bottom: 8px;
+        }
+
+        .tag-container {
+            margin-top: 1em;
+            margin-bottom: 2em;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .note {
+            background-color: #fffbeb;
+            border: 1px solid #fcd34d;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            color: #92400e;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2em;
+            padding: 2em 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기 (통합 가이드)</h1>
+        
+        <div class="ref-links">
+            <strong>📚 참고 자료</strong>
+            <ul>
+                <li>블로그 리뷰: <a href="https://insight.infograb.net/blog/2025/10/15/google-opal-review/" target="_blank">Google Opal Review (InfoGrab)</a></li>
+                <li>유튜브 (꿘샘AI): <a href="https://youtu.be/9Afc-p8t-Hc" target="_blank">이제는 구글의 Opal 시대!!</a></li>
+                <li>유튜브 (영어 리뷰): <a href="https://www.youtube.com/watch?v=w6tnu0Hmi9w" target="_blank">Google Opal review: Is This a Zapier / n8n Killer?</a></li>
+            </ul>
+        </div>
+
+        <div class="meta-info">
+            <strong>출처:</strong> 꿘샘AI YouTube, InfoGrab Blog, No Code MBA<br>
+            <strong>작성일:</strong> 2026년 01월 13일<br>
+            <strong>개요:</strong> 구글의 노코드 도구 'Opal'의 기본 사용법부터 최신 모델(Gemini 2.5) 활용 및 업무 자동화(DevOps) 사례까지 망라한 통합 핸즈온 가이드입니다.
+        </div>
+    </header>
+
+    <main>
+        <div class="tag-container">
+            <span class="tag">#구글Opal</span>
+            <span class="tag">#노코드개발</span>
+            <span class="tag">#Gemini2.5</span>
+            <span class="tag">#업무자동화</span>
+            <span class="tag">#멀티모달</span>
+        </div>
+
+        <section>
+            <h2>1. 기본 개념: Gems와 Opal의 차이</h2>
+            <p>Gemini 생태계 내에서 대화형 봇과 작업형 앱의 역할을 명확히 구분합니다.</p>
+            
+            <div class="step-container">
+                <div class="action-step">
+                    <div class="action-title">STEP 1: Gems vs Opal 구분하기</div>
+                    <ul class="detail-list">
+                        <li><strong>Gems:</strong> 사용자와 대화하며 답을 주는 '맞춤형 챗봇' (ChatGPT의 GPTS 유사).</li>
+                        <li><strong>Opal:</strong> 입력값을 받아 특정 작업을 수행하고 결과를 내는 <span class="highlight">미니 앱(App)</span> 도구입니다. 반복 업무 자동화에 최적화되어 있습니다.</li>
+                    </ul>
+                    <a class="timestamp-link" onclick="seekTo(94)">▶ [00:01:34] Gems와 Opal의 결정적 차이 설명</a>
+                </div>
+                
+                <div class="action-step">
+                    <div class="action-title">STEP 2: 프로젝트 시작 (Remix 활용)</div>
+                    <ul class="detail-list">
+                        <li>초보자는 'New Gem'으로 바닥부터 시작하기보다, 구글이 제공하는 샘플을 <strong>Remix(복제)</strong>하여 구조를 익히는 것이 효율적입니다.</li>
+                        <li>'New Gem' 클릭 시 나타나는 영어 메뉴에 당황하지 말고 자연어로 명령을 입력하면 됩니다.</li>
+                    </ul>
+                    <a class="timestamp-link" onclick="seekTo(145)">▶ [00:02:25] 기존 샘플 활용(Remix) 방법</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. 앱 설계 및 구조화 (Workflow)</h2>
+            <p>자연어 프롬프트로 앱의 흐름을 정의하고, Opal의 강력한 기능인 '병렬 처리'를 이해합니다.</p>
+
+            <div class="step-container">
+                <div class="action-step">
+                    <div class="action-title">STEP 1: 자연어로 기능 정의 및 시각화</div>
+                    <ul class="detail-list">
+                        <li>프롬프트 창에 "주제와 대상을 입력하면 퀴즈와 인포그래픽을 생성해 줘"와 같이 입력합니다.</li>
+                        <li>Opal은 이를 분석하여 <strong>입력(노란색) → 처리(하늘색) → 출력(녹색)</strong>의 흐름도로 자동 변환합니다.</li>
+                        <li><span class="highlight">Tip:</span> 복잡한 화면은 스페이스바를 누른 채 드래그하여 이동할 수 있습니다.</li>
+                    </ul>
+                    <a class="timestamp-link" onclick="seekTo(269)">▶ [00:04:29] 교육용 앱 생성 프롬프트 예시</a><br>
+                    <a class="timestamp-link" onclick="seekTo(1133)">▶ [00:18:53] 화면 이동(스페이스바) 꿀팁</a>
+                </div>
+
+                <div class="action-step">
+                    <div class="action-title">STEP 2: 병렬 처리(Parallel Processing) 구조 확인</div>
+                    <p>Opal의 큰 장점은 여러 작업을 동시에 수행하는 것입니다.</p>
+                    <ul class="detail-list">
+                        <li><strong>단일 입력, 다중 작업:</strong> 하나의 주제 입력으로 '블로그 글 작성', '요약문 생성', '이미지 생성'을 동시에 진행할 수 있습니다.</li>
+                        <li>흐름도에서 하나의 입력 노드가 여러 개의 처리 노드로 갈래 쳐 나가는 것을 확인하세요. 이는 전체 작업 시간을 획기적으로 단축시킵니다.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. 디테일 설정: 멀티모달 모델 및 한글화</h2>
+            <p>InfoGrab 리뷰에 기반하여 최신 AI 모델을 선택하고, 한국어 사용 환경을 최적화합니다.</p>
+
+            <div class="step-container">
+                <div class="action-step">
+                    <div class="action-title">STEP 1: 최신 멀티모달 모델 선택</div>
+                    <p>단순 텍스트 외에 이미지, 영상, 오디오까지 생성할 수 있는 모델을 노드별로 지정합니다.</p>
+                    <ul class="detail-list">
+                        <li><span class="model-badge">Gemini 2.5 Flash/Pro</span> 텍스트 생성 및 분석 (업그레이드 됨)</li>
+                        <li><span class="model-badge">Imagen 4</span> 고품질 텍스트-이미지 변환</li>
+                        <li><span class="model-badge">Veo</span> 텍스트/이미지 기반 영상 생성</li>
+                        <li><span class="model-badge">AudioLM</span> 텍스트를 음성으로 변환</li>
+                        <li><span class="model-badge">Lyria 2</span> 배경 음악 및 음악 생성</li>
+                    </ul>
+                    <a class="timestamp-link" onclick="seekTo(980)">▶ [00:16:20] 모델 변경 방법 및 고급 설정</a>
+                </div>
+
+                <div class="action-step">
+                    <div class="action-title">STEP 2: 프롬프트 한글화 및 번역</div>
+                    <div class="note">
+                        <strong>주의:</strong> 결과물이 영어로 나오는 것을 막기 위해 프롬프트 끝에 <strong>"모든 출력물은 반드시 한글로 작성해 줘"</strong>라는 문구를 꼭 포함해야 합니다.
+                    </div>
+                    <ul class="detail-list">
+                        <li>각 단계의 'Editor'에서 영어 프롬프트를 번역기(파파고 등)를 이용해 한글로 교체합니다.</li>
+                        <li>UI 라벨(User Input)도 'Input Topic' 대신 '주제 입력' 등으로 변경하여 사용자 편의성을 높입니다.</li>
+                    </ul>
+                    <a class="timestamp-link" onclick="seekTo(880)">▶ [00:14:40] 번역기를 활용한 프롬프트 수정 팁</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. 고급 활용: 외부 연동 및 실전 사례</h2>
+            <p>단순 생성을 넘어 실제 업무(DevOps, 블로그 운영)에 적용하는 방법입니다.</p>
+
+            <div class="step-container">
+                <div class="action-step">
+                    <div class="action-title">STEP 1: 구글 서비스 및 외부 API 연동</div>
+                    <ul class="detail-list">
+                        <li><strong>Google Sheets/Drive:</strong> 생성된 데이터를 구글 시트에 자동으로 저장하거나, 드라이브의 문서를 불러와 요약할 수 있습니다. (일부 기능 실험적 지원)</li>
+                        <li><strong>External API:</strong> 인증 설정을 통해 외부 서비스의 API를 호출하여 확장된 기능을 구현할 수 있습니다.</li>
+                    </ul>
+                </div>
+
+                <div class="action-step">
+                    <div class="action-title">STEP 2: 실전 사례 - 기술 블로그 자동화</div>
+                    <p>DevOps 팀이나 마케터가 반복 업무를 자동화하는 대표적인 워크플로입니다.</p>
+                    <ul class="detail-list">
+                        <li><strong>입력:</strong> 최신 기술 문서 URL 또는 핵심 키워드</li>
+                        <li><strong>처리 (병렬):</strong> 
+                            1. 내용 요약 및 초안 작성 (Gemini 2.5) <br>
+                            2. 썸네일 이미지 생성 (Imagen 4) <br>
+                            3. SEO 태그 추출
+                        </li>
+                        <li><strong>출력:</strong> 완성된 블로그 포스트 초안 (HTML 또는 마크다운)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>5. 테스트 및 배포</h2>
+            <p>완성된 앱을 검증하고 링크로 공유하거나 파일로 저장합니다.</p>
+
+            <div class="step-container">
+                <div class="action-step">
+                    <div class="action-title">STEP 1: 미리보기 및 디버깅</div>
+                    <p>우측 상단의 'Start' 버튼으로 앱을 실행합니다. 오류 발생 시 어떤 노드에서 멈췄는지 시각적으로 확인할 수 있어 디버깅이 빠릅니다.</p>
+                    <a class="timestamp-link" onclick="seekTo(769)">▶ [00:12:49] 앱 실행 및 데이터 입력 테스트</a>
+                </div>
+
+                <div class="action-step">
+                    <div class="action-title">STEP 2: 공유(Share) 및 다운로드</div>
+                    <ul class="detail-list">
+                        <li>별도의 호스팅 서버 없이 <span class="highlight">Share</span> 버튼 하나로 앱을 링크 형태로 배포할 수 있습니다.</li>
+                        <li>HTML 파일로 다운로드하여 로컬 환경에서 실행하거나 재활용할 수도 있습니다.</li>
+                    </ul>
+                    <a class="timestamp-link" onclick="seekTo(1586)">▶ [00:26:26] 앱 공유 링크 생성 및 HTML 다운로드</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="video-container">
+        <div class="video-wrapper">
+            <div id="player"></div>
+        </div>
+    </div>
+
+    <footer>
+        2026 Fovea
+    </footer>
+
+    <script>
+        // YouTube IFrame API 로드
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                videoId: '9Afc-p8t-Hc', // 영상 ID
+                playerVars: {
+                    'playsinline': 1,
+                    'rel': 0
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // 플레이어 준비 완료 상태
+        }
+
+        function seekTo(seconds) {
+            if (player && player.seekTo) {
+                // 비디오 위치로 스크롤 이동
+                document.querySelector('.video-container').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+
+                // 스크롤 이동 후 재생 (지연 시간 0.6초)
+                setTimeout(() => {
+                    player.seekTo(seconds, true);
+                    player.playVideo();
+                }, 600);
+            }
+        }
+    </script>
+</body>
+</html>
