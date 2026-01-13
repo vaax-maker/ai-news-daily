@@ -37,22 +37,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: white;
-            padding: 1rem 1.25rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            transition: all 0.2s;
+            background: transparent;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: color 0.2s;
             text-decoration: none;
             color: inherit;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
             gap: 1rem;
         }
 
+        .share-item:last-child {
+            border-bottom: none;
+        }
+
         .share-item:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border-color: var(--primary-color);
-            background: #fafaf9;
+            background: transparent;
         }
 
         .item-title {
