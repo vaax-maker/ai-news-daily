@@ -315,7 +315,7 @@
                 {% for article in afternoon_ai %}
                 <li class="article-item">
                     <div class="article-title">
-                        <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+                        <a href="{{ article.link }}" target="_blank" rel="noopener noreferrer">{{ article.title }}</a>
                         {% if article.is_new %}<span class="new-badge">NEW</span>{% endif %}
                     </div>
                     <div class="article-meta">{{ article.source_name }}</div>
@@ -340,7 +340,7 @@
                 {% for article in afternoon_xr %}
                 <li class="article-item">
                     <div class="article-title">
-                        <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+                        <a href="{{ article.link }}" target="_blank" rel="noopener noreferrer">{{ article.title }}</a>
                         {% if article.is_new %}<span class="new-badge">NEW</span>{% endif %}
                     </div>
                     <div class="article-meta">{{ article.source_name }}</div>
@@ -368,7 +368,7 @@
                 {% for article in morning_ai %}
                 <li class="article-item">
                     <div class="article-title">
-                        <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+                        <a href="{{ article.link }}" target="_blank" rel="noopener noreferrer">{{ article.title }}</a>
                     </div>
                     <div class="article-meta">{{ article.source_name }}</div>
                     {% if article.summary_html %}
@@ -392,7 +392,7 @@
                 {% for article in morning_xr %}
                 <li class="article-item">
                     <div class="article-title">
-                        <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+                        <a href="{{ article.link }}" target="_blank" rel="noopener noreferrer">{{ article.title }}</a>
                     </div>
                     <div class="article-meta">{{ article.source_name }}</div>
                     {% if article.summary_html %}
@@ -419,7 +419,7 @@
                 {% for item in gov_items %}
                 <li class="article-item">
                     <div class="article-title">
-                        <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                        <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
                         {% if item.is_new %}<span class="new-badge">NEW</span>{% endif %}
                     </div>
                     <div class="article-meta">
