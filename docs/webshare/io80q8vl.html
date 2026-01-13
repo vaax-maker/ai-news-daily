@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Cowork: AI 에이전트 협업의 새로운 기준</title>
+    <style>
+        /* vaax-theme.css - 외부 제공용 스타일 적용 */
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --line-gray: #9ca3af;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            background-color: #f9fafb;
+        }
+
+        /* 단락 간격 2배 설정 */
+        p {
+            margin-bottom: 2em;
+        }
+
+        h1, h2, h3 {
+            margin-top: 2em;
+            margin-bottom: 1em;
+            color: var(--text-main);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            background: linear-gradient(to right, #f0fdf4, transparent);
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 8px;
+        }
+
+        .meta-info {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--line-gray);
+            padding-bottom: 1rem;
+        }
+
+        .highlight {
+            background-color: #CEFA98;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .timestamp-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .timestamp-link:hover {
+            text-decoration: underline;
+            color: var(--primary-color-hover);
+        }
+
+        .tag-container {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #ecfccb;
+            color: #365314;
+            padding: 5px 12px;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        ul {
+            margin-bottom: 2em;
+        }
+
+        li {
+            margin-bottom: 0.8em;
+        }
+
+        .section-block {
+            margin-bottom: 4rem;
+        }
+        
+        blockquote {
+            background-color: #f3f4f6;
+            border-left: 4px solid var(--primary-color);
+            margin: 1.5em 0;
+            padding: 1em;
+            font-style: italic;
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Claude Cowork: 단순 대화를 넘어선 AI 에이전트 협업</h1>
+
+    <div class="meta-info">
+        <strong>날짜:</strong> 2026년 1월 13일<br>
+        <strong>출처:</strong> Anthropic (Claude Cowork Announcement)<br>
+    </div>
+
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/UAmKyyZ-b9E" title="Claude Cowork Introduction" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="section-block">
+        <h2>1. Cowork의 탄생 배경과 정의</h2>
+        
+        <h3>개발자 도구에서 범용 협업 도구로의 진화</h3>
+        <p>
+            Anthropic은 초기 개발자를 위한 도구인 <span class="highlight">Claude Code</span>를 출시했을 때, 사용자들이 코딩뿐만 아니라 다양한 업무에 이를 활용하는 현상을 목격했습니다. 이러한 사용자 행동 패턴은 개발자가 아닌 일반 사용자들도 Claude와 더 깊이 있는 협업을 원한다는 것을 시사했습니다. 이에 영감을 받아 탄생한 것이 바로 <strong>Cowork</strong>입니다.
+        </p>
+
+        <h3>Cowork란 무엇인가?</h3>
+        <p>
+            Cowork는 Claude Code와 동일한 기술적 기반 위에 구축되었으나, 비개발자 직군도 쉽게 사용할 수 있도록 접근성을 높인 <span class="highlight">연구 프리뷰(Research Preview)</span> 버전입니다. 단순한 채팅 인터페이스를 넘어, 사용자의 컴퓨터 내 특정 폴더에 접근하여 파일을 직접 읽고, 편집하고, 생성할 수 있는 권한을 가집니다. 이는 Claude를 단순한 대화 상대가 아닌, 실질적인 업무를 수행하는 동료(Coworker)로 격상시키는 변화입니다.
+        </p>
+        <p>
+            <a href="https://youtu.be/UAmKyyZ-b9E?t=0" class="timestamp-link" target="_blank">00:00</a> 현재 Claude Max 구독자들은 macOS 앱을 통해 Cowork를 즉시 사용할 수 있으며, 향후 Windows 지원 및 기능 확장이 예정되어 있습니다.
+        </p>
+    </div>
+
+    <hr>
+
+    <div class="section-block">
+        <h2>2. 주요 기능 및 작동 원리</h2>
+
+        <h3>로컬 파일 시스템과의 직접적인 상호작용</h3>
+        <p>
+            기존의 AI 챗봇과 달리, Cowork 환경에서 Claude는 사용자가 지정한 폴더에 대한 접근 권한을 갖습니다. 이를 통해 다음과 같은 구체적인 작업 수행이 가능해집니다.
+        </p>
+        <ul>
+            <li><strong>파일 정리 및 관리:</strong> 다운로드 폴더의 파일을 분석하여 내용을 파악하고, 적절한 이름으로 변경하거나 카테고리별로 정렬할 수 있습니다.</li>
+            <li><strong>문서 생성 및 변환:</strong> 스크린샷 뭉치를 분석하여 엑셀 스프레드시트로 비용 목록을 정리하거나, 흩어진 메모 파일들을 취합하여 보고서 초안을 작성할 수 있습니다.</li>
+        </ul>
+
+        <h3>주체적인 계획 수립과 실행 (Agency)</h3>
+        <p>
+            Cowork의 가장 큰 특징은 Claude가 <span class="highlight">높은 수준의 주체성(Agency)</span>을 발휘한다는 점입니다. 사용자가 목표를 설정하면, Claude는 스스로 계획을 수립하고 단계별로 작업을 수행합니다. 작업 진행 상황은 사용자에게 투명하게 공유되며, 사용자는 Claude가 업무를 수행하는 동안 큐(Queue)에 다음 작업을 미리 쌓아둘 수 있습니다. 이는 턴 방식의 대화가 아닌, 동료에게 업무 지시를 남겨두는 것과 유사한 비동기적 협업 경험을 제공합니다.
+        </p>
+        <p>
+            <a href="https://youtu.be/UAmKyyZ-b9E?t=30" class="timestamp-link" target="_blank">00:30</a> 또한, 사용자가 수동으로 컨텍스트를 제공하거나 결과물을 포맷팅할 필요 없이, Claude가 주도적으로 필요한 정보를 처리하고 결과물을 생성합니다.
+        </p>
+    </div>
+
+    <hr>
+
+    <div class="section-block">
+        <h2>3. 확장된 기능과 통합 환경</h2>
+        
+        <h3>커넥터(Connectors)와 스킬(Skills)</h3>
+        <p>
+            사용자가 기본 기능에 익숙해지면, Cowork의 잠재력을 더욱 끌어올릴 수 있습니다. 기존에 사용하던 커넥터를 통해 외부 정보 소스와 Claude를 연결할 수 있으며, 문서나 프레젠테이션 작성 능력을 향상시키는 초기 스킬 셋(Initial Set of Skills)이 포함되어 있습니다.
+        </p>
+
+        <h3>브라우저 통합 (Claude in Chrome)</h3>
+        <p>
+            Cowork를 Chrome 브라우저의 Claude와 함께 사용하면, 웹 브라우저 접근이 필요한 작업까지 수행 범위를 확장할 수 있습니다. 이는 로컬 파일 작업과 웹 기반 정보 검색 및 처리가 결합된 복합적인 업무 프로세스를 가능하게 합니다.
+        </p>
+    </div>
+
+    <hr>
+
+    <div class="section-block">
+        <h2>4. 보안, 통제 및 안전 수칙</h2>
+
+        <h3>사용자 주도의 통제권</h3>
+        <p>
+            Claude는 사용자가 명시적으로 접근을 허용한 폴더와 커넥터만 볼 수 있습니다. 또한, 중요한 작업을 수행하기 전에는 반드시 사용자의 확인을 요청하도록 설계되어 있어, 사용자가 언제든지 방향을 수정하거나 제어할 수 있습니다.
+        </p>
+
+        <h3>잠재적 위험과 프롬프트 인젝션 방어</h3>
+        <blockquote>
+            주의: 기본적으로 Claude는 지시에 따라 로컬 파일을 삭제하는 등의 파괴적인 행동을 수행할 수 있는 권한을 가질 수 있습니다.
+        </blockquote>
+        <p>
+            AI가 지시를 오해할 가능성이 항상 존재하므로, 사용자는 명확한 가이드라인을 제공해야 합니다. 또한, 인터넷상의 악의적인 콘텐츠가 Claude의 행동을 조작하려는 <span class="highlight">프롬프트 인젝션(Prompt Injections)</span> 시도에 대한 방어 체계가 구축되어 있으나, 에이전트의 물리적 행동에 대한 보안은 여전히 업계의 활발한 연구 분야입니다. 따라서 사용자는 초기 학습 단계에서 각별한 주의를 기울여야 합니다.
+        </p>
+        <p>
+            <a href="https://youtu.be/UAmKyyZ-b9E?t=60" class="timestamp-link" target="_blank">01:00</a> 이 도구는 단순한 대화형 AI를 넘어 실제 행동을 수행하는 도구이므로, 도움말 센터의 가이드를 참고하여 예방 조치를 취하는 것이 권장됩니다.
+        </p>
+    </div>
+
+    <hr>
+
+    <div class="section-block">
+        <h2>5. 향후 로드맵 및 접근 방법</h2>
+        
+        <p>
+            현재 공개된 버전은 사용자의 피드백을 통해 발전하기 위한 초기 연구 프리뷰입니다. Anthropic은 크로스 디바이스 동기화, Windows 버전 출시, 안전성 강화 등 지속적인 업데이트를 계획하고 있습니다. Claude Max 구독자는 macOS 앱의 사이드바에서 Cowork를 활성화하여 즉시 사용할 수 있으며, 다른 플랜 사용자는 대기자 명단에 등록할 수 있습니다.
+        </p>
+    </div>
+
+    <div class="tag-container">
+        <span class="tag">#Claude_Cowork</span>
+        <span class="tag">#AI_Agent</span>
+        <span class="tag">#Productivity</span>
+        <span class="tag">#MacOS</span>
+        <span class="tag">#Automation</span>
+        <span class="tag">#Anthropic</span>
+    </div>
+
+    <footer>
+        2026 Fovea
+    </footer>
+</div>
+
+</body>
+</html>
