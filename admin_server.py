@@ -71,34 +71,21 @@ def extract_title(html_content):
         return None
 
 
-def sanitize_filename(title):
-    """Convert title to safe filename."""
-    if not title:
-        # Generate unique untitled name
-        timestamp = datetime.now().strftime("%Y%m%d")
-        random_suffix = os.urandom(3).hex()
-        return f"untitled-{timestamp}-{random_suffix}"
-    
-    # Convert to lowercase and replace spaces with hyphens
-    filename = title.lower().strip()
-    filename = re.sub(r'\s+', '-', filename)
-    # Remove special characters except hyphens and Korean
-    filename = re.sub(r'[^\w\-\uAC00-\uD7A3]', '', filename)
-    # Remove multiple hyphens
-    filename = re.sub(r'-+', '-', filename)
-    filename = filename.strip('-')
-    
-    return filename if filename else sanitize_filename(None)
+import secrets
+import string
+
+def generate_short_id(length=8):
+    """Generate a random short ID."""
+    alphabet = string.ascii_lowercase + string.digits
+    return ''.join(secrets.choice(alphabet) for _ in range(length))
 
 
-def get_unique_filename(base_filename):
-    """Ensure filename is unique by adding suffix if needed."""
-    filename = base_filename
-    counter = 2
-    while os.path.exists(os.path.join(WEBSHARE_DIR, f"{filename}.html")):
-        filename = f"{base_filename}-{counter}"
-        counter += 1
-    return filename
+def get_unique_filename():
+    """Generate a unique short filename."""
+    while True:
+        filename = generate_short_id()
+        if not os.path.exists(os.path.join(WEBSHARE_DIR, f"{filename}.html")):
+            return filename
 
 
 def load_webshare_index():
@@ -136,10 +123,16 @@ def git_push(message):
             else:
                 return False, f"Commit failed: {result.stderr}"
         
-        # 3. Pull any remote changes (rebase)
-        # This works even if we just committed, as it replays our commit on top of remote
-        subprocess.run(["git", "pull", "--rebase"], cwd=PROJECT_ROOT, check=True, 
-                      capture_output=True, timeout=60)
+        # 3. Pull any remote changes (rebase) with Stash protection
+        # If there are uncommitted changes (though we just committed usually), stash them
+        subprocess.run(["git", "stash"], cwd=PROJECT_ROOT, check=False, capture_output=True)
+        
+        try:
+            subprocess.run(["git", "pull", "--rebase"], cwd=PROJECT_ROOT, check=True, 
+                          capture_output=True, timeout=60)
+        finally:
+            # Always try to pop stash if we stashed something
+            subprocess.run(["git", "stash", "pop"], cwd=PROJECT_ROOT, check=False, capture_output=True)
         
         # 4. Push
         subprocess.run(["git", "push"], cwd=PROJECT_ROOT, check=True, timeout=60)
@@ -188,9 +181,8 @@ def create_webshare():
         title = extract_title(html_content)
         display_title = title or "Untitled Page"
         
-        # Generate safe filename
-        base_filename = sanitize_filename(title)
-        filename = get_unique_filename(base_filename)
+        # Generate unique filename (Random Short ID)
+        filename = get_unique_filename()
         
         # Save HTML file
         filepath = os.path.join(WEBSHARE_DIR, f"{filename}.html")
