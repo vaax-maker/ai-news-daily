@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Google Antigravity 기초: AI 에이전트로 비행 추적 앱 만들기</title>
+<style>
+/* vaax-theme.css - 외부 제공용 */
+:root {
+  --primary-color: #65a30d;
+  --primary-color-hover: #4d7c0f;
+  --secondary-color: #475569;
+  --background-color: #ffffff;
+  --card-bg: #ffffff;
+  --text-main: #111827;
+  --text-muted: #4b5563;
+  --border-color: #d1d5db;
+  --line-gray: #9ca3af;
+}
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--text-main);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+p {
+  margin-bottom: 2em;
+}
+h1, h2, h3, h4, h5, h6 { 
+  margin-top: 2em; 
+  margin-bottom: 1em; 
+}
+.highlight {
+  background-color: #CEFA98;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+  margin-bottom: 2em;
+  border-radius: 8px;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.timestamp-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.timestamp-link:hover {
+  text-decoration: underline;
+  color: var(--primary-color-hover);
+}
+.step-header {
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5em;
+  color: var(--secondary-color);
+}
+footer {
+  margin-top: 4em;
+  padding-top: 1em;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+.tag-container {
+  margin-top: 1em;
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+.tag {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0.2em 0.8em;
+  border-radius: 999px;
+  font-size: 0.8em;
+}
+</style>
+<script>
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '100%',
+      width: '100%',
+      videoId: 'nTOVIGsqCuY',
+      events: {
+        'onReady': onPlayerReady
+      }
+    });
+  }
+
+  function onPlayerReady(event) {
+    // Player is ready
+  }
+
+  function seekTo(seconds) {
+    if (player && player.seekTo) {
+      player.seekTo(seconds, true);
+      player.playVideo();
+    }
+  }
+</script>
+<script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+
+<h1>Google Antigravity 기초: AI 에이전트로 비행 추적 앱 만들기</h1>
+
+<div style="font-size: 0.9em; color: var(--text-muted);">
+  <strong>출처:</strong> Google Antigravity &nbsp;|&nbsp; 
+  <strong>날짜:</strong> 2026-01-16
+</div>
+
+<div class="video-container">
+  <div id="player"></div>
+</div>
+
+<div class="tag-container">
+  <span class="tag">#GoogleAntigravity</span>
+  <span class="tag">#AI코딩</span>
+  <span class="tag">#NextJS</span>
+  <span class="tag">#웹개발핸즈온</span>
+  <span class="tag">#AgenticWorkflow</span>
+</div>
+
+<p>
+  이 가이드는 Google DeepMind의 새로운 개발 도구인 <span class="highlight">Antigravity</span>를 사용하여 처음부터 비행 추적(Flight Tracker) 웹 애플리케이션을 만드는 과정을 다룹니다. 에이전트 매니저, 에디터, 그리고 통합 브라우저를 활용하여 기획부터 배포까지의 워크플로우를 따라해보세요.
+</p>
+
+<h2 class="step-header">1. 시작하기 및 인터페이스 이해</h2>
+
+<h3>로그인 및 설정</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(0)">[00:00]</a> 앱을 실행하고 Google 계정으로 로그인합니다. 테마(라이트/다크 모드)를 설정하면 대시보드로 이동합니다.
+</p>
+
+<h3>주요 인터페이스 3가지</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(45)">[00:45]</a> 작업을 시작하기 전 3가지 핵심 영역을 이해해야 합니다.
+  <br>
+  1. <strong>Agent Manager:</strong> 모든 워크스페이스의 에이전트를 관리하고 생성하는 곳입니다.
+  <br>
+  2. <strong>Editor:</strong> 코드를 직접 수정할 때 사용하며, 탭 자동완성 및 사이드바 기능을 제공합니다. (단축키: Command+E)
+  <br>
+  3. <strong>Browser:</strong> Chrome 기반의 통합 브라우저로, 에이전트가 직접 화면을 보며 테스트를 수행합니다.
+</p>
+
+<h2 class="step-header">2. 프로젝트 생성 및 기본 앱 구축</h2>
+
+<h3>워크스페이스 생성</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(138)">[02:18]</a> 왼쪽 사이드바에서 'Add New Workspace'를 클릭합니다. 'Local' 작업을 선택하고 폴더 이름을 <code>flight-tracker</code>로 지정하여 생성합니다.
+</p>
+
+<h3>초기 프롬프트 입력</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(158)">[02:38]</a> 아래 내용을 참고하여 첫 번째 명령을 내립니다.
+  <br>
+  <em>"사용자가 비행 편명을 입력하면 출발/도착 시간, 타임존, 위치 정보를 보여주는 Next.js 웹 앱을 만들어줘. 지금은 모의(Mock) API를 사용해서 리스트를 보여줘."</em>
+  <br>
+  에이전트 설정을 'Auto'로 해두면 터미널 명령어(예: create-next-app)를 자동으로 수행합니다.
+</p>
+
+<h3>진행 상황 및 아티팩트(Artifacts) 확인</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(216)">[03:36]</a> 오른쪽 사이드바에서 에이전트가 생성한 <span class="highlight">Artifacts</span>(마크다운 문서)를 확인합니다.
+  <br>
+  - <strong>Task List:</strong> 현재 진행 중인 작업 목록
+  <br>
+  - <strong>Implementation Plan:</strong> 코드 작성 전 계획 보고서
+  <br>
+  - <strong>Walkthrough:</strong> 작업 완료 후 검증 리포트 (스크린샷 포함)
+</p>
+
+<h2 class="step-header">3. 앱 테스트 및 검증</h2>
+
+<h3>브라우저 설정 및 자동 테스트</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(306)">[05:06]</a> 코드 생성이 완료되면 'Setup'을 눌러 개발 서버를 실행하고 브라우저 확장을 설치합니다. 에이전트가 통합 브라우저를 열고 자동으로 커서를 움직이며 기능(예: AA123 편명 입력)을 테스트하는 것을 지켜봅니다.
+</p>
+
+<h2 class="step-header">4. 멀티태스킹: 리서치와 디자인 병렬 작업</h2>
+
+<h3>백그라운드 작업 지시</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(365)">[06:05]</a> 메인 홈(Inbox)으로 돌아와 두 가지 작업을 병렬로 지시합니다.
+</p>
+
+<h3>Task A: API 리서치</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(381)">[06:21]</a> 실제 비행 데이터를 얻기 위해 "Aviation Stack API를 조사해줘"라고 요청합니다. API 키가 있다면 함께 제공하여 cURL 테스트까지 수행하도록 합니다.
+</p>
+
+<h3>Task B: 로고 및 디자인 생성</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(403)">[06:43]</a> Nano Banana 모델을 활용해 로고를 만듭니다.
+  <br>
+  <em>"미니멀, 클래식, 캘린더 스타일 등 4가지 로고 시안을 만들어줘. 이걸 파비콘(Favicon)으로 쓸 거야."</em>
+</p>
+
+<h3>결과물 반영</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(447)">[07:27]</a> 생성된 로고 중 마음에 드는 것을 선택하여 파비콘과 사이트 타이틀에 적용하도록 지시합니다. 리서치가 끝난 API 정보(Artifact)를 확인하고, 실제 키를 사용하여 유틸리티 폴더(<code>utils</code>)에 구현하도록 승인합니다.
+</p>
+
+<h2 class="step-header">5. 실제 데이터 연동 (Coding)</h2>
+
+<h3>API 유틸리티 확인</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(591)">[09:51]</a> 에이전트가 생성한 <code>aviationStack.ts</code> 파일이 <code>utils</code> 폴더에 잘 생성되었는지 확인합니다.
+</p>
+
+<h3>코드 리팩토링: Mock 데이터 교체</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(610)">[10:10]</a> 에디터(Editor)로 진입합니다. <code>page.tsx</code> 파일에서 기존의 모의(Mock) 데이터 로직을 삭제합니다.
+  <br>
+  - 에디터의 제안(Tab 키)을 받아 실제 API 데이터 로직으로 교체합니다.
+  <br>
+  - 데이터 타입 정의를 <code>Flight</code>(Mock)에서 <code>AviationStackFlightData</code>(Real)로 변경하고, UI의 관련 변수들도 일괄 수정합니다.
+</p>
+
+<h2 class="step-header">6. 고급 기능 추가: 캘린더 연동</h2>
+
+<h3>기능 추가 요청</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(694)">[11:34]</a> "검색된 비행 정보를 클릭하면 구글 캘린더 일정이 생성되는 링크를 만들어줘"라고 요청합니다.
+</p>
+
+<h3>최종 테스트</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(729)">[12:09]</a> 에이전트가 코드를 수정하고 브라우저에서 직접 클릭 테스트를 수행하는지 확인합니다. 사용자가 직접 브라우저를 열어 실제 편명(예: AA100)을 검색하고 캘린더 등록이 되는지 최종 확인합니다.
+</p>
+
+<h2 class="step-header">7. 마무리 및 배포</h2>
+
+<h3>코드 커밋(Commit)</h3>
+<p>
+  <a class="timestamp-link" onclick="seekTo(793)">[13:13]</a> 에디터 하단의 커밋 버튼을 누릅니다. AI가 작업 내역을 바탕으로 작성한 커밋 메시지를 확인하고 코드를 저장합니다.
+</p>
+
+<footer>
+  2026 Fovea
+</footer>
+
+</body>
+</html>
