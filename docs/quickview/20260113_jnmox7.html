@@ -108,6 +108,66 @@
         margin: 1rem 0;
     }
 
+    /* === CSS OVERRIDES (replacing Shadow DOM isolation) === */
+    /* Hide duplicate titles from injected content */
+    .quickview-body > h1,
+    .quickview-body > .container > h1,
+    .quickview-body > body > .container > h1 {
+        display: none !important;
+    }
+
+    /* Flatten Container/Card styles from injected content */
+    .quickview-body .container,
+    .quickview-body .summary-box {
+        box-shadow: none !important;
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        border-radius: 0 !important;
+    }
+
+    /* Hide internal footer/meta from injected content */
+    .quickview-body > footer,
+    .quickview-body .container > footer,
+    .quickview-body .meta-date,
+    .quickview-body .meta-info {
+        display: none !important;
+    }
+
+    /* Adjust heading styles inside quickview */
+    .quickview-body h2 {
+        font-size: 1.4rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        color: #333;
+    }
+
+    .quickview-body h3 {
+        font-size: 1.15rem;
+        margin-top: 1.2rem;
+        color: #444;
+    }
+
+    /* Tags in injected content */
+    .quickview-body .tag {
+        display: inline-block;
+        background-color: #475569;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        margin-right: 6px;
+        margin-top: 6px;
+    }
+
+    /* Neutralize global body styles that might leak from injected content */
+    .quickview-body body {
+        all: unset;
+        display: block;
+    }
+
     /* === MOBILE RESPONSIVE === */
     @media (max-width: 767px) {
         .quickview-content {
@@ -222,8 +282,8 @@
         <div class="quickview-meta">📅 2026년 01월 13일 16:43</div>
     </div>
 
-    <!-- Raw content container (hidden) -->
-    <template id="quickview-raw-content">
+    <!-- Direct content injection (no Shadow DOM for external script compatibility) -->
+    <div class="quickview-body">
         <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -688,12 +748,10 @@
     </script>
 </body>
 </html>
-    </template>
-
-    <!-- Shadow Wrapper -->
-    <div id="quickview-shadow-host"></div>
-
-    <script>
+    </div>
+</body>
+</html>
+    </template><script>
         document.addEventListener('DOMContentLoaded', function () {
             const rawContent = document.getElementById('quickview-raw-content').content;
             const host = document.getElementById('quickview-shadow-host');
