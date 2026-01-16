@@ -110,9 +110,9 @@
 
     /* === CSS OVERRIDES (replacing Shadow DOM isolation) === */
     /* Hide duplicate titles from injected content */
-    .quickview-body > h1,
-    .quickview-body > .container > h1,
-    .quickview-body > body > .container > h1 {
+    .quickview-body>h1,
+    .quickview-body>.container>h1,
+    .quickview-body>body>.container>h1 {
         display: none !important;
     }
 
@@ -129,8 +129,8 @@
     }
 
     /* Hide internal footer/meta from injected content */
-    .quickview-body > footer,
-    .quickview-body .container > footer,
+    .quickview-body>footer,
+    .quickview-body .container>footer,
     .quickview-body .meta-date,
     .quickview-body .meta-info {
         display: none !important;
@@ -521,202 +521,6 @@ footer {
 </body>
 </html>
     </div>
-<script src="https://www.youtube.com/iframe_api"></script>
-</head>
-<body>
-
-<h1>구글 안티그래비티(Antigravity)로 AWS 서버 구축 및 대시보드 만들기</h1>
-
-<div style="font-size: 0.9em; color: var(--text-muted);">
-  <strong>출처:</strong> 패스트캠퍼스 &nbsp;|&nbsp; 
-  <strong>날짜:</strong> 2026-01-16
-</div>
-
-<div class="video-container">
-  <div id="player"></div>
-</div>
-
-<div class="tag-container">
-  <span class="tag">#GoogleAntigravity</span>
-  <span class="tag">#AWS_Lightsail</span>
-  <span class="tag">#AI코딩</span>
-  <span class="tag">#LAMP스택</span>
-  <span class="tag">#나노바나나</span>
-</div>
-
-<p>
-  이 가이드는 구글의 AI 통합 개발 환경인 <span class="highlight">Antigravity</span>를 사용하여 AWS Lightsail 서버를 구축하고, 코딩 없이 AI 에이전트에게 명령하여 서버 모니터링 대시보드를 배포하는 전체 과정을 다룹니다.
-</p>
-
-<h2 class="step-header">1. 안티그래비티 설치 및 기본 설정</h2>
-
-<h3>다운로드 및 설치</h3>
-<p>
-  <a class="timestamp-link" onclick="seekTo(0)">[00:00]</a> 구글 안티그래비티 홈페이지에서 다운로드 버튼을 눌러 설치를 진행합니다. 설치 옵션은 대부분 기본값(Default)으로 두고 진행하며, 설치 완료 후 구글 계정으로 로그인합니다.
-</p>
-
-<h3>모드 및 모델 설정</h3>
-<p>
-  <a class="timestamp-link" onclick="seekTo(59)">[00:59]</a> <strong>Planning Mode</strong>(계획 모드)와 <strong>Fast Mode</strong>(빠른 실행 모드) 중 선택할 수 있습니다. 오른쪽 패널에서 사용할 AI 모델(Gemini 3, Sonnet, GPT 등)을 변경할 수 있습니다.
-</p>
-
-<h2 class="step-header">2. AWS Lightsail 가상 서버 생성</h2>
-
-<h3>인스턴스 생성하기</h3>
-<p>
-  <a class="timestamp-link" onclick="seekTo(226)">[03:46]</a> AWS Lightsail 콘솔에서 '인스턴스 생성'을 클릭합니다.
-  <br>
-  - <strong>위치:</strong> 서울 (Seoul)
-  <br>
-  - <strong>이미지:</strong> Linux/Unix 플랫폼 선택 후 'Apps + OS'에서 <span class="highlight">LAMP (PHP 8)</span> 선택
-  <br>
-  - <strong>네트워킹:</strong> 듀얼 스택(Dual Stack) 권장
-  <br>
-  - <strong>요금제:</strong> 원하는 사양 선택 (예: 메모리 2GB 플랜)
-</p>
-
-<h3>고정 IP 설정</h3>
-<p>
-  <a class="timestamp-link" onclick="seekTo(443)">[07:23]</a> 인스턴스가 생성되면 '네트워킹' 탭에서 '고정 IP 연결'을 선택하여 IP가 변하지 않도록 설정합니다.
-</p>
-
-<h2 class="step-header">3. 서버 접속 정보 준비</h2>
-
-<h3>접속 키 및 사용자 정보 확인</h3>
-<p>
-  <a class="timestamp-link" onclick="seekTo(499)">[08:19]</a> 안티그래비티가 서버에 접속하기 위해 필요한 4가지 정보를 메모장에 정리합니다.
-  <br>
-  1. <strong>IP 주소:</strong> 할당받은 고정 IP
-  <br>
-  2. <strong>사용자 이름:</strong> <code>bitnami</code> (기본값)
-  <br>
-  3. <strong>접속 키(Key):</strong> 계정 페이지에서 SSH 키(.pem)를 다운로드하고 경로 저장
-  <br>
-  4. <strong>홈 디렉토리:</strong> 웹 파일이 위치할 경로 (보통 <code>htdocs</code> 폴더)
-</p>
-
-<h2 class="step-header">4. AI 에이전트와 서버 연결 (SSH/SCP)</h2>
-
-<h3>작업 폴더 생성 및 연결 테스트</h3>
-<p>
-  <a class="timestamp-link" onclick="seekTo(750)">[12:30]</a> PC에 'test'와 같은 빈 폴더를 만들고 안티그래비티에서 엽니다(Open Folder). 채팅창에 위에서 정리한 4가지 정보를 입력하고 <span class="highlight">"SSH 연결 테스트해줘"</span>라고 명령합니다.
-</p>
-
-<h3>파일 배포 권한 확인</h3>
-<p>
-  <a class="timestamp-link" onclick="seekTo(882)">[14:42]</a> 연결이 성공하면 <span class="highlight">"SCP로 파일 배포 가능한지 확인해줘"</span>라고 명령하여, AI가 직접 파일을 서버에 업로드할 수 있는지 검증합니다. 초록색 체크 표시가 뜨면 준비 완료입니다.
-</p>
-
-<h2 class="step-header">5. 웹 대시보드 만들기 및 배포</h2>
-
-<h3>서버 모니터링 페이지 생성</h3>
-<p>
-  <a class="timestamp-link" onclick="seekTo(941)">[15:41]</a> 다음 프롬프트를 입력하여 실제 기능을 구현합니다.
-  <br>
-  <em>"서버의 실시간 상태를 확인할 수 있는 간단한 대시보드를 만들어서 index.html로 업로드해줘."</em>
-  <br>
-  AI가 HTML과 PHP 코드를 작성하여 서버에 자동으로 업로드합니다. 브라우저 주소창에 서버 IP를 입력하여 결과물을 확인합니다.
-</p>
-
-<h2 class="step-header">6. AI 이미지 생성 및 UI 개선</h2>
-
-<h3>나노 바나나로 스플래시 이미지 생성</h3>
-<p>
-  <a class="timestamp-link" onclick="seekTo(1172)">[19:32]</a> 대시보드 진입 전 보여줄 '스플래시 모달(Splash Modal)' 화면을 만듭니다.
-  <br>
-  <em>"열심히 코딩하는 펭귄과 고양이 이미지를 나노 바나나 모델로 생성해서 스플래시 화면으로 만들어줘."</em>
-  <br>
-  생성된 이미지를 포함한 코드가 자동으로 서버에 반영됩니다.
-</p>
-
-<h3>한글 깨짐 수정 및 최종 확인</h3>
-<p>
-  <a class="timestamp-link" onclick="seekTo(1297)">[21:37]</a> 만약 결과 화면에서 한글이 깨져 보인다면, 깨진 화면을 캡처하여 붙여넣거나 <span class="highlight">"한글이 깨지는데 수정해줘"</span>라고 명령하면 AI가 인코딩을 수정하여 다시 배포합니다.
-</p>
-
-<footer>
-  2026 Fovea
-</footer>
-
-</body>
-</html>
-    </template><script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const rawContent = document.getElementById('quickview-raw-content').content;
-            const host = document.getElementById('quickview-shadow-host');
-
-            // Create Shadow DOM
-            const shadow = host.attachShadow({ mode: 'open' });
-
-            // Clone content
-            shadow.appendChild(rawContent.cloneNode(true));
-
-            // Inject Override Styles causing the layout issues
-            const style = document.createElement('style');
-            style.textContent = `
-                /* Reset Body/HTML defaults if they exist in content */
-                :host {
-                    display: block;
-                    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-                    line-height: 1.6;
-                    color: var(--text-main, #111827);
-                }
-                body {
-                    margin: 0;
-                    padding: 0;
-                    background: transparent !important;
-                    font-family: inherit;
-                }
-                
-                /* Hide duplicate titles */
-                h1 { display: none !important; }
-                
-                /* Flatten Container/Card styles */
-                .container, .card, .summary-box {
-                    box-shadow: none !important;
-                    border: none !important;
-                    background: transparent !important;
-                    padding: 0 !important;
-                    margin: 0 !important;
-                    max-width: 100% !important;
-                    border-radius: 0 !important;
-                }
-                
-                /* Adjust headings inside */
-                h2 { 
-                    font-size: 1.4rem; 
-                    margin-top: 1.5rem; 
-                    margin-bottom: 1rem;
-                    color: #333;
-                }
-                h3 {
-                    font-size: 1.15rem;
-                    margin-top: 1.2rem;
-                    color: #444;
-                }
-                
-                /* Hide internal footer/meta */
-                footer, .meta-date { display: none !important; }
-                
-                /* Links */
-                a { color: #65a30d; text-decoration: none; }
-                a:hover { text-decoration: underline; }
-                
-                /* Tags */
-                .tag {
-                    display: inline-block;
-                    background-color: #475569;
-                    color: white;
-                    padding: 4px 10px;
-                    border-radius: 15px;
-                    font-size: 0.8rem;
-                    margin-right: 6px;
-                    margin-top: 6px;
-                }
-            `;
-            shadow.appendChild(style);
-        });
-    </script>
 
     <div class="quickview-actions">
         <a href="index.html" class="back-link">← 퀵뷰 목록으로</a>

@@ -110,9 +110,9 @@
 
     /* === CSS OVERRIDES (replacing Shadow DOM isolation) === */
     /* Hide duplicate titles from injected content */
-    .quickview-body > h1,
-    .quickview-body > .container > h1,
-    .quickview-body > body > .container > h1 {
+    .quickview-body>h1,
+    .quickview-body>.container>h1,
+    .quickview-body>body>.container>h1 {
         display: none !important;
     }
 
@@ -129,8 +129,8 @@
     }
 
     /* Hide internal footer/meta from injected content */
-    .quickview-body > footer,
-    .quickview-body .container > footer,
+    .quickview-body>footer,
+    .quickview-body .container>footer,
     .quickview-body .meta-date,
     .quickview-body .meta-info {
         display: none !important;
