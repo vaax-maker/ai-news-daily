@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>구글 제미나이3 슈퍼젬스(Super Gems) 완벽 활용 가이드</title>
+<style>
+/* vaax-theme.css - 외부 제공용 스타일 적용 */
+:root {
+  --primary-color: #65a30d;
+  --primary-color-hover: #4d7c0f;
+  --secondary-color: #475569;
+  --background-color: #ffffff;
+  --card-bg: #ffffff;
+  --text-main: #111827;
+  --text-muted: #4b5563;
+  --border-color: #d1d5db;
+  --line-gray: #9ca3af;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--text-main);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+p {
+  margin-bottom: 2em;
+}
+
+h1, h2, h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  color: var(--text-main);
+}
+
+h1 {
+  font-size: 2.2em;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 10px;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: var(--primary-color);
+  border-left: 5px solid var(--primary-color);
+  padding-left: 10px;
+}
+
+h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.highlight {
+  background-color: #CEFA98;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.timestamp-link {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-size: 0.9em;
+  border: 1px solid var(--border-color);
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 8px;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.timestamp-link:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 비율 */
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.info-box {
+  background-color: #f3f4f6;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  font-size: 0.95em;
+  color: var(--text-muted);
+}
+
+.step-box {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: var(--card-bg);
+}
+
+ul {
+  margin-bottom: 2em;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 0.8em;
+}
+
+footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-gray);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+/* 태그 스타일 */
+.tags {
+  margin-top: 10px;
+}
+.tag {
+  display: inline-block;
+  background-color: #e5e7eb;
+  color: var(--text-muted);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  margin-right: 5px;
+}
+</style>
+</head>
+<body>
+
+  <h1>구글 제미나이3 '슈퍼 젬스' 사용법: 1분 업무 자동화</h1>
+  
+  <div class="info-box">
+    <strong>출처:</strong> 잘 파는 청년 [네이버플레이스 전문가] (YouTube)<br>
+    <strong>작업 일시:</strong> 2026년 1월 17일<br>
+    <strong>설명:</strong> 구글 제미나이(Gemini)의 'Gems' 기능을 활용하여 복잡한 업무(블로그 작성, 분석 등)를 자동화하는 '에이전트' 구축 방법을 단계별로 안내합니다.
+    <div class="tags">
+      <span class="tag">#구글제미나이</span>
+      <span class="tag">#슈퍼젬스</span>
+      <span class="tag">#업무자동화</span>
+      <span class="tag">#AI에이전트</span>
+      <span class="tag">#블로그마케팅</span>
+    </div>
+  </div>
+
+  <div class="video-container">
+    <div id="player"></div>
+  </div>
+
+  <h2>1. 슈퍼 젬스(Super Gems)란?</h2>
+  <div class="step-box">
+    <p>
+      기존의 AI 챗봇이 단순한 대화형이었다면, 슈퍼 젬스는 <span class="highlight">실행형 에이전트</span>입니다. 사용자가 목표를 제시하면 AI가 스스로 필요한 단계(워크플로우)를 설계하고 순서대로 작업을 처리합니다. 예를 들어 경쟁사 분석 시 '조사-분석-비교-전략수립' 과정을 한 번에 수행할 수 있습니다.
+      <a class="timestamp-link" onclick="seekTo(82)">[00:01:22] 설명 보기</a>
+    </p>
+  </div>
+
+  <h2>2. 기본 젬(Gem) 생성 및 테스트</h2>
+  <div class="step-box">
+    <h3>Step 1: 젬(Gems) 메뉴 접근</h3>
+    <p>
+      구글 제미나이 홈페이지 왼쪽 메뉴에서 <strong>'Gems(젬스)'</strong>를 클릭하고 <strong>'New Gem'</strong>을 선택합니다.
+      <a class="timestamp-link" onclick="seekTo(140)">[00:02:20] 화면 보기</a>
+    </p>
+
+    <h3>Step 2: 주제 입력 및 자동 생성</h3>
+    <p>
+      원하는 작업 주제(예: <span class="highlight">네이버 블로그 자동화</span>)를 입력하면 AI가 자동으로 워크플로우를 기획합니다.
+      <a class="timestamp-link" onclick="seekTo(166)">[00:02:46] 입력 예시</a>
+    </p>
+
+    <h3>Step 3: 언어 설정 (중요)</h3>
+    <p>
+      생성된 젬이 영어로 답변할 경우, 설정(Edit) 메뉴로 들어가 지시사항(Instructions)에 <strong>"모든 시스템 메시지와 결과물은 한국어로 출력하라"</strong>는 문구를 추가해야 합니다.
+      <a class="timestamp-link" onclick="seekTo(228)">[00:03:48] 한국어 설정</a>
+    </p>
+  </div>
+
+  <h2>3. 고품질 자동화: '워크플로우' 직접 설계하기</h2>
+  <div class="step-box">
+    <p>
+      단순히 주제만 입력해서 만든 젬은 퀄리티가 낮을 수 있습니다. <strong>고품질 결과물</strong>을 얻기 위해 먼저 제미나이(Pro 버전 추천)에게 완벽한 워크플로우를 짜달라고 요청한 뒤, 이를 젬에 적용하는 방법입니다.
+      <a class="timestamp-link" onclick="seekTo(300)">[00:05:00] 심화 과정 시작</a>
+    </p>
+
+    <h3>Step 1: 프롬프트 설계 요청</h3>
+    <p>
+      제미나이 채팅창에 다음과 같이 구체적으로 요청하여 워크플로우를 받습니다.<br>
+      <em>"네이버 블로그 상위 노출을 위한 글 작성 워크플로우를 구성해줘. 키워드, 강조 내용 등을 입력받고, 검색 의도 파악-제목 작성-아웃라인-본문 초안-SEO 해시태그 순으로 진행해줘."</em>
+      <a class="timestamp-link" onclick="seekTo(428)">[00:07:08] 프롬프트 입력</a>
+    </p>
+
+    <h3>Step 2: 워크플로우 복사 및 새 젬 생성</h3>
+    <p>
+      제미나이가 짜준 상세한 단계별 프롬프트(1단계~5단계 등)를 복사합니다. 다시 <strong>'New Gem'</strong>을 만들고 지시사항(Instructions)에 복사한 내용을 붙여넣습니다. 이때 "결과물은 한국어로 출력" 문구를 반드시 포함합니다.
+      <a class="timestamp-link" onclick="seekTo(504)">[00:08:24] 상세 설정 적용</a>
+    </p>
+  </div>
+
+  <h2>4. 실전 활용 및 결과 확인</h2>
+  <div class="step-box">
+    <h3>Step 1: 완성된 젬 실행</h3>
+    <p>
+      완성된 젬 앱을 실행(Start)하고 필요한 정보(키워드, 타겟, 강조점)를 입력합니다.<br>
+      예시: 키워드 '청주 피부관리', 타겟 '2030 여성', 강조 '웨딩케어'
+      <a class="timestamp-link" onclick="seekTo(561)">[00:09:21] 실행 예시</a>
+    </p>
+
+    <h3>Step 2: 결과물 분석</h3>
+    <p>
+      SEO 분석 보고서, 타겟 독자 분석, 차별화 전략, 그리고 실제 블로그 원고 초안과 해시태그까지 한 번에 출력되는 것을 확인합니다.
+      <a class="timestamp-link" onclick="seekTo(604)">[00:10:04] 결과 확인</a>
+    </p>
+  </div>
+
+  <h2>5. 팁: 활용 아이디어 얻기</h2>
+  <div class="step-box">
+    <p>
+      어떻게 활용할지 막막하다면 제미나이에게 직접 물어보세요.<br>
+      <em>"나는 분식집 사장인데 슈퍼 젬스를 활용할 수 있는 사례 30가지를 알려줘."</em><br>
+      마케팅, 알바 채용 공고, 매장 BGM 리스트 등 다양한 아이디어를 얻을 수 있습니다.
+      <a class="timestamp-link" onclick="seekTo(675)">[00:11:15] 활용법 질문하기</a>
+    </p>
+  </div>
+
+  <footer>
+    2026 Fovea
+  </footer>
+
+  <script>
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '450',
+        width: '100%',
+        videoId: 'HFFFokfO5Js',
+        playerVars: {
+          'playsinline': 1,
+          'rel': 0
+        }
+      });
+    }
+
+    function seekTo(seconds) {
+      if (player && player.seekTo) {
+        player.seekTo(seconds, true);
+        player.playVideo();
+        
+        // 부드러운 스크롤 이동 (플레이어로)
+        document.querySelector('.video-container').scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }
+    }
+  </script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>
