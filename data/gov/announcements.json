@@ -1243,7 +1243,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년도 차세대 유망 Seed 기술실용화  패스트트랙 사업 (유형1) 신규과제 공모",
@@ -1257,7 +1257,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년도 어린이 과학체험공간 확충지원 사업 공고",
@@ -1271,7 +1271,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2025-17호 성결대학교 마이크로 데이터센터 구축 및 활용 타당성 조사연구 용역",
@@ -1285,7 +1285,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "2026-01-20 14:00:00",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년도 『K-Lab 우즈베키스탄 협력 지원사업』 수행기관 모집공고",
@@ -1299,7 +1299,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026시즌 kt wiz 뉴미디어 콘텐츠 제작 및 운영",
@@ -1313,7 +1313,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "2026-01-23 15:00:00",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 상반기 병역지정업체(중소 기업부설연구소) 선정 신청 공고",
@@ -1327,6 +1327,6 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   }
 ]
