@@ -814,10 +814,13 @@ def main():
         except Exception as e:
             print(f"[Quickview] Error loading quickview data: {e}")
         
+        # Ensure gov data is sorted by date (newest first) before display
+        gov_sorted = sort_gov_announcements(dashboard_data.get("gov", []))
+        
         dash_html = render_dashboard(
             ai_latest=dashboard_data.get("ai", [])[:5],
             xr_latest=dashboard_data.get("xr", [])[:5],
-            gov_latest=dashboard_data.get("gov", [])[:5],
+            gov_latest=gov_sorted[:5],
             quickview_latest=quickview_latest,
             section_links=dashboard_data.get("links", {}),
             last_updated=news_update_time
