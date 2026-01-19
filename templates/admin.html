@@ -867,10 +867,40 @@
         return `📄 ${title}\n\n${summary}\n\n👉 ${pageUrl}`;
     }
 
+    // Extract body content from full HTML document (prevents nested HTML issues)
+    function extractBodyContent(html) {
+        // If the HTML contains DOCTYPE or full document structure, extract only body content
+        if (!html.includes('<!DOCTYPE') && !html.includes('<html') && !html.includes('<body')) {
+            return html; // Already just content, return as-is
+        }
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Get body content
+        const body = doc.body;
+        if (!body) return html;
+
+        // Also extract any styles from head (important for styling)
+        const headStyles = doc.head ? doc.head.querySelectorAll('style') : [];
+        let styles = '';
+        headStyles.forEach(style => {
+            styles += style.outerHTML + '\n';
+        });
+
+        // Return styles + body innerHTML
+        const content = styles + body.innerHTML;
+        console.log('[Quickview] Extracted body content from full HTML document');
+        return content.trim();
+    }
+
     // Create quickview page
     async function createQuickview(sendTelegram = false) {
         const title = quickviewTitle.value.trim();
-        const html = quickviewHtml.value.trim();
+        const rawHtml = quickviewHtml.value.trim();
+
+        // Extract only body content to prevent nested HTML issues (fixes YouTube embed)
+        const html = extractBodyContent(rawHtml);
 
         if (!title || !html) {
             alert('제목과 HTML 본문을 모두 입력해주세요.');
