@@ -45,26 +45,38 @@ class TitleExtractor(HTMLParser):
     def __init__(self):
         super().__init__()
         self.in_title = False
+        self.in_h1 = False
         self.title = ""
+        self.h1 = ""
     
     def handle_starttag(self, tag, attrs):
         if tag.lower() == "title":
             self.in_title = True
+        elif tag.lower() == "h1":
+            self.in_h1 = True
     
     def handle_endtag(self, tag):
         if tag.lower() == "title":
             self.in_title = False
+        elif tag.lower() == "h1":
+            self.in_h1 = False
     
     def handle_data(self, data):
         if self.in_title:
             self.title += data
+        if self.in_h1 and not self.h1:  # Only capture first h1
+            self.h1 += data
 
 
 def extract_title(html_content):
-    """Extract title from HTML, return 'untitled' if not found."""
+    """Extract title from HTML. Prefer h1 over title tag for actual content title."""
     parser = TitleExtractor()
     try:
         parser.feed(html_content)
+        # Prefer h1 (actual content title) over title tag (document title)
+        h1_title = parser.h1.strip()
+        if h1_title:
+            return h1_title
         title = parser.title.strip()
         return title if title else None
     except:
