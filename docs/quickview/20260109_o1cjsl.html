@@ -1,21 +1,24 @@
 <!DOCTYPE html>
+<html lang='ko'>
 
-<html lang="ko">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>[Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 &amp; 이메일 연동 사이트 만들기 - 퀵뷰</title>
-<!-- Google tag (gtag.js) -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9YQY3DLR0P"></script>
-<script>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>[Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 & 이메일 연동 사이트 만들기 - 퀵뷰</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YQY3DLR0P"></script>
+    <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'G-9YQY3DLR0P');
     </script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;family=Pretendard:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="../static/css/style.css?v=12" rel="stylesheet"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css?v=12">
+    
 <style>
     .quickview-content {
         background: var(--card-bg);
@@ -225,47 +228,69 @@
         }
     }
 </style>
+
 </head>
+
 <body>
-<header>
-<div class="gnb">
-<!-- Left: Logo -->
-<a class="logo-link" href="../index.html">
-<img alt="VAAX" class="header-logo" src="../static/images/logo_new.png?v=4"/>
-</a>
-<!-- Right: Slogan & Nav -->
-<div class="header-right-section">
-<div class="slogan-container">
-<span class="slogan-since">since 2016</span>
-<span class="header-slogan-text">
+    <header>
+        <div class="gnb">
+            <!-- Left: Logo -->
+            <a href="../index.html" class="logo-link">
+                <img src="../static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
+            </a>
+
+            <!-- Right: Slogan & Nav -->
+            <div class="header-right-section">
+                <div class="slogan-container">
+                    <span class="slogan-since">since 2016</span>
+                    <span class="header-slogan-text">
                         VR-AR-AI-XR <span class="slogan-highlight">기술과 Biz.를 연결하는</span>
                         성장나눔 <span class="slogan-highlight">커뮤니티</span>
-</span>
-</div>
-<nav class="nav-links">
-<a class="" href="../index.html">Home</a>
-<a class="" href="../ai/index.html">AI/XR뉴스</a>
-<a class="active" href="../quickview/index.html">퀵뷰</a>
-<a class="" href="../gov/index.html">정부과제</a>
-<a class="" href="../members/index.html">회원사소식</a>
-<a class="" href="../board/index.html">Small Talk</a>
-</nav>
-</div>
-</div>
-<!-- Announcement Message -->
-<div class="header-announcement" style="display: flex; justify-content: center; align-items: center; gap: 15px;">
-<span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
-<a href="../guide.html" style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
-</div>
-</header>
-<div class="container">
+                    </span>
+                </div>
+                <nav class="nav-links">
+                    <a href="../index.html"
+                        class="">Home</a>
+                    <a href="../ai/index.html"
+                        class="">AI/XR뉴스</a>
+                    <a href="../quickview/index.html"
+                        class="active">퀵뷰</a>
+                    <a href="../gov/index.html"
+                        class="">정부과제</a>
+                    <a href="../members/index.html"
+                        class="">회원사소식</a>
+                    <a href="../board/index.html"
+                        class="">Small Talk</a>
+
+                </nav>
+            </div>
+        </div>
+        <!-- Announcement Message -->
+        <div class="header-announcement"
+            style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
+            <a href="../guide.html"
+                style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
 <div class="quickview-content">
-<div class="quickview-header">
-<h1 class="quickview-title">[Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 &amp; 이메일 연동 사이트 만들기</h1>
-<div class="quickview-meta">📅 2026년 01월 09일 12:44</div>
-</div>
-<!-- Direct content injection (no Shadow DOM for external script compatibility) -->
-<div class="quickview-body"><style>
+    <div class="quickview-header">
+        <h1 class="quickview-title">[Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 & 이메일 연동 사이트 만들기</h1>
+        <div class="quickview-meta">📅 2026년 01월 09일 12:44</div>
+    </div>
+
+    <!-- Direct content injection (no Shadow DOM for external script compatibility) -->
+    <div class="quickview-body">
+        <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 & 이메일 연동 사이트 만들기</title>
+    <style>
         /* vaax-theme.css - 외부 제공용 */
         :root {
             --primary-color: #65a30d;
@@ -394,87 +419,110 @@
             color: var(--text-main);
         }
     </style>
-<header>
-<h1>[Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 &amp; 이메일 연동 사이트 만들기</h1>
-<div class="meta-info">
+</head>
+<body>
+
+    <header>
+        <h1>[Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 & 이메일 연동 사이트 만들기</h1>
+        <div class="meta-info">
             작성일시: 2026년 01월 09일 12:40 PM
         </div>
-</header>
-<main>
-<div class="video-container">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/qoFFrrUhXCU" title="YouTube video player"></iframe>
-</div>
-<p>이 가이드는 코딩 지식이 없는 초보자가 AI 툴인 <strong>Lovable</strong>을 사용하여 데크 시공 견적 계산기가 포함된 전문가 웹사이트를 만들고, 실제 이메일 문의까지 받을 수 있도록 구현하는 과정을 다룹니다.</p>
-<h2>1. 준비 및 기본 사이트 생성</h2>
-<p>ChatGPT를 활용하여 구체적인 프롬프트를 작성하고 Lovable에서 사이트 초안을 생성합니다.</p>
-<ul>
-<li><strong>Lovable 가입:</strong> Lovable 웹사이트(lovable.dev)에 접속하여 구글 계정 등으로 가입 및 로그인합니다. <span class="timestamp">[00:02:18]</span></li>
-<li><strong>ChatGPT로 프롬프트 작성:</strong> ChatGPT에게 만들고 싶은 사이트(예: 데크 시공 전문가 사이트)에 대해 설명하고 <span class="highlight">Lovable용 영문 프롬프트</span>를 작성해달라고 요청합니다. <span class="timestamp">[00:02:52]</span></li>
-<li><strong>사이트 생성:</strong> ChatGPT가 생성한 영문 프롬프트를 Lovable 입력창에 붙여넣고 실행하여 사이트 초안을 만듭니다. <span class="timestamp">[00:03:54]</span></li>
-</ul>
-<h2>2. 사이트 편집 (수동 및 AI)</h2>
-<p>생성된 사이트의 텍스트, 레이아웃, 이미지를 수정합니다.</p>
-<ul>
-<li><strong>텍스트 편집 모드:</strong> 왼쪽 하단 <strong>Edit</strong> 버튼을 눌러 요소를 선택합니다. 텍스트 수정, 마진(Margin)/패딩(Padding) 조절, 폰트 스타일 변경이 가능합니다. <span class="timestamp">[00:04:51]</span></li>
-<li><strong>AI 편집 (채팅):</strong> 수정하고 싶은 이미지를 업로드하고 "배경 이미지를 이걸로 바꿔줘"라고 요청하거나, 특정 섹션을 선택 후 "내용을 ~게 변경해줘"라고 채팅으로 요청합니다. <span class="timestamp">[00:06:36]</span></li>
-<li><strong>팁:</strong> AI 크레딧 절약을 위해 한 번의 메시지에 여러 수정 요청사항(이미지 변경 + 텍스트 변경 등)을 묶어서 보냅니다. <span class="timestamp">[00:08:23]</span></li>
-</ul>
-<h2>3. 고급 기능: 견적 계산기 추가</h2>
-<p>단순 정보 제공을 넘어, 사용자 인터랙션이 가능한 기능을 추가합니다.</p>
-<ul>
-<li><strong>기능 기획:</strong> ChatGPT에게 "Lovable에서 사용할 기능 추가 프롬프트를 작성해줘"라고 요청합니다. (예: 색상 선택 시 이미지 변경, 면적 입력 시 가격 자동 계산, 견적 요청 버튼 클릭 시 폼에 데이터 자동 입력 등) <span class="timestamp">[00:10:45]</span></li>
-<li><strong>기능 구현:</strong> 완성된 프롬프트를 Lovable 채팅창에 입력하여 계산기 섹션을 생성합니다. <span class="timestamp">[00:12:09]</span></li>
-<li><strong>동작 확인:</strong> 색상 변경에 따른 이미지 변화, 면적에 따른 가격 계산, '견적 요청' 버튼 클릭 시 하단 문의 폼으로 데이터가 이동하는지 확인합니다.</li>
-</ul>
-<h2>4. 데이터베이스 연동 (Supabase)</h2>
-<p>회원가입, 데이터 저장, 추후 이메일 기능을 위한 백엔드 데이터베이스를 연결합니다.</p>
-<ul>
-<li><strong>Supabase 설정:</strong> 구글에서 <strong>Supabase</strong> 검색 후 가입합니다. 'New Project'를 생성하고 이름, 비밀번호, Region(한국 근처)을 설정합니다. <span class="timestamp">[00:13:08]</span></li>
-<li><strong>Lovable 연동:</strong> Lovable에서 왼쪽 상단 아이콘 -&gt; <strong>Settings</strong> -&gt; <strong>Supabase</strong> -&gt; <strong>Connect Supabase</strong>를 클릭하여 방금 만든 프로젝트를 연결합니다. <span class="timestamp">[00:14:21]</span></li>
-</ul>
-<h2>5. 이메일 발송 기능 연동 (Resend)</h2>
-<p>고객이 견적 요청 폼을 제출하면 관리자에게 이메일이 오도록 설정합니다.</p>
-<ul>
-<li><strong>Resend API 발급:</strong> <strong>Resend</strong> 사이트에 가입 후 <strong>API Keys</strong> 메뉴에서 'Create API Key'를 클릭합니다. 권한은 'Sending access'로 설정하고 생성된 키를 복사합니다. <span class="timestamp">[00:15:36]</span></li>
-<li><strong>이메일 기능 구현:</strong> Lovable 채팅창에 <span class="highlight">"견적 요청 폼 제출 시 관리자 이메일로 발송되게 해줘. Resend 기능을 써줘"</span>라고 입력합니다. <span class="timestamp">[00:16:43]</span></li>
-<li><strong>API 키 입력:</strong> Lovable이 API 키를 요청하면 복사한 Resend 키를 붙여넣습니다. (무료 플랜은 본인 계정 이메일로만 발송 가능)</li>
-</ul>
-<h2>6. 테스트 및 배포</h2>
-<ul>
-<li><strong>최종 테스트:</strong> 웹사이트에서 실제 고객처럼 색상을 고르고, 면적을 입력한 뒤 견적 요청 버튼을 누릅니다.</li>
-<li><strong>이메일 확인:</strong> 설정한 관리자 이메일로 고객의 요청 정보가 들어왔는지 확인합니다. <span class="timestamp">[00:17:39]</span></li>
-<li><strong>배포 (Publish):</strong> 우측 상단 <strong>Publish</strong> 버튼을 눌러 사이트를 웹에 공개합니다. 메타데이터(아이콘, 제목, 썸네일)를 설정할 수 있습니다. <span class="timestamp">[00:08:44]</span></li>
-</ul>
-<div class="hashtag-container">
-<span class="hashtag">#Lovable</span>
-<span class="hashtag">#AI웹사이트빌더</span>
-<span class="hashtag">#노코드</span>
-<span class="hashtag">#Supabase</span>
-<span class="hashtag">#Resend</span>
-<span class="hashtag">#웹개발</span>
-<span class="hashtag">#자동견적산출</span>
-</div>
-</main>
-<footer class="footer">
+    </header>
+
+    <main>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/qoFFrrUhXCU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <p>이 가이드는 코딩 지식이 없는 초보자가 AI 툴인 <strong>Lovable</strong>을 사용하여 데크 시공 견적 계산기가 포함된 전문가 웹사이트를 만들고, 실제 이메일 문의까지 받을 수 있도록 구현하는 과정을 다룹니다.</p>
+
+        <h2>1. 준비 및 기본 사이트 생성</h2>
+        <p>ChatGPT를 활용하여 구체적인 프롬프트를 작성하고 Lovable에서 사이트 초안을 생성합니다.</p>
+        <ul>
+            <li><strong>Lovable 가입:</strong> Lovable 웹사이트(lovable.dev)에 접속하여 구글 계정 등으로 가입 및 로그인합니다. <span class="timestamp">[00:02:18]</span></li>
+            <li><strong>ChatGPT로 프롬프트 작성:</strong> ChatGPT에게 만들고 싶은 사이트(예: 데크 시공 전문가 사이트)에 대해 설명하고 <span class="highlight">Lovable용 영문 프롬프트</span>를 작성해달라고 요청합니다. <span class="timestamp">[00:02:52]</span></li>
+            <li><strong>사이트 생성:</strong> ChatGPT가 생성한 영문 프롬프트를 Lovable 입력창에 붙여넣고 실행하여 사이트 초안을 만듭니다. <span class="timestamp">[00:03:54]</span></li>
+        </ul>
+
+        <h2>2. 사이트 편집 (수동 및 AI)</h2>
+        <p>생성된 사이트의 텍스트, 레이아웃, 이미지를 수정합니다.</p>
+        <ul>
+            <li><strong>텍스트 편집 모드:</strong> 왼쪽 하단 <strong>Edit</strong> 버튼을 눌러 요소를 선택합니다. 텍스트 수정, 마진(Margin)/패딩(Padding) 조절, 폰트 스타일 변경이 가능합니다. <span class="timestamp">[00:04:51]</span></li>
+            <li><strong>AI 편집 (채팅):</strong> 수정하고 싶은 이미지를 업로드하고 "배경 이미지를 이걸로 바꿔줘"라고 요청하거나, 특정 섹션을 선택 후 "내용을 ~게 변경해줘"라고 채팅으로 요청합니다. <span class="timestamp">[00:06:36]</span></li>
+            <li><strong>팁:</strong> AI 크레딧 절약을 위해 한 번의 메시지에 여러 수정 요청사항(이미지 변경 + 텍스트 변경 등)을 묶어서 보냅니다. <span class="timestamp">[00:08:23]</span></li>
+        </ul>
+
+        <h2>3. 고급 기능: 견적 계산기 추가</h2>
+        <p>단순 정보 제공을 넘어, 사용자 인터랙션이 가능한 기능을 추가합니다.</p>
+        <ul>
+            <li><strong>기능 기획:</strong> ChatGPT에게 "Lovable에서 사용할 기능 추가 프롬프트를 작성해줘"라고 요청합니다. (예: 색상 선택 시 이미지 변경, 면적 입력 시 가격 자동 계산, 견적 요청 버튼 클릭 시 폼에 데이터 자동 입력 등) <span class="timestamp">[00:10:45]</span></li>
+            <li><strong>기능 구현:</strong> 완성된 프롬프트를 Lovable 채팅창에 입력하여 계산기 섹션을 생성합니다. <span class="timestamp">[00:12:09]</span></li>
+            <li><strong>동작 확인:</strong> 색상 변경에 따른 이미지 변화, 면적에 따른 가격 계산, '견적 요청' 버튼 클릭 시 하단 문의 폼으로 데이터가 이동하는지 확인합니다.</li>
+        </ul>
+
+        <h2>4. 데이터베이스 연동 (Supabase)</h2>
+        <p>회원가입, 데이터 저장, 추후 이메일 기능을 위한 백엔드 데이터베이스를 연결합니다.</p>
+        <ul>
+            <li><strong>Supabase 설정:</strong> 구글에서 <strong>Supabase</strong> 검색 후 가입합니다. 'New Project'를 생성하고 이름, 비밀번호, Region(한국 근처)을 설정합니다. <span class="timestamp">[00:13:08]</span></li>
+            <li><strong>Lovable 연동:</strong> Lovable에서 왼쪽 상단 아이콘 -> <strong>Settings</strong> -> <strong>Supabase</strong> -> <strong>Connect Supabase</strong>를 클릭하여 방금 만든 프로젝트를 연결합니다. <span class="timestamp">[00:14:21]</span></li>
+        </ul>
+
+        <h2>5. 이메일 발송 기능 연동 (Resend)</h2>
+        <p>고객이 견적 요청 폼을 제출하면 관리자에게 이메일이 오도록 설정합니다.</p>
+        <ul>
+            <li><strong>Resend API 발급:</strong> <strong>Resend</strong> 사이트에 가입 후 <strong>API Keys</strong> 메뉴에서 'Create API Key'를 클릭합니다. 권한은 'Sending access'로 설정하고 생성된 키를 복사합니다. <span class="timestamp">[00:15:36]</span></li>
+            <li><strong>이메일 기능 구현:</strong> Lovable 채팅창에 <span class="highlight">"견적 요청 폼 제출 시 관리자 이메일로 발송되게 해줘. Resend 기능을 써줘"</span>라고 입력합니다. <span class="timestamp">[00:16:43]</span></li>
+            <li><strong>API 키 입력:</strong> Lovable이 API 키를 요청하면 복사한 Resend 키를 붙여넣습니다. (무료 플랜은 본인 계정 이메일로만 발송 가능)</li>
+        </ul>
+
+        <h2>6. 테스트 및 배포</h2>
+        <ul>
+            <li><strong>최종 테스트:</strong> 웹사이트에서 실제 고객처럼 색상을 고르고, 면적을 입력한 뒤 견적 요청 버튼을 누릅니다.</li>
+            <li><strong>이메일 확인:</strong> 설정한 관리자 이메일로 고객의 요청 정보가 들어왔는지 확인합니다. <span class="timestamp">[00:17:39]</span></li>
+            <li><strong>배포 (Publish):</strong> 우측 상단 <strong>Publish</strong> 버튼을 눌러 사이트를 웹에 공개합니다. 메타데이터(아이콘, 제목, 썸네일)를 설정할 수 있습니다. <span class="timestamp">[00:08:44]</span></li>
+        </ul>
+
+        <div class="hashtag-container">
+            <span class="hashtag">#Lovable</span>
+            <span class="hashtag">#AI웹사이트빌더</span>
+            <span class="hashtag">#노코드</span>
+            <span class="hashtag">#Supabase</span>
+            <span class="hashtag">#Resend</span>
+            <span class="hashtag">#웹개발</span>
+            <span class="hashtag">#자동견적산출</span>
+        </div>
+    </main>
+
+    <footer class="footer">
         2026 Fovea
     </footer>
+
+</body>
+</html>
+    </div>
+
+    <div class="quickview-actions">
+        <a href="index.html" class="back-link">← 퀵뷰 목록으로</a>
+        <div style="flex: 1;"></div>
+        <a href="../board/index.html?mode=discuss&title=%5BHands-On%5D%20Lovable%3A%20AI%20%EC%9B%B9%EC%82%AC%EC%9D%B4%ED%8A%B8%20%EB%B9%8C%EB%8D%94%EB%A1%9C%20%EA%B2%AC%EC%A0%81%20%EA%B3%84%EC%82%B0%EA%B8%B0%20%26%20%EC%9D%B4%EB%A9%94%EC%9D%BC%20%EC%97%B0%EB%8F%99%20%EC%82%AC%EC%9D%B4%ED%8A%B8%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https%3A//vaax-maker.github.io/ai-news-daily/quickview/20260109_o1cjsl.html&source=퀵뷰"
+            class="discuss-btn-sm">토론</a>
+        <button type="button" class="discuss-btn-sm"
+            onclick="navigator.clipboard.writeText('https://vaax-maker.github.io/ai-news-daily/quickview/20260109_o1cjsl.html'); alert('URL이 복사되었습니다!');">공유</button>
+    </div>
 </div>
-<div class="quickview-actions">
-<a class="back-link" href="index.html">← 퀵뷰 목록으로</a>
-<div style="flex: 1;"></div>
-<a class="discuss-btn-sm" href="../board/index.html?mode=discuss&amp;title=%5BHands-On%5D%20Lovable%3A%20AI%20%EC%9B%B9%EC%82%AC%EC%9D%B4%ED%8A%B8%20%EB%B9%8C%EB%8D%94%EB%A1%9C%20%EA%B2%AC%EC%A0%81%20%EA%B3%84%EC%82%B0%EA%B8%B0%20%26%20%EC%9D%B4%EB%A9%94%EC%9D%BC%20%EC%97%B0%EB%8F%99%20%EC%82%AC%EC%9D%B4%ED%8A%B8%20%EB%A7%8C%EB%93%A4%EA%B8%B0&amp;link=https%3A//vaax-maker.github.io/ai-news-daily/quickview/20260109_o1cjsl.html&amp;source=퀵뷰">토론</a>
-<button class="discuss-btn-sm" onclick="navigator.clipboard.writeText('https://vaax-maker.github.io/ai-news-daily/quickview/20260109_o1cjsl.html'); alert('URL이 복사되었습니다!');" type="button">공유</button>
-</div>
-</div>
-</div>
-<footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
-<p>© 2026 VAAX rebuild Project by <a class="admin-link" href="../admin.html">Fovea</a>. All rights reserved.</p>
-<div id="page-visit-counter" style="margin-top: 5px; font-size: 0.8rem; color: var(--primary-color);">
-<span id="visit-count">Visits: ...</span>
-</div>
-</footer>
-<!-- Firebase SDK & Visit Counter -->
-<script type="module">
+
+    </div>
+
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 VAAX rebuild Project by <a href="../admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
+        <div id="page-visit-counter" style="margin-top: 5px; font-size: 0.8rem; color: var(--primary-color);">
+            <span id="visit-count">Visits: ...</span>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK & Visit Counter -->
+    <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -548,4 +596,5 @@
         trackVisit();
     </script>
 </body>
+
 </html>
