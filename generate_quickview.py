@@ -25,6 +25,87 @@ load_dotenv()
 from src.generators.html import render_quickview_index, render_quickview_page
 
 
+def transform_timestamp_links(html_content: str) -> str:
+    """
+    Transform YouTube timestamp links to in-page playback.
+    
+    Converts external YouTube URLs with timestamps (youtu.be/xxx?t=123 or youtube.com/watch?v=xxx&t=123s)
+    to data-time attributes with JavaScript-based in-page iframe control.
+    """
+    import re
+    
+    # Check if content has YouTube iframe
+    iframe_match = re.search(r'<iframe[^>]*src=["\']([^"\']*youtube\.com/embed/([a-zA-Z0-9_-]+)[^"\']*)["\']', html_content)
+    if not iframe_match:
+        return html_content
+    
+    video_id = iframe_match.group(2)
+    
+    # Check if there are timestamp links
+    timestamp_pattern = r'href=["\']https?://(youtu\.be/[a-zA-Z0-9_-]+\?t=|www\.youtube\.com/watch\?[^"\']*t=|youtube\.com/watch\?[^"\']*t=)(\d+)s?["\']'
+    if not re.search(timestamp_pattern, html_content):
+        return html_content
+    
+    # 1. Add id and enablejsapi to iframe (if not already present)
+    if 'id="youtube-player"' not in html_content:
+        html_content = re.sub(
+            r'<iframe([^>]*src=["\'][^"\']*youtube\.com/embed/)',
+            r'<iframe id="youtube-player"\1',
+            html_content
+        )
+    
+    # Add enablejsapi=1 to iframe src if not present
+    if 'enablejsapi=1' not in html_content:
+        # For iframes without query params
+        html_content = re.sub(
+            r'(youtube\.com/embed/[a-zA-Z0-9_-]+)(["\'])',
+            r'\1?enablejsapi=1\2',
+            html_content
+        )
+    
+    # 2. Convert timestamp links to data-time attributes
+    # Pattern captures the full href including any existing class attribute
+    def convert_link(match):
+        seconds = match.group(2)
+        return f'href="#" data-time="{seconds}"'
+    
+    html_content = re.sub(timestamp_pattern, convert_link, html_content)
+
+
+    
+    # 3. Add JavaScript for timestamp handling (before </body> or at end)
+    timestamp_script = f'''
+<!-- YouTube Timestamp In-Page Playback Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {{
+    const iframe = document.getElementById('youtube-player') || document.querySelector('iframe[src*="youtube.com/embed"]');
+    const videoId = '{video_id}';
+    
+    document.querySelectorAll('.timestamp-link, a[data-time]').forEach(function(link) {{
+        link.addEventListener('click', function(e) {{
+            e.preventDefault();
+            const seconds = parseInt(this.getAttribute('data-time'), 10);
+            
+            if (iframe) {{
+                iframe.src = 'https://www.youtube.com/embed/' + videoId + '?start=' + seconds + '&autoplay=1&enablejsapi=1';
+                iframe.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+            }}
+        }});
+    }});
+}});
+</script>
+'''
+    
+    # Insert before </body> if exists, otherwise append
+    if '</body>' in html_content:
+        html_content = html_content.replace('</body>', timestamp_script + '</body>')
+    else:
+        html_content += timestamp_script
+    
+    return html_content
+
+
+
 def get_firestore_client():
     """Initialize and return Firestore client."""
     if not FIREBASE_AVAILABLE:
@@ -131,6 +212,9 @@ def process_quickview_pages():
         
         # Fix 4: Handle HTML entities (&quot;)
         cleaned_html = re.sub(r'=&quot;\[([^\]]+)\]\(([^)]+)\)&quot;', r'=&quot;\2&quot;', cleaned_html)
+        
+        # Transform YouTube timestamp links for in-page playback
+        cleaned_html = transform_timestamp_links(cleaned_html)
         
         # Generate individual page HTML
         page_url = f"https://vaax-maker.github.io/ai-news-daily/quickview/{page_id}.html"
