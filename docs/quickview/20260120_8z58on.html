@@ -1,4 +1,290 @@
+<!DOCTYPE html>
+<html lang='ko'>
+
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>AGI 탄생의 연대기와 인류의 미래 - 퀵뷰</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YQY3DLR0P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-9YQY3DLR0P');
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css?v=12">
+    
 <style>
+    .quickview-content {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .quickview-header {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .quickview-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
+    }
+
+    .quickview-meta {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
+    .quickview-body {
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+
+    .quickview-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    .quickview-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Flatten nested content structure for better readability */
+    .quickview-body .card {
+        padding: 1.25rem !important;
+        /* Reduce padding from default 1.5rem */
+        box-shadow: none !important;
+        /* Remove shadow to reduce "depth" feeling */
+        background: #f8fafc;
+        /* Light background for contrast without depth */
+        border: 1px solid var(--border-color);
+        margin-bottom: 1.5rem;
+    }
+
+    .quickview-body ul,
+    .quickview-body ol {
+        padding-left: 1.25rem;
+        /* Reduce list indentation */
+        margin-bottom: 1rem;
+    }
+
+    .quickview-body li {
+        margin-bottom: 0.25rem;
+    }
+
+    /* Ensure code blocks don't add too much visual weight */
+    .quickview-body pre {
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    /* === CSS OVERRIDES (replacing Shadow DOM isolation) === */
+    /* Hide duplicate titles from injected content */
+    .quickview-body>h1,
+    .quickview-body>.container>h1,
+    .quickview-body>body>.container>h1 {
+        display: none !important;
+    }
+
+    /* Flatten Container/Card styles from injected content */
+    .quickview-body .container,
+    .quickview-body .summary-box {
+        box-shadow: none !important;
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        border-radius: 0 !important;
+    }
+
+    /* Hide internal footer/meta from injected content */
+    .quickview-body>footer,
+    .quickview-body .container>footer,
+    .quickview-body .meta-date,
+    .quickview-body .meta-info {
+        display: none !important;
+    }
+
+    /* Adjust heading styles inside quickview */
+    .quickview-body h2 {
+        font-size: 1.4rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        color: #333;
+    }
+
+    .quickview-body h3 {
+        font-size: 1.15rem;
+        margin-top: 1.2rem;
+        color: #444;
+    }
+
+    /* Tags in injected content */
+    .quickview-body .tag {
+        display: inline-block;
+        background-color: #475569;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        margin-right: 6px;
+        margin-top: 6px;
+    }
+
+    /* Neutralize global body styles that might leak from injected content */
+    .quickview-body body {
+        all: unset;
+        display: block;
+    }
+
+    /* === MOBILE RESPONSIVE === */
+    @media (max-width: 767px) {
+        .quickview-content {
+            /* Remove outer card styling on mobile - match daily article pages */
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 1rem;
+            border-radius: 0;
+        }
+
+        .quickview-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .quickview-title {
+            font-size: 1.35rem;
+            line-height: 1.3;
+        }
+
+        .quickview-meta {
+            font-size: 0.85rem;
+        }
+
+        .quickview-body {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .quickview-body .card {
+            padding: 0.75rem !important;
+            margin-bottom: 1rem;
+        }
+
+        .quickview-body ul,
+        .quickview-body ol {
+            padding-left: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .quickview-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        .quickview-body h2,
+        .quickview-body h3 {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quickview-actions {
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            gap: 0.5rem;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+    <header>
+        <div class="gnb">
+            <!-- Left: Logo -->
+            <a href="../index.html" class="logo-link">
+                <img src="../static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
+            </a>
+
+            <!-- Right: Slogan & Nav -->
+            <div class="header-right-section">
+                <div class="slogan-container">
+                    <span class="slogan-since">since 2016</span>
+                    <span class="header-slogan-text">
+                        VR-AR-AI-XR <span class="slogan-highlight">기술과 Biz.를 연결하는</span>
+                        성장나눔 <span class="slogan-highlight">커뮤니티</span>
+                    </span>
+                </div>
+                <nav class="nav-links">
+                    <a href="../index.html"
+                        class="">Home</a>
+                    <a href="../ai/index.html"
+                        class="">AI/XR뉴스</a>
+                    <a href="../quickview/index.html"
+                        class="active">퀵뷰</a>
+                    <a href="../gov/index.html"
+                        class="">정부과제</a>
+                    <a href="../members/index.html"
+                        class="">회원사소식</a>
+                    <a href="../board/index.html"
+                        class="">Small Talk</a>
+
+                </nav>
+            </div>
+        </div>
+        <!-- Announcement Message -->
+        <div class="header-announcement"
+            style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
+            <a href="../guide.html"
+                style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+<div class="quickview-content">
+    <div class="quickview-header">
+        <h1 class="quickview-title">AGI 탄생의 연대기와 인류의 미래</h1>
+        <div class="quickview-meta">📅 2026년 01월 20일 11:45</div>
+    </div>
+
+    <!-- Direct content injection (no Shadow DOM for external script compatibility) -->
+    <div class="quickview-body">
+        <style>
         :root {
             --primary-color: #65a30d;
             --primary-color-hover: #4d7c0f;
@@ -136,19 +422,19 @@
     </div>
 
     <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/d95J8yzvjbQ" allowfullscreen=""></iframe>
+        <iframe id="youtube-player" src="https://www.youtube.com/embed/d95J8yzvjbQ?enablejsapi=1" allowfullscreen=""></iframe>
     </div>
 
     <div class="section-block">
         <h2>1. 비전의 시작: 지능이라는 수수께끼</h2>
         <p>
-            데미스 허사비스(Demis Hassabis)는 어린 시절부터 체스 신동으로 불리며 '사고의 과정' 자체에 몰입했습니다. 그는 단순히 게임을 이기는 것을 넘어, 인간의 뇌가 어떻게 결정을 내리고 문제를 해결하는지에 대한 근원적인 질문을 던졌습니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=1359s" class="timestamp-link">[00:22:39]</a>
+            데미스 허사비스(Demis Hassabis)는 어린 시절부터 체스 신동으로 불리며 '사고의 과정' 자체에 몰입했습니다. 그는 단순히 게임을 이기는 것을 넘어, 인간의 뇌가 어떻게 결정을 내리고 문제를 해결하는지에 대한 근원적인 질문을 던졌습니다. <a href="#" data-time="1359" class="timestamp-link">[00:22:39]</a>
         </p>
         <p>
-            그는 캠브리지 대학교에서 만난 셰인 레그(Shane Legg)와 함께 <span class="highlight">범용 인공지능(AGI)</span>이라는 개념을 정립했습니다. 당시 학계에서 인공지능은 금기시되는 단어였으나, 그들은 인류의 지능이 우주에서 범용적 지능이 가능하다는 유일한 증거라는 믿음 하에 딥마인드를 설립했습니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=283s" class="timestamp-link">[00:04:43]</a>
+            그는 캠브리지 대학교에서 만난 셰인 레그(Shane Legg)와 함께 <span class="highlight">범용 인공지능(AGI)</span>이라는 개념을 정립했습니다. 당시 학계에서 인공지능은 금기시되는 단어였으나, 그들은 인류의 지능이 우주에서 범용적 지능이 가능하다는 유일한 증거라는 믿음 하에 딥마인드를 설립했습니다. <a href="#" data-time="283" class="timestamp-link">[00:04:43]</a>
         </p>
         <p>
-            초기 펀딩은 매우 험난했습니다. "모든 지능의 문제를 해결하겠다"는 그들의 야심 찬 계획에 투자자들은 냉소적이었으나, 피터 틸(Peter Thiel)과 일론 머스크(Elon Musk) 같은 선구적인 투자자들이 이 '로또' 같은 프로젝트에 손을 내밀며 위대한 여정이 시작되었습니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=410s" class="timestamp-link">[00:06:50]</a>
+            초기 펀딩은 매우 험난했습니다. "모든 지능의 문제를 해결하겠다"는 그들의 야심 찬 계획에 투자자들은 냉소적이었으나, 피터 틸(Peter Thiel)과 일론 머스크(Elon Musk) 같은 선구적인 투자자들이 이 '로또' 같은 프로젝트에 손을 내밀며 위대한 여정이 시작되었습니다. <a href="#" data-time="410" class="timestamp-link">[00:06:50]</a>
         </p>
     </div>
 
@@ -156,54 +442,54 @@
         <h2>2. 학습의 증명: 픽셀에서 전략까지</h2>
         <h3>강화학습과 딥러닝의 결합 (DQN)</h3>
         <p>
-            딥마인드는 <span class="highlight">강화학습(Reinforcement Learning)</span>을 핵심 방법론으로 선택했습니다. 에이전트에게 규칙을 가르치는 대신, 오직 화면의 픽셀 정보와 점수(보상)만을 제공하고 스스로 학습하게 만들었습니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=600s" class="timestamp-link">[00:10:00]</a>
+            딥마인드는 <span class="highlight">강화학습(Reinforcement Learning)</span>을 핵심 방법론으로 선택했습니다. 에이전트에게 규칙을 가르치는 대신, 오직 화면의 픽셀 정보와 점수(보상)만을 제공하고 스스로 학습하게 만들었습니다. <a href="#" data-time="600" class="timestamp-link">[00:10:00]</a>
         </p>
         <p>
-            아타리(Atari) 게임에서의 성공은 결정적이었습니다. 특히 'Breakout(벽돌 깨기)' 게임에서 에이전트가 수백 번의 시행착오 끝에 벽 뒤로 터널을 뚫는 최적의 전략을 스스로 발견했을 때, 연구진은 전율을 느꼈습니다. 이는 인공지능이 인간이 가르쳐주지 않은 '창의적 전략'을 구사할 수 있음을 보여준 최초의 사례였습니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=704s" class="timestamp-link">[00:11:44]</a>
+            아타리(Atari) 게임에서의 성공은 결정적이었습니다. 특히 'Breakout(벽돌 깨기)' 게임에서 에이전트가 수백 번의 시행착오 끝에 벽 뒤로 터널을 뚫는 최적의 전략을 스스로 발견했을 때, 연구진은 전율을 느꼈습니다. 이는 인공지능이 인간이 가르쳐주지 않은 '창의적 전략'을 구사할 수 있음을 보여준 최초의 사례였습니다. <a href="#" data-time="704" class="timestamp-link">[00:11:44]</a>
         </p>
 
         <h3>알파고: 인류의 자부심에 도전하다</h3>
         <p>
-            바둑은 경우의 수가 우주의 원자 수보다 많아 AI에게 불가능한 영역으로 여겨졌습니다. 그러나 알파고는 이세돌 9단과의 대국에서 '37수'라는 기상천외한 수를 두며 승리했습니다. 이 수는 인간 바둑 역사 3,000년 동안 단 한 번도 시도되지 않았던 수로, 인공지능이 지식의 복제가 아닌 <span class="highlight">직관과 창의성</span>을 가질 수 있음을 증명했습니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=1042s" class="timestamp-link">[00:17:22]</a>
+            바둑은 경우의 수가 우주의 원자 수보다 많아 AI에게 불가능한 영역으로 여겨졌습니다. 그러나 알파고는 이세돌 9단과의 대국에서 '37수'라는 기상천외한 수를 두며 승리했습니다. 이 수는 인간 바둑 역사 3,000년 동안 단 한 번도 시도되지 않았던 수로, 인공지능이 지식의 복제가 아닌 <span class="highlight">직관과 창의성</span>을 가질 수 있음을 증명했습니다. <a href="#" data-time="1042" class="timestamp-link">[00:17:22]</a>
         </p>
         <p>
-            이후 등장한 <span class="highlight">알파제로(AlphaZero)</span>는 인간의 기보조차 보지 않고 독학만으로 수천 년의 바둑 지식을 단 몇 시간 만에 재정립하며 범용 지능의 효율성을 극대화했습니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=1272s" class="timestamp-link">[00:21:12]</a>
+            이후 등장한 <span class="highlight">알파제로(AlphaZero)</span>는 인간의 기보조차 보지 않고 독학만으로 수천 년의 바둑 지식을 단 몇 시간 만에 재정립하며 범용 지능의 효율성을 극대화했습니다. <a href="#" data-time="1272" class="timestamp-link">[00:21:12]</a>
         </p>
     </div>
 
     <div class="section-block">
         <h2>3. 과학의 혁명: 알파폴드와 생명의 비밀</h2>
         <p>
-            데미스 허사비스의 궁극적인 목표는 게임이 아닌 '실제 과학'이었습니다. 그는 50년 동안 생물학계의 난제였던 <span class="highlight">단백질 구조 예측(Protein Folding)</span> 문제에 도전했습니다. 아미노산 서열만으로 복잡한 3D 구조를 예측하는 것은 질병 치료와 신약 개발의 열쇠였습니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=2785s" class="timestamp-link">[00:46:25]</a>
+            데미스 허사비스의 궁극적인 목표는 게임이 아닌 '실제 과학'이었습니다. 그는 50년 동안 생물학계의 난제였던 <span class="highlight">단백질 구조 예측(Protein Folding)</span> 문제에 도전했습니다. 아미노산 서열만으로 복잡한 3D 구조를 예측하는 것은 질병 치료와 신약 개발의 열쇠였습니다. <a href="#" data-time="2785" class="timestamp-link">[00:46:25]</a>
         </p>
         <p>
-            딥마인드는 'Strike Team'을 결성하여 이 문제에 모든 역량을 쏟아부었습니다. 초기 CASP 대회에서의 시행착오를 거쳐 탄생한 알파폴드 2는 인간 전문가와 유사한 수준의 정확도로 단백질 구조를 예측하는 데 성공했습니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=4441s" class="timestamp-link">[01:14:01]</a>
+            딥마인드는 'Strike Team'을 결성하여 이 문제에 모든 역량을 쏟아부었습니다. 초기 CASP 대회에서의 시행착오를 거쳐 탄생한 알파폴드 2는 인간 전문가와 유사한 수준의 정확도로 단백질 구조를 예측하는 데 성공했습니다. <a href="#" data-time="4441" class="timestamp-link">[01:14:01]</a>
         </p>
         <p>
-            가장 위대한 지점은 결과의 공유였습니다. 딥마인드는 2억 개가 넘는 단백질 구조 데이터를 전 세계에 무료로 공개했습니다. 이는 과학계의 '인덱스 모먼트'가 되었으며, 현재 전 세계 수백만 명의 과학자들이 이 데이터를 바탕으로 암 치료, 플라스틱 분해 효소 개발 등 인류의 생존을 위한 연구를 진행하고 있습니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=4567s" class="timestamp-link">[01:16:07]</a>
+            가장 위대한 지점은 결과의 공유였습니다. 딥마인드는 2억 개가 넘는 단백질 구조 데이터를 전 세계에 무료로 공개했습니다. 이는 과학계의 '인덱스 모먼트'가 되었으며, 현재 전 세계 수백만 명의 과학자들이 이 데이터를 바탕으로 암 치료, 플라스틱 분해 효소 개발 등 인류의 생존을 위한 연구를 진행하고 있습니다. <a href="#" data-time="4567" class="timestamp-link">[01:16:07]</a>
         </p>
     </div>
 
     <div class="section-block">
         <h2>4. 통제와 책임: 판도라의 상자를 마주하며</h2>
         <p>
-            지능의 급격한 가속은 필연적으로 윤리적 문제를 동반합니다. 허사비스는 AI 기술이 군사적 목적으로 오용되거나, 잘못된 목표 설정으로 인해 인류에게 해를 끼칠 가능성을 깊이 우려합니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=2133s" class="timestamp-link">[00:35:33]</a>
+            지능의 급격한 가속은 필연적으로 윤리적 문제를 동반합니다. 허사비스는 AI 기술이 군사적 목적으로 오용되거나, 잘못된 목표 설정으로 인해 인류에게 해를 끼칠 가능성을 깊이 우려합니다. <a href="#" data-time="2133" class="timestamp-link">[00:35:33]</a>
         </p>
         <p>
-            그는 AGI의 등장을 "외계 문명의 지구 도착"에 비유하며, 인류가 이에 대비할 국제적 기구와 안전 장치를 마련해야 한다고 강조합니다. 기술은 중립적이지만, 그 기술을 설계하는 <span class="highlight">가치관(Values)</span>은 인간의 몫이기 때문입니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=3907s" class="timestamp-link">[01:05:07]</a>
+            그는 AGI의 등장을 "외계 문명의 지구 도착"에 비유하며, 인류가 이에 대비할 국제적 기구와 안전 장치를 마련해야 한다고 강조합니다. 기술은 중립적이지만, 그 기술을 설계하는 <span class="highlight">가치관(Values)</span>은 인간의 몫이기 때문입니다. <a href="#" data-time="3907" class="timestamp-link">[01:05:07]</a>
         </p>
         <p>
-            허사비스는 "Move fast and break things(빠르게 실행하고 파괴하라)"라는 실리콘밸리의 격언이 AI 분야에서는 통용되어서는 안 된다고 주장합니다. 파괴된 뒤에는 고칠 수 없는 것들이 있기 때문입니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=2265s" class="timestamp-link">[00:37:45]</a>
+            허사비스는 "Move fast and break things(빠르게 실행하고 파괴하라)"라는 실리콘밸리의 격언이 AI 분야에서는 통용되어서는 안 된다고 주장합니다. 파괴된 뒤에는 고칠 수 없는 것들이 있기 때문입니다. <a href="#" data-time="2265" class="timestamp-link">[00:37:45]</a>
         </p>
     </div>
 
     <div class="section-block">
         <h2>5. 결론: 인류 역사의 새로운 분기점</h2>
         <p>
-            AGI는 인류 문명을 전과 후로 나눌 것입니다. 전기나 불의 발견이 그러했듯, AGI는 우리 삶의 모든 방식을 재정의할 것입니다. 딥마인드의 여정은 단순한 기술 개발을 넘어, 인간 지능의 본질을 이해하고 이를 인류 전체의 이익을 위해 확장하려는 거대한 실험입니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=4660s" class="timestamp-link">[01:17:40]</a>
+            AGI는 인류 문명을 전과 후로 나눌 것입니다. 전기나 불의 발견이 그러했듯, AGI는 우리 삶의 모든 방식을 재정의할 것입니다. 딥마인드의 여정은 단순한 기술 개발을 넘어, 인간 지능의 본질을 이해하고 이를 인류 전체의 이익을 위해 확장하려는 거대한 실험입니다. <a href="#" data-time="4660" class="timestamp-link">[01:17:40]</a>
         </p>
         <p>
-            "이것은 내가 평생을 기다려온 순간이다." 데미스 허사비스의 마지막 말처럼, 우리는 지금 인류 역사상 가장 중요한 '생각하는 게임'의 한복판에 서 있습니다. <a href="https://www.youtube.com/watch?v=d95J8yzvjbQ&amp;t=4809s" class="timestamp-link">[01:20:09]</a>
+            "이것은 내가 평생을 기다려온 순간이다." 데미스 허사비스의 마지막 말처럼, 우리는 지금 인류 역사상 가장 중요한 '생각하는 게임'의 한복판에 서 있습니다. <a href="#" data-time="4809" class="timestamp-link">[01:20:09]</a>
         </p>
     </div>
 
@@ -223,3 +509,122 @@
     <footer>
         2026 Fovea
     </footer>
+<!-- YouTube Timestamp In-Page Playback Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const iframe = document.getElementById('youtube-player') || document.querySelector('iframe[src*="youtube.com/embed"]');
+    const videoId = 'd95J8yzvjbQ';
+    
+    document.querySelectorAll('.timestamp-link, a[data-time]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const seconds = parseInt(this.getAttribute('data-time'), 10);
+            
+            if (iframe) {
+                iframe.src = 'https://www.youtube.com/embed/' + videoId + '?start=' + seconds + '&autoplay=1&enablejsapi=1';
+                iframe.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    });
+});
+</script>
+
+    </div>
+
+    <div class="quickview-actions">
+        <a href="index.html" class="back-link">← 퀵뷰 목록으로</a>
+        <div style="flex: 1;"></div>
+        <a href="../board/index.html?mode=discuss&title=AGI%20%ED%83%84%EC%83%9D%EC%9D%98%20%EC%97%B0%EB%8C%80%EA%B8%B0%EC%99%80%20%EC%9D%B8%EB%A5%98%EC%9D%98%20%EB%AF%B8%EB%9E%98&link=https%3A//vaax-maker.github.io/ai-news-daily/quickview/20260120_8z58on.html&source=퀵뷰"
+            class="discuss-btn-sm">토론</a>
+        <button type="button" class="discuss-btn-sm"
+            onclick="navigator.clipboard.writeText('https://vaax-maker.github.io/ai-news-daily/quickview/20260120_8z58on.html'); alert('URL이 복사되었습니다!');">공유</button>
+    </div>
+</div>
+
+    </div>
+
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 VAAX rebuild Project by <a href="../admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
+        <div id="page-visit-counter" style="margin-top: 5px; font-size: 0.8rem; color: var(--primary-color);">
+            <span id="visit-count">Visits: ...</span>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK & Visit Counter -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Reuse config from board.html
+        const firebaseConfig = {
+            apiKey: "AIzaSyANn76u2ZCJ5rq4IOpYaTzFy1JtKoPOM-c",
+            authDomain: "vaax-board.firebaseapp.com",
+            projectId: "vaax-board",
+            storageBucket: "vaax-board.firebasestorage.app",
+            messagingSenderId: "31682907508",
+            appId: "1:31682907508:web:cd3ee4231ec8b3fb75b021",
+            measurementId: "G-9YQY3DLR0P"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function trackVisit() {
+            try {
+                // Determine page ID from URL (e.g., "index.html", "ai/index.html")
+                let path = window.location.pathname;
+
+                // Remove leading slash and repo name if hosted on GitHub Pages
+                // e.g. "/ai-news-daily/ai/index.html" -> "ai/index.html"
+                if (path.startsWith('/ai-news-daily/')) {
+                    path = path.replace('/ai-news-daily/', '');
+                }
+                if (path.startsWith('/')) {
+                    path = path.substring(1);
+                }
+                if (!path || path === "") {
+                    path = "index.html";  // root
+                }
+
+                // Firestore document ID cannot contain slashes. Replace / with _
+                const docId = path.replace(/\//g, '_').replace(/\./g, '_');
+
+                const docRef = doc(db, "page_visits", docId);
+
+                // 1. Get current count (optimistic UI or wait?)
+                // Let's just update and then get, or get then update?
+                // Incrementing blindly is better for performance, then listening or getting.
+
+                // Use setDoc with merge to ensure document exists
+                await setDoc(docRef, {
+                    path: path,
+                    lastVisited: serverTimestamp()
+                }, { merge: true });
+
+                // Increment count
+                await updateDoc(docRef, {
+                    count: increment(1)
+                });
+
+                // Get updated count to display
+                const snap = await getDoc(docRef);
+                if (snap.exists()) {
+                    const data = snap.data();
+                    const countSpan = document.getElementById('visit-count');
+                    if (countSpan && data.count) {
+                        countSpan.textContent = `Total Visits: ${data.count.toLocaleString()}`;
+                    }
+                }
+
+            } catch (e) {
+                console.error("Visit tracking failed:", e);
+            }
+        }
+
+        // Execute tracking
+        trackVisit();
+    </script>
+</body>
+
+</html>
