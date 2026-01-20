@@ -1342,5 +1342,61 @@
     "bid_close_dt": "20260130",
     "openg_dt": "",
     "is_new": false
+  },
+  {
+    "title": "No-Code 제조기술 혁신 생태계 구축 사업 컨소시엄 모집 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117651",
+    "dept": "경상북도",
+    "manager": "",
+    "date": "2026-01-20",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-01-20",
+    "bid_begin_dt": "20260119",
+    "bid_close_dt": "20260213",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년 보조공학기기 연구개발사업 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117649",
+    "dept": "고용노동부",
+    "manager": "",
+    "date": "2026-01-20",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-01-20",
+    "bid_begin_dt": "20260119",
+    "bid_close_dt": "20260219",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년 연구선ㆍ과학기지 공동활용 지원사업 신규과제 선정계획 정기 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117614",
+    "dept": "해양수산부",
+    "manager": "",
+    "date": "2026-01-20",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-01-20",
+    "bid_begin_dt": "20260119",
+    "bid_close_dt": "20260220",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "[경기] 2026년 1차 사물인터넷(IoT) 설치 지원사업 모집 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117613",
+    "dept": "경기도",
+    "manager": "",
+    "date": "2026-01-20",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-01-20",
+    "bid_begin_dt": "20260202",
+    "bid_close_dt": "20260206",
+    "openg_dt": "",
+    "is_new": false
   }
 ]
