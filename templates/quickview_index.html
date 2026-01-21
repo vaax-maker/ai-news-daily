@@ -23,7 +23,7 @@
                     <span class="new-badge">NEW</span>
                     {% endif %}
                     <div class="title-actions">
-                        <a href="../board/index.html?mode=discuss&title={{ page.title | urlencode }}&link={{ page.id }}.html&source=퀵뷰"
+                        <a href="../board/index.html?mode=discuss&title={{ page.title | urlencode }}&link=https://vaax-maker.github.io/ai-news-daily/quickview/{{ page.id }}.html&source=퀵뷰"
                             class="discuss-btn-sm">토론</a>
                         <button type="button" class="discuss-btn-sm"
                             onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/{{ page.id }}.html'); alert('URL이 복사되었습니다!');">공유</button>
