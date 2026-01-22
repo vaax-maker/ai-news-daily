@@ -212,6 +212,20 @@ def create_webshare():
         })
         save_webshare_index(index_data)
         
+        # Post to Blogger (if configured)
+        blogger_url = None
+        blogger_error = None
+        try:
+            from src.utils.blogger_client import post_to_blogger, is_blogger_configured
+            if is_blogger_configured():
+                print(f"📝 Posting to Blogger: {display_title}")
+                result = post_to_blogger(display_title, html_content)
+                blogger_url = result.get('url')
+                print(f"✅ Blogger post created: {blogger_url}")
+        except Exception as e:
+            blogger_error = str(e)
+            print(f"⚠️ Blogger posting failed: {e}")
+        
         # Git push
         print(f"📤 Pushing webshare: {filename}.html")
         git_success, git_message = git_push(f"Add webshare: {display_title}")
@@ -221,6 +235,8 @@ def create_webshare():
             "filename": f"{filename}.html",
             "title": display_title,
             "url": url,
+            "bloggerUrl": blogger_url,
+            "bloggerError": blogger_error,
             "gitPushed": git_success,
             "message": f"Page created! {git_message}"
         })
