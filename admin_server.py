@@ -259,6 +259,37 @@ def get_webshare_history():
         return jsonify({"success": False, "message": str(e)}), 500
 
 
+@app.route('/blogger', methods=['POST'])
+def post_to_blogger_endpoint():
+    """Post content to Blogger only (for serverless webshare)."""
+    try:
+        data = request.get_json()
+        title = data.get('title', 'Untitled')
+        html_content = data.get('html', '').strip()
+        
+        if not html_content:
+            return jsonify({"success": False, "message": "HTML content is required"}), 400
+        
+        from src.utils.blogger_client import post_to_blogger, is_blogger_configured
+        
+        if not is_blogger_configured():
+            return jsonify({"success": False, "message": "Blogger not configured"}), 400
+        
+        print(f"📝 Posting to Blogger: {title}")
+        result = post_to_blogger(title, html_content)
+        print(f"✅ Blogger post created: {result.get('url')}")
+        
+        return jsonify({
+            "success": True,
+            "bloggerUrl": result.get('url'),
+            "message": "Posted to Blogger successfully!"
+        })
+        
+    except Exception as e:
+        print(f"❌ Blogger error: {e}")
+        return jsonify({"success": False, "message": str(e)}), 500
+
+
 if __name__ == "__main__":
     print("=" * 60)
     print("🚀 VAAX Admin Server Started")
