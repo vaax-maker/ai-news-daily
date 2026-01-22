@@ -1254,35 +1254,35 @@
 
             await createGithubFile('docs/webshare/data_x9k3.json', JSON.stringify(indexData, null, 2), `Update webshare index: ${title}`, sha);
 
-            // 3. Post to Blogger if checkbox is checked
+            // 3. Create Blogger queue if checkbox is checked
             const postToBlogger = document.getElementById('websharePostToBlogger').checked;
-            let bloggerUrl = null;
-
+            
             if (postToBlogger) {
-                webshareStatus.innerText = '4/4. Blogger에 게시 중...';
+                webshareStatus.innerText = '4/4. Blogger 큐 생성 중...';
                 try {
-                    const bloggerResp = await fetch('http://localhost:5555/blogger', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ title: title, html: html })
-                    });
-                    const bloggerData = await bloggerResp.json();
-                    if (bloggerData.success) {
-                        bloggerUrl = bloggerData.bloggerUrl;
-                    } else {
-                        console.warn('Blogger posting failed:', bloggerData.message);
-                    }
-                } catch (bloggerErr) {
-                    console.warn('Blogger posting error:', bloggerErr);
+                    const queueData = {
+                        posts: [{
+                            title: title,
+                            html: html,
+                            createdAt: new Date().toISOString()
+                        }]
+                    };
+                    
+                    await createGithubFile(
+                        'docs/webshare/.blogger_queue.json',
+                        JSON.stringify(queueData, null, 2),
+                        `Queue Blogger post: ${title}`,
+                        null  // Creates new file or overwrites
+                    );
+                } catch (queueErr) {
+                    console.warn('Blogger queue creation failed:', queueErr);
                 }
             }
 
             // Success
             webshareStatus.className = 'status-msg success';
-            if (bloggerUrl) {
-                webshareStatus.innerHTML = `✅ 게시 완료! (${title})<br>📝 <a href="${bloggerUrl}" target="_blank" style="color: #0369a1;">Blogger에도 게시됨</a>`;
-            } else if (postToBlogger) {
-                webshareStatus.innerText = `✅ GitHub 게시 완료! (Blogger 실패 - 서버 확인 필요)`;
+            if (postToBlogger) {
+                webshareStatus.innerHTML = `✅ 게시 완료! (${title})<br>📝 Blogger 게시는 1-2분 후 자동 처리됩니다`;
             } else {
                 webshareStatus.innerText = `✅ 게시 완료! (${title})`;
             }

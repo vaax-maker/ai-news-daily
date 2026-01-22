@@ -1,0 +1,50 @@
+name: Process Blogger Queue
+
+on:
+  push:
+    paths:
+      - 'docs/webshare/.blogger_queue.json'
+  workflow_dispatch:
+
+jobs:
+  post-to-blogger:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install google-auth google-auth-oauthlib google-api-python-client
+      
+      - name: Create credentials file
+        env:
+          BLOGGER_CREDENTIALS: ${{ secrets.BLOGGER_CREDENTIALS }}
+        run: |
+          echo "$BLOGGER_CREDENTIALS" > blogger_credentials.json
+      
+      - name: Create token file
+        env:
+          BLOGGER_TOKEN: ${{ secrets.BLOGGER_TOKEN }}
+        run: |
+          echo "$BLOGGER_TOKEN" | base64 -d > blogger_token.pickle
+      
+      - name: Process Blogger queue
+        run: |
+          python3 scripts/process_blogger_queue.py
+      
+      - name: Commit changes (remove queue file)
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add docs/webshare/.blogger_queue.json || true
+          git diff --staged --quiet || git commit -m "Remove processed Blogger queue"
+          git push || echo "Nothing to push"
