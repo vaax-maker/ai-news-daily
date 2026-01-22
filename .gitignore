@@ -7,3 +7,4 @@ docs/header_test.html
 *.json
 !data/latest_key_message.json
 !docs/webshare/data_x9k3.json
+blogger_token.pickle
