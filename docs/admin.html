@@ -1317,7 +1317,7 @@
 
             // 3. Create Blogger queue if checkbox is checked
             const postToBlogger = document.getElementById('websharePostToBlogger').checked;
-            
+
             if (postToBlogger) {
                 webshareStatus.innerText = '4/4. Blogger 큐 생성 중...';
                 try {
@@ -1328,12 +1328,15 @@
                             createdAt: new Date().toISOString()
                         }]
                     };
-                    
+
+                    const timestamp = new Date().getTime();
+                    const queueFilename = `.blogger_queue_${timestamp}.json`;
+
                     await createGithubFile(
-                        'docs/webshare/.blogger_queue.json',
+                        `docs/webshare/${queueFilename}`,
                         JSON.stringify(queueData, null, 2),
                         `Queue Blogger post: ${title}`,
-                        null  // Creates new file or overwrites
+                        null
                     );
                 } catch (queueErr) {
                     console.warn('Blogger queue creation failed:', queueErr);

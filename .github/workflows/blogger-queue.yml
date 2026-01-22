@@ -3,7 +3,7 @@ name: Process Blogger Queue
 on:
   push:
     paths:
-      - 'docs/webshare/.blogger_queue.json'
+      - 'docs/webshare/.blogger_queue_*.json'
   workflow_dispatch:
 
 jobs:
@@ -45,6 +45,6 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add docs/webshare/.blogger_queue.json || true
-          git diff --staged --quiet || git commit -m "Remove processed Blogger queue"
+          git add docs/webshare/.blogger_queue_*.json || true
+          git diff --staged --quiet || git commit -m "Remove processed Blogger queues"
           git push || echo "Nothing to push"
