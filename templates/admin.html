@@ -516,8 +516,10 @@
     }
 
     function loadHistory() {
+        if (!historyList) return; // Guard against null element
         const q = query(collection(db, "admin_notifications"), orderBy("createdAt", "desc"), limit(10));
         onSnapshot(q, (snapshot) => {
+            if (!historyList) return;
             historyList.innerHTML = "";
             if (snapshot.empty) {
                 historyList.innerText = "No history found.";
@@ -607,11 +609,13 @@
     const quickviewCopyCmd = document.getElementById('quickviewCopyCmd');
 
     // Copy command on click
-    quickviewCopyCmd.addEventListener('click', () => {
-        const cmd = 'cd /Users/fovea/Documents/vsc-codex/VAAXfinal && python3 scripts/deploy_quickview.py';
-        navigator.clipboard.writeText(cmd);
-        alert('명령어가 복사되었습니다! 터미널에 붙여넣기 하세요.');
-    });
+    if (quickviewCopyCmd) {
+        quickviewCopyCmd.addEventListener('click', () => {
+            const cmd = 'cd /Users/fovea/Documents/vsc-codex/VAAXfinal && python3 scripts/deploy_quickview.py';
+            navigator.clipboard.writeText(cmd);
+            alert('명령어가 복사되었습니다! 터미널에 붙여넣기 하세요.');
+        });
+    }
 
     // Generate quickview page ID
     function generateQuickviewId() {
@@ -978,6 +982,7 @@
 
     // Load History
     async function loadWebshareHistory() {
+        if (!webshareHistory) return; // Guard against null element
         webshareHistory.innerHTML = '<span style="color: #9ca3af;">불러오는 중...</span>';
         try {
             const fileData = await getGithubFile('docs/webshare/data_x9k3.json');
