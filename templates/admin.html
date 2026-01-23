@@ -909,12 +909,14 @@
 
     // Helper: Base64 Encode (UTF-8 safe)
     function utf8_to_b64(str) {
-        return window.btoa(unescape(encodeURIComponent(str)));
+        return window.btoa(String.fromCharCode(...new TextEncoder().encode(str)));
     }
 
     // Helper: Base64 Decode
     function b64_to_utf8(str) {
-        return decodeURIComponent(escape(window.atob(str)));
+        // Remove whitespace from base64 string
+        str = str.replace(/\s/g, '');
+        return new TextDecoder().decode(Uint8Array.from(window.atob(str), c => c.charCodeAt(0)));
     }
 
     // GitHub API: Create/Update File
