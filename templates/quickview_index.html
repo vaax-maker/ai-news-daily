@@ -156,60 +156,47 @@
         align-items: center;
         justify-content: center;
         height: 32px;
-        /* Fixed height */
         padding: 0 0.8rem;
         border-radius: 4px;
-        border: 1px solid #e2e8f0;
-        background: white;
+        border: 1px solid #d9f99d;
+        /* Lime-200 */
+        background: #f7fee7;
+        /* Lime-50 */
+        color: #65a30d;
+        /* Lime-600 */
         font-size: 0.85rem;
-        font-weight: 500;
+        font-weight: 600;
         cursor: pointer;
         text-decoration: none;
         transition: all 0.2s;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        /* Subtle shadow like image */
     }
 
-    /* Point Colors for Buttons */
-    /* Discuss - Blue/Indigo */
-    .action-btn.discuss {
-        color: #4f46e5;
-        border-color: #e0e7ff;
-        background: #eef2ff;
+    .action-btn:hover {
+        border-color: #bef264;
+        /* Lime-300 */
+        background: #ecfccb;
+        /* Lime-100 */
+        color: #4d7c0f;
+        /* Lime-700 */
     }
 
-    .action-btn.discuss:hover {
-        background: #e0e7ff;
-        border-color: #c7d2fe;
-    }
-
-    /* Share - Teal/Green */
-    .action-btn.share {
-        color: #0d9488;
-        border-color: #ccfbf1;
-        background: #f0fdfa;
-    }
-
-    .action-btn.share:hover {
-        background: #ccfbf1;
-        border-color: #99f6e4;
-    }
-
-    /* Delete - Red */
+    /* Special style for Delete if needed, but keeping unified for now per request */
     .action-btn.delete {
+        /* Optional: slightly different hover for delete safety? 
+           User said "unified color", so keeping base same. 
+           Maybe red text on hover? */
+    }
+
+    .action-btn.delete:hover {
         color: #b91c1c;
         border-color: #fee2e2;
         background: #fef2f2;
     }
 
-    .action-btn.delete:hover {
-        background: #fee2e2;
-        border-color: #fca5a5;
-    }
-
     .new-badge {
         display: inline-block;
-        background: #ef4444;
+        background: #84cc16;
+        /* Lime-500 */
         color: white;
         font-size: 0.7rem;
         font-weight: 700;
@@ -218,6 +205,72 @@
         margin-right: 0.5rem;
         vertical-align: middle;
         flex-shrink: 0;
+    }
+
+    /* Compact Header Styles */
+    .compact-header {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .compact-header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: #111827;
+    }
+
+    .compact-header .eyebrow {
+        color: #65a30d;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0;
+    }
+
+    .compact-header .subtitle {
+        color: #6b7280;
+        font-size: 1rem;
+        margin: 0;
+        border-left: 1px solid #e5e7eb;
+        padding-left: 1rem;
+    }
+
+    /* Mobile View Adjustments */
+    .mobile-cards {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .desktop-table {
+            display: none;
+        }
+
+        .mobile-cards {
+            display: block;
+        }
+
+        .compact-header {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .compact-header .subtitle {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        .course-card {
+            background: white;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
     }
 </style>
 <style>
@@ -316,7 +369,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
+<div class="page-header compact-header">
     <p class="eyebrow">Quickview</p>
     <h1>퀵뷰</h1>
     <p class="subtitle">빠르게 공유하는 핵심 요약</p>
@@ -345,8 +398,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title={{ page.title | urlencode }}&link=https://vaax-maker.github.io/ai-news-daily/quickview/{{ page.id }}.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/{{ page.id }}.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"

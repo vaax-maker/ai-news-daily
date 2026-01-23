@@ -172,60 +172,47 @@
         align-items: center;
         justify-content: center;
         height: 32px;
-        /* Fixed height */
         padding: 0 0.8rem;
         border-radius: 4px;
-        border: 1px solid #e2e8f0;
-        background: white;
+        border: 1px solid #d9f99d;
+        /* Lime-200 */
+        background: #f7fee7;
+        /* Lime-50 */
+        color: #65a30d;
+        /* Lime-600 */
         font-size: 0.85rem;
-        font-weight: 500;
+        font-weight: 600;
         cursor: pointer;
         text-decoration: none;
         transition: all 0.2s;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        /* Subtle shadow like image */
     }
 
-    /* Point Colors for Buttons */
-    /* Discuss - Blue/Indigo */
-    .action-btn.discuss {
-        color: #4f46e5;
-        border-color: #e0e7ff;
-        background: #eef2ff;
+    .action-btn:hover {
+        border-color: #bef264;
+        /* Lime-300 */
+        background: #ecfccb;
+        /* Lime-100 */
+        color: #4d7c0f;
+        /* Lime-700 */
     }
 
-    .action-btn.discuss:hover {
-        background: #e0e7ff;
-        border-color: #c7d2fe;
-    }
-
-    /* Share - Teal/Green */
-    .action-btn.share {
-        color: #0d9488;
-        border-color: #ccfbf1;
-        background: #f0fdfa;
-    }
-
-    .action-btn.share:hover {
-        background: #ccfbf1;
-        border-color: #99f6e4;
-    }
-
-    /* Delete - Red */
+    /* Special style for Delete if needed, but keeping unified for now per request */
     .action-btn.delete {
+        /* Optional: slightly different hover for delete safety? 
+           User said "unified color", so keeping base same. 
+           Maybe red text on hover? */
+    }
+
+    .action-btn.delete:hover {
         color: #b91c1c;
         border-color: #fee2e2;
         background: #fef2f2;
     }
 
-    .action-btn.delete:hover {
-        background: #fee2e2;
-        border-color: #fca5a5;
-    }
-
     .new-badge {
         display: inline-block;
-        background: #ef4444;
+        background: #84cc16;
+        /* Lime-500 */
         color: white;
         font-size: 0.7rem;
         font-weight: 700;
@@ -234,6 +221,72 @@
         margin-right: 0.5rem;
         vertical-align: middle;
         flex-shrink: 0;
+    }
+
+    /* Compact Header Styles */
+    .compact-header {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .compact-header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: #111827;
+    }
+
+    .compact-header .eyebrow {
+        color: #65a30d;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0;
+    }
+
+    .compact-header .subtitle {
+        color: #6b7280;
+        font-size: 1rem;
+        margin: 0;
+        border-left: 1px solid #e5e7eb;
+        padding-left: 1rem;
+    }
+
+    /* Mobile View Adjustments */
+    .mobile-cards {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .desktop-table {
+            display: none;
+        }
+
+        .mobile-cards {
+            display: block;
+        }
+
+        .compact-header {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .compact-header .subtitle {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        .course-card {
+            background: white;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
     }
 </style>
 <style>
@@ -377,7 +430,7 @@
 
     <div class="container">
         
-<div class="page-header">
+<div class="page-header compact-header">
     <p class="eyebrow">Quickview</p>
     <h1>퀵뷰</h1>
     <p class="subtitle">빠르게 공유하는 핵심 요약</p>
@@ -406,8 +459,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=Assistant%20Axis%3A%20LLM%EC%9D%98%20%EC%9D%B8%EA%B2%A9%EC%A0%81%20%EC%95%88%EC%A0%95%EC%84%B1%EA%B3%BC%20%ED%8E%98%EB%A5%B4%EC%86%8C%EB%82%98%20%EC%A0%9C%EC%96%B4%20%EA%B8%B0%EC%88%A0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260120_difwlm.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260120_difwlm.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -428,8 +481,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=AGI%20%ED%83%84%EC%83%9D%EC%9D%98%20%EC%97%B0%EB%8C%80%EA%B8%B0%EC%99%80%20%EC%9D%B8%EB%A5%98%EC%9D%98%20%EB%AF%B8%EB%9E%98&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260120_8z58on.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260120_8z58on.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -450,8 +503,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=OpenAI%20%27Sweetpea%27%3A%20%EC%97%90%EC%96%B4%ED%8C%9F%EC%9D%84%20%EB%8C%80%EC%B2%B4%ED%95%A0%20%EA%B7%80%20%EB%92%A4%EC%9D%98%20AI%20%EB%B9%84%EC%84%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260118_10v8ur.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260118_10v8ur.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -472,8 +525,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=IT%EB%89%B4%EC%8A%A4%20-%20GPT-5.3%20%27%EA%B0%88%EB%A6%AD%27%20%EB%A3%A8%EB%A8%B8%2C%20%EC%B1%97GPT%20%EA%B4%91%EA%B3%A0%20%EB%8F%84%EC%9E%85%2C%20%EC%95%A0%ED%94%8C%EC%9D%98%20%EC%A0%9C%EB%AF%B8%EB%82%98%EC%9D%B4%20%ED%83%91%EC%9E%AC%20%EB%93%B1%20%EC%A2%85%ED%95%A9%20%EC%A0%95%EB%A6%AC&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260118_l44qdb.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260118_l44qdb.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -494,8 +547,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%EC%9D%BC%EB%A1%A0%20%EB%A8%B8%EC%8A%A4%ED%81%AC%EC%9D%98%202026%20%EB%AF%B8%EB%9E%98%20%EC%A0%84%EB%A7%9D%3A%20%ED%8A%B9%EC%9D%B4%EC%A0%90%EA%B3%BC%20%EC%95%95%EB%8F%84%EC%A0%81%20%ED%92%8D%EC%9A%94&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260117_t0qmni.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260117_t0qmni.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -516,8 +569,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%EA%B5%AC%EA%B8%80%20%EC%95%88%ED%8B%B0%EA%B7%B8%EB%9E%98%EB%B9%84%ED%8B%B0%28Antigravity%29%EB%A1%9C%20AWS%20%EC%84%9C%EB%B2%84%20%EA%B5%AC%EC%B6%95%20%EB%B0%8F%20%EB%8C%80%EC%8B%9C%EB%B3%B4%EB%93%9C%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260115_ezbz6f.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260115_ezbz6f.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -538,8 +591,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%EB%A9%94%ED%83%80%EC%9D%98%20%EB%B0%98%EC%A0%84%3F%20%EB%AF%B8%EA%B5%AD%EC%84%9C%20%EB%8C%80%EB%B0%95%EB%82%9C%20%EC%8A%A4%EB%A7%88%ED%8A%B8%20%EC%95%88%EA%B2%BD%EA%B3%BC%20%EA%B3%B5%EA%B0%84%20%EC%BB%B4%ED%93%A8%ED%8C%85%EC%9D%98%20%EB%AF%B8%EB%9E%98&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260114_betnon.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260114_betnon.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -560,8 +613,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%ED%98%84%EB%8C%80%EC%B0%A8%20%EC%9E%90%EC%9C%A8%EC%A3%BC%ED%96%89%EC%9D%98%20%EC%8A%B9%EB%B6%80%EC%88%98%3A%20%EC%97%94%EB%B9%84%EB%94%94%EC%95%84%20%27%EC%95%8C%ED%8C%8C%EB%A7%88%EC%9A%94%27%EC%99%80%EC%9D%98%20%EB%8F%99%ED%96%89&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260114_o2klvv.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260114_o2klvv.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -582,8 +635,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%EA%B5%AC%EA%B8%80%20Opal%20%EC%82%AC%EC%9A%A9%EB%B2%95%3A%20%EC%BD%94%EB%94%A9%20%EC%97%86%EC%9D%B4%20%EB%82%98%EB%A7%8C%EC%9D%98%20AI%20%EC%95%B1%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260113_jnmox7.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260113_jnmox7.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -604,8 +657,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=IT%20%EB%89%B4%EC%8A%A4%20-%202026%EB%85%84%20AI%20%ED%8A%B8%EB%A0%8C%EB%93%9C%20%EB%B0%8F%20CES%20%EC%99%84%EC%A0%84%20%EC%A0%95%EB%B3%B5%20%28%EC%8B%AC%EC%B8%B5%20%EC%9A%94%EC%95%BD%29&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260112_ut14cj.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260112_ut14cj.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -626,8 +679,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%ED%8C%9D%EC%BD%98%20%EB%B8%8C%EB%A0%88%EC%9D%B8%3A%20%EA%B2%8C%EC%9D%B4%EB%A8%B8%EA%B0%80%20%EB%96%A0%EB%82%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0%EC%99%80%20%EA%B2%8C%EC%9E%84%20%EC%82%B0%EC%97%85%EC%9D%98%20%EC%9C%84%EA%B8%B0%20%EB%B6%84%EC%84%9D&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260112_7kta0a.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260112_7kta0a.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -648,8 +701,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%EA%B7%B8%EB%A1%9D%204.1%EB%A1%9C%20%EB%AC%B4%EC%A0%9C%ED%95%9C%20%EA%B8%B8%EC%9D%B4%20AI%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_idmes1.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_idmes1.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -670,8 +723,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=CES%202026%20K-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85%20%ED%98%81%EC%8B%A0%3A%20%EC%9D%BC%EC%83%81%EC%97%90%20%EC%8A%A4%EB%A9%B0%EB%93%A0%20%EC%95%B0%EB%B9%84%EC%96%B8%ED%8A%B8%20AI%20%EA%B8%B0%EC%88%A0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_6j618j.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_6j618j.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -692,8 +745,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%5BCES%202026%5D%20AI%EA%B0%80%20%EA%B2%B0%ED%95%A9%EB%90%9C%20XR%20%EA%B8%80%EB%9E%98%EC%8A%A4%EC%9D%98%20%EC%9D%BC%EC%83%81%ED%99%94%3A%20%EC%A3%BC%EC%9A%94%20%EA%B8%B0%EC%97%85%20%EB%B0%8F%20%EA%B8%B0%EC%88%A0%20%EB%B6%84%EC%84%9D&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_y5905q.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_y5905q.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -714,8 +767,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%EC%A0%9C%EB%B0%9C%20%EB%B2%84%ED%8B%B0%EC%A7%80%20%EB%A7%88%EC%84%B8%EC%9A%94%3A%20%EC%86%A1%EA%B8%B8%EC%98%81%EC%9D%B4%20%EA%B2%BD%EA%B3%A0%ED%95%98%EB%8A%94%202026%EB%85%84%20%EC%83%9D%EC%A1%B4%EB%B2%95&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_72w7vf.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_72w7vf.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -736,8 +789,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%EC%95%84%EB%AC%B4%EB%A6%AC%20%EB%AF%B8%EB%A3%A8%EB%8D%98%20%EC%82%AC%EB%9E%8C%EB%8F%84%20%EC%98%A4%EB%8A%98%EB%B6%80%ED%84%B0%20%EB%8B%AC%EB%9D%BC%EC%A7%91%EB%8B%88%EB%8B%A4&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_10jf3f.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_10jf3f.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -758,8 +811,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%EA%B5%90%EC%9C%A1%20%3A%20%EB%B3%80%ED%95%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EA%B0%80%EC%B9%98%EB%A5%BC%20%EC%B0%BE%EC%95%84%EC%84%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_jmqopm.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_jmqopm.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -780,8 +833,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=AI%20%EC%8B%9C%EB%8C%80%2C%20%EB%8C%80%EC%B2%B4%EB%90%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EC%83%9D%EC%A1%B4%20%EC%A0%84%EB%9E%B5%EA%B3%BC%20%ED%95%B5%EA%B0%9C%EC%9D%B8%EC%9D%98%20%ED%83%84%EC%83%9D&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_7v9nf6.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_7v9nf6.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -802,8 +855,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%EB%AF%B8%EA%B5%AD%20%EC%A0%95%EB%B6%80%EC%9D%98%20%EC%B6%A9%EA%B2%A9%20%EC%84%A0%EC%96%B8%3A%2050%EB%85%84%20%EC%98%81%EC%96%91%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%EC%9D%98%20%EC%A2%85%EB%A7%90%EA%B3%BC%20%EC%83%88%EB%A1%9C%EC%9A%B4%20%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_0y3zj0.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_0y3zj0.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -824,8 +877,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%EB%AF%BF%EC%9D%84%20%EC%A0%95%EB%B3%B4%EA%B0%80%20%EC%97%86%EB%8B%A4%3F%20AI%20%27%EC%8A%AC%EB%A1%AD%28Slop%29%27%EC%9D%98%20%EC%8A%B5%EA%B2%A9%EA%B3%BC%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A0%84%EC%9F%81&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260109_9xwith.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260109_9xwith.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -846,8 +899,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%5BHands-On%5D%20Lovable%3A%20AI%20%EC%9B%B9%EC%82%AC%EC%9D%B4%ED%8A%B8%20%EB%B9%8C%EB%8D%94%EB%A1%9C%20%EA%B2%AC%EC%A0%81%20%EA%B3%84%EC%82%B0%EA%B8%B0%20%26%20%EC%9D%B4%EB%A9%94%EC%9D%BC%20%EC%97%B0%EB%8F%99%20%EC%82%AC%EC%9D%B4%ED%8A%B8%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260109_o1cjsl.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260109_o1cjsl.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -868,8 +921,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%EB%A9%94%ED%83%80%28Meta%29%2C%2080%EC%A1%B0%EC%9B%90%EC%9D%98%20%EC%88%98%EC%97%85%EB%A3%8C%EC%99%80%20AI%EB%A1%9C%EC%9D%98%20%EB%B6%80%ED%99%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260108_h76tc3.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260108_h76tc3.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -890,8 +943,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=CES%202026%3A%20%ED%98%84%EB%8C%80%EC%B0%A8%20x%20%EA%B5%AC%EA%B8%80%20x%20%EB%B3%B4%EC%8A%A4%ED%84%B4%20%EB%8B%A4%EC%9D%B4%EB%82%B4%EB%AF%B9%EC%8A%A4%20%27%EB%89%B4%20%EC%95%84%ED%8B%80%EB%9D%BC%EC%8A%A4%27&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260108_aje3v7.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260108_aje3v7.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -912,8 +965,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%EC%A1%B0%EC%BD%94%EB%94%A9%20AI%20%EB%89%B4%EC%8A%A4%3A%20Meta%20%EB%A7%88%EB%88%84%EC%8A%A4%20%EC%9D%B8%EC%88%98%20%EB%B0%8F%20%EC%B5%9C%EC%8B%A0%20AI%20%ED%8A%B8%EB%A0%8C%EB%93%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260106_mvqpio.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_mvqpio.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -934,8 +987,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=Lovable_%EC%BD%94%EB%94%A9%20%EC%97%86%EC%9D%B4%20%EB%A7%8C%EB%93%9C%EB%8A%94%20%EC%A0%84%EB%AC%B8%EA%B0%80%EA%B8%89%20%EC%9B%B9%EC%82%AC%EC%9D%B4%ED%8A%B8&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260106_zsciaw.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_zsciaw.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -956,8 +1009,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=n8n%20%EC%9E%90%EB%8F%99%ED%99%94%20%EB%8F%84%EA%B5%AC%20%EC%84%A4%EC%B9%98%20%EA%B0%80%EC%9D%B4%EB%93%9C%3A%20%ED%8F%89%EC%83%9D%20%EB%AC%B4%EB%A3%8C%20vs%20%EC%A0%80%EB%A0%B4%ED%95%9C%20%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260106_o77osh.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_o77osh.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -978,8 +1031,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=AI%20%EB%8B%B5%EB%B3%80%20%ED%80%84%EB%A6%AC%ED%8B%B0%2010%EB%B0%B0%20%EB%86%92%EC%9D%B4%EB%8A%94%20%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260106_lqwotx.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_lqwotx.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
@@ -1000,8 +1053,8 @@
                         </div>
                         <div class="action-row">
                             <a href="../board/index.html?mode=discuss&title=%EB%B3%B4%EB%A6%AC%EC%8A%A4%28Boris%29%EA%B0%80%20%EC%A7%81%EC%A0%91%20%EA%B3%B5%EA%B0%9C%ED%95%9C%20%ED%9A%A8%EC%9C%A8%20200%25%20%EC%BD%94%EB%94%A9%20%EC%84%B8%ED%8C%85%EA%B3%BC%20%EC%82%AC%EC%9A%A9%EB%B2%95%20%2826.1/5%29&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260105_xx6cq8.html&source=퀵뷰"
-                                class="action-btn discuss">💬 토론</a>
-                            <button type="button" class="action-btn share"
+                                class="action-btn">💬 토론</a>
+                            <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260105_xx6cq8.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
