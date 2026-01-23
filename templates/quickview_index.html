@@ -157,12 +157,12 @@
         justify-content: center;
         height: 32px;
         /* Fixed height */
-        padding: 0 0.75rem;
+        padding: 0 0.8rem;
         border-radius: 4px;
         border: 1px solid #e2e8f0;
         background: white;
         font-size: 0.85rem;
-        color: #475569;
+        font-weight: 500;
         cursor: pointer;
         text-decoration: none;
         transition: all 0.2s;
@@ -170,16 +170,36 @@
         /* Subtle shadow like image */
     }
 
-    .action-btn:hover {
-        border-color: #cbd5e1;
-        background: #f8fafc;
-        color: #1e293b;
+    /* Point Colors for Buttons */
+    /* Discuss - Blue/Indigo */
+    .action-btn.discuss {
+        color: #4f46e5;
+        border-color: #e0e7ff;
+        background: #eef2ff;
     }
 
+    .action-btn.discuss:hover {
+        background: #e0e7ff;
+        border-color: #c7d2fe;
+    }
+
+    /* Share - Teal/Green */
+    .action-btn.share {
+        color: #0d9488;
+        border-color: #ccfbf1;
+        background: #f0fdfa;
+    }
+
+    .action-btn.share:hover {
+        background: #ccfbf1;
+        border-color: #99f6e4;
+    }
+
+    /* Delete - Red */
     .action-btn.delete {
-        color: #ef4444;
-        background: #fef2f2;
+        color: #b91c1c;
         border-color: #fee2e2;
+        background: #fef2f2;
     }
 
     .action-btn.delete:hover {
@@ -309,7 +329,7 @@
         <thead>
             <tr>
                 <th class="col-idx">#</th>
-                <th class="col-title">타이틀</th>
+                <th style="padding-left: 0;">타이틀</th>
                 <th class="col-date">등록일</th>
             </tr>
         </thead>
@@ -317,19 +337,21 @@
             {% for page in pages %}
             <tr>
                 <td class="col-idx">{{ loop.index }}</td>
-                <td class="col-title">
-                    <a href="{{ page.id }}.html">
-                        {% if page.is_new %}<span class="new-badge">NEW</span>{% endif %}
-                        {{ page.title }}
-                    </a>
-                    <div class="action-row">
-                        <a href="../board/index.html?mode=discuss&title={{ page.title | urlencode }}&link=https://vaax-maker.github.io/ai-news-daily/quickview/{{ page.id }}.html&source=퀵뷰"
-                            class="action-btn">💬 토론</a>
-                        <button type="button" class="action-btn"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/{{ page.id }}.html'); alert('URL이 복사되었습니다!');">🔗
-                            공유</button>
-                        <button type="button" class="action-btn delete"
-                            onclick="deleteQuickview('{{ page.id }}', '{{ page.title | escape }}')">🗑️ 삭제</button>
+                <td style="padding-left: 0;">
+                    <div class="col-title">
+                        <div class="title-wrapper">
+                            {% if page.is_new %}<span class="new-badge">NEW</span>{% endif %}
+                            <a href="{{ page.id }}.html" class="title-text">{{ page.title }}</a>
+                        </div>
+                        <div class="action-row">
+                            <a href="../board/index.html?mode=discuss&title={{ page.title | urlencode }}&link=https://vaax-maker.github.io/ai-news-daily/quickview/{{ page.id }}.html&source=퀵뷰"
+                                class="action-btn discuss">💬 토론</a>
+                            <button type="button" class="action-btn share"
+                                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/{{ page.id }}.html'); alert('URL이 복사되었습니다!');">🔗
+                                공유</button>
+                            <button type="button" class="action-btn delete"
+                                onclick="deleteQuickview('{{ page.id }}', '{{ page.title | escape }}')">🗑️ 삭제</button>
+                        </div>
                     </div>
                 </td>
                 <td class="col-date">{{ page.created_display }}</td>
