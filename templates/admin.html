@@ -415,52 +415,8 @@
         }
     });
 
-    // URL Summarization Elements
-    const articleUrl = document.getElementById('articleUrl');
-    const btnSummarize = document.getElementById('btnSummarize');
-    const summaryResult = document.getElementById('summaryResult');
-    const articleTitle = document.getElementById('articleTitle');
-    const summaryPreview = document.getElementById('summaryPreview');
-    const btnAddToMessage = document.getElementById('btnAddToMessage');
-    const btnSaveArchive = document.getElementById('btnSaveArchive');
-    const archiveCategory = document.getElementById('archiveCategory');
-    const detectedCategory = document.getElementById('detectedCategory');
-    const summarizeStatus = document.getElementById('summarizeStatus');
-    const archiveStatus = document.getElementById('archiveStatus');
 
     const GEMINI_API_KEY = 'AIzaSyBQnDMvtDnQDd9p4clijvVZsZcspRtiFIk';
-    let currentSummary = '';
-    let currentCategory = 'ai';
-
-    // Detect category from URL or content
-    function detectCategory(url, text = '') {
-        const combined = (url + ' ' + text).toLowerCase();
-        const xrKeywords = ['vr', 'ar', 'xr', 'virtual reality', 'augmented reality', 'mixed reality', 'metaverse', 'headset', 'quest', 'vision pro', 'hololens', 'spatial'];
-        for (const kw of xrKeywords) {
-            if (combined.includes(kw)) return 'xr';
-        }
-        return 'ai';
-    }
-
-    // Fetch URL content via CORS proxy
-    async function fetchUrlContent(url) {
-        const proxies = [
-            `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-            `https://corsproxy.io/?${encodeURIComponent(url)}`
-        ];
-
-        for (const proxyUrl of proxies) {
-            try {
-                const response = await fetch(proxyUrl);
-                if (response.ok) {
-                    return await response.text();
-                }
-            } catch (e) {
-                console.warn('Proxy failed:', proxyUrl, e);
-            }
-        }
-        throw new Error('Failed to fetch URL content');
-    }
 
     // Extract text from HTML
     function extractTextFromHtml(html) {
@@ -524,99 +480,6 @@
         throw new Error('Failed to generate summary');
     }
 
-    // Summarize button click
-    btnSummarize.addEventListener('click', async () => {
-        const url = articleUrl.value.trim();
-        if (!url) {
-            alert('Please enter a URL');
-            return;
-        }
-
-        summarizeStatus.className = 'status-msg';
-        summarizeStatus.innerText = 'Fetching article...';
-        summaryResult.style.display = 'none';
-
-        try {
-            const html = await fetchUrlContent(url);
-            summarizeStatus.innerText = 'Extracting content...';
-
-            const { title, text } = extractTextFromHtml(html);
-            if (!text || text.length < 100) {
-                throw new Error('Could not extract article content');
-            }
-
-            summarizeStatus.innerText = 'Generating summary with AI...';
-            const summary = await summarizeWithGemini(text, title);
-
-            currentSummary = summary;
-            currentCategory = detectCategory(url, text);
-
-            articleTitle.value = title;
-            summaryPreview.innerText = summary;
-            archiveCategory.innerText = currentCategory.toUpperCase();
-
-            // Show category badge
-            detectedCategory.style.display = 'inline';
-            detectedCategory.innerText = currentCategory.toUpperCase();
-            detectedCategory.style.background = currentCategory === 'xr' ? '#8b5cf6' : '#22c55e';
-            detectedCategory.style.color = 'white';
-
-            summaryResult.style.display = 'block';
-            summarizeStatus.className = 'status-msg success';
-            summarizeStatus.innerText = 'Summary generated!';
-        } catch (e) {
-            console.error(e);
-            summarizeStatus.className = 'status-msg error';
-            summarizeStatus.innerText = 'Error: ' + e.message;
-        }
-    });
-
-    // Add to Message button
-    btnAddToMessage.addEventListener('click', () => {
-        const url = articleUrl.value.trim();
-        const title = articleTitle.value.trim();
-        const message = `${title}\n\n${currentSummary}\n\n${url}`;
-
-        if (message.length > 500) {
-            alert(`Message is ${message.length} characters. Please shorten the summary.`);
-            return;
-        }
-
-        msgBody.value = message;
-        msgBody.dispatchEvent(new Event('input'));
-    });
-
-    // Save to Archive button
-    btnSaveArchive.addEventListener('click', async () => {
-        const url = articleUrl.value.trim();
-        const title = articleTitle.value.trim();
-
-        if (!url || !title || !currentSummary) {
-            alert('Please summarize an article first');
-            return;
-        }
-
-        archiveStatus.className = 'status-msg';
-        archiveStatus.innerText = 'Saving to archive...';
-
-        try {
-            await addDoc(collection(db, "manual_articles"), {
-                url,
-                title,
-                summary: currentSummary,
-                category: currentCategory,
-                status: 'pending',
-                createdAt: serverTimestamp()
-            });
-
-            archiveStatus.className = 'status-msg success';
-            archiveStatus.innerText = `Saved to ${currentCategory.toUpperCase()} archive!`;
-        } catch (e) {
-            console.error(e);
-            archiveStatus.className = 'status-msg error';
-            archiveStatus.innerText = 'Error: ' + e.message;
-        }
-    });
 
     // Login Logic
     btnLogin.addEventListener('click', async () => {
