@@ -485,30 +485,32 @@
     let webshareHistory = null;
 
     // Login Logic
-    btnLogin.addEventListener('click', async () => {
-        const pass = adminPass.value;
-        if (!pass) return;
+    if (btnLogin) {
+        btnLogin.addEventListener('click', async () => {
+            const pass = adminPass ? adminPass.value : '';
+            if (!pass) return;
 
-        try {
-            const adminDoc = await getDoc(doc(db, "config", "admin"));
-            if (adminDoc.exists() && adminDoc.data().password === pass) {
-                loginStatus.classList.remove('error');
-                loginStatus.innerText = "";
-                loginSection.classList.remove('active');
-                panelSection.classList.add('active');
-                sessionStorage.setItem('vaaxAdmin', 'true');
-                loadHistory();
-                loadWebshareHistory();
-            } else {
-                loginStatus.classList.add('error');
-                loginStatus.innerText = "Invalid password. Access denied.";
+            try {
+                const adminDoc = await getDoc(doc(db, "config", "admin"));
+                if (adminDoc.exists() && adminDoc.data().password === pass) {
+                    if (loginStatus) loginStatus.classList.remove('error');
+                    if (loginStatus) loginStatus.innerText = "";
+                    if (loginSection) loginSection.classList.remove('active');
+                    if (panelSection) panelSection.classList.add('active');
+                    sessionStorage.setItem('vaaxAdmin', 'true');
+                    loadHistory();
+                    loadWebshareHistory();
+                } else {
+                    if (loginStatus) loginStatus.classList.add('error');
+                    if (loginStatus) loginStatus.innerText = "Invalid password. Access denied.";
+                }
+            } catch (e) {
+                console.error(e);
+                if (loginStatus) loginStatus.classList.add('error');
+                if (loginStatus) loginStatus.innerText = "Error connecting to Firebase.";
             }
-        } catch (e) {
-            console.error(e);
-            loginStatus.classList.add('error');
-            loginStatus.innerText = "Error connecting to Firebase.";
-        }
-    });
+        });
+    }
 
     // Check session
     if (sessionStorage.getItem('vaaxAdmin') === 'true') {
@@ -542,66 +544,80 @@
     }
 
     // Logout
-    btnLogout.addEventListener('click', () => {
-        sessionStorage.removeItem('vaaxAdmin');
-        location.reload();
-    });
+    if (btnLogout) {
+        btnLogout.addEventListener('click', () => {
+            sessionStorage.removeItem('vaaxAdmin');
+            location.reload();
+        });
+    }
 
     // Send Option Toggle
-    sendOption.addEventListener('change', () => {
-        if (sendOption.value === 'scheduled') {
-            scheduleOptions.classList.add('active');
-        } else {
-            scheduleOptions.classList.remove('active');
-        }
-    });
+    if (sendOption) {
+        sendOption.addEventListener('change', () => {
+            if (sendOption.value === 'scheduled') {
+                scheduleOptions.classList.add('active');
+            } else {
+                scheduleOptions.classList.remove('active');
+            }
+        });
+    }
 
     // Send / Schedule Logic
-    btnSend.addEventListener('click', async () => {
-        const body = msgBody.value.trim();
-        if (!body) {
-            alert("Please enter message body.");
-            return;
-        }
-
-        const option = sendOption.value;
-        panelStatus.className = 'status-msg'; // Reset
-        panelStatus.innerText = "Processing...";
-
-        try {
-            if (option === 'immediate') {
-                await addDoc(collection(db, "admin_notifications"), {
-                    body,
-                    type: 'immediate',
-                    status: 'pending',
-                    createdAt: serverTimestamp()
-                });
-                panelStatus.classList.add('success');
-                panelStatus.innerText = "Message queued! It will be sent within 1 minute.";
-            } else {
-                const targetTime = scheduleTime.value;
-                if (!targetTime) {
-                    alert("Please select target time.");
-                    return;
-                }
-                await addDoc(collection(db, "admin_notifications"), {
-                    body,
-                    type: 'scheduled',
-                    status: 'pending',
-                    targetTime: new Date(targetTime),
-                    createdAt: serverTimestamp()
-                });
-                panelStatus.classList.add('success');
-                panelStatus.innerText = "Message scheduled successfully!";
+    if (btnSend) {
+        btnSend.addEventListener('click', async () => {
+            const body = msgBody.value.trim();
+            if (!body) {
+                alert("Please enter message body.");
+                return;
             }
-            msgBody.value = "";
-            charCounter.innerText = "0 characters";
-        } catch (e) {
-            console.error(e);
-            panelStatus.classList.add('error');
-            panelStatus.innerText = "Error: " + e.message;
-        }
-    });
+
+            const option = sendOption ? sendOption.value : 'immediate';
+            if (panelStatus) {
+                panelStatus.className = 'status-msg';
+                panelStatus.innerText = "Processing...";
+            }
+
+            try {
+                if (option === 'immediate') {
+                    await addDoc(collection(db, "admin_notifications"), {
+                        body,
+                        type: 'immediate',
+                        status: 'pending',
+                        createdAt: serverTimestamp()
+                    });
+                    if (panelStatus) {
+                        panelStatus.classList.add('success');
+                        panelStatus.innerText = "Message queued! It will be sent within 1 minute.";
+                    }
+                } else {
+                    const targetTime = scheduleTime ? scheduleTime.value : null;
+                    if (!targetTime) {
+                        alert("Please select target time.");
+                        return;
+                    }
+                    await addDoc(collection(db, "admin_notifications"), {
+                        body,
+                        type: 'scheduled',
+                        status: 'pending',
+                        targetTime: new Date(targetTime),
+                        createdAt: serverTimestamp()
+                    });
+                    if (panelStatus) {
+                        panelStatus.classList.add('success');
+                        panelStatus.innerText = "Message scheduled successfully!";
+                    }
+                }
+                if (msgBody) msgBody.value = "";
+                if (charCounter) charCounter.innerText = "0 characters";
+            } catch (e) {
+                console.error(e);
+                if (panelStatus) {
+                    panelStatus.classList.add('error');
+                    panelStatus.innerText = "Error: " + e.message;
+                }
+            }
+        });
+    }
 
     // Quickview Creation Elements
     const quickviewTitle = document.getElementById('quickviewTitle');
