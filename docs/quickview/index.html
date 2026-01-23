@@ -19,6 +19,161 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../static/css/style.css?v=12">
     
+<style>
+    /* 테이블 스타일 (Gov Archive 스타일 차용) */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .styled-table th {
+        background: #f8fafc;
+        padding: 1rem 1.5rem;
+        text-align: left;
+        font-weight: 600;
+        color: #475569;
+        border-bottom: 2px solid #e2e8f0;
+    }
+
+    .styled-table td {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #f1f5f9;
+        vertical-align: middle;
+        color: #334155;
+    }
+
+    .styled-table tbody tr:hover {
+        background: #f8fafc;
+    }
+
+    .col-idx {
+        width: 60px;
+        text-align: center;
+        color: #94a3b8;
+    }
+
+    .col-title {
+        min-width: 300px;
+    }
+
+    .col-title a {
+        color: #0f172a;
+        font-weight: 500;
+        text-decoration: none;
+        font-size: 1.05rem;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .col-title a:hover {
+        color: #2563eb;
+    }
+
+    .col-date {
+        width: 120px;
+        white-space: nowrap;
+        color: #64748b;
+        font-size: 0.9rem;
+    }
+
+    /* 반응형 모바일 뷰 */
+    .mobile-cards {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .desktop-table {
+            display: none;
+        }
+
+        .mobile-cards {
+            display: block;
+        }
+
+        .course-card {
+            background: white;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .course-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .course-card h3 {
+            margin: 0 0 1rem 0;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
+        .course-card h3 a {
+            color: #1e293b;
+            text-decoration: none;
+
+        }
+    }
+
+    /* Action Buttons */
+    .action-row {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .action-btn {
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+        border: 1px solid #e2e8f0;
+        background: white;
+        font-size: 0.75rem;
+        color: #64748b;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+        border-color: #cbd5e1;
+        background: #f8fafc;
+        color: #334155;
+    }
+
+    .action-btn.delete {
+        color: #ef4444;
+        border-color: #fee2e2;
+        background: #fef2f2;
+    }
+
+    .action-btn.delete:hover {
+        border-color: #fca5a5;
+        background: #fee2e2;
+    }
+
+    .new-badge {
+        display: inline-block;
+        background: #ef4444;
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.1rem 0.4rem;
+        border-radius: 4px;
+        margin-right: 0.5rem;
+        vertical-align: middle;
+    }
+</style>
+
 </head>
 
 <body>
@@ -69,653 +224,1250 @@
 <div class="page-header">
     <p class="eyebrow">Quickview</p>
     <h1>퀵뷰</h1>
-    <p class="subtitle">빠르게 공유하는 콘텐츠 모음</p>
+    <p class="subtitle">빠르게 공유하는 핵심 요약</p>
 </div>
 
 
-<section class="card">
-    <div class="news-grid">
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260120_difwlm.html">Assistant Axis: LLM의 인격적 안정성과 페르소나 제어 기술</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+<!-- PC Table View -->
+<div class="desktop-table">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th class="col-idx">#</th>
+                <th class="col-title">타이틀</th>
+                <th class="col-date">등록일</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td class="col-idx">1</td>
+                <td class="col-title">
+                    <a href="20260120_difwlm.html">
+                        
+                        Assistant Axis: LLM의 인격적 안정성과 페르소나 제어 기술
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=Assistant%20Axis%3A%20LLM%EC%9D%98%20%EC%9D%B8%EA%B2%A9%EC%A0%81%20%EC%95%88%EC%A0%95%EC%84%B1%EA%B3%BC%20%ED%8E%98%EB%A5%B4%EC%86%8C%EB%82%98%20%EC%A0%9C%EC%96%B4%20%EA%B8%B0%EC%88%A0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260120_difwlm.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260120_difwlm.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260120_difwlm', 'Assistant Axis: LLM의 인격적 안정성과 페르소나 제어 기술')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260120_difwlm.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260120_difwlm', 'Assistant Axis: LLM의 인격적 안정성과 페르소나 제어 기술')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 21일 08:39</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260120_8z58on.html">AGI 탄생의 연대기와 인류의 미래</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 21일 08:39</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">2</td>
+                <td class="col-title">
+                    <a href="20260120_8z58on.html">
+                        
+                        AGI 탄생의 연대기와 인류의 미래
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=AGI%20%ED%83%84%EC%83%9D%EC%9D%98%20%EC%97%B0%EB%8C%80%EA%B8%B0%EC%99%80%20%EC%9D%B8%EB%A5%98%EC%9D%98%20%EB%AF%B8%EB%9E%98&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260120_8z58on.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260120_8z58on.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260120_8z58on', 'AGI 탄생의 연대기와 인류의 미래')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260120_8z58on.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260120_8z58on', 'AGI 탄생의 연대기와 인류의 미래')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 20일 11:45</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260118_10v8ur.html">OpenAI 'Sweetpea': 에어팟을 대체할 귀 뒤의 AI 비서</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 20일 11:45</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">3</td>
+                <td class="col-title">
+                    <a href="20260118_10v8ur.html">
+                        
+                        OpenAI 'Sweetpea': 에어팟을 대체할 귀 뒤의 AI 비서
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=OpenAI%20%27Sweetpea%27%3A%20%EC%97%90%EC%96%B4%ED%8C%9F%EC%9D%84%20%EB%8C%80%EC%B2%B4%ED%95%A0%20%EA%B7%80%20%EB%92%A4%EC%9D%98%20AI%20%EB%B9%84%EC%84%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260118_10v8ur.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260118_10v8ur.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260118_10v8ur', 'OpenAI &#39;Sweetpea&#39;: 에어팟을 대체할 귀 뒤의 AI 비서')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260118_10v8ur.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260118_10v8ur', 'OpenAI &#39;Sweetpea&#39;: 에어팟을 대체할 귀 뒤의 AI 비서')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 19일 08:34</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260118_l44qdb.html">IT뉴스 - GPT-5.3 '갈릭' 루머, 챗GPT 광고 도입, 애플의 제미나이 탑재 등 종합 정리</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 19일 08:34</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">4</td>
+                <td class="col-title">
+                    <a href="20260118_l44qdb.html">
+                        
+                        IT뉴스 - GPT-5.3 '갈릭' 루머, 챗GPT 광고 도입, 애플의 제미나이 탑재 등 종합 정리
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=IT%EB%89%B4%EC%8A%A4%20-%20GPT-5.3%20%27%EA%B0%88%EB%A6%AD%27%20%EB%A3%A8%EB%A8%B8%2C%20%EC%B1%97GPT%20%EA%B4%91%EA%B3%A0%20%EB%8F%84%EC%9E%85%2C%20%EC%95%A0%ED%94%8C%EC%9D%98%20%EC%A0%9C%EB%AF%B8%EB%82%98%EC%9D%B4%20%ED%83%91%EC%9E%AC%20%EB%93%B1%20%EC%A2%85%ED%95%A9%20%EC%A0%95%EB%A6%AC&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260118_l44qdb.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260118_l44qdb.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260118_l44qdb', 'IT뉴스 - GPT-5.3 &#39;갈릭&#39; 루머, 챗GPT 광고 도입, 애플의 제미나이 탑재 등 종합 정리')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260118_l44qdb.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260118_l44qdb', 'IT뉴스 - GPT-5.3 &#39;갈릭&#39; 루머, 챗GPT 광고 도입, 애플의 제미나이 탑재 등 종합 정리')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 19일 08:24</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260118_xdvtpz.html">챗GPT vs 제미나이, AI 주식 투자 조언의 실체와 활용법</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 19일 08:24</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">5</td>
+                <td class="col-title">
+                    <a href="20260118_xdvtpz.html">
+                        
+                        챗GPT vs 제미나이, AI 주식 투자 조언의 실체와 활용법
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EC%B1%97GPT%20vs%20%EC%A0%9C%EB%AF%B8%EB%82%98%EC%9D%B4%2C%20AI%20%EC%A3%BC%EC%8B%9D%20%ED%88%AC%EC%9E%90%20%EC%A1%B0%EC%96%B8%EC%9D%98%20%EC%8B%A4%EC%B2%B4%EC%99%80%20%ED%99%9C%EC%9A%A9%EB%B2%95&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260118_xdvtpz.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260118_xdvtpz.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260118_xdvtpz', '챗GPT vs 제미나이, AI 주식 투자 조언의 실체와 활용법')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260118_xdvtpz.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260118_xdvtpz', '챗GPT vs 제미나이, AI 주식 투자 조언의 실체와 활용법')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 18일 12:05</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260117_t0qmni.html">일론 머스크의 2026 미래 전망: 특이점과 압도적 풍요</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 18일 12:05</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">6</td>
+                <td class="col-title">
+                    <a href="20260117_t0qmni.html">
+                        
+                        일론 머스크의 2026 미래 전망: 특이점과 압도적 풍요
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EC%9D%BC%EB%A1%A0%20%EB%A8%B8%EC%8A%A4%ED%81%AC%EC%9D%98%202026%20%EB%AF%B8%EB%9E%98%20%EC%A0%84%EB%A7%9D%3A%20%ED%8A%B9%EC%9D%B4%EC%A0%90%EA%B3%BC%20%EC%95%95%EB%8F%84%EC%A0%81%20%ED%92%8D%EC%9A%94&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260117_t0qmni.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260117_t0qmni.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260117_t0qmni', '일론 머스크의 2026 미래 전망: 특이점과 압도적 풍요')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260117_t0qmni.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260117_t0qmni', '일론 머스크의 2026 미래 전망: 특이점과 압도적 풍요')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 17일 21:48</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260115_ezbz6f.html">구글 안티그래비티(Antigravity)로 AWS 서버 구축 및 대시보드 만들기</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 17일 21:48</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">7</td>
+                <td class="col-title">
+                    <a href="20260115_ezbz6f.html">
+                        
+                        구글 안티그래비티(Antigravity)로 AWS 서버 구축 및 대시보드 만들기
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EA%B5%AC%EA%B8%80%20%EC%95%88%ED%8B%B0%EA%B7%B8%EB%9E%98%EB%B9%84%ED%8B%B0%28Antigravity%29%EB%A1%9C%20AWS%20%EC%84%9C%EB%B2%84%20%EA%B5%AC%EC%B6%95%20%EB%B0%8F%20%EB%8C%80%EC%8B%9C%EB%B3%B4%EB%93%9C%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260115_ezbz6f.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260115_ezbz6f.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260115_ezbz6f', '구글 안티그래비티(Antigravity)로 AWS 서버 구축 및 대시보드 만들기')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260115_ezbz6f.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260115_ezbz6f', '구글 안티그래비티(Antigravity)로 AWS 서버 구축 및 대시보드 만들기')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 16일 08:47</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260114_betnon.html">메타의 반전? 미국서 대박난 스마트 안경과 공간 컴퓨팅의 미래</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 16일 08:47</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">8</td>
+                <td class="col-title">
+                    <a href="20260114_betnon.html">
+                        
+                        메타의 반전? 미국서 대박난 스마트 안경과 공간 컴퓨팅의 미래
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EB%A9%94%ED%83%80%EC%9D%98%20%EB%B0%98%EC%A0%84%3F%20%EB%AF%B8%EA%B5%AD%EC%84%9C%20%EB%8C%80%EB%B0%95%EB%82%9C%20%EC%8A%A4%EB%A7%88%ED%8A%B8%20%EC%95%88%EA%B2%BD%EA%B3%BC%20%EA%B3%B5%EA%B0%84%20%EC%BB%B4%ED%93%A8%ED%8C%85%EC%9D%98%20%EB%AF%B8%EB%9E%98&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260114_betnon.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260114_betnon.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260114_betnon', '메타의 반전? 미국서 대박난 스마트 안경과 공간 컴퓨팅의 미래')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260114_betnon.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260114_betnon', '메타의 반전? 미국서 대박난 스마트 안경과 공간 컴퓨팅의 미래')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 14일 23:33</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260114_o2klvv.html">현대차 자율주행의 승부수: 엔비디아 '알파마요'와의 동행</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 14일 23:33</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">9</td>
+                <td class="col-title">
+                    <a href="20260114_o2klvv.html">
+                        
+                        현대차 자율주행의 승부수: 엔비디아 '알파마요'와의 동행
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%ED%98%84%EB%8C%80%EC%B0%A8%20%EC%9E%90%EC%9C%A8%EC%A3%BC%ED%96%89%EC%9D%98%20%EC%8A%B9%EB%B6%80%EC%88%98%3A%20%EC%97%94%EB%B9%84%EB%94%94%EC%95%84%20%27%EC%95%8C%ED%8C%8C%EB%A7%88%EC%9A%94%27%EC%99%80%EC%9D%98%20%EB%8F%99%ED%96%89&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260114_o2klvv.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260114_o2klvv.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260114_o2klvv', '현대차 자율주행의 승부수: 엔비디아 &#39;알파마요&#39;와의 동행')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260114_o2klvv.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260114_o2klvv', '현대차 자율주행의 승부수: 엔비디아 &#39;알파마요&#39;와의 동행')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 14일 23:31</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260113_jnmox7.html">구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 14일 23:31</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">10</td>
+                <td class="col-title">
+                    <a href="20260113_jnmox7.html">
+                        
+                        구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EA%B5%AC%EA%B8%80%20Opal%20%EC%82%AC%EC%9A%A9%EB%B2%95%3A%20%EC%BD%94%EB%94%A9%20%EC%97%86%EC%9D%B4%20%EB%82%98%EB%A7%8C%EC%9D%98%20AI%20%EC%95%B1%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260113_jnmox7.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260113_jnmox7.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260113_jnmox7', '구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260113_jnmox7.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260113_jnmox7', '구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 13일 16:43</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260112_ut14cj.html">IT 뉴스 - 2026년 AI 트렌드 및 CES 완전 정복 (심층 요약)</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 13일 16:43</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">11</td>
+                <td class="col-title">
+                    <a href="20260112_ut14cj.html">
+                        
+                        IT 뉴스 - 2026년 AI 트렌드 및 CES 완전 정복 (심층 요약)
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=IT%20%EB%89%B4%EC%8A%A4%20-%202026%EB%85%84%20AI%20%ED%8A%B8%EB%A0%8C%EB%93%9C%20%EB%B0%8F%20CES%20%EC%99%84%EC%A0%84%20%EC%A0%95%EB%B3%B5%20%28%EC%8B%AC%EC%B8%B5%20%EC%9A%94%EC%95%BD%29&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260112_ut14cj.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260112_ut14cj.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260112_ut14cj', 'IT 뉴스 - 2026년 AI 트렌드 및 CES 완전 정복 (심층 요약)')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260112_ut14cj.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260112_ut14cj', 'IT 뉴스 - 2026년 AI 트렌드 및 CES 완전 정복 (심층 요약)')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 12일 11:47</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260112_7kta0a.html">팝콘 브레인: 게이머가 떠나는 이유와 게임 산업의 위기 분석</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 12일 11:47</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">12</td>
+                <td class="col-title">
+                    <a href="20260112_7kta0a.html">
+                        
+                        팝콘 브레인: 게이머가 떠나는 이유와 게임 산업의 위기 분석
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%ED%8C%9D%EC%BD%98%20%EB%B8%8C%EB%A0%88%EC%9D%B8%3A%20%EA%B2%8C%EC%9D%B4%EB%A8%B8%EA%B0%80%20%EB%96%A0%EB%82%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0%EC%99%80%20%EA%B2%8C%EC%9E%84%20%EC%82%B0%EC%97%85%EC%9D%98%20%EC%9C%84%EA%B8%B0%20%EB%B6%84%EC%84%9D&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260112_7kta0a.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260112_7kta0a.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260112_7kta0a', '팝콘 브레인: 게이머가 떠나는 이유와 게임 산업의 위기 분석')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260112_7kta0a.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260112_7kta0a', '팝콘 브레인: 게이머가 떠나는 이유와 게임 산업의 위기 분석')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 12일 10:33</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260111_idmes1.html">그록 4.1로 무제한 길이 AI 애니메이션 만들기</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 12일 10:33</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">13</td>
+                <td class="col-title">
+                    <a href="20260111_idmes1.html">
+                        
+                        그록 4.1로 무제한 길이 AI 애니메이션 만들기
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EA%B7%B8%EB%A1%9D%204.1%EB%A1%9C%20%EB%AC%B4%EC%A0%9C%ED%95%9C%20%EA%B8%B8%EC%9D%B4%20AI%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_idmes1.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_idmes1.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260111_idmes1', '그록 4.1로 무제한 길이 AI 애니메이션 만들기')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_idmes1.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260111_idmes1', '그록 4.1로 무제한 길이 AI 애니메이션 만들기')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 11일 21:31</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260111_6j618j.html">CES 2026 K-스타트업 혁신: 일상에 스며든 앰비언트 AI 기술</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 11일 21:31</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">14</td>
+                <td class="col-title">
+                    <a href="20260111_6j618j.html">
+                        
+                        CES 2026 K-스타트업 혁신: 일상에 스며든 앰비언트 AI 기술
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=CES%202026%20K-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85%20%ED%98%81%EC%8B%A0%3A%20%EC%9D%BC%EC%83%81%EC%97%90%20%EC%8A%A4%EB%A9%B0%EB%93%A0%20%EC%95%B0%EB%B9%84%EC%96%B8%ED%8A%B8%20AI%20%EA%B8%B0%EC%88%A0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_6j618j.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_6j618j.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260111_6j618j', 'CES 2026 K-스타트업 혁신: 일상에 스며든 앰비언트 AI 기술')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_6j618j.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260111_6j618j', 'CES 2026 K-스타트업 혁신: 일상에 스며든 앰비언트 AI 기술')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 11일 21:22</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260111_y5905q.html">[CES 2026] AI가 결합된 XR 글래스의 일상화: 주요 기업 및 기술 분석</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 11일 21:22</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">15</td>
+                <td class="col-title">
+                    <a href="20260111_y5905q.html">
+                        
+                        [CES 2026] AI가 결합된 XR 글래스의 일상화: 주요 기업 및 기술 분석
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%5BCES%202026%5D%20AI%EA%B0%80%20%EA%B2%B0%ED%95%A9%EB%90%9C%20XR%20%EA%B8%80%EB%9E%98%EC%8A%A4%EC%9D%98%20%EC%9D%BC%EC%83%81%ED%99%94%3A%20%EC%A3%BC%EC%9A%94%20%EA%B8%B0%EC%97%85%20%EB%B0%8F%20%EA%B8%B0%EC%88%A0%20%EB%B6%84%EC%84%9D&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_y5905q.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_y5905q.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260111_y5905q', '[CES 2026] AI가 결합된 XR 글래스의 일상화: 주요 기업 및 기술 분석')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_y5905q.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260111_y5905q', '[CES 2026] AI가 결합된 XR 글래스의 일상화: 주요 기업 및 기술 분석')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 11일 20:54</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260111_72w7vf.html">제발 버티지 마세요: 송길영이 경고하는 2026년 생존법</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 11일 20:54</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">16</td>
+                <td class="col-title">
+                    <a href="20260111_72w7vf.html">
+                        
+                        제발 버티지 마세요: 송길영이 경고하는 2026년 생존법
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EC%A0%9C%EB%B0%9C%20%EB%B2%84%ED%8B%B0%EC%A7%80%20%EB%A7%88%EC%84%B8%EC%9A%94%3A%20%EC%86%A1%EA%B8%B8%EC%98%81%EC%9D%B4%20%EA%B2%BD%EA%B3%A0%ED%95%98%EB%8A%94%202026%EB%85%84%20%EC%83%9D%EC%A1%B4%EB%B2%95&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_72w7vf.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_72w7vf.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260111_72w7vf', '제발 버티지 마세요: 송길영이 경고하는 2026년 생존법')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_72w7vf.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260111_72w7vf', '제발 버티지 마세요: 송길영이 경고하는 2026년 생존법')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 11일 20:19</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260111_10jf3f.html">아무리 미루던 사람도 오늘부터 달라집니다</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 11일 20:19</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">17</td>
+                <td class="col-title">
+                    <a href="20260111_10jf3f.html">
+                        
+                        아무리 미루던 사람도 오늘부터 달라집니다
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EC%95%84%EB%AC%B4%EB%A6%AC%20%EB%AF%B8%EB%A3%A8%EB%8D%98%20%EC%82%AC%EB%9E%8C%EB%8F%84%20%EC%98%A4%EB%8A%98%EB%B6%80%ED%84%B0%20%EB%8B%AC%EB%9D%BC%EC%A7%91%EB%8B%88%EB%8B%A4&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_10jf3f.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_10jf3f.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260111_10jf3f', '아무리 미루던 사람도 오늘부터 달라집니다')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_10jf3f.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260111_10jf3f', '아무리 미루던 사람도 오늘부터 달라집니다')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 11일 20:15</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260111_jmqopm.html">AI 시대의 교육 : 변하지 않는 가치를 찾아서</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 11일 20:15</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">18</td>
+                <td class="col-title">
+                    <a href="20260111_jmqopm.html">
+                        
+                        AI 시대의 교육 : 변하지 않는 가치를 찾아서
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%EA%B5%90%EC%9C%A1%20%3A%20%EB%B3%80%ED%95%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EA%B0%80%EC%B9%98%EB%A5%BC%20%EC%B0%BE%EC%95%84%EC%84%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_jmqopm.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_jmqopm.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260111_jmqopm', 'AI 시대의 교육 : 변하지 않는 가치를 찾아서')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_jmqopm.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260111_jmqopm', 'AI 시대의 교육 : 변하지 않는 가치를 찾아서')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 11일 19:59</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260111_7v9nf6.html">AI 시대, 대체되지 않는 생존 전략과 핵개인의 탄생</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 11일 19:59</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">19</td>
+                <td class="col-title">
+                    <a href="20260111_7v9nf6.html">
+                        
+                        AI 시대, 대체되지 않는 생존 전략과 핵개인의 탄생
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=AI%20%EC%8B%9C%EB%8C%80%2C%20%EB%8C%80%EC%B2%B4%EB%90%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EC%83%9D%EC%A1%B4%20%EC%A0%84%EB%9E%B5%EA%B3%BC%20%ED%95%B5%EA%B0%9C%EC%9D%B8%EC%9D%98%20%ED%83%84%EC%83%9D&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_7v9nf6.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_7v9nf6.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260111_7v9nf6', 'AI 시대, 대체되지 않는 생존 전략과 핵개인의 탄생')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_7v9nf6.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260111_7v9nf6', 'AI 시대, 대체되지 않는 생존 전략과 핵개인의 탄생')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 11일 19:56</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260111_0y3zj0.html">미국 정부의 충격 선언: 50년 영양 가이드라인의 종말과 새로운 패러다임</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 11일 19:56</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">20</td>
+                <td class="col-title">
+                    <a href="20260111_0y3zj0.html">
+                        
+                        미국 정부의 충격 선언: 50년 영양 가이드라인의 종말과 새로운 패러다임
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EB%AF%B8%EA%B5%AD%20%EC%A0%95%EB%B6%80%EC%9D%98%20%EC%B6%A9%EA%B2%A9%20%EC%84%A0%EC%96%B8%3A%2050%EB%85%84%20%EC%98%81%EC%96%91%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%EC%9D%98%20%EC%A2%85%EB%A7%90%EA%B3%BC%20%EC%83%88%EB%A1%9C%EC%9A%B4%20%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_0y3zj0.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_0y3zj0.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260111_0y3zj0', '미국 정부의 충격 선언: 50년 영양 가이드라인의 종말과 새로운 패러다임')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_0y3zj0.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260111_0y3zj0', '미국 정부의 충격 선언: 50년 영양 가이드라인의 종말과 새로운 패러다임')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 11일 19:51</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260109_9xwith.html">믿을 정보가 없다? AI '슬롭(Slop)'의 습격과 데이터 전쟁</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 11일 19:51</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">21</td>
+                <td class="col-title">
+                    <a href="20260109_9xwith.html">
+                        
+                        믿을 정보가 없다? AI '슬롭(Slop)'의 습격과 데이터 전쟁
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EB%AF%BF%EC%9D%84%20%EC%A0%95%EB%B3%B4%EA%B0%80%20%EC%97%86%EB%8B%A4%3F%20AI%20%27%EC%8A%AC%EB%A1%AD%28Slop%29%27%EC%9D%98%20%EC%8A%B5%EA%B2%A9%EA%B3%BC%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A0%84%EC%9F%81&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260109_9xwith.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260109_9xwith.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260109_9xwith', '믿을 정보가 없다? AI &#39;슬롭(Slop)&#39;의 습격과 데이터 전쟁')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260109_9xwith.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260109_9xwith', '믿을 정보가 없다? AI &#39;슬롭(Slop)&#39;의 습격과 데이터 전쟁')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 09일 16:19</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260109_o1cjsl.html">[Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 & 이메일 연동 사이트 만들기</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 09일 16:19</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">22</td>
+                <td class="col-title">
+                    <a href="20260109_o1cjsl.html">
+                        
+                        [Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 & 이메일 연동 사이트 만들기
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%5BHands-On%5D%20Lovable%3A%20AI%20%EC%9B%B9%EC%82%AC%EC%9D%B4%ED%8A%B8%20%EB%B9%8C%EB%8D%94%EB%A1%9C%20%EA%B2%AC%EC%A0%81%20%EA%B3%84%EC%82%B0%EA%B8%B0%20%26%20%EC%9D%B4%EB%A9%94%EC%9D%BC%20%EC%97%B0%EB%8F%99%20%EC%82%AC%EC%9D%B4%ED%8A%B8%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260109_o1cjsl.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260109_o1cjsl.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260109_o1cjsl', '[Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 &amp; 이메일 연동 사이트 만들기')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260109_o1cjsl.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260109_o1cjsl', '[Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 &amp; 이메일 연동 사이트 만들기')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 09일 12:44</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260108_h76tc3.html">메타(Meta), 80조원의 수업료와 AI로의 부활</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 09일 12:44</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">23</td>
+                <td class="col-title">
+                    <a href="20260108_h76tc3.html">
+                        
+                        메타(Meta), 80조원의 수업료와 AI로의 부활
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EB%A9%94%ED%83%80%28Meta%29%2C%2080%EC%A1%B0%EC%9B%90%EC%9D%98%20%EC%88%98%EC%97%85%EB%A3%8C%EC%99%80%20AI%EB%A1%9C%EC%9D%98%20%EB%B6%80%ED%99%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260108_h76tc3.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260108_h76tc3.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260108_h76tc3', '메타(Meta), 80조원의 수업료와 AI로의 부활')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260108_h76tc3.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260108_h76tc3', '메타(Meta), 80조원의 수업료와 AI로의 부활')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 08일 22:04</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260108_aje3v7.html">CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 '뉴 아틀라스'</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 08일 22:04</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">24</td>
+                <td class="col-title">
+                    <a href="20260108_aje3v7.html">
+                        
+                        CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 '뉴 아틀라스'
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=CES%202026%3A%20%ED%98%84%EB%8C%80%EC%B0%A8%20x%20%EA%B5%AC%EA%B8%80%20x%20%EB%B3%B4%EC%8A%A4%ED%84%B4%20%EB%8B%A4%EC%9D%B4%EB%82%B4%EB%AF%B9%EC%8A%A4%20%27%EB%89%B4%20%EC%95%84%ED%8B%80%EB%9D%BC%EC%8A%A4%27&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260108_aje3v7.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260108_aje3v7.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260108_aje3v7', 'CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 &#39;뉴 아틀라스&#39;')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260108_aje3v7.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260108_aje3v7', 'CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 &#39;뉴 아틀라스&#39;')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 08일 12:05</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260106_mvqpio.html">조코딩 AI 뉴스: Meta 마누스 인수 및 최신 AI 트렌드</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 08일 12:05</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">25</td>
+                <td class="col-title">
+                    <a href="20260106_mvqpio.html">
+                        
+                        조코딩 AI 뉴스: Meta 마누스 인수 및 최신 AI 트렌드
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EC%A1%B0%EC%BD%94%EB%94%A9%20AI%20%EB%89%B4%EC%8A%A4%3A%20Meta%20%EB%A7%88%EB%88%84%EC%8A%A4%20%EC%9D%B8%EC%88%98%20%EB%B0%8F%20%EC%B5%9C%EC%8B%A0%20AI%20%ED%8A%B8%EB%A0%8C%EB%93%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260106_mvqpio.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_mvqpio.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260106_mvqpio', '조코딩 AI 뉴스: Meta 마누스 인수 및 최신 AI 트렌드')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_mvqpio.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260106_mvqpio', '조코딩 AI 뉴스: Meta 마누스 인수 및 최신 AI 트렌드')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 06일 16:28</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260106_zsciaw.html">Lovable_코딩 없이 만드는 전문가급 웹사이트</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 06일 16:28</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">26</td>
+                <td class="col-title">
+                    <a href="20260106_zsciaw.html">
+                        
+                        Lovable_코딩 없이 만드는 전문가급 웹사이트
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=Lovable_%EC%BD%94%EB%94%A9%20%EC%97%86%EC%9D%B4%20%EB%A7%8C%EB%93%9C%EB%8A%94%20%EC%A0%84%EB%AC%B8%EA%B0%80%EA%B8%89%20%EC%9B%B9%EC%82%AC%EC%9D%B4%ED%8A%B8&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260106_zsciaw.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_zsciaw.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260106_zsciaw', 'Lovable_코딩 없이 만드는 전문가급 웹사이트')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_zsciaw.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260106_zsciaw', 'Lovable_코딩 없이 만드는 전문가급 웹사이트')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 06일 15:30</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260106_o77osh.html">n8n 자동화 도구 설치 가이드: 평생 무료 vs 저렴한 클라우드</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 06일 15:30</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">27</td>
+                <td class="col-title">
+                    <a href="20260106_o77osh.html">
+                        
+                        n8n 자동화 도구 설치 가이드: 평생 무료 vs 저렴한 클라우드
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=n8n%20%EC%9E%90%EB%8F%99%ED%99%94%20%EB%8F%84%EA%B5%AC%20%EC%84%A4%EC%B9%98%20%EA%B0%80%EC%9D%B4%EB%93%9C%3A%20%ED%8F%89%EC%83%9D%20%EB%AC%B4%EB%A3%8C%20vs%20%EC%A0%80%EB%A0%B4%ED%95%9C%20%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260106_o77osh.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_o77osh.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260106_o77osh', 'n8n 자동화 도구 설치 가이드: 평생 무료 vs 저렴한 클라우드')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_o77osh.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260106_o77osh', 'n8n 자동화 도구 설치 가이드: 평생 무료 vs 저렴한 클라우드')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 06일 14:59</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260106_lqwotx.html">AI 답변 퀄리티 10배 높이는 컨텍스트 엔지니어링</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 06일 14:59</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">28</td>
+                <td class="col-title">
+                    <a href="20260106_lqwotx.html">
+                        
+                        AI 답변 퀄리티 10배 높이는 컨텍스트 엔지니어링
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=AI%20%EB%8B%B5%EB%B3%80%20%ED%80%84%EB%A6%AC%ED%8B%B0%2010%EB%B0%B0%20%EB%86%92%EC%9D%B4%EB%8A%94%20%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260106_lqwotx.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_lqwotx.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260106_lqwotx', 'AI 답변 퀄리티 10배 높이는 컨텍스트 엔지니어링')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_lqwotx.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260106_lqwotx', 'AI 답변 퀄리티 10배 높이는 컨텍스트 엔지니어링')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 06일 09:36</span>
-                </div>
-            </div>
-        </article>
-        
-        <article class="news-item">
-            <div class="news-header">
-                <div class="news-header-top">
-                    <h3 class="news-title">
-                        <a href="20260105_xx6cq8.html">보리스(Boris)가 직접 공개한 효율 200% 코딩 세팅과 사용법 (26.1/5)</a>
-                    </h3>
-                    
-                    <div class="title-actions">
+                </td>
+                <td class="col-date">2026년 01월 06일 09:36</td>
+            </tr>
+            
+            <tr>
+                <td class="col-idx">29</td>
+                <td class="col-title">
+                    <a href="20260105_xx6cq8.html">
+                        
+                        보리스(Boris)가 직접 공개한 효율 200% 코딩 세팅과 사용법 (26.1/5)
+                    </a>
+                    <div class="action-row">
                         <a href="../board/index.html?mode=discuss&title=%EB%B3%B4%EB%A6%AC%EC%8A%A4%28Boris%29%EA%B0%80%20%EC%A7%81%EC%A0%91%20%EA%B3%B5%EA%B0%9C%ED%95%9C%20%ED%9A%A8%EC%9C%A8%20200%25%20%EC%BD%94%EB%94%A9%20%EC%84%B8%ED%8C%85%EA%B3%BC%20%EC%82%AC%EC%9A%A9%EB%B2%95%20%2826.1/5%29&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260105_xx6cq8.html&source=퀵뷰"
-                            class="discuss-btn-sm">토론</a>
-                        <button type="button" class="discuss-btn-sm"
-                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260105_xx6cq8.html'); alert('URL이 복사되었습니다!');">공유</button>
-                        <button type="button" class="discuss-btn-sm delete-btn"
-                            onclick="deleteQuickview('20260105_xx6cq8', '보리스(Boris)가 직접 공개한 효율 200% 코딩 세팅과 사용법 (26.1/5)')">삭제</button>
+                            class="action-btn">💬 토론</a>
+                        <button type="button" class="action-btn"
+                            onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260105_xx6cq8.html'); alert('URL이 복사되었습니다!');">🔗
+                            공유</button>
+                        <button type="button" class="action-btn delete"
+                            onclick="deleteQuickview('20260105_xx6cq8', '보리스(Boris)가 직접 공개한 효율 200% 코딩 세팅과 사용법 (26.1/5)')">🗑️ 삭제</button>
                     </div>
-                </div>
-                <div class="news-meta">
-                    <span class="published-date">📅 2026년 01월 05일 21:19</span>
-                </div>
-            </div>
-        </article>
-        
+                </td>
+                <td class="col-date">2026년 01월 05일 21:19</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<!-- Mobile Card View -->
+<div class="mobile-cards">
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#1 Quickview</span>
+            <span>2026년 01월 21일 08:39</span>
+        </div>
+        <h3>
+            <a href="20260120_difwlm.html">
+                
+                Assistant Axis: LLM의 인격적 안정성과 페르소나 제어 기술
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=Assistant%20Axis%3A%20LLM%EC%9D%98%20%EC%9D%B8%EA%B2%A9%EC%A0%81%20%EC%95%88%EC%A0%95%EC%84%B1%EA%B3%BC%20%ED%8E%98%EB%A5%B4%EC%86%8C%EB%82%98%20%EC%A0%9C%EC%96%B4%20%EA%B8%B0%EC%88%A0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260120_difwlm.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260120_difwlm.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260120_difwlm', 'Assistant Axis: LLM의 인격적 안정성과 페르소나 제어 기술')">🗑️ 삭제</button>
+        </div>
     </div>
-</section>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#2 Quickview</span>
+            <span>2026년 01월 20일 11:45</span>
+        </div>
+        <h3>
+            <a href="20260120_8z58on.html">
+                
+                AGI 탄생의 연대기와 인류의 미래
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=AGI%20%ED%83%84%EC%83%9D%EC%9D%98%20%EC%97%B0%EB%8C%80%EA%B8%B0%EC%99%80%20%EC%9D%B8%EB%A5%98%EC%9D%98%20%EB%AF%B8%EB%9E%98&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260120_8z58on.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260120_8z58on.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260120_8z58on', 'AGI 탄생의 연대기와 인류의 미래')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#3 Quickview</span>
+            <span>2026년 01월 19일 08:34</span>
+        </div>
+        <h3>
+            <a href="20260118_10v8ur.html">
+                
+                OpenAI 'Sweetpea': 에어팟을 대체할 귀 뒤의 AI 비서
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=OpenAI%20%27Sweetpea%27%3A%20%EC%97%90%EC%96%B4%ED%8C%9F%EC%9D%84%20%EB%8C%80%EC%B2%B4%ED%95%A0%20%EA%B7%80%20%EB%92%A4%EC%9D%98%20AI%20%EB%B9%84%EC%84%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260118_10v8ur.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260118_10v8ur.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260118_10v8ur', 'OpenAI &#39;Sweetpea&#39;: 에어팟을 대체할 귀 뒤의 AI 비서')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#4 Quickview</span>
+            <span>2026년 01월 19일 08:24</span>
+        </div>
+        <h3>
+            <a href="20260118_l44qdb.html">
+                
+                IT뉴스 - GPT-5.3 '갈릭' 루머, 챗GPT 광고 도입, 애플의 제미나이 탑재 등 종합 정리
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=IT%EB%89%B4%EC%8A%A4%20-%20GPT-5.3%20%27%EA%B0%88%EB%A6%AD%27%20%EB%A3%A8%EB%A8%B8%2C%20%EC%B1%97GPT%20%EA%B4%91%EA%B3%A0%20%EB%8F%84%EC%9E%85%2C%20%EC%95%A0%ED%94%8C%EC%9D%98%20%EC%A0%9C%EB%AF%B8%EB%82%98%EC%9D%B4%20%ED%83%91%EC%9E%AC%20%EB%93%B1%20%EC%A2%85%ED%95%A9%20%EC%A0%95%EB%A6%AC&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260118_l44qdb.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260118_l44qdb.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260118_l44qdb', 'IT뉴스 - GPT-5.3 &#39;갈릭&#39; 루머, 챗GPT 광고 도입, 애플의 제미나이 탑재 등 종합 정리')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#5 Quickview</span>
+            <span>2026년 01월 18일 12:05</span>
+        </div>
+        <h3>
+            <a href="20260118_xdvtpz.html">
+                
+                챗GPT vs 제미나이, AI 주식 투자 조언의 실체와 활용법
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EC%B1%97GPT%20vs%20%EC%A0%9C%EB%AF%B8%EB%82%98%EC%9D%B4%2C%20AI%20%EC%A3%BC%EC%8B%9D%20%ED%88%AC%EC%9E%90%20%EC%A1%B0%EC%96%B8%EC%9D%98%20%EC%8B%A4%EC%B2%B4%EC%99%80%20%ED%99%9C%EC%9A%A9%EB%B2%95&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260118_xdvtpz.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260118_xdvtpz.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260118_xdvtpz', '챗GPT vs 제미나이, AI 주식 투자 조언의 실체와 활용법')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#6 Quickview</span>
+            <span>2026년 01월 17일 21:48</span>
+        </div>
+        <h3>
+            <a href="20260117_t0qmni.html">
+                
+                일론 머스크의 2026 미래 전망: 특이점과 압도적 풍요
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EC%9D%BC%EB%A1%A0%20%EB%A8%B8%EC%8A%A4%ED%81%AC%EC%9D%98%202026%20%EB%AF%B8%EB%9E%98%20%EC%A0%84%EB%A7%9D%3A%20%ED%8A%B9%EC%9D%B4%EC%A0%90%EA%B3%BC%20%EC%95%95%EB%8F%84%EC%A0%81%20%ED%92%8D%EC%9A%94&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260117_t0qmni.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260117_t0qmni.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260117_t0qmni', '일론 머스크의 2026 미래 전망: 특이점과 압도적 풍요')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#7 Quickview</span>
+            <span>2026년 01월 16일 08:47</span>
+        </div>
+        <h3>
+            <a href="20260115_ezbz6f.html">
+                
+                구글 안티그래비티(Antigravity)로 AWS 서버 구축 및 대시보드 만들기
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EA%B5%AC%EA%B8%80%20%EC%95%88%ED%8B%B0%EA%B7%B8%EB%9E%98%EB%B9%84%ED%8B%B0%28Antigravity%29%EB%A1%9C%20AWS%20%EC%84%9C%EB%B2%84%20%EA%B5%AC%EC%B6%95%20%EB%B0%8F%20%EB%8C%80%EC%8B%9C%EB%B3%B4%EB%93%9C%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260115_ezbz6f.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260115_ezbz6f.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260115_ezbz6f', '구글 안티그래비티(Antigravity)로 AWS 서버 구축 및 대시보드 만들기')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#8 Quickview</span>
+            <span>2026년 01월 14일 23:33</span>
+        </div>
+        <h3>
+            <a href="20260114_betnon.html">
+                
+                메타의 반전? 미국서 대박난 스마트 안경과 공간 컴퓨팅의 미래
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EB%A9%94%ED%83%80%EC%9D%98%20%EB%B0%98%EC%A0%84%3F%20%EB%AF%B8%EA%B5%AD%EC%84%9C%20%EB%8C%80%EB%B0%95%EB%82%9C%20%EC%8A%A4%EB%A7%88%ED%8A%B8%20%EC%95%88%EA%B2%BD%EA%B3%BC%20%EA%B3%B5%EA%B0%84%20%EC%BB%B4%ED%93%A8%ED%8C%85%EC%9D%98%20%EB%AF%B8%EB%9E%98&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260114_betnon.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260114_betnon.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260114_betnon', '메타의 반전? 미국서 대박난 스마트 안경과 공간 컴퓨팅의 미래')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#9 Quickview</span>
+            <span>2026년 01월 14일 23:31</span>
+        </div>
+        <h3>
+            <a href="20260114_o2klvv.html">
+                
+                현대차 자율주행의 승부수: 엔비디아 '알파마요'와의 동행
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%ED%98%84%EB%8C%80%EC%B0%A8%20%EC%9E%90%EC%9C%A8%EC%A3%BC%ED%96%89%EC%9D%98%20%EC%8A%B9%EB%B6%80%EC%88%98%3A%20%EC%97%94%EB%B9%84%EB%94%94%EC%95%84%20%27%EC%95%8C%ED%8C%8C%EB%A7%88%EC%9A%94%27%EC%99%80%EC%9D%98%20%EB%8F%99%ED%96%89&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260114_o2klvv.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260114_o2klvv.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260114_o2klvv', '현대차 자율주행의 승부수: 엔비디아 &#39;알파마요&#39;와의 동행')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#10 Quickview</span>
+            <span>2026년 01월 13일 16:43</span>
+        </div>
+        <h3>
+            <a href="20260113_jnmox7.html">
+                
+                구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EA%B5%AC%EA%B8%80%20Opal%20%EC%82%AC%EC%9A%A9%EB%B2%95%3A%20%EC%BD%94%EB%94%A9%20%EC%97%86%EC%9D%B4%20%EB%82%98%EB%A7%8C%EC%9D%98%20AI%20%EC%95%B1%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260113_jnmox7.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260113_jnmox7.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260113_jnmox7', '구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#11 Quickview</span>
+            <span>2026년 01월 12일 11:47</span>
+        </div>
+        <h3>
+            <a href="20260112_ut14cj.html">
+                
+                IT 뉴스 - 2026년 AI 트렌드 및 CES 완전 정복 (심층 요약)
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=IT%20%EB%89%B4%EC%8A%A4%20-%202026%EB%85%84%20AI%20%ED%8A%B8%EB%A0%8C%EB%93%9C%20%EB%B0%8F%20CES%20%EC%99%84%EC%A0%84%20%EC%A0%95%EB%B3%B5%20%28%EC%8B%AC%EC%B8%B5%20%EC%9A%94%EC%95%BD%29&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260112_ut14cj.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260112_ut14cj.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260112_ut14cj', 'IT 뉴스 - 2026년 AI 트렌드 및 CES 완전 정복 (심층 요약)')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#12 Quickview</span>
+            <span>2026년 01월 12일 10:33</span>
+        </div>
+        <h3>
+            <a href="20260112_7kta0a.html">
+                
+                팝콘 브레인: 게이머가 떠나는 이유와 게임 산업의 위기 분석
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%ED%8C%9D%EC%BD%98%20%EB%B8%8C%EB%A0%88%EC%9D%B8%3A%20%EA%B2%8C%EC%9D%B4%EB%A8%B8%EA%B0%80%20%EB%96%A0%EB%82%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0%EC%99%80%20%EA%B2%8C%EC%9E%84%20%EC%82%B0%EC%97%85%EC%9D%98%20%EC%9C%84%EA%B8%B0%20%EB%B6%84%EC%84%9D&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260112_7kta0a.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260112_7kta0a.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260112_7kta0a', '팝콘 브레인: 게이머가 떠나는 이유와 게임 산업의 위기 분석')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#13 Quickview</span>
+            <span>2026년 01월 11일 21:31</span>
+        </div>
+        <h3>
+            <a href="20260111_idmes1.html">
+                
+                그록 4.1로 무제한 길이 AI 애니메이션 만들기
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EA%B7%B8%EB%A1%9D%204.1%EB%A1%9C%20%EB%AC%B4%EC%A0%9C%ED%95%9C%20%EA%B8%B8%EC%9D%B4%20AI%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_idmes1.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_idmes1.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260111_idmes1', '그록 4.1로 무제한 길이 AI 애니메이션 만들기')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#14 Quickview</span>
+            <span>2026년 01월 11일 21:22</span>
+        </div>
+        <h3>
+            <a href="20260111_6j618j.html">
+                
+                CES 2026 K-스타트업 혁신: 일상에 스며든 앰비언트 AI 기술
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=CES%202026%20K-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85%20%ED%98%81%EC%8B%A0%3A%20%EC%9D%BC%EC%83%81%EC%97%90%20%EC%8A%A4%EB%A9%B0%EB%93%A0%20%EC%95%B0%EB%B9%84%EC%96%B8%ED%8A%B8%20AI%20%EA%B8%B0%EC%88%A0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_6j618j.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_6j618j.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260111_6j618j', 'CES 2026 K-스타트업 혁신: 일상에 스며든 앰비언트 AI 기술')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#15 Quickview</span>
+            <span>2026년 01월 11일 20:54</span>
+        </div>
+        <h3>
+            <a href="20260111_y5905q.html">
+                
+                [CES 2026] AI가 결합된 XR 글래스의 일상화: 주요 기업 및 기술 분석
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%5BCES%202026%5D%20AI%EA%B0%80%20%EA%B2%B0%ED%95%A9%EB%90%9C%20XR%20%EA%B8%80%EB%9E%98%EC%8A%A4%EC%9D%98%20%EC%9D%BC%EC%83%81%ED%99%94%3A%20%EC%A3%BC%EC%9A%94%20%EA%B8%B0%EC%97%85%20%EB%B0%8F%20%EA%B8%B0%EC%88%A0%20%EB%B6%84%EC%84%9D&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_y5905q.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_y5905q.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260111_y5905q', '[CES 2026] AI가 결합된 XR 글래스의 일상화: 주요 기업 및 기술 분석')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#16 Quickview</span>
+            <span>2026년 01월 11일 20:19</span>
+        </div>
+        <h3>
+            <a href="20260111_72w7vf.html">
+                
+                제발 버티지 마세요: 송길영이 경고하는 2026년 생존법
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EC%A0%9C%EB%B0%9C%20%EB%B2%84%ED%8B%B0%EC%A7%80%20%EB%A7%88%EC%84%B8%EC%9A%94%3A%20%EC%86%A1%EA%B8%B8%EC%98%81%EC%9D%B4%20%EA%B2%BD%EA%B3%A0%ED%95%98%EB%8A%94%202026%EB%85%84%20%EC%83%9D%EC%A1%B4%EB%B2%95&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_72w7vf.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_72w7vf.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260111_72w7vf', '제발 버티지 마세요: 송길영이 경고하는 2026년 생존법')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#17 Quickview</span>
+            <span>2026년 01월 11일 20:15</span>
+        </div>
+        <h3>
+            <a href="20260111_10jf3f.html">
+                
+                아무리 미루던 사람도 오늘부터 달라집니다
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EC%95%84%EB%AC%B4%EB%A6%AC%20%EB%AF%B8%EB%A3%A8%EB%8D%98%20%EC%82%AC%EB%9E%8C%EB%8F%84%20%EC%98%A4%EB%8A%98%EB%B6%80%ED%84%B0%20%EB%8B%AC%EB%9D%BC%EC%A7%91%EB%8B%88%EB%8B%A4&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_10jf3f.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_10jf3f.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260111_10jf3f', '아무리 미루던 사람도 오늘부터 달라집니다')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#18 Quickview</span>
+            <span>2026년 01월 11일 19:59</span>
+        </div>
+        <h3>
+            <a href="20260111_jmqopm.html">
+                
+                AI 시대의 교육 : 변하지 않는 가치를 찾아서
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%EA%B5%90%EC%9C%A1%20%3A%20%EB%B3%80%ED%95%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EA%B0%80%EC%B9%98%EB%A5%BC%20%EC%B0%BE%EC%95%84%EC%84%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_jmqopm.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_jmqopm.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260111_jmqopm', 'AI 시대의 교육 : 변하지 않는 가치를 찾아서')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#19 Quickview</span>
+            <span>2026년 01월 11일 19:56</span>
+        </div>
+        <h3>
+            <a href="20260111_7v9nf6.html">
+                
+                AI 시대, 대체되지 않는 생존 전략과 핵개인의 탄생
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=AI%20%EC%8B%9C%EB%8C%80%2C%20%EB%8C%80%EC%B2%B4%EB%90%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EC%83%9D%EC%A1%B4%20%EC%A0%84%EB%9E%B5%EA%B3%BC%20%ED%95%B5%EA%B0%9C%EC%9D%B8%EC%9D%98%20%ED%83%84%EC%83%9D&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_7v9nf6.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_7v9nf6.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260111_7v9nf6', 'AI 시대, 대체되지 않는 생존 전략과 핵개인의 탄생')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#20 Quickview</span>
+            <span>2026년 01월 11일 19:51</span>
+        </div>
+        <h3>
+            <a href="20260111_0y3zj0.html">
+                
+                미국 정부의 충격 선언: 50년 영양 가이드라인의 종말과 새로운 패러다임
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EB%AF%B8%EA%B5%AD%20%EC%A0%95%EB%B6%80%EC%9D%98%20%EC%B6%A9%EA%B2%A9%20%EC%84%A0%EC%96%B8%3A%2050%EB%85%84%20%EC%98%81%EC%96%91%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%EC%9D%98%20%EC%A2%85%EB%A7%90%EA%B3%BC%20%EC%83%88%EB%A1%9C%EC%9A%B4%20%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260111_0y3zj0.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260111_0y3zj0.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260111_0y3zj0', '미국 정부의 충격 선언: 50년 영양 가이드라인의 종말과 새로운 패러다임')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#21 Quickview</span>
+            <span>2026년 01월 09일 16:19</span>
+        </div>
+        <h3>
+            <a href="20260109_9xwith.html">
+                
+                믿을 정보가 없다? AI '슬롭(Slop)'의 습격과 데이터 전쟁
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EB%AF%BF%EC%9D%84%20%EC%A0%95%EB%B3%B4%EA%B0%80%20%EC%97%86%EB%8B%A4%3F%20AI%20%27%EC%8A%AC%EB%A1%AD%28Slop%29%27%EC%9D%98%20%EC%8A%B5%EA%B2%A9%EA%B3%BC%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A0%84%EC%9F%81&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260109_9xwith.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260109_9xwith.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260109_9xwith', '믿을 정보가 없다? AI &#39;슬롭(Slop)&#39;의 습격과 데이터 전쟁')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#22 Quickview</span>
+            <span>2026년 01월 09일 12:44</span>
+        </div>
+        <h3>
+            <a href="20260109_o1cjsl.html">
+                
+                [Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 & 이메일 연동 사이트 만들기
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%5BHands-On%5D%20Lovable%3A%20AI%20%EC%9B%B9%EC%82%AC%EC%9D%B4%ED%8A%B8%20%EB%B9%8C%EB%8D%94%EB%A1%9C%20%EA%B2%AC%EC%A0%81%20%EA%B3%84%EC%82%B0%EA%B8%B0%20%26%20%EC%9D%B4%EB%A9%94%EC%9D%BC%20%EC%97%B0%EB%8F%99%20%EC%82%AC%EC%9D%B4%ED%8A%B8%20%EB%A7%8C%EB%93%A4%EA%B8%B0&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260109_o1cjsl.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260109_o1cjsl.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260109_o1cjsl', '[Hands-On] Lovable: AI 웹사이트 빌더로 견적 계산기 &amp; 이메일 연동 사이트 만들기')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#23 Quickview</span>
+            <span>2026년 01월 08일 22:04</span>
+        </div>
+        <h3>
+            <a href="20260108_h76tc3.html">
+                
+                메타(Meta), 80조원의 수업료와 AI로의 부활
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EB%A9%94%ED%83%80%28Meta%29%2C%2080%EC%A1%B0%EC%9B%90%EC%9D%98%20%EC%88%98%EC%97%85%EB%A3%8C%EC%99%80%20AI%EB%A1%9C%EC%9D%98%20%EB%B6%80%ED%99%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260108_h76tc3.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260108_h76tc3.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260108_h76tc3', '메타(Meta), 80조원의 수업료와 AI로의 부활')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#24 Quickview</span>
+            <span>2026년 01월 08일 12:05</span>
+        </div>
+        <h3>
+            <a href="20260108_aje3v7.html">
+                
+                CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 '뉴 아틀라스'
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=CES%202026%3A%20%ED%98%84%EB%8C%80%EC%B0%A8%20x%20%EA%B5%AC%EA%B8%80%20x%20%EB%B3%B4%EC%8A%A4%ED%84%B4%20%EB%8B%A4%EC%9D%B4%EB%82%B4%EB%AF%B9%EC%8A%A4%20%27%EB%89%B4%20%EC%95%84%ED%8B%80%EB%9D%BC%EC%8A%A4%27&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260108_aje3v7.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260108_aje3v7.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260108_aje3v7', 'CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 &#39;뉴 아틀라스&#39;')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#25 Quickview</span>
+            <span>2026년 01월 06일 16:28</span>
+        </div>
+        <h3>
+            <a href="20260106_mvqpio.html">
+                
+                조코딩 AI 뉴스: Meta 마누스 인수 및 최신 AI 트렌드
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EC%A1%B0%EC%BD%94%EB%94%A9%20AI%20%EB%89%B4%EC%8A%A4%3A%20Meta%20%EB%A7%88%EB%88%84%EC%8A%A4%20%EC%9D%B8%EC%88%98%20%EB%B0%8F%20%EC%B5%9C%EC%8B%A0%20AI%20%ED%8A%B8%EB%A0%8C%EB%93%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260106_mvqpio.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_mvqpio.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260106_mvqpio', '조코딩 AI 뉴스: Meta 마누스 인수 및 최신 AI 트렌드')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#26 Quickview</span>
+            <span>2026년 01월 06일 15:30</span>
+        </div>
+        <h3>
+            <a href="20260106_zsciaw.html">
+                
+                Lovable_코딩 없이 만드는 전문가급 웹사이트
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=Lovable_%EC%BD%94%EB%94%A9%20%EC%97%86%EC%9D%B4%20%EB%A7%8C%EB%93%9C%EB%8A%94%20%EC%A0%84%EB%AC%B8%EA%B0%80%EA%B8%89%20%EC%9B%B9%EC%82%AC%EC%9D%B4%ED%8A%B8&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260106_zsciaw.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_zsciaw.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260106_zsciaw', 'Lovable_코딩 없이 만드는 전문가급 웹사이트')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#27 Quickview</span>
+            <span>2026년 01월 06일 14:59</span>
+        </div>
+        <h3>
+            <a href="20260106_o77osh.html">
+                
+                n8n 자동화 도구 설치 가이드: 평생 무료 vs 저렴한 클라우드
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=n8n%20%EC%9E%90%EB%8F%99%ED%99%94%20%EB%8F%84%EA%B5%AC%20%EC%84%A4%EC%B9%98%20%EA%B0%80%EC%9D%B4%EB%93%9C%3A%20%ED%8F%89%EC%83%9D%20%EB%AC%B4%EB%A3%8C%20vs%20%EC%A0%80%EB%A0%B4%ED%95%9C%20%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260106_o77osh.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_o77osh.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260106_o77osh', 'n8n 자동화 도구 설치 가이드: 평생 무료 vs 저렴한 클라우드')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#28 Quickview</span>
+            <span>2026년 01월 06일 09:36</span>
+        </div>
+        <h3>
+            <a href="20260106_lqwotx.html">
+                
+                AI 답변 퀄리티 10배 높이는 컨텍스트 엔지니어링
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=AI%20%EB%8B%B5%EB%B3%80%20%ED%80%84%EB%A6%AC%ED%8B%B0%2010%EB%B0%B0%20%EB%86%92%EC%9D%B4%EB%8A%94%20%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260106_lqwotx.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260106_lqwotx.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260106_lqwotx', 'AI 답변 퀄리티 10배 높이는 컨텍스트 엔지니어링')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+    <div class="course-card">
+        <div class="card-header">
+            <span>#29 Quickview</span>
+            <span>2026년 01월 05일 21:19</span>
+        </div>
+        <h3>
+            <a href="20260105_xx6cq8.html">
+                
+                보리스(Boris)가 직접 공개한 효율 200% 코딩 세팅과 사용법 (26.1/5)
+            </a>
+        </h3>
+        <div class="action-row" style="margin-top: 1rem;">
+            <a href="../board/index.html?mode=discuss&title=%EB%B3%B4%EB%A6%AC%EC%8A%A4%28Boris%29%EA%B0%80%20%EC%A7%81%EC%A0%91%20%EA%B3%B5%EA%B0%9C%ED%95%9C%20%ED%9A%A8%EC%9C%A8%20200%25%20%EC%BD%94%EB%94%A9%20%EC%84%B8%ED%8C%85%EA%B3%BC%20%EC%82%AC%EC%9A%A9%EB%B2%95%20%2826.1/5%29&link=https://vaax-maker.github.io/ai-news-daily/quickview/20260105_xx6cq8.html&source=퀵뷰"
+                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
+            <button type="button" class="action-btn" style="flex:1;"
+                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/20260105_xx6cq8.html'); alert('URL이 복사되었습니다!');">🔗
+                공유</button>
+            <button type="button" class="action-btn delete" style="flex:1;"
+                onclick="deleteQuickview('20260105_xx6cq8', '보리스(Boris)가 직접 공개한 효율 200% 코딩 세팅과 사용법 (26.1/5)')">🗑️ 삭제</button>
+        </div>
+    </div>
+    
+</div>
+
+
 
 <!-- Firebase for Deletion Logic -->
 <script type="module">
@@ -814,8 +1566,6 @@
         }
     }
 </script>
-
-
 
     </div>
 
