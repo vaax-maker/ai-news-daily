@@ -774,9 +774,10 @@
             return;
         }
 
-        // Disable buttons and show loading state
+        // Disable buttons and inputs, show loading state
         btnQuickviewSave.disabled = true;
         btnQuickviewSend.disabled = true;
+        quickviewHtml.disabled = true;
         const originalSaveText = btnQuickviewSave.innerText;
         const originalSendText = btnQuickviewSend.innerText;
 
@@ -885,9 +886,10 @@
             quickviewStatus.className = 'status-msg error';
             quickviewStatus.innerText = '❌ Error: ' + e.message;
         } finally {
-            // Re-enable buttons
+            // Re-enable buttons and inputs
             btnQuickviewSave.disabled = false;
             btnQuickviewSend.disabled = false;
+            quickviewHtml.disabled = false;
             btnQuickviewSave.innerText = originalSaveText;
             btnQuickviewSend.innerText = originalSendText;
         }
@@ -970,12 +972,14 @@
 
     // Helper: Base64 Encode (UTF-8 safe)
     function utf8_to_b64(str) {
-        return window.btoa(unescape(encodeURIComponent(str)));
+        return window.btoa(String.fromCharCode(...new TextEncoder().encode(str)));
     }
 
     // Helper: Base64 Decode
     function b64_to_utf8(str) {
-        return decodeURIComponent(escape(window.atob(str)));
+        // Remove whitespace from base64 string
+        str = str.replace(/\s/g, '');
+        return new TextDecoder().decode(Uint8Array.from(window.atob(str), c => c.charCodeAt(0)));
     }
 
     // GitHub API: Create/Update File
@@ -1083,7 +1087,11 @@
 
         if (!await checkGithubConfig()) return;
 
+        // Disable all inputs during processing
         btnWebsharePost.disabled = true;
+        webshareHtml.disabled = true;
+        document.getElementById('postToWebshare').disabled = true;
+        document.getElementById('postToBlogger').disabled = true;
         const originalText = btnWebsharePost.innerText;
         btnWebsharePost.innerText = '⏳ 처리 중...';
 
@@ -1182,7 +1190,11 @@
             webshareStatus.className = 'status-msg error';
             webshareStatus.innerText = '❌ 오류 발생: ' + e.message;
         } finally {
+            // Re-enable all inputs
             btnWebsharePost.disabled = false;
+            webshareHtml.disabled = false;
+            document.getElementById('postToWebshare').disabled = false;
+            document.getElementById('postToBlogger').disabled = false;
             btnWebsharePost.innerText = originalText;
         }
     }
