@@ -542,6 +542,9 @@
     }
 
 
+    // Early declaration of webshareHistory (used by loadWebshareHistory called from login/session check)
+    let webshareHistory = null;
+
     // Login Logic
     btnLogin.addEventListener('click', async () => {
         const pass = adminPass.value;
@@ -915,7 +918,7 @@
     const webshareStatus = document.getElementById('webshareStatus');
     const webshareUrlBox = document.getElementById('webshareUrlBox');
     const webshareUrl = document.getElementById('webshareUrl');
-    const webshareHistory = document.getElementById('webshareHistory');
+    webshareHistory = document.getElementById('webshareHistory'); // Already declared as let earlier
 
     // Add configuration UI
     const configDiv = document.createElement('div');
