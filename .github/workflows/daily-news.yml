@@ -30,7 +30,7 @@ on:
       run_members:
         description: "🟠 회원사소식"
         required: false
-        default: "실행"
+        default: "건너뛰기"
         type: choice
         options:
           - "실행"
@@ -49,8 +49,8 @@ on:
           - "llm"
           - "hybrid"
   schedule:
-    - cron: "0 23 * * *"   # 매일 23:00 UTC (한국시간 오전 8시)
-    - cron: "0 7 * * *"    # 매일 07:00 UTC (한국시간 오후 4시)
+    - cron: "20 22 * * *"  # 매일 22:20 UTC (한국시간 오전 7시 20분)
+    - cron: "20 8 * * *"   # 매일 08:20 UTC (한국시간 오후 5시 20분)
 permissions:
   contents: write
 
