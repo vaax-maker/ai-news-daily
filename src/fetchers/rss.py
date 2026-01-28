@@ -89,8 +89,11 @@ def fetch_rss_items(
     two_days_ago = time.time() - 48 * 60 * 60
     filtered_items = [item for item in raw_items if item[0] >= two_days_ago]
     
-    # Use filtered if we have enough items, else fallback to raw
-    target_items = filtered_items if len(filtered_items) >= 5 else raw_items
+    # Use filtered items strictly (No fallback to old items)
+    target_items = filtered_items
+    
+    if len(target_items) < len(raw_items):
+        logger.warning(f"[RSS] Filtered out {len(raw_items) - len(target_items)} old items (older than 48h).")
 
     # Sorting logic
     three_days_ago = time.time() - 3 * 24 * 60 * 60

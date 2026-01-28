@@ -66,7 +66,14 @@ def fetch_search_news(
         logger.error(f"[Search] Parse error for {keywords}: {e}")
         return []
 
-    # Sort by time desc
-    raw_items.sort(key=lambda x: x[0], reverse=True)
+    # Filter out items older than 7 days
+    seven_days_ago = time.time() - 7 * 24 * 60 * 60
+    filtered_items = [item for item in raw_items if item[0] >= seven_days_ago]
     
-    return raw_items[:limit]
+    if len(filtered_items) < len(raw_items):
+        logger.info(f"[Search] Filtered out {len(raw_items) - len(filtered_items)} old items (older than 7 days).")
+
+    # Sort by time desc
+    filtered_items.sort(key=lambda x: x[0], reverse=True)
+    
+    return filtered_items[:limit]
