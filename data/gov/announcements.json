@@ -1860,5 +1860,47 @@
     "bid_close_dt": "20260213",
     "openg_dt": "",
     "is_new": false
+  },
+  {
+    "title": "[경남] 창원시 2026년 강소기업 육성사업 참여기업 모집 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117871",
+    "dept": "경상남도",
+    "manager": "",
+    "date": "2026-01-27",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-01-27",
+    "bid_begin_dt": "20260126",
+    "bid_close_dt": "20260224",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년 한국형수소환원제철실증기술개발사업 신규지원 대상과제 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117883",
+    "dept": "산업통상부",
+    "manager": "",
+    "date": "2026-01-27",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-01-27",
+    "bid_begin_dt": "20260130",
+    "bid_close_dt": "20260305",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년 바이오ㆍ반도체 융합 기술 서비스 대응 전략 플랫폼 개발 사업 신규과제 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117881",
+    "dept": "과학기술정보통신부",
+    "manager": "",
+    "date": "2026-01-27",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-01-27",
+    "bid_begin_dt": "20260121",
+    "bid_close_dt": "20260223",
+    "openg_dt": "",
+    "is_new": false
   }
 ]

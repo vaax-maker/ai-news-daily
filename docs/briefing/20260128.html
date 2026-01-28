@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VAAX Daily Briefing - 2026년 01월 28일</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #65a30d;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --ai-color: #8b5cf6;
+            --xr-color: #06b6d4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 24px 0 20px;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 8px;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background-color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Key Message Section */
+        .key-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .key-message-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
+        .key-message-content {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .key-message-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .key-message-content li {
+            margin-bottom: 12px;
+            padding-left: 0;
+        }
+
+        .key-message-content li:last-child {
+            margin-bottom: 0;
+        }
+
+        .key-message-content li::before {
+            content: "• ";
+            margin-right: 4px;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .section-badge.ai {
+            background-color: rgba(139, 92, 246, 0.1);
+            color: var(--ai-color);
+        }
+
+        .section-badge.xr {
+            background-color: rgba(6, 182, 212, 0.1);
+            color: var(--xr-color);
+        }
+
+        .section-badge.gov {
+            background-color: #fff7ed;
+            color: #c2410c;
+            border: 1px solid #ffedd5;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .section-time {
+            margin-left: auto;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Article List */
+        .article-list {
+            list-style: none;
+        }
+
+        .article-item {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .article-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .article-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .article-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .article-title a:hover {
+            color: var(--primary-color);
+        }
+
+        .article-summary {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 6px;
+            background: #f9fafb;
+            border-left: 3px solid var(--primary-color);
+            padding: 12px 14px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 8px;
+        }
+
+        .article-summary .summary-section-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .article-summary ul {
+            list-style: disc;
+            padding-left: 18px;
+            margin: 0;
+        }
+
+        .article-summary li {
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+
+        .article-summary li:last-child {
+            margin-bottom: 0;
+        }
+
+        .article-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .new-badge {
+            display: inline-block;
+            background-color: #ef4444;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
+            }
+
+            .key-message {
+                padding: 16px;
+            }
+
+            .section-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div style="text-align: center; margin-bottom: 8px;">
+                <a href="../index.html"
+                    style="font-size: 0.9rem; color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                    VAAX홈 이동 &rarr;
+                </a>
+            </div>
+            <div>
+                <span class="date-badge">2026년 01월 28일</span>
+            </div>
+        </header>
+
+        <!-- Key Message -->
+        <!-- Key Message -->
+        <div class="key-message">
+            <div class="key-message-title">📌 Key Message</div>
+            <div class="key-message-content">
+                <ul>
+<li><em>중국AI</em>가 글로벌 시장 강타, 성능 경쟁 종식?</li>
+<li><em>자율주행</em> 보험 ‘반값’ 등장, 혁신 촉진 가능성</li>
+</ul>
+            </div>
+        </div>
+
+        <!-- Word Cloud -->
+        
+
+        <!-- 16시 섹션 (위로) -->
+        
+
+        <!-- 8시 섹션 (아래로) -->
+        
+        <div class="section-card">
+            <div class="section-header">
+                <span class="section-badge ai">AI</span>
+                <span class="section-title">오전 뉴스</span>
+                <span class="section-time">08:00 업데이트</span>
+            </div>
+            <ul class="article-list">
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.aitimes.com/news/articleView.html?idxno=205969" target="_blank" rel="noopener noreferrer">[1월27일] 세계 시장으로 파고드는 중국의 AI..."성능이 아닌, …</a>
+                    </div>
+                    <div class="article-meta">aitimes.com</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>중국 AI 기업들이 성능 대신 시장 점유율 확대 전략으로 전환</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">1년 전</span> 등장한 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">딥시크</span>가 중국 AI 기술 역량을 입증하며 미국 중심 인식을 깨트림</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">알리바바</span>를 중심으로 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">오픈소스 모델 대량 공개</span>를 이끌며 경쟁력 확보</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">2024년 말</span> 예정인 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">문샷 AI</span>와 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">지푸 AI</span>의 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">프론티어급 모델</span> 개발로 글로벌 시장 진입</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.aitimes.com/news/articleView.html?idxno=206013" target="_blank" rel="noopener noreferrer">자율주행 이용하면 ‘반값’ 할인해 주는 보험 등장</a>
+                    </div>
+                    <div class="article-meta">aitimes.com</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>동양생명이 자율주행자동차 사용 시 보험료 50% 할인 혜택 기술기반 상품 출시</li><li>2024년 6월부터 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">인천광역시·경기도·강원도</span>에서 단계적 서비스 개시됨</li><li>자율주행 시스템이 차량을 100% 제어하는 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">L4</span>(Lv.4) 수준 주행 시 적용되며, 할인율은 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">최대 50%</span></li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">보장 상품</span>은 자동차 보험의 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">대물·대인배상 책임보장</span>에 한함</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://techcrunch.com/2026/01/27/anduril-has-invented-a-wild-new-drone-flying-contest-where-jobs-are-the-prize/" target="_blank" rel="noopener noreferrer">Anduril은 일자리가 상이 되는 새로운 드론 비행 대회를 발명했습니…</a>
+                    </div>
+                    <div class="article-meta">techcrunch.com</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>**Anduril**이 소프트웨어 개발자 대상 드론 경연 대회를 개최해 **직무 제안**(무보증)을 상품으로 제시함</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">기술 분야</span>인 AI/자율 시스템 엔지니어를 위한 경연대회 형태임</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">2026년 1월 27일</span> 기준, <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">10,000</span> 상금 및 개발자에게 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">Anduril</span>의 정규직 공고 우선 제안 제도 도입됨</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;"> 창업주 팍머 럭키(Palmer Luckey)</span>가 직접 기획, <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">TechCrunch</span>가 보도함</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://techcrunch.com/2026/01/27/anthropic-reportedly-upped-its-latest-raise-to-20b/" target="_blank" rel="noopener noreferrer">Anthropic은 최근 인상액을 200억 달러로 늘린 것으로 알려졌습…</a>
+                    </div>
+                    <div class="article-meta">techcrunch.com</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>**Anthropic**가 **200억(약 25조원)** 규모 조달, **3000억 평가액**으로 사상 최대 라운드로 확정됨</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">2026년 1월 27일</span> 기준, <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">200억</span>(3000억원) 시리즈C 펀드레이징 진행 중임</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">3000억</span>(375조원) 규모 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">기업 가치</span>는 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">2023년 627억달러</span>(78조원) 대비 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">477% 증가</span>를 기록함</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">Claude 3</span> 등 대형 언어 모델 경쟁력 확보를 위한 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">2025년 7월 100억달러</span>(12조원) 조달 이후 추가 펀딩임</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.aitimes.kr/news/articleView.html?idxno=38344" target="_blank" rel="noopener noreferrer">“AI가 대신 장 봐드려요”... CJ프레시웨이 식자재 플랫폼 ‘프레시…</a>
+                    </div>
+                    <div class="article-meta">aitimes.kr</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>CJ프레시웨이, AI 주문 기능 도입으로 식자재 주문 효율화</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">AI 주문 에이전트</span>는 2023년 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">8월 27일</span> 베타 서비스 시작됨</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">LLM 기술</span>을 활용해 어제 주문 상품 재주문처럼 자연어 입력만으로 주문 가능</li><li>반복 주문 시 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">검색 과정 생략</span>해 시간 절약, <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">15만개의 상품 디비</span> 검색 지원</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.aitimes.kr/news/articleView.html?idxno=38343" target="_blank" rel="noopener noreferrer">EU 집행위, X·그록 정조준… “AI 추천시스템, 디지털서비스법 위반…</a>
+                    </div>
+                    <div class="article-meta">aitimes.kr</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>EU, X와 그록의 추천시스템 및 AI 모델이 디지털서비스법(DSA) 위반 여부 조사 착수</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">2024년 7월 26일</span> 기준으로 X와 XAI가 운영하는 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">인공지능(AI) 추천시스템</span>과 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">그록(Grok) AI 모델</span>에 대한 DSA 법적 조사가 시작됨</li><li>X가 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">불법 콘텐츠 확산</span> 등 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">시스템적 위험(systemic risks)</span>을 적절히 평가·완화했는지 중점 조사 중</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">2023년 12월</span>부터 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">X의 추천시스템</span> 검증 이력 확인을 위한 조사가 진행 중임</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.aitimes.kr/news/articleView.html?idxno=38342" target="_blank" rel="noopener noreferrer">구글 딥마인드, 픽사 출신 감독 협업… 생성형 AI로 완성한 애니메이션…</a>
+                    </div>
+                    <div class="article-meta">aitimes.kr</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>구글 딥마인드, 픽사 출신 디렉터와 협업한 **AI 애니메이션** 단편영화 **선댄스서 발표**</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">1월 26일</span>(현지시간) <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">디어 업스테어 네이버스(Dear Upstairs Neighbors)</span> 단편영화 선댄스 영화제에서 공개됨</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">생성형 AI 기술</span>을 기반으로 캐릭터 설계, 터닝, 렌더링 전과정 자동화 처리됨</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">코니 허(Connie He)</span> 감독(이전 픽사, 할리우드 애니메이션 시스템 경력)이 콘텐츠 창작 주도함</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.aitimes.com/news/articleView.html?idxno=206024" target="_blank" rel="noopener noreferrer">아이티센클로잇 “기업 맞춤 ‘에이전트 관리 플랫폼’ 출시...ROI로 …</a>
+                    </div>
+                    <div class="article-meta">aitimes.com</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>아이티센클로잇, 기업 맞춤형 **보안형 AI 에이전트 엔진 에이전트고** 출시</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">2023년 11월 27일</span> 서울 그랜드 인터컨티넨탈 팰리스에서 출시 간담회 개최됨</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">1986년 설립</span> 클라우드 전문 기업로서 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">40년간 축적된 데이터 관리 노하우</span> 기반으로 개발됨</li><li>기업 AI 도입 실패율 낮추기 위해 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">ROI(투자수익률) 중심 솔루션</span>으로 구축됨</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://techcrunch.com/2026/01/27/anthropic-and-openai-ceos-condemn-ice-violence-praise-trump/" target="_blank" rel="noopener noreferrer">Anthropic 및 OpenAI CEO, ICE 폭력 비난, 트럼프 …</a>
+                    </div>
+                    <div class="article-meta">techcrunch.com</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>**Anthropic와 OpenAI CEO, ICE 집행 강경성 비판하며 트럼프 지지 성명**</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">2026년 1월</span> 미국 밀라우니 폭력 사태 이후 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">Dario Amodei</span>(Anthropic CEO)와 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">Sam Altman</span>(OpenAI CEO)가 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">ICE(이민 집행국)</span>의 경찰 작전을 비판하는 성명 발표함</li><li>Amodei는 공개 성명을 통해 ICE 집행 방식의 개선을 요구함, Altman은 내부 메모로 임직원과 공유하며 비판함</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">트럼프 정권</span>의 ICE 정책에 대해 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">경호성</span>을 인정하며 찬양함</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.technologyreview.com/2026/01/27/1131793/openais-latest-product-lets-you-vibe-code-science/" target="_blank" rel="noopener noreferrer">OpenAI의 최신 제품으로 코드 과학에 활기를 불어넣으세요</a>
+                    </div>
+                    <div class="article-meta">technologyreview.com</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>**OpenAI**가 **과학자용** **Prism**이라는 **무료 LLM 기반 툴**을 2026년 1월 27일 출시함</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">Prism</span>은 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">ChatGPT</span> 기반의 LLM을 통합한 문서 편집 소프트웨어임</li><li>과학 논문 작성 시 데이터 분석, 가설 제시, 문장 편집 등 자동화 기능을 제공함</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">학술 연구자</span>와 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">지식 공유자</span>를 대상으로 무료로 배포되는 구조임</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.youtube.com/watch?v=5DlMaQydm_o" target="_blank" rel="noopener noreferrer">“100배 커지는 AI 반도체 크기 경쟁, 이제 플라스틱은 못 버틴다”…</a>
+                    </div>
+                    <div class="article-meta">youtube.com</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>삼성전기가 AI 반도체 기판 대체 재료로 **유리 기판** 개발을 밀어붙이며 2026년 시험 양산 목표 설정함</li><li>기존 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">플라스틱 기판</span>은 과열 시 변형률 30%에 달하는 열 안정성 문제로 AI 반도체 성능 한계를 초래함</li><li>유리 기판은 400C 이상에서도 변형률 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">0.1% 미만</span>의 열 내성과 정밀도를 보유함</li><li>유리 기판 1장당 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">100만 개</span> 이상의 초정밀 구멍 뚫는 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">TGV</span> 공정 기술 습득 필요함</li></ul>
+                    </div>
+                    
+                </li>
+                
+            </ul>
+        </div>
+
+        
+        <div class="section-card">
+            <div class="section-header">
+                <span class="section-badge xr">XR</span>
+                <span class="section-title">오전 XR 뉴스</span>
+                <span class="section-time">08:00 업데이트</span>
+            </div>
+            <ul class="article-list">
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxQRHZVVGI1dmZURVlBUjNvVG1kZ1FiN2FWMG1RWnlmZktUZS0zWk52eGVCVS1TWHJNWXFicTVaT09OTWpQVWFGLWF3enJDWmFRYXpOSDF2eFBJUm94ZzBld1BMZ0ZMTnB6Z0VRLVY2TmR1bWdEVHhTYURnWm9MYWNQMkpHcjJoOGd4UEY4ZERxcUhOS29CNWktZTR6Z1I?oc=5" target="_blank" rel="noopener noreferrer">'응삼이' 버추얼휴먼 2개월 만에 연출-사회ㅣ한국일보 - 한국일보</a>
+                    </div>
+                    <div class="article-meta">한국일보</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>KBS AI 버추얼휴먼 '응삼이'가 2개월 만에 연출·사회 업무로 확대 적용됨</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">KBS AI연구센터</span>와 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">디지털컨텐츠제작부</span>가 공동 개발한 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">버추얼-anchor</span> <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">'응삼이'</span>가 기존 뉴스캐스팅에서 연출(기술 감독), 사회 진행 등 다중 역할로 확장됨</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">2023년 10월</span> 기술 개발 착수 후 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">2024년 1월</span> 현재 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">400시간 이상 자동 콘텐츠 제작</span> 중임</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">'KBS 뉴스8'</span>과 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">라이브 토크쇼 '톡! 응삼이'</span>에서 실제로 실시간 대담 진행 경험 기록됨</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://arinsider.co/2026/01/27/video-can-mawari-unlock-xrs-frameless-future/" target="_blank" rel="noopener noreferrer">비디오: Mawari가 XR의 프레임리스 미래를 열 수 있습니까?</a>
+                    </div>
+                    <div class="article-meta">arinsider.co</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>Mawari가 XR(확장현실) 스트리밍 인프라 혁신을 위해 다각적 접근 전략 확정</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">XR</span>은 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">2D 콘텐츠(예: 넷플릭스) 인프라</span>로 처리 불가능함. <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">비트레이트</span>와 그래픽 처리 요구가 훨씬 높음</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">Mawari</span>는 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">다양한 방식</span>으로 문제 해결을 시도 중임. 예시로 콘텐츠 최적화, 네트워크 효율화, 하드웨어 혁신 등</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">AR Insider</span> 기사에 따르면 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">XR 허들이 시장 확장 계기가 될 것</span>으로 분석됨</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.roadtovr.com/virtuix-goes-public-nasdaq-consumer-vr/" target="_blank" rel="noopener noreferrer">Virtuix, 소비자 VR의 격동의 순간에 공개</a>
+                    </div>
+                    <div class="article-meta">roadtovr.com</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>VR 트레드밀 회사 **Virtuix**가 2025년 6월 Nasdaq 진입으로 공모주 발행 시작</li><li>공모주 티커 기호는 미공개임, Class A 보통주로 상장 시작함</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">700만 달러</span>(약 7억 7,000만 원) 규모의 자금 조달을 기획하였으나, 2023년 Meta-Intel 조사에서 73% VR 콘텐츠 개발사가 적자로 밝혀짐</li><li>주력 제품 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">Omni One</span>은 2024년 출시된 무료 이동용 VR 트레드밀로, HTC Vive 같은 경쟁사 제품 대비 자유 이동 범위가 더 넓음</li></ul>
+                    </div>
+                    
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.roadtovr.com/walkabout-mini-golf-lays-off-2026/" target="_blank" rel="noopener noreferrer">VR 히트작 '워크어바웃 미니 골프' 비하인드 스튜디오, 직원 25% …</a>
+                    </div>
+                    <div class="article-meta">roadtovr.com</div>
+                    
+                    <div class="article-summary">
+                        <div class="summary-section-title">핵심 내용</div><ul class="summary-list"><li>VR 인기 게임 Walkabout Mini Golf 개발사 '미지언트 코코넛'이 25% 인력 감원과 **DLC 가격 인상** 결정</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">25%</span> 직원을 해고하며 인건비 절감 계획 수립됨</li><li><span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">미래 DLC</span>(다운로드 콘텐츠) 가격 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">인상</span>을 통해 운영 비용 보전 방침 선언함</li><li>창립자 루카스 마텔은 VR 게임 개발 구조의 <span class="highlight" style="background-color: #E6F8D7; padding: 3px 5px; border-radius: 4px;">전반적 위기</span>를 진단하며 공식 블로그를 통해 경영 위기를 밝힘</li></ul>
+                    </div>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        
+        
+
+        <!-- Government Projects Section -->
+        
+        <div class="section-card">
+            <div class="section-header">
+                <span class="section-badge gov">GOV</span>
+                <span class="section-title">정부 과제</span>
+                <span class="section-time">신규 공고</span>
+            </div>
+            <ul class="article-list">
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117871" target="_blank" rel="noopener noreferrer">[경남] 창원시 2026년 강소기업 육성사업 참여기업 모집 공고</a>
+                        
+                    </div>
+                    <div class="article-meta">
+                        기업마당 | 경상남도 | 2026-01-27
+                    </div>
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117883" target="_blank" rel="noopener noreferrer">2026년 한국형수소환원제철실증기술개발사업 신규지원 대상과제 공고</a>
+                        
+                    </div>
+                    <div class="article-meta">
+                        기업마당 | 산업통상부 | 2026-01-27
+                    </div>
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117881" target="_blank" rel="noopener noreferrer">2026년 바이오ㆍ반도체 융합 기술 서비스 대응 전략 플랫폼 개발 사업 신규과제 공고</a>
+                        
+                    </div>
+                    <div class="article-meta">
+                        기업마당 | 과학기술정보통신부 | 2026-01-27
+                    </div>
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117837" target="_blank" rel="noopener noreferrer">2026년 문화체육관광 연구개발사업 신규과제(대중소 공동도약) 통합 공고</a>
+                        
+                    </div>
+                    <div class="article-meta">
+                        기업마당 | 문화체육관광부 | 2026-01-26
+                    </div>
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117857" target="_blank" rel="noopener noreferrer">2026년 문화체육관광 연구개발사업 신규과제(콘텐츠 인력양성) 통합 공고</a>
+                        
+                    </div>
+                    <div class="article-meta">
+                        기업마당 | 문화체육관광부 | 2026-01-26
+                    </div>
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117853" target="_blank" rel="noopener noreferrer">2026년 문화체육관광 연구개발사업 신규과제(저작권 인력양성) 공고</a>
+                        
+                    </div>
+                    <div class="article-meta">
+                        기업마당 | 문화체육관광부 | 2026-01-26
+                    </div>
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117828" target="_blank" rel="noopener noreferrer">2026년 문화체육관광 연구개발사업 신규과제(저작권 기술검증 상용화) 공고</a>
+                        
+                    </div>
+                    <div class="article-meta">
+                        기업마당 | 문화체육관광부 | 2026-01-26
+                    </div>
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117827" target="_blank" rel="noopener noreferrer">2026년 연구개발특구 협력거점 기반 글로벌 PoC 지원 참여기업 모집 공고</a>
+                        
+                    </div>
+                    <div class="article-meta">
+                        기업마당 | 과학기술정보통신부 | 2026-01-26
+                    </div>
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117822" target="_blank" rel="noopener noreferrer">2026년 한-스위스 바이오헬스 파트너십 참가기업 모집 공고</a>
+                        
+                    </div>
+                    <div class="article-meta">
+                        기업마당 | 산업통상부 | 2026-01-26
+                    </div>
+                </li>
+                
+                <li class="article-item">
+                    <div class="article-title">
+                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000117799" target="_blank" rel="noopener noreferrer">[울산] 지역혁신클러스터육성 2기 R&D 및 사업화 사전기획 지원 공고</a>
+                        
+                    </div>
+                    <div class="article-meta">
+                        기업마당 | 울산광역시 | 2026-01-26
+                    </div>
+                </li>
+                
+            </ul>
+        </div>
+        
+
+        <footer>
+            &copy; 2026 VAAX Maker | <a href="../index.html"
+                style="color: var(--primary-color);">홈으로</a>
+        </footer>
+    </div>
+</body>
+
+</html>

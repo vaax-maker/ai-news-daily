@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기획자의 AI 바이브 코딩 실무 가이드: 안티그래비티 활용법</title>
+    <style>
+        /* vaax-theme.css */
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --line-gray: #9ca3af;
+        }
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+        }
+        p { margin-bottom: 1.5em; }
+        h1, h2, h3 { color: var(--text-main); font-weight: 700; }
+        h1 { margin-top: 1em; margin-bottom: 0.5em; font-size: 2.2rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+        h2 { margin-top: 2.5em; margin-bottom: 1em; font-size: 1.7rem; color: var(--secondary-color); border-left: 5px solid var(--primary-color); padding-left: 15px; }
+        h3 { margin-top: 2em; margin-bottom: 0.8em; font-size: 1.4rem; }
+        .highlight { background-color: #CEFA98; padding: 2px 4px; border-radius: 4px; font-weight: 600; }
+        .section-block { margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-color); }
+        .meta-info { background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 30px; font-size: 0.9rem; color: var(--text-muted); }
+        .meta-info strong { color: var(--text-main); }
+        .timestamp { color: var(--primary-color); font-weight: bold; text-decoration: none; font-size: 0.9em; margin-left: 5px; cursor: pointer; }
+        .timestamp:hover { color: var(--primary-color-hover); text-decoration: underline; }
+        .tag-container { margin-top: 10px; }
+        .tag { display: inline-block; background-color: #e5e7eb; color: #374151; padding: 4px 10px; border-radius: 15px; font-size: 0.85rem; margin-right: 8px; margin-bottom: 5px; }
+        footer { text-align: center; margin-top: 50px; padding: 20px; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border-color); }
+        ul { margin-bottom: 1.5em; }
+        li { margin-bottom: 0.5em; }
+    </style>
+</head>
+<body>
+
+    <h1>기획자의 AI 바이브 코딩 실무 가이드: 안티그래비티 활용법</h1>
+
+    <div class="meta-info">
+        <p><strong>원본 발행일:</strong> 2025년 1월 22일 (추정)</p>
+        <p><strong>리포트 생성일:</strong> 2025년 1월 27일</p>
+        <p><strong>출처:</strong> <a href="https://yozm.wishket.com/magazine/detail/3562/" target="_blank">요즘IT - 기획자, 안티그래비티(Antigravity) 이렇게 써봤습니다</a></p>
+        <div class="tag-container">
+            <span class="tag">#프롬프트엔지니어링</span>
+            <span class="tag">#안티그래비티</span>
+            <span class="tag">#바이브코딩</span>
+            <span class="tag">#서비스기획</span>
+            <span class="tag">#MVP제작</span>
+            <span class="tag">#AI에이전트</span>
+        </div>
+    </div>
+
+    <div class="section-block">
+        <h2>1. 개요: 기획자가 코딩 툴을 잡아야 하는 이유</h2>
+        <p>현대 IT 실무에서 발생하는 대다수의 문제는 <span class="highlight">커뮤니케이션 비용</span>에서 기인합니다. 기획자의 의도가 디자인과 개발 단계를 거치며 왜곡되는 현상을 줄이기 위해, 최근 '바이브 코딩(Vibe Coding)'이 주목받고 있습니다. 본 리포트는 구글의 AI 코딩 에이전트인 <strong>안티그래비티(Antigravity)</strong>를 활용하여 기획자가 직접 '인플루언서 검색 앱' MVP를 구축한 실무 경험을 분석합니다.</p>
+        <ul>
+            <li><strong>핵심 목적:</strong> 아이디어를 작동하는 프로토타입으로 직접 증명하여 기획의 설득력을 높임</li>
+            <li><strong>주요 도구:</strong> Antigravity, Node.js, Python, Git/GitHub, Vercel</li>
+        </ul>
+    </div>
+
+    <div class="section-block">
+        <h2>2. AI 에이전트 협업을 위한 환경 구축</h2>
+        <p>AI 에이전트가 코드를 작성하고 앱을 실행하기 위해서는 단순히 채팅창에 명령어를 입력하는 것을 넘어, 에이전트가 활동할 수 있는 <strong>환경(Runtime)</strong>을 조성해 주는 것이 필수적입니다.</p>
+        
+        <h3>2.1 안티그래비티 초기 설정</h3>
+        <p>기획자가 코드를 직접 수정하지 않아도 AI가 자율적으로 파일을 생성하고 수정할 수 있도록 권한을 부여해야 합니다.</p>
+        <ul>
+            <li><strong>에이전트 권한 부여:</strong> Editor-Specific-Settings에서 <code>ARTIFACT</code> 항목을 <code>Agent Decides</code>로 설정</li>
+            <li><strong>파일 액세스 활성화:</strong> <code>FILE ACCESS</code> 관련 모든 항목을 활성화하여 에이전트의 작업 범위를 확장</li>
+        </ul>
+
+        <h3>2.2 필수 런타임 및 라이브러리 설치</h3>
+        <p>애플리케이션 구동 및 데이터 수집을 위해 다음의 도구들이 필요합니다.</p>
+        <ul>
+            <li><strong>Node.js:</strong> 웹 애플리케이션 실행 환경 (설치 시 'Automatically install' 체크 필수)</li>
+            <li><strong>Python:</strong> 데이터 분석 및 크롤링 로직 수행 (설치 시 'Add python.exe to PATH' 체크 필수)</li>
+            <li><strong>데이터 저장소:</strong> 초기 단계에서는 복잡한 DB(MySQL 등) 대신 기획자가 관리하기 쉬운 <strong>CSV 파일</strong> 형식을 활용하여 데이터 누적</li>
+        </ul>
+    </div>
+
+    <div class="section-block">
+        <h2>3. 기획부터 구현까지: 3단계 프로세스</h2>
+        <p>안티그래비티의 핵심 기능을 활용하여 기획 의도를 점진적으로 구체화하는 과정입니다.</p>
+
+        <h3>Step 1: Planning 모드 (구조 설계)</h3>
+        <p>전체적인 청사진을 그리는 단계입니다. <span class="highlight">Planning 모드</span>에서 큰 그림을 설계하면 AI가 구현 가능 여부와 필요한 단계를 제안합니다.</p>
+        <ul>
+            <li><strong>핵심 프롬프트 예시:</strong> "이름, 아이디, 카테고리, 팔로워 수로 검색 및 정렬이 가능한 인플루언서 검색 앱을 기획해 줘."</li>
+        </ul>
+
+        <h3>Step 2: Fast 모드 (디테일 구현)</h3>
+        <p>설계된 계획에 따라 실제 기능을 구현하고 수정하는 단계입니다. 코드를 전혀 몰라도 자연어 명령만으로 UI/UX를 개선할 수 있습니다.</p>
+        <ul>
+            <li><strong>기능 고도화:</strong> 특정 영역 클릭 시 인스타그램 연결, 체크박스 선택 시 DM 발송 로직 추가 등</li>
+        </ul>
+
+        <h3>Step 3: 자동화 테스트 및 아티팩트 리뷰</h3>
+        <p>안티그래비티의 <strong>아티팩트 시스템</strong>은 기획자가 코드를 읽지 못해도 개발 흐름을 파악하게 돕습니다.</p>
+        <ul>
+            <li>자동으로 브라우저를 실행하여 테스트 영상을 보여줌</li>
+            <li>크롤링 차단(Soft Ban) 같은 기술적 이슈 발생 시, "시간차 수집"과 같은 대안적 로직을 스스로 제안 및 적용</li>
+        </ul>
+    </div>
+
+    <div class="section-block">
+        <h2>4. 배포와 관리: 서비스를 세상에 내놓기</h2>
+        <p>로컬에서 만든 앱을 실제 URL로 접속 가능하게 만드는 배포 과정입니다.</p>
+        <ul>
+            <li><strong>Git & GitHub:</strong> 소스 코드의 이력을 관리하고 배포 채널과 연동하는 중심축 역할을 합니다.</li>
+            <li><strong>Vercel 연동:</strong> GitHub 리포지토리와 연결하여 'Import' 버튼 클릭만으로 최종 배포 URL을 생성할 수 있습니다.</li>
+            <li><strong>기획자의 역할 변화:</strong> 코딩을 직접 하는 개발자가 아닌, AI 에이전트들의 작업 결과를 조율하고 검증하는 <strong>PM(Project Manager)</strong>의 성격이 강해집니다.</li>
+        </ul>
+    </div>
+
+    <div class="section-block">
+        <h2>5. 시사점: 기획의 언어가 바뀌어야 한다</h2>
+        <p>바이브 코딩의 본질은 단순히 '자동 코드 작성'이 아닙니다. 기획자에게 요구되는 핵심 역량이 다음과 같이 변화하고 있음을 시사합니다.</p>
+        <ul>
+            <li><strong>구조적 사고:</strong> 명확한 설계 문서(PRD)가 없으면 AI도 엉뚱한 결과물을 내놓습니다.</li>
+            <li><strong>데이터 이해도:</strong> 데이터가 어떻게 쌓이고(CSV/DB), 어떻게 흐르는지에 대한 이해가 필수적입니다.</li>
+            <li><strong>검증 능력:</strong> AI가 만든 결과물이 기획 의도와 일치하는지 판별하는 '새로운 근육'이 필요합니다.</li>
+        </ul>
+    </div>
+
+    <footer>
+        2026 Fovea
+    </footer>
+
+</body>
+</html>
