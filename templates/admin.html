@@ -990,6 +990,67 @@
         return match ? match[1] : "Untitled Page";
     }
 
+    // Wrap HTML with responsive CSS for mobile compatibility
+    function wrapWithResponsiveCSS(html) {
+        const responsiveCSS = `
+<style>
+/* Responsive Wrapper - Auto-injected */
+html { font-size: 16px; }
+body { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 1rem; 
+    line-height: 1.7;
+    word-break: keep-all;
+}
+img, video, iframe { 
+    max-width: 100%; 
+    height: auto; 
+}
+table { 
+    width: 100%; 
+    display: block; 
+    overflow-x: auto; 
+}
+pre, code { 
+    overflow-x: auto; 
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+}
+@media (max-width: 768px) {
+    body { 
+        padding: 0.75rem; 
+        font-size: 15px; 
+    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.1rem; }
+}
+</style>`;
+
+        // Check if viewport meta exists
+        if (!/<meta[^>]*viewport/i.test(html)) {
+            const viewportMeta = '<meta name="viewport" content="width=device-width, initial-scale=1">';
+            // Insert after <head> or at start
+            if (/<head[^>]*>/i.test(html)) {
+                html = html.replace(/<head[^>]*>/i, '$&\n' + viewportMeta);
+            } else {
+                html = viewportMeta + '\n' + html;
+            }
+        }
+
+        // Insert responsive CSS before </head> or at start
+        if (/<\/head>/i.test(html)) {
+            html = html.replace(/<\/head>/i, responsiveCSS + '\n</head>');
+        } else if (/<body[^>]*>/i.test(html)) {
+            html = html.replace(/<body[^>]*>/i, responsiveCSS + '\n$&');
+        } else {
+            html = responsiveCSS + '\n' + html;
+        }
+
+        return html;
+    }
+
     // Extract Content (plain text for search)
     function extractContent(html) {
         const parser = new DOMParser();
@@ -1105,10 +1166,13 @@
 
             // 2. Perform Webshare (GitHub Pages) Post
             if (doWebshare) {
-                webshareStatus.innerText = '📂 Webshare(GitHub) 게시 중...';
+                webshareStatus.innerText = 'Webshare(GitHub) 게시 중...';
+
+                // Apply responsive wrapper for mobile
+                const responsiveHtml = wrapWithResponsiveCSS(html);
 
                 // Upload HTML File
-                await createGithubFile(path, html, `Add webshare: ${title}`);
+                await createGithubFile(path, responsiveHtml, `Add webshare: ${title}`);
 
                 // Update index.json
                 const indexFile = await getGithubFile('docs/webshare/data_x9k3.json');
@@ -1147,12 +1211,14 @@
 
             // 3. Perform Blogger Post (Queue)
             if (doBlogger) {
-                webshareStatus.innerText = '📝 Blogger 큐 생성 중...';
+                webshareStatus.innerText = 'Blogger 큐 생성 중...';
                 try {
+                    // Apply responsive wrapper for Blogger too
+                    const responsiveBloggerHtml = wrapWithResponsiveCSS(html);
                     const queueData = {
                         posts: [{
                             title: title,
-                            html: html,
+                            html: responsiveBloggerHtml,
                             createdAt: new Date().toISOString()
                         }]
                     };
