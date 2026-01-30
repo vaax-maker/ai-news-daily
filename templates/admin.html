@@ -990,6 +990,41 @@
         return match ? match[1] : "Untitled Page";
     }
 
+    // Extract Content (plain text for search)
+    function extractContent(html) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        // Remove scripts, styles, nav, footer
+        doc.querySelectorAll('script, style, nav, footer, header').forEach(el => el.remove());
+        const text = doc.body ? doc.body.textContent.trim() : '';
+        // Return first 500 chars
+        return text.replace(/\s+/g, ' ').slice(0, 500);
+    }
+
+    // Auto-detect category based on content keywords
+    function detectCategory(title, content) {
+        const text = (title + ' ' + content).toLowerCase();
+
+        // AI/ML keywords
+        if (/ai|인공지능|llm|gpt|claude|gemini|딥러닝|머신러닝|ml|machine learning|deep learning|신경망|neural|transformer/.test(text)) {
+            return 'AI';
+        }
+        // Development/Tech keywords
+        if (/개발|코딩|프로그래밍|api|sdk|github|오픈소스|python|javascript|react|node|개발자|developer/.test(text)) {
+            return '개발';
+        }
+        // Business keywords
+        if (/비즈니스|스타트업|투자|펀딩|매출|시장|마케팅|사업|기업|인수|합병|ipo|유니콘/.test(text)) {
+            return '비즈니스';
+        }
+        // Policy/Regulation keywords
+        if (/정책|규제|법안|정부|국회|입법|가이드라인|윤리|거버넌스|compliance/.test(text)) {
+            return '정책';
+        }
+        // Default
+        return '기타';
+    }
+
     function generateShortId(length = 8) {
         const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
         let result = '';
@@ -1089,12 +1124,17 @@
                     sha = indexFile.sha;
                 }
 
+                const excerpt = extractContent(html);
+                const category = detectCategory(title, excerpt);
+
                 indexData.pages.unshift({
                     filename: filename,
                     title: title,
                     url: fullUrl,
                     createdAt: new Date().toISOString(),
-                    type: (html.includes('youtube.com/embed') || html.includes('youtube.com/watch') || html.includes('youtu.be')) ? 'video' : 'webpage'
+                    type: (html.includes('youtube.com/embed') || html.includes('youtube.com/watch') || html.includes('youtu.be')) ? 'video' : 'webpage',
+                    excerpt: excerpt,
+                    category: category
                 });
 
                 await createGithubFile('docs/webshare/data_x9k3.json', JSON.stringify(indexData, null, 2), `Update webshare index: ${title}`, sha);
