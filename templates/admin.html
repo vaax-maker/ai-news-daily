@@ -1093,7 +1093,8 @@
                     filename: filename,
                     title: title,
                     url: fullUrl,
-                    createdAt: new Date().toISOString()
+                    createdAt: new Date().toISOString(),
+                    type: (html.includes('youtube.com/embed') || html.includes('youtube.com/watch') || html.includes('youtu.be')) ? 'video' : 'webpage'
                 });
 
                 await createGithubFile('docs/webshare/data_x9k3.json', JSON.stringify(indexData, null, 2), `Update webshare index: ${title}`, sha);
