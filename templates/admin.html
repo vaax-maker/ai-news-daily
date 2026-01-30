@@ -1005,21 +1005,17 @@
     function detectCategory(title, content) {
         const text = (title + ' ' + content).toLowerCase();
 
-        // AI/ML keywords
+        // AI keywords
         if (/ai|인공지능|llm|gpt|claude|gemini|딥러닝|머신러닝|ml|machine learning|deep learning|신경망|neural|transformer/.test(text)) {
             return 'AI';
-        }
-        // Development/Tech keywords
-        if (/개발|코딩|프로그래밍|api|sdk|github|오픈소스|python|javascript|react|node|개발자|developer/.test(text)) {
-            return '개발';
         }
         // Business keywords
         if (/비즈니스|스타트업|투자|펀딩|매출|시장|마케팅|사업|기업|인수|합병|ipo|유니콘/.test(text)) {
             return '비즈니스';
         }
-        // Policy/Regulation keywords
-        if (/정책|규제|법안|정부|국회|입법|가이드라인|윤리|거버넌스|compliance/.test(text)) {
-            return '정책';
+        // Insight keywords (includes dev, policy, analysis)
+        if (/인사이트|트렌드|분석|전망|리뷰|요약|정리|개발|코딩|정책|규제|법안/.test(text)) {
+            return '인사이트';
         }
         // Default
         return '기타';
