@@ -661,7 +661,6 @@
     }
 
     // Quickview Creation Elements
-    const quickviewTitle = document.getElementById('quickviewTitle');
     const quickviewHtml = document.getElementById('quickviewHtml');
     const btnQuickviewSave = document.getElementById('btnQuickviewSave');
     const btnQuickviewSend = document.getElementById('btnQuickviewSend');
@@ -766,16 +765,18 @@
 
     // Create quickview page
     async function createQuickview(sendTelegram = false) {
-        const title = quickviewTitle.value.trim();
         const rawHtml = quickviewHtml.value.trim();
+
+        if (!rawHtml) {
+            alert('HTML 본문을 입력해주세요.');
+            return;
+        }
+
+        // Extract title BEFORE extractBodyContent since it removes <head> with <title>
+        const title = extractTitle(rawHtml);
 
         // Extract only body content to prevent nested HTML issues (fixes YouTube embed)
         const html = extractBodyContent(rawHtml);
-
-        if (!title || !html) {
-            alert('제목과 HTML 본문을 모두 입력해주세요.');
-            return;
-        }
 
         // Disable buttons and inputs, show loading state
         btnQuickviewSave.disabled = true;
@@ -795,11 +796,16 @@
         quickviewStatus.innerText = '처리 중...';
 
         try {
-            // Auto-extract title from HTML
-            const title = extractTitle(html);
-            if (!title || title === 'Untitled Page') { // Changed from 'Untitled' to 'Untitled Page' to match extractTitle default
+            // Check title extraction result
+            if (!title || title === 'Untitled Page') {
                 if (!confirm('제목을 HTML에서 찾을 수 없습니다. "Untitled Page"로 계속하시겠습니까?')) {
                     quickviewStatus.innerText = '';
+                    // Re-enable buttons when user cancels
+                    btnQuickviewSave.disabled = false;
+                    btnQuickviewSend.disabled = false;
+                    quickviewHtml.disabled = false;
+                    btnQuickviewSave.innerText = originalSaveText;
+                    btnQuickviewSend.innerText = originalSendText;
                     return;
                 }
             }
