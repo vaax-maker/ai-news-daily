@@ -48,6 +48,7 @@ def process_blogger_queue():
                     os.remove(queue_file_path)
                     continue
                 
+                failed_count = 0
                 for post in queue['posts']:
                     title = post.get('title', 'Untitled')
                     html = post.get('html', '')
@@ -64,10 +65,14 @@ def process_blogger_queue():
                         total_posted += 1
                     except Exception as e:
                         print(f"❌ Failed to post '{title}': {e}")
+                        failed_count += 1
                 
-                # Delete processed file
-                os.remove(queue_file_path)
-                print(f"Deleted queue file: {queue_file_path}")
+                if failed_count == 0:
+                    # Delete processed file only if no failures
+                    os.remove(queue_file_path)
+                    print(f"Deleted queue file: {queue_file_path}")
+                else:
+                    print(f"⚠️ Kept queue file due to {failed_count} failures: {queue_file_path}")
                 
             except Exception as e:
                 print(f"❌ Error processing file {queue_file_path}: {e}")
@@ -77,7 +82,8 @@ def process_blogger_queue():
         
     except Exception as e:
         print(f"❌ Critical error: {e}")
-        raise
+        # Build fails if critical error
+        sys.exit(1)
 
 
 if __name__ == '__main__':
