@@ -2406,5 +2406,61 @@
     "bid_close_dt": "2026-03-10",
     "openg_dt": "",
     "is_new": false
+  },
+  {
+    "title": "[서울] 영등포구 2026년 1차 중소기업육성기금 융자지원계획 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118100",
+    "dept": "서울특별시",
+    "manager": "",
+    "date": "2026-02-02",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-02",
+    "bid_begin_dt": "2026-01-26",
+    "bid_close_dt": "2026-02-11",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "[서울] 서초구 2026년 중소기업육성기금 융자지원 계획 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118098",
+    "dept": "서울특별시",
+    "manager": "",
+    "date": "2026-02-02",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-02",
+    "bid_begin_dt": "예산 소진시까지",
+    "bid_close_dt": "예산 소진시까지",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년 지역혁신선도기업육성(R&D) 시행계획 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118092",
+    "dept": "중소벤처기업부",
+    "manager": "",
+    "date": "2026-02-02",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-02",
+    "bid_begin_dt": "2026-02-11",
+    "bid_close_dt": "2026-03-03",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "[부산] 사하구 2026년 사물인터넷 측정기기 부착지원사업 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118087",
+    "dept": "부산광역시",
+    "manager": "",
+    "date": "2026-02-02",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-02",
+    "bid_begin_dt": "2026-01-26",
+    "bid_close_dt": "2026-02-13",
+    "openg_dt": "",
+    "is_new": false
   }
 ]
