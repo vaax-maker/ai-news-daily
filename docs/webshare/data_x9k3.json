@@ -1,6 +1,15 @@
 {
   "pages": [
     {
+      "filename": "0btwarfd.html",
+      "title": "[초상세 리포트] OpenClaw와 자율 에이전트: 인공지능 혹사 시대의 개막",
+      "url": "https://vaax-maker.github.io/ai-news-daily/webshare/0btwarfd.html",
+      "createdAt": "2026-02-02T23:40:55.468Z",
+      "type": "video",
+      "excerpt": "OpenClaw와 자율 에이전트: 인공지능 혹사 시대의 개막 원본 게시일: 2026-02-02 리포트 생성일: 2026-02-03 출처: AI프렌즈 유튜브 채널 (출연: 유용균, 한준구, 제현) #OpenClaw#ClaudeCode#자율에이전트#혹사코딩#보안위협#에이전트사회#MCP#Ollama 목차 (Table of Contents) 1. OpenClaw의 탄생과 이름의 변천사 2. 핵심 기술: 컨텍스트 엔지니어링과 '랄프 스타일' 3. Claude AI(웹) vs Claude Code(로컬)의 결정적 차이 4. OpenClaw 설치 및 내부 구조 분석 (장기 기억의 원리) 5. 실전 사례: 시뮬레이터 제작부터 SNS 활동까지 6. 보안 대재앙: 10가지 위협과 UTM 가상화 해법 7. 에이전트 생태계: 마인크래프트, 데이팅, 그리고 DeFi 8. 미래 전망: 인간 바틀렉 시대와 증강 지능 1. OpenClaw의 탄생과 이름의 변천사 OpenClaw는 Peter Steinberger",
+      "category": "AI"
+    },
+    {
       "filename": "fla4durw.html",
       "title": "[초상세 리포트] OpenClaw와 자율 에이전트: 인공지능 혹사 시대의 개막",
       "url": "https://vaax-maker.github.io/ai-news-daily/webshare/fla4durw.html",
