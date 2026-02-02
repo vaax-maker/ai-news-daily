@@ -3,8 +3,9 @@
 Simple Flask server to trigger immediate message sending from admin panel.
 Run this server locally: python3 admin_server.py
 """
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
+from dotenv import load_dotenv
 import os
 import sys
 import json
@@ -12,6 +13,9 @@ import re
 import subprocess
 from datetime import datetime
 from html.parser import HTMLParser
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Add project root to path
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -29,6 +33,7 @@ WEBSHARE_INDEX = os.path.join(WEBSHARE_DIR, "index.json")
 WEBSHARE_BASE_URL = "https://vaax-maker.github.io/ai-news-daily/webshare"
 
 # Configure Flask to serve static files from 'docs' folder
+# Note: templates are looked up in 'templates' folder by default
 app = Flask(__name__, static_folder='docs', static_url_path='')
 CORS(app)  # Enable CORS for admin panel access
 
@@ -36,8 +41,15 @@ CORS(app)  # Enable CORS for admin panel access
 @app.route('/admin')
 @app.route('/admin.html')
 def serve_admin():
-    """Serve the admin.html page directly."""
-    return app.send_static_file('admin.html')
+    """Serve the admin.html page with injected API key."""
+    # Ensure OPENAI_API_KEY is available
+    openai_api_key = os.getenv("OPENAI_API_KEY", "")
+    if not openai_api_key:
+        print("⚠️ WARNING: OPENAI_API_KEY not found in environment variables.")
+    
+    # Render template from templates/admin.html and inject key
+    # Flask looks for templates in 'templates' folder by default
+    return render_template('admin.html', OPENAI_API_KEY=openai_api_key)
 
 
 class TitleExtractor(HTMLParser):
