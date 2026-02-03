@@ -2475,7 +2475,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년도 원자력연구기반확충사업 (차세대원자력 혁신생태계 기반조성) 신규과제 공모",
@@ -2489,7 +2489,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년도 원자로 재료열화 대응 혁신기술 개발사업 신규과제 공고",
@@ -2503,7 +2503,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 민관협력 기반 AI 휴머노이드 원천기술 고도화(R&D)사업  신규과제 공고",
@@ -2517,7 +2517,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 AI+S&T 혁신 기술개발(R&D)사업 신규과제 공고",
@@ -2531,7 +2531,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 양자내성암호 시범전환 지원사업 참가기업 모집 공모",
@@ -2545,7 +2545,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 상반기 우수기업부설연구소 지정 신청 공고",
@@ -2559,7 +2559,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년 기업공감원스톱지원센터 후속 기업 지원사업 공고",
@@ -2573,7 +2573,7 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "인도네시아 디지털 스마트시티 구현을 위한 디지털트윈 기반 입체지적 구축 시범사업 감리용역",
@@ -2587,7 +2587,7 @@
     "bid_begin_dt": "2026-02-02 20:00:00",
     "bid_close_dt": "2026-03-06 10:00:00",
     "openg_dt": "2026-03-06 11:00:00",
-    "is_new": true
+    "is_new": false
   },
   {
     "title": "2026년도 제1차 국방ICT R&D사업 신규지원 대상과제 공고",
@@ -2601,6 +2601,34 @@
     "bid_begin_dt": "",
     "bid_close_dt": "",
     "openg_dt": "",
-    "is_new": true
+    "is_new": false
+  },
+  {
+    "title": "2026년 대구 창업기업 스케일업 지원사업 R&D 신규지원 시행계획 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118139",
+    "dept": "대구광역시",
+    "manager": "",
+    "date": "2026-02-03",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-03",
+    "bid_begin_dt": "2026-02-23",
+    "bid_close_dt": "2026-02-27",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년 스마트 전자약 사업화 종합지원센터 인허가 지원 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118132",
+    "dept": "보건복지부",
+    "manager": "",
+    "date": "2026-02-03",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-03",
+    "bid_begin_dt": "2026-02-02",
+    "bid_close_dt": "2026-02-13",
+    "openg_dt": "",
+    "is_new": false
   }
 ]
