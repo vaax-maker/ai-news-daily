@@ -2630,5 +2630,61 @@
     "bid_close_dt": "2026-02-13",
     "openg_dt": "",
     "is_new": false
+  },
+  {
+    "title": "2026년 공공혁신수요기반 혁신제품 기술개발 사업 Scale-up형 신규지원 대상과제 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118214",
+    "dept": "조달청",
+    "manager": "",
+    "date": "2026-02-04",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-04",
+    "bid_begin_dt": "2026-02-09",
+    "bid_close_dt": "2026-03-03",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년 중견중소기업상생형혁신도약사업 신규지원 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118211",
+    "dept": "산업통상부",
+    "manager": "",
+    "date": "2026-02-04",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-04",
+    "bid_begin_dt": "2026-02-03",
+    "bid_close_dt": "2026-03-04",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년 중소기업 연구인력지원사업 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118209",
+    "dept": "중소벤처기업부",
+    "manager": "",
+    "date": "2026-02-04",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-04",
+    "bid_begin_dt": "세부사업별 상이",
+    "bid_close_dt": "세부사업별 상이",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년 지역 주도형 AI 대전환 사업 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118174",
+    "dept": "중소벤처기업부",
+    "manager": "",
+    "date": "2026-02-04",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-04",
+    "bid_begin_dt": "2026-02-04",
+    "bid_close_dt": "2026-03-10",
+    "openg_dt": "",
+    "is_new": false
   }
 ]
