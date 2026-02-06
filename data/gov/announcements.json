@@ -2784,5 +2784,47 @@
     "bid_close_dt": "2026-02-23",
     "openg_dt": "",
     "is_new": false
+  },
+  {
+    "title": "2026년 실감콘텐츠 스튜디오 프로젝트 현물지원기업 모집 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118285",
+    "dept": "광주광역시",
+    "manager": "",
+    "date": "2026-02-06",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-06",
+    "bid_begin_dt": "2026-02-02",
+    "bid_close_dt": "2026-12-01",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "2026년 KRISS 측정 소부장 개발 과제 공모",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118275",
+    "dept": "과학기술정보통신부",
+    "manager": "",
+    "date": "2026-02-06",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-06",
+    "bid_begin_dt": "2026-02-09",
+    "bid_close_dt": "2026-02-23",
+    "openg_dt": "",
+    "is_new": false
+  },
+  {
+    "title": "[경기] 2026년 스타기업 육성사업 참여기업 모집 공고",
+    "link": "https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118273",
+    "dept": "경기도",
+    "manager": "",
+    "date": "2026-02-06",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-02-06",
+    "bid_begin_dt": "2026-02-05",
+    "bid_close_dt": "2026-03-05",
+    "openg_dt": "",
+    "is_new": false
   }
 ]
