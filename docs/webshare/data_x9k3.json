@@ -1,6 +1,15 @@
 {
   "pages": [
     {
+      "filename": "ndiczsug.html",
+      "title": "에이전틱 코딩의 80% 문제 분석 보고서",
+      "url": "https://vaax-maker.github.io/ai-news-daily/webshare/ndiczsug.html",
+      "createdAt": "2026-02-06T07:53:01.661Z",
+      "type": "webpage",
+      "excerpt": "원문 발행일: 2026년 1월 28일 (추정) 리포트 생성일: 2026년 2월 6일 원문 소스: The 80% Problem in Agentic Coding - Addy Osmani #AI_Agents #SoftwareEngineering #AgenticCoding #FutureOfWork #TechnicalDebt 원문 핵심 분석: 80% 문제의 본질 Addy Osmani는 AI 에이전트가 소프트웨어 개발의 핵심으로 자리 잡으면서 발생하는 패러다임의 변화를 80% 문제라는 개념으로 설명합니다. 과거에는 AI가 70%를 돕고 인간이 30%를 마무리했다면, 이제는 에이전트가 코드의 80% 이상(때로는 100%)을 작성하는 단계에 진입했습니다. 하지만 이로 인해 발생하는 새로운 병목 현상이 개발자의 역할을 재정의하고 있습니다. 1. 이해 부채 (Understanding Debt)의 발생 에이전트가 코드를 순식간에 쏟아내면서 인간 개발자가 해당 코드를 읽고 검증하는 속도가 따라가지 못하는",
+      "category": "AI"
+    },
+    {
       "filename": "x98mk9au.html",
       "title": "지슨(GISON) 기업 분석 보고서: 무선 보안 및 탐지 솔루션의 미래",
       "url": "https://vaax-maker.github.io/ai-news-daily/webshare/x98mk9au.html",
