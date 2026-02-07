@@ -282,8 +282,9 @@ def process_category(config, now_utc, kst_timezone_offset=9):
             # New article - call LLM for summarization
             text_with_url = content + f"\n\nURL: {link}"
             try:
-                summary = summarize_article(text_with_url, title, config.display_name)
-                summary = sanitize_summary(summary)
+                result = summarize_article(text_with_url, title, config.display_name)
+                new_title = result["title"]
+                summary = sanitize_summary(result["summary"])
                 summary = trim_summary_lines(summary)
             except Exception as e:
                 print(f"[{config.key}] Summarization error for '{title[:50]}...': {e}")
@@ -293,14 +294,12 @@ def process_category(config, now_utc, kst_timezone_offset=9):
             placeholder_type = config.key if (config.key in ("ai", "xr") and not image_url) else ""
 
             summarized_items.append({
-                "title": shorten_korean_title(title),
+                "title": shorten_korean_title(new_title),
                 "link": link,
                 "summary_html": summary,
                 "published_display": format_timestamp(ts),
                 "source_name": extract_source_name(entry, link),
                 "image_url": image_url,
-                "placeholder_type": placeholder_type,
-                "original_title": title,
                 "placeholder_type": placeholder_type,
                 "original_title": title,
                 "timestamp": ts, # Add timestamp for badge
@@ -681,7 +680,7 @@ def main():
         "ai": str_to_bool(os.getenv("RUN_AI", "true")),
         "xr": str_to_bool(os.getenv("RUN_XR", "true")),
         "gov": str_to_bool(os.getenv("RUN_GOV", "true")),
-        "members": str_to_bool(os.getenv("RUN_MEMBERS", "true"))
+        "members": str_to_bool(os.getenv("RUN_MEMBERS", "false"))  # 회원사소식 기능 비활성화
     }
 
     # 1. Process Categories

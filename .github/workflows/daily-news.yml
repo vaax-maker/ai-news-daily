@@ -62,7 +62,7 @@ jobs:
       RUN_AI: ${{ github.event.inputs.run_ai == '건너뛰기' && 'false' || 'true' }}
       RUN_XR: ${{ github.event.inputs.run_xr == '건너뛰기' && 'false' || 'true' }}
       RUN_GOV: ${{ github.event.inputs.run_gov == '건너뛰기' && 'false' || 'true' }}
-      RUN_MEMBERS: ${{ github.event.inputs.run_members == '건너뛰기' && 'false' || 'true' }}
+      RUN_MEMBERS: 'false'  # 회원사소식 기능 비활성화
       
       # 기사 수 설정
       MAX_ARTICLES: ${{ github.event.inputs.max_articles || '10' }}
