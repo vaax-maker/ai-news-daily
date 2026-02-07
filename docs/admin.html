@@ -509,7 +509,12 @@
 
             // OpenAI API Key (for summary generation)
             // Server-side injection via admin_server.py
-            const OPENAI_API_KEY = '';
+            // OpenAI API Key (Client-side Management)
+            // Removed hardcoded/template key in favor of localStorage
+            // const OPENAI_API_KEY = ''; 
+            function getOpenAiKey() {
+                return localStorage.getItem('openaiKey') || '';
+            }
 
             // Extract text from HTML
             function extractTextFromHtml(html) {
@@ -790,7 +795,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${OPENAI_API_KEY}`
+                        'Authorization': `Bearer ${getOpenAiKey()}`
                     },
                     body: JSON.stringify({
                         model: 'gpt-4o-mini',
@@ -1036,7 +1041,39 @@
             <button id="savePat" style="margin-top: 5px; padding: 4px 8px; font-size: 0.75rem; background: #0f766e; color: white; border: none; border-radius: 4px; cursor: pointer;">저장</button>
             <span id="patStatus" style="font-size: 0.7rem; margin-left: 5px; color: #059669;"></span>
         </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 10px;" onclick="document.getElementById('openaiConfig').style.display = document.getElementById('openaiConfig').style.display === 'none' ? 'block' : 'none'">
+            <span style="font-size: 0.8rem; font-weight: bold; color: #0f766e;">🧠 OpenAI 연동 설정 (필수)</span>
+            <span style="font-size: 0.8rem;">▼</span>
+        </div>
+        <div id="openaiConfig" style="display: none; margin-top: 0.5rem;">
+            <p style="font-size: 0.75rem; color: #666;">요약 기능을 위해 OpenAI API Key가 필요합니다.</p>
+            <input type="password" id="openaiKeyInput" placeholder="sk-..." style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; font-size: 0.8rem; margin-top: 5px;">
+            <button id="saveOpenaiBtn" style="margin-top: 5px; padding: 4px 8px; font-size: 0.75rem; background: #0f766e; color: white; border: none; border-radius: 4px; cursor: pointer;">저장</button>
+            <span id="openaiStatus" style="font-size: 0.7rem; margin-left: 5px; color: #059669;"></span>
+        </div>
     `;
+
+            // OpenAI Key UI Logic
+            setTimeout(() => {
+                const openaiKeyInput = document.getElementById('openaiKeyInput');
+                const saveOpenaiBtn = document.getElementById('saveOpenaiBtn');
+                const openaiStatus = document.getElementById('openaiStatus');
+
+                if (openaiKeyInput) {
+                    openaiKeyInput.value = getOpenAiKey();
+                    saveOpenaiBtn.addEventListener('click', () => {
+                        const key = openaiKeyInput.value.trim();
+                        if (key) {
+                            localStorage.setItem('openaiKey', key);
+                            openaiStatus.innerText = '✅ 저장됨';
+                            setTimeout(() => openaiStatus.innerText = '', 2000);
+                        } else {
+                            alert('OpenAI API Key를 입력해주세요.');
+                        }
+                    });
+                }
+            }, 0);
             // Insert before the textarea in Webshare section
             webshareHtml.parentElement.insertBefore(configDiv, webshareHtml.parentElement.children[0]);
 
