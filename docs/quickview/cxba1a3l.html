@@ -1,0 +1,173 @@
+<style>
+        /* vaax-theme.css */
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --line-gray: #9ca3af;
+        }
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        p { margin-bottom: 1.5em; }
+        h1, h2, h3 { color: var(--text-main); font-weight: 700; }
+        h1 { margin-top: 1em; margin-bottom: 0.5em; font-size: 2.2rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+        h2 { margin-top: 2.5em; margin-bottom: 1em; font-size: 1.7rem; color: var(--secondary-color); border-left: 5px solid var(--primary-color); padding-left: 15px; }
+        h3 { margin-top: 2em; margin-bottom: 0.8em; font-size: 1.4rem; }
+        .highlight { background-color: #CEFA98; padding: 2px 4px; border-radius: 4px; font-weight: 600; }
+        .section-block { margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-color); }
+        .meta-info { background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 30px; font-size: 0.9rem; color: var(--text-muted); }
+        .meta-info strong { color: var(--text-main); }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 30px; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px; }
+        .timestamp { color: var(--primary-color); font-weight: bold; text-decoration: none; font-size: 0.9em; margin-left: 5px; cursor: pointer; }
+        .timestamp:hover { color: var(--primary-color-hover); text-decoration: underline; }
+        .tag-container { margin-top: 10px; }
+        .tag { display: inline-block; background-color: #e5e7eb; color: #374151; padding: 4px 10px; border-radius: 15px; font-size: 0.85rem; margin-right: 8px; margin-bottom: 5px; }
+        .source-link { font-size: 0.85em; color: var(--primary-color); text-decoration: none; border-bottom: 1px dashed var(--primary-color); }
+        .source-link:hover { color: var(--primary-color-hover); border-bottom-style: solid; }
+        footer { text-align: center; margin-top: 50px; padding: 20px; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border-color); }
+        ul { margin-bottom: 1.5em; }
+        li { margin-bottom: 0.5em; }
+        table { width:100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid var(--border-color); padding: 10px; text-align: left; }
+        th { background-color: #f3f4f6; }
+    </style>
+
+
+<h1>2026 Claude Cowork: 자율형 에이전트의 시대</h1>
+
+<div class="meta-info">
+    <strong>원문 발행일:</strong> 2026-01-17<br>
+    <strong>리포트 생성일:</strong> 2026-02-07<br>
+    <strong>분석 소스:</strong> <a href="https://www.youtube.com/watch?v=mFl9uULf1E4" target="_blank" class="source-link">YouTube 영상 (오후다섯씨 채널)</a><br>
+    <div class="tag-container">
+        <span class="tag">#AI에이전트</span>
+        <span class="tag">#ClaudeCowork</span>
+        <span class="tag">#Anthropic</span>
+        <span class="tag">#업무자동화</span>
+        <span class="tag">#데스크탑AI</span>
+    </div>
+</div>
+
+<div class="section-block">
+    <div class="video-container">
+        <iframe id="ytplayer" src="https://www.youtube.com/embed/mFl9uULf1E4?enablejsapi=1&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+    </div>
+
+    <h2>1. 원본 콘텐츠 상세 요약</h2>
+    <p>본 영상은 Anthropic의 최신 기능인 <span class="highlight">Claude Cowork</span>를 심도 있게 다룹니다. 기존의 텍스트 생성 위주 AI에서 벗어나, 실제 사용자의 PC 환경에서 <strong>'실행'과 '관리'</strong>를 담당하는 에이전트로의 진화를 선언하고 있습니다.</p>
+
+    <h3>주요 기능 및 기술적 특징</h3>
+    <ul>
+        <li><strong>로컬 파일 시스템 직접 제어:</strong> 사용자가 지정한 폴더에 대해 읽기/쓰기 권한을 부여받아 파일을 생성, 수정, 삭제합니다. <a href="javascript:void(0);" class="timestamp" data-time="9">[00:09]</a></li>
+        <li><strong>컨텍스트 엔지니어링(Context Engineering):</strong> 단순한 프롬프트 입력을 넘어, 폴더 내의 수많은 파일을 문맥으로 파악하여 연속성 있는 업무를 수행합니다. <a href="javascript:void(0);" class="timestamp" data-time="257">[04:17]</a></li>
+        <li><strong>다중 스킬(Skills) 시스템:</strong> 특정 업무(예: PPT 제작, 데이터 분석)에 최적화된 마크다운 기반 스킬 파일을 로딩하여 효율을 극대화합니다. <a href="javascript:void(0);" class="timestamp" data-time="365">[06:05]</a></li>
+        <li><strong>자율적 오류 수정:</strong> 작업 중 라이브러리 충돌 등 문제가 발생하면 스스로 대안을 찾아 다시 시도하는 루프(Loop) 기능을 탑재했습니다. <a href="javascript:void(0);" class="timestamp" data-time="745">[12:25]</a></li>
+    </ul>
+
+    <h3>워크플로우 시연 요약</h3>
+    <ul>
+        <li><strong>지시:</strong> "Claude Cowork 교육용 발표 자료를 만들어줘." <a href="javascript:void(0);" class="timestamp" data-time="562">[09:22]</a></li>
+        <li><strong>계획:</strong> 1단계 관련 정보 웹 검색, 2단계 슬라이드 구조 설계, 3단계 파워포인트 파일 생성.</li>
+        <li><strong>결과물:</strong> 단 몇 분 만에 실제 구동 가능한 .pptx 파일과 발표용 .docx 스크립트가 로컬 폴더에 저장됨을 확인했습니다. <a href="javascript:void(0);" class="timestamp" data-time="784">[13:04]</a></li>
+    </ul>
+</div>
+
+<div class="section-block">
+    <h2>2. [심화 인사이트] 2026 AI 에이전트 시장 경쟁 분석</h2>
+    <p>Claude Cowork의 등장은 단순한 기능 추가가 아닌, <strong>'OS 레벨의 AI 비서'</strong> 경쟁이 시작되었음을 의미합니다. 타사 사례와 시장 데이터를 통해 이를 분석합니다.</p>
+
+    <h3>글로벌 빅테크와의 경쟁 지형</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>구분</th>
+                <th>Anthropic (Cowork)</th>
+                <th>OpenAI (Operator)</th>
+                <th>Microsoft (Copilot+)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>강점</strong></td>
+                <td>코드 실행 및 파일 제어의 정교함</td>
+                <td>브라우저 기반 자율 행동(Browsing)</td>
+                <td>윈도우 OS 시스템과의 깊은 통합</td>
+            </tr>
+            <tr>
+                <td><strong>접근 방식</strong></td>
+                <td>격리된 가상 환경(Sandbox) 보안</td>
+                <td>멀티모달 비전 기반 조작</td>
+                <td>로컬 NPU 기반 온디바이스 처리</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>시장 통계 및 예측</h3>
+    <ul>
+        <li><strong>에이전트 도입률:</strong> Gartner의 2026 예측에 따르면, 글로벌 500대 기업의 40%가 자율적 의사결정이 가능한 AI 에이전트를 도입할 것으로 보입니다.</li>
+        <li><strong>생산성 향상:</strong> 초기 도입 기업 사례 연구에 따르면, 단순 반복 문서 작업에서 인간 대비 12배 빠른 처리 속도를 기록했습니다.</li>
+    </ul>
+    <p class="meta-info">
+        참조: <a href="https://www.gartner.com/en/newsroom/press-releases/2026-top-strategic-technology-trends" target="_blank" class="source-link">Gartner 2026 Technology Trends</a>, 
+        <a href="https://www.anthropic.com/claude/cowork-preview" target="_blank" class="source-link">Anthropic Claude Cowork 공식 문서</a>
+    </p>
+</div>
+
+<div class="section-block">
+    <h2>3. 전문가 제언: 안전한 에이전트 활용 가이드</h2>
+    <p>자율형 AI가 사용자의 파일을 직접 제어하는 만큼, 강력한 권한에는 책임이 따릅니다. 전문가들은 다음과 같은 수칙을 강조합니다.</p>
+    
+    <h3>핵심 보안 수칙</h3>
+    <ul>
+        <li><strong>최소 권한의 원칙:</strong> 컴퓨터 전체 폴더가 아닌, 작업용 <span class="highlight">특정 하위 폴더</span>만 Claude에게 허용해야 합니다.</li>
+        <li><strong>프롬프트 인젝션 대비:</strong> 외부 웹 검색을 허용할 경우, 악의적인 스크립트가 포함된 사이트에서 AI가 잘못된 파일을 생성할 수 있으므로 최종 결과물을 반드시 검토하십시오.</li>
+        <li><strong>구독 모델의 이해:</strong> 현재 Claude Max(월 $100 이상)에서 제공되는 서비스이므로, 팀 단위 도입 시 비용 대비 편익(ROI)을 철저히 계산해야 합니다.</li>
+    </ul>
+</div>
+
+<footer>2026 Fovea</footer>
+
+<script>
+    var player;
+    
+    // YouTube IFrame API 로드 후 실행될 함수
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('ytplayer', {
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        // 플레이어가 준비되면 타임스탬프 클릭 이벤트 리스너 등록
+        document.querySelectorAll('.timestamp').forEach(function(el) {
+            el.addEventListener('click', function(e) {
+                e.preventDefault();
+                var seconds = parseInt(this.getAttribute('data-time'));
+                if (player && player.seekTo) {
+                    player.seekTo(seconds, true);
+                    player.playVideo();
+                }
+            });
+        });
+    }
+
+    // YouTube IFrame API 스크립트 비동기 로드
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+</script>
