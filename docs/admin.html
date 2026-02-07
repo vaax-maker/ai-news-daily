@@ -687,6 +687,27 @@
                                 panelStatus.classList.add('success');
                                 panelStatus.innerText = "Message queued! It will be sent immediately.";
                             }
+
+                            // 즉시 발송 트리거 Logic
+                            try {
+                                console.log("Triggering local immediate send...");
+                                const res = await fetch('/trigger-send', { method: 'POST' });
+                                if (res.ok) {
+                                    if (panelStatus) panelStatus.innerText += " (Local Trigger OK)";
+                                } else {
+                                    throw new Error('Local trigger failed');
+                                }
+                            } catch (err) {
+                                console.warn("Local trigger failed, trying GitHub Action fallback:", err);
+
+                                // Fallback to GitHub Action
+                                const ghSuccess = await triggerGithubAction();
+                                if (ghSuccess) {
+                                    if (panelStatus) panelStatus.innerText += " (GitHub Action Triggered)";
+                                } else {
+                                    if (panelStatus) panelStatus.innerText += " (Scheduled)";
+                                }
+                            }
                         } else {
                             const targetTime = scheduleTime ? scheduleTime.value : null;
                             if (!targetTime) {
@@ -927,6 +948,30 @@
                             status: 'pending',
                             createdAt: serverTimestamp()
                         });
+
+                        // 즉시 발송 트리거 (GitHub Actions 대기 없이)
+                        quickviewStatus.innerText = '📨 텔레그램 즉시 발송 시도 중...';
+
+                        try {
+                            const triggerResponse = await fetch('/trigger-send', { method: 'POST' });
+                            const triggerResult = await triggerResponse.json();
+                            if (triggerResult.success) {
+                                quickviewStatus.innerText = '📨 텔레그램 발송 완료 (Local)';
+                            } else {
+                                throw new Error(triggerResult.message);
+                            }
+                        } catch (triggerErr) {
+                            console.warn('Local trigger failed, trying GitHub Action fallback:', triggerErr);
+
+                            // Fallback to GitHub Action
+                            quickviewStatus.innerText = '☁️ 원격 트리거 시도 중...';
+                            const ghSuccess = await triggerGithubAction();
+                            if (ghSuccess) {
+                                quickviewStatus.innerText = '📨 텔레그램 발송 요청됨 (GitHub)';
+                            } else {
+                                quickviewStatus.innerText = '⏳ 텔레그램 발송 예약됨 (Schedule)';
+                            }
+                        }
                     }
 
                     // GitHub Upload
