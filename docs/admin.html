@@ -1086,6 +1086,37 @@
                 };
             }
 
+            // GitHub API: Trigger Dispatch Event (for Immediate Send)
+            async function triggerGithubAction() {
+                const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/dispatches`;
+                const headers = getAuthHeaders();
+
+                if (!headers) {
+                    console.warn('GitHub Configuration missing for dispatch trigger');
+                    return false;
+                }
+
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: headers,
+                        body: JSON.stringify({
+                            event_type: 'send-notification'
+                        })
+                    });
+
+                    if (response.status === 204) {
+                        console.log('GitHub Action triggered successfully');
+                        return true;
+                    } else {
+                        console.warn('GitHub Action trigger failed:', response.status);
+                        return false;
+                    }
+                } catch (e) {
+                    console.error('GitHub Action trigger error:', e);
+                    return false;
+                }
+            }
             // Extract Title
             function extractTitle(html) {
                 const match = html.match(/<title>(.*?)<\/title>/i);
