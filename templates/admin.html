@@ -367,15 +367,7 @@
                 </div>
                 <div id="quickviewStatus" class="status-msg" style="margin-top: 0.5rem;"></div>
 
-                <!-- Quickview Deploy Command -->
-                <div
-                    style="margin-top: 1rem; padding: 0.5rem; background: #fefce8; border: 1px dashed #ca8a04; border-radius: 6px;">
-                    <p style="margin: 0 0 0.25rem 0; font-size: 0.75rem; color: #854d0e;">📦 즉시 배포:</p>
-                    <div id="quickviewCopyCmd"
-                        style="background: #1e293b; padding: 0.35rem 0.5rem; border-radius: 4px; font-family: monospace; color: #10b981; font-size: 0.65rem; overflow-x: auto; cursor: pointer; word-break: break-all;">
-                        python3 scripts/deploy_quickview.py
-                    </div>
-                </div>
+
             </div>
 
             <!-- 3. 수기 메시지 처리 (직접 입력) - 우측 -->
@@ -635,7 +627,15 @@
                     });
                     if (panelStatus) {
                         panelStatus.classList.add('success');
-                        panelStatus.innerText = "Message queued! It will be sent within 1 minute.";
+                        panelStatus.innerText = "Message queued! It will be sent immediately.";
+                    }
+
+                    // 즉시 발송 트리거
+                    try {
+                        console.log("Triggering immediate send...");
+                        fetch('/trigger-send', { method: 'POST' });
+                    } catch (err) {
+                        console.warn("Trigger failed:", err);
                     }
                 } else {
                     const targetTime = scheduleTime ? scheduleTime.value : null;
@@ -672,16 +672,9 @@
     const btnQuickviewSave = document.getElementById('btnQuickviewSave');
     const btnQuickviewSend = document.getElementById('btnQuickviewSend');
     const quickviewStatus = document.getElementById('quickviewStatus');
-    const quickviewCopyCmd = document.getElementById('quickviewCopyCmd');
 
-    // Copy command on click
-    if (quickviewCopyCmd) {
-        quickviewCopyCmd.addEventListener('click', () => {
-            const cmd = 'cd /Users/fovea/Documents/vsc-codex/VAAXfinal && python3 scripts/deploy_quickview.py';
-            navigator.clipboard.writeText(cmd);
-            alert('명령어가 복사되었습니다! 터미널에 붙여넣기 하세요.');
-        });
-    }
+
+
 
     // Generate quickview page ID
     function generateQuickviewId() {
@@ -732,7 +725,7 @@
                 model: 'gpt-4o-mini',
                 messages: [{ role: 'user', content: prompt }],
                 temperature: 0.2,
-                max_tokens: Math.min(maxChars, 300)
+                max_tokens: 800  // 한국어는 글자당 2~4토큰 필요, 300자 요약을 위해 충분한 토큰 할당
             })
         });
 
@@ -884,6 +877,18 @@
                     status: 'pending',
                     createdAt: serverTimestamp()
                 });
+
+                // 즉시 발송 트리거 (GitHub Actions 대기 없이)
+                quickviewStatus.innerText = '📨 텔레그램 즉시 발송 중...';
+                try {
+                    const triggerResponse = await fetch('/trigger-send', { method: 'POST' });
+                    const triggerResult = await triggerResponse.json();
+                    if (!triggerResult.success) {
+                        console.warn('Trigger-send warning:', triggerResult.message);
+                    }
+                } catch (triggerErr) {
+                    console.warn('Trigger-send failed (will retry via GitHub Actions):', triggerErr);
+                }
             }
 
             // GitHub Upload
@@ -897,7 +902,7 @@
 
             quickviewStatus.className = 'status-msg success';
             quickviewStatus.innerHTML = sendTelegram
-                ? `✅ 퀵뷰 생성 및 전송 예약 완료!<br><a href="${pageUrl}" target="_blank">${pageUrl}</a>`
+                ? `✅ 퀵뷰 생성 및 텔레그램 발송 완료!<br><a href="${pageUrl}" target="_blank">${pageUrl}</a>`
                 : `✅ 퀵뷰 생성 완료!<br><a href="${pageUrl}" target="_blank">${pageUrl}</a>`;
 
             quickviewHtml.value = '';
