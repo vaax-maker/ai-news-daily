@@ -1,0 +1,260 @@
+
+<style>
+/* Responsive Wrapper - Auto-injected */
+html { font-size: 16px; }
+body { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 1rem; 
+    line-height: 1.7;
+    word-break: keep-all;
+}
+img, video, iframe { 
+    max-width: 100%; 
+    height: auto; 
+}
+table { 
+    width: 100%; 
+    display: block; 
+    overflow-x: auto; 
+}
+pre, code { 
+    overflow-x: auto; 
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+}
+@media (max-width: 768px) {
+    body { 
+        padding: 0.75rem; 
+        font-size: 15px; 
+    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.1rem; }
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+        /* fovea-theme.css - Mobile Optimized Version */
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --touch-highlight: rgba(101, 163, 13, 0.1);
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-main);
+            background-color: var(--background-color);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            word-break: keep-all;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1 {
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+            font-size: 2.2rem;
+            letter-spacing: -0.02em;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 12px;
+        }
+
+        h2 {
+            margin-top: 2.5em;
+            margin-bottom: 1.2em;
+            font-size: 1.75rem;
+            color: var(--secondary-color);
+            border-left: 6px solid var(--primary-color);
+            padding-left: 18px;
+        }
+
+        .meta-info {
+            background-color: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .tag-container {
+            margin-top: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #f3f4f6;
+            color: #374151;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-right: 6px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .timestamp {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.95em;
+            margin-left: 4px;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            display: inline-block;
+        }
+
+        .timestamp:active {
+            background-color: var(--touch-highlight);
+        }
+
+        .editors-note {
+            background-color: #ecfdf5;
+            border-left: 5px solid #10b981;
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            margin-top: 80px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 20px 16px; }
+            h1 { font-size: 1.65rem; }
+            h2 { font-size: 1.35rem; }
+        }
+    </style>
+
+    <h1>현실 공간에 침투한 AR 물리엔진: AirDraw의 진화</h1>
+
+    <div class="meta-info">
+        <div><strong>Original Date:</strong> 2026-02-05</div>
+        <div><strong>Report Date:</strong> 2026-02-08</div>
+        <div><strong>Source:</strong> <a href="https://www.youtube.com/shorts/0rErLjYfdGI" target="_blank">현실 공간에 침투해버린 AR 물리엔진 (치직치직)</a></div>
+        <div class="tag-container">
+            <span class="tag">#애플비전프로</span>
+            <span class="tag">#AR</span>
+            <span class="tag">#에어드로우</span>
+            <span class="tag">#물리엔진</span>
+            <span class="tag">#3D드로잉</span>
+            <span class="tag">#USDZ</span>
+        </div>
+    </div>
+
+    <div class="video-container">
+        <div id="player"></div>
+    </div>
+
+    <section>
+        <h2>1. 공간 물리 드로잉의 새로운 패러다임</h2>
+        <p>
+            단순히 공중에 선을 긋는 것을 넘어, 이제 사용자가 그린 가상 물체가 현실의 물리 법칙을 따르기 시작했습니다. 
+            애플 비전 프로(Apple Vision Pro)의 서드파티 앱인 <strong>에어드로우(AirDraw)</strong>는 공간 드로잉에 고도화된 물리 엔진을 결합하여 가상과 현실의 경계를 허물고 있습니다 <span class="timestamp" data-time="0">[00:00]</span>. 
+            단순한 시각적 표현을 넘어, 질량과 중력, 충돌 등의 물리적 특성이 부여된 '디지털 실체'를 생성할 수 있게 된 것입니다.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. 핵심 물리 메커니즘 분석</h2>
+        <p>
+            에어드로우가 구현하는 물리 엔진의 핵심은 다음과 같은 세 가지 요소로 요약됩니다.
+        </p>
+        <ul>
+            <li><strong>중력 및 강체 물리(Rigid Body Dynamics):</strong> 사용자가 공중에 3D 객체를 그린 후 물리 모드를 활성화하면, 객체는 즉시 중력의 영향을 받아 아래로 떨어집니다 <span class="timestamp" data-time="8">[00:08]</span>. 특히 체인 형태의 구조물을 그릴 경우, 각 고리가 서로를 지탱하며 자연스럽게 휘어지는 강체 물리 연산이 실시간으로 이루어집니다 <span class="timestamp" data-time="11">[00:11]</span>.</li>
+            <li><strong>정밀한 충돌 판정(Collision Detection):</strong> 생성된 드로잉은 단순히 바닥에 닿는 것을 넘어, 미리 그려진 다른 선이나 현실 세계의 가구, 바닥 등 오브젝트와 상호작용합니다 <span class="timestamp" data-time="15">[00:15]</span>. 영상에서는 고리가 다른 물체에 걸리거나 튕겨 나가는 등 정교한 충돌 계산을 보여줍니다.</li>
+            <li><strong>관성 및 질량의 적용:</strong> 물체의 부피(두께)에 따라 질량이 다르게 설정됩니다. 선을 두껍게 그릴수록 더 무거운 물체로 취급되어 관성 법칙이 강하게 적용되며, 이는 가상 물체의 움직임에 사실감을 더해줍니다 <span class="timestamp" data-time="18">[00:18]</span>.</li>
+        </ul>
+    </section>
+
+    <div class="editors-note">
+        <strong>[Editor's Note: 물리 엔진의 원리]</strong><br>
+        AR 공간에서의 물리 엔진은 비전 프로의 <strong>LiDAR 스캐너</strong>를 통해 생성된 실시간 매시(Mesh) 데이터 위에서 작동합니다. AirDraw와 같은 앱은 Unity의 PhysX 엔진이나 Apple의 SceneKit 물리 엔진을 활용하여, 가상의 드로잉 포인트들을 제약 조건(Constraints)으로 연결함으로써 실시간 천 시뮬레이션이나 강체 연결을 구현합니다.
+    </div>
+
+    <section>
+        <h2>3. 데이터 호환성과 확장성</h2>
+        <p>
+            에어드로우에서 제작된 결과물은 일회성 시각 자료에 그치지 않습니다. 이 앱은 <strong>USDZ(Universal Scene Description)</strong>라는 애플의 표준 3D 포맷으로 데이터를 저장합니다 <span class="timestamp" data-time="24">[00:24]</span>. 
+            이 포맷 덕분에 사용자는 자신이 만든 물리 드로잉을 동일한 공간에 다시 불러오거나, 다른 앱 또는 AR 프로젝트에서 재사용할 수 있는 고도의 범용성을 확보하게 됩니다 <span class="timestamp" data-time="27">[00:27]</span>.
+        </p>
+    </section>
+
+    <div class="editors-note">
+        <strong>[Editor's Note: USDZ 포맷의 중요성]</strong><br>
+        USDZ는 Pixar에서 개발하고 Apple이 채택한 포맷으로, 텍스처와 기하학적 데이터를 하나의 압축 파일에 담습니다. 최근 NVIDIA와 Apple, Pixar 등이 참여한 <strong>'Alliance for OpenUSD (AOUSD)'</strong>의 출범으로 메타버스 및 공간 컴퓨팅의 표준 규격으로 자리 잡고 있습니다.<br>
+        <a href="https://aousd.org/" target="_blank">관련 자료: Alliance for OpenUSD 공식 웹사이트</a>
+    </div>
+
+    <footer>Generated by AI Analyst | Focus on Spatial Computing &amp; AR Dynamics</footer>
+
+    <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                videoId: '0rErLjYfdGI',
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            var timestamps = document.querySelectorAll('.timestamp');
+            timestamps.forEach(function(el) {
+                el.addEventListener('click', function() {
+                    var time = this.getAttribute('data-time');
+                    if (player && player.seekTo) {
+                        player.seekTo(time, true);
+                        player.playVideo();
+                    }
+                });
+            });
+        }
+    </script>
