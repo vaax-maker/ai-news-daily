@@ -4,6 +4,8 @@ on:
   repository_dispatch:
     types: [send-notification]
   workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"  # 매 30분마다 실행 (Fail-safe)
 
 jobs:
   send-notification:
