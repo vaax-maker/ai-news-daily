@@ -105,6 +105,63 @@ document.addEventListener('DOMContentLoaded', function() {{
     return html_content
 
 
+def wrap_with_responsive_css(html: str) -> str:
+    """Wrap HTML content with responsive CSS for mobile optimization."""
+    responsive_css = """
+<style>
+/* Responsive Wrapper - Auto-injected */
+html { font-size: 16px; }
+body { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 1rem; 
+    line-height: 1.7;
+    word-break: keep-all;
+}
+img, video, iframe { 
+    max-width: 100%; 
+    height: auto; 
+}
+table { 
+    width: 100%; 
+    display: block; 
+    overflow-x: auto; 
+}
+pre, code { 
+    overflow-x: auto; 
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+}
+@media (max-width: 768px) {
+    body { 
+        padding: 0.75rem; 
+        font-size: 15px; 
+    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.1rem; }
+}
+</style>"""
+    
+    import re
+    # Check if viewport meta exists
+    if not re.search(r'<meta[^>]*viewport', html, re.IGNORECASE):
+        viewport_meta = '<meta name="viewport" content="width=device-width, initial-scale=1">'
+        if re.search(r'<head[^>]*>', html, re.IGNORECASE):
+            html = re.sub(r'(<head[^>]*>)', r'\1\n' + viewport_meta, html, count=1, flags=re.IGNORECASE)
+        else:
+            html = viewport_meta + '\n' + html
+
+    # Insert responsive CSS before </head> or at start
+    if re.search(r'</head>', html, re.IGNORECASE):
+        html = re.sub(r'</head>', responsive_css + '\n</head>', html, count=1, flags=re.IGNORECASE)
+    elif re.search(r'<body[^>]*>', html, re.IGNORECASE):
+        html = re.sub(r'(<body[^>]*>)', responsive_css + '\n' + r'\1', html, count=1, flags=re.IGNORECASE)
+    else:
+        html = responsive_css + '\n' + html
+        
+    return html
+
 
 def get_firestore_client():
     """Initialize and return Firestore client."""
@@ -215,6 +272,9 @@ def process_quickview_pages():
         
         # Transform YouTube timestamp links for in-page playback
         cleaned_html = transform_timestamp_links(cleaned_html)
+        
+        # Apply Responsive Wrapper (Mobile Optimization)
+        cleaned_html = wrap_with_responsive_css(cleaned_html)
         
         # Generate individual page HTML
         page_url = f"https://vaax-maker.github.io/ai-news-daily/quickview/{page_id}.html"
