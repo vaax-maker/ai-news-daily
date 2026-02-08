@@ -123,66 +123,70 @@ def generate_briefing():
     if state.get("date") != date_str:
         state = {"morning_ai": [], "morning_xr": [], "date": date_str}
     
-    # Get current articles
-    categories = load_categories()
+    # === OPTION A: Read from dashboard_data.json for consistency ===
+    dashboard_data_path = "data/dashboard_data.json"
     
-    if run_type == "morning":
-        # Morning run: fetch and save
+    if os.path.exists(dashboard_data_path):
+        print("[Briefing] Loading articles from dashboard_data.json (Option A)")
+        with open(dashboard_data_path, "r", encoding="utf-8") as f:
+            dashboard_data = json.load(f)
+        
+        # Check if data is from today
+        if dashboard_data.get("date") == date_str:
+            current_ai = dashboard_data.get("ai", [])
+            current_xr = dashboard_data.get("xr", [])
+            print(f"[Briefing] Loaded from JSON: AI={len(current_ai)}, XR={len(current_xr)}")
+        else:
+            print(f"[Briefing] dashboard_data.json is from {dashboard_data.get('date')}, falling back to HTML parsing")
+            current_ai = []
+            current_xr = []
+    else:
+        print("[Briefing] No dashboard_data.json found, falling back to HTML parsing")
+        current_ai = []
+        current_xr = []
+    
+    # Fallback to HTML parsing if JSON not available
+    if not current_ai and not current_xr:
+        categories = load_categories()
         ai_file = None
         xr_file = None
         
         if "ai" in categories and os.path.isdir(categories["ai"].archive_dir):
             files = sorted([f for f in os.listdir(categories["ai"].archive_dir) 
-                          if f.startswith(date_str) and f.endswith(".html")])
+                          if f.startswith(date_str) and f.endswith(".html")], reverse=True)
             if files:
                 ai_file = os.path.join(categories["ai"].archive_dir, files[0])
         
         if "xr" in categories and os.path.isdir(categories["xr"].archive_dir):
             files = sorted([f for f in os.listdir(categories["xr"].archive_dir) 
-                          if f.startswith(date_str) and f.endswith(".html")])
+                          if f.startswith(date_str) and f.endswith(".html")], reverse=True)
             if files:
                 xr_file = os.path.join(categories["xr"].archive_dir, files[0])
         
-        morning_ai = parse_articles_from_html(ai_file) if ai_file else []
-        morning_xr = parse_articles_from_html(xr_file) if xr_file else []
+        current_ai = parse_articles_from_html(ai_file) if ai_file else []
+        current_xr = parse_articles_from_html(xr_file) if xr_file else []
+    
+    # Organize by run type
+    if run_type == "morning":
+        morning_ai = current_ai
+        morning_xr = current_xr
+        afternoon_ai = []
+        afternoon_xr = []
         
         # Save state for afternoon
         state["morning_ai"] = morning_ai
         state["morning_xr"] = morning_xr
         state["date"] = date_str
         save_briefing_state(state_file, state)
-        
-        afternoon_ai = []
-        afternoon_xr = []
-        
     else:
-        # Afternoon run: load morning state and get current
+        # Afternoon run: combine with morning state
         morning_ai = state.get("morning_ai", [])
         morning_xr = state.get("morning_xr", [])
         
-        # Get afternoon articles (latest files)
-        ai_file = None
-        xr_file = None
-        
-        if "ai" in categories and os.path.isdir(categories["ai"].archive_dir):
-            files = sorted([f for f in os.listdir(categories["ai"].archive_dir) 
-                          if f.startswith(date_str) and f.endswith(".html")], reverse=True)
-            if files:
-                ai_file = os.path.join(categories["ai"].archive_dir, files[0])
-        
-        if "xr" in categories and os.path.isdir(categories["xr"].archive_dir):
-            files = sorted([f for f in os.listdir(categories["xr"].archive_dir) 
-                          if f.startswith(date_str) and f.endswith(".html")], reverse=True)
-            if files:
-                xr_file = os.path.join(categories["xr"].archive_dir, files[0])
-        
-        afternoon_ai = parse_articles_from_html(ai_file) if ai_file else []
-        afternoon_xr = parse_articles_from_html(xr_file) if xr_file else []
-        
-        # Remove duplicates (articles in morning)
+        # Remove duplicates from current (those in morning)
         morning_links = {a.get("link") for a in morning_ai + morning_xr}
-        afternoon_ai = [a for a in afternoon_ai if a.get("link") not in morning_links]
-        afternoon_xr = [a for a in afternoon_xr if a.get("link") not in morning_links]
+        afternoon_ai = [a for a in current_ai if a.get("link") not in morning_links]
+        afternoon_xr = [a for a in current_xr if a.get("link") not in morning_links]
     
     # Generate Key Message and Keywords (unified LLM call)
     print("[Briefing] Generating Key Message and Keywords...")
@@ -275,7 +279,7 @@ def generate_briefing():
         f.write(html_root)
     print(f"[Briefing] Updated: {main_briefing}")
     
-    return briefing_path
+    return {"path": briefing_path, "key_message": key_message}
 
 
 def update_briefing_archive(briefing_dir: str):

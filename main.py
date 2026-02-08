@@ -856,6 +856,20 @@ def main():
         with open("docs/last_update.txt", "w", encoding="utf-8") as f:
             f.write(news_update_time)
         print(f"[Update] New articles found ({total_new_items}). Saved update time: {news_update_time}")
+        
+        # Save dashboard_data for briefing consistency
+        import json
+        os.makedirs("data", exist_ok=True)
+        with open("data/dashboard_data.json", "w", encoding="utf-8") as f:
+            # Only save serializable fields
+            serializable_data = {
+                "ai": dashboard_data.get("ai", []),
+                "xr": dashboard_data.get("xr", []),
+                "gov": dashboard_data.get("gov", []),
+                "date": get_kst_now().strftime("%Y-%m-%d")
+            }
+            json.dump(serializable_data, f, ensure_ascii=False, indent=2)
+        print("[Update] Saved dashboard_data.json for briefing consistency")
     else:
         # Read existing time if no new articles
         if os.path.exists("docs/last_update.txt"):
@@ -929,10 +943,20 @@ def main():
         print(f"[Briefing] Found {total_new_items} new items. Generating daily briefing...")
         try:
             from scripts.generate_briefing import generate_briefing
-            briefing_path = generate_briefing()
+            briefing_result = generate_briefing()
             
-            # Add briefing URL for notifier
+            # Extract path and key_message from result
+            if isinstance(briefing_result, dict):
+                briefing_path = briefing_result.get("path")
+                key_message = briefing_result.get("key_message")
+            else:
+                briefing_path = briefing_result
+                key_message = None
+            
+            # Add briefing URL and key_message for notifier
             dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/briefing.html"
+            if key_message:
+                dashboard_data["key_message"] = key_message
             print(f"[Briefing] Generated {briefing_path}")
         except Exception as e:
             print(f"[Briefing] Failed: {e}")

@@ -30,10 +30,11 @@ class TelegramNotifier:
             logger.error(f"[Notifier] Failed to send message: {e}")
             return False
 
-def format_daily_briefing(ai_items, xr_items, gov_items, briefing_url, max_chars=450):
+def format_daily_briefing(ai_items, xr_items, gov_items, briefing_url, key_message=None, max_chars=450):
     """
     Format:
     [Header]
+    📌 Key Message (if provided)
     
     [AI]
     - Title..
@@ -44,6 +45,7 @@ def format_daily_briefing(ai_items, xr_items, gov_items, briefing_url, max_chars
     
     [Full Report Link]
     """
+    import re
     from src.utils.common import get_kst_now
     now = get_kst_now()
     weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
@@ -54,17 +56,28 @@ def format_daily_briefing(ai_items, xr_items, gov_items, briefing_url, max_chars
     
     footer = f"\n\n{briefing_url}"
     
-    # Calculate available space
-    reserved = len(header) + len(footer) + 15
-    available_chars = max_chars - reserved
-    if available_chars < 50: available_chars = 50
-    
     content_lines = []
     current_length = 0
     
+    # Add Key Message at the top (if provided)
+    if key_message:
+        # Strip HTML tags for plain text
+        clean_msg = re.sub(r'<[^>]+>', '', key_message)
+        clean_msg = clean_msg.replace('&amp;', '&').replace('•', '').strip()
+        # Get first line only for brevity
+        first_line = clean_msg.split('\n')[0].strip()
+        if first_line:
+            key_line = f"📌 {first_line}\n\n"
+            content_lines.append(key_line)
+            current_length += len(key_line)
+    
+    # Calculate available space
+    reserved = len(header) + len(footer) + 15
+    available_chars = max_chars - reserved - current_length
+    if available_chars < 50: available_chars = 50
+    
     # Helper to clean title
     def clean_title(text):
-        import re
         text = re.sub(r'\b[a-zA-Z0-9-]+\.[a-zA-Z0-9-]{2,}\b', '', text)
         text = re.sub(r'\s+-\s*$', '', text).strip()
         return text
@@ -110,7 +123,7 @@ def format_daily_briefing(ai_items, xr_items, gov_items, briefing_url, max_chars
 def send_daily_briefing(dashboard_data):
     """
     Orchestrates the notification.
-    dashboard_data: dict containing 'ai', 'xr', 'gov' lists and 'briefing_url'.
+    dashboard_data: dict containing 'ai', 'xr', 'gov' lists, 'briefing_url', and optionally 'key_message'.
     """
     notifier = TelegramNotifier()
     
@@ -118,12 +131,9 @@ def send_daily_briefing(dashboard_data):
     xr_items = dashboard_data.get("xr", [])
     gov_items = dashboard_data.get("gov", [])
     briefing_url = dashboard_data.get("briefing_url", "https://vaax-maker.github.io/ai-news-daily/index.html")
+    key_message = dashboard_data.get("key_message", None)
     
     # Filter for ONLY new items to avoid repetition
-    # main.py/storage.py now tag items with 'is_new' boolean.
-    # If key is missing (e.g. legacy data), treat as False to be safe (or True? Safe is False to avoid spam)
-    # User requested: "Compare with previous... exclude repetitive".
-    
     def filter_new(items):
         return [item for item in items if item.get("is_new", False)]
 
@@ -131,12 +141,13 @@ def send_daily_briefing(dashboard_data):
     new_xr = filter_new(xr_items)
     new_gov = filter_new(gov_items)
     
-    # If all empty, maybe we shouldn't send? 
-    # But main.py checks total_new_items > 0. 
-    # So at least one list should have something.
-    
-    # Strict limit: 420 chars
-    message = format_daily_briefing(new_ai, new_xr, new_gov, briefing_url=briefing_url, max_chars=420)
+    # Strict limit: 420 chars (increased slightly to accommodate key message)
+    message = format_daily_briefing(
+        new_ai, new_xr, new_gov, 
+        briefing_url=briefing_url, 
+        key_message=key_message, 
+        max_chars=500
+    )
     
     print("--- PREVIEW MESSAGE ---")
     print(message)
