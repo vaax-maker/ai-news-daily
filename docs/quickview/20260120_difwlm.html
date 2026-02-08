@@ -285,7 +285,42 @@
 
     <!-- Direct content injection (no Shadow DOM for external script compatibility) -->
     <div class="quickview-body">
-        <style>
+        
+<style>
+/* Responsive Wrapper - Auto-injected */
+html { font-size: 16px; }
+body { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 1rem; 
+    line-height: 1.7;
+    word-break: keep-all;
+}
+img, video, iframe { 
+    max-width: 100%; 
+    height: auto; 
+}
+table { 
+    width: 100%; 
+    display: block; 
+    overflow-x: auto; 
+}
+pre, code { 
+    overflow-x: auto; 
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+}
+@media (max-width: 768px) {
+    body { 
+        padding: 0.75rem; 
+        font-size: 15px; 
+    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.1rem; }
+}
+</style>
+<style>
         /* vaax-theme.css - 외부 제공용 */
         :root {
             --primary-color: #65a30d;
@@ -386,6 +421,7 @@
 
 
     <header>
+<meta name="viewport" content="width=device-width, initial-scale=1">
         <h1>Assistant Axis: LLM의 인격적 안정성과 페르소나 제어 기술</h1>
         <div class="meta-info">
             분석 일시: 2026년 1월 21일 오전 8시 37분<br>
