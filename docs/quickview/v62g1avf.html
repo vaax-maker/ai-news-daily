@@ -1,0 +1,167 @@
+<style>
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --line-gray: #9ca3af;
+        }
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            word-break: keep-all;
+        }
+        h1 { margin-top: 1em; margin-bottom: 0.5em; font-size: 2.2rem; line-height: 1.4; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+        h2 { margin-top: 2.5em; margin-bottom: 1em; font-size: 1.7rem; line-height: 1.4; color: var(--secondary-color); border-left: 5px solid var(--primary-color); padding-left: 15px; }
+        h3 { margin-top: 2em; margin-bottom: 0.8em; font-size: 1.4rem; line-height: 1.4; }
+        .highlight { background-color: #CEFA98; padding: 2px 4px; border-radius: 4px; font-weight: 600; }
+        .section-block { margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-color); }
+        .meta-info { background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 30px; font-size: 0.9rem; color: var(--text-muted); }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 30px; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px; }
+        .timestamp { color: var(--primary-color); font-weight: bold; font-size: 0.9em; margin-left: 5px; cursor: pointer; transition: color 0.2s; }
+        .timestamp:hover { color: var(--primary-color-hover); text-decoration: underline; }
+        footer { text-align: center; margin-top: 50px; padding: 20px; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border-color); }
+        ul { margin-bottom: 1.5em; }
+        li { margin-bottom: 0.8em; }
+        .tag-container { margin-top: 20px; }
+        .tag { display: inline-block; background: #f3f4f6; color: #4b5563; padding: 4px 10px; border-radius: 4px; font-size: 0.85rem; margin-right: 5px; margin-bottom: 5px; font-weight: 500; }
+        @media (max-width: 768px) {
+            body { padding: 0.75rem; font-size: 15px; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.25rem; }
+        }
+    </style>
+
+
+    <header>
+        <h1>3D 스포츠 중계의 대전환: 몰입형 기술과 데이터 혁신 분석</h1>
+        <div class="meta-info">
+            분석 대상: 빌라왈 시두(Bilawal Sidhu)의 차세대 스포츠 경험 리서치<br>
+            보강 자료: Fortune Business Insights, Mordor Intelligence 글로벌 스포츠 테크 시장 통계
+        </div>
+    </header>
+
+    <div class="section-block">
+        <div class="video-container">
+            <iframe id="ytplayer" src="https://www.youtube.com/embed/0dSn22pkr4w?enablejsapi=1" frameborder="0" allowfullscreen=""></iframe>
+        </div>
+        
+        <h2>1. 스포츠 데이터의 파운데이션: 컴퓨터 비전과 IoT</h2>
+        <p>현대 스포츠는 단순한 경기 관람을 넘어 거대한 데이터 생성 플랫폼으로 진화하고 있습니다. 중계 기술의 혁신은 크게 두 가지 축으로 나뉩니다.</p>
+        
+        <h3>초정밀 카메라 시스템 (Sony Hawkeye)</h3>
+        <ul>
+            <li>경기장 전역에 배치된 고프레임 레이트 기계 비전 카메라를 통해 선수와 공의 위치를 밀리미터 단위로 추적합니다. <span class="timestamp" data-time="48">[00:48]</span></li>
+            <li>이 기술은 VAR(비디오 판독) 시스템의 핵심으로 활용되어 심판의 판정 정확도를 극대화합니다. <span class="timestamp" data-time="73">[01:13]</span></li>
+        </ul>
+
+        <h3>선수 및 장비의 데이터화 (RFID Tag)</h3>
+        <ul>
+            <li>NFL 등 프로 리그에서는 선수들의 숄더 패드에 RFID 태그를 삽입하여 심박수, 가속도, 이동 거리 등의 데이터를 실시간 수집합니다. <span class="timestamp" data-time="106">[01:46]</span></li>
+            <li>공, 유니폼, 경기장 시설물(유틸리티 파이런 등)에 내장된 센서를 통해 경기장 전체를 하나의 3D 에어태그(AirTag) 맵처럼 관리합니다. <span class="timestamp" data-time="119">[01:59]</span></li>
+        </ul>
+    </div>
+
+    <div class="section-block">
+        <h2>2. 시각화 혁명: 3D 가우시안 스플래팅과 볼륨메트릭 중계</h2>
+        <p>과거의 중계가 2D 화면에 갇혀 있었다면, 이제는 <span class="highlight">Radiance Fields</span>와 <span class="highlight">3D Gaussian Splatting</span> 기술을 통해 완전한 공간적 자유도를 제공합니다.</p>
+        
+        <h3>신기술 기반의 몰입형 렌더링</h3>
+        <ul>
+            <li><strong>Gaussian Splatting:</strong> 기존 NeRF 기술보다 훨씬 빠른 렌더링 속도를 제공하며, 1080p 해상도에서 실시간(100fps 이상) 시점 전환을 가능하게 합니다. <span class="timestamp" data-time="264">[04:24]</span></li>
+            <li><strong>볼륨메트릭 리플레이:</strong> Viewpoint Pro와 Arcturus 같은 기업들은 실시간 데이터를 언리얼 엔진(Unreal Engine)으로 시각화하여, 중계 카메라가 존재할 수 없는 각도에서의 리플레이를 제공합니다. <span class="timestamp" data-time="311">[05:11]</span></li>
+            <li><strong>4D 가우시안 스플래팅:</strong> 시간을 포함한 4차원 데이터를 통해 격투기(MMA)나 야구의 투구 궤적을 360도 전방위에서 감상할 수 있는 경험을 선사합니다. <span class="timestamp" data-time="362">[06:02]</span></li>
+        </ul>
+    </div>
+
+    <div class="section-block">
+        <h2>3. 심화 리서치: 글로벌 스포츠 테크 시장 동향</h2>
+        <p>외부 리서치 데이터에 따르면 스포츠 기술 시장은 유례없는 성장을 기록하고 있으며, 이는 중계 방식의 근본적인 변화를 뒷받침합니다.</p>
+
+        <h3>시장 규모 및 성장성 (2025-2030)</h3>
+        <ul>
+            <li><strong>시장 가치:</strong> 글로벌 스포츠 기술 시장 규모는 2025년 약 325억 달러에서 2034년 1,179억 달러로 성장할 전망이며, 연평균 성장률(CAGR)은 20%를 상회합니다. (출처: Fortune Business Insights)</li>
+            <li><strong>팬 경험 혁신:</strong> 특히 팬 참여 및 엔지먼트 세그먼트는 연평균 26.7%라는 가장 높은 성장률을 보이고 있습니다. 이는 단순 시청에서 '경험'으로의 패러다임 전환을 의미합니다.</li>
+        </ul>
+
+        <h3>애플 비전 프로(Apple Vision Pro)와 공간 컴퓨팅</h3>
+        <ul>
+            <li>애플은 F1 중계에 공간 맵(Spatial Map)을 도입하여 시청자가 거실 테이블 위에 실시간 3D 서킷을 띄워놓고 중계를 볼 수 있는 앱을 프로토타이핑 중입니다. <span class="timestamp" data-time="606">[10:06]</span></li>
+            <li>시선 추적(Eye-tracking) 기술을 활용하여 시청자가 특정 선수를 바라보는 것만으로 해당 선수의 텔레메트리(Telemetry) 데이터를 실시간으로 확인할 수 있습니다.</li>
+        </ul>
+    </div>
+
+    <div class="section-block">
+        <h2>4. 공유된 실재감: COSM과 헤드셋 없는 몰입</h2>
+        <p>개인용 VR 헤드셋의 보급률과 착용의 불편함을 극복하기 위해 <span class="highlight">Shared Reality</span>라는 새로운 비즈니스 모델이 부상하고 있습니다.</p>
+        
+        <h3>COSM: 차세대 스포츠 전용 영화관</h3>
+        <ul>
+            <li>라스베이거스의 '스피어(Sphere)'를 축소한 형태의 8K 돔 스크린을 통해 수백 명이 동시에 몰입형 경기를 관람합니다. <span class="timestamp" data-time="717">[11:57]</span></li>
+            <li><strong>상업적 성공:</strong> 현장 티켓 가격이 600달러에 달함에도 불구하고, 최고의 명당 자리를 보장한다는 가치 때문에 강력한 수요가 발생하고 있습니다. <span class="timestamp" data-time="732">[12:12]</span></li>
+            <li><strong>강점:</strong> dorky한 헤드셋을 쓸 필요 없이 동료들과 맥주를 마시며 자유롭게 대화하면서도, 현장보다 더 생생한 시야를 확보할 수 있습니다. <span class="timestamp" data-time="779">[12:59]</span></li>
+        </ul>
+    </div>
+
+    <div class="section-block">
+        <h2>5. 시사점 및 미래 전망</h2>
+        <p>스포츠 중계는 지난 100년간 '제작자가 보여주는 것'을 보는 수동적 경험이었습니다. 하지만 이제 데이터와 공간 렌더링 기술의 결합으로 다음과 같은 미래가 열리고 있습니다.</p>
+        <ul>
+            <li><strong>사용자 제어형 중계:</strong> 시청자가 직접 카메라 앵글을 선택하거나, 특정 선수 중심의 커스텀 중계를 구성할 수 있게 됩니다.</li>
+            <li><strong>크리에이터 중심의 워치 파티:</strong> 바닐라 중계 대신, 3D 캔버스 위에 인기 스트리머의 해설과 통계 시각화가 얹어진 새로운 형태의 콘텐츠가 주류가 될 것입니다.</li>
+            <li><strong>에이전틱 분석:</strong> 실시간 생성형 AI가 복잡한 데이터 포인트를 분석하여 "이 선수의 현재 구속은 리그 평균보다 5% 높습니다"와 같은 통찰을 즉각적으로 시각화해 제공할 것입니다.</li>
+        </ul>
+    </div>
+
+    <div class="tag-container">
+        <div class="tag">#SportsTech</div>
+        <div class="tag">#GaussianSplatting</div>
+        <div class="tag">#ImmersiveExperience</div>
+        <div class="tag">#AppleVisionPro</div>
+        <div class="tag">#Cosm</div>
+        <div class="tag">#VolumetricVideo</div>
+        <div class="tag">#SonyHawkeye</div>
+        <div class="tag">#AIAnalytics</div>
+    </div>
+
+    <footer>
+        <p>출처 콘텐츠: <a href="https://www.youtube.com/watch?v=0dSn22pkr4w" target="_blank" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">The 3D Sports Experience That Changes Everything (YouTube)</a></p>
+        <p>© 2026 Content Intelligence Report. All rights reserved.</p>
+    </footer>
+
+    <script>
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('ytplayer', {
+          events: { 'onReady': onPlayerReady }
+        });
+      }
+
+      function onPlayerReady(event) {
+        const timestamps = document.querySelectorAll('.timestamp');
+        timestamps.forEach(el => {
+          el.addEventListener('click', function() {
+            const seconds = this.getAttribute('data-time');
+            if (player && player.seekTo) {
+              player.seekTo(seconds, true);
+              player.playVideo();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          });
+        });
+      }
+    </script>
