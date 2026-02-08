@@ -1,259 +1,321 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-        /* fovea-theme.css 스타일 적용 */
-        :root {
-            --primary-color: #65a30d;       /* 주요 포인트 컬러 (라임 그린 계열) */
-            --primary-color-hover: #4d7c0f; /* 링크/버튼 호버 시 색상 */
-            --secondary-color: #475569;     /* 보조 텍스트 색상 */
-            --background-color: #ffffff;    /* 전체 배경색 */
-            --text-main: #111827;           /* 본문 텍스트 색상 */
-            --text-muted: #4b5563;          /* 흐린 텍스트 (메타 정보 등) */
-            --border-color: #d1d5db;        /* 경계선 색상 */
-        }
+    /* fovea-theme.css 스타일 적용 */
+    :root {
+        --primary-color: #65a30d;
+        /* 주요 포인트 컬러 (라임 그린 계열) */
+        --primary-color-hover: #4d7c0f;
+        /* 링크/버튼 호버 시 색상 */
+        --secondary-color: #475569;
+        /* 보조 텍스트 색상 */
+        --background-color: #ffffff;
+        /* 전체 배경색 */
+        --text-main: #111827;
+        /* 본문 텍스트 색상 */
+        --text-muted: #4b5563;
+        /* 흐린 텍스트 (메타 정보 등) */
+        --border-color: #d1d5db;
+        /* 경계선 색상 */
+    }
 
-        html { font-size: 16px; }
+    html {
+        font-size: 16px;
+    }
 
+    body {
+        font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        line-height: 1.7;
+        color: var(--text-main);
+        background-color: var(--background-color);
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        word-break: keep-all;
+    }
+
+    h1,
+    h2,
+    h3 {
+        line-height: 1.4;
+        color: var(--text-main);
+        font-weight: 700;
+    }
+
+    h1 {
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+        font-size: 2.2rem;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+    }
+
+    h2 {
+        margin-top: 2.5em;
+        margin-bottom: 1em;
+        font-size: 1.7rem;
+        color: var(--secondary-color);
+        border-left: 5px solid var(--primary-color);
+        padding-left: 15px;
+    }
+
+    h3 {
+        margin-top: 2em;
+        margin-bottom: 0.8em;
+        font-size: 1.4rem;
+    }
+
+    p {
+        margin-bottom: 1.5em;
+    }
+
+    .highlight {
+        background-color: #CEFA98;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-weight: 600;
+    }
+
+    .section-block {
+        margin-bottom: 4rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .meta-info {
+        background-color: #f3f4f6;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
+    .meta-info strong {
+        color: var(--text-main);
+    }
+
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        margin-bottom: 30px;
+    }
+
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+    }
+
+    .timestamp {
+        color: var(--primary-color);
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 0.9em;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+    .timestamp:hover {
+        color: var(--primary-color-hover);
+        text-decoration: underline;
+    }
+
+    .tag-container {
+        margin-top: 10px;
+    }
+
+    .tag {
+        display: inline-block;
+        background-color: #e5e7eb;
+        color: #374151;
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.85rem;
+        margin-right: 8px;
+        margin-bottom: 5px;
+    }
+
+    .editors-note {
+        background-color: #f0fdf4;
+        border-left: 4px solid #22c55e;
+        padding: 20px;
+        margin: 30px 0;
+        font-size: 0.95rem;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 50px;
+        padding: 20px;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    @media (max-width: 768px) {
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-            line-height: 1.7;
-            color: var(--text-main);
-            background-color: var(--background-color);
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            word-break: keep-all;
+            padding: 0.75rem;
+            font-size: 15px;
         }
-
-        h1, h2, h3 { line-height: 1.4; color: var(--text-main); font-weight: 700; }
 
         h1 {
-            margin-top: 1em;
-            margin-bottom: 0.5em;
-            font-size: 2.2rem;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
+            font-size: 1.5rem;
         }
 
         h2 {
-            margin-top: 2.5em;
-            margin-bottom: 1em;
-            font-size: 1.7rem;
-            color: var(--secondary-color);
-            border-left: 5px solid var(--primary-color);
-            padding-left: 15px;
+            font-size: 1.25rem;
         }
 
-        h3 { margin-top: 2em; margin-bottom: 0.8em; font-size: 1.4rem; }
-
-        p { margin-bottom: 1.5em; }
-
-        .highlight {
-            background-color: #CEFA98;
-            padding: 2px 4px;
-            border-radius: 4px;
-            font-weight: 600;
+        h3 {
+            font-size: 1.1rem;
         }
+    }
+</style>
 
-        .section-block {
-            margin-bottom: 4rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
+<h1>스포츠 중계의 혁명: 2D 화면을 넘어선 3D 몰입형 경험의 시대</h1>
 
-        .meta-info {
-            background-color: #f3f4f6;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .meta-info strong { color: var(--text-main); }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            margin-bottom: 30px;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 8px;
-        }
-
-        .timestamp {
-            color: var(--primary-color);
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 0.9em;
-            margin-left: 5px;
-            cursor: pointer;
-        }
-
-        .timestamp:hover {
-            color: var(--primary-color-hover);
-            text-decoration: underline;
-        }
-
-        .tag-container { margin-top: 10px; }
-
-        .tag {
-            display: inline-block;
-            background-color: #e5e7eb;
-            color: #374151;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            margin-right: 8px;
-            margin-bottom: 5px;
-        }
-
-        .editors-note {
-            background-color: #f0fdf4;
-            border-left: 4px solid #22c55e;
-            padding: 20px;
-            margin: 30px 0;
-            font-size: 0.95rem;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        @media (max-width: 768px) {
-            body { padding: 0.75rem; font-size: 15px; }
-            h1 { font-size: 1.5rem; }
-            h2 { font-size: 1.25rem; }
-            h3 { font-size: 1.1rem; }
-        }
-    </style>
-
-    <h1>스포츠 중계의 혁명: 2D 화면을 넘어선 3D 몰입형 경험의 시대</h1>
-
-    <div class="meta-info">
-        <div><strong>Original Date:</strong> 2026-02-07</div>
-        <div><strong>Report Date:</strong> 2026-02-08</div>
-        <div><strong>Source:</strong> <a href="https://www.youtube.com/watch?v=0dSn22pkr4w" target="_blank">The 3D Sports Experience That Changes Everything</a></div>
-        <div class="tag-container">
-            <span class="tag">#3D_Sports</span> <span class="tag">#Gaussian_Splatting</span> <span class="tag">#Apple_Vision_Pro</span> <span class="tag">#Future_Broadcasting</span>
-        </div>
+<div class="meta-info">
+    <div><strong>Original Date:</strong> 2026-02-07</div>
+    <div><strong>Report Date:</strong> 2026-02-08</div>
+    <div><strong>Source:</strong> <a href="https://www.youtube.com/watch?v=0dSn22pkr4w" target="_blank">The 3D Sports
+            Experience That Changes Everything</a></div>
+    <div class="tag-container">
+        <span class="tag">#3D_Sports</span> <span class="tag">#Gaussian_Splatting</span> <span
+            class="tag">#Apple_Vision_Pro</span> <span class="tag">#Future_Broadcasting</span>
     </div>
+</div>
 
-    <div class="video-container">
-        <div id="player"></div>
+<div class="video-container">
+    <div id="player"></div>
+</div>
+
+<div class="section-block">
+    <h2>1. 몰입의 격차: 기술적 배경과 데이터 파운데이션</h2>
+    <p>
+        현재 우리는 <span class="highlight">몰입의 거대한 격차(Immersion Gap)</span> 시대에 살고 있습니다. 스포츠를 캡처하는 기술은 시청하는 기술보다 약 10년 정도 앞서
+        있습니다 <span class="timestamp" data-time="0">[00:00:00]</span>. 모든 움직임과 심박수까지 기록할 수 있는 수준이지만, 거실까지 도달하는 방식은 여전히
+        전통적인 2D 방식에 머물러 있습니다.
+    </p>
+
+    <h3>밀리미터 단위의 정밀 추적 기술</h3>
+    <p>
+        이러한 변화의 핵심은 컴퓨터 비전입니다. <strong>Sony의 Hawkeye</strong> 시스템은 경기장 곳곳에 설치된 고프레임 머신 비전 카메라를 통해 모든 선수의 3D 위치를 밀리미터 단위의
+        정확도로 재현합니다 <span class="timestamp" data-time="48">[00:00:48]</span>. 이는 단순히 중계를 위한 것이 아니라, 테니스 공의 인/아웃 판정이나 NFL의
+        득점 라인 판독과 같은 비디오 판독(VAR)의 핵심 근거가 됩니다 <span class="timestamp" data-time="73">[00:01:13]</span>.
+    </p>
+
+    <h3>데이터 소스가 된 선수들</h3>
+    <p>
+        카메라뿐만 아니라 선수 자체가 데이터 소스가 되고 있습니다. <strong>NFL</strong>은 선수의 숄더 패드에 2~3개의 RFID 태그를 장착하고, 경기장 전체에 20~30개의
+        초광대역(UWB) 수신기를 배치합니다 <span class="timestamp" data-time="106">[00:01:46]</span>. 공, 심판, 폴대 등 모든 움직이는 객체에 '3D
+        에어태그'를 붙인 것과 같은 환경이 구축되어 있습니다 <span class="timestamp" data-time="119">[00:01:59]</span>.
+    </p>
+
+    <div class="editors-note">
+        <strong>[Editor's Note 1: 스포츠 데이터 시장의 성장]</strong><br>
+        최근 보고서에 따르면 글로벌 스포츠 분석 시장 규모는 2023년 약 35억 달러에서 2030년까지 연평균 27.3% 성장할 것으로 전망됩니다. 이는 단순 기록 통계를 넘어 AI 기반의 실시간 예측 및
+        베팅 데이터 시장의 폭발적 성장에 기인합니다. (출처: Grand View Research, 2024)
     </div>
+</div>
 
-    <div class="section-block">
-        <h2>1. 몰입의 격차: 기술적 배경과 데이터 파운데이션</h2>
-        <p>
-            현재 우리는 <span class="highlight">몰입의 거대한 격차(Immersion Gap)</span> 시대에 살고 있습니다. 스포츠를 캡처하는 기술은 시청하는 기술보다 약 10년 정도 앞서 있습니다 <span class="timestamp" data-time="0">[00:00:00]</span>. 모든 움직임과 심박수까지 기록할 수 있는 수준이지만, 거실까지 도달하는 방식은 여전히 전통적인 2D 방식에 머물러 있습니다.
-        </p>
-        
-        <h3>밀리미터 단위의 정밀 추적 기술</h3>
-        <p>
-            이러한 변화의 핵심은 컴퓨터 비전입니다. <strong>Sony의 Hawkeye</strong> 시스템은 경기장 곳곳에 설치된 고프레임 머신 비전 카메라를 통해 모든 선수의 3D 위치를 밀리미터 단위의 정확도로 재현합니다 <span class="timestamp" data-time="48">[00:00:48]</span>. 이는 단순히 중계를 위한 것이 아니라, 테니스 공의 인/아웃 판정이나 NFL의 득점 라인 판독과 같은 비디오 판독(VAR)의 핵심 근거가 됩니다 <span class="timestamp" data-time="73">[00:01:13]</span>.
-        </p>
+<div class="section-block">
+    <h2>2. VR의 한계와 새로운 3D 렌더링 기술</h2>
+    <p>
+        과거 Apple이 인수한 <strong>NextVR</strong>과 같은 기업들이 스테레오 비디오를 통한 몰입을 시도했지만, 무거운 헤드셋 착용과 낮은 보급률이 발목을 잡았습니다 <span
+            class="timestamp" data-time="208">[00:03:28]</span>. 하지만 이제 <span class="highlight">Gaussian
+            Splatting</span>과 같은 혁신적인 3D 렌더링 기술이 이 한계를 극복하고 있습니다.
+    </p>
 
-        <h3>데이터 소스가 된 선수들</h3>
-        <p>
-            카메라뿐만 아니라 선수 자체가 데이터 소스가 되고 있습니다. <strong>NFL</strong>은 선수의 숄더 패드에 2~3개의 RFID 태그를 장착하고, 경기장 전체에 20~30개의 초광대역(UWB) 수신기를 배치합니다 <span class="timestamp" data-time="106">[00:01:46]</span>. 공, 심판, 폴대 등 모든 움직이는 객체에 '3D 에어태그'를 붙인 것과 같은 환경이 구축되어 있습니다 <span class="timestamp" data-time="119">[00:01:59]</span>.
-        </p>
+    <h3>4D Gaussian Splatting의 등장</h3>
+    <p>
+        <strong>Arcturus</strong>와 같은 기업들은 여러 대의 카메라 피드를 사용하여 경기 내용을 3D로 완벽하게 재구성합니다 <span class="timestamp"
+            data-time="364">[00:06:04]</span>. 이를 통해 시청자는 경기의 어느 순간이든 일시 정지하고, <span class="highlight">원하는 모든 각도에서 장면을
+            관찰</span>할 수 있습니다. 이는 기존 360도 비디오와는 차원이 다른 '완전한 자유도'를 제공합니다 <span class="timestamp"
+            data-time="430">[00:07:10]</span>.
+    </p>
 
-        <div class="editors-note">
-            <strong>[Editor's Note 1: 스포츠 데이터 시장의 성장]</strong><br>
-            최근 보고서에 따르면 글로벌 스포츠 분석 시장 규모는 2023년 약 35억 달러에서 2030년까지 연평균 27.3% 성장할 것으로 전망됩니다. 이는 단순 기록 통계를 넘어 AI 기반의 실시간 예측 및 베팅 데이터 시장의 폭발적 성장에 기인합니다. (출처: Grand View Research, 2024)
-        </div>
+    <h3>비침습적 캡처: Mubbridge의 접근</h3>
+    <p>
+        유럽의 <strong>Mubbridge</strong>는 선수들에게 방해를 주지 않는 세련된 카메라 스트립을 사용하여 볼륨메트릭(Volumetric) 재구성을 수행합니다 <span
+            class="timestamp" data-time="456">[00:07:36]</span>. 이들은 NeRF 대신 MPI(Multiplane Images) 기술을 발전시켜, 가상 카메라가 마치
+        실제 카메라 레일을 따라 움직이는 듯한 효과를 중계에 즉시 통합할 수 있게 합니다 <span class="timestamp" data-time="484">[00:08:04]</span>.
+    </p>
+</div>
+
+<div class="section-block">
+    <h2>3. 공간 컴퓨팅 시대의 스포츠 시청</h2>
+    <p>
+        <strong>Apple Vision Pro</strong>와 같은 기기는 이러한 3D 데이터를 소비하는 가장 강력한 플랫폼이 되고 있습니다.
+    </p>
+
+    <h3>Formula 1의 혁신적 대시보드</h3>
+    <p>
+        현재 개발 중인 <strong>F1 앱</strong>은 거실 테이블 위에 실시간 3D 트랙 미니맵을 띄워줍니다 <span class="timestamp"
+            data-time="601">[00:10:01]</span>. 시청자는 전체 중계 화면과 동시에 각 차량의 3D 위치를 확인하고, 특정 드라이버를 선택해 '고무줄' 효과로 추적하며 다각도의
+        1인칭 시점을 즐길 수 있습니다 <span class="timestamp" data-time="617">[00:10:17]</span>.
+    </p>
+
+    <h3>COSM: 헤드셋 없는 몰입형 극장</h3>
+    <p>
+        아이러니하게도 현재 가장 상업적으로 성공한 몰입형 경험은 헤드셋이 아닌 <strong>COSM</strong>이라는 거대 8K 돔 스크린입니다 <span class="timestamp"
+            data-time="712">[00:11:52]</span>. 약 600달러(한화 약 80만 원)에 달하는 입장권에도 불구하고, 사람들은 친구들과 함께 맥주를 마시며 '얼굴에 기기를 쓰지
+        않고도' 현장의 열기를 그대로 느끼는 경험에 기꺼이 지불하고 있습니다 <span class="timestamp" data-time="737">[00:12:17]</span>.
+    </p>
+
+    <div class="editors-note">
+        <strong>[Editor's Note 2: 몰입형 미디어 시설의 확산]</strong><br>
+        라스베이거스의 'The Sphere' 성공 이후, COSM은 로스앤젤레스와 달라스 등 주요 도시로 확장 중입니다. 이러한 시설은 하이엔드 3D 콘텐츠의 B2B 수익 모델을 증명하며, 개인용 기기가
+        보급되기 전까지 3D 스포츠 소비의 교두보 역할을 하고 있습니다.
     </div>
+</div>
 
-    <div class="section-block">
-        <h2>2. VR의 한계와 새로운 3D 렌더링 기술</h2>
-        <p>
-            과거 Apple이 인수한 <strong>NextVR</strong>과 같은 기업들이 스테레오 비디오를 통한 몰입을 시도했지만, 무거운 헤드셋 착용과 낮은 보급률이 발목을 잡았습니다 <span class="timestamp" data-time="208">[00:03:28]</span>. 하지만 이제 <span class="highlight">Gaussian Splatting</span>과 같은 혁신적인 3D 렌더링 기술이 이 한계를 극복하고 있습니다.
-        </p>
+<div class="section-block">
+    <h2>4. 결론: 개인화된 중계와 '1인 1중계실'의 미래</h2>
+    <p>
+        지난 100년 동안 스포츠 중계는 방송국이 보여주는 대로만 보는 '일방향성' 경험이었습니다 <span class="timestamp" data-time="841">[00:14:01]</span>.
+        하지만 이제는 시청자가 직접 카메라 워킹을 조절하거나, 자신이 좋아하는 스트리머의 관점(Watch Party)에서 3D 데이터를 재가공한 중계를 소비하는 시대가 오고 있습니다 <span
+            class="timestamp" data-time="852">[00:14:12]</span>.
+    </p>
+    <p>
+        데이터는 이미 준비되었습니다. 이제 남은 과제는 이 방대한 3D 데이터를 소비자용 하드웨어가 얼마나 효율적으로 처리하고 전달하느냐의 문제입니다 <span class="timestamp"
+            data-time="867">[00:14:27]</span>.
+    </p>
+</div>
 
-        <h3>4D Gaussian Splatting의 등장</h3>
-        <p>
-            <strong>Arcturus</strong>와 같은 기업들은 여러 대의 카메라 피드를 사용하여 경기 내용을 3D로 완벽하게 재구성합니다 <span class="timestamp" data-time="364">[00:06:04]</span>. 이를 통해 시청자는 경기의 어느 순간이든 일시 정지하고, <span class="highlight">원하는 모든 각도에서 장면을 관찰</span>할 수 있습니다. 이는 기존 360도 비디오와는 차원이 다른 '완전한 자유도'를 제공합니다 <span class="timestamp" data-time="430">[00:07:10]</span>.
-        </p>
+<footer>Generated by AI Analyst</footer>
 
-        <h3>비침습적 캡처: Mubbridge의 접근</h3>
-        <p>
-            유럽의 <strong>Mubbridge</strong>는 선수들에게 방해를 주지 않는 세련된 카메라 스트립을 사용하여 볼륨메트릭(Volumetric) 재구성을 수행합니다 <span class="timestamp" data-time="456">[00:07:36]</span>. 이들은 NeRF 대신 MPI(Multiplane Images) 기술을 발전시켜, 가상 카메라가 마치 실제 카메라 레일을 따라 움직이는 듯한 효과를 중계에 즉시 통합할 수 있게 합니다 <span class="timestamp" data-time="484">[00:08:04]</span>.
-        </p>
-    </div>
+<script>
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    <div class="section-block">
-        <h2>3. 공간 컴퓨팅 시대의 스포츠 시청</h2>
-        <p>
-            <strong>Apple Vision Pro</strong>와 같은 기기는 이러한 3D 데이터를 소비하는 가장 강력한 플랫폼이 되고 있습니다.
-        </p>
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '100%',
+            width: '100%',
+            videoId: '0dSn22pkr4w',
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
 
-        <h3>Formula 1의 혁신적 대시보드</h3>
-        <p>
-            현재 개발 중인 <strong>F1 앱</strong>은 거실 테이블 위에 실시간 3D 트랙 미니맵을 띄워줍니다 <span class="timestamp" data-time="601">[00:10:01]</span>. 시청자는 전체 중계 화면과 동시에 각 차량의 3D 위치를 확인하고, 특정 드라이버를 선택해 '고무줄' 효과로 추적하며 다각도의 1인칭 시점을 즐길 수 있습니다 <span class="timestamp" data-time="617">[00:10:17]</span>.
-        </p>
-
-        <h3>COSM: 헤드셋 없는 몰입형 극장</h3>
-        <p>
-            아이러니하게도 현재 가장 상업적으로 성공한 몰입형 경험은 헤드셋이 아닌 <strong>COSM</strong>이라는 거대 8K 돔 스크린입니다 <span class="timestamp" data-time="712">[00:11:52]</span>. 약 600달러(한화 약 80만 원)에 달하는 입장권에도 불구하고, 사람들은 친구들과 함께 맥주를 마시며 '얼굴에 기기를 쓰지 않고도' 현장의 열기를 그대로 느끼는 경험에 기꺼이 지불하고 있습니다 <span class="timestamp" data-time="737">[00:12:17]</span>.
-        </p>
-
-        <div class="editors-note">
-            <strong>[Editor's Note 2: 몰입형 미디어 시설의 확산]</strong><br>
-            라스베이거스의 'The Sphere' 성공 이후, COSM은 로스앤젤레스와 달라스 등 주요 도시로 확장 중입니다. 이러한 시설은 하이엔드 3D 콘텐츠의 B2B 수익 모델을 증명하며, 개인용 기기가 보급되기 전까지 3D 스포츠 소비의 교두보 역할을 하고 있습니다.
-        </div>
-    </div>
-
-    <div class="section-block">
-        <h2>4. 결론: 개인화된 중계와 '1인 1중계실'의 미래</h2>
-        <p>
-            지난 100년 동안 스포츠 중계는 방송국이 보여주는 대로만 보는 '일방향성' 경험이었습니다 <span class="timestamp" data-time="841">[00:14:01]</span>. 하지만 이제는 시청자가 직접 카메라 워킹을 조절하거나, 자신이 좋아하는 스트리머의 관점(Watch Party)에서 3D 데이터를 재가공한 중계를 소비하는 시대가 오고 있습니다 <span class="timestamp" data-time="852">[00:14:12]</span>.
-        </p>
-        <p>
-            데이터는 이미 준비되었습니다. 이제 남은 과제는 이 방대한 3D 데이터를 소비자용 하드웨어가 얼마나 효율적으로 처리하고 전달하느냐의 문제입니다 <span class="timestamp" data-time="867">[00:14:27]</span>.
-        </p>
-    </div>
-
-    <footer>Generated by AI Analyst</footer>
-
-    <script>
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '100%',
-                width: '100%',
-                videoId: '0dSn22pkr4w',
-                events: {
-                    'onReady': onPlayerReady
+    function onPlayerReady(event) {
+        var timestamps = document.querySelectorAll('.timestamp');
+        timestamps.forEach(function (el) {
+            el.addEventListener('click', function () {
+                var time = this.getAttribute('data-time');
+                if (player && player.seekTo) {
+                    player.seekTo(time, true);
+                    player.playVideo();
                 }
             });
-        }
-
-        function onPlayerReady(event) {
-            var timestamps = document.querySelectorAll('.timestamp');
-            timestamps.forEach(function(el) {
-                el.addEventListener('click', function() {
-                    var time = this.getAttribute('data-time');
-                    if (player && player.seekTo) {
-                        player.seekTo(time, true);
-                        player.playVideo();
-                    }
-                });
-            });
-        }
-    </script>
+        });
+    }
+</script>

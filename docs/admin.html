@@ -869,7 +869,10 @@
                 const title = extractTitle(rawHtml);
 
                 // Extract only body content to prevent nested HTML issues (fixes YouTube embed)
-                const html = extractBodyContent(rawHtml);
+                let html = extractBodyContent(rawHtml);
+
+                // Apply responsive wrapper (meta viewport + CSS)
+                html = wrapWithResponsiveCSS(html);
 
                 // Disable buttons and inputs, show loading state
                 btnQuickviewSave.disabled = true;
