@@ -411,42 +411,15 @@
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/{{ page.id }}.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
                             <button type="button" class="action-btn delete"
-                                onclick="deleteQuickview('{{ page.id }}', '{{ page.title | escape }}')">🗑️ 삭제</button>
+                                onclick='deleteQuickview({{ page.id | tojson }}, {{ page.title | tojson }})'>🗑️
+                                삭제</button>`,
+
+                            <button type="button" class="action-btn delete" style="flex:1;"
+                                onclick='deleteQuickview({{ page.id | tojson }}, {{ page.title | tojson }})'>🗑️
+                                삭제</button>
                         </div>
                     </div>
-                </td>
-                <td class="col-date">{{ page.created_display }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-
-<!-- Mobile Card View -->
-<div class="mobile-cards">
-    {% for page in pages %}
-    <div class="course-card">
-        <div class="card-header">
-            <span>#{{ loop.index }} Quickview</span>
-            <span>{{ page.created_display }}</span>
-        </div>
-        <h3>
-            <a href="{{ page.id }}.html">
-                {% if page.is_new %}<span class="new-badge">NEW</span>{% endif %}
-                {{ page.title }}
-            </a>
-        </h3>
-        <div class="action-row" style="margin-top: 1rem;">
-            <a href="../board/index.html?mode=discuss&title={{ page.title | urlencode }}&link=https://vaax-maker.github.io/ai-news-daily/quickview/{{ page.id }}.html&source=퀵뷰"
-                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
-            <button type="button" class="action-btn" style="flex:1;"
-                onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/{{ page.id }}.html'); alert('URL이 복사되었습니다!');">🔗
-                공유</button>
-            <button type="button" class="action-btn delete" style="flex:1;"
-                onclick="deleteQuickview('{{ page.id }}', '{{ page.title | escape }}')">🗑️ 삭제</button>
-        </div>
-    </div>
-    {% endfor %}
+                    {% endfor %}
 </div>
 
 {% else %}
