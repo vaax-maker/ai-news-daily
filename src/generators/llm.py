@@ -429,7 +429,8 @@ def summarize_article(text: str, title: str, display_name: str) -> dict:
         return {"title": title, "summary": "API Key 미설정으로 AI 요약 생략"}
 
     # === 개선된 프롬프트: 제목 생성 + 자기완결적 요약 ===
-    today_str = datetime.datetime.now().strftime("%Y-%m-%d")
+    from src.utils.common import get_kst_now
+    today_str = get_kst_now().strftime("%Y-%m-%d")
     
     prompt = f"""<task>
 뉴스 기사를 요약하고, 완전한 제목을 생성하세요.
