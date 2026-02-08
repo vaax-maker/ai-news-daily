@@ -36,7 +36,7 @@ def render_daily_page(articles, date_str, time_str, config, active_tab="home"):
         now_timestamp=datetime.datetime.now().timestamp() 
     )
 
-def render_archive_index(run_entries, config):
+def render_archive_index(run_entries, config, holidays=None):
     template = env.get_template("archive_index.html")
     return template.render(
         run_entries=run_entries,
@@ -44,6 +44,7 @@ def render_archive_index(run_entries, config):
         active_tab=config.key,
         category_key=config.key,
         now_year=datetime.datetime.now().year,
+        holidays=holidays or {},
         root_path=".."
     )
 

@@ -183,36 +183,11 @@
         return `${parts[0]}년 ${Number(parts[1])}월 ${Number(parts[2])}일`;
     }
 
-    function getKoreanHolidays(year) {
-        if (!year) return new Set();
-        if (holidayCache[year]) return holidayCache[year];
-
-        const fixed = [
-            `${year}-01-01`, // 새해 첫날
-            `${year}-03-01`, // 삼일절
-            `${year}-05-05`, // 어린이날
-            `${year}-06-06`, // 현충일
-            `${year}-08-15`, // 광복절
-            `${year}-10-03`, // 개천절
-            `${year}-10-09`, // 한글날
-            `${year}-12-25`  // 성탄절
-        ];
-
-        const lunarBased = {
-            2023: ['2023-01-21', '2023-01-22', '2023-01-23', '2023-01-24', '2023-05-27', '2023-09-28', '2023-09-29', '2023-09-30'],
-            2024: ['2024-02-09', '2024-02-10', '2024-02-11', '2024-02-12', '2024-05-15', '2024-09-16', '2024-09-17', '2024-09-18'],
-            2025: ['2025-01-28', '2025-01-29', '2025-01-30', '2025-01-31', '2025-05-05', '2025-10-06', '2025-10-07', '2025-10-08']
-        };
-
-        const holidays = new Set([...fixed, ...(lunarBased[year] || [])]);
-        holidayCache[year] = holidays;
-        return holidays;
-    }
+    // Holiday data injected from backend (Python holidays.py)
+    const holidaysMap = {{ holidays | tojson | safe }};
 
     function isKoreanHoliday(dateStr) {
-        const [year] = dateStr.split('-').map(Number);
-        if (!year) return false;
-        return getKoreanHolidays(year).has(dateStr);
+        return !!holidaysMap[dateStr];
     }
 
     function getMonthKey(dateStr) {
@@ -606,8 +581,7 @@
                 ? currentPath.replace(/\/(ai|xr)\//, `/${category}/`)
                 : `../${category}/index.html`;
             window.location.href = basePath;
-        });
-    });
+  });
 </script>
 {% else %}
 <div class="empty-msg">아직 발행된 뉴스가 없습니다.</div>

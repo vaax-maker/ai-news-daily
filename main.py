@@ -29,6 +29,7 @@ from src.utils.common import (
 from src.utils.notifier import send_daily_briefing
 from src.utils.storage import MemberStorage, GovStorage
 from src.utils.wordcloud_generator import extract_weekly_keywords, create_wordcloud_image
+from src.utils.holidays import get_calendar_data
 from collections import Counter
 import re
 
@@ -526,6 +527,10 @@ def load_existing_members_latest(limit=5):
 def rebuild_indexes(categories, consolidate_archives=False):
     # Daily Archives Index Generation
     weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
+    
+    # Get holiday data for calendar display (current year +/- 1)
+    current_year = datetime.datetime.now().year
+    holidays_map = get_calendar_data(current_year)
 
     for key, cfg in categories.items():
         if key == "gov":
@@ -570,7 +575,7 @@ def rebuild_indexes(categories, consolidate_archives=False):
             except:
                 entries.append({"filename": f, "date_str": f, "time_str": "", "day_of_week": ""})
         
-        index_html = render_archive_index(entries, cfg)
+        index_html = render_archive_index(entries, cfg, holidays_map)
         with open(cfg.index_path, "w", encoding="utf-8") as f:
             f.write(index_html)
 
