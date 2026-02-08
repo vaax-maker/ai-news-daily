@@ -213,6 +213,9 @@ class GovStorage:
 
         existing_items = self.load_announcements()
         merged = merge_items(existing_items, new_items)
+        
+        # 🔧 날짜순 정렬 추가 (최신순) - 이 정렬이 없으면 파일 저장 순서가 유지됨
+        merged.sort(key=lambda x: x.get('date', '') or x.get('published_display', ''), reverse=True)
 
         try:
             with open(self.data_path, "w", encoding="utf-8") as f:
