@@ -18,7 +18,7 @@
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./static/css/style.css?v=12">
-
+    
 </head>
 
 <body>
@@ -39,11 +39,16 @@
                     </span>
                 </div>
                 <nav class="nav-links">
-                    <a href="./index.html" class="active">Home</a>
-                    <a href="./ai/index.html" class="">AI/XR뉴스</a>
-                    <a href="./quickview/index.html" class="">퀵뷰</a>
-                    <a href="./gov/index.html" class="">정부과제</a>
-                    <a href="./board/index.html" class="">Small Talk</a>
+                    <a href="./index.html"
+                        class="active">Home</a>
+                    <a href="./ai/index.html"
+                        class="">AI/XR뉴스</a>
+                    <a href="./quickview/index.html"
+                        class="">퀵뷰</a>
+                    <a href="./gov/index.html"
+                        class="">정부과제</a>
+                    <a href="./board/index.html"
+                        class="">Small Talk</a>
 
                 </nav>
             </div>
@@ -52,445 +57,429 @@
         <div class="header-announcement"
             style="display: flex; justify-content: center; align-items: center; gap: 15px;">
             <span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
-            <a href="./guide.html" style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
+            <a href="./guide.html"
+                style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
         </div>
     </header>
 
     <div class="container">
+        
+<h1>오늘의 뉴스</h1>
+<p class="subtitle">
+    last update <strong style="color: var(--primary-color);">2026년 02월 08일 17시 55분</strong> (정기update 매일 오전8시/오후4시)
+    <a href="#" id="news-source-btn" class="news-source-link">뉴스소스</a>
+</p>
 
-        <h1>오늘의 뉴스</h1>
-        <p class="subtitle">
-            last update <strong style="color: var(--primary-color);">2026년 02월 08일 17시 55분</strong> (정기update 매일
-            오전8시/오후4시)
-            <a href="#" id="news-source-btn" class="news-source-link">뉴스소스</a>
-        </p>
-
-        <!-- News Source Popup Modal -->
-        <div id="news-source-modal" class="modal-overlay" style="display: none;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>뉴스 소스 목록</h3>
-                    <button class="modal-close" id="modal-close-btn">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="source-category">
-                        <h4>AI 카테고리</h4>
-                        <ul class="source-list">
-                            <li>AI타임스 (aitimes.com)</li>
-                            <li>TechCrunch AI</li>
-                            <li>MIT Technology Review AI</li>
-                            <li>AI타임스 (aitimes.kr)</li>
-                            <li>Two Minute Papers (YouTube)</li>
-                            <li>티타임즈TV (YouTube)</li>
-                            <li>가젯서울 (YouTube)</li>
-                            <li>조코딩 (YouTube)</li>
-                            <li>AI코리아커뮤니티 (YouTube)</li>
-                        </ul>
-                    </div>
-
-                    <div class="source-category">
-                        <h4>XR 카테고리</h4>
-                        <ul class="source-list">
-                            <li>Road to VR</li>
-                            <li>UploadVR</li>
-                            <li>AR Insider</li>
-                            <li>Skarred Ghost</li>
-                            <li>ThrillSeeker (YouTube)</li>
-                            <li>SadlyItsBradley (YouTube)</li>
-                            <li>MRTV (YouTube)</li>
-                            <li>Google News: 가상휴먼, 버추얼휴먼, 가상아이돌</li>
-                            <li>Google News: virtual influencer, metahuman</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<!-- News Source Popup Modal -->
+<div id="news-source-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>뉴스 소스 목록</h3>
+            <button class="modal-close" id="modal-close-btn">&times;</button>
         </div>
-
-        <style>
-            .news-source-link {
-                color: var(--primary-color);
-                text-decoration: none;
-                font-size: 0.85rem;
-                margin-left: 0.75rem;
-                padding: 0.25rem 0.75rem;
-                border: 1px solid var(--border-color);
-                border-radius: 6px;
-                background: var(--card-bg);
-                transition: all 0.2s;
-            }
-
-            .news-source-link:hover {
-                background: var(--primary-color);
-                color: white;
-                border-color: var(--primary-color);
-            }
-
-            .modal-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 1000;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .modal-content {
-                background: var(--card-bg, #fff);
-                border-radius: 12px;
-                max-width: 480px;
-                width: 90%;
-                max-height: 80vh;
-                overflow-y: auto;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-                border: 1px solid var(--border-color);
-            }
-
-            .modal-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1.25rem 1.5rem;
-                border-bottom: 1px solid var(--border-color);
-                background: var(--background-color);
-            }
-
-            .modal-header h3 {
-                margin: 0;
-                font-size: 1.1rem;
-                font-weight: 700;
-                color: var(--text-main);
-            }
-
-            .modal-close {
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                cursor: pointer;
-                color: var(--text-muted);
-                padding: 0;
-                line-height: 1;
-                transition: color 0.2s;
-            }
-
-            .modal-close:hover {
-                color: var(--primary-color);
-            }
-
-            .modal-body {
-                padding: 1.25rem 1.5rem 1.5rem;
-            }
-
-            .source-category {
-                margin-bottom: 1.5rem;
-            }
-
-            .source-category:last-child {
-                margin-bottom: 0;
-            }
-
-            .source-category h4 {
-                margin: 0 0 0.75rem;
-                font-size: 0.9rem;
-                font-weight: 600;
-                color: var(--primary-color);
-                padding-bottom: 0.5rem;
-                border-bottom: 2px solid var(--primary-color);
-            }
-
-            .source-list {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.25rem 1rem;
-            }
-
-            .source-list li {
-                padding: 0.5rem 0;
-                font-size: 0.85rem;
-                color: var(--text-muted);
-            }
-
-            @media (max-width: 480px) {
-                .source-list {
-                    grid-template-columns: 1fr;
-                }
-            }
-
-            .new-badge {
-                display: inline-block;
-                background-color: #ef4444;
-                color: white;
-                font-size: 0.65rem;
-                font-weight: 700;
-                padding: 2px 5px;
-                border-radius: 3px;
-                margin-left: 4px;
-                vertical-align: middle;
-            }
-        </style>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const btn = document.getElementById('news-source-btn');
-                const modal = document.getElementById('news-source-modal');
-                const closeBtn = document.getElementById('modal-close-btn');
-
-                btn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    modal.style.display = 'flex';
-                });
-
-                closeBtn.addEventListener('click', function () {
-                    modal.style.display = 'none';
-                });
-
-                modal.addEventListener('click', function (e) {
-                    if (e.target === modal) {
-                        modal.style.display = 'none';
-                    }
-                });
-            });
-        </script>
-
-        <!-- Key Message Section (Replacing Word Cloud) -->
-        <section class="card key-message-section">
-            <div class="key-message-content" style="font-size: 1rem; line-height: 1.8; color: var(--text-main);">
-
-                <p style="color: var(--text-muted);">오늘의 핵심 요약이 아직 생성되지 않았습니다.</p>
-
-            </div>
-        </section>
-
-        <style>
-            /* Styling for Key Message List */
-            .key-message-content ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                /* Single column layout for 2 items */
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .key-message-content li {
-                margin-bottom: 0px;
-                padding-left: 0;
-                position: relative;
-                /* Typography Update: Larger & Bold */
-                font-size: 1.15rem;
-                /* ~120% of base */
-                font-weight: 700;
-                line-height: 1.5;
-            }
-
-            .key-message-content li::before {
-                content: "•";
-                color: var(--primary-color);
-                font-weight: bold;
-                display: inline-block;
-                width: 1em;
-                margin-left: -1em;
-            }
-
-            /* Highlight style for emphasized keywords */
-            .key-message-content em {
-                font-style: normal;
-                color: var(--primary-color);
-                font-weight: 800;
-            }
-        </style>
-
-        <div class="dashboard-grid">
-            <!-- AI Section -->
-            <div class="dashboard-section">
-                <h2>
-                    AI 뉴스
-                    <a href="ai/daily/2026-02-08_074856.html" class="section-more">더보기</a>
-                </h2>
-                <ul class="preview-list">
-                    <li>
-                        <span class="preview-date">2026-02-08 16:53</span>
-                        <a href="https://www.aitimes.com/news/articleView.html?idxno=206552" target="_blank"
-                            class="preview-title">중국, EV 성공 전략 휴머노이드 로봇에 적용…140개사로 미국과 기술…</a>
-                        <span class="new-badge">NEW</span>
-                    </li>
-                    <li>
-                        <span class="preview-date">2026-02-08 13:49</span>
-                        <a href="https://www.aitimes.com/news/articleView.html?idxno=206555" target="_blank"
-                            class="preview-title">구글-스탠포드, AI 연구 자동화 기술 ‘마스’ 공개</a>
-                        <span class="new-badge">NEW</span>
-                    </li>
-                    <li>
-                        <span class="preview-date">2026-02-08 13:10</span>
-                        <a href="https://www.aitimes.com/news/articleView.html?idxno=206556" target="_blank"
-                            class="preview-title">빅테크 AI 투자 6700억달러…달 착륙·철도 구축 웃도는 미국사 최대…</a>
-                        <span class="new-badge">NEW</span>
-                    </li>
-                    <li>
-                        <span class="preview-date">2026-02-08 00:28</span>
-                        <a href="https://news.google.com/rss/articles/CBMiTEFVX3lxTE51SDhBTzItM2EtSUh6eXo0YzQ1MGRidVlXZ3QxVHpqM0xHSUlENzdmRzZnWEdXV2tBM2pJRENhYkNqY25EU05rc1ZwQWs?oc=5"
-                            target="_blank" class="preview-title">경기도, AI 기업 200만원 과태료 막기 위해 ‘생존 가이드’ 시행</a>
-
-                    </li>
-                    <li>
-                        <span class="preview-date">2026-02-08 00:20</span>
-                        <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE9ZanF2N0JYSzNkYjNwSVlDUUYxeG9SZjA2S2F2ZTNjQ3ZvRXBhYVVYRVk0RUM5NzZlZVhMOEtETURmLUxiX3JIMkkyN3dGc3FvMzMtS3o5Z1VVeTV0QkIwZU1XZWcxUnROWWV3?oc=5"
-                            target="_blank" class="preview-title">미국 거대 기술 기업, 2020년부터 AI에 2000억 달러 이상 투자…</a>
-
-                    </li>
+        <div class="modal-body">
+            <div class="source-category">
+                <h4>AI 카테고리</h4>
+                <ul class="source-list">
+                    <li>AI타임스 (aitimes.com)</li>
+                    <li>TechCrunch AI</li>
+                    <li>MIT Technology Review AI</li>
+                    <li>AI타임스 (aitimes.kr)</li>
+                    <li>Two Minute Papers (YouTube)</li>
+                    <li>티타임즈TV (YouTube)</li>
+                    <li>가젯서울 (YouTube)</li>
+                    <li>조코딩 (YouTube)</li>
+                    <li>AI코리아커뮤니티 (YouTube)</li>
                 </ul>
             </div>
 
-            <!-- XR Section -->
-            <div class="dashboard-section">
-                <h2>
-                    XR 뉴스
-                    <a href="xr/daily/2026-02-08_074856.html" class="section-more">더보기</a>
-                </h2>
-                <ul class="preview-list">
-
-                    <li>
-                        <span class="preview-date">2026-02-08 00:00</span>
-                        <a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxOLS1RTUpKRDl2UUZYNVRDSXJKN2N3VS1qMW1haEVtSkhSeFRtdXhTQUN5M0t3SkU0d2R4U2FGbFpsdV9hdmNzLXlPMDRoZEoxZDhUTXA4ck5mcElTYXplMXJFaTRHUkhLQjlvb0pHR19RZFUwdGhmZl9EUnV5dE5fXzdPQnA3WWNOejV0b2xHam1pd9IBlwFBVV95cUxNd2ZiZmU2WDhFNmZXcEJYaHZUc3NuU2F5UVdPRmxSbUVVMjQzZVFFbXdMN2liZ0xNY3EtLTRQXzQ3Q2Q1QXhsOE9iZURzblNESWNIajRKZi05cS1vRFNUY0l2S2JYb3VMRWtOZHIzc1RMQXgtdGN6OWhBcWdVV3NDSnJwdjRyQU1aWE54TGpKdjZWd1lMeUw0?oc=5"
-                            target="_blank" class="preview-title">애플, 스펙트럼과 협력 레이커스 팬들 위한 가상 코트사이드 서비스 출시</a>
-                        <span class="new-badge">NEW</span>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2026-02-07 23:31</span>
-                        <a href="https://www.uploadvr.com/glassbreakers-champions-of-moss-clay-hunt-vr-are-quests-horizon-monthly-games-this-february/"
-                            target="_blank" class="preview-title">메타, 2026년 2월 Horizon+ 월간게임 3종 공개함</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2026-02-07 23:30</span>
-                        <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQZl9fQ3JfTmlhOWlIQ2htS2IxTzh5Q1JPR0dGZGZ3UEduVEg2SEx4RkhiTUgwQXpsYktsWk5ZUmlnNkh5NV8wWWFwVkVNY3lHRGQxX0NpUFU0TjF1UkFuZl9PT2FkU0tPamlBQXh2MzhiNGNvTXAyWkZFdWFkVk1tLXlkVzNwV1c0SW9SRTdvY2ctMHdRcUkzRQ?oc=5"
-                            target="_blank" class="preview-title">스파이크 리, 스마트안경 촬영 대결 후 알바라도 트레이드 언급함</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2026-02-07 23:30</span>
-                        <a href="https://www.uploadvr.com/khronos-moves-to-integrate-gaussian-splatting-into-gltf-3d-format/"
-                            target="_blank" class="preview-title">크로노스, glTF에 가우시안 스플래팅 표준 통합 추진함</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2026-02-07 01:54</span>
-                        <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxOSGNuOWVsNkNxYno5d2VnRTljWHY5TUR0cW9FNkt1Z2FsbFRVcGtWc1V0RUI2MlBTcmNoTFduemRrNHJpOVBlajQ2RDZBei1IQmNHdjh4M0xkaDBURzJ5M2pCYTJLZUI3TXhZSjZiV044R1YtRmhvYVRMY3ZLVjdGdTduZDVlT1NyTmQ0Q01pZXFZV3BEbVlHQTFNRFJaa19JWjBV?oc=5"
-                            target="_blank" class="preview-title">오클리·메타 HSTN AI 스마트안경, 339.15달러로 할인 판매됨</a>
-
-                    </li>
-
-                </ul>
-            </div>
-
-            <!-- Gov Section -->
-            <div class="dashboard-section">
-                <h2>
-                    정부과제
-                    <a href="gov/index.html" class="section-more">더보기</a>
-                </h2>
-                <ul class="preview-list">
-
-                    <li>
-                        <span class="preview-date"> | 광주광역시</span>
-                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118285"
-                            target="_blank" class="preview-title">2026년 실감콘텐츠 스튜디오 프로젝트 현물지원기업 모집 공고</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date"> | 과학기술정보통신부</span>
-                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118275"
-                            target="_blank" class="preview-title">2026년 KRISS 측정 소부장 개발 과제 공모</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date"> | 경기도</span>
-                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118273"
-                            target="_blank" class="preview-title">[경기] 2026년 스타기업 육성사업 참여기업 모집 공고</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date"> | 디지털사회기획과</span>
-                        <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186441"
-                            target="_blank" class="preview-title">2026년 블록체인 특성화 대학(원) 지원사업 모집 공고</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date"> | 정보보호산업과</span>
-                        <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186440"
-                            target="_blank" class="preview-title">2026년 제로트러스트 도입 시범사업 참여기업 모집 공고</a>
-
-                    </li>
-
-                </ul>
-            </div>
-
-            <!-- Quickview Section -->
-            <div class="dashboard-section">
-                <h2>
-                    퀵뷰
-                    <a href="quickview/index.html" class="section-more">더보기</a>
-                </h2>
-                <ul class="preview-list">
-
-                    <li>
-                        <span class="preview-date">2026년 02월 08일</span>
-
-                        <span class="new-badge">NEW</span>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2026년 02월 07일</span>
-                        <a href="quickview/rgct0do7.html" target="_blank" class="preview-title">[상세 리포트] 2026 Claude
-                            Cowork: 자율형 에이전트의 시대</a>
-                        <span class="new-badge">NEW</span>
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2026년 02월 06일</span>
-                        <a href="quickview/mk7oa3es.html" target="_blank" class="preview-title">스페이스X의 xAI 인수 - 콘텐츠 분석
-                            리포트</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2026년 02월 05일</span>
-                        <a href="quickview/lj36tag4.html" target="_blank" class="preview-title">AI 기반 포스트 스마트폰 시대의 생존 전략
-                            보고서</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2026년 02월 05일</span>
-                        <a href="quickview/yhed9mhj.html" target="_blank" class="preview-title">머스크 유니버스: 100만 위성 제국과 AI
-                            패권의 재편</a>
-
-                    </li>
-
+            <div class="source-category">
+                <h4>XR 카테고리</h4>
+                <ul class="source-list">
+                    <li>Road to VR</li>
+                    <li>UploadVR</li>
+                    <li>AR Insider</li>
+                    <li>Skarred Ghost</li>
+                    <li>ThrillSeeker (YouTube)</li>
+                    <li>SadlyItsBradley (YouTube)</li>
+                    <li>MRTV (YouTube)</li>
+                    <li>Google News: 가상휴먼, 버추얼휴먼, 가상아이돌</li>
+                    <li>Google News: virtual influencer, metahuman</li>
                 </ul>
             </div>
         </div>
+    </div>
+</div>
+
+<style>
+    .news-source-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 0.85rem;
+        margin-left: 0.75rem;
+        padding: 0.25rem 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        background: var(--card-bg);
+        transition: all 0.2s;
+    }
+
+    .news-source-link:hover {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background: var(--card-bg, #fff);
+        border-radius: 12px;
+        max-width: 480px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        border: 1px solid var(--border-color);
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+        background: var(--background-color);
+    }
+
+    .modal-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-main);
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        padding: 0;
+        line-height: 1;
+        transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+        color: var(--primary-color);
+    }
+
+    .modal-body {
+        padding: 1.25rem 1.5rem 1.5rem;
+    }
+
+    .source-category {
+        margin-bottom: 1.5rem;
+    }
+
+    .source-category:last-child {
+        margin-bottom: 0;
+    }
+
+    .source-category h4 {
+        margin: 0 0 0.75rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+    .source-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.25rem 1rem;
+    }
+
+    .source-list li {
+        padding: 0.5rem 0;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+
+    @media (max-width: 480px) {
+        .source-list {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .new-badge {
+        display: inline-block;
+        background-color: #ef4444;
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 2px 5px;
+        border-radius: 3px;
+        margin-left: 4px;
+        vertical-align: middle;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btn = document.getElementById('news-source-btn');
+        const modal = document.getElementById('news-source-modal');
+        const closeBtn = document.getElementById('modal-close-btn');
+
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
+
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+<!-- Key Message Section (Replacing Word Cloud) -->
+<section class="card key-message-section">
+    <div class="key-message-content" style="font-size: 1rem; line-height: 1.8; color: var(--text-main);">
+        
+        <ul>
+<li><em>휴머노이드 로봇</em>이 경쟁 구도를 어떻게 재편하고 있을까?</li>
+<li><em>AI 투자</em>가 기술의 주도권을 어디로 이끌 전망인가?</li>
+</ul>
+        
+    </div>
+</section>
+
+<style>
+    /* Styling for Key Message List */
+    .key-message-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        /* Single column layout for 2 items */
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .key-message-content li {
+        margin-bottom: 0px;
+        padding-left: 0;
+        position: relative;
+        /* Typography Update: Larger & Bold */
+        font-size: 1.15rem;
+        /* ~120% of base */
+        font-weight: 700;
+        line-height: 1.5;
+    }
+
+    .key-message-content li::before {
+        content: "•";
+        color: var(--primary-color);
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+    }
+
+    /* Highlight style for emphasized keywords */
+    .key-message-content em {
+        font-style: normal;
+        color: var(--primary-color);
+        font-weight: 800;
+    }
+</style>
+
+<div class="dashboard-grid">
+    <!-- AI Section -->
+    <div class="dashboard-section">
+        <h2>
+            AI 뉴스
+            <a href="ai/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            <li>
+                <span class="preview-date">aitimes.com 2026-02-08 16:53</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=206552" target="_blank" class="preview-title">중국, EV 성공 전략 휴머노이드 로봇에 적용…140개사로 미국과 기술…</a>
+                
+            </li>
+            <li>
+                <span class="preview-date">aitimes.com 2026-02-08 13:49</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=206555" target="_blank" class="preview-title">구글-스탠포드, AI 연구 자동화 기술 ‘마스’ 공개</a>
+                
+            </li>
+            <li>
+                <span class="preview-date">aitimes.com 2026-02-08 13:10</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=206556" target="_blank" class="preview-title">빅테크 AI 투자 6700억달러…달 착륙·철도 구축 웃도는 미국사 최대…</a>
+                
+            </li>
+            <li>
+                <span class="preview-date">브랜드경제신문 2026-02-08 00:28</span>
+                <a href="https://news.google.com/rss/articles/CBMiTEFVX3lxTE51SDhBTzItM2EtSUh6eXo0YzQ1MGRidVlXZ3QxVHpqM0xHSUlENzdmRzZnWEdXV2tBM2pJRENhYkNqY25EU05rc1ZwQWs?oc=5" target="_blank" class="preview-title">경기도, AI 기업 200만원 과태료 막기 위해 ‘생존 가이드’ 시행</a>
+                
+            </li>
+            <li>
+                <span class="preview-date">미디어데일 2026-02-08 00:20</span>
+                <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE9ZanF2N0JYSzNkYjNwSVlDUUYxeG9SZjA2S2F2ZTNjQ3ZvRXBhYVVYRVk0RUM5NzZlZVhMOEtETURmLUxiX3JIMkkyN3dGc3FvMzMtS3o5Z1VVeTV0QkIwZU1XZWcxUnROWWV3?oc=5" target="_blank" class="preview-title">미국 거대 기술 기업, 2020년부터 AI에 2000억 달러 이상 투자…</a>
+                
+            </li>
+        </ul>
+    </div>
+
+    <!-- XR Section -->
+    <div class="dashboard-section">
+        <h2>
+            XR 뉴스
+            <a href="xr/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            
+            <li>
+                <span class="preview-date">Lakers Nation 2026-02-08 00:00</span>
+                <a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxOLS1RTUpKRDl2UUZYNVRDSXJKN2N3VS1qMW1haEVtSkhSeFRtdXhTQUN5M0t3SkU0d2R4U2FGbFpsdV9hdmNzLXlPMDRoZEoxZDhUTXA4ck5mcElTYXplMXJFaTRHUkhLQjlvb0pHR19RZFUwdGhmZl9EUnV5dE5fXzdPQnA3WWNOejV0b2xHam1pd9IBlwFBVV95cUxNd2ZiZmU2WDhFNmZXcEJYaHZUc3NuU2F5UVdPRmxSbUVVMjQzZVFFbXdMN2liZ0xNY3EtLTRQXzQ3Q2Q1QXhsOE9iZURzblNESWNIajRKZi05cS1vRFNUY0l2S2JYb3VMRWtOZHIzc1RMQXgtdGN6OWhBcWdVV3NDSnJwdjRyQU1aWE54TGpKdjZWd1lMeUw0?oc=5" target="_blank" class="preview-title">애플, 스펙트럼과 협력 레이커스 팬들 위한 가상 코트사이드 서비스 출시</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">uploadvr.com 2026-02-07 23:31</span>
+                <a href="https://www.uploadvr.com/glassbreakers-champions-of-moss-clay-hunt-vr-are-quests-horizon-monthly-games-this-february/" target="_blank" class="preview-title">메타, 2026년 2월 Horizon+ 월간게임 3종 공개함</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">USA Today 2026-02-07 23:30</span>
+                <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQZl9fQ3JfTmlhOWlIQ2htS2IxTzh5Q1JPR0dGZGZ3UEduVEg2SEx4RkhiTUgwQXpsYktsWk5ZUmlnNkh5NV8wWWFwVkVNY3lHRGQxX0NpUFU0TjF1UkFuZl9PT2FkU0tPamlBQXh2MzhiNGNvTXAyWkZFdWFkVk1tLXlkVzNwV1c0SW9SRTdvY2ctMHdRcUkzRQ?oc=5" target="_blank" class="preview-title">스파이크 리, 스마트안경 촬영 대결 후 알바라도 트레이드 언급함</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">uploadvr.com 2026-02-07 23:30</span>
+                <a href="https://www.uploadvr.com/khronos-moves-to-integrate-gaussian-splatting-into-gltf-3d-format/" target="_blank" class="preview-title">크로노스, glTF에 가우시안 스플래팅 표준 통합 추진함</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">Technobezz 2026-02-07 01:54</span>
+                <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxOSGNuOWVsNkNxYno5d2VnRTljWHY5TUR0cW9FNkt1Z2FsbFRVcGtWc1V0RUI2MlBTcmNoTFduemRrNHJpOVBlajQ2RDZBei1IQmNHdjh4M0xkaDBURzJ5M2pCYTJLZUI3TXhZSjZiV044R1YtRmhvYVRMY3ZLVjdGdTduZDVlT1NyTmQ0Q01pZXFZV3BEbVlHQTFNRFJaa19JWjBV?oc=5" target="_blank" class="preview-title">오클리·메타 HSTN AI 스마트안경, 339.15달러로 할인 판매됨</a>
+                
+            </li>
+            
+        </ul>
+    </div>
+
+    <!-- Gov Section -->
+    <div class="dashboard-section">
+        <h2>
+            정부과제
+            <a href="gov/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            
+            <li>
+                <span class="preview-date">2026-02-06 | 광주광역시</span>
+                <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118285" target="_blank" class="preview-title">2026년 실감콘텐츠 스튜디오 프로젝트 현물지원기업 모집 공고</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026-02-06 | 과학기술정보통신부</span>
+                <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118275" target="_blank" class="preview-title">2026년 KRISS 측정 소부장 개발 과제 공모</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026-02-06 | 경기도</span>
+                <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118273" target="_blank" class="preview-title">[경기] 2026년 스타기업 육성사업 참여기업 모집 공고</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026-02-06 | 디지털사회기획과</span>
+                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186441" target="_blank" class="preview-title">2026년 블록체인 특성화 대학(원) 지원사업 모집 공고</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026-02-06 | 정보보호산업과</span>
+                <a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mId=311&mPid=121&bbsSeqNo=100&nttSeqNo=3186440" target="_blank" class="preview-title">2026년 제로트러스트 도입 시범사업 참여기업 모집 공고</a>
+                
+            </li>
+            
+        </ul>
+    </div>
+
+    <!-- Quickview Section -->
+    <div class="dashboard-section">
+        <h2>
+            퀵뷰
+            <a href="quickview/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            
+            <li>
+                <span class="preview-date">2026년 02월 08일</span>
+                <a href="quickview/gfnv2krp.html" target="_blank" class="preview-title">애플 비전 프로의 혁명: 현실을 시뮬레이터로 만드는 AR 물리엔진 '에어드로우(AirDraw)' 분석 리포트</a>
+                <span class="new-badge">NEW</span>
+            </li>
+            
+            <li>
+                <span class="preview-date">2026년 02월 08일</span>
+                <a href="quickview/pwz0yqvu.html" target="_blank" class="preview-title">애플 비전 프로의 혁명: 현실을 시뮬레이터로 만드는 AR 물리엔진 '에어드로우(AirDraw)' 분석 리포트</a>
+                <span class="new-badge">NEW</span>
+            </li>
+            
+            <li>
+                <span class="preview-date">2026년 02월 08일</span>
+                <a href="quickview/mls3uw7v.html" target="_blank" class="preview-title">스포츠 중계의 미래: 3D 몰입형 경험의 혁명</a>
+                <span class="new-badge">NEW</span>
+            </li>
+            
+            <li>
+                <span class="preview-date">2026년 02월 07일</span>
+                <a href="quickview/rgct0do7.html" target="_blank" class="preview-title">[상세 리포트] 2026 Claude Cowork: 자율형 에이전트의 시대</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026년 02월 06일</span>
+                <a href="quickview/mk7oa3es.html" target="_blank" class="preview-title">스페이스X의 xAI 인수 - 콘텐츠 분석 리포트</a>
+                
+            </li>
+            
+        </ul>
+    </div>
+</div>
 
     </div>
 
     <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
-        <p>&copy; 2026 VAAX rebuild Project by <a href="./admin.html" class="admin-link">Fovea</a>. All rights reserved.
-        </p>
+        <p>&copy; 2026 VAAX rebuild Project by <a href="./admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
         <div id="page-visit-counter" style="margin-top: 5px; font-size: 0.8rem; color: var(--primary-color);">
             <span id="visit-count">Visits: ...</span>
         </div>

@@ -32,3 +32,20 @@ jobs:
           ENABLE_NOTIFICATION: "true"
         run: |
           python scripts/process_scheduled.py
+
+      - name: Update Quickview & Dashboard
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}  # Needed for dashboard generation context if used
+        run: |
+          python scripts/update_quickview.py
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          git pull --rebase --autostash origin main
+          git add docs/quickview docs/index.html
+          git commit -m "Update Quickview & Dashboard [skip ci]" || echo "No changes to commit"
+          git push origin HEAD:main
