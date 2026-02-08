@@ -107,17 +107,45 @@ def _extract_retry_delay(exc: Exception, default: float = 30.0) -> float:
 
 # Heuristic keyword buckets for lightweight ranking
 IMPORTANT_COMPANIES = [
+    # Global Tech Giants
     "openai", "google", "alphabet", "apple", "microsoft", "meta",
     "amazon", "nvidia", "amd", "samsung", "lg", "tesla",
+    # AI-focused companies
+    "anthropic", "xai", "perplexity", "huggingface", "stability ai",
+    "mistral", "deepseek", "cohere", "inflection", "character.ai",
+    # Korean Tech
+    "네이버", "카카오", "sk텔레콤", "kt", "삼성전자", "lg전자", "현대차",
 ]
+
+# AI Models & Products (high relevance)
+AI_MODELS = [
+    "gpt", "chatgpt", "gemini", "claude", "grok", "sora", "midjourney",
+    "stable diffusion", "dall-e", "하이퍼클로바", "hyperclova",
+    "copilot", "cursor", "vision pro", "quest", "hololens",
+]
+
 EVENT_KEYWORDS = ["모델", "model", "출시", "발표", "release", "launch", "upgrade", "v2", "v3"]
 BUSINESS_KEYWORDS = ["인수", "acquisition", "합병", "merger", "m&a", "투자", "ipo", "규제", "policy", "법", "ban"]
-NEGATIVE_KEYWORDS = ["튜토리얼", "tutorial", "가이드", "guide", "how to", "홍보", "sponsor", "sponsored"]
+
+# Negative keywords - expanded to filter irrelevant news
+NEGATIVE_KEYWORDS = [
+    # Tutorial/Promo
+    "튜토리얼", "tutorial", "가이드", "guide", "how to", "홍보", "sponsor", "sponsored",
+    # Local/Regional news (not AI-related)
+    "여수", "나주", "광주시", "전남", "경남", "충북", "충남", "강원", 
+    "마을", "빈집", "철거", "주차장", "텃밭", "추경", "진료버스",
+    # Irrelevant sectors
+    "농식품부", "농촌", "농업", "과수", "축산", "어업", "수산", "조달청",
+    "보건복지", "환경부", "국토부", "해양수산",
+    # Entertainment/Politics (unless AI-related context)
+    "연예", "아이돌", "드라마", "예능",
+]
 
 # Pre-lowered keyword lists to avoid repeated lower() calls and to catch case variants
 EVENT_KEYWORDS_LOWER = [kw.lower() for kw in EVENT_KEYWORDS]
 BUSINESS_KEYWORDS_LOWER = [kw.lower() for kw in BUSINESS_KEYWORDS]
 NEGATIVE_KEYWORDS_LOWER = [kw.lower() for kw in NEGATIVE_KEYWORDS]
+AI_MODELS_LOWER = [kw.lower() for kw in AI_MODELS]
 
 # Groq Client Initialization
 try:
@@ -140,21 +168,30 @@ def _score_title(title: str) -> int:
     for kw in IMPORTANT_COMPANIES:
         if kw in lowered:
             score += 3
+            break  # Count once per title
+
+    # AI Model mentions (high relevance)
+    for kw in AI_MODELS_LOWER:
+        if kw in lowered:
+            score += 3
+            break  # Count once per title
 
     # Product/model events
     for kw in EVENT_KEYWORDS_LOWER:
         if kw in lowered:
             score += 2
+            break
 
     # Business / policy changes
     for kw in BUSINESS_KEYWORDS_LOWER:
         if kw in lowered:
             score += 2
+            break
 
-    # Penalties for low-value/tutorial-like items
+    # Penalties for low-value/tutorial-like items (강화된 페널티)
     for kw in NEGATIVE_KEYWORDS_LOWER:
         if kw in lowered:
-            score -= 2
+            score -= 5  # 강화된 페널티로 비관련 기사 확실히 제외
 
     return score
 
@@ -355,94 +392,122 @@ def _summarize_with_grok(prompt: str) -> str:
     
     raise last_exc if last_exc else RuntimeError("Grok summarization failed")
 
-def summarize_article(text: str, title: str, display_name: str) -> str:
-    """Summarize an article using LLM with fallback and rate limiting."""
+def _parse_summary_response(response: str, original_title: str) -> dict:
+    """Parse LLM response to extract title and summary."""
+    # Remove any <think> tags
+    response = re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL)
+    
+    # Extract title
+    title_match = re.search(r'\*\*제목\*\*:\s*(.+?)(?:\n|$)', response)
+    new_title = title_match.group(1).strip() if title_match else original_title
+    
+    # Remove title line from summary
+    summary = re.sub(r'\*\*제목\*\*:\s*.+?\n', '', response, count=1).strip()
+    
+    # Ensure title doesn't end with '...'
+    if new_title.endswith('...'):
+        new_title = new_title.rstrip('.') + '.'
+    
+    # Fallback to original if new title is empty or too short
+    if len(new_title) < 10:
+        new_title = original_title
+    
+    return {
+        "title": new_title,
+        "summary": summary
+    }
+
+
+def summarize_article(text: str, title: str, display_name: str) -> dict:
+    """Summarize an article using LLM with fallback and rate limiting.
+    
+    Returns:
+        dict with 'title' (완성된 제목) and 'summary' (요약 HTML)
+    """
     # Check if any API key is available
     if not os.environ.get("GEMINI_API_KEY") and not os.environ.get("GROK_API_KEY"):
-        return "API Key 미설정으로 AI 요약 생략"
+        return {"title": title, "summary": "API Key 미설정으로 AI 요약 생략"}
 
-    # === 상세 구조화 프롬프트 (XML 태그 기반, Gemini 최적화) ===
+    # === 개선된 프롬프트: 제목 생성 + 자기완결적 요약 ===
     prompt = f"""<task>
-뉴스 기사를 섹션별로 구조화된 상세 요약으로 작성
+뉴스 기사를 요약하고, 완전한 제목을 생성하세요.
+요약만 읽어도 기사의 맥락을 완전히 파악할 수 있어야 합니다.
 </task>
 
 <output_format>
+**제목**: (기사 핵심을 담은 완전한 한 문장 제목, 50자 이내)
+
 ## 1. 핵심 내용
-**주제**: 한 문장으로 핵심 요약
+**주제**: 한 문장으로 핵심 요약 (누가/무엇을/왜 했는지 포함)
 
 - 세부 내용 1 (구체적 수치/금액/일정 포함)
 - 세부 내용 2
 - 세부 내용 3
 
 ## 2. 배경 및 맥락
-- 왜 이런 결정/사건이 발생했는지
-- 관련 기술/시장 상황 설명
+- 이 사건이 발생하게 된 업계 상황이나 이유
+- 관련 기술/시장의 현재 트렌드
 
-## 3. 주요 관계자/기업
-- 관련 기업/인물과 역할
+## 3. 시장 영향 및 의미
+- 이 발표/사건이 왜 중요한지
+- 업계/소비자에게 미치는 영향
 
-## 4. 전략적 의미
-- 산업/시장에 미치는 영향
-- 경쟁 구도 변화
-
-## 5. 향후 전망
-- 예상되는 후속 영향
-- 리스크 요인
-
-**한 줄 요약**: (기사의 핵심을 한 문장으로)
+**한 줄 요약**: (기사의 핵심을 한 문장으로, 맥락 포함)
 </output_format>
 
 <constraint>
-- 각 섹션에 2-4개의 bullet point 포함
-- 수치(금액, 날짜, 비율)는 반드시 명시
-- **중요 키워드나 핵심 수치(2-3단어)는 반드시 **bold** 처리하여 강조할 것**
-- 문장 전체를 bold 처리하지 말 것
-- 문장 끝은 ~함, ~임, ~됨 형식
-- 전체 분량 800-1200자
-- 불필요한 섹션은 생략 가능
+★ 핵심 원칙: 요약만 읽어도 원문 없이 기사를 완전히 이해할 수 있어야 함 ★
+
+1. **제목 규칙**: 
+   - 반드시 완전한 문장으로 끝날 것 ('...'으로 끝나면 안 됨)
+   - 핵심 키워드와 수치 포함
+   - 50자 이내
+
+2. **자기완결적 요약 규칙**:
+   - 5W1H 포함: 누가(Who), 무엇을(What), 왜(Why), 언제(When), 어디서(Where), 어떻게(How)
+   - 약어나 전문용어 사용 시 간단한 설명 병기 (예: "LPU(언어처리유닛)")
+   - 숫자/금액에는 비교 맥락 추가 (예: "200억달러(전년 대비 30% 증가)")
+   - "이것", "해당", "그" 같은 지시어 사용 금지 → 구체적 명칭 사용
+
+3. **문체 규칙**:
+   - 각 섹션에 2-3개의 bullet point
+   - 문장 끝은 ~함, ~임, ~됨 형식
+   - **중요 키워드나 핵심 수치(2-3단어)는 **bold** 처리**
+   - 전체 분량 600-800자
+
+4. **품질 검증**:
+   - 요약을 읽은 독자가 "그래서 뭐?"라고 묻지 않도록 의미/영향 반드시 포함
+   - 불필요한 섹션은 생략 가능하되, "왜 중요한지"는 반드시 포함
 </constraint>
 
 <example>
-## 1. 핵심 내용
-**주제**: 엔비디아가 그록과 200억달러(약 29조원) 규모 기술 라이선스 계약 체결
+**제목**: 엔비디아, 그록 LPU 기술 200억달러에 라이선스 계약 체결
 
-- 그록의 LPU(언어처리유닛) 관련 지적재산권을 비독점 라이선스로 확보함
-- 창립자 조나단 로스, 사장 써니 마드라 등 핵심 인재가 엔비디아로 합류함
+## 1. 핵심 내용
+**주제**: **엔비디아**가 AI 추론 전문기업 **그록**의 LPU(언어처리유닛) 기술을 **200억달러**(약 29조원)에 라이선스 계약 체결함
+
+- 그록의 LPU 관련 지적재산권을 비독점 라이선스로 확보함
+- 창립자 조나단 로스, 사장 써니 마드라 등 **핵심 인재**가 엔비디아로 합류함
 - 그록클라우드 사업 제외한 대부분의 자산이 계약 대상임
 
 ## 2. 배경 및 맥락
-- 그록의 LPU는 LLM 추론에서 GPU 대비 최대 5배 빠른 속도와 저지연 성능 보유함
+- 그록의 LPU는 LLM 추론에서 GPU 대비 **최대 5배** 빠른 속도와 저지연 성능 보유함
 - AI 서비스에서 추론(Inference) 경쟁력이 학습만큼 중요해지는 추세임
 
-## 3. 주요 관계자/기업
-- 그록: 독립 기업 유지, 신임 CEO 사이먼 에드워즈가 경영권 승계
-- 엔비디아: 젠슨 황 CEO가 LPU를 AI 팩토리 아키텍처에 통합 계획 발표
-
-## 4. 전략적 의미
-- 전체 인수가 아닌 라이선스+인재영입 방식으로 반독점 규제 리스크 회피함
-- GPU 중심 생태계에서 실시간 추론 시장까지 영역 확장하는 전략임
-
-## 5. 향후 전망
-- LPU와 GPU 결합으로 AI 서비스 실시간성과 에너지 효율 대폭 개선 전망됨
-- 구글, AWS 등 빅테크의 자체 칩 개발 경쟁이 변수로 남음
+## 3. 시장 영향 및 의미
+- 전체 인수가 아닌 라이선스+인재영입 방식으로 **반독점 규제 리스크** 회피함
+- GPU 중심 생태계에서 **실시간 추론 시장**(연 40% 성장)까지 영역 확장하는 전략임
 
 **한 줄 요약**: 엔비디아가 추론 특화 칩(LPU) 기술과 핵심 인재를 29조원에 확보, AI 학습을 넘어 실시간 추론 시장까지 지배력 확대를 노림
 </example>
 
-<verification>
-응답 전 확인:
-- 모든 섹션에 구체적 내용이 있는가?
-- 수치/금액/일정이 포함되었는가?
-- 한 줄 요약이 있는가?
-</verification>
-
 <article>
-제목: {title}
+원본 제목: {title}
 
 {text[:1500]}
 </article>
 
-위 기사를 구조화된 형식으로 요약하세요.
+위 기사에 대해 완전한 제목과 자기완결적 구조화 요약을 작성하세요.
 """
 
     # Try OpenAI (GPT-5.2) first, then Grok, then Gemini as fallback
@@ -450,26 +515,34 @@ def summarize_article(text: str, title: str, display_name: str) -> str:
     grok_error = None
     gemini_error = None
     
+    raw_response = None
+    
     # 1st: OpenAI GPT-5.2
     try:
-        return _summarize_with_openai(prompt)
+        raw_response = _summarize_with_openai(prompt)
     except Exception as e:
         openai_error = str(e)
         print(f"[OpenAI] Failed: {openai_error[:100]}")
     
     # 2nd: Groq
-    try:
-        return _summarize_with_grok(prompt)
-    except Exception as e:
-        grok_error = str(e)
-        print(f"[Grok] Failed: {grok_error[:100]}")
+    if raw_response is None:
+        try:
+            raw_response = _summarize_with_grok(prompt)
+        except Exception as e:
+            grok_error = str(e)
+            print(f"[Grok] Failed: {grok_error[:100]}")
     
     # 3rd: Gemini
-    try:
-        return _summarize_with_gemini(prompt)
-    except Exception as e:
-        gemini_error = str(e)
-        print(f"[Gemini] Failed: {gemini_error[:100]}")
+    if raw_response is None:
+        try:
+            raw_response = _summarize_with_gemini(prompt)
+        except Exception as e:
+            gemini_error = str(e)
+            print(f"[Gemini] Failed: {gemini_error[:100]}")
+    
+    # If we got a response, parse it
+    if raw_response:
+        return _parse_summary_response(raw_response, title)
     
     # All failed - return error message instead of raising
     error_summary = f"OpenAI: {openai_error[:30] if openai_error else 'N/A'}, Grok: {grok_error[:30] if grok_error else 'N/A'}, Gemini: {gemini_error[:30] if gemini_error else 'N/A'}"
@@ -494,25 +567,28 @@ def analyze_text_with_llm(prompt: str) -> str:
 def _rank_with_llm(candidates: List[tuple], limit: int) -> List[tuple]:
     candidates_text = "\n".join([f"{idx}. {t[1]}" for idx, t in enumerate(candidates)])
 
-    prompt = f"""
-다음은 다양한 테크 뉴스 기사들의 제목 리스트야.
-이 중에서 오늘날짜 뉴스레터에 포함시킬 가장 '중요하고 의미 있는' 기사 {limit}개를 골라줘.
+    prompt = f"""다음 기사 제목 중 AI/XR 뉴스레터에 포함할 {limit}개를 선정하세요.
 
-중요도 판단 기준:
-1. 주요 기술 기업(OpenAI, Google, Apple, 삼성, LG 등)의 새로운 제품/모델 출시
-2. AI 분야의 획기적인 연구 성과나 논문
-3. 업계의 큰 인수합병이나 정책 변화
-4. AI, XR 기술과 서비스에 대한 고객 반응 및 시장 평가
-5. 새로운 비즈니스 모델 소개 및 성공 사례
-6. 단순 튜토리얼이나 홍보성 기사는 제외
+[✅ 포함해야 할 기사]
+1. 주요 AI/XR 기업의 신제품/업데이트 (OpenAI, Google, Meta, Nvidia, Anthropic 등)
+2. AI 모델 출시/업그레이드 (GPT, Gemini, Claude, Sora, Grok 등)
+3. 대규모 투자/인수합병 소식 (금액이 명시된 경우 우선)
+4. 업계 트렌드를 보여주는 분석/전망 기사
+5. 글로벌 시장에 영향을 미치는 정책/규제 변화
+6. 한국 주요 기업(네이버, 카카오, 삼성, LG)의 AI 관련 뉴스
 
-응답 형식:
-- 가장 중요하다고 생각되는 기사의 '인덱스 번호'만 쉼표(,)로 나열해줘.
-- 예: 1, 5, 10, 3, 2
+[❌ 반드시 제외해야 할 기사]
+1. 특정 지역(여수, 나주, 광주 등) 로컬 뉴스 - AI 키워드가 있어도 제외
+2. 농업, 수산, 축산, 환경 등 비관련 분야
+3. 조달청, 보건복지부 등 AI와 직접 관련 없는 정부 발표
+4. 튜토리얼, 가이드, 홍보성 콘텐츠
+5. 연예인/정치인 관련 비기술 뉴스
+6. 철거, 진료, 마을, 빈집 등 일상 뉴스
 
 [기사 목록]
 {candidates_text}
-"""
+
+중요도 높은 순서대로 {limit}개의 인덱스 번호만 쉼표로 나열:"""
 
     try:
         try:
@@ -629,12 +705,23 @@ def generate_key_message_and_keywords(ai_articles: list, xr_articles: list) -> d
     
     prompt = f"""다음은 오늘의 AI/XR 뉴스 기사 제목 목록입니다.
 
-[작업 1] Key Message 생성
-- 독자의 호기심을 강렬하게 자극하는 문장 **정확히 2개**만 작성
-- 짧고 임팩트 있는 문장, 도발적인 질문이나 놀라운 사실 형태로 작성
+[작업 1] Key Message 생성 - 생각을 자극하는 인사이트 질문
+- 오늘 뉴스를 바탕으로 **독자가 깊이 생각해볼 화두**를 던지는 질문 **정확히 2개** 작성
+- 단순 팩트 나열이 아니라, "그래서 이게 왜 중요한가?"에 답하는 인사이트 제공
+- 형식: 질문 또는 도발적 명제 (물음표로 끝나거나, 강한 주장)
 - 문장 속 **핵심 키워드 1~2개**를 <em> 태그로 감싸서 강조
-- 한글로 작성, 이모지 금지, 각 줄 50자 이내
-- 예시: "<em>엔비디아</em>가 CES에서 공개한 AI 칩이 모든 것을 바꾼다"
+- 한글로 작성, 이모지 금지, 각 줄 60자 이내
+
+[좋은 예시]
+- "<em>AI</em>가 단편영화를 만든다면, 감독의 역할은 무엇이 될까?"
+- "<em>엔비디아</em> 29조 베팅 - 추론 시장이 학습 시장을 넘어설 것인가?"
+- "VR 피트니스가 헬스장을 대체할 수 있을까? <em>Meta</em>의 도전"
+- "<em>OpenAI</em>와 <em>Google</em>의 격차가 좁혀지고 있다 - 승자는 누구?"
+
+[나쁜 예시 - 피할 것]
+- "젠슨황 967조 투자 발표" (단순 팩트 나열)
+- "AI 영상 기술 발전" (너무 일반적)
+- "오늘의 AI 뉴스를 확인하세요" (의미 없음)
 
 [작업 2] 워드클라우드 키워드 추출
 - 기사에서 중요한 키워드 30~40개 추출 (최대한 다양하게)
@@ -646,8 +733,8 @@ def generate_key_message_and_keywords(ai_articles: list, xr_articles: list) -> d
 
 [출력 형식 - 아래 형식 정확히 따르기]
 KEY_MESSAGE:
-<em>핵심키워드</em>가 포함된 첫번째 강렬한 문장
-<em>핵심키워드</em>가 포함된 두번째 강렬한 문장
+<em>키워드</em>가 포함된 인사이트 질문 또는 화두 1
+<em>키워드</em>가 포함된 인사이트 질문 또는 화두 2
 
 KEYWORDS:
 엔비디아|Company

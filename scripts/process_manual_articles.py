@@ -117,11 +117,15 @@ def process_manual_articles():
         if not final_summary and scraped_data and scraped_data['text']:
             print("Generating summary via LLM...")
             try:
-                final_summary = summarize_article(
+                result = summarize_article(
                     text=scraped_data['text'],
                     title=final_title or "Untitled",
                     display_name="Manual Entry"
                 )
+                final_summary = result["summary"]
+                # Also update title if LLM generated a better one
+                if result.get("title") and not current_title:
+                    final_title = result["title"]
             except Exception as e:
                 print(f"LLM Summary generation failed: {e}")
                 final_summary = "요약을 생성할 수 없습니다."

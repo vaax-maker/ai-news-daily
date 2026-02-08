@@ -53,7 +53,10 @@ if __name__ == "__main__":
         print("=" * 60)
         print("✅ 요약 결과:")
         print("=" * 60)
-        print(result)
+        print(f"📌 생성된 제목: {result['title']}")
+        print("-" * 60)
+        print(result['summary'])
         print("=" * 60)
     except Exception as e:
         print(f"❌ 오류 발생: {e}")
+

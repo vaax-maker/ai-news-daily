@@ -20,7 +20,8 @@ def fetch_rss_items(
     feeds: List[str],
     selection_mode: str = "time",
     keyword_filters: Optional[List[str]] = None,
-    max_per_source: int = MAX_PER_SOURCE
+    max_per_source: int = MAX_PER_SOURCE,
+    time_hours: int = 48  # Configurable time window for fallback support
 ) -> List[Tuple[float, str, str, str, Any]]:
     """
     Fetch items from multiple RSS feeds.
@@ -85,15 +86,15 @@ def fetch_rss_items(
         ]
         logger.info(f"[RSS] After keyword filter: {len(raw_items)} items")
 
-    # Time Filtering (Last 48 hours for robustness)
-    two_days_ago = time.time() - 48 * 60 * 60
-    filtered_items = [item for item in raw_items if item[0] >= two_days_ago]
+    # Time Filtering (configurable, default 48 hours)
+    cutoff_time = time.time() - time_hours * 60 * 60
+    filtered_items = [item for item in raw_items if item[0] >= cutoff_time]
     
     # Use filtered items strictly (No fallback to old items)
     target_items = filtered_items
     
     if len(target_items) < len(raw_items):
-        logger.warning(f"[RSS] Filtered out {len(raw_items) - len(target_items)} old items (older than 48h).")
+        logger.warning(f"[RSS] Filtered out {len(raw_items) - len(target_items)} old items (older than {time_hours}h).")
 
     # Sorting logic
     three_days_ago = time.time() - 3 * 24 * 60 * 60

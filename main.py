@@ -317,6 +317,72 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         for item in summarized_items:
             item["summary_html"] = markdown_bold_to_highlight(item["summary_html"])
 
+    # 🎬 FALLBACK: YouTube/블로그 폴백 (기사 부족 시)
+    MIN_ARTICLES = 3
+    if config.key != "gov" and len(summarized_items) < MIN_ARTICLES and config.fallback_feeds:
+        print(f"[{config.key.upper()}] Primary: {len(summarized_items)}개 → Fallback 수집 시작 (YouTube/블로그)")
+        
+        # Fetch from fallback feeds with extended time window (default 7 days)
+        fallback_raw = fetch_rss_items(
+            config.fallback_feeds,
+            selection_mode=config.selection_mode,
+            keyword_filters=config.keyword_filters,
+            time_hours=config.fallback_time_hours  # 168h = 7일
+        )
+        
+        if fallback_raw:
+            print(f"[{config.key.upper()}] Fallback: {len(fallback_raw)}개 후보 발견")
+            
+            # Dedup against existing (more relaxed: 95% similarity for fallback)
+            fallback_links = {item.get("link") for item in summarized_items if item.get("link")}
+            
+            for ts, title, link, content, entry in fallback_raw:
+                if len(summarized_items) >= MIN_ARTICLES:
+                    break  # Enough articles now
+                    
+                if link in past_links or link in today_links or link in fallback_links:
+                    continue
+                
+                # Relaxed title similarity for fallback (95% instead of 80%)
+                if is_similar_title(title, all_existing_titles, threshold=0.95):
+                    continue
+                
+                # Summarize fallback item
+                text_with_url = content + f"\n\nURL: {link}"
+                try:
+                    result = summarize_article(text_with_url, title, config.display_name)
+                    new_title = result["title"]
+                    summary = sanitize_summary(result["summary"])
+                    summary = trim_summary_lines(summary)
+                except Exception as e:
+                    print(f"[{config.key}] Fallback summarization error: {e}")
+                    continue
+                
+                image_url = extract_image_url(entry, link) if config.key in ("ai", "xr") else ""
+                placeholder_type = config.key if (config.key in ("ai", "xr") and not image_url) else ""
+                
+                # 🎬 YouTube 배지 추가
+                source_badge = "🎬 " if "youtube.com" in link else ""
+                
+                summarized_items.append({
+                    "title": source_badge + shorten_korean_title(new_title),
+                    "link": link,
+                    "summary_html": markdown_bold_to_highlight(summary),
+                    "published_display": format_timestamp(ts),
+                    "source_name": extract_source_name(entry, link),
+                    "image_url": image_url,
+                    "placeholder_type": placeholder_type,
+                    "original_title": title,
+                    "timestamp": ts,
+                    "is_new": True,
+                    "is_fallback": True  # 폴백 표시
+                })
+                fallback_links.add(link)
+                new_summarized_count += 1
+                print(f"[{config.key.upper()}] Fallback 추가: {title[:40]}...")
+            
+            print(f"[{config.key.upper()}] Fallback 완료: 총 {len(summarized_items)}개")
+
     if not summarized_items and config.key != "gov":
         print(f"[{config.key.upper()}] WARNING: No items produced after summarization step.")
 

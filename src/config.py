@@ -21,6 +21,8 @@ class CategoryConfig:
     keyword_filters: List[str] = field(default_factory=list)
     use_ai_ranking: bool = False
     is_table_view: bool = False
+    fallback_feeds: List[str] = field(default_factory=list)  # YouTube/블로그 폴백용
+    fallback_time_hours: int = 168  # 폴백 시간 범위 (7일)
 
 @dataclass
 class MemberConfig:
@@ -61,7 +63,9 @@ def load_categories(path: str = "config/categories.yaml") -> Dict[str, CategoryC
             selection_mode=sel_mode,
             keyword_filters=kw_list,
             use_ai_ranking=use_ai,
-            is_table_view=val.get("is_table_view", False)
+            is_table_view=val.get("is_table_view", False),
+            fallback_feeds=val.get("fallback_feeds", []),
+            fallback_time_hours=val.get("fallback_time_hours", 168)
         )
     return configs
 

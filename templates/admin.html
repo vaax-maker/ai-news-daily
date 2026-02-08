@@ -398,10 +398,93 @@
 
                 <button id="btnSend" class="admin-btn">전송 / 예약</button>
                 <div id="panelStatus" class="status-msg" style="margin-top: 0.5rem;"></div>
+
+                <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+                    <h4 style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: #4b5563;">⚙️ 시스템 관리</h4>
+                    <button id="updateGovBtn" class="admin-btn" style="background: #0ea5e9; font-size: 0.9rem;">
+                        🏛️ 정부과제 강제 업데이트
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Independent Logic (Works even if Firebase crashes) -->
+<script>
+    // Define as a global function on window for maximum reach
+    window.triggerGovUpdate = async function() {
+        console.log('[GovUpdate] Function start');
+        const btn = document.getElementById('updateGovBtn');
+        const statusDiv = document.getElementById('panelStatus');
+
+        if (!btn) {
+            console.error('[GovUpdate] Button not found');
+            return;
+        }
+
+        btn.disabled = true;
+        var originalText = btn.innerHTML;
+        btn.innerHTML = '⏳ 업데이트 중...';
+
+        if (statusDiv) {
+            statusDiv.className = 'status-msg';
+            statusDiv.style.display = 'block';
+            statusDiv.innerText = "업데이트 요청 중...";
+        }
+
+        try {
+            console.log('[GovUpdate] Fetching /trigger-gov-update...');
+            const response = await fetch('/trigger-gov-update', {
+                method: 'POST'
+            });
+
+            const result = await response.json();
+            console.log('[GovUpdate] Result:', result);
+
+            if (statusDiv) {
+                if (result.success) {
+                    statusDiv.className = 'status-msg success';
+                    statusDiv.innerText = '✅ ' + result.message;
+                } else {
+                    statusDiv.className = 'status-msg error';
+                    statusDiv.innerText = '❌ ' + result.message;
+                }
+            } else if (!result.success) {
+                alert(result.message);
+            }
+        } catch (e) {
+            console.error('[GovUpdate] Error:', e);
+            if (statusDiv) {
+                statusDiv.className = 'status-msg error';
+                statusDiv.innerText = '❌ 연결 오류: ' + String(e);
+            } else {
+                alert('연결 오류: ' + e);
+            }
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        }
+    };
+
+    // Attach listener as soon as DOM is ready
+    function initGovButton() {
+        var govBtn = document.getElementById('updateGovBtn');
+        if (govBtn) {
+            // Remove previous listeners if any (by replacing the node) or just set onclick
+            govBtn.onclick = window.triggerGovUpdate; 
+            console.log('✅ Gov update button initialized with onclick');
+        } else {
+            console.warn('⚠️ Gov update button not found during init');
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGovButton);
+    } else {
+        initGovButton();
+    }
+</script>
 
 <!-- Firebase SDK -->
 <script type="module">
@@ -455,10 +538,14 @@
     function getOpenAiKey() {
         // 1. Check template injection (server environment)
         const templateKey = '{{ OPENAI_API_KEY }}';
-        // If it's a valid key and not the template literal itself
+
+        // Use raw block to prevent Jinja2 from parsing JS curly braces
+        {% raw %}
         if (templateKey && !templateKey.includes('{{') && templateKey.length > 10) {
             return templateKey;
         }
+        {% endraw %}
+
         // 2. Check localStorage (client environment / GitHub Pages)
         return localStorage.getItem('openaiKey') || '';
     }
@@ -513,17 +600,15 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${getOpenAiKey()}`
-                },
-                body: JSON.stringify({
-                    model: 'gpt-4o-mini',
-                    messages: [{ role: 'user', content: prompt }],
-                    temperature: 0.3,
-                    max_tokens: 300
-                })
-            });
+                'Authorization': `Bearer ${getOpenAiKey()}`
+            },
+            body: JSON.stringify({
+                model: 'gpt-4o-mini',
+                messages: [{ role: 'user', content: prompt }],
+                temperature: 0.3,
+                max_tokens: 300
+            })
+        });
 
         const data = await response.json();
         if (data.choices && data.choices[0]?.message?.content) {
@@ -1435,7 +1520,11 @@ pre, code {
         }
     }
 
-    btnWebsharePost.addEventListener('click', createWebshare);
+    // triggerGovUpdate function moved to standalone script block
+
+    if (btnWebsharePost) {
+        btnWebsharePost.addEventListener('click', createWebshare);
+    }
 
     // Load history when panel becomes visible
     if (sessionStorage.getItem('vaaxAdmin') === 'true') {

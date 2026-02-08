@@ -185,6 +185,30 @@ def trigger_send():
         return jsonify({"success": False, "message": str(e)}), 500
 
 
+@app.route('/trigger-gov-update', methods=['POST'])
+def trigger_gov_update():
+    """Trigger manual government projects update."""
+    try:
+        print("🚀 Starting manual Gov Update...")
+        result = subprocess.run(
+            ["python3", "scripts/update_gov_now.py"], 
+            cwd=PROJECT_ROOT, 
+            capture_output=True, 
+            text=True
+        )
+        
+        if result.returncode == 0:
+            print(f"✅ Gov Update Success:\n{result.stdout}")
+            return jsonify({"success": True, "message": "Government projects updated successfully!"})
+        else:
+            print(f"❌ Gov Update Failed:\n{result.stderr}")
+            return jsonify({"success": False, "message": f"Update failed: {result.stderr}"}), 500
+            
+    except Exception as e:
+        print(f"❌ Error: {e}")
+        return jsonify({"success": False, "message": str(e)}), 500
+
+
 @app.route('/health', methods=['GET'])
 def health():
     """Health check endpoint."""
