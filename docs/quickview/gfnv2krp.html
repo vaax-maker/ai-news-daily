@@ -287,44 +287,42 @@
     <div class="quickview-body">
         
 <style>
-/* Responsive Wrapper - Auto-injected */
-html { font-size: 16px; }
-body { 
-    max-width: 900px; 
-    margin: 0 auto; 
-    padding: 1rem; 
-    line-height: 1.7;
+/* Responsive Wrapper - Scoped */
+.quickview-body {
     word-break: keep-all;
+    overflow-wrap: break-word;
 }
-img, video, iframe { 
+.quickview-body img, 
+.quickview-body video, 
+.quickview-body iframe { 
     max-width: 100%; 
     height: auto; 
 }
-table { 
+.quickview-body table { 
     width: 100%; 
     display: block; 
     overflow-x: auto; 
 }
-pre, code { 
+.quickview-body pre, 
+.quickview-body code { 
     overflow-x: auto; 
     white-space: pre-wrap; 
-    word-wrap: break-word;
+    word-wrap: break-word; 
 }
 @media (max-width: 768px) {
-    body { 
-        padding: 0.75rem; 
+    .quickview-body { 
         font-size: 15px; 
     }
-    h1 { font-size: 1.5rem; }
-    h2 { font-size: 1.25rem; }
-    h3 { font-size: 1.1rem; }
+    .quickview-body h1 { font-size: 1.5rem; }
+    .quickview-body h2 { font-size: 1.25rem; }
+    .quickview-body h3 { font-size: 1.1rem; }
 }
 </style>
 
 <style>
 /* Responsive Wrapper - Auto-injected */
-html { font-size: 16px; }
-body { 
+.quickview-body { font-size: 16px; }
+.quickview-body { 
     max-width: 900px; 
     margin: 0 auto; 
     padding: 1rem; 
@@ -346,13 +344,10 @@ pre, code {
     word-wrap: break-word;
 }
 @media (max-width: 768px) {
-    body { 
+    .quickview-body { 
         padding: 0.75rem; 
         font-size: 15px; 
-    }
-    h1 { font-size: 1.5rem; }
-    h2 { font-size: 1.25rem; }
-    h3 { font-size: 1.1rem; }
+    } .quickview-body h1 { font-size: 1.5rem; } .quickview-body h2 { font-size: 1.25rem; } .quickview-body h3 { font-size: 1.1rem; }
 }
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -369,12 +364,12 @@ pre, code {
             --touch-highlight: rgba(101, 163, 13, 0.1);
         }
 
-        html {
+        .quickview-body {
             font-size: 16px;
             scroll-behavior: smooth;
         }
 
-        body {
+        .quickview-body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             line-height: 1.7;
             color: var(--text-main);
@@ -384,18 +379,14 @@ pre, code {
             padding: 40px 20px;
             word-break: keep-all;
             -webkit-font-smoothing: antialiased;
-        }
-
-        h1 {
+        } .quickview-body h1 {
             margin-top: 1.2em;
             margin-bottom: 0.6em;
             font-size: 2.2rem;
             letter-spacing: -0.02em;
             border-bottom: 3px solid var(--primary-color);
             padding-bottom: 12px;
-        }
-
-        h2 {
+        } .quickview-body h2 {
             margin-top: 2.5em;
             margin-bottom: 1.2em;
             font-size: 1.75rem;
@@ -481,9 +472,7 @@ pre, code {
         }
 
         @media (max-width: 768px) {
-            body { padding: 20px 16px; }
-            h1 { font-size: 1.65rem; }
-            h2 { font-size: 1.35rem; }
+            .quickview-body { padding: 20px 16px; } .quickview-body h1 { font-size: 1.65rem; } .quickview-body h2 { font-size: 1.35rem; }
         }
     </style>
 

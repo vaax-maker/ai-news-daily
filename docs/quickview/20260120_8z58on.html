@@ -287,40 +287,37 @@
     <div class="quickview-body">
         
 <style>
-/* Responsive Wrapper - Auto-injected */
-html { font-size: 16px; }
-body { 
-    max-width: 900px; 
-    margin: 0 auto; 
-    padding: 1rem; 
-    line-height: 1.7;
+/* Responsive Wrapper - Scoped */
+.quickview-body {
     word-break: keep-all;
+    overflow-wrap: break-word;
 }
-img, video, iframe { 
+.quickview-body img, 
+.quickview-body video, 
+.quickview-body iframe { 
     max-width: 100%; 
     height: auto; 
 }
-table { 
+.quickview-body table { 
     width: 100%; 
     display: block; 
     overflow-x: auto; 
 }
-pre, code { 
+.quickview-body pre, 
+.quickview-body code { 
     overflow-x: auto; 
     white-space: pre-wrap; 
-    word-wrap: break-word;
+    word-wrap: break-word; 
 }
 @media (max-width: 768px) {
-    body { 
-        padding: 0.75rem; 
+    .quickview-body { 
         font-size: 15px; 
     }
-    h1 { font-size: 1.5rem; }
-    h2 { font-size: 1.25rem; }
-    h3 { font-size: 1.1rem; }
+    .quickview-body h1 { font-size: 1.5rem; }
+    .quickview-body h2 { font-size: 1.25rem; }
+    .quickview-body h3 { font-size: 1.1rem; }
 }
 </style>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
         :root {
             --primary-color: #65a30d;
@@ -333,7 +330,7 @@ pre, code {
             --border-color: #d1d5db;
             --line-gray: #9ca3af;
         }
-        body {
+        .quickview-body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             line-height: 1.8;
             color: var(--text-main);
@@ -341,8 +338,7 @@ pre, code {
             margin: 0 auto;
             padding: 40px 20px;
             background-color: var(--background-color);
-        }
-        h1 {
+        } .quickview-body h1 {
             font-size: 2.8em;
             color: var(--primary-color);
             text-align: center;
@@ -379,16 +375,14 @@ pre, code {
             border-left: 6px solid var(--primary-color);
             background-color: #fcfdfa;
             border-radius: 0 12px 12px 0;
-        }
-        h2 {
+        } .quickview-body h2 {
             font-size: 2em;
             color: var(--secondary-color);
             margin-top: 0;
             margin-bottom: 1.5em;
             padding-bottom: 10px;
             border-bottom: 1px solid var(--border-color);
-        }
-        h3 {
+        } .quickview-body h3 {
             font-size: 1.5em;
             color: var(--primary-color-hover);
             margin-top: 2em;

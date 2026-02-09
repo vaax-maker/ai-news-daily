@@ -285,7 +285,40 @@
 
     <!-- Direct content injection (no Shadow DOM for external script compatibility) -->
     <div class="quickview-body">
-        <!DOCTYPE html>
+        
+<style>
+/* Responsive Wrapper - Scoped */
+.quickview-body {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+.quickview-body img, 
+.quickview-body video, 
+.quickview-body iframe { 
+    max-width: 100%; 
+    height: auto; 
+}
+.quickview-body table { 
+    width: 100%; 
+    display: block; 
+    overflow-x: auto; 
+}
+.quickview-body pre, 
+.quickview-body code { 
+    overflow-x: auto; 
+    white-space: pre-wrap; 
+    word-wrap: break-word; 
+}
+@media (max-width: 768px) {
+    .quickview-body { 
+        font-size: 15px; 
+    }
+    .quickview-body h1 { font-size: 1.5rem; }
+    .quickview-body h2 { font-size: 1.25rem; }
+    .quickview-body h3 { font-size: 1.1rem; }
+}
+</style>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -305,7 +338,7 @@
             --line-gray: #9ca3af;
         }
 
-        body {
+        .quickview-body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             color: var(--text-main);
             background-color: var(--background-color);
@@ -315,9 +348,7 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-        }
-
-        h1 {
+        } .quickview-body h1 {
             color: var(--text-main);
             font-size: 1.8rem;
             margin-bottom: 0.5rem;
@@ -330,9 +361,7 @@
             font-size: 0.9rem;
             margin-bottom: 2rem;
             display: block;
-        }
-
-        h2 {
+        } .quickview-body h2 {
             color: var(--secondary-color);
             font-size: 1.4rem;
             margin-top: 2.5rem;
@@ -349,9 +378,7 @@
             background-color: var(--primary-color);
             margin-right: 10px;
             border-radius: 2px;
-        }
-
-        h3 {
+        } .quickview-body h3 {
             color: var(--text-main);
             font-size: 1.15rem;
             margin-top: 1.5rem;
@@ -426,41 +453,6 @@
             color: var(--text-muted);
         }
     </style>
-
-<style>
-/* Responsive Wrapper - Auto-injected */
-html { font-size: 16px; }
-body { 
-    max-width: 900px; 
-    margin: 0 auto; 
-    padding: 1rem; 
-    line-height: 1.7;
-    word-break: keep-all;
-}
-img, video, iframe { 
-    max-width: 100%; 
-    height: auto; 
-}
-table { 
-    width: 100%; 
-    display: block; 
-    overflow-x: auto; 
-}
-pre, code { 
-    overflow-x: auto; 
-    white-space: pre-wrap; 
-    word-wrap: break-word;
-}
-@media (max-width: 768px) {
-    body { 
-        padding: 0.75rem; 
-        font-size: 15px; 
-    }
-    h1 { font-size: 1.5rem; }
-    h2 { font-size: 1.25rem; }
-    h3 { font-size: 1.1rem; }
-}
-</style>
 </head>
 <body>
 
