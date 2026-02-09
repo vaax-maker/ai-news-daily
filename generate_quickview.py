@@ -105,62 +105,76 @@ document.addEventListener('DOMContentLoaded', function() {{
     return html_content
 
 
+def scope_injected_styles(html: str) -> str:
+    """
+    Scope global selectors in injected <style> blocks to .quickview-body
+    to prevent them from breaking the main page layout.
+    """
+    import re
+    
+    def replace_selectors(match):
+        style_content = match.group(1)
+        # Replace 'body {' with '.quickview-body {'
+        style_content = re.sub(r'body\s*\{', '.quickview-body {', style_content, flags=re.IGNORECASE)
+        # Replace 'html {' with '.quickview-body {' (or just ignore/remove html rules if they set font-size)
+        style_content = re.sub(r'html\s*\{', '.quickview-body {', style_content, flags=re.IGNORECASE)
+        # Replace 'h1 {' with '.quickview-body h1 {'
+        style_content = re.sub(r'(^|\})\s*h([1-6])\s*\{', r'\1 .quickview-body h\2 {', style_content, flags=re.IGNORECASE)
+        
+        return f'<style>{style_content}</style>'
+
+    # Apply to all style blocks
+    return re.sub(r'<style>(.*?)</style>', replace_selectors, html, flags=re.DOTALL | re.IGNORECASE)
+
 def wrap_with_responsive_css(html: str) -> str:
-    """Wrap HTML content with responsive CSS for mobile optimization."""
+    """
+    Wrap HTML content with scoped responsive CSS for mobile optimization.
+    This injects styles that target .quickview-body children to ensure
+    responsiveness of tables, images, and pre blocks.
+    """
+    # First, scope any existing styles in the HTML
+    html = scope_injected_styles(html)
+
+    # Scoped CSS - targets .quickview-body specifically to avoid global pollution
     responsive_css = """
 <style>
-/* Responsive Wrapper - Auto-injected */
-html { font-size: 16px; }
-body { 
-    max-width: 900px; 
-    margin: 0 auto; 
-    padding: 1rem; 
-    line-height: 1.7;
+/* Responsive Wrapper - Scoped */
+.quickview-body {
     word-break: keep-all;
+    overflow-wrap: break-word;
 }
-img, video, iframe { 
+.quickview-body img, 
+.quickview-body video, 
+.quickview-body iframe { 
     max-width: 100%; 
     height: auto; 
 }
-table { 
+.quickview-body table { 
     width: 100%; 
     display: block; 
     overflow-x: auto; 
 }
-pre, code { 
+.quickview-body pre, 
+.quickview-body code { 
     overflow-x: auto; 
     white-space: pre-wrap; 
-    word-wrap: break-word;
+    word-wrap: break-word; 
 }
 @media (max-width: 768px) {
-    body { 
-        padding: 0.75rem; 
+    .quickview-body { 
         font-size: 15px; 
     }
-    h1 { font-size: 1.5rem; }
-    h2 { font-size: 1.25rem; }
-    h3 { font-size: 1.1rem; }
+    .quickview-body h1 { font-size: 1.5rem; }
+    .quickview-body h2 { font-size: 1.25rem; }
+    .quickview-body h3 { font-size: 1.1rem; }
 }
 </style>"""
     
-    import re
-    # Check if viewport meta exists
-    if not re.search(r'<meta[^>]*viewport', html, re.IGNORECASE):
-        viewport_meta = '<meta name="viewport" content="width=device-width, initial-scale=1">'
-        if re.search(r'<head[^>]*>', html, re.IGNORECASE):
-            html = re.sub(r'(<head[^>]*>)', r'\1\n' + viewport_meta, html, count=1, flags=re.IGNORECASE)
-        else:
-            html = viewport_meta + '\n' + html
-
-    # Insert responsive CSS before </head> or at start
-    if re.search(r'</head>', html, re.IGNORECASE):
-        html = re.sub(r'</head>', responsive_css + '\n</head>', html, count=1, flags=re.IGNORECASE)
-    elif re.search(r'<body[^>]*>', html, re.IGNORECASE):
-        html = re.sub(r'(<body[^>]*>)', responsive_css + '\n' + r'\1', html, count=1, flags=re.IGNORECASE)
-    else:
-        html = responsive_css + '\n' + html
+    # Avoid adding if already present (simple check)
+    if "/* Responsive Wrapper - Scoped */" in html:
+        return html
         
-    return html
+    return responsive_css + '\n' + html
 
 
 def get_firestore_client():
