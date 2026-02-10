@@ -1,10 +1,12 @@
 
 import os
+import re
 
 CSS_TO_INJECT = """
         /* Custom Highlight */
         .highlight {
-            background-color: #d9f99d;
+            background-color: #65a30d;
+            color: white;
             padding: 0px 4px;
             border-radius: 4px;
             font-weight: 700;
@@ -16,22 +18,35 @@ def fix_briefing_file(file_path):
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
         
-        if ".highlight {" in content:
-            print(f"Skipping {file_path} (already has highlight style)")
-            return 0
-            
-        if "</style>" not in content:
-            print(f"Skipping {file_path} (no style block found)")
-            return 0
-            
-        # Inject before </style>
-        new_content = content.replace("</style>", CSS_TO_INJECT + "\n    </style>")
+        # If it has old highlight style, replace it
+        # We look for the block start and end.
+        # But easier to just use regex to replace the whole .highlight {...} block if present
         
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write(new_content)
+        # Or, since we know exactly what we injected last time:
+        old_style_start = ".highlight {"
+        if old_style_start in content:
+            # Simple replace of the block might be tricky due to formatting.
+            # Let's use regex to find .highlight { ... }
+            pattern = r"\.highlight\s*\{[^}]+\}"
+            new_style_block = CSS_TO_INJECT.strip()
             
-        print(f"Fixed {file_path}")
-        return 1
+            new_content, count = re.subn(pattern, new_style_block, content)
+            if count > 0:
+                with open(file_path, "w", encoding="utf-8") as f:
+                    f.write(new_content)
+                print(f"Updated style in {file_path}")
+                return 1
+            
+        # If not present, inject it (fallback)
+        if "</style>" in content and ".highlight" not in content:
+             new_content = content.replace("</style>", CSS_TO_INJECT + "\n    </style>")
+             with open(file_path, "w", encoding="utf-8") as f:
+                f.write(new_content)
+             print(f"Injected style into {file_path}")
+             return 1
+            
+        print(f"No changes needed for {file_path}")
+        return 0
         
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
