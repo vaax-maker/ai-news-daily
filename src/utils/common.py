@@ -17,13 +17,7 @@ HIGHLIGHT_STYLE = (
 
 
 def _wrap_highlight(text: str) -> str:
-    return (
-        "<span class='highlight' style='"
-        + HIGHLIGHT_STYLE
-        + "'>"
-        + text
-        + "</span>"
-    )
+    return f"<span class='highlight'>{text}</span>"
 
 
 def get_kst_now() -> datetime.datetime:
