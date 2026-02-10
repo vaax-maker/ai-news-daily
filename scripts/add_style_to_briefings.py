@@ -5,10 +5,8 @@ import re
 CSS_TO_INJECT = """
         /* Custom Highlight */
         .highlight {
-            background-color: #65a30d;
-            color: white;
-            padding: 0px 4px;
-            border-radius: 4px;
+            background-color: transparent;
+            color: #65a30d;
             font-weight: 700;
         }
 """

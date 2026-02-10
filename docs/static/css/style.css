@@ -450,11 +450,8 @@ html {
 
 /* Custom Highlight */
 .highlight {
-    background-color: #65a30d;
-    /* Primary color match */
-    color: white;
-    padding: 0px 4px;
-    border-radius: 4px;
+    background-color: transparent;
+    color: #65a30d;
     font-weight: 700;
 }
 
