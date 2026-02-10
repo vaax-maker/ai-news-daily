@@ -450,11 +450,11 @@ html {
 
 /* Custom Highlight */
 .highlight {
-    background-color: #e5f7da;
-    color: #111827;
+    background-color: #CEFA98;
+    /* Softer lime highlight */
     padding: 2px 4px;
     border-radius: 4px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .summary-list {

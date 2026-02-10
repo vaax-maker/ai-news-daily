@@ -643,7 +643,7 @@
         if (docSnap.exists() && docSnap.data().password === inputPw) {
             document.getElementById('formTitle').textContent = "게시글 수정";
             inputWriter.value = docSnap.data().writer;
-            inputPassword.value = "";
+            inputPassword.value = "****";
             inputPassword.disabled = true;
             inputTitle.value = docSnap.data().title;
 
