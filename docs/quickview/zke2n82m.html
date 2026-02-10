@@ -1,0 +1,237 @@
+<style>
+        /* fovea.css - Mobile Optimized Version */
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --touch-highlight: rgba(101, 163, 13, 0.1);
+        }
+
+        html { font-size: 16px; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.4;
+            color: var(--text-main);
+            background-color: var(--background-color);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            word-break: keep-all;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1 {
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+            font-size: 2.2rem;
+            letter-spacing: -0.02em;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 12px;
+        }
+
+        h2 {
+            margin-top: 2.5em;
+            margin-bottom: 1.2em;
+            font-size: 1.75rem;
+            color: var(--secondary-color);
+            border-left: 6px solid var(--primary-color);
+            padding-left: 18px;
+        }
+
+        h3 {
+            margin-top: 1.8em;
+            font-size: 1.4rem;
+            color: var(--text-main);
+        }
+
+        .timestamp {
+            color: var(--primary-color);
+            font-weight: 700;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            display: inline-block;
+            text-decoration: underline;
+        }
+
+        .timestamp:active { background-color: var(--touch-highlight); }
+
+        .tag {
+            display: inline-block;
+            background-color: #f3f4f6;
+            color: #374151;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-right: 6px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin-bottom: 30px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
+
+        .meta-info {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .editor-note {
+            background-color: #fefce8;
+            border: 1px solid #fde047;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+
+        .editor-note strong { color: #854d0e; }
+
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 20px 16px; }
+            h1 { font-size: 1.65rem; }
+            h2 { font-size: 1.35rem; }
+            .meta-info { padding: 12px; font-size: 0.85rem; }
+        }
+    </style>
+
+    <h1>OpenClaw 제작자: 왜 앱의 80%가 사라질 것인가</h1>
+
+    <div class="meta-info">
+        <div><strong>Original Date:</strong> 2026-02-07</div>
+        <div><strong>Report Date:</strong> 2026-02-11</div>
+        <div><strong>Source:</strong> <a href="http://www.youtube.com/watch?v=4uzGDAoNOZc" target="_blank">OpenClaw Creator: Why 80% Of Apps Will Disappear</a></div>
+        <div class="tag-container" style="margin-top: 10px;">
+            <span class="tag">#OpenClaw</span> <span class="tag">#PeterSteinberger</span> <span class="tag">#AIAgent</span> <span class="tag">#YCombinator</span> <span class="tag">#FutureOfApps</span>
+        </div>
+    </div>
+
+    <div class="video-container">
+        <div id="player"></div>
+    </div>
+
+    <section>
+        <h2>1. OpenClaw의 폭발적 성장과 '로컬'의 힘</h2>
+        <p>
+            OpenClaw는 출시 직후 GitHub에서 16만 개 이상의 별(Stars)을 받으며 인터넷을 장악했습니다 <span class="timestamp" data-time="0">[00:00:00]</span>. 
+            제작자 피터 슈타인베르거(Peter Steinberger)는 기존의 수많은 AI 어시스턴트들과 OpenClaw의 결정적인 차이점으로 <strong>'로컬 실행'</strong>을 꼽습니다 <span class="timestamp" data-time="103">[01:43]</span>.
+        </p>
+        <p>
+            대부분의 AI 서비스가 클라우드에서 제한적인 기능만 수행하는 반면, OpenClaw는 사용자의 컴퓨터에서 직접 실행되기에 운영체제(OS)의 모든 자원에 접근할 수 있습니다. 
+            이는 에이전트가 테슬라 자동차 제어, 집안 온도 조절, 심지어는 컴퓨터 내의 수만 개의 파일을 뒤져 사용자가 잊고 있던 1년 전의 기록까지 찾아내 서사를 만들어내는 수준의 강력한 성능을 가능케 합니다 <span class="timestamp" data-time="111">[01:51]</span>, <span class="timestamp" data-time="130">[02:10]</span>.
+        </p>
+
+        <div class="editor-note">
+            <strong>[Editor's Note: OpenClaw의 진화]</strong><br>
+            OpenClaw는 초기 'Clawdbot'이라는 이름으로 시작했으나 Anthropic과의 상표권 이슈 등으로 인해 'Moltbot'을 거쳐 현재의 이름으로 확정되었습니다. 현재 GitHub Stars는 18만 개를 넘어섰으며, 단순한 챗봇을 넘어 로컬 자원을 활용하는 '개인용 에이전트 런타임'으로 자리 잡고 있습니다. 
+            <a href="https://github.com/openclaw/openclaw" target="_blank">[GitHub 저장소 확인]</a>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. 앱의 시대가 저물고 '에이전트'가 지배하는 이유</h2>
+        <p>
+            피터는 향후 <strong>기존 앱의 80%가 사라질 것</strong>이라고 단언합니다 <span class="timestamp" data-time="643">[10:43]</span>. 그 논거는 명확합니다. 
+            현재 우리가 사용하는 대부분의 앱은 단순한 '데이터 관리 도구'에 불과하기 때문입니다.
+        </p>
+        <ul>
+            <li><strong>피트니스 앱:</strong> 에이전트가 사용자의 위치 정보(식당 방문 등)와 사진을 통해 식단을 자동으로 기록하고 운동 스케줄을 조정한다면 별도의 앱에 접속해 수동으로 입력할 필요가 없습니다 <span class="timestamp" data-time="651">[10:51]</span>.</li>
+            <li><strong>To-do 앱:</strong> 단순히 "내일 이거 알려줘"라고 말하면 에이전트가 알아서 기억하고 알림을 주는데, 데이터가 어느 앱의 데이터베이스에 저장되는지는 사용자에게 중요하지 않습니다 <span class="timestamp" data-time="679">[11:19]</span>.</li>
+        </ul>
+        <p>
+            결국 센서 데이터를 직접 다루는 특수 앱을 제외하고, 자연스러운 대화 인터페이스를 통해 데이터를 관리할 수 있는 에이전트가 모든 '기능'을 흡수하게 될 것입니다.
+        </p>
+    </section>
+
+    <section>
+        <h2>3. 봇이 인간을 고용하는 '군집 지능'의 출현</h2>
+        <p>
+            인터뷰에서는 더욱 파격적인 미래가 언급됩니다. 바로 봇과 봇 사이의 협업, 그리고 봇이 실세계의 인간을 고용하는 시나리오입니다 <span class="timestamp" data-time="181">[03:01]</span>.
+        </p>
+        <p>
+            예를 들어, 식당 예약을 위해 내 에이전트가 식당측 에이전트와 협상을 벌이거나, 디지털 세계의 에이전트가 물리적인 도움이 필요할 때 인간에게 비용을 지불하고 심부름을 시키는 형태입니다. 
+            이미 커뮤니티에서는 봇들끼리 대화하고 투표하는 <strong>Maltbook</strong>과 같은 프로젝트가 활성화되고 있습니다 <span class="timestamp" data-time="16">[00:16]</span>.
+        </p>
+
+        <div class="editor-note">
+            <strong>[Editor's Note: AI 경제의 실재화]</strong><br>
+            실제로 'RentAHuman.ai'와 같은 플랫폼을 통해 OpenClaw 에이전트들이 실세계의 인간을 고용하여 사진 촬영이나 문서 배달 등의 '물리적 작업'을 수행하게 하는 사례가 보고되고 있습니다. 이는 AI가 단순한 도구를 넘어 경제적 주체로 활동하기 시작했음을 시사합니다.
+            <a href="https://www.browseract.com/blog/openclaw-becomes-boss-ai-hiring-humans-via-rentahumanai" target="_blank">[관련 뉴스 전문]</a>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. 피터의 개발 철학: Soul.md와 창의적 해결</h2>
+        <p>
+            OpenClaw의 독특한 개성은 <strong>`soul.md`</strong>라는 파일에서 기인합니다. 피터는 AI에게 단순한 지침이 아닌 '가치관'과 '성격'을 부여했습니다 <span class="timestamp" data-time="1062">[17:42]</span>. 
+            이 파일은 모델이 사용자와 대화할 때 훨씬 자연스럽고 때로는 '건방지거나(sassy)' 유머러스하게 반응하도록 만듭니다 <span class="timestamp" data-time="514">[08:34]</span>.
+        </p>
+        <p>
+            그의 개발 방식 또한 독특합니다. 복잡한 UI 도구 대신 여러 개의 터미널 윈도우와 로컬 레포지토리 복사본을 활용하며, 
+            AI가 인간이 사용하는 <strong>CLI(명령줄 인터페이스)</strong> 도구를 직접 다루도록 교육했습니다 <span class="timestamp" data-time="1135">[18:55]</span>, <span class="timestamp" data-time="1284">[21:24]</span>. 
+            그는 AI를 위해 새로운 프로토콜을 만들기보다, 이미 검증된 Unix 철학의 도구들을 AI에게 쥐어주는 것이 가장 효율적이라고 믿습니다.
+        </p>
+    </section>
+
+    <footer>Generated by Fovea</footer>
+
+    <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                videoId: '4uzGDAoNOZc',
+                events: { 'onReady': onPlayerReady }
+            });
+        }
+
+        function onPlayerReady(event) {
+            var timestamps = document.querySelectorAll('.timestamp');
+            timestamps.forEach(function(el) {
+                el.addEventListener('click', function() {
+                    var time = this.getAttribute('data-time');
+                    if (player && player.seekTo) {
+                        player.seekTo(time, true);
+                        player.playVideo();
+                    }
+                });
+            });
+        }
+    </script>
