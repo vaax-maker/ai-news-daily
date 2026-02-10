@@ -89,6 +89,14 @@ def _render_new_format(text: str) -> str:
         # Check for **주제**: line (treat as important)
         if stripped.startswith("**주제**:") or stripped.startswith("주제:"):
             topic_text = re.sub(r"^\*?\*?주제\*?\*?:\s*", "", stripped)
+            
+            # Apply bold highlighting to topic text as well
+            def replace_bold(match):
+                content = match.group(1)
+                return _wrap_highlight(content)
+                
+            topic_text = re.sub(r"\*\*(.+?)\*\*", replace_bold, topic_text)
+            
             current_section["items"].append({"text": topic_text, "important": True})
             continue
         
