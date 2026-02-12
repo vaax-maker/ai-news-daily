@@ -326,7 +326,7 @@
     <title>퀵뷰: 메타(Meta)의 대전환</title>
     <style>
         /* vaax-theme.css */
-        :root {
+        .quickview-body {
             --primary-color: #65a30d;
             --primary-color-hover: #4d7c0f;
             --secondary-color: #475569;
@@ -354,7 +354,9 @@
             padding: 20px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
-        } .quickview-body h1 {
+        }
+
+        .quickview-body h1 {
             color: var(--text-main);
             font-size: 24px;
             margin-bottom: 10px;
@@ -392,7 +394,7 @@
             margin-bottom: 25px;
         }
 
-        .section h2 {
+        .section .quickview-body h2 {
             font-size: 18px;
             color: var(--secondary-color);
             margin-bottom: 12px;
@@ -400,12 +402,12 @@
             padding-left: 10px;
         }
 
-        ul {
+        .quickview-body ul {
             list-style-type: none;
             padding: 0;
         }
 
-        li {
+        .quickview-body li {
             margin-bottom: 8px;
             padding-left: 15px;
             position: relative;
@@ -426,20 +428,20 @@
             font-weight: 500;
         }
 
-        table {
+        .quickview-body table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
             font-size: 14px;
         }
 
-        th, td {
+        .quickview-body th , .quickview-body td {
             border: 1px solid var(--border-color);
             padding: 8px;
             text-align: center;
         }
 
-        th {
+        .quickview-body th {
             background-color: #f3f4f6;
             color: var(--secondary-color);
         }
@@ -450,7 +452,7 @@
             font-size: 14px;
         }
 
-        footer {
+        .quickview-body footer {
             margin-top: 40px;
             text-align: center;
             font-size: 12px;

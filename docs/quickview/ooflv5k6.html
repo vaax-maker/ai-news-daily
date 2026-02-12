@@ -320,7 +320,7 @@
 </style>
 <style>
         /* fovea.css - Mobile Optimized Version */
-        :root {
+        .quickview-body {
             --primary-color: #65a30d;
             --primary-color-hover: #4d7c0f;
             --secondary-color: #475569;
@@ -343,7 +343,9 @@
             padding: 40px 20px;
             word-break: keep-all;
             -webkit-font-smoothing: antialiased;
-        } .quickview-body h1 {
+        }
+
+        .quickview-body h1 {
             margin-top: 1.2em;
             margin-bottom: 0.6em;
             font-size: 2.2rem;
@@ -351,14 +353,18 @@
             border-bottom: 3px solid var(--primary-color);
             padding-bottom: 12px;
             line-height: 1.2;
-        } .quickview-body h2 {
+        }
+
+        .quickview-body h2 {
             margin-top: 2.5em;
             margin-bottom: 1.2em;
             font-size: 1.75rem;
             color: var(--secondary-color);
             border-left: 6px solid var(--primary-color);
             padding-left: 18px;
-        } .quickview-body h3 {
+        }
+
+        .quickview-body h3 {
             margin-top: 1.8em;
             font-size: 1.4rem;
             color: var(--text-main);
@@ -382,7 +388,7 @@
             flex-shrink: 0;
         }
 
-        p { margin-bottom: 1.5em; }
+        .quickview-body p { margin-bottom: 1.5em; }
 
         .meta-info {
             background: #f8fafc;
@@ -393,7 +399,7 @@
             font-size: 0.95rem;
         }
 
-        .meta-info div { margin-bottom: 8px; }
+        .meta-info .quickview-body div { margin-bottom: 8px; }
 
         .tag {
             display: inline-block;
@@ -406,7 +412,7 @@
             border: 1px solid var(--border-color);
         }
 
-        table {
+        .quickview-body table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
@@ -414,13 +420,13 @@
             display: block;
         }
 
-        th, td {
+        .quickview-body th , .quickview-body td {
             padding: 12px;
             border: 1px solid var(--border-color);
             text-align: left;
         }
 
-        th { background-color: #f8fafc; }
+        .quickview-body th { background-color: #f8fafc; }
 
         .editor-note {
             background-color: #f0fdf4;
@@ -437,7 +443,7 @@
             display: block;
         }
 
-        footer {
+        .quickview-body footer {
             margin-top: 50px;
             padding-top: 20px;
             border-top: 1px solid var(--border-color);
@@ -447,7 +453,9 @@
         }
 
         @media (max-width: 768px) {
-            .quickview-body { padding: 20px 16px; } .quickview-body h1 { font-size: 1.65rem; } .quickview-body h2 { font-size: 1.35rem; }
+            .quickview-body { padding: 20px 16px; }
+            .quickview-body h1 { font-size: 1.65rem; }
+            .quickview-body h2 { font-size: 1.35rem; }
         }
     </style>
 

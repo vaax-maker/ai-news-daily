@@ -326,7 +326,7 @@
     <title>CES 2026: 현대차 x 구글 x 보스턴 다이내믹스 '뉴 아틀라스' 공개</title>
     <style>
         /* vaax-theme.css - 외부 제공용 */
-        :root {
+        .quickview-body {
             --primary-color: #65a30d;
             --primary-color-hover: #4d7c0f;
             --secondary-color: #475569;
@@ -348,7 +348,9 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-        } .quickview-body h1 {
+        }
+
+        .quickview-body h1 {
             color: var(--text-main);
             font-size: 24px;
             border-bottom: 2px solid var(--primary-color);
@@ -408,13 +410,13 @@
             border-radius: 2px;
         }
 
-        ul {
+        .quickview-body ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
 
-        li {
+        .quickview-body li {
             margin-bottom: 12px;
             padding-left: 15px;
             position: relative;
@@ -457,7 +459,7 @@
             color: var(--text-main);
         }
 
-        footer {
+        .quickview-body footer {
             margin-top: 60px;
             text-align: center;
             font-size: 14px;
@@ -473,13 +475,13 @@
             font-size: 14px;
         }
 
-        .comparison-table th, .comparison-table td {
+        .comparison-table .quickview-body th , .comparison-table .quickview-body td {
             border: 1px solid var(--border-color);
             padding: 8px;
             text-align: center;
         }
 
-        .comparison-table th {
+        .comparison-table .quickview-body th {
             background-color: #f9fafb;
             color: var(--secondary-color);
         }

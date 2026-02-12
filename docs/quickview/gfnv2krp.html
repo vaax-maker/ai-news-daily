@@ -329,16 +329,16 @@
     line-height: 1.7;
     word-break: keep-all;
 }
-img, video, iframe { 
+.quickview-body img , video, iframe { 
     max-width: 100%; 
     height: auto; 
 }
-table { 
+.quickview-body table { 
     width: 100%; 
     display: block; 
     overflow-x: auto; 
 }
-pre, code { 
+.quickview-body pre , .quickview-body code { 
     overflow-x: auto; 
     white-space: pre-wrap; 
     word-wrap: break-word;
@@ -347,13 +347,16 @@ pre, code {
     .quickview-body { 
         padding: 0.75rem; 
         font-size: 15px; 
-    } .quickview-body h1 { font-size: 1.5rem; } .quickview-body h2 { font-size: 1.25rem; } .quickview-body h3 { font-size: 1.1rem; }
+    }
+    .quickview-body h1 { font-size: 1.5rem; }
+    .quickview-body h2 { font-size: 1.25rem; }
+    .quickview-body h3 { font-size: 1.1rem; }
 }
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
         /* fovea-theme.css - Mobile Optimized Version */
-        :root {
+        .quickview-body {
             --primary-color: #65a30d;
             --primary-color-hover: #4d7c0f;
             --secondary-color: #475569;
@@ -379,14 +382,18 @@ pre, code {
             padding: 40px 20px;
             word-break: keep-all;
             -webkit-font-smoothing: antialiased;
-        } .quickview-body h1 {
+        }
+
+        .quickview-body h1 {
             margin-top: 1.2em;
             margin-bottom: 0.6em;
             font-size: 2.2rem;
             letter-spacing: -0.02em;
             border-bottom: 3px solid var(--primary-color);
             padding-bottom: 12px;
-        } .quickview-body h2 {
+        }
+
+        .quickview-body h2 {
             margin-top: 2.5em;
             margin-bottom: 1.2em;
             font-size: 1.75rem;
@@ -462,7 +469,7 @@ pre, code {
             font-size: 0.95rem;
         }
 
-        footer {
+        .quickview-body footer {
             margin-top: 80px;
             padding-top: 20px;
             border-top: 1px solid var(--border-color);
@@ -472,7 +479,9 @@ pre, code {
         }
 
         @media (max-width: 768px) {
-            .quickview-body { padding: 20px 16px; } .quickview-body h1 { font-size: 1.65rem; } .quickview-body h2 { font-size: 1.35rem; }
+            .quickview-body { padding: 20px 16px; }
+            .quickview-body h1 { font-size: 1.65rem; }
+            .quickview-body h2 { font-size: 1.35rem; }
         }
     </style>
 

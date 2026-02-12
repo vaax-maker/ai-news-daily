@@ -112,14 +112,47 @@ def scope_injected_styles(html: str) -> str:
     """
     import re
     
+    # Global element selectors that should be scoped to .quickview-body
+    GLOBAL_TAGS = [
+        'body', 'html', 'main',
+        'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+        'p', 'a', 'span', 'em', 'strong', 'b', 'i', 'u',
+        'ul', 'ol', 'li',
+        'table', 'thead', 'tbody', 'tfoot', 'tr', 'th', 'td',
+        'blockquote', 'pre', 'code',
+        'img', 'figure', 'figcaption',
+        'section', 'article', 'nav', 'header', 'footer', 'aside',
+        'div', 'hr', 'br',
+    ]
+    
     def replace_selectors(match):
         style_content = match.group(1)
-        # Replace 'body {' with '.quickview-body {'
-        style_content = re.sub(r'body\s*\{', '.quickview-body {', style_content, flags=re.IGNORECASE)
-        # Replace 'html {' with '.quickview-body {' (or just ignore/remove html rules if they set font-size)
-        style_content = re.sub(r'html\s*\{', '.quickview-body {', style_content, flags=re.IGNORECASE)
-        # Replace 'h1 {' with '.quickview-body h1 {'
-        style_content = re.sub(r'(^|\})\s*h([1-6])\s*\{', r'\1 .quickview-body h\2 {', style_content, flags=re.IGNORECASE)
+        
+        # Replace standalone tag selectors: "tag {" → ".quickview-body tag {"
+        # But skip when already scoped (e.g., ".quickview-body p {")
+        # and skip selectors that are part of class/id (e.g., ".tag-name {")
+        for tag in GLOBAL_TAGS:
+            if tag in ('body', 'html'):
+                # body/html → replace with .quickview-body itself
+                style_content = re.sub(
+                    r'(?<![.\-#\w])' + tag + r'\s*\{',
+                    '.quickview-body {',
+                    style_content, flags=re.IGNORECASE
+                )
+            else:
+                # Other tags → prepend .quickview-body
+                style_content = re.sub(
+                    r'(?<![.\-#\w])' + tag + r'\s*([,\{])',
+                    r'.quickview-body ' + tag + r' \1',
+                    style_content, flags=re.IGNORECASE
+                )
+        
+        # Also scope :root { to .quickview-body {
+        style_content = re.sub(
+            r':root\s*\{',
+            '.quickview-body {',
+            style_content, flags=re.IGNORECASE
+        )
         
         return f'<style>{style_content}</style>'
 

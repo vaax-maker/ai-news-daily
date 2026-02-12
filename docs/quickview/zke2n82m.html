@@ -320,7 +320,7 @@
 </style>
 <style>
         /* fovea.css - Mobile Optimized Version */
-        :root {
+        .quickview-body {
             --primary-color: #65a30d;
             --primary-color-hover: #4d7c0f;
             --secondary-color: #475569;
@@ -343,21 +343,27 @@
             padding: 40px 20px;
             word-break: keep-all;
             -webkit-font-smoothing: antialiased;
-        } .quickview-body h1 {
+        }
+
+        .quickview-body h1 {
             margin-top: 1.2em;
             margin-bottom: 0.6em;
             font-size: 2.2rem;
             letter-spacing: -0.02em;
             border-bottom: 3px solid var(--primary-color);
             padding-bottom: 12px;
-        } .quickview-body h2 {
+        }
+
+        .quickview-body h2 {
             margin-top: 2.5em;
             margin-bottom: 1.2em;
             font-size: 1.75rem;
             color: var(--secondary-color);
             border-left: 6px solid var(--primary-color);
             padding-left: 18px;
-        } .quickview-body h3 {
+        }
+
+        .quickview-body h3 {
             margin-top: 1.8em;
             font-size: 1.4rem;
             color: var(--text-main);
@@ -421,9 +427,9 @@
             font-size: 0.95rem;
         }
 
-        .editor-note strong { color: #854d0e; }
+        .editor-note .quickview-body strong { color: #854d0e; }
 
-        footer {
+        .quickview-body footer {
             margin-top: 50px;
             padding-top: 20px;
             border-top: 1px solid var(--border-color);
@@ -433,7 +439,9 @@
         }
 
         @media (max-width: 768px) {
-            .quickview-body { padding: 20px 16px; } .quickview-body h1 { font-size: 1.65rem; } .quickview-body h2 { font-size: 1.35rem; }
+            .quickview-body { padding: 20px 16px; }
+            .quickview-body h1 { font-size: 1.65rem; }
+            .quickview-body h2 { font-size: 1.35rem; }
             .meta-info { padding: 12px; font-size: 0.85rem; }
         }
     </style>

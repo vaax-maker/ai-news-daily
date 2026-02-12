@@ -326,7 +326,7 @@
     <title>AI 답변 퀄리티 10배 높이는 컨텍스트 엔지니어링</title>
     <style>
         /* vaax-theme.css - 외부 제공용 스타일 준용 */
-        :root {
+        .quickview-body {
             --primary-color: #65a30d;
             --primary-color-hover: #4d7c0f;
             --secondary-color: #475569;
@@ -353,11 +353,13 @@
             padding: 40px 20px;
         }
 
-        header {
+        .quickview-body header {
             margin-bottom: 40px;
             border-bottom: 2px solid var(--primary-color);
             padding-bottom: 20px;
-        } .quickview-body h1 {
+        }
+
+        .quickview-body h1 {
             font-size: 2.2rem;
             margin: 0 0 10px 0;
             color: var(--text-main);
@@ -378,9 +380,11 @@
             color: var(--text-main);
         }
 
-        section {
+        .quickview-body section {
             margin-bottom: 40px;
-        } .quickview-body h2 {
+        }
+
+        .quickview-body h2 {
             font-size: 1.5rem;
             color: var(--secondary-color);
             border-left: 5px solid var(--primary-color);
@@ -388,7 +392,7 @@
             margin-bottom: 20px;
         }
 
-        p {
+        .quickview-body p {
             margin-bottom: 16px;
             color: var(--text-muted);
         }
@@ -485,7 +489,7 @@
             font-weight: 500;
         }
 
-        footer {
+        .quickview-body footer {
             text-align: center;
             margin-top: 60px;
             padding-top: 20px;

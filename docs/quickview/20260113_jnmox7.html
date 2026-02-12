@@ -326,7 +326,7 @@
     <title>구글 Opal 사용법: 코딩 없이 나만의 AI 앱 만들기 (통합 가이드)</title>
     <style>
         /* vaax-theme.css - 외부 제공용 스타일 적용 */
-        :root {
+        .quickview-body {
             --primary-color: #65a30d;
             --primary-color-hover: #4d7c0f;
             --secondary-color: #475569;
@@ -348,21 +348,25 @@
             background-color: var(--background-color);
         }
 
-        p {
+        .quickview-body p {
             margin-bottom: 1.5em;
             color: #374151;
         }
 
-        h1, h2, h3 {
+        .quickview-body h1 , .quickview-body h2 , .quickview-body h3 {
             color: var(--text-main);
             margin-top: 2em;
             margin-bottom: 0.8em;
-        } .quickview-body h1 {
+        }
+
+        .quickview-body h1 {
             font-size: 2.2rem;
             border-bottom: 3px solid var(--primary-color);
             padding-bottom: 15px;
             margin-top: 1em;
-        } .quickview-body h2 {
+        }
+
+        .quickview-body h2 {
             font-size: 1.5rem;
             color: var(--primary-color);
             border-left: 5px solid var(--primary-color);
@@ -370,7 +374,9 @@
             background-color: #f7fee7;
             padding-top: 5px;
             padding-bottom: 5px;
-        } .quickview-body h3 {
+        }
+
+        .quickview-body h3 {
             font-size: 1.2rem;
             font-weight: 600;
             margin-top: 1.5em;
@@ -388,22 +394,22 @@
             font-size: 0.95rem;
         }
 
-        .ref-links strong {
+        .ref-links .quickview-body strong {
             display: block;
             margin-bottom: 8px;
             color: #166534;
         }
 
-        .ref-links ul {
+        .ref-links .quickview-body ul {
             margin: 0;
             padding-left: 20px;
         }
 
-        .ref-links li {
+        .ref-links .quickview-body li {
             margin-bottom: 5px;
         }
 
-        .ref-links a {
+        .ref-links .quickview-body a {
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 600;
@@ -515,7 +521,7 @@
             color: #4b5563;
         }
         
-        .detail-list li {
+        .detail-list .quickview-body li {
             margin-bottom: 8px;
         }
 
@@ -547,7 +553,7 @@
             color: #92400e;
         }
 
-        footer {
+        .quickview-body footer {
             text-align: center;
             margin-top: 2em;
             padding: 2em 0;

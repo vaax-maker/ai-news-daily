@@ -320,7 +320,7 @@
 </style>
 <style>
         /* fovea-theme.css 내용을 기반으로 한 스타일 적용 */
-        :root {
+        .quickview-body {
             --primary-color: #65a30d;
             --primary-color-hover: #4d7c0f;
             --secondary-color: #475569;
@@ -343,7 +343,10 @@
             padding: 40px 20px;
             word-break: keep-all;
             -webkit-font-smoothing: antialiased;
-        } .quickview-body h1 { margin-top: 1.2em; margin-bottom: 0.6em; font-size: 2.2rem; letter-spacing: -0.02em; border-bottom: 3px solid var(--primary-color); padding-bottom: 12px; } .quickview-body h2 { margin-top: 2.5em; margin-bottom: 1.2em; font-size: 1.75rem; color: var(--secondary-color); border-left: 6px solid var(--primary-color); padding-left: 18px; }
+        }
+
+        .quickview-body h1 { margin-top: 1.2em; margin-bottom: 0.6em; font-size: 2.2rem; letter-spacing: -0.02em; border-bottom: 3px solid var(--primary-color); padding-bottom: 12px; }
+        .quickview-body h2 { margin-top: 2.5em; margin-bottom: 1.2em; font-size: 1.75rem; color: var(--secondary-color); border-left: 6px solid var(--primary-color); padding-left: 18px; }
         
         .meta-info {
             background: #f9fafb;
@@ -352,7 +355,7 @@
             border: 1px solid var(--border-color);
             margin-bottom: 30px;
         }
-        .meta-info div { margin-bottom: 8px; }
+        .meta-info .quickview-body div { margin-bottom: 8px; }
         .tag {
             display: inline-block;
             background-color: #f3f4f6;
@@ -393,9 +396,9 @@
             margin: 30px 0;
             border-radius: 0 8px 8px 0;
         }
-        .editor-note h4 { margin-top: 0; color: #166534; }
+        .editor-note .quickview-body h4 { margin-top: 0; color: #166534; }
 
-        footer {
+        .quickview-body footer {
             margin-top: 80px;
             padding-top: 20px;
             border-top: 1px solid var(--border-color);
@@ -404,7 +407,9 @@
         }
 
         @media (max-width: 768px) {
-            .quickview-body { padding: 20px 16px; } .quickview-body h1 { font-size: 1.65rem; } .quickview-body h2 { font-size: 1.35rem; }
+            .quickview-body { padding: 20px 16px; }
+            .quickview-body h1 { font-size: 1.65rem; }
+            .quickview-body h2 { font-size: 1.35rem; }
         }
     </style>
 

@@ -326,7 +326,7 @@
     <title>조코딩 AI 뉴스 요약 (2026.01.05)</title>
     <style>
         /* vaax-theme.css - 외부 제공용 */
-        :root {
+        .quickview-body {
             --primary-color: #65a30d;
             --primary-color-hover: #4d7c0f;
             --secondary-color: #475569;
@@ -355,7 +355,9 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
-        } .quickview-body h1 {
+        }
+
+        .quickview-body h1 {
             color: var(--primary-color);
             font-size: 24px;
             margin-bottom: 10px;
@@ -401,13 +403,13 @@
             padding-left: 10px;
         }
 
-        ul {
+        .quickview-body ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
 
-        li {
+        .quickview-body li {
             margin-bottom: 8px;
             padding-left: 15px;
             position: relative;
@@ -445,7 +447,7 @@
             margin-bottom: 8px;
         }
 
-        footer {
+        .quickview-body footer {
             text-align: center;
             margin-top: 40px;
             font-size: 14px;

@@ -320,7 +320,7 @@
 </style>
 <!DOCTYPE html>
 
-<html lang="ko"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Grok 4.1로 무제한 길이 AI 애니메이션 만들기</title> <style> /* vaax-theme.css 준용 */ :root { --primary-color: #65a30d; --primary-color-hover: #4d7c0f; --secondary-color: #475569; --background-color: #ffffff; --card-bg: #ffffff; --text-main: #111827; --text-muted: #4b5563; --border-color: #d1d5db; --line-gray: #9ca3af; }
+<html lang="ko"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Grok 4.1로 무제한 길이 AI 애니메이션 만들기</title> <style> /* vaax-theme.css 준용 */ .quickview-body { --primary-color: #65a30d; --primary-color-hover: #4d7c0f; --secondary-color: #475569; --background-color: #ffffff; --card-bg: #ffffff; --text-main: #111827; --text-muted: #4b5563; --border-color: #d1d5db; --line-gray: #9ca3af; }
 
     .quickview-body {
         font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
@@ -338,7 +338,9 @@
         padding: 40px;
         border-radius: 12px;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    } .quickview-body h1 {
+    }
+
+    .quickview-body h1 {
         font-size: 2.2rem;
         font-weight: 800;
         margin-bottom: 10px;
@@ -452,7 +454,7 @@
         margin-bottom: 8px;
     }
 
-    footer {
+    .quickview-body footer {
         text-align: center;
         margin-top: 60px;
         color: var(--text-muted);
@@ -460,12 +462,12 @@
         font-weight: 500;
     }
 
-    ul {
+    .quickview-body ul {
         padding-left: 20px;
         margin: 0;
     }
     
-    li {
+    .quickview-body li {
         margin-bottom: 8px;
     }
 </style>

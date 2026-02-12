@@ -325,7 +325,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claude Code Creator's Workflow Tips</title>
     <style>
-        :root {
+        .quickview-body {
             --primary-color: #2563eb; /* Professional Blue */
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
@@ -355,7 +355,7 @@
         }
 
         /* Header Area */
-        header {
+        .quickview-body header {
             text-align: center;
             margin-bottom: 40px;
             padding: 40px 20px;
@@ -363,7 +363,9 @@
             border-radius: 12px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--border-color);
-        } .quickview-body h1 {
+        }
+
+        .quickview-body h1 {
             font-size: 2rem;
             margin-bottom: 10px;
             color: #0f172a;
@@ -426,7 +428,9 @@
             justify-content: center;
             margin-right: 12px;
             flex-shrink: 0;
-        } .quickview-body h2 {
+        }
+
+        .quickview-body h2 {
             font-size: 1.15rem;
             font-weight: 700;
             line-height: 1.4;
@@ -467,7 +471,7 @@
         }
 
         /* Footer */
-        footer {
+        .quickview-body footer {
             text-align: center;
             margin-top: 50px;
             color: #94a3b8;
@@ -477,7 +481,7 @@
 
         /* Responsive Tweaks */
         @media (max-width: 600px) {
-            h1 { font-size: 1.5rem; }
+            .quickview-body h1 { font-size: 1.5rem; }
             .grid { grid-template-columns: 1fr; }
         }
     </style>
