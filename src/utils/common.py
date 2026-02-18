@@ -439,7 +439,7 @@ def trim_summary_lines(summary: str, min_lines: int = 3, max_lines: int = 5) -> 
     return "\n".join(trimmed)
 
 
-def shorten_korean_title(title: str, max_length: int = 40) -> str:
+def shorten_korean_title(title: str, max_length: int = 60) -> str:
     """Translate English titles to Korean and trim them to under 40 chars."""
     translated = translate_title_to_korean(title)
     translated = translated or title

@@ -8,6 +8,7 @@ categories:
       - https://techcrunch.com/category/artificial-intelligence/feed/
       - https://www.technologyreview.com/topic/artificial-intelligence/feed/
       - http://www.aitimes.kr/rss/allArticle.xml
+      - https://news.hada.io/rss/news  # GeekNews
       # Primary YouTube (조코딩)
       - https://www.youtube.com/feeds/videos.xml?channel_id=UCQNE2JmbasNYbjGAcuBiRRg  # 조코딩 Jocoding
     fallback_feeds:

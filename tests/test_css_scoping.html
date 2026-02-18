@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Scoping Test</title>
+</head>
+
+<body>
+    <h1>CSS Scoping Test</h1>
+    <div id="logs"></div>
+
+    <script>
+        function log(msg, type = 'info') {
+            const div = document.createElement('div');
+            div.textContent = msg;
+            div.style.color = type === 'error' ? 'red' : (type === 'success' ? 'green' : 'black');
+            document.getElementById('logs').appendChild(div);
+            console.log(msg);
+        }
+
+        // --- PASTE LOGIC START ---
+        function scopeCss(cssText, prefix) {
+            const cleanCss = cssText.replace(/\/\*[\s\S]*?\*\//g, '');
+
+            try {
+                const frame = document.createElement('iframe');
+                frame.style.display = 'none';
+                document.body.appendChild(frame);
+                const doc = frame.contentDocument;
+                const style = doc.createElement('style');
+                style.textContent = cssText;
+                doc.head.appendChild(style);
+
+                const sheet = style.sheet;
+                let scoped = '';
+
+                const scopeSelectorText = (selectorText) => {
+                    return selectorText.split(',').map(s => {
+                        s = s.trim();
+                        if (!s) return '';
+                        if (s.toLowerCase() === 'body') return prefix;
+                        if (s.toLowerCase() === 'html') return prefix;
+                        if (s.toLowerCase().startsWith('body ')) return prefix + s.substring(4);
+                        return `${prefix} ${s}`;
+                    }).join(', ');
+                };
+
+                const processRules = (rules) => {
+                    let css = '';
+                    for (let i = 0; i < rules.length; i++) {
+                        const rule = rules[i];
+                        if (rule.type === 1) { // STYLE_RULE
+                            css += `${scopeSelectorText(rule.selectorText)} { ${rule.style.cssText} }\n`;
+                        } else if (rule.type === 4) { // MEDIA_RULE
+                            css += `@media ${rule.conditionText} {\n${processRules(rule.cssRules)}\n}\n`;
+                        } else {
+                            css += rule.cssText + '\n';
+                        }
+                    }
+                    return css;
+                };
+
+                scoped = processRules(sheet.cssRules);
+                document.body.removeChild(frame);
+                return scoped;
+
+            } catch (e) {
+                return cssText;
+            }
+        }
+        // --- PASTE LOGIC END ---
+
+        function runTest() {
+            const prefix = '.quickview-body';
+            const tests = [
+                {
+                    name: 'Simple Selector',
+                    input: 'p { color: red; }',
+                    expected: '.quickview-body p'
+                },
+                {
+                    name: 'Body Selector',
+                    input: 'body { margin: 0; }',
+                    expected: '.quickview-body'
+                },
+                {
+                    name: 'Multiple Selectors',
+                    input: 'h1, h2 { font-weight: bold; }',
+                    expected: '.quickview-body h1, .quickview-body h2'
+                },
+                {
+                    name: 'Media Query',
+                    input: '@media (max-width: 600px) { body { font-size: 14px; } }',
+                    expected: '@media (max-width: 600px) {\n.quickview-body { font-size: 14px; }\n}'
+                }
+            ];
+
+            let allPassed = true;
+
+            tests.forEach(test => {
+                const result = scopeCss(test.input, prefix);
+                // Normalize spaces for comparison
+                const normResult = result.replace(/\s+/g, ' ').trim();
+                const normExpected = test.expected.replace(/\s+/g, ' ').trim();
+
+                // Check if expected selector exists in result
+                // (Exact match is hard due to browser CSS serializing differences)
+
+                // Better check: check if the selector structure is correct
+                let passed = false;
+                if (test.expected.includes('@media')) {
+                    passed = normResult.includes('.quickview-body { font-size: 14px; }');
+                } else {
+                    // Check if it starts with the expected selector
+                    // The browser might reorder "h1, h2" to "h1, h2" or split them
+                    passed = normResult.includes(test.expected) || normResult.includes(test.expected.split(', ').reverse().join(', '));
+                    // Simple check: does it contain the scoped selector?
+                    // result: ".quickview-body p { color: red; }"
+                    // expected: ".quickview-body p"
+                    if (normResult.includes(test.expected + ' {')) passed = true;
+                    if (test.name === 'Body Selector' && normResult.includes('.quickview-body {')) passed = true;
+                }
+
+                if (passed) {
+                    log(`[PASS] ${test.name}`, 'success');
+                } else {
+                    log(`[FAIL] ${test.name}`, 'error');
+                    log(`Input: ${test.input}`);
+                    log(`Output: ${result}`);
+                    log(`Expected (contains): ${test.expected}`);
+                    allPassed = false;
+                }
+            });
+
+            if (allPassed) {
+                log('ALL TESTS PASSED', 'success');
+            } else {
+                log('SOME TESTS FAILED', 'error');
+            }
+        }
+
+        window.onload = runTest;
+    </script>
+</body>
+
+</html>
