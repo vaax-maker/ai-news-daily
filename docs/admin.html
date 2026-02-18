@@ -796,7 +796,7 @@
     2. 각 포인트는 "• "로 시작
     3. 각 포인트 사이 빈 줄 1개
     4. ⚠️ 전체 요약문 ${maxChars}자 이내 (엄수)
-    5. 요약문만 출력 (제목, 서론 없이)
+    5. 요약문만 출력 (제목, 서론, "알겠습니다" 등의 대화체 절대 금지)
     
     제목: ${title}
     본문: ${text}`;
@@ -811,13 +811,42 @@
                         model: 'gpt-4o-mini',
                         messages: [{ role: 'user', content: prompt }],
                         temperature: 0.2,
-                        max_tokens: 800  // 한국어는 글자당 2~4토큰 필요, 300자 요약을 위해 충분한 토큰 할당
+                        max_tokens: 800
                     })
                 });
 
                 const data = await response.json();
                 if (data.choices && data.choices[0]?.message?.content) {
-                    return data.choices[0].message.content.trim();
+                    let content = data.choices[0].message.content.trim();
+
+                    // --- Parsing Logic (Mirroring Python Backend) ---
+
+                    // 1. Remove <think> tags
+                    content = content.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+
+                    // 2. Remove conversational prefixes (Okay, Here is...)
+                    const structureStartRegex = /(?:^|\n)(?:•|\[|#|\*)/;
+                    const match = content.match(structureStartRegex);
+
+                    if (match) {
+                        // Keep everything from the first bullet or structure marker
+                        content = content.substring(match.index).trim();
+                    } else {
+                        // Fallback: strip common English conversational starts
+                        const prefixes = [
+                            /^Okay,.*?(\n|$)/i,
+                            /^Here is.*?(\n|$)/i,
+                            /^Sure,.*?(\n|$)/i,
+                            /^I have.*?(\n|$)/i,
+                            /^Let me.*?(\n|$)/i,
+                            /^I will.*?(\n|$)/i
+                        ];
+                        prefixes.forEach(prefix => {
+                            content = content.replace(prefix, '').trim();
+                        });
+                    }
+
+                    return content;
                 }
                 throw new Error('Failed to generate summary');
             }

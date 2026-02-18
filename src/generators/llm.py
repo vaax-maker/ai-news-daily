@@ -394,17 +394,70 @@ def _summarize_with_grok(prompt: str) -> str:
 
 def _parse_summary_response(response: str, original_title: str) -> dict:
     """Parse LLM response to extract title and summary."""
-    # Remove any <think> tags
+    # 1. Remove <think> tags (DeepSeek style)
     response = re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL)
     
-    # Extract title
+    # 2. Remove common "Internal Monologue" / "Reasoning" patterns
+    # These often start with "Okay,", "Here is", "Sure,", "I will", etc.
+    # We look for the FIRST occurrence of a structured header like "## 1." or "**제목**"
+    # and discard everything before it IF there is a significant amount of text preceding it.
+    
+    # regex for start of structured content
+    structure_start_pattern = r'(?:\*\*제목\*\*|##\s*1\.|\[핵심\s*내용\])'
+    match = re.search(structure_start_pattern, response)
+    
+    if match:
+        # If we found a structure start, keep everything from there onwards
+        # But check if there was a title line right before it that didn't use **제목** marker
+        # (Sometimes models just output "Title: ...\n\n## 1. ...")
+        start_index = match.start()
+        
+        # Look for a potential title line immediately preceding the structure
+        # (e.g. "Title: ... \n\n")
+        preceding_text = response[:start_index].strip()
+        lines = preceding_text.split('\n')
+        if lines and len(lines[-1]) < 100 and ('제목' in lines[-1] or 'Title' in lines[-1]):
+             # If the last line looks like a title, keep it.
+             # But usually our prompt enforces **제목** format, so we trust the match mostly.
+             pass
+        
+        # Clean up the pre-structure rubbish
+        response = response[start_index:]
+    else:
+        # Fallback: if no structure found, try to strip common conversational prefixes
+        conversational_prefixes = [
+            r'^Okay,.*?(\n|$)',
+            r'^Here is.*?(\n|$)',
+            r'^Sure,.*?(\n|$)',
+            r'^I have.*?(\n|$)',
+            r'^Let me.*?(\n|$)',
+            r'^I will.*?(\n|$)',
+            r'^To summarize.*?(\n|$)'
+        ]
+        for prefix in conversational_prefixes:
+            response = re.sub(prefix, '', response, flags=re.IGNORECASE | re.MULTILINE).strip()
+
+    # 3. Extract title
+    # Look for **제목**: ...
     title_match = re.search(r'\*\*제목\*\*:\s*(.+?)(?:\n|$)', response)
-    new_title = title_match.group(1).strip() if title_match else original_title
+    if title_match:
+        new_title = title_match.group(1).strip()
+        # Remove the title line from summary
+        summary = re.sub(r'\*\*제목\*\*:\s*.+?\n', '', response, count=1).strip()
+    else:
+        # If no **제목** tag, check if the first line looks like a title (short, contains keyword)
+        lines = response.split('\n')
+        first_line = lines[0].strip()
+        if len(first_line) < 60 and not first_line.startswith('#'):
+             new_title = first_line
+             summary = "\n".join(lines[1:]).strip()
+        else:
+             new_title = original_title
+             summary = response.strip()
     
-    # Remove title line from summary
-    summary = re.sub(r'\*\*제목\*\*:\s*.+?\n', '', response, count=1).strip()
-    
-    # Ensure title doesn't end with '...'
+    # 4. Cleanup Title
+    # Ensure title doesn't end with '...' or have markdown bold formatting leftovers
+    new_title = new_title.replace('**', '').strip()
     if new_title.endswith('...'):
         new_title = new_title.rstrip('.') + '.'
     
