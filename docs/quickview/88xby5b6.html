@@ -1,0 +1,286 @@
+<style>
+        /* fovea.css - Mobile Optimized Version */
+        :root {
+            --primary-color: #65a30d;
+            --primary-color-hover: #4d7c0f;
+            --secondary-color: #475569;
+            --background-color: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border-color: #d1d5db;
+            --touch-highlight: rgba(101, 163, 13, 0.1);
+        }
+
+        html { font-size: 16px; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.4;
+            color: var(--text-main);
+            background-color: var(--background-color);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            word-break: keep-all;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1 {
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+            font-size: 2.2rem;
+            letter-spacing: -0.02em;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 12px;
+        }
+
+        h2 {
+            margin-top: 2.5em;
+            margin-bottom: 1.2em;
+            font-size: 1.75rem;
+            color: var(--secondary-color);
+            border-left: 6px solid var(--primary-color);
+            padding-left: 18px;
+        }
+
+        h3 {
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+        }
+
+        .timestamp {
+            color: var(--primary-color);
+            font-weight: 700;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            display: inline-block;
+            text-decoration: underline;
+        }
+
+        .timestamp:active { background-color: var(--touch-highlight); }
+
+        .tag {
+            display: inline-block;
+            background-color: #f3f4f6;
+            color: #374151;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-right: 6px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin-bottom: 30px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
+
+        .meta-info {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .editor-note {
+            background-color: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+
+        .editor-note strong { color: #166534; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th { background-color: #f8fafc; }
+
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 20px 16px; }
+            h1 { font-size: 1.65rem; }
+            h2 { font-size: 1.35rem; }
+            .meta-info { padding: 12px; font-size: 0.85rem; }
+        }
+    </style>
+
+    <h1>Gemini 3.1 Pro 출시 및 2026년 2월 AI 기술 대격변 리포트</h1>
+
+    <div class="meta-info">
+        <div><strong>Original Date:</strong> 2026-02-22</div>
+        <div><strong>Report Date:</strong> 2026-02-23</div>
+        <div><strong>Source:</strong> <a href="http://www.youtube.com/watch?v=DieMeHC2k6Q" target="_blank">조코딩 IT 뉴스</a></div>
+        <div class="tag-container" style="margin-top:10px;">
+            <span class="tag">#Gemini3.1Pro</span> <span class="tag">#Sonnet4.6</span> <span class="tag">#Grok4.2</span> <span class="tag">#TaalasHC1</span> <span class="tag">#AI에이전트</span>
+        </div>
+    </div>
+
+    <div class="video-container">
+        <div id="player"></div>
+    </div>
+
+    <h2>1. 구글 Gemini 3.1 Pro: 종합 지능 1위 탈환</h2>
+    <p>
+        구글이 최신 모델인 <strong>Gemini 3.1 Pro</strong>를 출시하며 다시 한번 소타(SOTA) 모델의 자리에 올랐습니다 <span class="timestamp" data-time="194">[03:14]</span>. 
+        가장 놀라운 변화는 벤치마크 점수의 비약적인 상승입니다. ARC-AGI-2 벤치마크에서 기존 31.1점에서 77.1점으로 약 2.5배 가량 성능이 폭발적으로 향상되었습니다 <span class="timestamp" data-time="233">[03:53]</span>. 
+        이 점수는 기존 1위였던 Claude Opus 4.6(68.8%)이나 GPT-5.2(52.9%)를 상회하는 압도적인 수치입니다.
+    </p>
+
+    <h3>주요 특징 및 활용 사례</h3>
+    <ul>
+        <li><strong>이미지 및 SVG 생성:</strong> SVG 애니메이션 생성 능력이 탁월하여, 복잡한 벡터 애니메이션이나 CSS 디자인 코드를 높은 퀄리티로 출력합니다 <span class="timestamp" data-time="404">[06:44]</span>.</li>
+        <li><strong>수능 만점 기록:</strong> 한국 2026학년도 수능 테스트에서 탐구 과목 포함 시 최초로 만점 수준에 도달하는 등 한국어 추론 능력이 극대화되었습니다 <span class="timestamp" data-time="449">[07:29]</span>.</li>
+        <li><strong>멀티모달 통합:</strong> 사진 속 상황을 인식하여 해당 분위기에 맞는 음악을 작곡하거나(Lyria 3 연동), 텍스트 프롬프트 하나로 런칭 비디오용 애니메이션을 생성합니다 <span class="timestamp" data-time="780">[13:00]</span>.</li>
+    </ul>
+
+    <div class="editor-note">
+        <strong>[Editor's Note]</strong> 
+        Google DeepMind의 공식 모델 카드에 따르면, Gemini 3.1 Pro는 안전성(Safety)과 톤 조절 능력이 이전 모델 대비 크게 개선되었으며, 특히 연구 수준의 물리 추론 벤치마크인 CritPt에서 차순위 모델을 5포인트 차로 따돌렸습니다. 
+        <a href="https://deepmind.google/models/model-cards/gemini-3-1-pro/" target="_blank">(출처: Google DeepMind)</a>
+    </div>
+
+    <h2>2. Anthropic의 반격: Claude Sonnet 4.6 &amp; 보안 혁신</h2>
+    <p>
+        Anthropic은 더욱 가볍고 강력해진 <strong>Claude Sonnet 4.6</strong>을 출시했습니다 <span class="timestamp" data-time="2408">[40:08]</span>. 
+        Sonnet 4.6은 이전 플래그십 모델인 Opus 4.5급의 성능을 내면서도 비용은 5배 저렴하며, 특정 코딩 벤치마크(SWE-bench Verified)에서는 최상위권인 79.6%를 기록했습니다.
+    </p>
+
+    <h3>보안 혁명: Claude Code Security</h3>
+    <p>
+        단순 코딩을 넘어 <strong>Claude Code Security</strong> 기능을 프리뷰로 공개했습니다 <span class="timestamp" data-time="2797">[46:37]</span>. 
+        이 도구는 단순한 패턴 매칭 방식의 기존 보안 스캐너와 달리, 인간 보안 연구원처럼 코드의 로직과 데이터 흐름을 분석하여 취약점을 찾아내고 패치까지 제안합니다. 
+        이 소식이 전해지자마자 사이버 보안 대장주인 CrowdStrike, Cloudflare 등의 주가가 일제히 폭락하며 시장에 큰 충격을 주었습니다 <span class="timestamp" data-time="2956">[49:16]</span>.
+    </p>
+
+    <div class="editor-note">
+        <strong>[Editor's Note]</strong> 
+        실제로 Claude Opus 4.6은 오픈소스 코드베이스에서 수십 년간 발견되지 않았던 500개 이상의 취약점을 찾아내 검증을 마쳤습니다. 이는 AI가 보안의 '공격'뿐만 아니라 '방어' 측면에서도 핵심적인 역할을 하게 되었음을 시사합니다. 
+        <a href="https://www.anthropic.com/news/claude-code-security" target="_blank">(출처: Anthropic Blog)</a>
+    </div>
+
+    <h2>3. xAI Grok 4.2: 멀티 에이전트 토론 시스템</h2>
+    <p>
+        일론 머스크의 xAI는 <strong>Grok 4.2 베타</strong>를 공개했습니다 <span class="timestamp" data-time="4205">[01:10:05]</span>. 
+        가장 큰 특징은 하나의 모델이 답변하는 것이 아니라, 내부의 여러 특화 에이전트들이 서로 토론하고 교차 검증하여 최종 결론을 도출하는 방식입니다. 
+        이를 통해 할루시네이션(환각 현상)을 65% 이상 줄였으며, 복잡한 논리 문제나 물리 시뮬레이션에서 뛰어난 성능을 보입니다 <span class="timestamp" data-time="4387">[01:13:07]</span>.
+    </p>
+
+    <h2>4. 하드웨어 혁신: 17,000 TPS의 Taalas HC1 칩</h2>
+    <p>
+        스타트업 <strong>Taalas</strong>가 공개한 HC1 칩은 AI 하드웨어의 패러다임을 바꿨습니다 <span class="timestamp" data-time="4922">[01:22:02]</span>. 
+        범용 GPU 대신 특정 모델(라마 3.1 8B 등)의 회로를 실리콘에 직접 하드와이어링하여 박아버리는 방식을 채택했습니다. 
+        그 결과, 추론 속도가 초당 <strong>17,000 토큰</strong>이라는 경이로운 수치를 기록했습니다. 이는 기존 NVIDIA GPU 대비 약 10배 이상 빠르며 에너지 효율도 극대화된 수치입니다 <span class="timestamp" data-time="5004">[01:23:24]</span>.
+    </p>
+
+    <h2>5. 로봇 공학의 진화: 유니트리(Unitree) 군무와 서커스</h2>
+    <p>
+        중국의 <strong>Unitree</strong> 휴머노이드 로봇 기술이 1년 만에 압도적으로 진화했습니다 <span class="timestamp" data-time="6580">[01:49:40]</span>. 
+        단순 보행을 넘어 백댄서들과의 칼군무, 공중제비, 복잡한 서커스 묘기까지 수행하며 인간의 움직임을 완벽하게 모사하기 시작했습니다. 
+        또한, 드론 및 로봇 개와 협업하여 군사용 에이전트로 활용되는 모습까지 시연되며 터미네이터와 같은 미래가 머지않았음을 보여주었습니다 <span class="timestamp" data-time="6860">[01:54:20]</span>.
+    </p>
+
+    <h2>언급된 주요 주식 및 기업 정보</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>기업명</th>
+                <th>주요 분야</th>
+                <th>최신 이슈</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Google (Alphabet)</strong></td>
+                <td>AI 모델 (Gemini)</td>
+                <td>Gemini 3.1 Pro 출시, 종합 벤치마크 1위</td>
+            </tr>
+            <tr>
+                <td><strong>Anthropic</strong></td>
+                <td>AI 모델 (Claude)</td>
+                <td>Sonnet 4.6 출시, 보안 분석 기능 강화</td>
+            </tr>
+            <tr>
+                <td><strong>NVIDIA</strong></td>
+                <td>AI 반도체 (GPU)</td>
+                <td>GTC 2026 개최 및 RTX 5090 발표</td>
+            </tr>
+            <tr>
+                <td><strong>Tesla</strong></td>
+                <td>AI 및 자율주행</td>
+                <td>한국 반도체 인력 채용 공고 (태극기 16개 리트윗)</td>
+            </tr>
+            <tr>
+                <td><strong>CrowdStrike</strong></td>
+                <td>사이버 보안</td>
+                <td>Claude 보안 기능 출시 영향으로 주가 급락</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <footer>Generated by Fovea - AI Content Analyst</footer>
+
+    <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                videoId: 'DieMeHC2k6Q',
+                events: { 'onReady': onPlayerReady }
+            });
+        }
+
+        function onPlayerReady(event) {
+            var timestamps = document.querySelectorAll('.timestamp');
+            timestamps.forEach(function(el) {
+                el.addEventListener('click', function() {
+                    var time = this.getAttribute('data-time');
+                    if (player && player.seekTo) {
+                        player.seekTo(time, true);
+                        player.playVideo();
+                    }
+                });
+            });
+        }
+    </script>
