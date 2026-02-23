@@ -1,12 +1,26 @@
+"""
+URL Analyzer — FastAPI 독립 서버
+
+실행 방법:
+    pip install -r requirements-extra.txt
+    uvicorn src.url_analyzer:app --reload --port 8000
+
+엔드포인트:
+    POST /analyze  {"url": "https://..."}  → ParsedContent JSON
+    GET  /bento?url=https://...            → Bento Grid HTML
+
+메인 파이프라인(main.py)과 독립 실행됨. requirements-extra.txt 의존.
+"""
 from __future__ import annotations
 
-import re
-from typing import List, Optional
-import requests
-from bs4 import BeautifulSoup
+from typing import List
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from youtube_transcript_api import YouTubeTranscriptApi
+
+from src.parser.base import BaseParser, ParsedContent
+from src.parser.youtube import YouTubeParser
+from src.parser.article import ArticleParser
 
 app = FastAPI()
 
@@ -15,38 +29,47 @@ class AnalyzeRequest(BaseModel):
     url: str
 
 
-def is_youtube_url(url: str) -> bool:
-    return bool(re.search(r"(youtube.com|youtu.be)", url, re.IGNORECASE))
+class ParserRegistry:
+    def __init__(self):
+        self._parsers: list[BaseParser] = []
+
+    def register(self, parser: BaseParser) -> None:
+        self._parsers.append(parser)
+
+    def get_parser(self, url: str) -> BaseParser:
+        for parser in self._parsers:
+            if parser.can_parse(url):
+                return parser
+        raise ValueError(f"No parser available for: {url}")
 
 
-def extract_video_id(url: str) -> Optional[str]:
-    m = re.search(r"(?:v=|/)([0-9A-Za-z_-]{11})(?:[&?]|$)", url)
-    if m:
-        return m.group(1)
-    return None
+_registry = ParserRegistry()
+_registry.register(YouTubeParser())
+_registry.register(ArticleParser())  # fallback: can_parse() always True
 
 
-def fetch_youtube_transcript(video_id: str) -> List[str]:
-    try:
-        transcript_list = YouTubeTranscriptApi.get_transcript(video_id)  # type: ignore[attr-defined]
-        lines = [entry["text"] for entry in transcript_list]
-        return lines
-    except Exception:
-        return []
-
-
-def fetch_article(url: str) -> dict:
-    resp = requests.get(url, timeout=10)
-    resp.raise_for_status()
-    soup = BeautifulSoup(resp.text, "html.parser")
-    title = " ".join([t.get_text(strip=True) for t in soup.find_all(['title', 'h1'])]) or url
-    paragraphs = [p.get_text(strip=True) for p in soup.find_all("p") if p.get_text(strip=True)]
-    content = "\n".join(paragraphs[:20]) if paragraphs else resp.text
-    return {"title": title, "content": content, "source": url}
+def analyze_url(url: str) -> dict:
+    """URL을 분석하여 ParsedContent를 dict로 반환."""
+    parser = _registry.get_parser(url)
+    result: ParsedContent = parser.parse_with_fallback(url)
+    return {
+        "url": url,
+        "title": result.title,
+        "content": result.content,
+        "source": result.source,
+        "date": result.date,
+        "keywords": result.keywords,
+        "related_links": result.related_links,
+    }
 
 
 def render_bento_html(items: List[dict]) -> str:
-    html = ["<html><head><style> .card{border:1px solid #ddd;padding:10px;margin:6px;flex:1;} .grid{display:flex;flex-wrap:wrap;} </style></head><body>"]
+    html = [
+        "<html><head><style>"
+        " .card{border:1px solid #ddd;padding:10px;margin:6px;flex:1;}"
+        " .grid{display:flex;flex-wrap:wrap;}"
+        "</style></head><body>"
+    ]
     html.append('<div class="grid">')
     for it in items:
         t = it.get("title", "")
@@ -62,29 +85,10 @@ def render_bento_html(items: List[dict]) -> str:
     return "".join(html)
 
 
-def analyze_url(url: str) -> dict:
-    data = {"url": url, "title": None, "content": None, "transcript": None, "source": url}
-    if is_youtube_url(url):
-        vid = extract_video_id(url)
-        data["title"] = "YouTube Video"
-        transcript = fetch_youtube_transcript(vid) if vid else []
-        data["transcript"] = transcript
-        if transcript:
-            data["content"] = "\n".join(transcript)
-        else:
-            data["content"] = "Transcript unavailable"
-        return data
-    article = fetch_article(url)
-    data["title"] = article.get("title")
-    data["content"] = article.get("content")
-    return data
-
-
 @app.post("/analyze")
 async def analyze(req: AnalyzeRequest):
-    url = req.url
     try:
-        result = analyze_url(url)
+        result = analyze_url(req.url)
         return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -94,5 +98,4 @@ async def analyze(req: AnalyzeRequest):
 async def bento(url: str):
     data = analyze_url(url)
     items = [{"title": data.get("title"), "content": data.get("content"), "source": data.get("source")}]
-    html = render_bento_html(items)
-    return html
+    return render_bento_html(items)

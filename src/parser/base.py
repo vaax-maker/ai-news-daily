@@ -15,7 +15,21 @@ class BaseParser(ABC):
     @abstractmethod
     def can_parse(self, url: str) -> bool:
         pass
-    
+
     @abstractmethod
     def parse(self, url: str) -> ParsedContent:
         pass
+
+    def parse_with_fallback(self, url: str, fallback_content: str = "") -> ParsedContent:
+        """예외 발생 시 빈 ParsedContent 반환."""
+        try:
+            return self.parse(url)
+        except Exception as e:
+            return ParsedContent(
+                title=url,
+                source=url,
+                date=None,
+                content=fallback_content or f"[Parse error: {e}]",
+                keywords=[],
+                related_links=[],
+            )
