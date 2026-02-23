@@ -728,21 +728,21 @@
     }
 
     .styled-table .col-subject a {
-        color: #2d3748;
+        color: var(--text-main);
         text-decoration: none;
         font-weight: 500;
         display: block;
     }
 
     .styled-table .col-subject a:hover {
-        color: #667eea;
+        color: var(--text-muted);
         text-decoration: underline;
     }
 
     .col-num {
         width: 60px;
         text-align: center;
-        color: #718096;
+        color: var(--text-muted);
         white-space: nowrap;
     }
 
@@ -1080,13 +1080,13 @@
     /* 본문 링크 스타일 */
     .ql-editor a,
     .autolink {
-        color: #2563eb !important;
+        color: var(--text-main) !important;
         text-decoration: underline !important;
     }
 
     .ql-editor a:hover,
     .autolink:hover {
-        color: #1d4ed8 !important;
+        color: var(--text-muted) !important;
     }
 </style>
 
@@ -1095,7 +1095,7 @@
     <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
         <p>&copy; 2026 VAAX rebuild Project by <a href="../admin.html"
                 class="admin-link">Fovea</a>. All rights reserved.</p>
-        <div id="page-visit-counter" style="margin-top: 5px; font-size: 0.8rem; color: var(--primary-color);">
+        <div id="page-visit-counter" style="margin-top: 5px; font-size: 0.8rem; color: var(--text-muted);">
             <span id="visit-count">Visits: ...</span>
         </div>
     </footer>
