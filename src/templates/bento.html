@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ content.title }} - VAAX Analyzer</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6c757d;
+            --border-color: #e9ecef;
+            /* Green point color */
+            --accent: #10b981;
+            --accent-light: #d1fae5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 24px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .card {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .card.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        h1 {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+        
+        .source {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .source::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        
+        .date {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .keyword {
+            font-size: 12px;
+            padding: 4px 10px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        .summary {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-primary);
+        }
+        
+        .bullets {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .bullets li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+        
+        .bullets li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .related-info {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        
+        .related-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .related-links li {
+            margin-bottom: 8px;
+        }
+        
+        .related-links a {
+            font-size: 13px;
+            color: var(--accent);
+            text-decoration: none;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .related-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .source-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        
+        /* Mobile */
+        @media (max-width: 600px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="bento-grid">
+            <!-- Title & Source -->
+            <div class="card full-width">
+                <div class="card-header">
+                    <div>
+                        <h1>{{ content.title }}</h1>
+                        <div class="source">{{ content.source }}</div>
+                    </div>
+                    <span class="source-badge">VAAX</span>
+                </div>
+                {% if content.date %}
+                <div class="date">{{ content.date }}</div>
+                {% endif %}
+                {% if content.keywords %}
+                <div class="keywords">
+                    {% for kw in content.keywords %}
+                    <span class="keyword">#{{ kw }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Summary -->
+            <div class="card full-width">
+                <div class="card-title">요약</div>
+                <p class="summary">{{ content.summary }}</p>
+            </div>
+            
+            <!-- Key Bullets -->
+            <div class="card">
+                <div class="card-title">핵심 포인트</div>
+                <ul class="bullets">
+                    {% for bullet in bullets %}
+                    <li>{{ bullet }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!-- Related Info -->
+            <div class="card">
+                <div class="card-title">관련 정보</div>
+                <div class="related-info">
+                    {% if additional_info.wikipedia %}
+                    {{ additional_info.wikipedia[:200] }}...
+                    {% else %}
+                    관련 정보를 찾을 수 없습니다.
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Related Links -->
+            <div class="card full-width">
+                <div class="card-title">관련 링크</div>
+                {% if content.related_links %}
+                <ul class="related-links">
+                    {% for link in content.related_links %}
+                    <li><a href="{{ link }}" target="_blank" rel="noopener">{{ link }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="related-info">관련 링크가 없습니다.</p>
+                {% endif %}
+            </div>
+            
+            <!-- Original URL -->
+            <div class="card full-width">
+                <div class="card-title">원본 URL</div>
+                <a href="{{ url }}" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; font-size: 14px;">{{ url }}</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

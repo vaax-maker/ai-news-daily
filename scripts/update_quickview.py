@@ -10,7 +10,7 @@ import sys
 # Add project root to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from generate_quickview import process_quickview_pages, get_latest_quickviews
+from src.generators.quickview import process_quickview_pages, get_latest_quickviews
 from src.generators.html import render_dashboard
 from src.utils.storage import GovStorage
 from main import load_latest_articles_from_archive, load_categories

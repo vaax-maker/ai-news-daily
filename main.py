@@ -30,6 +30,8 @@ from src.utils.notifier import send_daily_briefing
 from src.utils.storage import MemberStorage, GovStorage
 from src.utils.wordcloud_generator import extract_weekly_keywords, create_wordcloud_image
 from src.utils.holidays import get_calendar_data
+from src.utils.dedup import is_similar_title
+from src.utils.archive import resolve_daily_file
 from collections import Counter
 import re
 
@@ -88,7 +90,7 @@ def parse_existing_articles(html_path: str):
 
     return parsed
 
-def merge_articles(primary_items, secondary_items):
+def merge_articles(primary_items: list[dict], secondary_items: list[dict]) -> list[dict]:
     merged = []
     seen_links = set()
 
@@ -152,7 +154,7 @@ def consolidate_daily_archives(config):
             except Exception:
                 pass
 
-def process_category(config, now_utc, kst_timezone_offset=9):
+def process_category(config, now_utc: datetime.datetime, kst_timezone_offset: int = 9) -> dict:
     print(f"[{config.key.upper()}] Processing...")
     
     # Resolve current day's info
@@ -230,29 +232,6 @@ def process_category(config, now_utc, kst_timezone_offset=9):
         today_by_link = {art.get("link"): art for art in today_existing_articles if art.get("link")}
         
         # Title-based dedup: collect normalized titles for similarity check
-        from difflib import SequenceMatcher
-        
-        def normalize_title(title):
-            """Normalize title for comparison"""
-            if not title:
-                return ""
-            # Remove special chars, lowercase
-            cleaned = re.sub(r"[^0-9A-Za-z가-힣\s]", "", title)
-            return cleaned.lower().strip()
-        
-        def is_similar_title(new_title, existing_titles, threshold=0.80):
-            """Check if new_title is similar to any existing title"""
-            norm_new = normalize_title(new_title)
-            if not norm_new:
-                return False
-            for existing in existing_titles:
-                norm_existing = normalize_title(existing)
-                if norm_existing:
-                    ratio = SequenceMatcher(None, norm_new, norm_existing).ratio()
-                    if ratio >= threshold:
-                        return True
-            return False
-        
         past_titles = [art.get("title", "") for art in all_past_articles if art.get("title")]
         today_titles = [art.get("title", "") for art in today_existing_articles if art.get("title")]
         all_existing_titles = past_titles + today_titles
@@ -387,21 +366,8 @@ def process_category(config, now_utc, kst_timezone_offset=9):
     if not summarized_items and config.key != "gov":
         print(f"[{config.key.upper()}] WARNING: No items produced after summarization step.")
 
-    def resolve_daily_file(date_str: str, run_id: str):
-        os.makedirs(config.archive_dir, exist_ok=True)
-        html_files = [
-            f for f in os.listdir(config.archive_dir)
-            if f.endswith(".html") and f.startswith(date_str)
-        ]
-
-        if html_files:
-            html_files.sort()
-            return html_files[0], html_files[1:]
-
-        return f"{run_id}.html", []
-
     # 2. Render Page
-    filename, duplicates = resolve_daily_file(date_str, run_id)
+    filename, duplicates = resolve_daily_file(config.archive_dir, date_str, run_id)
     archived_articles = []
 
     for fname in [filename] + duplicates:
@@ -524,7 +490,7 @@ def load_existing_members_latest(limit=5):
     collected.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
     return collected[:limit]
 
-def rebuild_indexes(categories, consolidate_archives=False):
+def rebuild_indexes(categories: dict, consolidate_archives: bool = False) -> None:
     # Daily Archives Index Generation
     weekday_map = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
     
@@ -889,7 +855,7 @@ def main():
         # Load quickview pages from Firestore
         quickview_latest = []
         try:
-            from generate_quickview import get_latest_quickviews, process_quickview_pages
+            from src.generators.quickview import get_latest_quickviews, process_quickview_pages
             # Generate quickview HTML pages
             process_quickview_pages()
             # Get latest for dashboard

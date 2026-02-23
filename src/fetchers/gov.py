@@ -1,6 +1,7 @@
 """Government Announcements Fetcher - 나라장터 및 과기정통부 API"""
 
 import os
+import json
 import logging
 import requests
 import datetime
@@ -10,8 +11,6 @@ from urllib.parse import urlencode
 
 logger = logging.getLogger(__name__)
 
-# API Key
-DEFAULT_GOV_API_KEY = "b333fbc99c073b3c163fabc773d9be9b4ae29d18e69a2522f825630386066c82"
 REQUEST_TIMEOUT = 30
 
 
@@ -172,7 +171,8 @@ def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[s
                 
                 try:
                     data = response.json()
-                except:
+                except (json.JSONDecodeError, ValueError):
+                    logger.debug(f"[KONEPS] JSON parse error")
                     continue
                 
                 resp = data.get("response", {})
@@ -244,15 +244,17 @@ def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[s
 def fetch_iitp_announcements(limit: int = 20) -> List[Dict[str, str]]:
     """IITP 정보통신기획평가원 사업공고 스크래핑"""
     from bs4 import BeautifulSoup
-    import urllib3
-    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-    
+
     url = "https://www.iitp.kr/kr/1/notice/businessAnnouncements.it"
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
-    
+
     items_list = []
     try:
-        response = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT, verify=False)
+        try:
+            response = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT, verify=True)
+        except requests.exceptions.SSLError:
+            logger.warning("[IITP] SSL 검증 실패. IITP 소스를 건너뜁니다.")
+            return []
         response.raise_for_status()
         
         soup = BeautifulSoup(response.content, "html.parser")
@@ -305,16 +307,16 @@ def fetch_iitp_announcements(limit: int = 20) -> List[Dict[str, str]]:
     return items_list
 
 
-    return items_list
-
-
 def fetch_bizinfo_announcements(limit: int = 20) -> List[Dict[str, str]]:
     """기업마당(Bizinfo) 지원사업 API - AI/XR/기술개발 관련 과제"""
     
     # 기업마당 API 설정
-    api_key = "6TJrqD"
+    api_key = os.getenv("BIZINFO_API_KEY", "")
+    if not api_key:
+        logger.warning("[Bizinfo] BIZINFO_API_KEY not set. Skipping.")
+        return []
     url = "https://www.bizinfo.go.kr/uss/rss/bizinfoApi.do"
-    
+
     items_list = []
     
     # 최근 200건 조회 후 필터링
@@ -392,7 +394,7 @@ def fetch_bizinfo_announcements(limit: int = 20) -> List[Dict[str, str]]:
 
 def fetch_gov_announcements(limit: int = 50) -> List[Dict[str, str]]:
     """정부 과제 통합 수집 (과기정통부 + 나라장터 + 기업마당)"""
-    service_key = os.getenv("GOV_API_KEY", DEFAULT_GOV_API_KEY)
+    service_key = os.getenv("GOV_API_KEY", "")
     
     # 상위 limit에 비례하여 개별 수집 개수 설정 (각각 40% 정도 여유 있게 수집)
     per_source_limit = int(limit * 0.5) + 10

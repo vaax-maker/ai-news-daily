@@ -97,7 +97,7 @@ def main():
         # Quickview
         quickview_latest = []
         try:
-            from generate_quickview import get_latest_quickviews
+            from src.generators.quickview import get_latest_quickviews
             quickview_latest = get_latest_quickviews(limit=5)
             dashboard_data["links"]["quickview"] = "quickview/index.html"
         except:

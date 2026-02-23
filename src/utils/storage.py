@@ -1,18 +1,43 @@
 import json
 import os
 import re
+import hashlib
 from difflib import SequenceMatcher
 from typing import List, Dict
 
+
 class MemberStorage:
     def __init__(self, data_dir="data/members"):
+        self.use_firestore = os.getenv("FIRESTORE_ENABLED", "false").lower() == "true"
         self.data_dir = data_dir
-        os.makedirs(self.data_dir, exist_ok=True)
-        
+        self._db = None
+        if not self.use_firestore:
+            os.makedirs(self.data_dir, exist_ok=True)
+
+    @property
+    def db(self):
+        """지연 초기화 — 첫 Firestore 호출 시에만 연결."""
+        if self._db is None:
+            from src.generators.quickview import get_firestore_client
+            self._db = get_firestore_client()
+        return self._db
+
     def _get_path(self, member_id: str) -> str:
         return os.path.join(self.data_dir, f"{member_id}.json")
-        
+
     def load_news(self, member_id: str) -> List[Dict]:
+        if self.use_firestore:
+            return self._load_from_firestore(member_id)
+        return self._load_from_json(member_id)
+
+    def save_news(self, member_id: str, new_items: List[Dict]):
+        if self.use_firestore:
+            return self._save_to_firestore(member_id, new_items)
+        return self._save_to_json(member_id, new_items)
+
+    # --- JSON backend (기존 로직 그대로) ---
+
+    def _load_from_json(self, member_id: str) -> List[Dict]:
         path = self._get_path(member_id)
         if not os.path.exists(path):
             return []
@@ -22,8 +47,8 @@ class MemberStorage:
         except Exception as e:
             print(f"[Storage] Failed to load {member_id}: {e}")
             return []
-            
-    def save_news(self, member_id: str, new_items: List[Dict]):
+
+    def _save_to_json(self, member_id: str, new_items: List[Dict]):
         """
         Merge new items with existing items for a member.
 
@@ -35,7 +60,7 @@ class MemberStorage:
         """
         import datetime
 
-        existing = self.load_news(member_id)
+        existing = self._load_from_json(member_id)
 
         cutoff_date = datetime.datetime(2025, 1, 1).timestamp()
         now_ts = datetime.datetime.now().timestamp()
@@ -51,7 +76,6 @@ class MemberStorage:
             seen_links = set()
             seen_titles: List[str] = []
             cleaned = []
-            # Sort older to newer to keep the first version of each article
             for item in sorted(items, key=lambda x: x.get("timestamp", 0)):
                 link = item.get("link")
                 title = item.get("title", "")
@@ -73,33 +97,21 @@ class MemberStorage:
             if not title or "살린" not in title:
                 return False
 
-            # Accept explicit romanization mentions as a proper noun.
             if re.search(r"\bSALIN\b", title, flags=re.IGNORECASE):
                 return True
-            
-            # Accept if title starts with "살린" (likely company name)
+
             if title.strip().startswith("살린"):
                 return True
 
-            # Verb-like patterns to EXCLUDE
             verb_like_patterns = [
-                # Object + 살린 + noun (e.g., "회사 살린", "생명 살린", "청년 살린")
                 r"[가-힣A-Za-z0-9\)\]\"\''\"]\s*살린\s+[가-힣]",
-                # Common verb usage: X를/을 살린, X가 살린
                 r"[을를이가도은는]\s*살린",
-                # Past-tense clause tails
                 r"살린\s*(뒤|후|채|적|줄|상황|점|것|이|건|덕|힘|게|데|곳)",
-                # Pattern: "~살린 '~'" (describing something saved)
                 r"살린\s*['\"\'']",
-                # Pattern: 불씨/기회/우위/특성 등 + 살린
                 r"(불씨|기회|우위|특성|장점|개성|맛|멋|전통|가치|정신|분위기)\s*살린",
-                # Pattern: ~를 살린, ~을 살린 (object marker before 살린)
                 r"[가-힣]+[를을]\s*살린",
-                # Pattern: 못 살린
                 r"못\s*살린",
-                # Common nouns before 살린 (verb usage)
                 r"(회사|사람|생명|청년|아이|환자|목숨|팀|기업|농어촌|경제|마을|동네)\s*살린",
-                # Article patterns with 살린 as verb
                 r"망해가던.*살린",
                 r"벼랑.*살린",
             ]
@@ -108,7 +120,6 @@ class MemberStorage:
                 if re.search(pat, title):
                     return False
 
-            # If no verb patterns matched and contains 살린, likely a proper noun
             return True
 
         def apply_member_specific_filters(items: List[Dict]) -> List[Dict]:
@@ -144,6 +155,7 @@ class MemberStorage:
         merged.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
         merged = enforce_daily_limit(merged)
 
+        os.makedirs(self.data_dir, exist_ok=True)
         try:
             with open(self._get_path(member_id), "w", encoding="utf-8") as f:
                 json.dump(merged, f, ensure_ascii=False, indent=2)
@@ -152,13 +164,97 @@ class MemberStorage:
 
         return merged
 
+    # --- Firestore backend (신규) ---
+
+    def _doc_id(self, link: str) -> str:
+        return hashlib.md5(link.encode()).hexdigest()[:16]
+
+    def _load_from_firestore(self, member_id: str) -> List[Dict]:
+        """Firestore members/{member_id}/news 컬렉션에서 로드."""
+        try:
+            docs = self.db.collection("members").document(member_id).collection("news").stream()
+            return [doc.to_dict() for doc in docs]
+        except Exception as e:
+            print(f"[Storage/Firestore] Failed to load {member_id}: {e}")
+            return []
+
+    def _save_to_firestore(self, member_id: str, new_items: List[Dict]) -> List[Dict]:
+        """기존 dedup 로직 유지, Firestore에 저장."""
+        # 기존 JSON 경로로 dedup 처리 후 Firestore에 저장
+        # 임시로 JSON 경로를 통해 dedup 수행
+        existing = self._load_from_firestore(member_id)
+        import datetime
+        cutoff_date = datetime.datetime(2025, 1, 1).timestamp()
+        now_ts = datetime.datetime.now().timestamp()
+
+        def normalize(s):
+            cleaned = re.sub(r"[^0-9A-Za-z가-힣]", "", s)
+            return cleaned.lower()
+
+        def is_similar(norm_title: str, seen_titles: List[str], threshold: float = 0.9) -> bool:
+            return any(SequenceMatcher(None, norm_title, seen).ratio() >= threshold for seen in seen_titles)
+
+        seen_links = {item.get("link") for item in existing if item.get("link")}
+        seen_titles = [normalize(item.get("title", "")) for item in existing if item.get("title")]
+
+        col_ref = self.db.collection("members").document(member_id).collection("news")
+        added = 0
+        for item in new_items:
+            ts = item.get("timestamp", 0)
+            if not (cutoff_date <= ts <= now_ts):
+                continue
+            link = item.get("link", "")
+            if link in seen_links:
+                continue
+            norm_title = normalize(item.get("title", ""))
+            if norm_title and is_similar(norm_title, seen_titles):
+                continue
+            doc_id = self._doc_id(link) if link else None
+            if doc_id:
+                col_ref.document(doc_id).set(item)
+            else:
+                col_ref.add(item)
+            seen_links.add(link)
+            if norm_title:
+                seen_titles.append(norm_title)
+            added += 1
+
+        if added:
+            print(f"[Storage/Firestore] Saved {added} new items for {member_id}")
+        return existing + [i for i in new_items if i.get("link") in seen_links]
+
 
 class GovStorage:
     def __init__(self, data_path: str = "data/gov/announcements.json"):
+        self.use_firestore = os.getenv("FIRESTORE_ENABLED", "false").lower() == "true"
         self.data_path = data_path
-        os.makedirs(os.path.dirname(self.data_path), exist_ok=True)
+        self._db = None
+        if not self.use_firestore:
+            os.makedirs(os.path.dirname(self.data_path), exist_ok=True)
+
+    @property
+    def db(self):
+        if self._db is None:
+            from src.generators.quickview import get_firestore_client
+            self._db = get_firestore_client()
+        return self._db
+
+    def _doc_id(self, link: str) -> str:
+        return hashlib.md5(link.encode()).hexdigest()[:16]
 
     def load_announcements(self) -> List[Dict]:
+        if self.use_firestore:
+            return self._load_from_firestore()
+        return self._load_from_json()
+
+    def save_announcements(self, new_items: List[Dict]) -> List[Dict]:
+        if self.use_firestore:
+            return self._save_to_firestore(new_items)
+        return self._save_to_json(new_items)
+
+    # --- JSON backend (기존 로직 그대로) ---
+
+    def _load_from_json(self) -> List[Dict]:
         if not os.path.exists(self.data_path):
             return []
         try:
@@ -168,7 +264,7 @@ class GovStorage:
             print(f"[Storage] Failed to load gov announcements: {e}")
             return []
 
-    def save_announcements(self, new_items: List[Dict]) -> List[Dict]:
+    def _save_to_json(self, new_items: List[Dict]) -> List[Dict]:
         """
         Accumulate government announcements onto the first captured list while
         removing duplicates by link or similar normalized titles. Newly fetched
@@ -200,8 +296,8 @@ class GovStorage:
                     seen_links.add(link)
                 if norm_title:
                     seen_titles.append(norm_title)
-                
-                item["is_new"] = is_new  # 🚀 Flag for notifier
+
+                item["is_new"] = is_new
                 merged.append(item)
 
             for item in existing:
@@ -211,12 +307,11 @@ class GovStorage:
 
             return merged
 
-        existing_items = self.load_announcements()
+        existing_items = self._load_from_json()
         merged = merge_items(existing_items, new_items)
-        
-        # 🔧 날짜순 정렬 추가 (최신순) - 이 정렬이 없으면 파일 저장 순서가 유지됨
         merged.sort(key=lambda x: x.get('date', '') or x.get('published_display', ''), reverse=True)
 
+        os.makedirs(os.path.dirname(self.data_path), exist_ok=True)
         try:
             with open(self.data_path, "w", encoding="utf-8") as f:
                 json.dump(merged, f, ensure_ascii=False, indent=2)
@@ -224,3 +319,50 @@ class GovStorage:
             print(f"[Storage] Failed to save gov announcements: {e}")
 
         return merged
+
+    # --- Firestore backend (신규) ---
+
+    def _load_from_firestore(self) -> List[Dict]:
+        try:
+            docs = self.db.collection("gov").document("announcements").collection("items").stream()
+            return [doc.to_dict() for doc in docs]
+        except Exception as e:
+            print(f"[Storage/Firestore] Failed to load gov announcements: {e}")
+            return []
+
+    def _save_to_firestore(self, new_items: List[Dict]) -> List[Dict]:
+        existing = self._load_from_firestore()
+
+        def normalize(text: str) -> str:
+            cleaned = re.sub(r"[^0-9A-Za-z가-힣]", "", text or "")
+            return cleaned.lower()
+
+        def is_similar(norm_title: str, seen_titles: List[str], threshold: float = 0.9) -> bool:
+            return any(SequenceMatcher(None, norm_title, seen).ratio() >= threshold for seen in seen_titles)
+
+        seen_links = {item.get("link") for item in existing if item.get("link")}
+        seen_titles = [normalize(item.get("title", "")) for item in existing if item.get("title")]
+
+        col_ref = self.db.collection("gov").document("announcements").collection("items")
+        added = 0
+        for item in new_items:
+            link = item.get("link", "")
+            if link in seen_links:
+                continue
+            norm_title = normalize(item.get("title", ""))
+            if norm_title and is_similar(norm_title, seen_titles):
+                continue
+            item["is_new"] = True
+            doc_id = self._doc_id(link) if link else None
+            if doc_id:
+                col_ref.document(doc_id).set(item)
+            else:
+                col_ref.add(item)
+            seen_links.add(link)
+            if norm_title:
+                seen_titles.append(norm_title)
+            added += 1
+
+        if added:
+            print(f"[Storage/Firestore] Saved {added} new gov announcements")
+        return existing + [i for i in new_items if i.get("link") in seen_links]

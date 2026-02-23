@@ -10,3 +10,7 @@ docs/header_test.html
 !docs/webshare/.blogger_queue_*.json
 blogger_token.pickle
 .worktrees/
+
+# Rollback/Backup artifacts
+backups/
+data/_snapshots/

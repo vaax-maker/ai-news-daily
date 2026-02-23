@@ -24,7 +24,7 @@ if not os.getenv("FIREBASE_SERVICE_ACCOUNT"):
         os.environ["FIREBASE_SERVICE_ACCOUNT"] = cred_path
         print(f"[Deploy] Set FIREBASE_SERVICE_ACCOUNT to {cred_path}")
 
-from generate_quickview import process_quickview_pages
+from src.generators.quickview import process_quickview_pages
 from scripts.process_scheduled import main as process_notifications
 
 import requests
