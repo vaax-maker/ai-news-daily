@@ -118,6 +118,15 @@ jobs:
           test -f docs/index.html || (echo "❌ index.html 생성 실패" && exit 1)
           [ $(wc -c < docs/index.html) -gt 1024 ] || (echo "❌ index.html 비정상 (너무 작음)" && exit 1)
           grep -q "</html>" docs/index.html || (echo "❌ index.html HTML 구조 불완전" && exit 1)
+
+          # gov/index.html 유실 방지: 10KB 미만이면 데이터 유실로 판단하고 원복
+          if [ -f docs/gov/index.html ]; then
+            GOV_SIZE=$(wc -c < docs/gov/index.html)
+            if [ "$GOV_SIZE" -lt 10240 ]; then
+              echo "⚠️ gov/index.html 비정상 (${GOV_SIZE}B < 10KB) — 이전 버전 복원"
+              git checkout HEAD -- docs/gov/index.html 2>/dev/null || true
+            fi
+          fi
           echo "✅ 출력 검증 통과"
 
       - name: Commit and Push
