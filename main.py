@@ -503,9 +503,22 @@ def rebuild_indexes(categories: dict, consolidate_archives: bool = False) -> Non
             storage = GovStorage()
             announcements = sort_gov_announcements(storage.load_announcements())
 
+            # ── 방어 로직: Firestore 실패 시 로컬 JSON 폴백 ──
+            if not announcements and storage.use_firestore:
+                print("[GOV] WARNING: Firestore returned empty data. Falling back to local JSON.")
+                local_storage = GovStorage()
+                local_storage.use_firestore = False
+                announcements = sort_gov_announcements(local_storage.load_announcements())
+
+            # ── 방어 로직: 데이터 없으면 기존 index.html 보존 ──
+            if not announcements:
+                print("[GOV] WARNING: No announcements found. Preserving existing gov/index.html.")
+                continue
+
             index_html = render_gov_archive(announcements)
             with open(cfg.index_path, "w", encoding="utf-8") as f:
                 f.write(index_html)
+            print(f"[GOV] Regenerated index with {len(announcements)} announcements.")
             continue
 
         if consolidate_archives:
