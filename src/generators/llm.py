@@ -290,7 +290,10 @@ def _summarize_with_openai(prompt: str) -> str:
             
             res = client.chat.completions.create(
                 model=model,
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    {"role": "system", "content": _get_summary_system_message()},
+                    {"role": "user", "content": prompt}
+                ],
                 max_completion_tokens=2000,
                 temperature=0.3
             )
@@ -347,7 +350,7 @@ def _summarize_with_grok(prompt: str) -> str:
             os.environ["OPENAI_BASE_URL"] = openai_base_url
         if openai_api_base is not None:
             os.environ["OPENAI_API_BASE"] = openai_api_base
-    model = os.getenv("GROK_MODEL", "qwen/qwen3-32b")
+    model = os.getenv("GROK_MODEL", "glm-4.5")
     
     last_exc = None
     for attempt in range(MAX_RETRIES):
@@ -356,7 +359,10 @@ def _summarize_with_grok(prompt: str) -> str:
             _rate_limit_delay()
             
             res = client.chat.completions.create(
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    {"role": "system", "content": _get_summary_system_message()},
+                    {"role": "user", "content": prompt}
+                ],
                 model=model,
             )
             
@@ -392,83 +398,141 @@ def _summarize_with_grok(prompt: str) -> str:
     
     raise last_exc if last_exc else RuntimeError("Grok summarization failed")
 
+# ============================================================================
+# System Message (독백 억제용)
+# ============================================================================
+_SUMMARY_SYSTEM_MESSAGE = (
+    "당신은 뉴스 요약 전문가입니다. 다음 규칙을 반드시 지키세요:\n"
+    "1. 반드시 한국어로만 응답하세요.\n"
+    "2. 영어로 생각하는 과정(Reasoning/Thinking), 설명, 인사말, 독백을 절대 포함하지 마세요.\n"
+    "3. <think> 태그를 사용하지 마세요.\n"
+    "4. 첫 줄은 반드시 '**제목**: '으로 시작해야 합니다.\n"
+    "5. 지정된 출력 형식(제목, ##1, ##2, ##3, 한줄요약)만 출력하세요."
+)
+
+def _get_summary_system_message() -> str:
+    """LLM 독백 억제를 위한 system message 반환."""
+    return _SUMMARY_SYSTEM_MESSAGE
+
+
 def _parse_summary_response(response: str, original_title: str) -> dict:
-    """Parse LLM response to extract title and summary."""
-    # 1. Remove <think> tags (DeepSeek style)
+    """Parse LLM response to extract title and summary.
+    
+    화이트리스트 방식: 올바른 구조화된 출력만 추출하고 나머지는 모두 버림.
+    """
+    # ── 1단계: <think>...</think> 제거 (Qwen3, DeepSeek 등) ──
     response = re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL)
     
-    # 2. Remove common "Internal Monologue" / "Reasoning" patterns
-    # These often start with "Okay,", "Here is", "Sure,", "I will", etc.
-    # We look for the FIRST occurrence of a structured header like "## 1." or "**제목**"
-    # and discard everything before it IF there is a significant amount of text preceding it.
-    
-    # regex for start of structured content
-    structure_start_pattern = r'(?:\*\*제목\*\*|##\s*1\.|\[핵심\s*내용\])'
-    match = re.search(structure_start_pattern, response)
-    
-    if match:
-        # If we found a structure start, keep everything from there onwards
-        # But check if there was a title line right before it that didn't use **제목** marker
-        # (Sometimes models just output "Title: ...\n\n## 1. ...")
-        start_index = match.start()
-        
-        # Look for a potential title line immediately preceding the structure
-        # (e.g. "Title: ... \n\n")
-        preceding_text = response[:start_index].strip()
-        lines = preceding_text.split('\n')
-        if lines and len(lines[-1]) < 100 and ('제목' in lines[-1] or 'Title' in lines[-1]):
-             # If the last line looks like a title, keep it.
-             # But usually our prompt enforces **제목** format, so we trust the match mostly.
-             pass
-        
-        # Clean up the pre-structure rubbish
-        response = response[start_index:]
+    # ── 2단계: 화이트리스트 - 구조화된 시작점 찾기 ──
+    # "**제목**" 마커를 최우선으로 탐색
+    title_marker = re.search(r'\*\*제목\*\*\s*[:：]', response)
+    if title_marker:
+        response = response[title_marker.start():]
     else:
-        # Fallback: if no structure found, try to strip common conversational prefixes
-        conversational_prefixes = [
-            r'^Okay,.*?(\n|$)',
-            r'^Here is.*?(\n|$)',
-            r'^Sure,.*?(\n|$)',
-            r'^I have.*?(\n|$)',
-            r'^Let me.*?(\n|$)',
-            r'^I will.*?(\n|$)',
-            r'^To summarize.*?(\n|$)'
-        ]
-        for prefix in conversational_prefixes:
-            response = re.sub(prefix, '', response, flags=re.IGNORECASE | re.MULTILINE).strip()
-
-    # 3. Extract title
-    # Look for **제목**: ...
-    title_match = re.search(r'\*\*제목\*\*:\s*(.+?)(?:\n|$)', response)
+        # "## 1." 섹션 헤더를 차선으로 탐색
+        section_marker = re.search(r'##\s*1\.', response)
+        if section_marker:
+            response = response[section_marker.start():]
+        else:
+            # 한국어 "제목:" 변형 탐색 (마지막 폴백)
+            fallback_marker = re.search(r'제목\s*[:：]\s*', response)
+            if fallback_marker:
+                response = response[fallback_marker.start():]
+    
+    # ── 3단계: 영어 독백 문장 제거 (안전장치) ──
+    # 구조화된 블록 내에서도 영어 문장이 섞여 있을 수 있음
+    lines = response.split('\n')
+    cleaned_lines = []
+    for line in lines:
+        stripped = line.strip()
+        if not stripped:
+            cleaned_lines.append(line)
+            continue
+        
+        # 구조 마커가 있는 줄은 무조건 유지 (**, ##, -, •, 숫자.)
+        if re.match(r'^(\*\*|##|[-•]|\d+\.)', stripped):
+            cleaned_lines.append(line)
+            continue
+        
+        # 영어 비율 70% 초과 + 20자 이상인 줄 → 독백으로 판단하여 제거
+        if len(stripped) > 20:
+            ascii_chars = sum(1 for c in stripped if ord(c) < 128 and c.isalpha())
+            total_alpha = sum(1 for c in stripped if c.isalpha())
+            if total_alpha > 0 and ascii_chars / total_alpha > 0.7:
+                continue  # 이 줄은 영어 독백이므로 스킵
+        
+        cleaned_lines.append(line)
+    
+    response = '\n'.join(cleaned_lines).strip()
+    
+    # ── 4단계: 제목 추출 ──
+    title_match = re.search(r'\*\*제목\*\*\s*[:：]\s*(.+?)(?:\n|$)', response)
     if title_match:
         new_title = title_match.group(1).strip()
-        # Remove the title line from summary
-        summary = re.sub(r'\*\*제목\*\*:\s*.+?\n', '', response, count=1).strip()
+        # 제목 줄을 요약에서 제거
+        summary = response[title_match.end():].strip()
     else:
-        # If no **제목** tag, check if the first line looks like a title (short, contains keyword)
-        lines = response.split('\n')
-        first_line = lines[0].strip()
-        if len(first_line) < 60 and not first_line.startswith('#'):
-             new_title = first_line
-             summary = "\n".join(lines[1:]).strip()
+        # 제목 마커 없으면 첫 줄이 짧고 한국어이면 제목으로 간주
+        first_lines = response.split('\n')
+        first_line = first_lines[0].strip() if first_lines else ''
+        if 10 < len(first_line) < 60 and not first_line.startswith('#'):
+            new_title = first_line
+            summary = '\n'.join(first_lines[1:]).strip()
         else:
-             new_title = original_title
-             summary = response.strip()
+            new_title = original_title
+            summary = response.strip()
     
-    # 4. Cleanup Title
-    # Ensure title doesn't end with '...' or have markdown bold formatting leftovers
+    # ── 5단계: 제목 정리 ──
     new_title = new_title.replace('**', '').strip()
     if new_title.endswith('...'):
         new_title = new_title.rstrip('.') + '.'
     
-    # Fallback to original if new title is empty or too short
+    # 제목이 너무 짧거나 비어있으면 원본 사용
     if len(new_title) < 10:
         new_title = original_title
     
-    return {
-        "title": new_title,
-        "summary": summary
-    }
+    # ── 6단계: 최종 독백 검증 ──
+    result = {"title": new_title, "summary": summary}
+    return _validate_summary_output(result, original_title)
+
+
+def _validate_summary_output(result: dict, original_title: str) -> dict:
+    """최종 출력에서 LLM 독백 잔여물을 검증 및 제거."""
+    summary = result.get("summary", "")
+    title = result.get("title", "")
+    
+    # 영어 독백 패턴 (문장 단위로 제거)
+    monologue_patterns = [
+        r'[^\n]*The article (?:says|mentions|discusses|talks about)[^\n]*',
+        r'[^\n]*(?:I need to|Let me|I will|I should|I\'ll|I have to)[^\n]*',
+        r'[^\n]*(?:The user\'?s?|the user)[^\n]*',
+        r'[^\n]*(?:However|Therefore|Additionally),?\s+(?:the|I|we|it)[^\n]*',
+        r'[^\n]*(?:make sure|check if|verify that|ensure that)[^\n]*',
+        r'[^\n]*(?:Now,? I|First,? I|Next,? I|Also,? I|So,? I)[^\n]*',
+        r'[^\n]*(?:Looking at|Based on|According to) (?:the|this) (?:article|text|content)[^\n]*',
+        r'[^\n]*(?:It seems|It appears|It looks like)[^\n]*',
+        r'[^\n]*(?:In this case|In summary|To summarize)[^\n]*',
+    ]
+    
+    for pattern in monologue_patterns:
+        summary = re.sub(pattern, '', summary, flags=re.IGNORECASE).strip()
+    
+    # 제목에서도 영어 독백 검증
+    for pattern in monologue_patterns:
+        if re.search(pattern, title, re.IGNORECASE):
+            title = original_title
+            break
+    
+    # 연속 빈 줄 정리
+    summary = re.sub(r'\n{3,}', '\n\n', summary)
+    
+    # 요약이 비정상적으로 짧아지면 최소한의 구조 보장
+    if len(summary.strip()) < 30:
+        summary = f"## 1. 핵심 내용\n**주제**: {original_title}"
+    
+    result["title"] = title
+    result["summary"] = summary.strip()
+    return result
 
 
 def summarize_article(text: str, title: str, display_name: str) -> dict:
@@ -541,6 +605,10 @@ def summarize_article(text: str, title: str, display_name: str) -> dict:
 5. **품질 검증**:
    - 요약을 읽은 독자가 "그래서 뭐?"라고 묻지 않도록 의미/영향 반드시 포함
    - 불필요한 섹션은 생략 가능하되, "왜 중요한지"는 반드시 포함
+
+6. **출력 엄격성 (매우 중요)**:
+   - 영어로 생각하는 과정(Reasoning), 설명, 인사말 등을 절대 적지 마세요.
+   - 첫 줄은 반드시 `**제목**: `으로 시작해야 합니다.
 </constraint>
 
 <example>
@@ -603,9 +671,11 @@ def summarize_article(text: str, title: str, display_name: str) -> dict:
             gemini_error = str(e)
             print(f"[Gemini] Failed: {gemini_error[:100]}")
     
-    # If we got a response, parse it
+    # If we got a response, parse and validate it
     if raw_response:
-        return _parse_summary_response(raw_response, title)
+        result = _parse_summary_response(raw_response, title)
+        print(f"[LLM] Summary parsed - title: {result['title'][:40]}...")
+        return result
     
     # All failed - return error message instead of raising
     error_summary = f"OpenAI: {openai_error[:30] if openai_error else 'N/A'}, Grok: {grok_error[:30] if grok_error else 'N/A'}, Gemini: {gemini_error[:30] if gemini_error else 'N/A'}"
@@ -655,9 +725,12 @@ def _rank_with_llm(candidates: List[tuple], limit: int) -> List[tuple]:
 
     try:
         try:
-            resp = _summarize_with_grok(prompt)
+            resp = _summarize_with_openai(prompt)
         except Exception:
-            resp = _summarize_with_gemini(prompt)
+            try:
+                resp = _summarize_with_grok(prompt)
+            except Exception:
+                resp = _summarize_with_gemini(prompt)
 
         matches = re.findall(r"\d+", resp)
         ranked_indices = [int(m) for m in matches]
