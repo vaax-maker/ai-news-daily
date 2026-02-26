@@ -43,7 +43,7 @@ class YouTubeParser(BaseParser):
     
     def _get_metadata(self, url: str) -> dict:
         headers = {'User-Agent': 'Mozilla/5.0'}
-        resp = requests.get(url, headers=headers)
+        resp = requests.get(url, headers=headers, timeout=15)
         soup = BeautifulSoup(resp.text, 'html.parser')
         title_tag = soup.find('meta', property='og:title')
         if title_tag and title_tag.get('content'):

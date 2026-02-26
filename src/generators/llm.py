@@ -220,7 +220,7 @@ def _summarize_with_gemini(prompt: str) -> str:
             # Apply rate limiting
             _rate_limit_delay()
             
-            res = model.generate_content(prompt)
+            res = model.generate_content(prompt, request_options={"timeout": 60.0})
             
             # Usage Tracking
             try:
@@ -295,7 +295,8 @@ def _summarize_with_openai(prompt: str) -> str:
                     {"role": "user", "content": prompt}
                 ],
                 max_completion_tokens=2000,
-                temperature=0.3
+                temperature=0.3,
+                timeout=60.0
             )
             
             # Usage Tracking
@@ -364,6 +365,7 @@ def _summarize_with_grok(prompt: str) -> str:
                     {"role": "user", "content": prompt}
                 ],
                 model=model,
+                timeout=60.0
             )
             
             # Usage Tracking
