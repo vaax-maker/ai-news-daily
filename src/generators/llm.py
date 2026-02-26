@@ -40,6 +40,7 @@ _last_api_call_time = 0.0
 # Gemini API key rotation index
 _gemini_key_index = 0
 _gemini_api_keys = []
+_dead_providers = set()
 
 def _get_gemini_api_keys():
     """Parse and return list of Gemini API keys from environment."""
@@ -85,6 +86,15 @@ def _is_rate_limit_error(error_msg: str) -> bool:
     ]
     error_lower = error_msg.lower()
     return any(indicator in error_lower for indicator in rate_limit_indicators)
+
+def _is_permanent_error(error_msg: str) -> bool:
+    """Check if error is likely permanent (e.g. 401, 403, 404, or hard quota exceeded)."""
+    indicators = [
+        "401", "403", "404", "leaked", "invalid api key", 
+        "not found", "check your plan and billing details"
+    ]
+    error_lower = error_msg.lower()
+    return any(ind in error_lower for ind in indicators)
 
 def _extract_retry_delay(exc: Exception, default: float = 30.0) -> float:
     """Extract retry delay from error message or use default."""
@@ -207,6 +217,9 @@ def _rank_with_heuristics(items: List[tuple], limit: int) -> List[tuple]:
 
 def _summarize_with_gemini(prompt: str) -> str:
     """Call Gemini API with rate limiting and retry logic."""
+    if not _get_gemini_api_keys():
+        raise RuntimeError("All Gemini API keys are depleted or marked dead.")
+        
     # Get next API key in rotation
     key = _get_next_gemini_key()
     
@@ -235,6 +248,13 @@ def _summarize_with_gemini(prompt: str) -> str:
             
         except exceptions.ResourceExhausted as exc:
             last_exc = exc
+            error_msg = str(exc)
+            if _is_permanent_error(error_msg):
+                print(f"[Gemini] Permanent quota error. Removing key.")
+                if key in _get_gemini_api_keys():
+                    _get_gemini_api_keys().remove(key)
+                raise RuntimeError(f"Permanent quota error: {error_msg}")
+                
             if attempt == MAX_RETRIES - 1: 
                 raise
             delay = _extract_retry_delay(exc)
@@ -244,6 +264,12 @@ def _summarize_with_gemini(prompt: str) -> str:
         except exceptions.GoogleAPICallError as exc:
             last_exc = exc
             error_msg = str(exc)
+            
+            if _is_permanent_error(error_msg):
+                print(f"[Gemini] Permanent API error. Removing key.")
+                if key in _get_gemini_api_keys():
+                    _get_gemini_api_keys().remove(key)
+                raise RuntimeError(f"Permanent API error: {error_msg}")
             
             if _is_rate_limit_error(error_msg):
                 if attempt == MAX_RETRIES - 1:
@@ -272,6 +298,9 @@ def _summarize_with_gemini(prompt: str) -> str:
 
 def _summarize_with_openai(prompt: str) -> str:
     """Call OpenAI API (GPT-5.2) with rate limiting and retry logic."""
+    if "openai" in _dead_providers:
+        raise RuntimeError("OpenAI provider marked as dead.")
+        
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         raise RuntimeError("OPENAI_API_KEY is not set.")
@@ -314,6 +343,11 @@ def _summarize_with_openai(prompt: str) -> str:
             last_exc = exc
             error_msg = str(exc)
             
+            if _is_permanent_error(error_msg):
+                _dead_providers.add("openai")
+                print(f"[OpenAI] Permanent API error. Marking provider as dead.")
+                raise RuntimeError(f"Permanent error: {error_msg}")
+            
             if _is_rate_limit_error(error_msg):
                 if attempt == MAX_RETRIES - 1:
                     raise
@@ -332,6 +366,9 @@ def _summarize_with_openai(prompt: str) -> str:
 
 def _summarize_with_grok(prompt: str) -> str:
     """Call Grok/Groq API with rate limiting and retry logic."""
+    if "grok" in _dead_providers:
+        raise RuntimeError("Grok provider marked as dead.")
+        
     api_key = os.getenv("GROK_API_KEY")
     if not api_key:
         raise RuntimeError("GROK_API_KEY is not set.")
@@ -351,7 +388,7 @@ def _summarize_with_grok(prompt: str) -> str:
             os.environ["OPENAI_BASE_URL"] = openai_base_url
         if openai_api_base is not None:
             os.environ["OPENAI_API_BASE"] = openai_api_base
-    model = os.getenv("GROK_MODEL", "glm-4.5")
+    model = os.getenv("GROK_MODEL", "llama-3.3-70b-versatile")
     
     last_exc = None
     for attempt in range(MAX_RETRIES):
@@ -382,6 +419,11 @@ def _summarize_with_grok(prompt: str) -> str:
         except Exception as exc:
             last_exc = exc
             error_msg = str(exc)
+            
+            if _is_permanent_error(error_msg):
+                _dead_providers.add("grok")
+                print(f"[Grok] Permanent API error. Marking provider as dead.")
+                raise RuntimeError(f"Permanent error: {error_msg}")
             
             if _is_rate_limit_error(error_msg):
                 if attempt == MAX_RETRIES - 1:
