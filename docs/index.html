@@ -18,7 +18,7 @@
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./static/css/style.css?v=12">
-
+    
 </head>
 
 <body>
@@ -39,11 +39,16 @@
                     </span>
                 </div>
                 <nav class="nav-links">
-                    <a href="./index.html" class="active">Home</a>
-                    <a href="./ai/index.html" class="">AI/XR뉴스</a>
-                    <a href="./quickview/index.html" class="">퀵뷰</a>
-                    <a href="./gov/index.html" class="">정부과제</a>
-                    <a href="./board/index.html" class="">Small Talk</a>
+                    <a href="./index.html"
+                        class="active">Home</a>
+                    <a href="./ai/index.html"
+                        class="">AI/XR뉴스</a>
+                    <a href="./quickview/index.html"
+                        class="">퀵뷰</a>
+                    <a href="./gov/index.html"
+                        class="">정부과제</a>
+                    <a href="./board/index.html"
+                        class="">Small Talk</a>
 
                 </nav>
             </div>
@@ -52,413 +57,382 @@
         <div class="header-announcement"
             style="display: flex; justify-content: center; align-items: center; gap: 15px;">
             <span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
-            <a href="./guide.html" style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
+            <a href="./guide.html"
+                style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
         </div>
     </header>
 
     <div class="container">
+        
+<h1>오늘의 뉴스</h1>
+<p class="subtitle">
+    last update <strong style="color: var(--primary-color);">2026년 02월 27일 07시 57분</strong> (정기update 매일 오전8시/오후4시)
+    <a href="#" id="news-source-btn" class="news-source-link">뉴스소스</a>
+</p>
 
-        <h1>오늘의 뉴스</h1>
-        <p class="subtitle">
-            last update <strong style="color: var(--primary-color);">2026년 02월 27일 07시 57분</strong> (정기update 매일
-            오전8시/오후4시)
-            <a href="#" id="news-source-btn" class="news-source-link">뉴스소스</a>
-        </p>
-
-        <!-- News Source Popup Modal -->
-        <div id="news-source-modal" class="modal-overlay" style="display: none;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>뉴스 소스 목록</h3>
-                    <button class="modal-close" id="modal-close-btn">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="source-category">
-                        <h4>AI 카테고리</h4>
-                        <ul class="source-list">
-                            <li>AI타임스 (aitimes.com)</li>
-                            <li>TechCrunch AI</li>
-                            <li>MIT Technology Review AI</li>
-                            <li>AI타임스 (aitimes.kr)</li>
-                            <li>Two Minute Papers (YouTube)</li>
-                            <li>티타임즈TV (YouTube)</li>
-                            <li>가젯서울 (YouTube)</li>
-                            <li>조코딩 (YouTube)</li>
-                            <li>AI코리아커뮤니티 (YouTube)</li>
-                        </ul>
-                    </div>
-
-                    <div class="source-category">
-                        <h4>XR 카테고리</h4>
-                        <ul class="source-list">
-                            <li>Road to VR</li>
-                            <li>UploadVR</li>
-                            <li>AR Insider</li>
-                            <li>Skarred Ghost</li>
-                            <li>ThrillSeeker (YouTube)</li>
-                            <li>SadlyItsBradley (YouTube)</li>
-                            <li>MRTV (YouTube)</li>
-                            <li>Google News: 가상휴먼, 버추얼휴먼, 가상아이돌</li>
-                            <li>Google News: virtual influencer, metahuman</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<!-- News Source Popup Modal -->
+<div id="news-source-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>뉴스 소스 목록</h3>
+            <button class="modal-close" id="modal-close-btn">&times;</button>
         </div>
-
-        <style>
-            .news-source-link {
-                color: var(--primary-color);
-                text-decoration: none;
-                font-size: 0.85rem;
-                margin-left: 0.75rem;
-                padding: 0.25rem 0.75rem;
-                border: 1px solid var(--border-color);
-                border-radius: 6px;
-                background: var(--card-bg);
-                transition: all 0.2s;
-            }
-
-            .news-source-link:hover {
-                background: var(--primary-color);
-                color: white;
-                border-color: var(--primary-color);
-            }
-
-            .modal-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 1000;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .modal-content {
-                background: var(--card-bg, #fff);
-                border-radius: 12px;
-                max-width: 480px;
-                width: 90%;
-                max-height: 80vh;
-                overflow-y: auto;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-                border: 1px solid var(--border-color);
-            }
-
-            .modal-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1.25rem 1.5rem;
-                border-bottom: 1px solid var(--border-color);
-                background: var(--background-color);
-            }
-
-            .modal-header h3 {
-                margin: 0;
-                font-size: 1.1rem;
-                font-weight: 700;
-                color: var(--text-main);
-            }
-
-            .modal-close {
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                cursor: pointer;
-                color: var(--text-muted);
-                padding: 0;
-                line-height: 1;
-                transition: color 0.2s;
-            }
-
-            .modal-close:hover {
-                color: var(--primary-color);
-            }
-
-            .modal-body {
-                padding: 1.25rem 1.5rem 1.5rem;
-            }
-
-<<<<<<< Updated upstream
-            .source-category {
-                margin-bottom: 1.5rem;
-            }
-
-            .source-category:last-child {
-                margin-bottom: 0;
-            }
-
-            .source-category h4 {
-                margin: 0 0 0.75rem;
-                font-size: 0.9rem;
-                font-weight: 600;
-                color: var(--primary-color);
-                padding-bottom: 0.5rem;
-                border-bottom: 2px solid var(--primary-color);
-            }
-
-            .source-list {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.25rem 1rem;
-            }
-
-            .source-list li {
-                padding: 0.5rem 0;
-                font-size: 0.85rem;
-                color: var(--text-muted);
-            }
-
-            @media (max-width: 480px) {
-                .source-list {
-                    grid-template-columns: 1fr;
-                }
-            }
-
-            .new-badge {
-                display: inline-block;
-                background-color: #ef4444;
-                color: white;
-                font-size: 0.65rem;
-                font-weight: 700;
-                padding: 2px 5px;
-                border-radius: 3px;
-                margin-left: 4px;
-                vertical-align: middle;
-            }
-        </style>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const btn = document.getElementById('news-source-btn');
-                const modal = document.getElementById('news-source-modal');
-                const closeBtn = document.getElementById('modal-close-btn');
-
-                btn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    modal.style.display = 'flex';
-                });
-
-                closeBtn.addEventListener('click', function () {
-                    modal.style.display = 'none';
-                });
-
-                modal.addEventListener('click', function (e) {
-                    if (e.target === modal) {
-                        modal.style.display = 'none';
-                    }
-                });
-            });
-        </script>
-
-        <!-- Key Message Section (Replacing Word Cloud) -->
-        <section class="card key-message-section">
-            <div class="key-message-content" style="font-size: 1rem; line-height: 1.8; color: var(--text-main);">
-
-                <ul>
-                    <li><em>AI</em>가 책 한 권을 30초만에 암기한다면, 인간의 지식 습득 방식은 어떻게 변화할까?</li>
-                    <li><em>VR</em> 기술이 레이싱 게임에 적용되면, 현실과 가상의 경계는 어떻게消滅할까?</li>
-                </ul>
-
-            </div>
-        </section>
-
-        <style>
-            /* Styling for Key Message List */
-            .key-message-content ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                /* Single column layout for 2 items */
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .key-message-content li {
-                margin-bottom: 0px;
-                padding-left: 0;
-                position: relative;
-                /* Typography Update: Larger & Bold */
-                font-size: 1.15rem;
-                /* ~120% of base */
-                font-weight: 700;
-                line-height: 1.5;
-            }
-
-            .key-message-content li::before {
-                content: "•";
-                color: var(--primary-color);
-                font-weight: bold;
-                display: inline-block;
-                width: 1em;
-                margin-left: -1em;
-            }
-
-            /* Highlight style for emphasized keywords */
-            .key-message-content em {
-                font-style: normal;
-                color: var(--primary-color);
-                font-weight: 800;
-            }
-        </style>
-
-        <div class="dashboard-grid">
-            <!-- AI Section -->
-            <div class="dashboard-section">
-                <h2>
-                    AI 뉴스
-                    <a href="ai/index.html" class="section-more">더보기</a>
-                </h2>
-                <ul class="preview-list">
-                    <li>
-                        <span class="preview-date">aitimes.com 2026-02-27 07:00</span>
-                        <a href="https://www.aitimes.com/news/articleView.html?idxno=207281" target="_blank"
-                            class="preview-title">스콧 애덤스, 68세로 타계</a>
-
-                    </li>
-                    <li>
-                        <span class="preview-date">aitimes.com 2026-02-27 06:55</span>
-                        <a href="https://www.aitimes.com/news/articleView.html?idxno=207324" target="_blank"
-                            class="preview-title">AI, 책 한 권을 30초만에 암기 가능해짐</a>
-
-                    </li>
-                    <li>
-                        <span class="preview-date">aitimes.com 2026-02-27 06:27</span>
-                        <a href="https://www.aitimes.com/news/articleView.html?idxno=207329" target="_blank"
-                            class="preview-title">구글, 나노 바나나 2 출시</a>
-
-                    </li>
-                    <li>
-                        <span class="preview-date">news.hada.io 2026-02-26 22:33</span>
-                        <a href="https://news.hada.io/topic?id=27037" target="_blank" class="preview-title">윈도우 11 메모장,
-                            마크다운 편집 기능 추가</a>
-
-                    </li>
-                    <li>
-                        <span class="preview-date">news.hada.io 2026-02-26 21:33</span>
-                        <a href="https://news.hada.io/topic?id=27036" target="_blank" class="preview-title">미국 버스 정류장
-                            間격이 너무 가깝다</a>
-
-                    </li>
+        <div class="modal-body">
+            <div class="source-category">
+                <h4>AI 카테고리</h4>
+                <ul class="source-list">
+                    <li>AI타임스 (aitimes.com)</li>
+                    <li>TechCrunch AI</li>
+                    <li>MIT Technology Review AI</li>
+                    <li>AI타임스 (aitimes.kr)</li>
+                    <li>Two Minute Papers (YouTube)</li>
+                    <li>티타임즈TV (YouTube)</li>
+                    <li>가젯서울 (YouTube)</li>
+                    <li>조코딩 (YouTube)</li>
+                    <li>AI코리아커뮤니티 (YouTube)</li>
                 </ul>
             </div>
 
-            <!-- XR Section -->
-            <div class="dashboard-section">
-                <h2>
-                    XR 뉴스
-                    <a href="xr/index.html" class="section-more">더보기</a>
-                </h2>
-                <ul class="preview-list">
-
-                    <li>
-                        <span class="preview-date">uploadvr.com 2026-02-26 22:45</span>
-                        <a href="https://www.uploadvr.com/raceclub-made-for-vr-racer-quest-early-access/"
-                            target="_blank" class="preview-title">레이스클럽, VR용 레이싱 게임 퀘스트에서 早期 접근 출시</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">FOX 4 News Dallas-Fort Worth 2026-02-26 21:40</span>
-                        <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOMEtzR3NwVnFsTjc5blVRajM2LWVONm94QkE4dGp3REFLT1g4N3pXRHpndXdjbTVrWngzNmxkRXY5S0FnUFZ3Slc0c282R1Rqci1LR1MybFZGWFdJcm0xVHpVTlp5c05VdldsQXlBOU1aQnVMSWdZV0VENWFhNlBHNFVRVDlpM2JNeklMQ0d2eUk0d21NVzdHLWlESExlWmY20gGmAUFVX3lxTE8wMENwWjFIWUZoSDUzak4xN1lBR2Vob2xDMHA3dU1qR2Jmc2dHal91bEVqaFNMalBfTkV0NFdEMkloNlhrYmk4LXpVOFlwUzl4N2RTZ3JjZ2RkZEVoRmpJc1B1OXkzYUtwNkhyWk1aZGI2Q0Vhbm9EMlJSRF9YWW94NHlTbkVLN042cDZETnQtUnVFM2FKSWlPODRyS213VDdKdF9yRVE?oc=5"
-                            target="_blank" class="preview-title">미국 텍사스 주에서 배달 기사 스마트 글라스가 도로 폭력 시비 사건 녹화</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">uploadvr.com 2026-02-26 19:25</span>
-                        <a href="https://www.uploadvr.com/laser-dance-gets-first-major-content-update-today/"
-                            target="_blank" class="preview-title">레저 댄스, 첫 번째 메이저 콘텐츠 업데이트发布</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">uploadvr.com 2026-02-26 18:54</span>
-                        <a href="https://www.uploadvr.com/fixer-undercover-review-this-escape-room-puzzler-nails-it/"
-                            target="_blank" class="preview-title">Fixer Undercover, VR 퍼즐 게임의 기본 요소를 성공적으로 구현</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">WDW News Today 2026-02-26 17:47</span>
-                        <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPN2w5WG1PTHFvTXBSMUVoU3ktelZYam5PZ1NncEJ1OVUzdENkVUlIMGlIRjUxbHoyMFpJUDdWLVJVM3cwNWRyc1JnYXZLTjZKUmJ0VGJydUJfRXJpUFVTWVUyN25FbzYtWmpJLUpZTEY5YU42bDlTOUw5TmhPeHBRVnBiV3M5R1FDN0tselN6SGh4SDJzVU53QQ?oc=5"
-                            target="_blank" class="preview-title">MuppetVision 3D, 애플 비전 프로 VR 헤드셋에 출시</a>
-
-                    </li>
-
-                </ul>
-            </div>
-
-            <!-- Gov Section -->
-            <div class="dashboard-section">
-                <h2>
-                    정부과제
-                    <a href="gov/index.html" class="section-more">더보기</a>
-                </h2>
-                <ul class="preview-list">
-
-                    <li>
-                        <span class="preview-date">2026-02-20 | 문화체육관광부</span>
-                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118683"
-                            target="_blank" class="preview-title">2026년 방송영상콘텐츠제작지원(LG채널 오리지널)공고</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2026-02-20 | 경기도</span>
-                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118669"
-                            target="_blank" class="preview-title">[경기] 2026년 시스템반도체 OSAT 분야 기술개발 지원사업 참여기업 모집 공고</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2026-02-20 | 보건복지부</span>
-                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118658"
-                            target="_blank" class="preview-title">2026년 한의약산업 전주기 지원체계 구축사업 한의약 제품 개발 맞춤형 기업지원 공고</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2026-02-19 | 경기도</span>
-                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118624"
-                            target="_blank" class="preview-title">[경기] 화성시 2026년 공급망 확대 사업화 R&D 지원사업 참여기업 모집 공고</a>
-
-                    </li>
-
-                    <li>
-                        <span class="preview-date">2026-02-19 | 충청북도</span>
-                        <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118617"
-                            target="_blank" class="preview-title">[충북] 지능형첨단부품산업의 디지털전환 거점 구축 사업 오픈랩 AI 개발플랫폼 활용 지원 수혜기업
-                            모집 공고</a>
-
-                    </li>
-
-                </ul>
-            </div>
-
-            <!-- Quickview Section -->
-            <div class="dashboard-section">
-                <h2>
-                    퀵뷰
-                    <a href="quickview/index.html" class="section-more">더보기</a>
-                </h2>
-                <ul class="preview-list">
-
-                    <li style="color: var(--text-muted);">아직 등록된 퀵뷰가 없습니다.</li>
-
+            <div class="source-category">
+                <h4>XR 카테고리</h4>
+                <ul class="source-list">
+                    <li>Road to VR</li>
+                    <li>UploadVR</li>
+                    <li>AR Insider</li>
+                    <li>Skarred Ghost</li>
+                    <li>ThrillSeeker (YouTube)</li>
+                    <li>SadlyItsBradley (YouTube)</li>
+                    <li>MRTV (YouTube)</li>
+                    <li>Google News: 가상휴먼, 버추얼휴먼, 가상아이돌</li>
+                    <li>Google News: virtual influencer, metahuman</li>
                 </ul>
             </div>
         </div>
-=======
+    </div>
+</div>
+
+<style>
+    .news-source-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 0.85rem;
+        margin-left: 0.75rem;
+        padding: 0.25rem 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        background: var(--card-bg);
+        transition: all 0.2s;
+    }
+
+    .news-source-link:hover {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background: var(--card-bg, #fff);
+        border-radius: 12px;
+        max-width: 480px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        border: 1px solid var(--border-color);
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+        background: var(--background-color);
+    }
+
+    .modal-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-main);
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        padding: 0;
+        line-height: 1;
+        transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+        color: var(--primary-color);
+    }
+
+    .modal-body {
+        padding: 1.25rem 1.5rem 1.5rem;
+    }
+
+    .source-category {
+        margin-bottom: 1.5rem;
+    }
+
+    .source-category:last-child {
+        margin-bottom: 0;
+    }
+
+    .source-category h4 {
+        margin: 0 0 0.75rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+    .source-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.25rem 1rem;
+    }
+
+    .source-list li {
+        padding: 0.5rem 0;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+
+    @media (max-width: 480px) {
+        .source-list {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .new-badge {
+        display: inline-block;
+        background-color: #ef4444;
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 2px 5px;
+        border-radius: 3px;
+        margin-left: 4px;
+        vertical-align: middle;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btn = document.getElementById('news-source-btn');
+        const modal = document.getElementById('news-source-modal');
+        const closeBtn = document.getElementById('modal-close-btn');
+
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
+
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+<!-- Key Message Section (Replacing Word Cloud) -->
+<section class="card key-message-section">
+    <div class="key-message-content" style="font-size: 1rem; line-height: 1.8; color: var(--text-main);">
+        
+        <ul>
+<li><em>AI</em>가 책 한 권을 30초만에 암기한다면, 인간의 지식 습득 방식은 어떻게 변화할까?</li>
+<li><em>VR</em> 기술이 레이싱 게임에 적용되면, 현실과 가상의 경계는 어떻게消滅할까?</li>
+</ul>
+        
+    </div>
+</section>
+
+<style>
+    /* Styling for Key Message List */
+    .key-message-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        /* Single column layout for 2 items */
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .key-message-content li {
+        margin-bottom: 0px;
+        padding-left: 0;
+        position: relative;
+        /* Typography Update: Larger & Bold */
+        font-size: 1.15rem;
+        /* ~120% of base */
+        font-weight: 700;
+        line-height: 1.5;
+    }
+
+    .key-message-content li::before {
+        content: "•";
+        color: var(--primary-color);
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+    }
+
+    /* Highlight style for emphasized keywords */
+    .key-message-content em {
+        font-style: normal;
+        color: var(--primary-color);
+        font-weight: 800;
+    }
+</style>
+
+<div class="dashboard-grid">
+    <!-- AI Section -->
+    <div class="dashboard-section">
+        <h2>
+            AI 뉴스
+            <a href="ai/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            <li>
+                <span class="preview-date">aitimes.com 2026-02-27 07:00</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=207281" target="_blank" class="preview-title">스콧 애덤스, 68세로 타계</a>
+                
+            </li>
+            <li>
+                <span class="preview-date">aitimes.com 2026-02-27 06:55</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=207324" target="_blank" class="preview-title">AI, 책 한 권을 30초만에 암기 가능해짐</a>
+                
+            </li>
+            <li>
+                <span class="preview-date">aitimes.com 2026-02-27 06:27</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=207329" target="_blank" class="preview-title">구글, 나노 바나나 2 출시</a>
+                
+            </li>
+            <li>
+                <span class="preview-date">news.hada.io 2026-02-26 22:33</span>
+                <a href="https://news.hada.io/topic?id=27037" target="_blank" class="preview-title">윈도우 11 메모장, 마크다운 편집 기능 추가</a>
+                
+            </li>
+            <li>
+                <span class="preview-date">news.hada.io 2026-02-26 21:33</span>
+                <a href="https://news.hada.io/topic?id=27036" target="_blank" class="preview-title">미국 버스 정류장 間격이 너무 가깝다</a>
+                
+            </li>
+        </ul>
+    </div>
+
+    <!-- XR Section -->
+    <div class="dashboard-section">
+        <h2>
+            XR 뉴스
+            <a href="xr/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            
+            <li>
+                <span class="preview-date">uploadvr.com 2026-02-26 22:45</span>
+                <a href="https://www.uploadvr.com/raceclub-made-for-vr-racer-quest-early-access/" target="_blank" class="preview-title">레이스클럽, VR용 레이싱 게임 퀘스트에서 早期 접근 출시</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">FOX 4 News Dallas-Fort Worth 2026-02-26 21:40</span>
+                <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOMEtzR3NwVnFsTjc5blVRajM2LWVONm94QkE4dGp3REFLT1g4N3pXRHpndXdjbTVrWngzNmxkRXY5S0FnUFZ3Slc0c282R1Rqci1LR1MybFZGWFdJcm0xVHpVTlp5c05VdldsQXlBOU1aQnVMSWdZV0VENWFhNlBHNFVRVDlpM2JNeklMQ0d2eUk0d21NVzdHLWlESExlWmY20gGmAUFVX3lxTE8wMENwWjFIWUZoSDUzak4xN1lBR2Vob2xDMHA3dU1qR2Jmc2dHal91bEVqaFNMalBfTkV0NFdEMkloNlhrYmk4LXpVOFlwUzl4N2RTZ3JjZ2RkZEVoRmpJc1B1OXkzYUtwNkhyWk1aZGI2Q0Vhbm9EMlJSRF9YWW94NHlTbkVLN042cDZETnQtUnVFM2FKSWlPODRyS213VDdKdF9yRVE?oc=5" target="_blank" class="preview-title">미국 텍사스 주에서 배달 기사 스마트 글라스가 도로 폭력 시비 사건 녹화</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">uploadvr.com 2026-02-26 19:25</span>
+                <a href="https://www.uploadvr.com/laser-dance-gets-first-major-content-update-today/" target="_blank" class="preview-title">레저 댄스, 첫 번째 메이저 콘텐츠 업데이트发布</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">uploadvr.com 2026-02-26 18:54</span>
+                <a href="https://www.uploadvr.com/fixer-undercover-review-this-escape-room-puzzler-nails-it/" target="_blank" class="preview-title">Fixer Undercover, VR 퍼즐 게임의 기본 요소를 성공적으로 구현</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">WDW News Today 2026-02-26 17:47</span>
+                <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPN2w5WG1PTHFvTXBSMUVoU3ktelZYam5PZ1NncEJ1OVUzdENkVUlIMGlIRjUxbHoyMFpJUDdWLVJVM3cwNWRyc1JnYXZLTjZKUmJ0VGJydUJfRXJpUFVTWVUyN25FbzYtWmpJLUpZTEY5YU42bDlTOUw5TmhPeHBRVnBiV3M5R1FDN0tselN6SGh4SDJzVU53QQ?oc=5" target="_blank" class="preview-title">MuppetVision 3D, 애플 비전 프로 VR 헤드셋에 출시</a>
+                
+            </li>
+            
+        </ul>
+    </div>
+
+    <!-- Gov Section -->
+    <div class="dashboard-section">
+        <h2>
+            정부과제
+            <a href="gov/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            
+            <li>
+                <span class="preview-date">2026-02-20 | 문화체육관광부</span>
+                <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118683" target="_blank" class="preview-title">2026년 방송영상콘텐츠제작지원(LG채널 오리지널)공고</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026-02-20 | 경기도</span>
+                <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118669" target="_blank" class="preview-title">[경기] 2026년 시스템반도체 OSAT 분야 기술개발 지원사업 참여기업 모집 공고</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026-02-20 | 보건복지부</span>
+                <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118658" target="_blank" class="preview-title">2026년 한의약산업 전주기 지원체계 구축사업 한의약 제품 개발 맞춤형 기업지원 공고</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026-02-19 | 경기도</span>
+                <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118624" target="_blank" class="preview-title">[경기] 화성시 2026년 공급망 확대 사업화 R&D 지원사업 참여기업 모집 공고</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026-02-19 | 충청북도</span>
+                <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/view.do?pblancId=PBLN_000000000118617" target="_blank" class="preview-title">[충북] 지능형첨단부품산업의 디지털전환 거점 구축 사업 오픈랩 AI 개발플랫폼 활용 지원 수혜기업 모집 공고</a>
+                
+            </li>
+            
+        </ul>
+    </div>
+
     <!-- Quickview Section -->
     <div class="dashboard-section">
         <h2>
@@ -466,6 +440,12 @@
             <a href="quickview/index.html" class="section-more">더보기</a>
         </h2>
         <ul class="preview-list">
+            
+            <li>
+                <span class="preview-date">2026년 02월 27일</span>
+                <a href="quickview/2c2nc8o3.html" target="_blank" class="preview-title">[심층 분석] 애플의 차세대 AI 웨어러블 전략: 시각 지능(Visual Intelligence)의 물리적 확장</a>
+                <span class="new-badge">NEW</span>
+            </li>
             
             <li>
                 <span class="preview-date">2026년 02월 27일</span>
@@ -491,22 +471,15 @@
                 
             </li>
             
-            <li>
-                <span class="preview-date">2026년 02월 12일</span>
-                <a href="quickview/rlj71d4g.html" target="_blank" class="preview-title">[분석 리포트] 궤도 AI(Orbital AI)의 경제학: 왜 우주 데이터 센터는 '잔혹한' 비즈니스인가?</a>
-                
-            </li>
-            
         </ul>
     </div>
 </div>
->>>>>>> Stashed changes
 
     </div>
 
     <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
-        <p>&copy; 2026 VAAX rebuild Project by <a href="./admin.html" class="admin-link">Fovea</a>. All rights reserved.
-        </p>
+        <p>&copy; 2026 VAAX rebuild Project by <a href="./admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
         <div id="page-visit-counter" style="margin-top: 5px; font-size: 0.8rem; color: var(--primary-color);">
             <span id="visit-count">Visits: ...</span>
         </div>
