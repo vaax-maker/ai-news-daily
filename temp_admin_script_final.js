@@ -371,7 +371,10 @@ function buildTelegramMessage(title, summary, pageUrl) {
 
 // Extract body content from full HTML document (prevents nested HTML issues)
 function extractBodyContent(html) {
-    if (!html.includes('<!DOCTYPE') && !html.includes('<html') && !html.includes('<body')) {
+    // If the HTML contains DOCTYPE or full document structure, we assumes it's a full page 
+    // and we DO NOT extract just the body so as to preserve the raw HTML structure.
+    if (html.toLowerCase().includes('<!doctype') || html.toLowerCase().includes('<html') || html.toLowerCase().includes('<body')) {
+        console.log('[Quickview] Full HTML document detected, preserving raw HTML structure');
         return html;
     }
 
@@ -388,7 +391,7 @@ function extractBodyContent(html) {
     });
 
     const content = styles + body.innerHTML;
-    console.log('[Quickview] Extracted body content from full HTML document');
+    console.log('[Quickview] Extracted body content from HTML fragment');
     return content.trim();
 }
 

@@ -209,6 +209,43 @@ def wrap_with_responsive_css(html: str) -> str:
         
     return responsive_css + '\n' + html
 
+def inject_minimal_responsive_css(html: str) -> str:
+    """
+    Injects only essential, non-destructive mobile CSS into a full HTML document
+    without overriding global layouts or sizes.
+    """
+    responsive_css = """
+<style>
+/* Minimal Mobile CSS (Safe for Full Pages) */
+img, video, iframe { 
+    max-width: 100%; 
+    height: auto; 
+}
+table, pre { 
+    max-width: 100%; 
+    overflow-x: auto; 
+}
+</style>
+"""
+    viewport_meta = '<meta name="viewport" content="width=device-width, initial-scale=1">'
+
+    # 1. Inject Viewport if missing
+    import re
+    if not re.search(r'<meta[^>]*viewport', html, re.IGNORECASE):
+        if re.search(r'<head[^>]*>', html, re.IGNORECASE):
+            html = re.sub(r'(<head[^>]*>)', r'\1\n' + viewport_meta, html, count=1, flags=re.IGNORECASE)
+        else:
+            html = viewport_meta + '\n' + html
+
+    # 2. Inject Minimal CSS
+    if "/* Minimal Mobile CSS" not in html:
+        if re.search(r'</head>', html, re.IGNORECASE):
+            html = re.sub(r'(</head>)', responsive_css + '\n' + r'\1', html, count=1, flags=re.IGNORECASE)
+        else:
+            html = responsive_css + '\n' + html
+
+    return html
+
 
 def get_firestore_client():
     """Initialize and return Firestore client."""
@@ -320,12 +357,29 @@ def process_quickview_pages():
         # Transform YouTube timestamp links for in-page playback
         cleaned_html = transform_timestamp_links(cleaned_html)
         
-        # Apply Responsive Wrapper (Mobile Optimization)
-        cleaned_html = wrap_with_responsive_css(cleaned_html)
-        
         # Generate individual page HTML
         page_url = f"https://vaax-maker.github.io/ai-news-daily/quickview/{page_id}.html"
-        page_html = render_quickview_page(title, cleaned_html, created_display, page_url, created_at=created_ts)
+        
+        is_full_page = '<!doctype' in html_content.lower() or '<html' in html_content.lower() or '<body' in html_content.lower()
+        
+        if is_full_page:
+            # For full pages, we preserve original code exactly, but add minimal responsive handles
+            print(f"[Quickview] {page_id} is a full HTML document. Preserving raw structure.")
+            cleaned_html = inject_minimal_responsive_css(cleaned_html)
+            page_html = cleaned_html
+            
+            # Optionally inject a small navigation back button if needed (commented out for now to ensure 1:1 match)
+            # return_btn = f'<div style="position:fixed; bottom:20px; right:20px; z-index:9999;"><a href="../quickview/index.html" style="background:#047857;color:#fff;padding:10px 15px;text-decoration:none;border-radius:20px;font-family:sans-serif;font-size:14px;box-shadow:0 2px 5px rgba(0,0,0,0.2);">← 퀵뷰 목록</a></div>'
+            # if '</body>' in page_html:
+            #     page_html = page_html.replace('</body>', return_btn + '</body>')
+            # else:
+            #     page_html += return_btn
+                
+        else:
+            # Apply Responsive Wrapper (Mobile Optimization) and layout for snippets
+            cleaned_html = wrap_with_responsive_css(cleaned_html)
+            page_html = render_quickview_page(title, cleaned_html, created_display, page_url, created_at=created_ts)
+            
         page_path = os.path.join(quickview_dir, f"{page_id}.html")
         
         with open(page_path, "w", encoding="utf-8") as f:

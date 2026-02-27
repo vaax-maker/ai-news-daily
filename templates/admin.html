@@ -796,9 +796,11 @@
 
     // Extract body content from full HTML document (prevents nested HTML issues)
     function extractBodyContent(html) {
-        // If the HTML contains DOCTYPE or full document structure, extract only body content
-        if (!html.includes('<!DOCTYPE') && !html.includes('<html') && !html.includes('<body')) {
-            return html; // Already just content, return as-is
+        // If the HTML contains DOCTYPE or full document structure, we assumes it's a full page 
+        // and we DO NOT extract just the body so as to preserve the raw HTML structure.
+        if (html.toLowerCase().includes('<!doctype') || html.toLowerCase().includes('<html') || html.toLowerCase().includes('<body')) {
+            console.log('[Quickview] Full HTML document detected, preserving raw HTML structure');
+            return html;
         }
 
         const parser = new DOMParser();
@@ -817,7 +819,7 @@
 
         // Return styles + body innerHTML
         const content = styles + body.innerHTML;
-        console.log('[Quickview] Extracted body content from full HTML document');
+        console.log('[Quickview] Extracted body content from HTML fragment');
         return content.trim();
     }
 
