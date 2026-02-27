@@ -1,42 +1,326 @@
+<!DOCTYPE html>
+<html lang='ko'>
 
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>[심층 분석] 애플의 차세대 AI 웨어러블 전략: 시각 지능(Visual Intelligence)의 물리적 확장 - 퀵뷰</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YQY3DLR0P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-9YQY3DLR0P');
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css?v=12">
+    
 <style>
-/* Responsive Wrapper - Auto-injected */
-html { font-size: 16px; }
-body { 
-    max-width: 900px; 
-    margin: 0 auto; 
-    padding: 1rem; 
-    line-height: 1.7;
+    .quickview-content {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .quickview-header {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .quickview-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
+    }
+
+    .quickview-meta {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
+    .quickview-body {
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+
+    .quickview-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    .quickview-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Flatten nested content structure for better readability */
+    .quickview-body .card {
+        padding: 1.25rem !important;
+        /* Reduce padding from default 1.5rem */
+        box-shadow: none !important;
+        /* Remove shadow to reduce "depth" feeling */
+        background: #f8fafc;
+        /* Light background for contrast without depth */
+        border: 1px solid var(--border-color);
+        margin-bottom: 1.5rem;
+    }
+
+    .quickview-body ul,
+    .quickview-body ol {
+        padding-left: 1.25rem;
+        /* Reduce list indentation */
+        margin-bottom: 1rem;
+    }
+
+    .quickview-body li {
+        margin-bottom: 0.25rem;
+    }
+
+    /* Ensure code blocks don't add too much visual weight */
+    .quickview-body pre {
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    /* === CSS OVERRIDES (replacing Shadow DOM isolation) === */
+    /* Hide duplicate titles from injected content */
+    .quickview-body>h1,
+    .quickview-body>.container>h1,
+    .quickview-body>body>.container>h1 {
+        display: none !important;
+    }
+
+    /* Flatten Container/Card styles from injected content */
+    .quickview-body .container,
+    .quickview-body .summary-box,
+    .quickview-body .section-block {
+        box-shadow: none !important;
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        border-radius: 0 !important;
+    }
+
+    /* Hide internal footer/meta from injected content */
+    .quickview-body>footer,
+    .quickview-body .container>footer,
+    .quickview-body .meta-date,
+    .quickview-body .meta-info {
+        display: none !important;
+    }
+
+    /* Adjust heading styles inside quickview */
+    .quickview-body h2 {
+        font-size: 1.4rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        color: #333;
+        border-left: none !important;
+        padding-left: 0 !important;
+    }
+
+    .quickview-body h3 {
+        font-size: 1.15rem;
+        margin-top: 1.2rem;
+        color: #444;
+    }
+
+    /* Tags in injected content */
+    .quickview-body .tag {
+        display: inline-block;
+        background-color: #475569;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        margin-right: 6px;
+        margin-top: 6px;
+    }
+
+    /* Neutralize global body styles that might leak from injected content */
+    .quickview-body body {
+        all: unset;
+        display: block;
+    }
+
+    /* === MOBILE RESPONSIVE === */
+    @media (max-width: 767px) {
+        .quickview-content {
+            /* Remove outer card styling on mobile - match daily article pages */
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 1rem;
+            border-radius: 0;
+        }
+
+        .quickview-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .quickview-title {
+            font-size: 1.35rem;
+            line-height: 1.3;
+        }
+
+        .quickview-meta {
+            font-size: 0.85rem;
+        }
+
+        .quickview-body {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .quickview-body .card {
+            padding: 0.75rem !important;
+            margin-bottom: 1rem;
+        }
+
+        .quickview-body ul,
+        .quickview-body ol {
+            padding-left: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .quickview-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        .quickview-body h2,
+        .quickview-body h3 {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quickview-actions {
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            gap: 0.5rem;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+    <header>
+        <div class="gnb">
+            <!-- Left: Logo -->
+            <a href="../index.html" class="logo-link">
+                <img src="../static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
+            </a>
+
+            <!-- Right: Slogan & Nav -->
+            <div class="header-right-section">
+                <div class="slogan-container">
+                    <span class="slogan-since">since 2016</span>
+                    <span class="header-slogan-text">
+                        VR-AR-AI-XR <span class="slogan-highlight">기술과 Biz.를 연결하는</span>
+                        성장나눔 <span class="slogan-highlight">커뮤니티</span>
+                    </span>
+                </div>
+                <nav class="nav-links">
+                    <a href="../index.html"
+                        class="">Home</a>
+                    <a href="../ai/index.html"
+                        class="">AI/XR뉴스</a>
+                    <a href="../quickview/index.html"
+                        class="active">퀵뷰</a>
+                    <a href="../gov/index.html"
+                        class="">정부과제</a>
+                    <a href="../board/index.html"
+                        class="">Small Talk</a>
+
+                </nav>
+            </div>
+        </div>
+        <!-- Announcement Message -->
+        <div class="header-announcement"
+            style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
+            <a href="../guide.html"
+                style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+<div class="quickview-content">
+    <div class="quickview-header">
+        <h1 class="quickview-title">[심층 분석] 애플의 차세대 AI 웨어러블 전략: 시각 지능(Visual Intelligence)의 물리적 확장</h1>
+        <div class="quickview-meta">📅 2026년 02월 27일 09:10</div>
+    </div>
+
+    <!-- Direct content injection (no Shadow DOM for external script compatibility) -->
+    <div class="quickview-body">
+        
+<style>
+/* Responsive Wrapper - Scoped */
+.quickview-body {
     word-break: keep-all;
+    overflow-wrap: break-word;
 }
-img, video, iframe { 
+.quickview-body img, 
+.quickview-body video, 
+.quickview-body iframe { 
     max-width: 100%; 
     height: auto; 
 }
-table { 
+.quickview-body table { 
     width: 100%; 
     display: block; 
     overflow-x: auto; 
 }
-pre, code { 
+.quickview-body pre, 
+.quickview-body code { 
     overflow-x: auto; 
     white-space: pre-wrap; 
-    word-wrap: break-word;
+    word-wrap: break-word; 
 }
 @media (max-width: 768px) {
-    body { 
-        padding: 0.75rem; 
+    .quickview-body { 
         font-size: 15px; 
     }
-    h1 { font-size: 1.5rem; }
-    h2 { font-size: 1.25rem; }
-    h3 { font-size: 1.1rem; }
+    .quickview-body h1 { font-size: 1.5rem; }
+    .quickview-body h2 { font-size: 1.25rem; }
+    .quickview-body h3 { font-size: 1.1rem; }
 }
 </style>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
  .quickview-body /* fovea.css - Mobile Optimized Version */
-        :root {
+        .quickview-body {
             --primary-color: #65a30d;
             --primary-color-hover: #4d7c0f;
             --secondary-color: #475569;
@@ -47,9 +331,9 @@ pre, code {
             --touch-highlight: rgba(101, 163, 13, 0.1);
         }
 
-        html { font-size: 16px; scroll-behavior: smooth; }
+        .quickview-body { font-size: 16px; scroll-behavior: smooth; }
 
-        body {
+        .quickview-body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             line-height: 1.4;
             color: var(--text-main);
@@ -59,7 +343,7 @@ pre, code {
             padding: 40px 20px;
             word-break: keep-all;
             -webkit-font-smoothing: antialiased;
-        } .quickview-body h1 {
+        } .quickview-body .quickview-body h1 {
             margin-top: 1.2em;
             margin-bottom: 0.6em;
             font-size: 2.2rem;
@@ -67,25 +351,25 @@ pre, code {
             border-bottom: 3px solid var(--primary-color);
             padding-bottom: 12px;
             line-height: 1.2;
-        } .quickview-body h2 {
+        } .quickview-body .quickview-body h2 {
             margin-top: 2.5em;
             margin-bottom: 1.2em;
             font-size: 1.75rem;
             color: var(--secondary-color);
             border-left: 6px solid var(--primary-color);
             padding-left: 18px;
-        } .quickview-body h3 {
+        } .quickview-body .quickview-body h3 {
             margin-top: 1.8em;
             font-size: 1.4rem;
             color: var(--text-main);
-        } .quickview-body p { margin-bottom: 1.5em; } .quickview-body .meta-info {
+        } .quickview-body .quickview-body p { margin-bottom: 1.5em; } .quickview-body .meta-info {
             background: #f8fafc;
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 30px;
             border: 1px solid var(--border-color);
             font-size: 0.95rem;
-        } .quickview-body .meta-info div { margin-bottom: 8px; } .quickview-body .tag {
+        } .quickview-body .meta-info .quickview-body div { margin-bottom: 8px; } .quickview-body .tag {
             display: inline-block;
             background-color: #f3f4f6;
             color: #374151;
@@ -94,17 +378,17 @@ pre, code {
             font-size: 0.85rem;
             margin-right: 6px;
             border: 1px solid var(--border-color);
-        } .quickview-body table {
+        } .quickview-body .quickview-body table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
             overflow-x: auto;
             display: block;
-        } .quickview-body th, .quickview-body td {
+        } .quickview-body .quickview-body th , .quickview-body .quickview-body td {
             padding: 12px;
             border: 1px solid var(--border-color);
             text-align: left;
-        } .quickview-body th { background-color: #f8fafc; } .quickview-body .editor-note {
+        } .quickview-body .quickview-body th { background-color: #f8fafc; } .quickview-body .editor-note {
             background-color: #f0fdf4;
             border: 1px solid #bbf7d0;
             padding: 20px;
@@ -115,7 +399,7 @@ pre, code {
             font-weight: bold;
             margin-bottom: 10px;
             display: block;
-        } .quickview-body footer {
+        } .quickview-body .quickview-body footer {
             margin-top: 50px;
             padding-top: 20px;
             border-top: 1px solid var(--border-color);
@@ -125,7 +409,7 @@ pre, code {
         }
 
         @media (max-width: 768px) {
-            body { padding: 20px 16px; } .quickview-body h1 { font-size: 1.65rem; } .quickview-body h2 { font-size: 1.35rem; } .quickview-body .meta-info { padding: 12px; font-size: 0.85rem; }
+            .quickview-body { padding: 20px 16px; } .quickview-body .quickview-body h1 { font-size: 1.65rem; } .quickview-body .quickview-body h2 { font-size: 1.35rem; } .quickview-body .meta-info { padding: 12px; font-size: 0.85rem; }
         }
     
 </style>
@@ -224,3 +508,102 @@ pre, code {
 
     <p>[애플의 새로운 AI 웨어러블 전략 분석 영상](https://www.youtube.com/watch?v=5ws0r0Ly5aE)</p>
     이 영상은 애플이 준비 중인 AI 안경, 펜던트, 카메라 탑재 에어팟에 대한 구체적인 출시 타임라인과 기술적 특징을 시각적으로 상세히 설명하고 있어 본 리포트의 내용을 이해하는 데 큰 도움이 됩니다.
+    </div>
+
+    <div class="quickview-actions">
+        <a href="index.html" class="back-link">← 퀵뷰 목록으로</a>
+        <div style="flex: 1;"></div>
+        <a href="../board/index.html?mode=discuss&title=%5B%EC%8B%AC%EC%B8%B5%20%EB%B6%84%EC%84%9D%5D%20%EC%95%A0%ED%94%8C%EC%9D%98%20%EC%B0%A8%EC%84%B8%EB%8C%80%20AI%20%EC%9B%A8%EC%96%B4%EB%9F%AC%EB%B8%94%20%EC%A0%84%EB%9E%B5%3A%20%EC%8B%9C%EA%B0%81%20%EC%A7%80%EB%8A%A5%28Visual%20Intelligence%29%EC%9D%98%20%EB%AC%BC%EB%A6%AC%EC%A0%81%20%ED%99%95%EC%9E%A5&link=https%3A//vaax-maker.github.io/ai-news-daily/quickview/z71swe61.html&source=퀵뷰"
+            class="discuss-btn-sm">토론</a>
+        <button type="button" class="discuss-btn-sm"
+            onclick="navigator.clipboard.writeText('https://vaax-maker.github.io/ai-news-daily/quickview/z71swe61.html'); alert('URL이 복사되었습니다!');">공유</button>
+    </div>
+</div>
+
+    </div>
+
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 VAAX rebuild Project by <a href="../admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
+        <div id="page-visit-counter" style="margin-top: 5px; font-size: 0.8rem; color: var(--primary-color);">
+            <span id="visit-count">Visits: ...</span>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK & Visit Counter -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Reuse config from board.html
+        const firebaseConfig = {
+            apiKey: "AIzaSyANn76u2ZCJ5rq4IOpYaTzFy1JtKoPOM-c",
+            authDomain: "vaax-board.firebaseapp.com",
+            projectId: "vaax-board",
+            storageBucket: "vaax-board.firebasestorage.app",
+            messagingSenderId: "31682907508",
+            appId: "1:31682907508:web:cd3ee4231ec8b3fb75b021",
+            measurementId: "G-9YQY3DLR0P"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function trackVisit() {
+            try {
+                // Determine page ID from URL (e.g., "index.html", "ai/index.html")
+                let path = window.location.pathname;
+
+                // Remove leading slash and repo name if hosted on GitHub Pages
+                // e.g. "/ai-news-daily/ai/index.html" -> "ai/index.html"
+                if (path.startsWith('/ai-news-daily/')) {
+                    path = path.replace('/ai-news-daily/', '');
+                }
+                if (path.startsWith('/')) {
+                    path = path.substring(1);
+                }
+                if (!path || path === "") {
+                    path = "index.html";  // root
+                }
+
+                // Firestore document ID cannot contain slashes. Replace / with _
+                const docId = path.replace(/\//g, '_').replace(/\./g, '_');
+
+                const docRef = doc(db, "page_visits", docId);
+
+                // 1. Get current count (optimistic UI or wait?)
+                // Let's just update and then get, or get then update?
+                // Incrementing blindly is better for performance, then listening or getting.
+
+                // Use setDoc with merge to ensure document exists
+                await setDoc(docRef, {
+                    path: path,
+                    lastVisited: serverTimestamp()
+                }, { merge: true });
+
+                // Increment count
+                await updateDoc(docRef, {
+                    count: increment(1)
+                });
+
+                // Get updated count to display
+                const snap = await getDoc(docRef);
+                if (snap.exists()) {
+                    const data = snap.data();
+                    const countSpan = document.getElementById('visit-count');
+                    if (countSpan && data.count) {
+                        countSpan.textContent = `Total Visits: ${data.count.toLocaleString()}`;
+                    }
+                }
+
+            } catch (e) {
+                console.error("Visit tracking failed:", e);
+            }
+        }
+
+        // Execute tracking
+        trackVisit();
+    </script>
+</body>
+
+</html>
