@@ -140,10 +140,10 @@ def fetch_koneps_announcements(service_key: str, limit: int = 30) -> List[Dict[s
         "IDC", "데이터센터", "클라우드"
     ]
     
-    # 검색 기간: 최근 30일로 확대 (안정적인 데이터 수집)
+    # 검색 기간: 최근 7일 (나라장터 API 입력범위 제한으로 30일 초과 시 에러 발생)
     now = datetime.datetime.now()
     end_dt = now.strftime("%Y%m%d%H%M")
-    start_dt = (now - datetime.timedelta(days=30)).strftime("%Y%m%d") + "0000"
+    start_dt = (now - datetime.timedelta(days=7)).strftime("%Y%m%d") + "0000"
     
     items_list = []
     seen_links = set()
