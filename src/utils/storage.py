@@ -345,6 +345,7 @@ class GovStorage:
 
         col_ref = self.db.collection("gov").document("announcements").collection("items")
         added = 0
+        added_items = []
         for item in new_items:
             link = item.get("link", "")
             if link in seen_links:
@@ -361,8 +362,17 @@ class GovStorage:
             seen_links.add(link)
             if norm_title:
                 seen_titles.append(norm_title)
+            added_items.append(item)
             added += 1
 
         if added:
             print(f"[Storage/Firestore] Saved {added} new gov announcements")
-        return existing + [i for i in new_items if i.get("link") in seen_links]
+
+        # 기존 항목은 is_new=False로 설정하여 기존과제와 신규과제를 구분
+        for item in existing:
+            item["is_new"] = False
+
+        # 기존(existing) + 신규(added_items) 합산 후 날짜순 정렬
+        merged = existing + added_items
+        merged.sort(key=lambda x: x.get('date', '') or x.get('published_display', ''), reverse=True)
+        return merged
