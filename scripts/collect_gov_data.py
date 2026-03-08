@@ -4,6 +4,9 @@ import os
 # Adjust path to find src
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from src.fetchers.gov import fetch_gov_announcements
 from src.utils.storage import GovStorage
 
