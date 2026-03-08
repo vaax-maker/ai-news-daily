@@ -18,6 +18,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger(__name__)
 
 
+import html
+
 def get_bot() -> Bot:
     token = os.environ.get("TELEGRAM_BOT_TOKEN")
     if not token:
@@ -39,21 +41,22 @@ async def send_infographics_async(png_paths: list[str], analysis: dict, videos: 
     today = datetime.now().strftime("%Y년 %m월 %d일")
     
     # 헤더 메시지
+    summary_escaped = html.escape(analysis.get('daily_summary', '')[:200])
     header_msg = (
-        f"🤖 *AI 이슈 데일리 리포트*\n"
+        f"🤖 <b>AI 이슈 데일리 리포트</b>\n"
         f"📅 {today}\n"
         f"━━━━━━━━━━━━━━━━━\n"
         f"📊 분석 영상: {analysis.get('video_count', 0)}개\n"
         f"✅ 자막 수집: {analysis.get('has_transcript_count', 0)}개\n"
         f"📡 채널 수: {len(set(v['channel_handle'] for v in videos))}개\n"
         f"━━━━━━━━━━━━━━━━━\n"
-        f"💡 {analysis.get('daily_summary', '')[:200]}"
+        f"💡 {summary_escaped}"
     )
     
     await bot.send_message(
         chat_id=chat_id,
         text=header_msg,
-        parse_mode=ParseMode.MARKDOWN,
+        parse_mode=ParseMode.HTML,
     )
     logger.info("✅ 헤더 메시지 발송 완료")
     
@@ -64,8 +67,8 @@ async def send_infographics_async(png_paths: list[str], analysis: dict, videos: 
             continue
         
         caption_map = {
-            "01_common": "🔥 *공통 AI 이슈* — 여러 채널이 다룬 주제",
-            "02_unique": "📌 *개별 AI 이슈* — 채널별 단독 이슈",
+            "01_common": "🔥 <b>공통 AI 이슈</b> — 여러 채널이 다룬 주제",
+            "02_unique": "📌 <b>개별 AI 이슈</b> — 채널별 단독 이슈",
         }
         caption = next((v for k, v in caption_map.items() if k in Path(png_path).name), f"AI 이슈 #{i+1}")
         
@@ -74,21 +77,21 @@ async def send_infographics_async(png_paths: list[str], analysis: dict, videos: 
                 chat_id=chat_id,
                 photo=f,
                 caption=caption,
-                parse_mode=ParseMode.MARKDOWN,
+                parse_mode=ParseMode.HTML,
             )
         logger.info(f"✅ PNG 발송: {Path(png_path).name}")
         await asyncio.sleep(1)  # Rate limit 방지
     
     # 영상 링크 목록 발송
     video_links = "\n".join(
-        f"• [{v['channel_handle']}] [{v['title'][:40]}]({v['url']})"
+        f"• [{html.escape(v['channel_handle'])}] <a href=\"{html.escape(v['url'])}\">{html.escape(v['title'][:40])}</a>"
         for v in videos[:10]
     )
     if video_links:
         await bot.send_message(
             chat_id=chat_id,
-            text=f"📺 *오늘의 수집 영상 목록*\n\n{video_links}",
-            parse_mode=ParseMode.MARKDOWN,
+            text=f"📺 <b>오늘의 수집 영상 목록</b>\n\n{video_links}",
+            parse_mode=ParseMode.HTML,
             disable_web_page_preview=True,
         )
     
@@ -106,10 +109,11 @@ async def send_error_notification_async(error_msg: str):
         bot = get_bot()
         chat_id = get_chat_id()
         today = datetime.now().strftime("%Y-%m-%d %H:%M")
+        error_escaped = html.escape(error_msg[:1000])
         await bot.send_message(
             chat_id=chat_id,
-            text=f"❌ *AI 이슈 에이전트 오류*\n📅 {today}\n\n```\n{error_msg[:1000]}\n```",
-            parse_mode=ParseMode.MARKDOWN,
+            text=f"❌ <b>AI 이슈 에이전트 오류</b>\n📅 {today}\n\n<pre>{error_escaped}</pre>",
+            parse_mode=ParseMode.HTML,
         )
     except Exception as e:
         logger.error(f"에러 알림 발송 실패: {e}")
