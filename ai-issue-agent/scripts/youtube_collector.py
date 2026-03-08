@@ -94,7 +94,7 @@ def get_transcript(video_id: str, langs: list[str] = None) -> Optional[str]:
     try:
         api = YouTubeTranscriptApi()
         transcript = api.fetch(video_id, languages=langs)
-        text = " ".join([seg["text"] for seg in transcript])
+        text = " ".join([t["text"] if isinstance(t, dict) else getattr(t, "text", "") for t in transcript])
         return text
     except TranscriptsDisabled:
         logger.warning(f"  자막 비활성화: {video_id}")
@@ -105,7 +105,8 @@ def get_transcript(video_id: str, langs: list[str] = None) -> Optional[str]:
             api = YouTubeTranscriptApi()
             transcript_list = api.list(video_id)
             for t in transcript_list:
-                text = " ".join([seg["text"] for seg in t.fetch()])
+                fetched = t.fetch()
+                text = " ".join([seg["text"] if isinstance(seg, dict) else getattr(seg, "text", "") for seg in fetched])
                 return text
         except Exception:
             pass
