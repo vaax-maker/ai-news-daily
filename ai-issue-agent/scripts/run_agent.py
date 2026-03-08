@@ -21,12 +21,16 @@ from topic_analyzer import analyze_topics_with_ai
 from infographic_generator import generate_all
 from telegram_sender import send_infographics, send_error_notification
 
+OUTPUT_DIR = BASE_DIR / "output"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+# 로깅 설정
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s [%(levelname)s] %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler(BASE_DIR / "output" / "agent.log", mode='a', encoding='utf-8'),
+        logging.FileHandler(OUTPUT_DIR / "agent.log", mode='a', encoding='utf-8'),
     ]
 )
 logger = logging.getLogger(__name__)
