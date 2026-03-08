@@ -833,6 +833,19 @@ def main():
     except Exception as e:
         print(f"[Board] Failed: {e}")
 
+    # === FORCIBLY SYNC GOV DATA TO ENSURE DASHBOARD HAS LATEST ITEMS ===
+    try:
+        from src.utils.storage import GovStorage
+        storage = GovStorage()
+        all_gov = storage.load_announcements()
+        if all_gov:
+            from src.utils.common import parse_article_datetime
+            synced_gov = sorted(all_gov, key=parse_article_datetime, reverse=True)
+            dashboard_data["gov"] = synced_gov
+            print(f"[Sync] Synced {len(synced_gov)} gov items directly from storage for dashboard.")
+    except Exception as e:
+        print(f"[Sync] Failed to sync gov data: {e}")
+
     # 4. Save actual news update timestamp (only when there are NEW articles)
     from src.utils.common import get_kst_now
     if total_new_items > 0:
@@ -877,8 +890,9 @@ def main():
         except Exception as e:
             print(f"[Quickview] Error loading quickview data: {e}")
         
-        # Ensure gov data is sorted by date (newest first) before display
-        gov_sorted = sort_gov_announcements(dashboard_data.get("gov", []))
+        # Gov is already synced and sorted, but fallback just in case
+        from src.utils.common import parse_article_datetime
+        gov_sorted = sorted(dashboard_data.get("gov", []), key=parse_article_datetime, reverse=True)
         
         dash_html = render_dashboard(
             ai_latest=dashboard_data.get("ai", [])[:5],
