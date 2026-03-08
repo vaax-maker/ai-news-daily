@@ -92,7 +92,8 @@ def get_transcript(video_id: str, langs: list[str] = None) -> Optional[str]:
     if langs is None:
         langs = ["ko", "en", "ko-KR"]
     try:
-        transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=langs)
+        api = YouTubeTranscriptApi()
+        transcript = api.fetch(video_id, languages=langs)
         text = " ".join([seg["text"] for seg in transcript])
         return text
     except TranscriptsDisabled:
@@ -101,7 +102,8 @@ def get_transcript(video_id: str, langs: list[str] = None) -> Optional[str]:
     except NoTranscriptFound:
         # 자동 생성 포함 재시도
         try:
-            transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+            api = YouTubeTranscriptApi()
+            transcript_list = api.list(video_id)
             for t in transcript_list:
                 text = " ".join([seg["text"] for seg in t.fetch()])
                 return text

@@ -68,9 +68,14 @@ jobs:
           else
             echo "⚠️ NOTEBOOKLM_COOKIES 미설정 - 로컬 분석 모드 사용"
           fi
-          # notebooklm 스킬 심볼릭 링크 (저장소에 포함된 경우)
-          if [ -d "antigravity-awesome-skills/skills/notebooklm" ]; then
-            cp -r antigravity-awesome-skills/skills/notebooklm "$SKILL_DIR"
+          # notebooklm 스킬 저장소 클론 및 복사
+          echo "🔄 notebooklm 스킬 레포지토리 클론 중..."
+          git clone https://github.com/sickn33/antigravity-awesome-skills.git /tmp/skills_repo || true
+          if [ -d "/tmp/skills_repo/skills/notebooklm" ]; then
+            cp -r /tmp/skills_repo/skills/notebooklm/* "$SKILL_DIR/"
+            echo "✅ 스킬 설치 완료"
+          else
+            echo "⚠️ 스킬 레포지토리 클론 실패"
           fi
 
       # ── 7. output 폴더 생성 ─────────────────────────
