@@ -18,6 +18,12 @@ fi
 # 가상환경 활성화
 source .venv/bin/activate
 
+# 환경 변수 로드 (.env 파일이 존재할 경우)
+if [ -f ".env" ]; then
+    export $(grep -v '^#' .env | xargs)
+    echo "환경 변수(.env) 로드 완료"
+fi
+
 # 의존성 설치
 pip install -r requirements.txt > /dev/null 2>&1
 playwright install chromium > /dev/null 2>&1
