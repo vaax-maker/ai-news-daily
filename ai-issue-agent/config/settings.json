@@ -1,0 +1,34 @@
+{
+    "schedule": {
+        "time": "07:30",
+        "timezone": "Asia/Seoul",
+        "cron_utc": "30 22 * * *"
+    },
+    "telegram": {
+        "bot_token_env": "TELEGRAM_BOT_TOKEN",
+        "chat_id_env": "TELEGRAM_CHAT_ID",
+        "send_infographics": true,
+        "send_report_md": false
+    },
+    "notebooklm": {
+        "notebook_name": "AI이슈모니터링",
+        "queries": {
+            "common_topics": "오늘 수집된 영상들에서 2개 이상의 채널이 공통으로 다룬 AI 주제는 무엇인가? 각 주제별로 핵심 내용과 다룬 채널명을 포함해서 한국어로 정리해줘.",
+            "unique_topics": "각 채널이 단독으로 다룬 독자적인 AI 이슈는 무엇인가? 채널명과 주제, 핵심 내용을 한국어로 정리해줘.",
+            "daily_summary": "오늘의 AI 이슈를 전체적으로 한 문단으로 한국어 요약해줘."
+        },
+        "max_sources_per_run": 30,
+        "cookies_env": "NOTEBOOKLM_COOKIES"
+    },
+    "output": {
+        "dir": "output",
+        "infographic_width": 1080,
+        "infographic_height": 1920,
+        "language": "ko",
+        "font": "Noto Sans KR"
+    },
+    "paths": {
+        "transcripts_dir": "/tmp/ai-issue-agent/transcripts",
+        "output_dir": "./output"
+    }
+}

@@ -1,0 +1,103 @@
+{
+    "channels": [
+        {
+            "handle": "@nateherk",
+            "url": "https://www.youtube.com/@nateherk",
+            "lang": "en",
+            "category": "AI"
+        },
+        {
+            "handle": "@nicksaraev",
+            "url": "https://www.youtube.com/@nicksaraev",
+            "lang": "en",
+            "category": "AI"
+        },
+        {
+            "handle": "@itssssss_Jack",
+            "url": "https://www.youtube.com/@itssssss_Jack",
+            "lang": "en",
+            "category": "AI"
+        },
+        {
+            "handle": "@Chase-H-AI",
+            "url": "https://www.youtube.com/@Chase-H-AI",
+            "lang": "en",
+            "category": "AI"
+        },
+        {
+            "handle": "@jocoding",
+            "url": "https://www.youtube.com/@jocoding",
+            "lang": "ko",
+            "category": "AI/Coding"
+        },
+        {
+            "handle": "@코딩알려주는누나",
+            "url": "https://www.youtube.com/@%EC%BD%94%EB%94%A9%EC%95%8C%EB%A0%A4%EC%A3%BC%EB%8A%94%EB%88%84%EB%82%98",
+            "lang": "ko",
+            "category": "AI/Coding"
+        },
+        {
+            "handle": "@TTimesTV",
+            "url": "https://www.youtube.com/@TTimesTV",
+            "lang": "ko",
+            "category": "Tech"
+        },
+        {
+            "handle": "@dante-labs",
+            "url": "https://www.youtube.com/@dante-labs",
+            "lang": "en",
+            "category": "AI"
+        },
+        {
+            "handle": "@ai_tusol",
+            "url": "https://www.youtube.com/@ai_tusol",
+            "lang": "ko",
+            "category": "AI"
+        },
+        {
+            "handle": "@mr.5pm",
+            "url": "https://www.youtube.com/@mr.5pm",
+            "lang": "ko",
+            "category": "AI"
+        },
+        {
+            "handle": "@배움의달인",
+            "url": "https://www.youtube.com/@%EB%B0%B0%EC%9B%80%EC%9D%98%EB%8B%AC%EC%9D%B8-p5v",
+            "lang": "ko",
+            "category": "AI"
+        },
+        {
+            "handle": "@평범한사업가",
+            "url": "https://www.youtube.com/@%ED%8F%89%EB%B2%94%ED%95%9C%EC%82%AC%EC%97%85%EA%B0%80",
+            "lang": "ko",
+            "category": "Business/AI"
+        },
+        {
+            "handle": "@maker-evan",
+            "url": "https://www.youtube.com/@maker-evan",
+            "lang": "ko",
+            "category": "AI/Maker"
+        },
+        {
+            "handle": "@OMG_electronics",
+            "url": "https://www.youtube.com/@OMG_electronics",
+            "lang": "ko",
+            "category": "Tech"
+        },
+        {
+            "handle": "@innovation-catalyst",
+            "url": "https://www.youtube.com/@innovation-catalyst",
+            "lang": "en",
+            "category": "AI"
+        }
+    ],
+    "collection": {
+        "hours_back": 48,
+        "max_videos_per_channel": 3,
+        "min_duration_seconds": 120,
+        "preferred_languages": [
+            "ko",
+            "en"
+        ]
+    }
+}
