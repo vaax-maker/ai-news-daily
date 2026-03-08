@@ -55,8 +55,10 @@ def get_channel_rss(channel_id: str) -> list[dict]:
     """RSS 피드에서 최근 영상 목록 반환"""
     rss_url = f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
     try:
-        feed = feedparser.parse(rss_url)
-        if feed.bozo:
+        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+        resp = requests.get(rss_url, headers=headers, timeout=15)
+        feed = feedparser.parse(resp.content)
+        if feed.bozo and len(feed.entries) == 0:
             logger.warning(f"RSS 파싱 경고: {channel_id}")
         return feed.entries
     except Exception as e:
@@ -67,13 +69,15 @@ def get_channel_rss(channel_id: str) -> list[dict]:
 def is_within_hours(published_str: str, hours: int = 48) -> bool:
     """영상이 지정 시간 이내에 업로드되었는지 확인"""
     try:
-        import email.utils
-        published_dt = email.utils.parsedate_to_datetime(published_str)
+        # YouTube RSS는 RFC 3339 형식(예: 2025-03-08T15:07:48+00:00) 반환
+        clean_str = published_str.replace("Z", "+00:00")
+        published_dt = datetime.fromisoformat(clean_str)
         if published_dt.tzinfo is None:
             published_dt = published_dt.replace(tzinfo=timezone.utc)
         cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
         return published_dt >= cutoff
-    except Exception:
+    except Exception as e:
+        logger.warning(f"날짜 파싱 오류 ({published_str}): {e}")
         return False
 
 
