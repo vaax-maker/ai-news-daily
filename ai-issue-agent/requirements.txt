@@ -1,0 +1,8 @@
+youtube-transcript-api>=0.6.1
+feedparser>=6.0.10
+requests>=2.31.0
+python-telegram-bot>=20.8
+Pillow>=10.0.0
+playwright>=1.40.0
+python-dotenv>=1.0.0
+pytz>=2024.1
