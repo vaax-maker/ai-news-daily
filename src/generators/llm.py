@@ -451,12 +451,65 @@ _SUMMARY_SYSTEM_MESSAGE = (
     "2. 영어로 생각하는 과정(Reasoning/Thinking), 설명, 인사말, 독백을 절대 포함하지 마세요.\n"
     "3. <think> 태그를 사용하지 마세요.\n"
     "4. 첫 줄은 반드시 '**제목**: '으로 시작해야 합니다.\n"
-    "5. 지정된 출력 형식(제목, ##1, ##2, ##3, 한줄요약)만 출력하세요."
+    "5. 지정된 출력 형식(제목, ##1, ##2, ##3, 한줄요약)만 출력하세요.\n"
+    "6. 절대로 중국어(한자), 일본어(히라가나·가타카나), 아랍어 등 한국어·영어 이외의 언어를 출력하지 마세요."
 )
 
 def _get_summary_system_message() -> str:
     """LLM 독백 억제를 위한 system message 반환."""
     return _SUMMARY_SYSTEM_MESSAGE
+
+
+def _strip_non_ko_en_chars(text: str) -> str:
+    """한국어·영어·숫자·공백·기본 구두점·HTML 태그 외의 문자를 제거한다.
+
+    제거 대상 유니코드 블록:
+    - CJK Unified Ideographs (한자): U+4E00–U+9FFF, U+3400–U+4DBF, U+F900–U+FAFF
+    - CJK Compatibility / Extensions: U+2E80–U+2FFF, U+20000–U+2A6DF, U+2A700–U+2CEAF
+    - Hiragana / Katakana (일본어): U+3040–U+30FF, U+31F0–U+31FF
+    - Katakana Phonetic Extensions, Kanbun 등: U+3100–U+319F
+    - Arabic / Arabic Supplement: U+0600–U+06FF, U+0750–U+077F
+    - Devanagari (힌디 등): U+0900–U+097F
+    - Thai / Lao / Khmer 등 동남아 문자: U+0E00–U+0FFF, U+1780–U+17FF
+    - Cyrillic (러시아어 등): U+0400–U+04FF
+    - 그 밖에 기본 라틴(ASCII), 확장 라틴, 한글 자모·완성형은 허용
+    """
+    # 허용하지 않을 유니코드 코드포인트 범위 (inclusive)
+    BLOCKED_RANGES = [
+        (0x2E80, 0x2FFF),   # CJK Radicals Supplement, Kangxi Radicals
+        (0x3040, 0x30FF),   # Hiragana, Katakana
+        (0x3100, 0x319F),   # Bopomofo, Kanbun
+        (0x31F0, 0x31FF),   # Katakana Phonetic Extensions
+        (0x3400, 0x4DBF),   # CJK Extension A
+        (0x4E00, 0x9FFF),   # CJK Unified Ideographs
+        (0xF900, 0xFAFF),   # CJK Compatibility Ideographs
+        (0x0400, 0x04FF),   # Cyrillic
+        (0x0600, 0x06FF),   # Arabic
+        (0x0750, 0x077F),   # Arabic Supplement
+        (0x0900, 0x097F),   # Devanagari
+        (0x0E00, 0x0FFF),   # Thai, Lao
+        (0x1780, 0x17FF),   # Khmer
+    ]
+
+    def _is_blocked(cp: int) -> bool:
+        for lo, hi in BLOCKED_RANGES:
+            if lo <= cp <= hi:
+                return True
+        return False
+
+    cleaned = []
+    for ch in text:
+        cp = ord(ch)
+        if _is_blocked(cp):
+            continue  # 비허용 문자 제거
+        cleaned.append(ch)
+
+    result = ''.join(cleaned)
+    # 비허용 문자가 제거된 경우 로그 출력
+    if len(result) < len(text):
+        removed = len(text) - len(result)
+        print(f"[LLM] 비허용 언어 문자 {removed}자 제거됨 (중국어·일본어 등)")
+    return result
 
 
 def _parse_summary_response(response: str, original_title: str) -> dict:
@@ -508,7 +561,10 @@ def _parse_summary_response(response: str, original_title: str) -> dict:
         cleaned_lines.append(line)
     
     response = '\n'.join(cleaned_lines).strip()
-    
+
+    # ── 3.5단계: 비허용 언어 문자(한자·일본어 가나 등) 제거 ──
+    response = _strip_non_ko_en_chars(response)
+
     # ── 4단계: 제목 추출 ──
     title_match = re.search(r'\*\*제목\*\*\s*[:：]\s*(.+?)(?:\n|$)', response)
     if title_match:
@@ -541,7 +597,7 @@ def _parse_summary_response(response: str, original_title: str) -> dict:
 
 
 def _validate_summary_output(result: dict, original_title: str) -> dict:
-    """최종 출력에서 LLM 독백 잔여물을 검증 및 제거."""
+    """최종 출력에서 LLM 독백 잔여물 및 비허용 언어 문자를 검증 및 제거."""
     summary = result.get("summary", "")
     title = result.get("title", "")
     
@@ -567,6 +623,10 @@ def _validate_summary_output(result: dict, original_title: str) -> dict:
             title = original_title
             break
     
+    # 비허용 언어 문자 최종 제거 (한자·일본어 가나·키릴 문자 등)
+    summary = _strip_non_ko_en_chars(summary)
+    title = _strip_non_ko_en_chars(title)
+
     # 연속 빈 줄 정리
     summary = re.sub(r'\n{3,}', '\n\n', summary)
     
