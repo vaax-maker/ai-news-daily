@@ -106,13 +106,8 @@ jobs:
           echo "  - 회원사: $RUN_MEMBERS"
           echo "  - 기사 수: $MAX_ARTICLES개"
 
-          # 1. Government Data Collection (Persistence for Archive)
-          if [ "$RUN_GOV" == "true" ]; then
-            echo "🟣 정부 과제 데이터 수집 중..."
-            python scripts/collect_gov_data.py
-          fi
-
-          # 2. Main News Generation (Briefing & Daily News)
+          # main.py가 정부과제 수집+저장+렌더링을 통합 처리
+          # (collect_gov_data.py 이중 수집 제거 - 2026-03-17)
           python main.py
 
           # 3. Validate generated output

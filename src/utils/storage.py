@@ -229,8 +229,8 @@ class GovStorage:
         self.use_firestore = os.getenv("FIRESTORE_ENABLED", "false").lower() == "true"
         self.data_path = data_path
         self._db = None
-        if not self.use_firestore:
-            os.makedirs(os.path.dirname(self.data_path), exist_ok=True)
+        # JSON 백업 디렉토리는 항상 생성 (Firestore 사용 시에도 백업용)
+        os.makedirs(os.path.dirname(self.data_path), exist_ok=True)
 
     @property
     def db(self):
@@ -244,12 +244,20 @@ class GovStorage:
 
     def load_announcements(self) -> List[Dict]:
         if self.use_firestore:
-            return self._load_from_firestore()
+            data = self._load_from_firestore()
+            if data:
+                return data
+            # Firestore 실패 또는 빈 데이터 → 로컬 JSON 자동 폴백
+            print("[GovStorage] Firestore 데이터 없음/실패 → 로컬 JSON 폴백")
+            return self._load_from_json()
         return self._load_from_json()
 
     def save_announcements(self, new_items: List[Dict]) -> List[Dict]:
         if self.use_firestore:
-            return self._save_to_firestore(new_items)
+            merged = self._save_to_firestore(new_items)
+            # Firestore 저장 후 로컬 JSON에도 항상 백업 (폴백 안전망)
+            self._backup_to_json(merged)
+            return merged
         return self._save_to_json(new_items)
 
     # --- JSON backend (기존 로직 그대로) ---
@@ -320,7 +328,17 @@ class GovStorage:
 
         return merged
 
-    # --- Firestore backend (신규) ---
+    def _backup_to_json(self, merged: List[Dict]) -> None:
+        """Firestore 데이터를 로컬 JSON에 백업 저장 (폴백 안전망)."""
+        try:
+            os.makedirs(os.path.dirname(self.data_path), exist_ok=True)
+            with open(self.data_path, "w", encoding="utf-8") as f:
+                json.dump(merged, f, ensure_ascii=False, indent=2)
+            print(f"[GovStorage] 로컬 JSON 백업 완료: {len(merged)}건 → {self.data_path}")
+        except Exception as e:
+            print(f"[GovStorage] 로컬 JSON 백업 실패: {e}")
+
+    # --- Firestore backend ---
 
     def _load_from_firestore(self) -> List[Dict]:
         try:
