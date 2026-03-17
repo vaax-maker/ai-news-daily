@@ -1,0 +1,250 @@
+
+<style>
+/* Responsive Wrapper - Auto-injected */
+html { font-size: 16px; }
+body { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 1rem; 
+    line-height: 1.7;
+    word-break: keep-all;
+}
+img, video, iframe { 
+    max-width: 100%; 
+    height: auto; 
+}
+table { 
+    width: 100%; 
+    display: block; 
+    overflow-x: auto; 
+}
+pre, code { 
+    overflow-x: auto; 
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+}
+@media (max-width: 768px) {
+    body { 
+        padding: 0.75rem; 
+        font-size: 15px; 
+    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.1rem; }
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { padding: 1rem 0; overflow-x: auto; }
+.header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 8px; }
+.title-text { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+.subtitle-text { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
+.filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+.filter-btn { padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-secondary); font-size: 12px; cursor: pointer; transition: all 0.15s; }
+.filter-btn.active { background: #178CF2; color: #fff; border-color: #178CF2; }
+.filter-btn:hover:not(.active) { background: var(--color-background-secondary); }
+.legend { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--color-text-secondary); }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 1150px; }
+thead tr { border-bottom: 1px solid var(--color-border-secondary); }
+th { padding: 8px 6px; text-align: left; color: var(--color-text-secondary); font-weight: 500; font-size: 11px; white-space: nowrap; cursor: pointer; user-select: none; }
+th:hover { color: var(--color-text-primary); }
+th .sort-arrow { font-size: 9px; margin-left: 2px; opacity: 0.4; }
+th.sorted .sort-arrow { opacity: 1; }
+td { padding: 7px 6px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); vertical-align: middle; white-space: nowrap; }
+tr:hover td { background: var(--color-background-secondary); }
+.sector-tag { display: inline-block; padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 500; }
+.s-robot { background: #EEEDFE; color: #3C3489; }
+.s-semi  { background: #E6F1FB; color: #0C447C; }
+.s-defense { background: #FAEEDA; color: #633806; }
+.s-power { background: #EAF3DE; color: #27500A; }
+.s-battery { background: #FCEBEB; color: #791F1F; }
+.grade-A { background: #EAF3DE; color: #27500A; padding: 2px 8px; border-radius: 10px; font-weight: 500; font-size: 11px; }
+.grade-B { background: #E6F1FB; color: #0C447C; padding: 2px 8px; border-radius: 10px; font-weight: 500; font-size: 11px; }
+.grade-C { background: #FAEEDA; color: #633806; padding: 2px 8px; border-radius: 10px; font-weight: 500; font-size: 11px; }
+.grade-D { background: #FCEBEB; color: #791F1F; padding: 2px 8px; border-radius: 10px; font-weight: 500; font-size: 11px; }
+.tag-buy  { background: #EAF3DE; color: #27500A; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+.tag-hold { background: #F1EFE8; color: #5F5E5A; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+.signal-up  { color: #1D9E75; font-weight: 500; font-size: 11px; }
+.signal-dn  { color: #D85A30; font-weight: 500; font-size: 11px; }
+.signal-neu { color: var(--color-text-secondary); font-size: 11px; }
+.stat-pos { color: #1D9E75; }
+.stat-neg { color: #D85A30; }
+.num  { color: var(--color-text-primary); }
+.muted { color: var(--color-text-secondary); font-size: 11px; }
+.name-main { font-size: 12px; font-weight: 500; color: var(--color-text-primary); }
+.name-code { font-size: 10px; color: var(--color-text-secondary); }
+.score-bar { display: flex; align-items: center; gap: 5px; }
+.score-dots { display: flex; gap: 2px; }
+.dot { width: 7px; height: 7px; border-radius: 50%; }
+.dot-on  { background: #178CF2; }
+.dot-off { background: var(--color-border-secondary); }
+.count-badge { font-size: 11px; color: var(--color-text-secondary); margin-left: 4px; }
+</style>
+<div class="wrap">
+  <div class="header-row">
+    <div>
+      <div class="title-text">한국 주식 종합 분석표</div>
+      <div class="subtitle-text">K-DEXTER MCP 기준 · 2026.03.17 · 32개 종목</div>
+    </div>
+    <div style="font-size:11px;color:var(--color-text-secondary)">헤더 클릭 → 정렬</div>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterSector('all',this)">전체 <span class="count-badge" id="cnt-all">32</span></button>
+    <button class="filter-btn" onclick="filterSector('robot',this)">🤖 로봇</button>
+    <button class="filter-btn" onclick="filterSector('semi',this)">💾 반도체</button>
+    <button class="filter-btn" onclick="filterSector('defense',this)">🛡 방산</button>
+    <button class="filter-btn" onclick="filterSector('power',this)">⚡ 전력기기</button>
+    <button class="filter-btn" onclick="filterSector('battery',this)">🔋 배터리</button>
+  </div>
+  <div class="legend">
+    <span class="legend-item"><span class="legend-dot" style="background:#178CF2"></span>점수 도트 = 1점</span>
+    <span class="legend-item"><span class="grade-A">A</span> 스윙 최적</span>
+    <span class="legend-item"><span class="grade-B">B</span> 양호</span>
+    <span class="legend-item"><span class="grade-C">C</span> 보통</span>
+    <span class="legend-item"><span class="grade-D">D</span> 부적합</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th onclick="sortBy('name')">종목명 <span class="sort-arrow">↕</span></th>
+        <th onclick="sortBy('sector')">섹터 <span class="sort-arrow">↕</span></th>
+        <th onclick="sortBy('price')">현재가 <span class="sort-arrow">↕</span></th>
+        <th onclick="sortBy('cap')">시총(조) <span class="sort-arrow">↕</span></th>
+        <th onclick="sortBy('per')">PER <span class="sort-arrow">↕</span></th>
+        <th onclick="sortBy('pbr')">PBR <span class="sort-arrow">↕</span></th>
+        <th onclick="sortBy('roe')">ROE(%) <span class="sort-arrow">↕</span></th>
+        <th onclick="sortBy('rsi')">RSI <span class="sort-arrow">↕</span></th>
+        <th onclick="sortBy('score')">종합점수 <span class="sort-arrow">↕</span></th>
+        <th onclick="sortBy('grade')">스윙등급 <span class="sort-arrow">↕</span></th>
+        <th>단기추세</th>
+        <th onclick="sortBy('fgn')">외국인% <span class="sort-arrow">↕</span></th>
+        <th onclick="sortBy('inst')">기관% <span class="sort-arrow">↕</span></th>
+        <th onclick="sortBy('upside')">1차목표(상승%) <span class="sort-arrow">↕</span></th>
+        <th>손절가</th>
+        <th onclick="sortBy('opinion')">의견 <span class="sort-arrow">↕</span></th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+<script>
+const raw = [
+  {code:"277810",name:"레인보우로보틱스",sector:"robot",sl:"로봇",price:721000,cap:139873,per:1478,pbr:23.78,roe:1.62,rsi:49.4,score:2,grade:"B",trend:"상승추세",fgn:23.14,inst:-15.18,t1:934000,stop:584421,opinion:"관망"},
+  {code:"389500",name:"에스비비테크",sector:"robot",sl:"로봇",price:51000,cap:3394,per:-124,pbr:8.84,roe:-7.55,rsi:43.8,score:2,grade:"C",trend:"중립",fgn:-7.1,inst:0.29,t1:55073,stop:40742,opinion:"관망"},
+  {code:"138360",name:"앤로보틱스",sector:"robot",sl:"로봇",price:2210,cap:1702,per:5.61,pbr:2.03,roe:10.29,rsi:54.6,score:5,grade:"B",trend:"상승/조정",fgn:-7.36,inst:0,t1:2471,stop:1694,opinion:"매수검토"},
+  {code:"108490",name:"로보티즈",sector:"robot",sl:"로봇",price:252000,cap:36925,per:1173,pbr:36.55,roe:2.95,rsi:46.8,score:2,grade:"D",trend:"중립",fgn:17.66,inst:1.24,t1:263247,stop:206191,opinion:"관망"},
+  {code:"117730",name:"티로보틱스",sector:"robot",sl:"로봇",price:20500,cap:4548,per:-238,pbr:4.26,roe:-1.78,rsi:44.4,score:2,grade:"C",trend:"중립",fgn:23.31,inst:0.08,t1:30900,stop:17107,opinion:"관망"},
+  {code:"454910",name:"두산로보틱스",sector:"robot",sl:"로봇",price:89200,cap:57819,per:-93,pbr:8.42,roe:-8.69,rsi:43.1,score:2,grade:"D",trend:"중립",fgn:12.81,inst:-9.33,t1:103571,stop:76546,opinion:"관망"},
+  {code:"000660",name:"SK하이닉스",sector:"semi",sl:"반도체",price:970000,cap:6913213,per:5.29,pbr:2.76,roe:72.16,rsi:55.4,score:5,grade:"B",trend:"상승/조정",fgn:-6.62,inst:-0.13,t1:1099000,stop:845578,opinion:"매수검토"},
+  {code:"399720",name:"가온칩스",sector:"semi",sl:"반도체",price:63000,cap:7308,per:-57,pbr:6.54,roe:11.46,rsi:49.3,score:4,grade:"A",trend:"상승/조정",fgn:11.69,inst:-8.51,t1:78000,stop:53329,opinion:"매수검토"},
+  {code:"058610",name:"에스피지",sector:"semi",sl:"반도체",price:125000,cap:27722,per:251,pbr:2.04,roe:5.54,rsi:47.3,score:2,grade:"B",trend:"상승추세",fgn:3.24,inst:-20.22,t1:132628,stop:100482,opinion:"관망"},
+  {code:"005930",name:"삼성전자",sector:"semi",sl:"반도체",price:193900,cap:11478178,per:7.75,pbr:2.17,roe:32.84,rsi:56.6,score:5,grade:"A",trend:"상승/조정",fgn:1.88,inst:7.77,t1:223000,stop:172552,opinion:"매수검토"},
+  {code:"007660",name:"이수페타시스",sector:"semi",sl:"반도체",price:114300,cap:83907,per:50.73,pbr:13.03,roe:33.52,rsi:51.7,score:4,grade:"B",trend:"상승/조정",fgn:24.43,inst:8.45,t1:117168,stop:95273,opinion:"매수검토"},
+  {code:"042700",name:"한미반도체",sector:"semi",sl:"반도체",price:301000,cap:286890,per:71.32,pbr:26.55,roe:43.8,rsi:60.0,score:4,grade:"B",trend:"상승/조정",fgn:-12.76,inst:2.78,t1:305262,stop:252072,opinion:"매수검토"},
+  {code:"240810",name:"원익IPS",sector:"semi",sl:"반도체",price:118600,cap:58214,per:75.31,pbr:6.03,roe:8.41,rsi:51.8,score:2,grade:"B",trend:"상승추세",fgn:-18.11,inst:-11.4,t1:144837,stop:95268,opinion:"관망"},
+  {code:"403870",name:"HPSP",sector:"semi",sl:"반도체",price:44050,cap:36253,per:52.46,pbr:11.67,roe:23.99,rsi:52.4,score:5,grade:"B",trend:"상승/조정",fgn:20.06,inst:0.69,t1:44634,stop:37222,opinion:"매수검토"},
+  {code:"080220",name:"제주반도체",sector:"semi",sl:"반도체",price:42800,cap:14742,per:15.72,pbr:1.63,roe:11.44,rsi:51.0,score:3,grade:"C",trend:"상승/조정",fgn:-22.13,inst:-2.13,t1:44419,stop:33822,opinion:"관망"},
+  {code:"003570",name:"SNT다이내믹스",sector:"defense",sl:"방산",price:49950,cap:16610,per:16.9,pbr:1.27,roe:7.43,rsi:45.1,score:1,grade:"C",trend:"하락추세",fgn:-10.01,inst:-19.08,t1:61100,stop:42848,opinion:"관망"},
+  {code:"103140",name:"풍산",sector:"defense",sl:"방산",price:102500,cap:28725,per:17.96,pbr:1.54,roe:9.04,rsi:41.2,score:1,grade:"D",trend:"하락추세",fgn:16.93,inst:-2.36,t1:121501,stop:86448,opinion:"관망"},
+  {code:"064350",name:"현대로템",sector:"defense",sl:"방산",price:192900,cap:210535,per:21.56,pbr:5.4,roe:28.02,rsi:42.0,score:2,grade:"D",trend:"하락추세",fgn:7.92,inst:-9.35,t1:216255,stop:163191,opinion:"관망"},
+  {code:"012450",name:"한화에어로스페이스",sector:"defense",sl:"방산",price:1396000,cap:719825,per:40.27,pbr:6.57,roe:20.26,rsi:55.5,score:5,grade:"B",trend:"상승/조정",fgn:-24.77,inst:-16.22,t1:1427238,stop:1183060,opinion:"매수검토"},
+  {code:"005870",name:"휴니드",sector:"defense",sl:"방산",price:8600,cap:1214,per:10.13,pbr:0.59,roe:6.45,rsi:51.6,score:5,grade:"A",trend:"상승/조정",fgn:13.46,inst:1.53,t1:10480,stop:7452,opinion:"매수검토"},
+  {code:"010820",name:"퍼스텍",sector:"defense",sl:"방산",price:7550,cap:3682,per:13.24,pbr:2.26,roe:17.33,rsi:56.7,score:4,grade:"B",trend:"상승/조정",fgn:-11.4,inst:-0.09,t1:9940,stop:5804,opinion:"매수검토"},
+  {code:"079550",name:"LIG넥스원",sector:"defense",sl:"방산",price:705000,cap:155100,per:37.36,pbr:8.48,roe:24.19,rsi:60.1,score:4,grade:"C",trend:"상승/조정",fgn:-3.35,inst:-3.72,t1:742728,stop:581486,opinion:"관망"},
+  {code:"065450",name:"빅텍",sector:"defense",sl:"방산",price:5000,cap:1433,per:30.76,pbr:2.02,roe:6.71,rsi:54.7,score:4,grade:"B",trend:"상승/조정",fgn:-11.67,inst:0,t1:7050,stop:3938,opinion:"관망"},
+  {code:"047810",name:"한국항공우주",sector:"defense",sl:"방산",price:202000,cap:196900,per:78.37,pbr:8.76,roe:11.7,rsi:64.8,score:4,grade:"B",trend:"상승/조정",fgn:-1.76,inst:4.86,t1:215500,stop:177246,opinion:"매수검토"},
+  {code:"003670",name:"포스코퓨처엠",sector:"battery",sl:"배터리",price:193100,cap:171755,per:512,pbr:4.59,roe:0.85,rsi:41.1,score:2,grade:"D",trend:"하락추세",fgn:-7.96,inst:2.45,t1:195154,stop:164449,opinion:"관망"},
+  {code:"267260",name:"HD현대일렉트릭",sector:"power",sl:"전력기기",price:931000,cap:335599,per:44.65,pbr:15.91,roe:40.76,rsi:48.3,score:4,grade:"A",trend:"상승/조정",fgn:16.59,inst:0.38,t1:1116000,stop:817044,opinion:"매수검토"},
+  {code:"033100",name:"제룡전기",sector:"power",sl:"전력기기",price:48600,cap:7806,per:9.23,pbr:3.75,roe:49.72,rsi:47.9,score:5,grade:"A",trend:"상승/조정",fgn:-17.39,inst:-1.3,t1:56736,stop:41629,opinion:"매수검토"},
+  {code:"298040",name:"효성중공업",sector:"power",sl:"전력기기",price:2546000,cap:237403,per:45.7,pbr:9.39,roe:22.61,rsi:52.4,score:4,grade:"A",trend:"상승/조정",fgn:18.68,inst:5.36,t1:2941000,stop:2205400,opinion:"매수검토"},
+  {code:"010120",name:"LS ELECTRIC",sector:"power",sl:"전력기기",price:762000,cap:228600,per:57.89,pbr:7.51,roe:13.69,rsi:61.0,score:4,grade:"B",trend:"상승/조정",fgn:26.62,inst:15.95,t1:824000,stop:663147,opinion:"매수검토"},
+  {code:"103590",name:"일진전기",sector:"power",sl:"전력기기",price:78200,cap:37290,per:23.65,pbr:4.89,roe:23.2,rsi:52.9,score:3,grade:"B",trend:"상승/조정",fgn:15.62,inst:10.41,t1:79893,stop:67341,opinion:"관망"},
+];
+
+raw.forEach(s => { s.upside = s.t1 ? ((s.t1 - s.price) / s.price * 100) : 0; });
+
+let currentFilter = 'all';
+let sortKey = 'score';
+let sortAsc = false;
+
+const gradeOrder = {A:0,B:1,C:2,D:3};
+
+function sortData(arr) {
+  return [...arr].sort((a,b) => {
+    let av = a[sortKey], bv = b[sortKey];
+    if (sortKey === 'grade') { av = gradeOrder[a.grade]||9; bv = gradeOrder[b.grade]||9; }
+    if (sortKey === 'opinion') { av = a.opinion==='매수검토'?0:1; bv = b.opinion==='매수검토'?0:1; }
+    if (typeof av === 'string') return sortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
+    return sortAsc ? av - bv : bv - av;
+  });
+}
+
+function dots(score) {
+  let h = '';
+  for (let i=1;i<=5;i++) h += `<div class="dot ${i<=score?'dot-on':'dot-off'}"></div>`;
+  return `<div class="score-dots">${h}</div>`;
+}
+
+function perStr(per) {
+  if (!per || per < -500 || per > 2000) return '<span class="muted">N/A</span>';
+  const cls = per<0?'stat-neg':(per<30?'stat-pos':'num');
+  return `<span class="${cls}">${per.toFixed(per>100?0:1)}</span>`;
+}
+
+function trendCls(t) {
+  if (t.includes('상승')) return 'signal-up';
+  if (t.includes('하락')) return 'signal-dn';
+  return 'signal-neu';
+}
+
+function sectorCls(s) {
+  return {robot:'s-robot',semi:'s-semi',defense:'s-defense',power:'s-power',battery:'s-battery'}[s]||'';
+}
+
+function renderTable() {
+  const filtered = currentFilter==='all' ? raw : raw.filter(s=>s.sector===currentFilter);
+  const sorted = sortData(filtered);
+  let html = '';
+  sorted.forEach(s => {
+    const up = s.upside.toFixed(1);
+    html += `<tr>
+      <td><div class="name-main">${s.name}</div><div class="name-code">${s.code}</div></td>
+      <td><span class="sector-tag ${sectorCls(s.sector)}">${s.sl}</span></td>
+      <td class="num">${s.price.toLocaleString()}</td>
+      <td class="muted">${(s.cap/10000).toFixed(s.cap>100000?1:2)}조</td>
+      <td>${perStr(s.per)}</td>
+      <td class="num">${s.pbr.toFixed(2)}</td>
+      <td class="${s.roe>20?'stat-pos':s.roe<0?'stat-neg':'num'}">${s.roe.toFixed(1)}</td>
+      <td class="${s.rsi>60?'stat-pos':s.rsi<40?'stat-neg':'num'}">${s.rsi.toFixed(1)}</td>
+      <td><div class="score-bar">${dots(s.score)}<span style="font-size:10px;color:var(--color-text-secondary);margin-left:2px">${s.score}/5</span></div></td>
+      <td><span class="grade-${s.grade}">${s.grade}</span></td>
+      <td><span class="${trendCls(s.trend)}">${s.trend}</span></td>
+      <td class="${s.fgn>0?'stat-pos':'stat-neg'}">${s.fgn>0?'+':''}${s.fgn.toFixed(1)}%</td>
+      <td class="${s.inst>0?'stat-pos':'stat-neg'}">${s.inst>0?'+':''}${s.inst.toFixed(1)}%</td>
+      <td><span class="stat-pos">${s.t1.toLocaleString()}</span> <span class="muted">(+${up}%)</span></td>
+      <td class="stat-neg" style="font-size:11px">${s.stop.toLocaleString()}</td>
+      <td><span class="${s.opinion==='매수검토'?'tag-buy':'tag-hold'}">${s.opinion}</span></td>
+    </tr>`;
+  });
+  document.getElementById('tbody').innerHTML = html;
+  document.querySelectorAll('th').forEach(th => th.classList.remove('sorted'));
+}
+
+function filterSector(sector, btn) {
+  currentFilter = sector;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTable();
+}
+
+function sortBy(key) {
+  if (sortKey === key) sortAsc = !sortAsc;
+  else { sortKey = key; sortAsc = false; }
+  renderTable();
+}
+
+renderTable();
+</script>
