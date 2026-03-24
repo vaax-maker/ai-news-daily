@@ -15,7 +15,8 @@ REQUEST_TIMEOUT = 30
 
 
 def fetch_msit_announcements(service_key: str, limit: int = 30) -> List[Dict[str, str]]:
-    """과학기술정보통신부 사업공고 API"""
+    """과학기술정보통신부 사업공고 API (3회 재시도 포함)"""
+    import time
     url = "http://apis.data.go.kr/1721000/msitannouncementinfo/businessAnnouncMentList"
     
     params = {
@@ -26,32 +27,42 @@ def fetch_msit_announcements(service_key: str, limit: int = 30) -> List[Dict[str
     }
     
     items_list = []
-    try:
-        response = requests.get(url, params=params, timeout=REQUEST_TIMEOUT)
-        response.raise_for_status()
-        
-        root = ET.fromstring(response.content)
-        xml_items = root.findall(".//item")
-        
-        for item in xml_items:
-            items_list.append({
-                "title": item.findtext("subject", ""),
-                "link": item.findtext("viewUrl", ""),
-                "dept": item.findtext("deptName", "") or "과기정통부",
-                "manager": item.findtext("managerName", ""),
-                "date": item.findtext("pressDt", ""),
-                "source_name": "과기정통부",  # 통일
-                "image_url": "",
-                "published_display": item.findtext("pressDt", ""),
-                "bid_begin_dt": "",    # 과기정통부는 미제공
-                "bid_close_dt": "",    # 과기정통부는 미제공
-                "openg_dt": ""         # 과기정통부는 미제공
-            })
-        
-        logger.info(f"[MSIT] 수집 완료: {len(items_list)}건")
+    # 간헐적 502 대응: 최대 3회 재시도 (2초, 4초 대기)
+    max_retries = 3
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = requests.get(url, params=params, timeout=REQUEST_TIMEOUT)
+            response.raise_for_status()
             
-    except Exception as e:
-        logger.error(f"[MSIT] 오류: {e}")
+            root = ET.fromstring(response.content)
+            xml_items = root.findall(".//item")
+            
+            for item in xml_items:
+                items_list.append({
+                    "title": item.findtext("subject", ""),
+                    "link": item.findtext("viewUrl", ""),
+                    "dept": item.findtext("deptName", "") or "과기정통부",
+                    "manager": item.findtext("managerName", ""),
+                    "date": item.findtext("pressDt", ""),
+                    "source_name": "과기정통부",
+                    "image_url": "",
+                    "published_display": item.findtext("pressDt", ""),
+                    "bid_begin_dt": "",
+                    "bid_close_dt": "",
+                    "openg_dt": ""
+                })
+            
+            logger.info(f"[MSIT] 수집 완료: {len(items_list)}건 (시도 {attempt}회)")
+            break  # 성공 시 루프 종료
+                
+        except Exception as e:
+            logger.warning(f"[MSIT] 시도 {attempt}/{max_retries} 실패: {e}")
+            if attempt < max_retries:
+                wait_sec = 2 ** attempt  # 2초, 4초
+                logger.info(f"[MSIT] {wait_sec}초 후 재시도...")
+                time.sleep(wait_sec)
+            else:
+                logger.error(f"[MSIT] 최대 재시도 횟수 초과. 0건 반환.")
         
     return items_list
 
