@@ -172,8 +172,11 @@
 
     /* 테이블 스타일 개선 */
     .styled-table {
+        width: 100%;
+        min-width: 1100px;
         border-collapse: collapse;
         font-size: 0.9rem;
+        table-layout: fixed;
     }
 
     .styled-table th {
@@ -195,33 +198,28 @@
     }
 
     .col-idx {
-        width: 5%;
-        min-width: 50px;
+        width: 50px;
         text-align: center;
     }
 
     .col-title {
-        width: 55%;
-        min-width: 300px;
+        min-width: 400px;
     }
 
     .col-source {
-        width: 10%;
-        min-width: 100px;
+        width: 110px;
     }
 
     .col-dept {
-        width: 15%;
-        min-width: 120px;
+        width: 120px;
     }
 
     .col-date {
-        width: 15%;
-        min-width: 100px;
+        width: 110px;
     }
 
     .col-schedule {
-        width: 130px;
+        width: 110px;
         font-size: 0.85rem;
         text-align: center;
     }
@@ -3728,7 +3726,7 @@
             
             
              <tr
-                class="gov-item status-active"
+                class="gov-item "
                 data-source="기업마당">
                 <td class="col-idx">100</td>
                 <td class="col-title">
@@ -18448,7 +18446,7 @@
     
     
      <div <div
-        class="gov-card status-active"
+        class="gov-card "
         data-source="기업마당">
         <div class="card-header">
             <span class="card-badge">기업마당</span>
