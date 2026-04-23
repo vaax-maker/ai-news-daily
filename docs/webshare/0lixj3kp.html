@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>팔칠오 충청여행</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+  * { font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif !important; }
+</style>
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #faf7f2;
+    --warm: #f5ede0;
+    --gold: #c4922a;
+    --gold-light: #e8c97a;
+    --rust: #8b4513;
+    --cream: #fffdf8;
+    --border: rgba(196,146,42,0.25);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Pretendard', sans-serif; font-weight: 300; line-height: 1.8; }
+
+  header { background: var(--ink); color: var(--paper); padding: 60px 24px 50px; text-align: center; position: relative; overflow: hidden; }
+  header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(196,146,42,0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(74,103,65,0.15) 0%, transparent 60%); }
+  .header-badge { display: inline-block; border: 1px solid var(--gold); color: var(--gold-light); font-size: 11px; letter-spacing: 3px; padding: 5px 16px; margin-bottom: 24px; }
+  header h1 { font-family: 'Pretendard', sans-serif; font-weight: 700; font-size: clamp(28px, 6vw, 52px); font-weight: 700; line-height: 1.3; margin-bottom: 16px; position: relative; }
+  header h1 em { color: var(--gold-light); font-style: normal; }
+  .header-sub { font-size: 14px; color: rgba(250,247,242,0.6); letter-spacing: 1px; margin-bottom: 40px; }
+  .members { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; position: relative; }
+  .member-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(196,146,42,0.3); border-radius: 8px; padding: 14px 22px; text-align: center; min-width: 110px; }
+  .member-icon { width: 56px; height: 56px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; }
+  .member-name { font-family: 'Pretendard', sans-serif; font-weight: 700; font-size: 15px; font-weight: 600; color: var(--paper); }
+  .member-desc { font-size: 11px; color: rgba(250,247,242,0.5); margin-top: 2px; }
+
+  .route-bar { background: var(--gold); padding: 14px 24px; text-align: center; font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.7; }
+
+  main { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+
+  .day-section { margin-top: 48px; opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease forwards; }
+  .day-section:nth-child(1){animation-delay:.1s}.day-section:nth-child(2){animation-delay:.25s}.day-section:nth-child(3){animation-delay:.4s}.day-section:nth-child(4){animation-delay:.55s}.day-section:nth-child(5){animation-delay:.7s}
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  .day-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .day-badge { background: var(--ink); color: var(--gold-light); font-family: 'Pretendard', sans-serif; font-weight: 700; font-size: 12px; font-weight: 600; padding: 6px 14px; letter-spacing: 1px; white-space: nowrap; flex-shrink: 0; }
+  .day-badge.pre { background: #555; }
+  .day-title { font-family: 'Pretendard', sans-serif; font-weight: 700; font-size: 20px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .day-date { font-size: 12px; color: var(--gold); margin-top: 2px; }
+
+  /* 숙소 강조 배너 */
+  .stay-banner {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4e 100%);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 16px 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .stay-banner-icon { font-size: 24px; flex-shrink: 0; }
+  .stay-banner-text { color: var(--paper); }
+  .stay-banner-name { font-family: 'Pretendard', sans-serif; font-weight: 700; font-size: 15px; font-weight: 600; color: var(--gold-light); }
+  .stay-banner-sub { font-size: 12px; color: rgba(250,247,242,0.55); margin-top: 2px; }
+
+  .timeline { position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 48px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(to bottom, var(--gold), transparent); }
+  .tl-item { display: grid; grid-template-columns: 96px 1fr; gap: 0 20px; margin-bottom: 24px; }
+  .tl-time { text-align: right; padding-right: 20px; padding-top: 2px; font-size: 13px; font-weight: 500; color: var(--gold); white-space: nowrap; position: relative; }
+  .tl-time::after { content: ''; position: absolute; right: -6px; top: 8px; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; border: 2px solid var(--paper); box-shadow: 0 0 0 1px var(--gold); }
+  .tl-dot-empty::after { background: var(--paper) !important; }
+  .tl-place { font-family: 'Pretendard', sans-serif; font-weight: 700; font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .tl-tag { font-family: 'Pretendard', sans-serif; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px; }
+  .tag-meal { background: #fff3e0; color: #e65100; }
+  .tag-sightseeing { background: #e8f5e9; color: #2e7d32; }
+  .tag-stay { background: #e3f2fd; color: #1565c0; }
+  .tag-transport { background: #fce4ec; color: #880e4f; }
+  .tl-desc { font-size: 13.5px; color: #555; line-height: 1.7; margin-bottom: 6px; }
+  .tl-tip { background: var(--warm); border-left: 3px solid var(--gold); padding: 8px 12px; font-size: 12.5px; color: #666; margin-top: 8px; border-radius: 0 4px 4px 0; line-height: 1.7; }
+  .tl-tip strong { color: var(--rust); }
+  .drive-row { margin-bottom: 16px; }
+  .drive-content { display: flex; align-items: center; gap: 10px; color: #888; font-size: 12.5px; padding: 6px 0; }
+  .drive-line { flex: 1; height: 1px; background: repeating-linear-gradient(90deg, #ccc 0, #ccc 4px, transparent 4px, transparent 8px); }
+  .who-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .who-badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+  .who-me { background: #e8f4fd; color: #1565c0; }
+  .who-dad { background: #e8f5e9; color: #2e7d32; }
+  .who-bro { background: #fff3e0; color: #e65100; }
+
+  .ktx-box { background: var(--ink); color: var(--paper); border-radius: 10px; padding: 18px 22px; margin-top: 10px; }
+  .ktx-title { font-size: 11px; color: var(--gold-light); letter-spacing: 1px; margin-bottom: 10px; }
+  .ktx-row { display: flex; align-items: center; gap: 8px; font-family: 'Pretendard', sans-serif; font-weight: 700; font-size: 15px; font-weight: 600; flex-wrap: wrap; }
+  .ktx-arrow { color: var(--gold-light); }
+  .ktx-time { color: var(--gold-light); font-size: 12px; font-family: 'Pretendard'; font-weight: 300; }
+  .ktx-sub { font-size: 12px; color: rgba(250,247,242,0.5); margin-top: 8px; }
+
+  .info-card { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-top: 48px; }
+  .info-card-title { font-family: 'Pretendard', sans-serif; font-weight: 700; font-size: 18px; font-weight: 700; margin-bottom: 20px; color: var(--ink); }
+  .checklist { list-style: none; }
+  .checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(196,146,42,0.1); font-size: 14px; }
+  .checklist li:last-child { border-bottom: none; }
+  .check-icon { width: 20px; height: 20px; border: 1.5px solid var(--gold); border-radius: 4px; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--gold); }
+  .checklist li.urgent .check-icon { background: #fff3e0; border-color: #e65100; color: #e65100; }
+  .checklist li.urgent strong { color: var(--rust); }
+  .check-label { flex: 1; line-height: 1.5; }
+  .check-sub { font-size: 12px; color: #888; display: block; margin-top: 2px; }
+
+  .map-hint { background: var(--ink); color: var(--paper); border-radius: 10px; padding: 20px 24px; margin-top: 40px; display: flex; gap: 16px; align-items: flex-start; }
+  .map-hint-icon { font-size: 32px; flex-shrink: 0; }
+  .map-hint-text { font-size: 13px; line-height: 1.9; color: rgba(250,247,242,0.8); }
+  .map-hint-text strong { color: var(--gold-light); }
+
+  footer { text-align: center; padding: 40px 24px; font-size: 12px; color: #aaa; border-top: 1px solid var(--border); margin-top: 60px; }
+
+  @media (max-width: 480px) {
+    .tl-item { grid-template-columns: 72px 1fr; }
+    .timeline::before { left: 36px; }
+    .tl-time { font-size: 11px; }
+  }
+</style>
+
+<style>
+/* Responsive Wrapper - Auto-injected */
+html { font-size: 16px; }
+body { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 1rem; 
+    line-height: 1.7;
+    word-break: keep-all;
+}
+img, video, iframe { 
+    max-width: 100%; 
+    height: auto; 
+}
+table { 
+    width: 100%; 
+    display: block; 
+    overflow-x: auto; 
+}
+pre, code { 
+    overflow-x: auto; 
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+}
+@media (max-width: 768px) {
+    body { 
+        padding: 0.75rem; 
+        font-size: 15px; 
+    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.1rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">2026년 5월 여행 안내서</div>
+  <h1>팔칠오<br><em>충청여행</em></h1>
+  <p class="header-sub">5월 8일 금요일 → 5월 10일 일요일 · 2박 3일</p>
+  <div class="members">
+    <div class="member-card"><div class="member-icon"><svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="28" cy="28" r="28" fill="#2d3a4a"/>
+  <!-- body / suit -->
+  <rect x="14" y="36" width="28" height="16" rx="4" fill="#1a2535"/>
+  <rect x="22" y="36" width="4" height="10" fill="#c4922a" opacity="0.8"/>
+  <!-- shirt collar -->
+  <polygon points="22,36 28,40 34,36" fill="white" opacity="0.9"/>
+  <!-- neck -->
+  <rect x="24" y="30" width="8" height="7" fill="#d4a574"/>
+  <!-- head -->
+  <ellipse cx="28" cy="24" rx="10" ry="11" fill="#d4a574"/>
+  <!-- silver hair -->
+  <ellipse cx="28" cy="14" rx="10" ry="5" fill="#b0b8c0"/>
+  <rect x="18" y="14" width="4" height="6" fill="#b0b8c0"/>
+  <rect x="34" y="14" width="4" height="6" fill="#b0b8c0"/>
+  <!-- eyes -->
+  <ellipse cx="24" cy="23" rx="1.5" ry="1.5" fill="#3a2a1a"/>
+  <ellipse cx="32" cy="23" rx="1.5" ry="1.5" fill="#3a2a1a"/>
+  <!-- eyebrow -->
+  <path d="M22 20 Q24 19 26 20" stroke="#888" stroke-width="1.2" fill="none"/>
+  <path d="M30 20 Q32 19 34 20" stroke="#888" stroke-width="1.2" fill="none"/>
+  <!-- subtle smile -->
+  <path d="M25 27 Q28 29 31 27" stroke="#8b5a3a" stroke-width="1.2" fill="none"/>
+</svg></div><div class="member-name">팔십대남</div><div class="member-desc">85세 · 의성 출발</div></div>
+    <div class="member-card"><div class="member-icon"><svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="28" cy="28" r="28" fill="#1e3a2f"/>
+  <!-- body / jacket -->
+  <rect x="12" y="36" width="32" height="16" rx="4" fill="#c4922a"/>
+  <rect x="24" y="36" width="8" height="16" fill="#e8c97a" opacity="0.4"/>
+  <!-- collar -->
+  <polygon points="20,36 28,41 36,36" fill="#f5ede0" opacity="0.9"/>
+  <!-- neck -->
+  <rect x="24" y="30" width="8" height="7" fill="#c8845a"/>
+  <!-- head -->
+  <ellipse cx="28" cy="24" rx="10" ry="11" fill="#c8845a"/>
+  <!-- dark styled hair -->
+  <ellipse cx="28" cy="13" rx="10" ry="5" fill="#2a2a2a"/>
+  <rect x="18" y="13" width="3" height="7" fill="#2a2a2a"/>
+  <rect x="35" y="13" width="3" height="7" fill="#2a2a2a"/>
+  <ellipse cx="28" cy="13" rx="10" ry="4" fill="#1a1a1a"/>
+  <!-- eyes -->
+  <ellipse cx="24" cy="23" rx="1.6" ry="1.6" fill="#1a1a1a"/>
+  <ellipse cx="32" cy="23" rx="1.6" ry="1.6" fill="#1a1a1a"/>
+  <!-- eyebrow -->
+  <path d="M22 20 Q24 19 26 20" stroke="#2a2a2a" stroke-width="1.5" fill="none"/>
+  <path d="M30 20 Q32 19 34 20" stroke="#2a2a2a" stroke-width="1.5" fill="none"/>
+  <!-- confident smile -->
+  <path d="M24 27 Q28 30 32 27" stroke="#7a4030" stroke-width="1.3" fill="none"/>
+</svg></div><div class="member-name">오십대남</div><div class="member-desc">56세 · 운전 담당</div></div>
+    <div class="member-card"><div class="member-icon"><svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="28" cy="28" r="28" fill="#3a2a4a"/>
+  <!-- body / blazer -->
+  <rect x="13" y="36" width="30" height="16" rx="4" fill="#2d1f3d"/>
+  <rect x="24" y="36" width="8" height="16" fill="#f5ede0" opacity="0.15"/>
+  <!-- pocket square -->
+  <polygon points="15,37 20,37 18,41" fill="#c4922a" opacity="0.9"/>
+  <!-- collar -->
+  <polygon points="21,36 28,41 35,36" fill="#f0ece4" opacity="0.9"/>
+  <!-- neck -->
+  <rect x="24" y="30" width="8" height="7" fill="#c09070"/>
+  <!-- head -->
+  <ellipse cx="28" cy="24" rx="10" ry="11" fill="#c09070"/>
+  <!-- salt-pepper hair -->
+  <ellipse cx="28" cy="13" rx="10" ry="5" fill="#6a6a72"/>
+  <rect x="18" y="13" width="3" height="7" fill="#6a6a72"/>
+  <rect x="35" y="13" width="3" height="7" fill="#6a6a72"/>
+  <!-- highlight -->
+  <ellipse cx="26" cy="13" rx="4" ry="3" fill="#9a9aa2" opacity="0.5"/>
+  <!-- eyes -->
+  <ellipse cx="24" cy="23" rx="1.5" ry="1.5" fill="#2a1a0a"/>
+  <ellipse cx="32" cy="23" rx="1.5" ry="1.5" fill="#2a1a0a"/>
+  <!-- eyebrow -->
+  <path d="M22 20 Q24 19 26 20" stroke="#555" stroke-width="1.3" fill="none"/>
+  <path d="M30 20 Q32 19 34 20" stroke="#555" stroke-width="1.3" fill="none"/>
+  <!-- warm smile -->
+  <path d="M25 27 Q28 30 31 27" stroke="#7a5040" stroke-width="1.2" fill="none"/>
+</svg></div><div class="member-name">칠십대남</div><div class="member-desc">76세 · 대전역 합류</div></div>
+  </div>
+</header>
+
+<div class="route-bar">
+  🗺️ 의성 → 대전역 → 마곡사(공주) → 수안보스파호텔 1박<br>
+  → 법주사(속리산) → 황정산자연휴양림 2박 → 수안보온천역 KTX(형님) → 충주 → 의성
+</div>
+
+<main>
+
+<!-- 사전일 -->
+<section class="day-section">
+  <div class="day-header">
+    <div class="day-badge pre">D-1</div>
+    <div>
+      <div class="day-title">이동일 — 나 혼자 서울에서 의성으로</div>
+      <div class="day-date">5월 7일 목요일 밤</div>
+    </div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">밤 출발</div>
+      <div class="tl-content">
+        <div class="tl-place">🚗 서울 영등포 출발</div>
+        <div class="tl-desc">나 혼자 이동. 약 3시간 소요.</div>
+        <div class="tl-tip">아버지는 의성 자택에서 편히 쉬시면 됩니다.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">자정 전후</div>
+      <div class="tl-content">
+        <div class="tl-place">🏠 의성 아버지 댁 도착</div>
+        <div class="tl-desc">도착 후 바로 취침. 다음날 일찍 출발 준비.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 1일차 -->
+<section class="day-section">
+  <div class="day-header">
+    <div class="day-badge">1일차</div>
+    <div>
+      <div class="day-title">마곡사 · 수안보온천 — 유네스코 숲길과 온천 첫날</div>
+      <div class="day-date">5월 8일 금요일</div>
+    </div>
+  </div>
+
+  <div class="stay-banner">
+    <div class="stay-banner-icon">♨️</div>
+    <div class="stay-banner-text">
+      <div class="stay-banner-name">1박 · 수안보스파호텔</div>
+      <div class="stay-banner-sub">조선 왕이 즐기던 천연 탄산온천 · 객실 내 온천욕조</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-time">07:30</div>
+      <div class="tl-content">
+        <div class="tl-place">🏡 의성 출발</div>
+        <div class="tl-desc">아버지와 함께. 의성IC → 고속도로 진입.</div>
+        <div class="tl-tip"><strong>🛑 휴게소 1회</strong> — 의성→대전 구간 중간에 한 번 쉬어갑니다. 대전역까지 약 2시간 소요.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">10:10</div>
+      <div class="tl-content">
+        <div class="tl-place">🚉 대전역 형님 픽업 <span class="tl-tag tag-transport">합류</span></div>
+        <div class="tl-desc">역 앞 단기주차장 이용. 형님 도착 확인 후 바로 공주 방향 출발.</div>
+        <div class="who-row">
+          <span class="who-badge who-me">나 ✓</span>
+          <span class="who-badge who-dad">아버지 ✓</span>
+          <span class="who-badge who-bro">형님 합류 ✓</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item drive-row">
+      <div class="tl-time tl-dot-empty"></div>
+      <div class="drive-content"><span>대전역 → 공주 시내</span><div class="drive-line"></div><span>약 40분</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">10:50</div>
+      <div class="tl-content">
+        <div class="tl-place">🏯 공산성 산책 <span class="tl-tag tag-sightseeing">관광</span></div>
+        <div class="tl-desc">백제 웅진 시대 왕성. 입구~연지 구간만 걸어도 금강이 한눈에. 완전 평지. 부담 없이 30분.</div>
+        <div class="tl-tip">입장료 성인 1,200원 · 주차 무료 · 무리하지 않고 입구 주변만 둘러봐도 충분.</div>
+      </div>
+    </div>
+
+    <div class="tl-item drive-row">
+      <div class="tl-time tl-dot-empty"></div>
+      <div class="drive-content"><span>공주 → 솥뚜껑매운탕(사곡면)</span><div class="drive-line"></div><span>약 25분</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">12:00</div>
+      <div class="tl-content">
+        <div class="tl-place">🍲 솥뚜껑매운탕 <span class="tl-tag tag-meal">점심</span></div>
+        <div class="tl-desc">공주시 사곡면. 솥뚜껑에 끓여내는 메기매운탕. KBS·MBN 등 방송 다수 소개 맛집. 어르신도 좋아하실 진한 국물 맛.</div>
+        <div class="tl-tip"><strong>월요일 휴무</strong> · ☎️ 041-841-7647 · 오픈 11:00 · 평일 브레이크타임 14:50~16:00</div>
+      </div>
+    </div>
+
+    <div class="tl-item drive-row">
+      <div class="tl-time tl-dot-empty"></div>
+      <div class="drive-content"><span>솥뚜껑매운탕 → 마곡사</span><div class="drive-line"></div><span>약 15분</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">13:15</div>
+      <div class="tl-content">
+        <div class="tl-place">🌿 마곡사 <span class="tl-tag tag-sightseeing">관광</span></div>
+        <div class="tl-desc">유네스코 세계유산. 소나무 숲 흙길 — 입구에서 대웅전까지 완만하고 그늘짐. 계단 거의 없음. 어르신 동반 최적 코스.</div>
+        <div class="tl-tip"><strong>소요 약 70분.</strong> 입장료 성인 3,000원 · 70세 이상 무료 여부 현장 확인.</div>
+      </div>
+    </div>
+
+    <div class="tl-item drive-row">
+      <div class="tl-time tl-dot-empty"></div>
+      <div class="drive-content"><span>마곡사 → 수안보온천</span><div class="drive-line"></div><span>약 1시간 30분 · 중간 휴식 1회</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">16:00</div>
+      <div class="tl-content">
+        <div class="tl-place">♨️ 수안보스파호텔 체크인 <span class="tl-tag tag-stay">1박</span></div>
+        <div class="tl-desc">체크인 후 바로 온천 즐기기.</div>
+        <div class="tl-tip">객실 욕조에서 천연 탄산온천수 이용. 대중탕도 함께 이용 가능.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">18:00</div>
+      <div class="tl-content">
+        <div class="tl-place">🍲 수안보 저녁 식사 <span class="tl-tag tag-meal">저녁</span></div>
+        <div class="tl-desc">수안보 읍내 한우구이 또는 충주 올갱이국 전문점. 담백하고 어르신도 편하게 드실 수 있는 메뉴로.</div>
+        <div class="tl-tip">수안보 온천 특구 내 식당가 도보 이동 가능. 한우·버섯전골 추천.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">저녁 이후</div>
+      <div class="tl-content">
+        <div class="tl-place">♨️ 온천탕 한 번 더 · 취침</div>
+        <div class="tl-desc">저녁 후 온천 한 번 더 즐기고 일찍 주무세요.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 2일차 -->
+<section class="day-section">
+  <div class="day-header">
+    <div class="day-badge">2일차</div>
+    <div>
+      <div class="day-title">법주사 · 황정산 — 유네스코 고찰과 숲속 휴양림</div>
+      <div class="day-date">5월 9일 토요일</div>
+    </div>
+  </div>
+
+  <div class="stay-banner">
+    <div class="stay-banner-icon">🌲</div>
+    <div class="stay-banner-text">
+      <div class="stay-banner-name">2박 · 황정산자연휴양림</div>
+      <div class="stay-banner-sub">충북 제천 · 수안보에서 약 40분 · 깊은 산속 휴양</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-time">아침</div>
+      <div class="tl-content">
+        <div class="tl-place">♨️ 마지막 수안보 온천탕 · 아침식사</div>
+        <div class="tl-desc">여유롭게 아침 온천 후 체크아웃. 호텔 조식 또는 수안보 읍내 식당 이용.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">10:00</div>
+      <div class="tl-content">
+        <div class="tl-place">🏨 수안보스파호텔 체크아웃</div>
+      </div>
+    </div>
+
+    <div class="tl-item drive-row">
+      <div class="tl-time tl-dot-empty"></div>
+      <div class="drive-content"><span>수안보 → 법주사(속리산)</span><div class="drive-line"></div><span>약 1시간 30분</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">11:30</div>
+      <div class="tl-content">
+        <div class="tl-place">🌲 정이품송 <span class="tl-tag tag-sightseeing">관광</span></div>
+        <div class="tl-desc">수령 600년 천연기념물 소나무. 법주사 입구 바로 옆. 완전 평지. 무료. 사진 찍기 좋음.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">12:00</div>
+      <div class="tl-content">
+        <div class="tl-place">🍜 법주사 입구 식당가 점심 <span class="tl-tag tag-meal">식사</span></div>
+        <div class="tl-desc">산채정식·순두부·도토리묵밥 등 산사 앞 깔끔한 한식. 어르신 입맛에 맞는 담백한 메뉴 추천.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">13:30</div>
+      <div class="tl-content">
+        <div class="tl-place">🪷 법주사 <span class="tl-tag tag-sightseeing">관광</span></div>
+        <div class="tl-desc">유네스코 세계유산. 천년 고찰. 입구~대웅전 완만한 흙길, 경사 거의 없음. 금동미륵대불(33m) 장관.</div>
+        <div class="tl-tip"><strong>소요 약 50분.</strong> 입장료 성인 5,000원 · 경로 무료 확인.</div>
+      </div>
+    </div>
+
+    <div class="tl-item drive-row">
+      <div class="tl-time tl-dot-empty"></div>
+      <div class="drive-content"><span>법주사 → 황정산자연휴양림(제천)</span><div class="drive-line"></div><span>약 1시간 30분</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">16:00</div>
+      <div class="tl-content">
+        <div class="tl-place">🌲 황정산자연휴양림 체크인 <span class="tl-tag tag-stay">2박</span></div>
+        <div class="tl-desc">충북 제천 깊은 산속 국립 휴양림. 맑은 공기, 조용한 숲. 저녁은 휴양림 내 식당 또는 제천 읍내 이동.</div>
+        <div class="tl-tip"><strong>저녁 추천:</strong> 제천 닭갈비 또는 황기족발 (제천 특산). 읍내까지 약 20~30분.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">저녁 이후</div>
+      <div class="tl-content">
+        <div class="tl-place">🌙 휴양림 산책 · 별빛 감상</div>
+        <div class="tl-desc">도심 불빛 없는 깊은 산속. 5월 맑은 날 별이 선명하게 보임. 천천히 산책 후 일찍 주무세요.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 3일차 -->
+<section class="day-section">
+  <div class="day-header">
+    <div class="day-badge">3일차</div>
+    <div>
+      <div class="day-title">휴양림 산책 · 형님 KTX 배웅 · 귀가</div>
+      <div class="day-date">5월 10일 일요일</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-time">아침</div>
+      <div class="tl-content">
+        <div class="tl-place">🌄 휴양림 아침 산책</div>
+        <div class="tl-desc">30분 가볍게. 이슬 내린 새벽 숲길 산책. 맑은 공기 마시며 여유롭게 체크아웃 준비.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">09:30</div>
+      <div class="tl-content">
+        <div class="tl-place">🏕️ 황정산자연휴양림 체크아웃</div>
+      </div>
+    </div>
+
+    <div class="tl-item drive-row">
+      <div class="tl-time tl-dot-empty"></div>
+      <div class="drive-content"><span>황정산 → 수안보온천역</span><div class="drive-line"></div><span>약 40분</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">10:39</div>
+      <div class="tl-content">
+        <div class="tl-place">🚆 수안보온천역 — 형님 KTX 탑승 <span class="tl-tag tag-transport">작별</span></div>
+        <div class="ktx-box">
+          <div class="ktx-title">🚆 중부내륙선 KTX-이음 732호</div>
+          <div class="ktx-row">
+            <span>수안보온천역</span>
+            <span class="ktx-arrow">→</span>
+            <span>판교역</span>
+            <span class="ktx-time">10:39 출발 · 11:57 도착 (약 78분)</span>
+          </div>
+          <div class="ktx-sub">판교역 도착 후 신분당선 환승 → 강남·서울 방면 이동 편리</div>
+        </div>
+        <div class="tl-tip" style="margin-top:10px;">
+          <strong>형님께:</strong> 코레일톡 앱으로 미리 예매하시면 편합니다.<br>
+          요금: 수안보온천 → 판교 일반실 약 12,000원대 (경로 할인 가능)
+        </div>
+        <div class="who-row">
+          <span class="who-badge who-me">나 ✓</span>
+          <span class="who-badge who-dad">아버지 ✓</span>
+          <span class="who-badge who-bro">형님 — KTX 판교행 탑승</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item drive-row">
+      <div class="tl-time tl-dot-empty"></div>
+      <div class="drive-content"><span>수안보 → 충주 시내</span><div class="drive-line"></div><span>약 15분</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">11:00</div>
+      <div class="tl-content">
+        <div class="tl-place">🍲 충주 올갱이국 점심 <span class="tl-tag tag-meal">식사</span></div>
+        <div class="tl-desc">충주 명물 다슬기(올갱이) 해장국. 시원하고 깔끔. 어르신도 편하게 드실 수 있음.</div>
+      </div>
+    </div>
+
+    <div class="tl-item drive-row">
+      <div class="tl-time tl-dot-empty"></div>
+      <div class="drive-content"><span>충주 → 의성</span><div class="drive-line"></div><span>약 1시간 50분 · 휴게소 1회</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">13:30</div>
+      <div class="tl-content">
+        <div class="tl-place">🏠 의성 아버지 댁 도착</div>
+        <div class="tl-desc">아버지 모셔드리고 잠깐 쉬었다 출발.</div>
+      </div>
+    </div>
+
+    <div class="tl-item drive-row">
+      <div class="tl-time tl-dot-empty"></div>
+      <div class="drive-content"><span>의성 → 서울 영등포</span><div class="drive-line"></div><span>약 3시간</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">16:30~</div>
+      <div class="tl-content">
+        <div class="tl-place">🌆 서울 귀환 (나 혼자)</div>
+        <div class="tl-desc">아버지는 자택에서, 형님은 판교에서 편히 쉬시면 됩니다.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 예약 체크리스트 -->
+<div class="info-card">
+  <div class="info-card-title">📋 예약 · 준비 체크리스트</div>
+  <ul class="checklist">
+    <li>
+      <div class="check-icon">✓</div>
+      <div class="check-label"><strong>수안보스파호텔</strong> ✅ 예약 완료<span class="check-sub">1일차 · 이른 체크인 가능 여부 사전 확인 권장</span></div>
+    </li>
+    <li>
+      <div class="check-icon">✓</div>
+      <div class="check-label"><strong>황정산자연휴양림</strong> ✅ 예약 완료<span class="check-sub">2일차 · foresttrip.go.kr 예약 확인</span></div>
+    </li>
+    <li>
+      <div class="check-icon">✓</div>
+      <div class="check-label">수안보 저녁 식당 확인<span class="check-sub">한우구이 또는 올갱이국 · 수안보 온천 특구 내 식당가 이용</span></div>
+    </li>
+    <li class="urgent">
+      <div class="check-icon">!</div>
+      <div class="check-label"><strong>형님 KTX 승차권 예매</strong><span class="check-sub">수안보온천역 10:39 → 판교역 11:57 · 코레일톡 앱 또는 코레일 홈페이지</span></div>
+    </li>
+    <li>
+      <div class="check-icon">✓</div>
+      <div class="check-label">상비약 챙기기<span class="check-sub">소화제, 진통제, 파스, 혈압약 등 어르신 상비약 확인</span></div>
+    </li>
+    <li>
+      <div class="check-icon">✓</div>
+      <div class="check-label">법주사 · 마곡사 입장료 확인<span class="check-sub">법주사 5,000원 · 마곡사 3,000원 · 70세 이상 무료 여부 현장 확인</span></div>
+    </li>
+  </ul>
+</div>
+
+<!-- 이동 주의사항 -->
+<div class="info-card" style="margin-top: 24px;">
+  <div class="info-card-title">🚗 이동 중 어르신 배려 포인트</div>
+  <ul class="checklist">
+    <li>
+      <div class="check-icon">✓</div>
+      <div class="check-label">1~2시간마다 휴게소 또는 주차 후 5분 휴식<span class="check-sub">의성→대전, 마곡사→수안보, 충주→의성 각 1회</span></div>
+    </li>
+    <li>
+      <div class="check-icon">✓</div>
+      <div class="check-label">관광지 보행 30~50분 이내로 제한<span class="check-sub">마곡사·법주사 모두 완만한 평지 흙길 코스</span></div>
+    </li>
+    <li>
+      <div class="check-icon">✓</div>
+      <div class="check-label">뒷좌석 온도·환기 수시 확인<span class="check-sub">황정산 휴양림 밤은 쌀쌀할 수 있음 — 얇은 겉옷 필수</span></div>
+    </li>
+    <li>
+      <div class="check-icon">✓</div>
+      <div class="check-label">물·간식 차 안에 항상 준비</div>
+    </li>
+  </ul>
+</div>
+
+<div class="map-hint">
+  <div class="map-hint-icon">🗺️</div>
+  <div class="map-hint-text">
+    <strong>숙소 확정 동선:</strong><br>
+    의성 → 대전역(형님) → 마곡사(공주) → <strong>수안보스파호텔 1박</strong><br>
+    → 법주사(속리산) → <strong>황정산자연휴양림 2박</strong><br>
+    → 수안보온천역 KTX(형님 판교) → 충주 → 의성 → 서울<br><br>
+    유네스코 세계유산 <strong>2곳</strong>(마곡사·법주사) · 온천 <strong>1박</strong> · 휴양림 <strong>1박</strong>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <p style="font-size:20px; color: var(--gold);">♥</p>
+  <p style="margin-top: 8px;">2026년 5월, 팔칠오 충청여행</p>
+  <p style="margin-top: 4px; color: #bbb;">팔십대남, 칠십대남, 오십대남 — 건강하게 즐거운 여행 되시길 바랍니다.</p>
+</footer>
+
+</body>
+</html>
