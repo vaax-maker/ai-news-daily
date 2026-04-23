@@ -1,31 +1,31 @@
 [
   {
-    "title": "2026년 기계ㆍ로봇산업(로봇분야) 발전유공 포상 신청 연장 공고",
-    "link": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000121210",
     "dept": "산업통상부",
-    "manager": "",
-    "date": "2026-04-23",
     "source_name": "기업마당",
+    "date": "2026-04-23",
     "image_url": "",
+    "bid_begin_dt": "2026-04-21",
+    "title": "2026년 제조암묵지기반AI모델개발사업 신규지원 대상과제 수정 공고",
+    "manager": "",
+    "is_new": false,
+    "bid_close_dt": "2026-05-11",
+    "link": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000121189",
     "published_display": "2026-04-23",
-    "bid_begin_dt": "2026-03-12",
-    "bid_close_dt": "2026-05-01",
-    "openg_dt": "",
-    "is_new": true
+    "openg_dt": ""
   },
   {
-    "title": "2026년 제조암묵지기반AI모델개발사업 신규지원 대상과제 수정 공고",
-    "link": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000121189",
     "dept": "산업통상부",
-    "manager": "",
-    "date": "2026-04-23",
     "source_name": "기업마당",
+    "date": "2026-04-23",
     "image_url": "",
+    "bid_begin_dt": "2026-03-12",
+    "title": "2026년 기계ㆍ로봇산업(로봇분야) 발전유공 포상 신청 연장 공고",
+    "manager": "",
+    "is_new": false,
+    "bid_close_dt": "2026-05-01",
+    "link": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000121210",
     "published_display": "2026-04-23",
-    "bid_begin_dt": "2026-04-21",
-    "bid_close_dt": "2026-05-11",
-    "openg_dt": "",
-    "is_new": true
+    "openg_dt": ""
   },
   {
     "dept": "충청북도",
