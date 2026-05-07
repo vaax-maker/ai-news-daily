@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10종목 분석</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'IBM Plex Sans KR', sans-serif; background: #f5f5f3; color: #1a1a1a; padding: 24px; }
+  .accent { color: #0066cc; }
+  .red { color: #cc2200; }
+  .dim { color: #999; }
+  h1 { font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .date { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #bbb; margin-bottom: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: #ddd; border: 1px solid #ddd; }
+  .card { background: #fff; padding: 16px 18px; }
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .company-name { font-size: 14px; font-weight: 600; color: #111; }
+  .ticker { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #aaa; margin-top: 2px; }
+  .signal-badge { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 2px; flex-shrink: 0; }
+  .badge-buy { background: #e6f0ff; color: #0055bb; border: 1px solid #b3ccee; }
+  .badge-neutral { background: #f2f2f2; color: #888; border: 1px solid #ddd; }
+  .price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+  .price { font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 500; color: #111; }
+  .swing { font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 1px 6px; border-radius: 2px; }
+  .sw-a { color: #0055bb; border: 1px solid #b3ccee; background: #e6f0ff; }
+  .sw-b { color: #444; border: 1px solid #ccc; background: #f5f5f5; }
+  .sw-c { color: #999; border: 1px solid #ddd; background: #fafafa; }
+  .sw-d { color: #cc2200; border: 1px solid #f0c4bd; background: #fff0ee; }
+  .overview { font-size: 11px; color: #777; line-height: 1.6; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-bottom: 8px; }
+  .metric { background: #f9f9f9; padding: 6px 8px; border-radius: 2px; border: 1px solid #eee; }
+  .metric-label { font-size: 9px; color: #bbb; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
+  .metric-value { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #333; }
+  .valuation-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .val-range { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #bbb; }
+  .val-tag { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 2px; flex-shrink: 0; }
+  .val-under { background: #e6f0ff; color: #0055bb; }
+  .val-fair  { background: #eef5e6; color: #336600; }
+  .val-over  { background: #fff0ee; color: #cc2200; }
+  .val-na    { background: #f5f5f5; color: #aaa; }
+  .investor-bar { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; font-size: 10px; flex-wrap: wrap; }
+  .pos { color: #0055bb; font-family: 'IBM Plex Mono', monospace; }
+  .neg { color: #cc2200; font-family: 'IBM Plex Mono', monospace; }
+  .inv-sep { color: #ddd; }
+  .outlook { font-size: 11px; color: #777; line-height: 1.5; padding-top: 8px; border-top: 1px solid #eee; }
+  .outlook strong { color: #333; font-weight: 500; }
+  .summary-bar { background: #fff; border: 1px solid #ddd; padding: 12px 18px; margin-top: 1px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .sum-item { font-size: 11px; color: #aaa; }
+  .sum-item span { font-family: 'IBM Plex Mono', monospace; color: #555; margin-left: 4px; }
+</style>
+
+<style>
+/* Responsive Wrapper - Auto-injected */
+html { font-size: 16px; }
+body { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 1rem; 
+    line-height: 1.7;
+    word-break: keep-all;
+}
+img, video, iframe { 
+    max-width: 100%; 
+    height: auto; 
+}
+table { 
+    width: 100%; 
+    display: block; 
+    overflow-x: auto; 
+}
+pre, code { 
+    overflow-x: auto; 
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+}
+@media (max-width: 768px) {
+    body { 
+        padding: 0.75rem; 
+        font-size: 15px; 
+    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.1rem; }
+}
+</style>
+</head>
+<body>
+
+<h1>Korean Stock Analysis — 10 종목</h1>
+<div class="date">2026.05.07 &nbsp;|&nbsp; K-DEXTER 기준</div>
+
+<div class="grid">
+
+<!-- 현대건설 -->
+<div class="card">
+  <div class="card-header">
+    <div><div class="company-name">현대건설</div><div class="ticker">000720 &nbsp;|&nbsp; 시총 18.2조</div></div>
+    <span class="signal-badge badge-neutral">NEUTRAL</span>
+  </div>
+  <div class="price-row"><div class="price">163,700</div><span class="swing sw-c">스윙 C</span></div>
+  <div class="overview">현대차그룹 계열 대형 건설사. 힐스테이트 브랜드. 토목·주택·중동 플랜트 포트폴리오 보유. 외국인 순매수 강세이나 단기 MA20 하회 중.</div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-label">PER</div><div class="metric-value">33.7x</div></div>
+    <div class="metric"><div class="metric-label">PBR</div><div class="metric-value">2.0x</div></div>
+    <div class="metric"><div class="metric-label">ROE</div><div class="metric-value">6.2%</div></div>
+  </div>
+  <div class="valuation-row"><div class="val-range">S-RIM 27,667 ~ 41,500</div><div class="val-tag val-over">OVERVALUED</div></div>
+  <div class="investor-bar">
+    <span class="dim">개인</span><span class="neg">-4.7%</span><span class="inv-sep">|</span>
+    <span class="dim">외국인</span><span class="pos">+22.8%</span><span class="inv-sep">|</span>
+    <span class="dim">기관</span><span class="neg">-17.7%</span>
+  </div>
+  <div class="outlook"><strong>전망:</strong> 외국인 매수세 긍정적이나 S-RIM 적정가 대비 4~6배 고평가. 중동 수주 기대감 선반영 구간. 조정 후 분할 접근 권고.</div>
+</div>
+
+<!-- 대우건설 -->
+<div class="card">
+  <div class="card-header">
+    <div><div class="company-name">대우건설</div><div class="ticker">047040 &nbsp;|&nbsp; 시총 13.2조</div></div>
+    <span class="signal-badge badge-neutral">NEUTRAL</span>
+  </div>
+  <div class="price-row"><div class="price">32,200</div><span class="swing sw-b">스윙 B</span></div>
+  <div class="overview">푸르지오 주택 브랜드 보유 4대 건설사. MA120 대비 3배 급등. EPS 음수(적자 전환). 수주 확대·미분양 해소 기대감 선반영 상태.</div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-label">PER</div><div class="metric-value">38.5x</div></div>
+    <div class="metric"><div class="metric-label">PBR</div><div class="metric-value">3.6x</div></div>
+    <div class="metric"><div class="metric-label">ROE</div><div class="metric-value">9.8%</div></div>
+  </div>
+  <div class="valuation-row"><div class="val-range">S-RIM 6,661 ~ 9,991</div><div class="val-tag val-over">OVERVALUED</div></div>
+  <div class="investor-bar">
+    <span class="dim">개인</span><span class="neg">-1.3%</span><span class="inv-sep">|</span>
+    <span class="dim">외국인</span><span class="pos">+1.4%</span><span class="inv-sep">|</span>
+    <span class="dim">기관</span><span class="pos">+0.2%</span>
+  </div>
+  <div class="outlook"><strong>전망:</strong> 기술적 상승 추세(MA 전 구간 우상향). S-RIM 대비 3~5배 고평가. 추격 매수 자제, 눌림목 분할 매수 전략 유효.</div>
+</div>
+
+<!-- DL이엔씨 -->
+<div class="card">
+  <div class="card-header">
+    <div><div class="company-name">DL이엔씨</div><div class="ticker">375500 &nbsp;|&nbsp; 시총 3.6조</div></div>
+    <span class="signal-badge badge-neutral">NEUTRAL</span>
+  </div>
+  <div class="price-row"><div class="price">93,100</div><span class="swing sw-c">스윙 C</span></div>
+  <div class="overview">구 대림산업 건설부문 분할 법인. e편한세상 브랜드. PBR 0.68 저평가. 건설주 중 펀더멘털 안정성 상위. 외국인 순매수율 34% 강세.</div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-label">PER</div><div class="metric-value">9.8x</div></div>
+    <div class="metric"><div class="metric-label">PBR</div><div class="metric-value">0.7x</div></div>
+    <div class="metric"><div class="metric-label">ROE</div><div class="metric-value">7.4%</div></div>
+  </div>
+  <div class="valuation-row"><div class="val-range">S-RIM 71,875 ~ 107,813</div><div class="val-tag val-fair">FAIR</div></div>
+  <div class="investor-bar">
+    <span class="dim">개인</span><span class="neg">-29.4%</span><span class="inv-sep">|</span>
+    <span class="dim">외국인</span><span class="pos">+34.0%</span><span class="inv-sep">|</span>
+    <span class="dim">기관</span><span class="neg">-4.0%</span>
+  </div>
+  <div class="outlook"><strong>전망:</strong> 10종목 중 유일 FAIR 판정. 현재가 적정가 범위 내. 건설주 중 밸류에이션 가장 안정적. 눌림목 적극 활용 가능.</div>
+</div>
+
+<!-- 에스엘 -->
+<div class="card" style="border-left: 3px solid #0066cc;">
+  <div class="card-header">
+    <div><div class="company-name">에스엘 <span class="accent" style="font-size:10px; font-weight:400;">BUY</span></div><div class="ticker">005850 &nbsp;|&nbsp; 시총 2.9조</div></div>
+    <span class="signal-badge badge-buy">BUY</span>
+  </div>
+  <div class="price-row"><div class="price">62,800</div><span class="swing sw-a">스윙 A</span></div>
+  <div class="overview">현대차·기아 1차 협력사. 차량용 헤드램프·리어램프 전문. 전기차 프리미엄 조명 수혜. 저PER(7.9x)·고ROE(14%) 가치주 특성.</div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-label">PER</div><div class="metric-value accent">7.9x</div></div>
+    <div class="metric"><div class="metric-label">PBR</div><div class="metric-value">1.1x</div></div>
+    <div class="metric"><div class="metric-label">ROE</div><div class="metric-value accent">14.0%</div></div>
+  </div>
+  <div class="valuation-row"><div class="val-range">S-RIM 55,767 ~ 83,650</div><div class="val-tag val-under">UNDERVALUED</div></div>
+  <div class="investor-bar">
+    <span class="dim">개인</span><span class="neg">-14.1%</span><span class="inv-sep">|</span>
+    <span class="dim">외국인</span><span class="pos">+29.4%</span><span class="inv-sep">|</span>
+    <span class="dim">기관</span><span class="neg">-14.7%</span>
+  </div>
+  <div class="outlook"><strong>전망:</strong> 유일 UNDERVALUED+BUY+A등급. 목표가 1차 77,400 / 2차 94,364. 손절 61,136. R/R 8.77 최적. 10종목 중 가장 명확한 매수 논거.</div>
+</div>
+
+<!-- 한화시스템 -->
+<div class="card">
+  <div class="card-header">
+    <div><div class="company-name">한화시스템</div><div class="ticker">272210 &nbsp;|&nbsp; 시총 23.1조</div></div>
+    <span class="signal-badge badge-neutral">NEUTRAL</span>
+  </div>
+  <div class="price-row"><div class="price">122,200</div><span class="swing sw-d">스윙 D</span></div>
+  <div class="overview">방산 IT·체계통합·SAR위성·UAM 사업. 방산 테마 프리미엄 과다 반영. PER 89x는 10종목 최고. ROE 5.1%로 수익성 낮음.</div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-label">PER</div><div class="metric-value red">89.8x</div></div>
+    <div class="metric"><div class="metric-label">PBR</div><div class="metric-value red">4.5x</div></div>
+    <div class="metric"><div class="metric-label">ROE</div><div class="metric-value">5.1%</div></div>
+  </div>
+  <div class="valuation-row"><div class="val-range">S-RIM 10,683 ~ 16,025</div><div class="val-tag val-over">OVERVALUED</div></div>
+  <div class="investor-bar">
+    <span class="dim">개인</span><span class="neg">-8.2%</span><span class="inv-sep">|</span>
+    <span class="dim">외국인</span><span class="pos">+10.4%</span><span class="inv-sep">|</span>
+    <span class="dim">기관</span><span class="neg">-2.2%</span>
+  </div>
+  <div class="outlook"><strong>전망:</strong> S-RIM 대비 7~11배 고평가(10종목 중 최대 괴리). 스윙 D등급 비적합. UAM·위성 성과 가시화 전까지 밸류에이션 근거 취약.</div>
+</div>
+
+<!-- LG이노텍 -->
+<div class="card">
+  <div class="card-header">
+    <div><div class="company-name">LG이노텍</div><div class="ticker">011070 &nbsp;|&nbsp; 시총 14.9조</div></div>
+    <span class="signal-badge badge-neutral">NEUTRAL</span>
+  </div>
+  <div class="price-row"><div class="price">632,000</div><span class="swing sw-b">스윙 B</span></div>
+  <div class="overview">아이폰 카메라모듈 세계 1위 공급사. 반도체 기판(FC-BGA) 신성장. 애플 의존도 약 80%. RSI 83.1 과매수권 진입.</div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-label">PER</div><div class="metric-value">18.8x</div></div>
+    <div class="metric"><div class="metric-label">PBR</div><div class="metric-value">2.2x</div></div>
+    <div class="metric"><div class="metric-label">ROE</div><div class="metric-value">12.2%</div></div>
+  </div>
+  <div class="valuation-row"><div class="val-range">S-RIM 120,158 ~ 180,238</div><div class="val-tag val-over">OVERVALUED</div></div>
+  <div class="investor-bar">
+    <span class="dim">개인</span><span class="neg">-14.5%</span><span class="inv-sep">|</span>
+    <span class="dim">외국인</span><span class="pos">+10.2%</span><span class="inv-sep">|</span>
+    <span class="dim">기관</span><span class="pos">+4.2%</span>
+  </div>
+  <div class="outlook"><strong>전망:</strong> RSI 83·MFI 81 동반 과매수 경고. S-RIM 대비 3.5~5배 고평가. 아이폰 신모델 수혜 기대 선반영. 눌림목 조정 시 진입 전략.</div>
+</div>
+
+<!-- SKC -->
+<div class="card">
+  <div class="card-header">
+    <div><div class="company-name">SKC</div><div class="ticker">011790 &nbsp;|&nbsp; 시총 6.1조</div></div>
+    <span class="signal-badge badge-neutral">NEUTRAL</span>
+  </div>
+  <div class="price-row"><div class="price">161,200</div><span class="swing sw-b">스윙 B</span></div>
+  <div class="overview">반도체 유리기판(FCG)·CMP 패드·동박 소재 전환기. ROE -24.9% 적자 구조. 유리기판 패키징 테마로 외국인 매수 집중.</div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-label">PER</div><div class="metric-value red">적자</div></div>
+    <div class="metric"><div class="metric-label">PBR</div><div class="metric-value red">6.4x</div></div>
+    <div class="metric"><div class="metric-label">ROE</div><div class="metric-value red">-24.9%</div></div>
+  </div>
+  <div class="valuation-row"><div class="val-range">S-RIM 산출 불가 (적자)</div><div class="val-tag val-na">N/A</div></div>
+  <div class="investor-bar">
+    <span class="dim">개인</span><span class="pos">+2.0%</span><span class="inv-sep">|</span>
+    <span class="dim">외국인</span><span class="pos">+12.1%</span><span class="inv-sep">|</span>
+    <span class="dim">기관</span><span class="neg">-13.0%</span>
+  </div>
+  <div class="outlook"><strong>전망:</strong> RSI 78.8 과매수. MA20 대비 +44% 급등. 유리기판 수혜 기대 모멘텀. 흑자 전환 시점 확인 전까지 PBR 6.4x는 고위험 영역.</div>
+</div>
+
+<!-- 필옵틱스 -->
+<div class="card">
+  <div class="card-header">
+    <div><div class="company-name">필옵틱스</div><div class="ticker">161580 &nbsp;|&nbsp; 시총 1.5조</div></div>
+    <span class="signal-badge badge-neutral">NEUTRAL</span>
+  </div>
+  <div class="price-row"><div class="price">63,000</div><span class="swing sw-b">스윙 B</span></div>
+  <div class="overview">레이저 광학 장비 전문 중소형주. 디스플레이·이차전지·반도체 공정 장비 공급. 적자 구조에서 테마 급등. MFI 87.9 과매수 극단.</div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-label">PER</div><div class="metric-value red">적자</div></div>
+    <div class="metric"><div class="metric-label">PBR</div><div class="metric-value red">8.8x</div></div>
+    <div class="metric"><div class="metric-label">ROE</div><div class="metric-value red">-14.7%</div></div>
+  </div>
+  <div class="valuation-row"><div class="val-range">S-RIM 산출 불가 (적자)</div><div class="val-tag val-na">N/A</div></div>
+  <div class="investor-bar">
+    <span class="dim">개인</span><span class="neg">-11.8%</span><span class="inv-sep">|</span>
+    <span class="dim">외국인</span><span class="pos">+9.1%</span><span class="inv-sep">|</span>
+    <span class="dim">기관</span><span class="pos">+2.7%</span>
+  </div>
+  <div class="outlook"><strong>전망:</strong> PBR 8.8x는 10종목 최고. RSI 73.8·MFI 87.9 과열 극단. POC(49,476) 대비 현재가 +27% 괴리. 수주 실적 가시화 전 고위험 모멘텀.</div>
+</div>
+
+<!-- 켐트로닉스 -->
+<div class="card">
+  <div class="card-header">
+    <div><div class="company-name">켐트로닉스</div><div class="ticker">089010 &nbsp;|&nbsp; 시총 0.7조</div></div>
+    <span class="signal-badge badge-neutral">NEUTRAL</span>
+  </div>
+  <div class="price-row"><div class="price">42,350</div><span class="swing sw-b">스윙 B</span></div>
+  <div class="overview">자동차 전장부품·2차전지 소재·IT 소재 전문 중소형주. ROE 13.6% 양호. 외국인·기관 동반 순매수 유입 중. 시총 소규모로 변동성 큰 편.</div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-label">PER</div><div class="metric-value">23.1x</div></div>
+    <div class="metric"><div class="metric-label">PBR</div><div class="metric-value">3.0x</div></div>
+    <div class="metric"><div class="metric-label">ROE</div><div class="metric-value">13.6%</div></div>
+  </div>
+  <div class="valuation-row"><div class="val-range">S-RIM 5,092 ~ 7,638</div><div class="val-tag val-over">OVERVALUED</div></div>
+  <div class="investor-bar">
+    <span class="dim">개인</span><span class="neg">-36.9%</span><span class="inv-sep">|</span>
+    <span class="dim">외국인</span><span class="pos">+20.6%</span><span class="inv-sep">|</span>
+    <span class="dim">기관</span><span class="pos">+14.3%</span>
+  </div>
+  <div class="outlook"><strong>전망:</strong> 외국인+기관 동반 매수(+34.9%) 강세. 기술적 상승 추세 유효(MA 전 구간 우상향). 그러나 S-RIM 대비 5~8배 고평가. 목표가 48,900(+15%). 소형주 변동성 관리 필요.</div>
+</div>
+
+<!-- 삼성E&A -->
+<div class="card">
+  <div class="card-header">
+    <div><div class="company-name">삼성E&amp;A</div><div class="ticker">028050 &nbsp;|&nbsp; 시총 12.6조</div></div>
+    <span class="signal-badge badge-neutral">NEUTRAL</span>
+  </div>
+  <div class="price-row"><div class="price">64,400</div><span class="swing sw-b">스윙 B</span></div>
+  <div class="overview">구 삼성엔지니어링. 석유화학·가스처리·환경 플랜트 EPC 전문. ROE 14.1% 우수. RSI 74.6 과매수권. 외국인·기관 동반 이탈 중.</div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-label">PER</div><div class="metric-value">14.7x</div></div>
+    <div class="metric"><div class="metric-label">PBR</div><div class="metric-value">2.0x</div></div>
+    <div class="metric"><div class="metric-label">ROE</div><div class="metric-value">14.1%</div></div>
+  </div>
+  <div class="valuation-row"><div class="val-range">S-RIM 26,250 ~ 39,375</div><div class="val-tag val-over">OVERVALUED</div></div>
+  <div class="investor-bar">
+    <span class="dim">개인</span><span class="pos">+10.5%</span><span class="inv-sep">|</span>
+    <span class="dim">외국인</span><span class="neg">-4.7%</span><span class="inv-sep">|</span>
+    <span class="dim">기관</span><span class="neg">-5.9%</span>
+  </div>
+  <div class="outlook"><strong>전망:</strong> ROE 14.1%로 펀더멘털 우수이나 RSI 74.6 과매수. S-RIM 대비 1.6~2.5배 고평가. 외국인·기관 이탈·개인 주도 상승은 추세 지속성 측면에서 부정적. 눌림목 대기.</div>
+</div>
+
+</div>
+
+<div class="summary-bar">
+  <div class="sum-item">BUY <span style="color:#0055bb">에스엘 1종목</span></div>
+  <div class="sum-item">NEUTRAL <span>9종목</span></div>
+  <div class="sum-item">UNDERVALUED <span style="color:#0055bb">에스엘</span></div>
+  <div class="sum-item">FAIR <span style="color:#336600">DL이엔씨</span></div>
+  <div class="sum-item">OVERVALUED <span style="color:#cc2200">7종목</span></div>
+  <div class="sum-item">S-RIM N/A <span>SKC · 필옵틱스</span></div>
+</div>
+
+</body>
+</html>
