@@ -1,31 +1,31 @@
 [
   {
-    "title": "[전북] 2026년 기술교류 네트워크 R&D과제 기획지원 사업 참여기업 모집 공고",
-    "link": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000121711",
     "dept": "중소벤처기업부",
-    "manager": "",
-    "date": "2026-05-07",
     "source_name": "기업마당",
+    "date": "2026-05-07",
     "image_url": "",
+    "bid_begin_dt": "2026-05-01",
+    "title": "미주 K-뷰티ㆍ푸드 현지유통망 진출 특화프로그램 참여기업 모집 공고",
+    "manager": "",
+    "is_new": false,
+    "bid_close_dt": "2026-05-18",
+    "link": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000121690",
     "published_display": "2026-05-07",
-    "bid_begin_dt": "2026-04-20",
-    "bid_close_dt": "2026-05-15",
-    "openg_dt": "",
-    "is_new": true
+    "openg_dt": ""
   },
   {
-    "title": "미주 K-뷰티ㆍ푸드 현지유통망 진출 특화프로그램 참여기업 모집 공고",
-    "link": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000121690",
     "dept": "중소벤처기업부",
-    "manager": "",
-    "date": "2026-05-07",
     "source_name": "기업마당",
+    "date": "2026-05-07",
     "image_url": "",
+    "bid_begin_dt": "2026-04-20",
+    "title": "[전북] 2026년 기술교류 네트워크 R&D과제 기획지원 사업 참여기업 모집 공고",
+    "manager": "",
+    "is_new": false,
+    "bid_close_dt": "2026-05-15",
+    "link": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000121711",
     "published_display": "2026-05-07",
-    "bid_begin_dt": "2026-05-01",
-    "bid_close_dt": "2026-05-18",
-    "openg_dt": "",
-    "is_new": true
+    "openg_dt": ""
   },
   {
     "dept": "전북특별자치도",
