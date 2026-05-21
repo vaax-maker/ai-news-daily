@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>소비자용 AI 영상편집 단말 비교</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 32px;
+      background: #f6f7f4;
+      color: #1f2421;
+      line-height: 1.55;
+    }
+    h1, h2 {
+      color: #10251c;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 36px;
+      border-left: 5px solid #1f6b4a;
+      padding-left: 10px;
+    }
+    .summary {
+      background: #ffffff;
+      border: 1px solid #dfe5dd;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin: 20px 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #e4f2ea;
+      color: #145c3b;
+      font-weight: 700;
+      font-size: 13px;
+      margin-right: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin-top: 14px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    th {
+      background: #143828;
+      color: white;
+      text-align: left;
+      padding: 12px;
+      font-size: 14px;
+    }
+    td {
+      border-bottom: 1px solid #e6e9e4;
+      padding: 12px;
+      vertical-align: top;
+      font-size: 14px;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .good { color: #0c6b3d; font-weight: 700; }
+    .mid { color: #9a6400; font-weight: 700; }
+    .bad { color: #a33a2a; font-weight: 700; }
+    .note {
+      font-size: 13px;
+      color: #555;
+      margin-top: 8px;
+    }
+    .decision {
+      background: #10251c;
+      color: white;
+      padding: 20px;
+      border-radius: 16px;
+      margin-top: 24px;
+    }
+    .decision strong {
+      color: #9fe3bd;
+    }
+  </style>
+
+<style>
+/* Responsive Wrapper - Auto-injected */
+html { font-size: 16px; }
+body { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 1rem; 
+    line-height: 1.7;
+    word-break: keep-all;
+}
+img, video, iframe { 
+    max-width: 100%; 
+    height: auto; 
+}
+table { 
+    width: 100%; 
+    display: block; 
+    overflow-x: auto; 
+}
+pre, code { 
+    overflow-x: auto; 
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+}
+@media (max-width: 768px) {
+    body { 
+        padding: 0.75rem; 
+        font-size: 15px; 
+    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.1rem; }
+}
+</style>
+</head>
+
+<body>
+  <h1>소비자용 AI 영상편집 단말 비교</h1>
+  <p>
+    목적: 동영상에서 이미지를 추출하고, 이미지를 임베딩하여 장면을 이해한 뒤,
+    스토리에 맞춰 컷편집하는 “바이브편집”용 단말 비교.
+  </p>
+
+  <div class="summary">
+    <span class="badge">핵심 결론</span>
+    바이브편집 기준 최적 선택은 <strong>MacBook Pro M5 Max 128GB</strong> 또는
+    <strong>ASUS Ascent GX10 / DGX Spark 128GB</strong>이다.
+    단, 영상 편집까지 한 대로 끝내려면 MacBook Pro가 유리하고,
+    로컬 AI 추론·임베딩 서버로는 DGX Spark 계열이 유리하다.
+  </div>
+
+  <h2>1. 후보 단말 스펙 비교</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>구분</th>
+        <th>대표 구성</th>
+        <th>메모리</th>
+        <th>AI/영상 처리 특성</th>
+        <th>가격대</th>
+        <th>바이브편집 적합도</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>MacBook Pro M5 Pro</td>
+        <td>M5 Pro / 18코어 CPU / 20코어 GPU</td>
+        <td>최대 64GB 통합메모리</td>
+        <td>이동형 작업, 4K 영상편집, 중간 규모 이미지 임베딩에 적합</td>
+        <td>약 400만~600만원대 예상</td>
+        <td class="good">상</td>
+      </tr>
+      <tr>
+        <td>MacBook Pro M5 Max</td>
+        <td>M5 Max / 18코어 CPU / 최대 40코어 GPU</td>
+        <td>최대 128GB 통합메모리</td>
+        <td>영상편집 + 멀티모달 분석 + 로컬 LLM까지 한 대에서 처리 가능</td>
+        <td>약 700만~1,000만원대 이상 예상</td>
+        <td class="good">최상</td>
+      </tr>
+      <tr>
+        <td>Mac mini M4 Pro</td>
+        <td>M4 Pro / 12코어 CPU / 16코어 GPU</td>
+        <td>최대 48GB 통합메모리</td>
+        <td>거치형, 저소음, 4K 편집 가능. 단 대형 AI 모델에는 메모리 한계</td>
+        <td>약 200만~400만원대 예상</td>
+        <td class="mid">중상</td>
+      </tr>
+      <tr>
+        <td>NVIDIA DGX Spark</td>
+        <td>GB10 Grace Blackwell / 20코어 Arm CPU / Blackwell GPU</td>
+        <td>128GB LPDDR5x 통합메모리</td>
+        <td>로컬 AI 추론·파인튜닝·에이전트 개발에 특화. 영상 편집툴용 PC는 아님</td>
+        <td>미국 기준 약 $3,999부터 알려짐, 국내가는 유통처별 상이</td>
+        <td class="good">AI 분석 최상 / 편집 중</td>
+      </tr>
+      <tr>
+        <td>ASUS Ascent GX10</td>
+        <td>DGX Spark 기반 / NVIDIA GB10 Grace Blackwell</td>
+        <td>128GB 통합메모리</td>
+        <td>DGX Spark 호환 소형 AI 슈퍼컴퓨터. 로컬 LLM·임베딩 서버용</td>
+        <td>국내 검색가 약 590만~970만원대</td>
+        <td class="good">AI 분석 최상 / 편집 중</td>
+      </tr>
+      <tr>
+        <td>RTX 5090 데스크톱 PC</td>
+        <td>RTX 5090 32GB + 고성능 CPU + RAM 128GB</td>
+        <td>GPU VRAM 32GB + 시스템 RAM 128GB</td>
+        <td>CUDA 기반 AI 파이프라인, DaVinci/Premiere 렌더링 모두 강함</td>
+        <td>완제품 기준 약 1,000만~1,500만원대</td>
+        <td class="good">최상</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>2. 작업별 적합도</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>작업</th>
+        <th>MacBook Pro M5 Max</th>
+        <th>Mac mini M4 Pro</th>
+        <th>DGX Spark / ASUS GX10</th>
+        <th>RTX 5090 PC</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4K 영상편집</td>
+        <td class="good">매우 좋음</td>
+        <td class="good">좋음</td>
+        <td class="mid">보통</td>
+        <td class="good">매우 좋음</td>
+      </tr>
+      <tr>
+        <td>프레임 추출</td>
+        <td class="good">좋음</td>
+        <td class="good">좋음</td>
+        <td class="good">좋음</td>
+        <td class="good">매우 좋음</td>
+      </tr>
+      <tr>
+        <td>이미지 임베딩</td>
+        <td class="good">좋음</td>
+        <td class="mid">보통</td>
+        <td class="good">매우 좋음</td>
+        <td class="good">매우 좋음</td>
+      </tr>
+      <tr>
+        <td>멀티모달 LLM</td>
+        <td class="good">좋음</td>
+        <td class="mid">제한적</td>
+        <td class="good">매우 좋음</td>
+        <td class="good">좋음</td>
+      </tr>
+      <tr>
+        <td>DaVinci / Premiere 작업</td>
+        <td class="good">좋음</td>
+        <td class="good">좋음</td>
+        <td class="bad">부적합</td>
+        <td class="good">매우 좋음</td>
+      </tr>
+      <tr>
+        <td>로컬 AI 서버</td>
+        <td class="mid">가능</td>
+        <td class="mid">제한적</td>
+        <td class="good">매우 좋음</td>
+        <td class="good">매우 좋음</td>
+      </tr>
+      <tr>
+        <td>휴대성</td>
+        <td class="good">매우 좋음</td>
+        <td class="bad">없음</td>
+        <td class="bad">없음</td>
+        <td class="bad">없음</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3. 가격 대비 판단</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>예산</th>
+        <th>추천 단말</th>
+        <th>판단</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>300만~400만원</td>
+        <td>Mac mini M4 Pro 48GB</td>
+        <td>입문형 자동 컷편집/4K 편집용. 대형 AI 분석은 제한적</td>
+      </tr>
+      <tr>
+        <td>500만~700만원</td>
+        <td>MacBook Pro M5 Pro 64GB 또는 ASUS Ascent GX10 1~2TB</td>
+        <td>이동형이면 MacBook, AI 서버형이면 GX10</td>
+      </tr>
+      <tr>
+        <td>800만~1,100만원</td>
+        <td>MacBook Pro M5 Max 128GB 또는 ASUS Ascent GX10 4TB</td>
+        <td>소비자용 단말 기준 가장 균형 잡힌 고성능 구간</td>
+      </tr>
+      <tr>
+        <td>1,000만~1,500만원</td>
+        <td>RTX 5090 32GB 데스크톱</td>
+        <td>속도·CUDA 호환성·영상 렌더링까지 고려하면 최고 성능</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. 최종 추천</h2>
+  <div class="decision">
+    <p><strong>1순위: MacBook Pro M5 Max / 128GB / SSD 4TB</strong></p>
+    <p>
+      촬영, 현장 편집, 프레임 추출, 임베딩, 장면 요약, 컷 리스트 생성까지
+      한 대로 처리하려면 가장 균형이 좋다.
+    </p>
+
+    <p><strong>2순위: ASUS Ascent GX10 또는 DGX Spark</strong></p>
+    <p>
+      영상 편집용 메인 PC라기보다, 로컬 AI 분석 서버로 적합하다.
+      MacBook 또는 편집용 PC와 조합하면 좋다.
+    </p>
+
+    <p><strong>3순위: Mac mini M4 Pro / 48GB</strong></p>
+    <p>
+      예산형 거치 장비로는 좋지만, 128GB급 통합메모리가 필요한
+      대형 멀티모달 워크플로에는 한계가 있다.
+    </p>
+
+    <p><strong>성능 최우선: RTX 5090 데스크톱</strong></p>
+    <p>
+      CUDA 기반 임베딩, 비전 모델, Whisper, DaVinci/Premiere 렌더링까지
+      모두 고려하면 가장 빠르다. 단, 휴대성은 없다.
+    </p>
+  </div>
+
+  <p class="note">
+    ※ 가격은 2026년 5월 기준 공개 사양 및 국내 검색가 기반의 대략적 범위입니다.
+    Apple 제품은 CTO 옵션, 환율, 교육할인, 리셀러 정책에 따라 변동됩니다.
+    ASUS GX10/DGX Spark 계열은 국내 유통처별 재고와 저장장치 용량에 따라 가격 차이가 큽니다.
+  </p>
+</body>
+</html>
