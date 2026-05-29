@@ -1,6 +1,15 @@
 {
   "pages": [
     {
+      "filename": "3ah9o19b.html",
+      "title": "ixi-O Biz · 구성도 · 콜셋업/요약 콜플로우 · API",
+      "url": "https://vaax-maker.github.io/ai-news-daily/webshare/3ah9o19b.html",
+      "createdAt": "2026-05-29T07:15:28.655Z",
+      "type": "webpage",
+      "excerpt": "요약② 종료 후 전사→키워드·요약을 A·B에 전달 챗봇③ A-ixio 창 텍스트 대화 음성비서④ 통화 중 \"자비스\" 호출 응답 대신받기⑤ A 부재 시 B의 Biz콜 대신 응대·메모 1전체 구성도 BSP는 하나(메시지면 + 통화·미디어면). 서비스서버가 오케스트레이터, AI 4종은 서버 허브로 연결. 개인 메세지/통화 (E2E · 서버 미개입) 왓츠앱 A 발신자 · 가입자 왓츠앱 B 수신자 · 앱 불필요 BSP · WABA (Infobip 등) — 단일 계정 메시지면 (Messaging) 템플릿·프리폼·콜버튼·Webhook 통화·미디어면 (Calling) WebRTC·RTP브릿지·포킹·STT? 서비스서버 (LG U+ · 오케스트레이터) 연락처 DB 세션 상태머신 발송/분기 로직 Webhook 수신·파싱 딥링크/토큰·요약 웹링크 발급 동의·고지 상태 · 보관/삭제 (PDPA) AI요약 ② STT(화자분리)·키워드 요약(A용/B용) AI챗봇 ③ A-ixio 창 텍스트 대화 AI음성비서 ④",
+      "category": "AI"
+    },
+    {
       "filename": "4r8ag881.html",
       "title": "소비자용 AI 영상편집 단말 비교",
       "url": "https://vaax-maker.github.io/ai-news-daily/webshare/4r8ag881.html",
