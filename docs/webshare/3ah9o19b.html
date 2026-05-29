@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ixi-O Biz · 구성도 · 콜셋업/요약 콜플로우 · API</title>
+<style>
+  :root{
+    --ink:#1a1c1e; --ink2:#3c4043; --mut:#6b7280; --mut2:#9aa1a9;
+    --line:#e3e6ea; --line2:#d2d7dd; --bg:#ffffff; --panel:#f6f7f9; --panel2:#eef0f3;
+    --accent:#0b8a6b; --accent-w:#e6f4ef; --accent-l:#cbe8df;
+    --bubble:#f1f3f5; --bubbleA:#dff3ec;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1160px;margin:0 auto;padding:44px 28px 80px;}
+  header.top{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:8px;}
+  .kic{display:inline-block;font-size:11px;letter-spacing:.14em;font-weight:700;color:var(--accent);
+    border:1px solid var(--accent-l);background:var(--accent-w);border-radius:20px;padding:4px 12px;margin-bottom:14px;}
+  h1{font-size:25px;margin:0 0 8px;letter-spacing:-.02em;}
+  .sub{color:var(--mut);font-size:14px;margin:0;max-width:840px;}
+  h2{font-size:18px;margin:46px 0 4px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;}
+  h2 .n{font-size:12px;font-weight:700;color:#fff;background:var(--accent);width:24px;height:24px;
+    border-radius:7px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .h2sub{color:var(--mut);font-size:13px;margin:2px 0 18px 34px;}
+  .legend{font-size:11.5px;color:var(--mut);margin:14px 0 0;display:flex;gap:20px;flex-wrap:wrap;align-items:center;}
+  .legend b{color:var(--ink2);}
+  .lg{display:inline-flex;align-items:center;gap:7px;}
+  .lg i{width:26px;height:0;border-top:2px solid var(--ink2);display:inline-block;}
+  .lg i.acc{border-top:2px solid var(--accent);}
+  .lg i.dash{border-top:2px dashed var(--mut2);}
+  .diagram{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:10px;overflow-x:auto;}
+  svg{display:block;margin:0 auto;max-width:100%;height:auto;}
+  .feat{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px;}
+  .chip{font-size:12px;border:1px solid var(--line2);border-radius:8px;padding:7px 11px;background:#fff;}
+  .chip b{color:var(--accent);}
+  /* callout */
+  .call{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;background:#fff;padding:15px 18px;margin-top:8px;}
+  .call h4{margin:0 0 9px;font-size:13.5px;}
+  .call ul{margin:0;padding-left:18px;}
+  .call li{font-size:12.5px;color:var(--ink2);margin-bottom:7px;}
+  .call li b{color:var(--ink);}
+  /* phones */
+  .lanes{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px;}
+  @media(max-width:840px){.lanes{grid-template-columns:1fr}}
+  .lane h3{font-size:14px;margin:0 0 12px;display:flex;align-items:center;gap:8px;}
+  .tag2{font-size:10px;font-weight:700;border-radius:6px;padding:2px 8px;border:1px solid var(--accent-l);color:var(--accent);background:var(--accent-w);}
+  .tag2.g{border-color:var(--line2);color:var(--mut);background:#fff;}
+  .phone{border:1px solid var(--line2);border-radius:18px;overflow:hidden;margin-bottom:14px;background:#fff;}
+  .pbar{background:var(--panel2);padding:8px 13px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line);}
+  .pav{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .pav.p{background:#6b7280;}
+  .pname{font-size:12px;font-weight:700;}
+  .pmeta{font-size:10px;color:var(--mut);}
+  .pbody{padding:13px;background:#fbfcfd;}
+  .stepno{font-size:10px;font-weight:700;color:var(--mut2);letter-spacing:.06em;margin-bottom:7px;}
+  .bub{background:var(--bubble);border-radius:4px 12px 12px 12px;padding:8px 10px;font-size:11.5px;color:var(--ink2);margin-bottom:7px;max-width:92%;}
+  .bub.me{background:var(--bubbleA);border-radius:12px 4px 12px 12px;margin-left:auto;}
+  .bub .small{font-size:10px;color:var(--mut);display:block;margin-top:3px;}
+  .lk{color:var(--accent);font-weight:700;}
+  .btn{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;border-radius:8px;padding:6px 13px;margin-top:2px;}
+  .op{font-size:10.5px;color:var(--mut);margin:6px 0 0 2px;padding-left:13px;position:relative;}
+  .op:before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:var(--accent);}
+  .attach{display:flex;gap:5px;font-size:10px;color:var(--mut);margin-bottom:7px;}
+  .attach span{background:var(--panel2);border-radius:6px;padding:3px 7px;}
+  .attach span.hl{background:var(--accent-w);color:var(--accent);font-weight:700;border:1px solid var(--accent-l);}
+  .vcard{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 9px;margin-bottom:7px;}
+  .vcard .ico{width:26px;height:26px;border-radius:50%;background:var(--panel2);display:flex;align-items:center;justify-content:center;font-size:12px;}
+  /* table */
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px;}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{font-size:11px;letter-spacing:.04em;color:var(--mut);font-weight:700;background:var(--panel);}
+  td code{background:var(--panel2);border-radius:4px;padding:1px 5px;font-size:11.5px;}
+  td.rec{background:var(--accent-w);}
+  .tag{font-size:10px;font-weight:700;border-radius:5px;padding:2px 7px;background:var(--accent-w);color:var(--accent);}
+  .tag.g{background:var(--panel2);color:var(--mut);}
+  .foot{margin-top:46px;border-top:1px solid var(--line);padding-top:16px;font-size:11.5px;color:var(--mut2);}
+  .note{font-size:11.5px;color:var(--mut);margin-top:10px;padding-left:14px;position:relative;}
+  .note:before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent);}
+</style>
+
+<style>
+/* Responsive Wrapper - Auto-injected */
+html { font-size: 16px; }
+body { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 1rem; 
+    line-height: 1.7;
+    word-break: keep-all;
+}
+img, video, iframe { 
+    max-width: 100%; 
+    height: auto; 
+}
+table { 
+    width: 100%; 
+    display: block; 
+    overflow-x: auto; 
+}
+pre, code { 
+    overflow-x: auto; 
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+}
+@media (max-width: 768px) {
+    body { 
+        padding: 0.75rem; 
+        font-size: 15px; 
+    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.1rem; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <span class="kic">ixi-O Biz · WhatsApp · 시스템 전체상 (딥링크 기준)</span>
+  <h1>구성도 · 콜셋업/요약 콜플로우 · API</h1>
+  <p class="sub">9개 구성요소 아키텍처(①), 콜 셋업 콜플로우+A·B 화면(②), 통화종료 후 AI요약 회신(③), 요약 전달 방식·통화링크 재사용(QR/토큰)·미디어 제어 모델, 구성요소 간 rough API. 첫 접촉은 A 개인메시지(딥링크) 전제.</p>
+</header>
+
+<div class="feat">
+  <div class="chip"><b>요약②</b> 종료 후 전사→키워드·요약을 A·B에 전달</div>
+  <div class="chip"><b>챗봇③</b> A-ixio 창 텍스트 대화</div>
+  <div class="chip"><b>음성비서④</b> 통화 중 "자비스" 호출 응답</div>
+  <div class="chip"><b>대신받기⑤</b> A 부재 시 B의 Biz콜 대신 응대·메모</div>
+</div>
+
+<!-- ===== 1. ARCHITECTURE ===== -->
+<h2><span class="n">1</span>전체 구성도</h2>
+<p class="h2sub">BSP는 하나(메시지면 + 통화·미디어면). 서비스서버가 오케스트레이터, AI 4종은 서버 허브로 연결.</p>
+<div class="diagram">
+<svg viewBox="0 0 1120 640" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#3c4043"/></marker>
+    <marker id="arA" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#0b8a6b"/></marker>
+    <marker id="arS" markerWidth="9" markerHeight="9" refX="2" refY="4.5" orient="auto"><path d="M9,0 L0,4.5 L9,9 z" fill="#3c4043"/></marker>
+  </defs>
+
+  <!-- A-B personal dashed -->
+  <line x1="250" y1="58" x2="870" y2="58" stroke="#9aa1a9" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="560" y="48" text-anchor="middle" font-size="11" fill="#6b7280">개인 메세지/통화 (E2E · 서버 미개입)</text>
+
+  <!-- A/B -> BSP -->
+  <line x1="150" y1="110" x2="430" y2="172" stroke="#3c4043" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="220" y1="110" x2="600" y2="172" stroke="#0b8a6b" stroke-width="1.8" marker-end="url(#arA)"/>
+  <line x1="970" y1="110" x2="690" y2="172" stroke="#3c4043" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="900" y1="110" x2="720" y2="172" stroke="#0b8a6b" stroke-width="1.8" marker-end="url(#arA)"/>
+
+  <!-- BSP <-> server -->
+  <line x1="490" y1="280" x2="500" y2="318" stroke="#3c4043" stroke-width="1.8" marker-end="url(#ar)" marker-start="url(#arS)"/>
+  <line x1="650" y1="280" x2="640" y2="318" stroke="#0b8a6b" stroke-width="2" marker-end="url(#arA)" marker-start="url(#arS)"/>
+
+  <!-- server -> AI -->
+  <line x1="430" y1="438" x2="200" y2="500" stroke="#3c4043" stroke-width="1.6" marker-end="url(#ar)" marker-start="url(#arS)"/>
+  <line x1="520" y1="438" x2="430" y2="500" stroke="#3c4043" stroke-width="1.6" marker-end="url(#ar)" marker-start="url(#arS)"/>
+  <line x1="620" y1="438" x2="660" y2="500" stroke="#0b8a6b" stroke-width="1.8" marker-end="url(#arA)" marker-start="url(#arS)"/>
+  <line x1="700" y1="438" x2="900" y2="500" stroke="#0b8a6b" stroke-width="1.8" marker-end="url(#arA)" marker-start="url(#arS)"/>
+
+  <!-- clients -->
+  <rect x="40" y="40" width="210" height="70" rx="12" fill="#fff" stroke="#d2d7dd"/>
+  <text x="145" y="72" text-anchor="middle" font-size="14" font-weight="700">왓츠앱 A</text>
+  <text x="145" y="92" text-anchor="middle" font-size="11" fill="#6b7280">발신자 · 가입자</text>
+  <rect x="870" y="40" width="210" height="70" rx="12" fill="#fff" stroke="#d2d7dd"/>
+  <text x="975" y="72" text-anchor="middle" font-size="14" font-weight="700">왓츠앱 B</text>
+  <text x="975" y="92" text-anchor="middle" font-size="11" fill="#6b7280">수신자 · 앱 불필요</text>
+
+  <!-- BSP (merged) -->
+  <rect x="350" y="172" width="420" height="108" rx="14" fill="#fff" stroke="#0b8a6b" stroke-width="1.4"/>
+  <text x="560" y="196" text-anchor="middle" font-size="14" font-weight="700">BSP · WABA (Infobip 등) — 단일 계정</text>
+  <rect x="368" y="210" width="190" height="56" rx="9" fill="#f6f7f9" stroke="#d2d7dd"/>
+  <text x="463" y="232" text-anchor="middle" font-size="11.5" font-weight="700" fill="#3c4043">메시지면 (Messaging)</text>
+  <text x="463" y="250" text-anchor="middle" font-size="10" fill="#6b7280">템플릿·프리폼·콜버튼·Webhook</text>
+  <rect x="562" y="210" width="190" height="56" rx="9" fill="#e6f4ef" stroke="#cbe8df"/>
+  <text x="657" y="232" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0b8a6b">통화·미디어면 (Calling)</text>
+  <text x="657" y="250" text-anchor="middle" font-size="10" fill="#6b7280">WebRTC·RTP브릿지·포킹·STT?</text>
+
+  <!-- server -->
+  <rect x="330" y="318" width="470" height="120" rx="14" fill="#fff" stroke="#1a1c1e" stroke-width="1.5"/>
+  <text x="565" y="346" text-anchor="middle" font-size="15" font-weight="700">서비스서버 (LG U+ · 오케스트레이터)</text>
+  <text x="420" y="375" text-anchor="middle" font-size="11" fill="#3c4043">연락처 DB</text>
+  <text x="565" y="375" text-anchor="middle" font-size="11" fill="#3c4043">세션 상태머신</text>
+  <text x="710" y="375" text-anchor="middle" font-size="11" fill="#3c4043">발송/분기 로직</text>
+  <text x="430" y="400" text-anchor="middle" font-size="11" fill="#3c4043">Webhook 수신·파싱</text>
+  <text x="620" y="400" text-anchor="middle" font-size="11" fill="#3c4043">딥링크/토큰·요약 웹링크 발급</text>
+  <text x="565" y="423" text-anchor="middle" font-size="10.5" fill="#9aa1a9">동의·고지 상태 · 보관/삭제 (PDPA)</text>
+
+  <!-- AI -->
+  <rect x="40" y="500" width="240" height="90" rx="12" fill="#fff" stroke="#d2d7dd"/>
+  <text x="160" y="530" text-anchor="middle" font-size="13" font-weight="700">AI요약 <tspan fill="#0b8a6b">②</tspan></text>
+  <text x="160" y="550" text-anchor="middle" font-size="10.5" fill="#6b7280">STT(화자분리)·키워드</text>
+  <text x="160" y="566" text-anchor="middle" font-size="10.5" fill="#6b7280">요약(A용/B용)</text>
+  <rect x="300" y="500" width="200" height="90" rx="12" fill="#fff" stroke="#d2d7dd"/>
+  <text x="400" y="530" text-anchor="middle" font-size="13" font-weight="700">AI챗봇 <tspan fill="#0b8a6b">③</tspan></text>
+  <text x="400" y="550" text-anchor="middle" font-size="10.5" fill="#6b7280">A-ixio 창</text>
+  <text x="400" y="566" text-anchor="middle" font-size="10.5" fill="#6b7280">텍스트 대화</text>
+  <rect x="520" y="500" width="240" height="90" rx="12" fill="#fff" stroke="#0b8a6b"/>
+  <text x="640" y="530" text-anchor="middle" font-size="13" font-weight="700">AI음성비서 <tspan fill="#0b8a6b">④</tspan></text>
+  <text x="640" y="550" text-anchor="middle" font-size="10.5" fill="#6b7280">통화 중 "자비스" 웨이크</text>
+  <text x="640" y="566" text-anchor="middle" font-size="10.5" fill="#6b7280">실시간 STT·응답·TTS</text>
+  <rect x="780" y="500" width="300" height="90" rx="12" fill="#fff" stroke="#0b8a6b"/>
+  <text x="930" y="530" text-anchor="middle" font-size="13" font-weight="700">AI대신받기 <tspan fill="#0b8a6b">⑤</tspan></text>
+  <text x="930" y="550" text-anchor="middle" font-size="10.5" fill="#6b7280">A 부재 시 B 콜 응대</text>
+  <text x="930" y="566" text-anchor="middle" font-size="10.5" fill="#6b7280">대화·메모 → A 전달</text>
+</svg>
+</div>
+<div class="legend">
+  <span class="lg"><i></i> <b>제어/데이터</b></span>
+  <span class="lg"><i class="acc"></i> <b>통화·오디오 미디어</b></span>
+  <span class="lg"><i class="dash"></i> <b>개인 메세지/통화 (API 없음)</b></span>
+</div>
+<div class="call" style="margin-top:16px">
+  <h4>BSP(call) = WABA 안에 포함</h4>
+  <ul>
+    <li>BSP(call)은 별도 업체가 아니라 <b>같은 BSP·같은 WABA 계정</b>의 통화 API 면. 메시지면과 통화·미디어면으로 표면만 다름.</li>
+    <li>다만 책임·역량 확인은 면별로 다름: 메시지면(템플릿·콜버튼)은 표준, <b>통화·미디어면(RTP 브릿지·채널 포킹·STT)은 BSP별 [확인필요]</b>.</li>
+  </ul>
+</div>
+
+<!-- ===== 2. CALL SETUP FLOW ===== -->
+<h2><span class="n">2</span>콜 셋업 콜플로우 (딥링크 기준)</h2>
+<p class="h2sub">축소 플로우: A 1탭(B지정+콜레그 선개통, ①+⑧ 결합) → 개인창 전송 1탭 → B 1탭(고지 포함 링크=동의+진입, S1+S2 통합) → 브릿지. A 2동작 / B 1동작.</p>
+<div class="diagram">
+<svg viewBox="0 0 1020 500" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif">
+  <defs>
+    <marker id="m" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#3c4043"/></marker>
+    <marker id="mA" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#0b8a6b"/></marker>
+  </defs>
+  <g font-size="12" font-weight="700" text-anchor="middle">
+    <rect x="40" y="18" width="120" height="38" rx="9" fill="#fff" stroke="#d2d7dd"/><text x="100" y="42">왓츠앱 A</text>
+    <rect x="240" y="18" width="120" height="38" rx="9" fill="#fff" stroke="#d2d7dd"/><text x="300" y="42">왓츠앱 B</text>
+    <rect x="540" y="18" width="160" height="38" rx="9" fill="#fff" stroke="#0b8a6b"/><text x="620" y="42" fill="#0b8a6b">BSP(WABA)</text>
+    <rect x="840" y="18" width="140" height="38" rx="9" fill="#fff" stroke="#1a1c1e"/><text x="910" y="42">서비스서버</text>
+  </g>
+  <g stroke="#d2d7dd" stroke-width="1.3" stroke-dasharray="3 4">
+    <line x1="100" y1="56" x2="100" y2="478"/>
+    <line x1="300" y1="56" x2="300" y2="478"/>
+    <line x1="620" y1="56" x2="620" y2="478"/>
+    <line x1="910" y1="56" x2="910" y2="478"/>
+  </g>
+  <g font-size="10.5" fill="#3c4043">
+    <!-- A action 1 marker -->
+    <rect x="44" y="70" width="112" height="16" rx="8" fill="#e6f4ef" stroke="#cbe8df"/><text x="100" y="82" text-anchor="middle" font-size="9" font-weight="700" fill="#0b8a6b">A 동작 1</text>
+    <!-- 1 A->BSP->SRV -->
+    <line x1="100" y1="104" x2="620" y2="104" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m)"/>
+    <line x1="620" y1="122" x2="910" y2="122" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m)"/>
+    <text x="350" y="98" text-anchor="middle">① ixi-O서 B 연락처 공유 = B지정·콜요청·A세션 (①+⑧ 결합)</text>
+    <!-- 2 self -->
+    <path d="M910,138 h44 v20 h-44" fill="none" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m)"/>
+    <text x="905" y="152" text-anchor="end">② 콜토큰·요약 웹링크·딥링크 생성</text>
+    <!-- 3 A->BSP call leg pre-open (accent) -->
+    <line x1="100" y1="180" x2="620" y2="180" stroke="#0b8a6b" stroke-width="1.7" marker-end="url(#mA)"/>
+    <text x="345" y="174" text-anchor="middle" fill="#0b8a6b">③ A 콜레그 선개통(user-initiated, 대기) · 통화 탭 흡수</text>
+    <text x="345" y="195" text-anchor="middle" font-size="9.5" fill="#9aa1a9">A 클라이언트는 B 개인창으로 자동 점프(중간 화면 없음)</text>
+    <!-- A action 2 marker -->
+    <rect x="44" y="212" width="112" height="16" rx="8" fill="#e6f4ef" stroke="#cbe8df"/><text x="100" y="224" text-anchor="middle" font-size="9" font-weight="700" fill="#0b8a6b">A 동작 2</text>
+    <!-- 4 A->B personal dashed -->
+    <line x1="100" y1="246" x2="300" y2="246" stroke="#9aa1a9" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#m)"/>
+    <text x="205" y="240" text-anchor="middle" fill="#6b7280">④ 딥링크 자동입력 → A 전송 1탭</text>
+    <text x="205" y="261" text-anchor="middle" fill="#6b7280" font-size="9.5">(고지 전문 + 통화(녹음동의)링크 + 요약 웹링크)</text>
+    <!-- B action marker -->
+    <rect x="244" y="276" width="112" height="16" rx="8" fill="#e6f4ef" stroke="#cbe8df"/><text x="300" y="288" text-anchor="middle" font-size="9" font-weight="700" fill="#0b8a6b">B 동작 1</text>
+    <!-- 5 B->BSP->SRV -->
+    <line x1="300" y1="310" x2="620" y2="310" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m)"/>
+    <line x1="620" y1="328" x2="910" y2="328" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m)"/>
+    <text x="455" y="304" text-anchor="middle">⑤ 고지 본 뒤 "통화(녹음동의)" 링크 탭 = 동의+ixi-O 진입(토큰)·B세션·매칭 (S1+S2 통합)</text>
+    <!-- 6 B->BSP call (accent) -->
+    <line x1="300" y1="354" x2="620" y2="354" stroke="#0b8a6b" stroke-width="1.7" marker-end="url(#mA)"/>
+    <text x="460" y="348" text-anchor="middle" fill="#0b8a6b">⑥ B user-initiated call</text>
+    <!-- 7 SRV->BSP bridge (accent) -->
+    <line x1="910" y1="382" x2="620" y2="382" stroke="#0b8a6b" stroke-width="1.7" marker-end="url(#mA)"/>
+    <text x="765" y="376" text-anchor="middle" fill="#0b8a6b">⑦ bridge A↔B (RTP 포워딩) 지시 · A 대기레그 연결</text>
+    <!-- 8 IVR -->
+    <rect x="70" y="400" width="560" height="24" rx="6" fill="#e6f4ef" stroke="#cbe8df"/>
+    <text x="350" y="416" text-anchor="middle" fill="#0b8a6b" font-weight="700">⑧ 연결 직후 IVR 음성 재동의(DTMF, 양측) = 권위 증적 · 거부 시 종료</text>
+    <!-- 9 call start -->
+    <rect x="70" y="430" width="560" height="24" rx="6" fill="#f6f7f9" stroke="#d2d7dd"/>
+    <text x="350" y="446" text-anchor="middle" font-weight="700" fill="#3c4043">⑨ 통화 시작 → (시나리오 ② 요약 콜플로우로)</text>
+    <text x="800" y="446" text-anchor="middle" font-size="9.5" fill="#9aa1a9">요약 웹링크는 ④에서 이미 전달 → 통화 후 서버가 URL 채움</text>
+  </g>
+</svg>
+</div>
+
+<div class="call" style="margin-top:16px">
+  <h4>동작 수 — A 2 / B 1 (축소 적용)</h4>
+  <ul>
+    <li><b>A 2동작</b>: ① B 지정+콜레그 선개통(통화 탭 흡수) · ④ 개인창 전송 1탭. ④는 개인창 API가 없어 <b>제거 불가 = 아웃바운드 최소치</b>.</li>
+    <li><b>B 1동작</b>: ⑤ 고지 포함 메시지의 "통화(녹음동의)" 링크 탭 = 동의+진입(별도 동의 화면 제거). IVR DTMF 재동의가 법적 증적 백업.</li>
+    <li><b>트레이드오프</b>: A 콜레그 선개통으로 B 진입까지 "연결 중…" 대기 발생(타임아웃·WABA 콜세션 유지시간 관리 전제).</li>
+    <li><b>인바운드(QR/공개토큰)</b>: B가 먼저 스캔·진입 → A는 통화 응답 1동작, ④ 불필요 → 6번 재사용 섹션 참조.</li>
+  </ul>
+</div>
+
+<!-- ===== 3. SETUP SCREENS ===== -->
+<h2><span class="n">3</span>콜 셋업 — A · B 화면 (축소 플로우)</h2>
+<p class="h2sub">동작 최소화: A 4→2단계 / B 2→1단계. 회색 아바타 = 개인 채팅, 초록 = ixi-O 채팅.</p>
+<div class="lanes">
+  <div class="lane">
+    <h3>발신자 A <span class="tag2">2단계</span></h3>
+
+    <div class="phone">
+      <div class="pbar"><div class="pav">ix</div><div><div class="pname">ixi-O</div><div class="pmeta">비즈니스 · 온라인</div></div></div>
+      <div class="pbody">
+        <div class="stepno">A-S1 · B 지정 + 통화 시작 (①+⑧ 결합)</div>
+        <div class="bub">통화하실 상대의 <b>연락처를 공유</b>하면 바로 연결을 준비합니다.<span class="small">(최초 1회) 녹음·요약·BSP 처리 동의</span></div>
+        <div class="vcard"><div class="ico">👤</div><div><b style="font-size:11.5px">Mr. Tan</b><div style="font-size:10px;color:var(--mut)">+60 12-345 6789</div></div></div>
+        <span class="btn">연락처 공유 → 통화 준비</span>
+        <div class="op">1탭 = B 지정 + A 콜레그 선개통 + 딥링크 생성</div>
+        <div class="op">완료 즉시 B 개인창으로 자동 점프(중간 "보내기" 화면 제거)</div>
+      </div>
+    </div>
+
+    <div class="phone">
+      <div class="pbar"><div class="pav p">T</div><div><div class="pname">Mr. Tan</div><div class="pmeta">개인 채팅</div></div></div>
+      <div class="pbody">
+        <div class="stepno">A-S2 · 개인창 자동입력 → 전송</div>
+        <div class="bub me">[ixi-O] 통화를 요청드립니다. 이 통화는 요약 제공을 위해 녹음·처리됩니다. (처리주체 ixi-O/LG U+·BSP · 보관·삭제 안내)<br>· 통화(녹음 동의): <span class="lk">wa.me/ixio?t=…</span><br>· 통화요약 보기: <span class="lk">s.ixio/…</span></div>
+        <span class="btn">전송</span>
+        <div class="op">문구·고지 자동입력됨 → A가 전송 1탭</div>
+        <div class="op">A 콜은 이미 개통 상태 → B 진입 시 자동 브릿지(별도 통화 탭 불필요)</div>
+      </div>
+    </div>
+
+    <div class="call" style="margin-top:4px">
+      <h4>인바운드(QR/공개토큰)면 A는 1단계</h4>
+      <ul>
+        <li>B가 QR 스캔으로 먼저 진입 → A는 <b>통화 응답만</b>. 딥링크 전송(A-S2)도 불필요.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="lane">
+    <h3>수신자 B <span class="tag2 g">1단계</span></h3>
+
+    <div class="phone">
+      <div class="pbar"><div class="pav p">A</div><div><div class="pname">Aisyah</div><div class="pmeta">개인 채팅</div></div></div>
+      <div class="pbody">
+        <div class="stepno">B-S1 · 고지 포함 메시지에서 동의 탭 (S1+S2 통합)</div>
+        <div class="bub">[ixi-O] 통화를 요청드립니다. 이 통화는 요약 제공을 위해 <b>녹음·처리</b>됩니다.<span class="small">처리주체(ixi-O/LG U+·BSP) · 보관기간 · 삭제요청 · 자세히 ▸</span><br>· 통화(녹음 동의): <span class="lk">wa.me/ixio?t=…</span><br>· 통화요약 보기: <span class="lk">s.ixio/…</span></div>
+        <span class="btn">📞 통화 (녹음 동의)</span>
+        <div class="op">고지를 본 뒤 <b>"통화(녹음동의)" 링크 탭 = 동의 + ixi-O 진입</b>(별도 동의 화면 없음)</div>
+        <div class="op"><b>통화요약 보기</b> 링크: 통화 후 서버가 같은 URL에 요약을 채움 → B가 탭해 열람</div>
+        <div class="op">연결 직후 IVR 음성 재동의(DTMF) = 권위 증적 · 미동의 시 종료</div>
+      </div>
+    </div>
+
+    <div class="call" style="margin-top:4px">
+      <h4>B 동의 = PDPA 핵심 지점</h4>
+      <ul>
+        <li><b>고지 먼저 → 동의 탭</b> 순서 충족: 메시지 본문에 고지 전문(ixi-O가 딥링크에 통제 입력) → "통화(녹음 동의)" 링크 탭이 명시적 동의.</li>
+        <li>증적 2중화: ① 탭 시점 + 제시 고지문 버전 기록 ② <b>IVR DTMF 동의</b>를 법적 동의 지점으로 백업(녹취·보존 필수).</li>
+        <li>화면 동의를 없앤 만큼 IVR 동의 증적이 핵심 → 베타에서 충분성 법무 확인 후 확정.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 4. SUMMARY FLOW ===== -->
+<h2><span class="n">4</span>통화종료 후 AI요약 콜플로우 (시나리오 ②)</h2>
+<p class="h2sub">종료 시점부터 전사·요약·전달. A-ixio·B-ixio 창은 세션 내 무료 전달, A-B 개인창은 ④에서 미리 보낸 요약 웹링크가 채워짐.</p>
+<div class="diagram">
+<svg viewBox="0 0 1100 560" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif">
+  <defs>
+    <marker id="m2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#3c4043"/></marker>
+    <marker id="m2A" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#0b8a6b"/></marker>
+  </defs>
+  <g font-size="12" font-weight="700" text-anchor="middle">
+    <rect x="20" y="18" width="120" height="38" rx="9" fill="#fff" stroke="#d2d7dd"/><text x="80" y="42">왓츠앱 A</text>
+    <rect x="210" y="18" width="120" height="38" rx="9" fill="#fff" stroke="#d2d7dd"/><text x="270" y="42">왓츠앱 B</text>
+    <rect x="395" y="18" width="130" height="38" rx="9" fill="#fff" stroke="#0b8a6b"/><text x="460" y="42" fill="#0b8a6b">BSP(WABA)</text>
+    <rect x="785" y="18" width="130" height="38" rx="9" fill="#fff" stroke="#1a1c1e"/><text x="850" y="42">서비스서버</text>
+    <rect x="970" y="18" width="120" height="38" rx="9" fill="#fff" stroke="#d2d7dd"/><text x="1030" y="42">AI요약</text>
+  </g>
+  <g stroke="#d2d7dd" stroke-width="1.3" stroke-dasharray="3 4">
+    <line x1="80" y1="56" x2="80" y2="540"/><line x1="270" y1="56" x2="270" y2="540"/>
+    <line x1="460" y1="56" x2="460" y2="540"/><line x1="850" y1="56" x2="850" y2="540"/>
+    <line x1="1030" y1="56" x2="1030" y2="540"/>
+  </g>
+  <g font-size="11" fill="#3c4043">
+    <rect x="70" y="76" width="400" height="24" rx="6" fill="#e6f4ef" stroke="#cbe8df"/>
+    <text x="270" y="92" text-anchor="middle" fill="#0b8a6b" font-weight="700">통화 중 · A ↔ BSP(Call) ↔ B 브릿지</text>
+    <line x1="460" y1="124" x2="850" y2="124" stroke="#0b8a6b" stroke-width="1.7" marker-end="url(#m2A)"/>
+    <text x="655" y="118" text-anchor="middle" fill="#0b8a6b">① 채널분리 오디오 스트림(포킹)</text>
+    <line x1="850" y1="150" x2="1030" y2="150" stroke="#0b8a6b" stroke-width="1.7" marker-end="url(#m2A)"/>
+    <text x="940" y="144" text-anchor="middle" fill="#0b8a6b">② 오디오 중계</text>
+    <line x1="80" y1="186" x2="460" y2="186" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m2)"/>
+    <text x="270" y="180" text-anchor="middle">③ 통화 종료</text>
+    <line x1="460" y1="212" x2="850" y2="212" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m2)"/>
+    <text x="655" y="206" text-anchor="middle">④ call.ended</text>
+    <line x1="850" y1="238" x2="1030" y2="238" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m2)"/>
+    <text x="940" y="232" text-anchor="middle">⑤ /transcribe·/summarize</text>
+    <path d="M1030,262 h44 v30 h-44" fill="none" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m2)"/>
+    <text x="1078" y="280" font-size="10" fill="#3c4043">⑥ 전사·키워드</text>
+    <text x="1078" y="293" font-size="10" fill="#3c4043">·요약(A/B용)</text>
+    <line x1="1030" y1="316" x2="850" y2="316" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m2)"/>
+    <text x="940" y="310" text-anchor="middle">⑦ 결과 반환</text>
+    <line x1="850" y1="346" x2="460" y2="346" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m2)"/>
+    <line x1="460" y1="364" x2="80" y2="364" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m2)"/>
+    <text x="360" y="340" text-anchor="middle">⑧ 요약 → A-ixio 창 (무료)</text>
+    <line x1="850" y1="396" x2="460" y2="396" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m2)"/>
+    <line x1="460" y1="414" x2="270" y2="414" stroke="#3c4043" stroke-width="1.4" marker-end="url(#m2)"/>
+    <text x="460" y="390" text-anchor="middle">⑨ 요약 → B-ixio 창 (무료)</text>
+    <path d="M850,444 h60 v-30" fill="none" stroke="#0b8a6b" stroke-width="1.5" marker-end="url(#m2A)"/>
+    <text x="700" y="448" text-anchor="middle" fill="#0b8a6b">⑩ 요약 웹링크(s.ixio/token) URL을 서버가 채움</text>
+    <rect x="55" y="468" width="430" height="24" rx="6" fill="#f6f7f9" stroke="#d2d7dd"/>
+    <text x="270" y="484" text-anchor="middle" font-size="10.5" fill="#3c4043">⑩ A·B는 개인창에 이미 있는 요약 링크를 탭해 열람 (서버 직접기록 불필요)</text>
+  </g>
+</svg>
+</div>
+
+<!-- ===== 5. SUMMARY DELIVERY ===== -->
+<h2><span class="n">5</span>요약 전달 방식 — 개인창 & 요약 웹링크</h2>
+<div class="call">
+  <h4>A-B 개인창 자동 기록은 불가 → 요약 웹링크로 해결</h4>
+  <ul>
+    <li><b>직접 기록 불가</b>: A↔B 개인 채팅은 E2E·API 없음 → 서버가 텍스트를 써 넣을 수 없음.</li>
+    <li><b>해결(채택)</b>: 최초 콜링크 메시지에 <b>요약 permalink(예: s.ixio/&lt;token&gt;)를 함께</b> 발송 → 통화 후 서버가 그 URL에 요약을 채움 → A·B는 개인창에 이미 있는 링크를 탭해 열람. WABA 비용 0.</li>
+    <li><b>3곳에서 동일 접근</b>: A-B 개인창(링크), A-ixio 창(요약 메시지+링크), B-ixio 창(요약 메시지+링크).</li>
+    <li><b>PDPA 조건</b>: 토큰은 추측 불가(난수), <b>만료·1회성/로그인 게이트</b>, 접근 로그, 삭제 시 링크 무효화. 요약 본문에 민감정보 최소화.</li>
+  </ul>
+</div>
+
+<!-- ===== 6. REUSE / QR ===== -->
+<h2><span class="n">6</span>통화링크 재사용 — 연락처 저장 · 상시 QR · 토큰 3종</h2>
+<p class="h2sub">1회용 세션 토큰을 재사용 가능한 토큰으로 설계하면, 매번 딥링크를 새로 보내지 않아도 통화 시작 가능.</p>
+<div class="call">
+  <h4>재사용 방식 3갈래</h4>
+  <ul>
+    <li><b>연락처 저장(특정 B)</b>: A가 vCard 공유 시 통화 링크를 URL/메모 필드에 포함 → B가 연락처로 저장, 탭마다 새 통화. (WhatsApp에 전용 통화버튼 필드는 없어 URL 방식이 현실적)</li>
+    <li><b>상시노출 QR(불특정 다수) · 권장</b>: A-공개 토큰을 QR로 발급 → 명함·이메일 서명·매장 게시. B 스캔 = ixi-O 진입(user inbound·무료·옵트인 불필요) → 동의 → A 호출. biz 포지셔닝 최적, <b>A의 딥링크 전송(④) 불필요</b>.</li>
+    <li><b>페어 영구 링크(1:1)</b>: A↔B 최초 교환 후 그 링크를 B가 저장해 재사용.</li>
+  </ul>
+</div>
+<table style="margin-top:14px">
+  <thead><tr><th style="width:150px">토큰</th><th style="width:120px">수명</th><th>스코프 · 용도</th><th style="width:120px">동의(PDPA)</th></tr></thead>
+  <tbody>
+    <tr><td><b>세션 통화토큰</b></td><td>1회용·만료</td><td>단일 통화. 기본·가장 안전</td><td>진입 시 동의</td></tr>
+    <tr><td class="rec"><b>재사용 통화토큰</b><span class="tag" style="margin-left:6px">신규</span></td><td class="rec">상시·해지 가능</td><td class="rec">페어(A↔B) 또는 <b>A-공개(QR)</b>. 탭마다 새 세션</td><td class="rec"><b>매 진입 시 재확인</b></td></tr>
+    <tr><td><b>요약 토큰</b></td><td>1회용·만료</td><td>통화 1건당 결과 1개(s.ixio/…). 재사용 부적합</td><td>접근통제·삭제 시 무효</td></tr>
+  </tbody>
+</table>
+<div class="note">공개(QR) 토큰 전제: <b>추측 불가 난수 · A 해지(revoke) · 남용/레이트 제한 · 매 진입 동의 재확인</b>. 각 탭은 user-initiated라 통화비용 무료.</div>
+
+<!-- ===== 7. MEDIA MODEL ===== -->
+<h2><span class="n">7</span>미디어 제어 — 서버가 직접 해야 하나?</h2>
+<p class="h2sub">권장: 서버는 오케스트레이션만, 저수준 미디어는 BSP 위임. BSP 역량에 따라 3단계로 분기(현 미결 블로커가 이 분기를 결정).</p>
+<table>
+  <thead><tr><th style="width:130px">모델</th><th>BSP 역량</th><th>서버 역할</th><th style="width:120px">부담</th></tr></thead>
+  <tbody>
+    <tr><td class="rec"><b>T1 · 완전 위임</b><span class="tag" style="margin-left:6px">권장</span></td><td class="rec">브릿지 + 채널 포킹 + STT 모두 지원</td><td class="rec">API 호출·이벤트 구독만(콜 생성/bridge/say). 전사 결과 수신 → 요약</td><td class="rec"><span class="tag">낮음</span></td></tr>
+    <tr><td>T2 · 부분 위임</td><td>브릿지 O · STT X</td><td>BSP가 채널 오디오를 우리 STT로 포워딩 → 서버는 경량 미디어 중계·정렬</td><td><span class="tag g">중간</span></td></tr>
+    <tr><td>T3 · 자체 미디어</td><td>브릿지 X (2안 직접)</td><td>서버가 RTP 포워딩·SRTP 종단·채널 분리 직접 운영(미디어 서버 필요)</td><td><span class="tag g">높음</span></td></tr>
+  </tbody>
+</table>
+<div class="note">④음성비서·⑤대신받기는 <b>통화 중 양방향 실시간 오디오(저지연 in/out·TTS 주입)</b>가 필수 → 최소 T1~T2의 실시간 스트림·barge-in 지원 필요.</div>
+<div class="note">결론: 정상 경로는 <b>서버가 미디어를 직접 다루지 않음(T1)</b>. T3는 BSP가 브릿지조차 불가할 때만. 미결 블로커(RTP 포워딩·포킹 STT) 확인이 모델을 확정.</div>
+
+<!-- ===== 8. API ===== -->
+<h2><span class="n">8</span>구성요소 간 rough API 리스트</h2>
+<p class="h2sub">BSP 실제 스펙(Infobip 등) 확정 필요. ◆ 외부(BSP) / ○ 내부.</p>
+<table>
+  <thead><tr><th style="width:190px">구간</th><th style="width:140px">유형</th><th>대표 API · 이벤트 (rough)</th><th style="width:80px">기능</th></tr></thead>
+  <tbody>
+    <tr><td>왓츠앱A/B ↔ BSP</td><td>WhatsApp 메시지·통화 ◆<br><span style="color:var(--mut);font-size:11px">BSP·Meta 관리</span></td><td>메시지 송수신, 인터랙티브 <code>콜버튼</code> 탭, user-initiated call → 브릿지, SRTP 미디어</td><td><span class="tag g">전구간</span></td></tr>
+    <tr><td>왓츠앱A ↔ 왓츠앱B</td><td>개인 메세지/통화<br><span style="color:var(--mut);font-size:11px">E2E · API 없음</span></td><td>딥링크·요약 웹링크 전달(클라이언트 동작만)</td><td><span class="tag">②</span></td></tr>
+    <tr><td>서비스서버 ↔ BSP(메시지면)</td><td>REST + Webhook ◆</td><td><code>POST /messages</code>(템플릿·프리폼·인터랙티브), Webhook <code>inbound·status·button_tap</code></td><td><span class="tag">②③⑤</span></td></tr>
+    <tr><td>서비스서버 ↔ BSP(통화면)</td><td>REST + Webhook + 미디어 ◆</td><td><code>POST /calls</code>, <code>/calls/{id}/bridge</code>, <code>/say</code>(TTS), <code>/permission</code>(필요시), 이벤트 <code>ringing·answered·ended</code>, 채널 <code>audio stream</code>(fork)</td><td><span class="tag">②④⑤</span></td></tr>
+    <tr><td>서비스서버 ↔ AI요약</td><td>내부 REST ○</td><td><code>POST /transcribe</code>(화자분리), <code>POST /summarize</code>(키워드+A용/B용)</td><td><span class="tag">②</span></td></tr>
+    <tr><td>서비스서버 ↔ AI챗봇</td><td>내부 REST ○</td><td><code>POST /chat</code>(A-ixio 텍스트→응답)</td><td><span class="tag">③</span></td></tr>
+    <tr><td>서비스서버 ↔ AI음성비서</td><td>내부 WS(실시간) ○</td><td><code>WS /assistant/stream</code>("자비스" 웨이크), 응답→TTS→BSP <code>/say</code></td><td><span class="tag">④</span></td></tr>
+    <tr><td>서비스서버 ↔ AI대신받기</td><td>내부 REST/WS ○</td><td><code>POST /attendant/answer</code>(부재 응대), STT/TTS 루프, <code>POST /attendant/memo</code>→A 전달</td><td><span class="tag">⑤</span></td></tr>
+    <tr><td>서비스서버 ↔ 토큰/링크</td><td>내부 REST ○</td><td><code>POST /call-token</code>(세션·페어·공개 구분 발급), <code>GET /qr/{token}</code>(공개 QR), <code>DELETE /call-token/{id}</code>(해지)</td><td><span class="tag">①</span></td></tr>
+    <tr><td>서비스서버 ↔ 요약 웹(permalink)</td><td>내부 REST/정적 ○</td><td><code>PUT /summary/{token}</code>(채움), <code>GET /s/{token}</code>(열람·만료·접근통제)</td><td><span class="tag">②</span></td></tr>
+  </tbody>
+</table>
+
+<div class="foot">
+  ixi-O Biz WhatsApp · 구성도·콜셋업/요약 콜플로우·API(rough) · 2026-05-29 · 딥링크 기준 ·
+  가정: WABA Calling 1:1·2안 RTP 브릿지·메시지당 과금(세션 내 무료)·Meta ToS/BSP 통화·미디어 역량 [확인필요].
+</div>
+
+</div>
+</body>
+</html>
