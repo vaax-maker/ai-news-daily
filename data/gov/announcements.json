@@ -1,5 +1,33 @@
 [
   {
+    "title": "[대전] 2026년 3차 정보보호기업 성장지원(창업ㆍ벤처, 사업화) 모집 공고(충청권 지역거점 정보보호 클러스터 구축사업)",
+    "link": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000123977",
+    "dept": "대전광역시",
+    "manager": "",
+    "date": "2026-07-06",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-07-06",
+    "bid_begin_dt": "2026-07-13",
+    "bid_close_dt": "2026-07-17",
+    "openg_dt": "",
+    "is_new": true
+  },
+  {
+    "title": "[부산] 2026년 AI 자율제조 기술지원 수혜기업 모집 공고(대형모빌리티 부품조립 복수 로봇 시스템 개발사업)",
+    "link": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000123963",
+    "dept": "부산광역시",
+    "manager": "",
+    "date": "2026-07-06",
+    "source_name": "기업마당",
+    "image_url": "",
+    "published_display": "2026-07-06",
+    "bid_begin_dt": "2026-07-02",
+    "bid_close_dt": "2026-07-16",
+    "openg_dt": "",
+    "is_new": true
+  },
+  {
     "dept": "과학기술정보통신부",
     "source_name": "기업마당",
     "date": "2026-07-03",
