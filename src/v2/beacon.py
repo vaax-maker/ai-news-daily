@@ -50,6 +50,7 @@ def load_candidates(docs_root: str) -> list[dict]:
             "source": getattr(it, "domain", "") or "",
             "category": getattr(it, "category", "") or "",
             "date": pub.strftime("%m.%d") if isinstance(pub, datetime.datetime) else "",
+            "url": (getattr(it, "url", "") or "").strip(),
         })
     return out
 
@@ -146,6 +147,14 @@ def _esc(s: Any) -> str:
     return html.escape(str(s or ""))
 
 
+def _inner(text: Any, url: str) -> str:
+    """제목 텍스트를 원문 링크(새 탭)로 감싼다. url 없으면 텍스트만."""
+    t = _esc(text)
+    if url:
+        return f'<a href="{_esc(url)}" target="_blank" rel="noopener noreferrer">{t}</a>'
+    return t
+
+
 def _css() -> str:
     path = os.path.join(os.path.dirname(__file__), "..", "..", "templates", "v2", "beacon.css")
     with open(os.path.abspath(path), encoding="utf-8") as f:
@@ -153,13 +162,13 @@ def _css() -> str:
 
 
 def render_html(cands: list[dict], gen: dict, date: str) -> str:
-    rep = cands[gen["representative_index"]]  # noqa: F841 (대표 원문은 fact로 대체 표기)
+    rep = cands[gen["representative_index"]]
     tags_html = "".join(f'<span class="tag">{_esc(t)}</span>' for t in gen.get("tags", [])[:4])
 
     rail = "\n".join(
         f'<div class="live__item{" is-today" if i == gen["representative_index"] else ""}">'
         f'<span class="live__date">{_esc(c["date"])}</span>'
-        f'<span class="live__t">{_esc(c["title"])}</span></div>'
+        f'<span class="live__t">{_inner(c["title"], c.get("url"))}</span></div>'
         for i, c in enumerate(cands[:6]))
 
     cards = []
@@ -171,7 +180,7 @@ def render_html(cands: list[dict], gen: dict, date: str) -> str:
             f'<article class="card"><div class="thumb"><span class="thumb__ghost">{n:02d}</span>'
             f'<span class="thumb__kw">{_esc(kw)}</span></div><div class="card__body">'
             f'<div class="card__tags">{ctags}</div>'
-            f'<h3 class="card__title">{_esc(c["title"])}</h3>'
+            f'<h3 class="card__title">{_inner(c["title"], c.get("url"))}</h3>'
             f'<p class="card__point"><b>{_esc(card.get("mini_impact",""))}</b></p>'
             f'<div class="card__src">{_esc(c["source"]).upper()}</div></div></article>')
     cards_html = "\n".join(cards)
@@ -194,6 +203,7 @@ def render_html(cands: list[dict], gen: dict, date: str) -> str:
       <div class="lead__fact"><span class="k">대표 뉴스</span><span class="v">{_esc(gen["fact"])}</span></div>
       {f'<p class="lead__interp">{_esc(gen["interpretation"])}</p>' if gen.get("interpretation") else ''}
       <div class="lead__tags">{tags_html}</div>
+      {f'<a class="lead__src" href="{_esc(rep.get("url"))}" target="_blank" rel="noopener noreferrer">대표 뉴스 원문 →</a>' if rep.get("url") else ''}
     </div>
     <aside class="live">
       <div class="live__head"><h2>오늘의 신호 · 전체</h2><span class="live__badge">LIVE · {_esc(date[-5:])}</span></div>
