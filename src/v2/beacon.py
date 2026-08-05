@@ -23,9 +23,12 @@ MODELS = ["openai/gpt-5.6-luna", "anthropic/claude-sonnet-4-6", "google/gemini-3
 SYSTEM = (
     "너는 VAAX의 'AI·XR 경종 에디터'다. 하루 한 건, 세상의 변화를 독자가 "
     "'정신 차리게' 만드는 대표 메시지를 만든다.\n"
-    "원칙: (1) 사실에 없는 것은 절대 쓰지 않는다. 수치·인용·주체를 창작하지 않는다. "
+    "원칙: (1) 사실에 없는 것은 절대 쓰지 않는다. 수치·인용·주체·대상·기능을 창작하지 "
+    "않는다. 원문에 없는 단어·고유명사를 해석에 추가하지 마라(예: 원문에 카메라만 있으면 "
+    "'마이크' 같은 미언급 대상 추가 금지). "
     "(2) 함의(메시지)는 한 문장, 감각적이고 강하게. 그러나 낚시·과장·공포조장 금지. "
-    "(3) 해석은 '왜 그것이 그런 뜻인지'를 사실과 연결해 설명한다(단정적 예언 금지). "
+    "(3) 해석은 '왜 그것이 그런 뜻인지'를 사실과 연결해 설명한다. 단일 사건을 사회 전체의 "
+    "규범·결론으로 단정하거나 예언하지 않는다. "
     "(4) 한국어. 완결된 문장. 이모지·해시태그 금지. "
     "(5) 반드시 JSON만 출력한다(설명 문장 금지)."
 )
@@ -189,7 +192,7 @@ def render_html(cands: list[dict], gen: dict, date: str) -> str:
       <div class="lead__eyebrow">오늘의 경종</div>
       <h1 class="lead__msg">{_esc(gen["impact_headline"])}</h1>
       <div class="lead__fact"><span class="k">대표 뉴스</span><span class="v">{_esc(gen["fact"])}</span></div>
-      <p class="lead__interp">{_esc(gen["interpretation"])}</p>
+      {f'<p class="lead__interp">{_esc(gen["interpretation"])}</p>' if gen.get("interpretation") else ''}
       <div class="lead__tags">{tags_html}</div>
     </div>
     <aside class="live">

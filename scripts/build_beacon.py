@@ -60,7 +60,11 @@ def main():
             print(f"[eval] 실패 (attempt {attempt}): evidence={ev['evidence_issues']} "
                   f"judge={ev['judge'].get('issues')}", file=sys.stderr)
         if not gen["_eval"]["passed"]:
-            print("[eval] ⚠ 재생성 후에도 미통과 — degraded 발행(사람 검토 필요)", file=sys.stderr)
+            # 보수 폴백: 환각·과장은 주로 '해석'에서 발생 → 해석을 비워 함의+사실만 안전 발행.
+            gen["_interpretation_dropped"] = gen.get("interpretation", "")
+            gen["interpretation"] = ""
+            print("[eval] ⚠ 미통과 → 보수 폴백: 해석 제거하고 함의+사실만 발행(사람 검토)",
+                  file=sys.stderr)
         payload = {"date": args.date, "cands": cands, "gen": gen, "modu": modu}
         dated = os.path.join(DATA_DIR, f"{args.date.replace('.', '-')}.json")
         for path in (dated, latest):
