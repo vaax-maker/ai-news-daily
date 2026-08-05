@@ -122,6 +122,12 @@
   @media (prefers-reduced-motion:reduce){.wake *{animation:none !important}}
   .lead__tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}
   .lead__tags .tag{border-color:var(--hero-line);color:var(--hero-muted)}
+  /* 원문 링크: 제목은 색 상속·밑줄 없음, 호버 시 밑줄 */
+  .live__t a, .card__title a{color:inherit;text-decoration:none}
+  .live__t a:hover, .card__title a:hover{text-decoration:underline;text-underline-offset:2px}
+  .lead__src{display:inline-block;margin-top:18px;font-family:var(--font-mono);font-size:11.5px;
+    letter-spacing:.06em;color:var(--signal);text-decoration:none}
+  .lead__src:hover{text-decoration:underline;text-underline-offset:2px}
 
 </style>
 <div class="wake"><div class="wrap">
@@ -132,30 +138,31 @@
   <section class="hero">
     <div class="lead">
       <div class="lead__eyebrow">오늘의 경종</div>
-      <h1 class="lead__msg">안경이 된 카메라, 사라지는 촬영 동의</h1>
-      <div class="lead__fact"><span class="k">대표 뉴스</span><span class="v">메타 스마트 글래스로 촬영한 영상을 공개한 틱톡커가 몰래 촬영한 사람들의 신고로 경찰 조사를 받고 있다.</span></div>
-      <p class="lead__interp">스마트 글래스의 촬영 기능이 일상적인 착용 형태에 들어오면 주변 사람은 촬영 여부와 동의 요청을 알아채기 어려워질 수 있다. 이번 조사는 기술의 편리함만큼 촬영 동의와 개인정보 보호 기준도 함께 마련되어야 함을 보여준다.</p>
-      <div class="lead__tags"><span class="tag">스마트글래스</span><span class="tag">개인정보</span><span class="tag">촬영동의</span></div>
+      <h1 class="lead__msg">안경이 카메라가 되는 순간, 동의가 시험대에 오른다</h1>
+      <div class="lead__fact"><span class="k">대표 뉴스</span><span class="v">메타 스마트 글래스로 촬영한 영상들을 공개한 틱톡커가 몰래 촬영한 사람들의 신고로 경찰 조사를 받게 됐다.</span></div>
+      <p class="lead__interp">스마트 글래스는 촬영 사실을 드러내지 않은 채 주변 환경을 기록할 수 있어, 일상적인 촬영과 사생활 침해의 경계가 흔들릴 수 있다. 실제 신고와 경찰 조사로 이어졌다는 점은 이 문제가 기술의 편리함만으로 끝나지 않음을 보여준다.</p>
+      <div class="lead__tags"><span class="tag">스마트글래스</span><span class="tag">개인정보</span><span class="tag">몰래촬영</span></div>
+      <a class="lead__src" href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxQcFQ2bFAzN1F4elBxQXR6aDE1YjFXOWp5cVNsamJhcTllWUZERnN6ZUlRX3VFMFFITDhDME5rWTBibVpJSE5DdTR4NHp4MzFlckVOb1lWRmpQaW5fTmt3SjhNNkpMcVdQWE9PVllDT3JyVjBsSWE1MFdzQnFKYTZjVENPWGgyRXNJNGxSTm5xWEEzc3o3d1VLTzJsdDVaclVlYXRzVGE3RHhWM2lDZjlLcTRFMG5GenZFdmdWMlQyUEI?oc=5" target="_blank" rel="noopener noreferrer">대표 뉴스 원문 →</a>
     </div>
     <aside class="live">
       <div class="live__head"><h2>오늘의 신호 · 전체</h2><span class="live__badge">LIVE · 08.05</span></div>
-      <div class="live__item"><span class="live__date">08.05</span><span class="live__t">KAIST, 대용량 배터리 전해질 생산시간 67% 단축 기술 개발</span></div>
-<div class="live__item"><span class="live__date">08.05</span><span class="live__t">삼성전자, 미국 FMS 2026에서 차세대 3D 메모리 기술과 AI 메모리 로드맵 공개</span></div>
-<div class="live__item"><span class="live__date">08.05</span><span class="live__t">애플 시리 AI, 퍼블릭 베타 테스트서 개인 데이터 검색 능력 인정</span></div>
-<div class="live__item"><span class="live__date">08.05</span><span class="live__t">대규모 행사에서 휴머노이드 로봇이 안전 문제로 쓰러짐</span></div>
-<div class="live__item"><span class="live__date">08.05</span><span class="live__t">이스트에이드, 국내 첫 AI 요약 기능 &#x27;줌&#x27;으로 포털 시장 진출</span></div>
-<div class="live__item"><span class="live__date">08.04</span><span class="live__t">슈나이더 일렉트릭, 800V DC 아키텍처로 AIDC 전력 공급 구조 혁신</span></div>
+      <div class="live__item"><span class="live__date">08.05</span><span class="live__t"><a href="https://www.aitimes.kr/news/articleView.html?idxno=41311" target="_blank" rel="noopener noreferrer">KAIST, 대용량 배터리 전해질 생산시간 67% 단축 기술 개발</a></span></div>
+<div class="live__item"><span class="live__date">08.05</span><span class="live__t"><a href="https://www.aitimes.kr/news/articleView.html?idxno=41310" target="_blank" rel="noopener noreferrer">삼성전자, 미국 FMS 2026에서 차세대 3D 메모리 기술과 AI 메모리 로드맵 공개</a></span></div>
+<div class="live__item"><span class="live__date">08.05</span><span class="live__t"><a href="https://www.aitimes.com/news/articleView.html?idxno=213507" target="_blank" rel="noopener noreferrer">애플 시리 AI, 퍼블릭 베타 테스트서 개인 데이터 검색 능력 인정</a></span></div>
+<div class="live__item"><span class="live__date">08.05</span><span class="live__t"><a href="https://www.aitimes.com/news/articleView.html?idxno=213530" target="_blank" rel="noopener noreferrer">대규모 행사에서 휴머노이드 로봇이 안전 문제로 쓰러짐</a></span></div>
+<div class="live__item"><span class="live__date">08.05</span><span class="live__t"><a href="https://www.aitimes.com/news/articleView.html?idxno=213514" target="_blank" rel="noopener noreferrer">이스트에이드, 국내 첫 AI 요약 기능 &#x27;줌&#x27;으로 포털 시장 진출</a></span></div>
+<div class="live__item"><span class="live__date">08.04</span><span class="live__t"><a href="https://www.aitimes.kr/news/articleView.html?idxno=41309" target="_blank" rel="noopener noreferrer">슈나이더 일렉트릭, 800V DC 아키텍처로 AIDC 전력 공급 구조 혁신</a></span></div>
       <div class="live__all">전체 24건</div>
     </aside>
   </section>
   <section class="sec">
     <div class="sec__head"><span class="sec__eyebrow">Curated signals</span><h2>오늘의 다른 신호</h2><span class="more">2026.08.05 · 큐레이션 5건</span></div>
     <div class="grid">
-<article class="card"><div class="thumb"><span class="thumb__ghost">01</span><span class="thumb__kw">배터리</span></div><div class="card__body"><div class="card__tags"><span class="tag">배터리</span><span class="tag">생산기술</span></div><h3 class="card__title">삼성전자, 미국 FMS 2026에서 차세대 3D 메모리 기술과 AI 메모리 로드맵 공개</h3><p class="card__point"><b>배터리 생산 병목을 67% 줄이다</b></p><div class="card__src">AITIMES.KR</div></div></article>
-<article class="card"><div class="thumb"><span class="thumb__ghost">02</span><span class="thumb__kw">AI데이터센터</span></div><div class="card__body"><div class="card__tags"><span class="tag">AI데이터센터</span><span class="tag">전력</span></div><h3 class="card__title">슈나이더 일렉트릭, 800V DC 아키텍처로 AIDC 전력 공급 구조 혁신</h3><p class="card__point"><b>AI 확장의 다음 관문은 전력이다</b></p><div class="card__src">AITIMES.KR</div></div></article>
-<article class="card"><div class="thumb"><span class="thumb__ghost">03</span><span class="thumb__kw">오픈웨이트AI</span></div><div class="card__body"><div class="card__tags"><span class="tag">오픈웨이트AI</span><span class="tag">AI안전</span></div><h3 class="card__title">Z.ai의 GLM-5.2, 개방형 AI로 경계선 수준 능력 도달</h3><p class="card__point"><b>개방성보다 안전장치가 먼저다</b></p><div class="card__src">TECHCRUNCH.COM</div></div></article>
-<article class="card"><div class="thumb"><span class="thumb__ghost">04</span><span class="thumb__kw">애플비전프로</span></div><div class="card__body"><div class="card__tags"><span class="tag">애플비전프로</span><span class="tag">의료XR</span></div><h3 class="card__title">애플 비전 프로, 수술 시간 19% 단축</h3><p class="card__point"><b>수술실에서 XR의 시간이 줄었다</b></p><div class="card__src">IPHONE IN CANADA</div></div></article>
-<article class="card"><div class="thumb"><span class="thumb__ghost">05</span><span class="thumb__kw">메타글래스</span></div><div class="card__body"><div class="card__tags"><span class="tag">메타글래스</span><span class="tag">규제</span></div><h3 class="card__title">독일에서 메타 글래스스 판매금지 논의 심화</h3><p class="card__point"><b>스마트 글래스가 규제의 시야에 들어왔다</b></p><div class="card__src">DW.COM</div></div></article>
+<article class="card"><div class="thumb"><span class="thumb__ghost">01</span><span class="thumb__kw">배터리</span></div><div class="card__body"><div class="card__tags"><span class="tag">배터리</span><span class="tag">전해질</span></div><h3 class="card__title"><a href="https://www.aitimes.kr/news/articleView.html?idxno=41311" target="_blank" rel="noopener noreferrer">KAIST, 대용량 배터리 전해질 생산시간 67% 단축 기술 개발</a></h3><p class="card__point"><b>배터리 생산 속도가 빨라진다</b></p><div class="card__src">AITIMES.KR</div></div></article>
+<article class="card"><div class="thumb"><span class="thumb__ghost">02</span><span class="thumb__kw">삼성전자</span></div><div class="card__body"><div class="card__tags"><span class="tag">삼성전자</span><span class="tag">3D메모리</span></div><h3 class="card__title"><a href="https://www.aitimes.kr/news/articleView.html?idxno=41310" target="_blank" rel="noopener noreferrer">삼성전자, 미국 FMS 2026에서 차세대 3D 메모리 기술과 AI 메모리 로드맵 공개</a></h3><p class="card__point"><b>AI 메모리 경쟁이 더 쌓인다</b></p><div class="card__src">AITIMES.KR</div></div></article>
+<article class="card"><div class="thumb"><span class="thumb__ghost">03</span><span class="thumb__kw">개방형AI</span></div><div class="card__body"><div class="card__tags"><span class="tag">개방형AI</span><span class="tag">안전성</span></div><h3 class="card__title"><a href="https://techcrunch.com/2026/08/04/open-weight-ai-models-are-catching-up-to-the-frontier-the-safety-gap-remains/" target="_blank" rel="noopener noreferrer">Z.ai의 GLM-5.2, 개방형 AI로 경계선 수준 능력 도달</a></h3><p class="card__point"><b>개방형 AI의 안전 공백</b></p><div class="card__src">TECHCRUNCH.COM</div></div></article>
+<article class="card"><div class="thumb"><span class="thumb__ghost">04</span><span class="thumb__kw">애플비전프로</span></div><div class="card__body"><div class="card__tags"><span class="tag">애플비전프로</span><span class="tag">의료</span></div><h3 class="card__title"><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxNWkxER1JFY01xcWtqUWNiVS1PbUREa3FSWW9uTXNUQllFNG1kbjdjZFNMeldGbzFZNFhCNEJtMDM2UVBaWWFUZ3k1V3VYS2FwU0JHZUZlZUdOVkRBUmIzYUZiNkFHTTNHOVBabVBQR05aSUxZaFBpb21YSVJuTXlnUkY2OXBjZm5NaFJ1NjJjOWhMQzExcVdEUmY3Q2MyVTVLSnc?oc=5" target="_blank" rel="noopener noreferrer">애플 비전 프로, 수술 시간 19% 단축</a></h3><p class="card__point"><b>수술실에 들어온 공간컴퓨팅</b></p><div class="card__src">IPHONE IN CANADA</div></div></article>
+<article class="card"><div class="thumb"><span class="thumb__ghost">05</span><span class="thumb__kw">메타</span></div><div class="card__body"><div class="card__tags"><span class="tag">메타</span><span class="tag">스마트글래스</span></div><h3 class="card__title"><a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxPMXRhdk1wekxHZnBDS0czM3NSSzdxOUxuY2ZLQk05emRSbS1ucHpGc3l6WVp4bll0YUlRM3ZMdFNKaUJGMnZ5ZjU3eEplTXVUd3ZPdkdOYk5TSDE3bWs2VWMxZ0lEV1JRWVpNVHhPUnpzdlEwSDRORExwR0tOLXVQN0VvcXAzVUY3RkdTRGI2bWdHZWtqV0RfcTQwSVBLNjY0OHBuSU5zbndIazFl?oc=5" target="_blank" rel="noopener noreferrer">메타 스마트 글래스, 유럽에서 개인정보 문제로 판매 금지 요구됨</a></h3><p class="card__point"><b>스마트 글래스가 규제와 마주친다</b></p><div class="card__src">PETAPIXEL</div></div></article>
     </div>
   </section>
   <a class="monthly" href="#" onclick="return false">

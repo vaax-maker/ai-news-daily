@@ -121,3 +121,9 @@
   @media (prefers-reduced-motion:reduce){.wake *{animation:none !important}}
   .lead__tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}
   .lead__tags .tag{border-color:var(--hero-line);color:var(--hero-muted)}
+  /* 원문 링크: 제목은 색 상속·밑줄 없음, 호버 시 밑줄 */
+  .live__t a, .card__title a{color:inherit;text-decoration:none}
+  .live__t a:hover, .card__title a:hover{text-decoration:underline;text-underline-offset:2px}
+  .lead__src{display:inline-block;margin-top:18px;font-family:var(--font-mono);font-size:11.5px;
+    letter-spacing:.06em;color:var(--signal);text-decoration:none}
+  .lead__src:hover{text-decoration:underline;text-underline-offset:2px}
