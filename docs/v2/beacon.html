@@ -1,0 +1,167 @@
+<style>
+/* ===== 오늘, 세상이 — v3 (다크 경종 헤드 + 라이트 뉴스룸 본문 · 톤다운) ===== */
+  .wake *{box-sizing:border-box}
+  .wake{
+    --paper:#F7F6F3;        /* warm off-white body */
+    --paper-2:#FFFFFF;      /* card */
+    --ink:#1A1B1E;          /* near-black text */
+    --muted:#6E7178;        /* warm grey */
+    --line:#E5E3DC;         /* hairline (light) */
+    --hero:#121417;         /* dark hero */
+    --hero-2:#1B1E22;
+    --hero-ink:#F1EFEA;
+    --hero-muted:#9BA0A8;
+    --hero-line:#2A2E34;
+    --signal:#D8452F;       /* editorial vermilion (toned) */
+    --signal-soft:#F2E3DE;  /* soft tint for light bg */
+    --font-display:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",system-ui,-apple-system,sans-serif;
+    --font-body:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",system-ui,-apple-system,sans-serif;
+    --font-mono:"SF Mono","JetBrains Mono",ui-monospace,"D2Coding",Menlo,monospace;
+    background:var(--paper);color:var(--ink);font-family:var(--font-body);line-height:1.6;
+    -webkit-font-smoothing:antialiased;min-height:100vh;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,52px)}
+
+  /* masthead */
+  .mast{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0 18px}
+  .mast__brand{font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:-.01em}
+  .mast__brand .sub{font-family:var(--font-mono);font-weight:400;font-size:11px;letter-spacing:.14em;color:var(--muted);margin-left:10px;text-transform:uppercase}
+  .mast__meta{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--muted);text-align:right}
+  .mast__cad{color:var(--signal)}
+
+  /* ---------- HERO (dark) : 대표 경종 + 라이브 리스트 ---------- */
+  .hero{background:var(--hero);color:var(--hero-ink);border-radius:10px;overflow:hidden;
+    display:grid;grid-template-columns:1.5fr 1fr}
+  .lead{padding:clamp(28px,4vw,46px);border-right:1px solid var(--hero-line);min-width:0;
+    display:flex;flex-direction:column;justify-content:center}
+  .lead__eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:11.5px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--signal);margin-bottom:20px}
+  .lead__eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--signal)}
+  .lead__msg{font-family:var(--font-display);font-weight:800;font-size:clamp(26px,4.2vw,42px);
+    line-height:1.14;letter-spacing:-.02em;text-wrap:balance;margin:0}
+  .lead__msg .hl{color:var(--signal)}
+  .lead__fact{display:flex;gap:12px;margin-top:22px;padding-top:18px;border-top:1px solid var(--hero-line)}
+  .lead__fact .k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;color:var(--hero-muted);text-transform:uppercase;padding-top:3px;white-space:nowrap}
+  .lead__fact .v{font-size:15px;color:var(--hero-ink)}
+  .lead__interp{color:var(--hero-muted);font-size:14px;line-height:1.7;margin:14px 0 0}
+  .lead__interp b{color:var(--hero-ink);font-weight:600}
+
+  /* live list */
+  .live{padding:clamp(24px,3vw,34px) clamp(22px,2.6vw,30px);background:var(--hero-2);display:flex;flex-direction:column}
+  .live__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .live__head h2{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--hero-muted);margin:0;font-weight:600}
+  .live__badge{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--signal);display:inline-flex;align-items:center;gap:6px}
+  .live__badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--signal);animation:blink 2.6s ease-in-out infinite}
+  .live__item{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--hero-line);align-items:baseline}
+  .live__item:first-of-type{border-top:0}
+  .live__date{font-family:var(--font-mono);font-size:11px;color:var(--hero-muted);font-variant-numeric:tabular-nums}
+  .live__t{font-size:14px;line-height:1.45;color:var(--hero-ink)}
+  .live__item.is-today .live__date{color:var(--signal)}
+  .live__item.is-today .live__t{font-weight:700}
+  .live__all{margin-top:auto;padding-top:16px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--hero-muted)}
+
+  /* ---------- BODY (light) : 카드뉴스 ---------- */
+  .sec{padding:clamp(34px,5vw,56px) 0 0}
+  .sec__head{display:flex;align-items:baseline;gap:12px;margin-bottom:22px}
+  .sec__eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--signal)}
+  .sec__head h2{font-family:var(--font-display);font-weight:800;font-size:clamp(20px,3vw,27px);letter-spacing:-.02em;margin:0}
+  .sec__head .more{margin-left:auto;font-family:var(--font-mono);font-size:11.5px;color:var(--muted);letter-spacing:.05em}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:8px;overflow:hidden;
+    display:flex;flex-direction:column;transition:box-shadow .25s ease,transform .25s ease}
+  .card:hover{box-shadow:0 10px 30px -12px rgba(0,0,0,.18);transform:translateY(-2px)}
+  /* 카드뉴스 썸네일 zone */
+  .thumb{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,var(--hero),var(--hero-2));
+    display:flex;align-items:flex-end;padding:14px;overflow:hidden}
+  .thumb__ghost{position:absolute;top:-14px;right:6px;font-family:var(--font-display);font-weight:800;
+    font-size:110px;line-height:1;color:rgba(255,255,255,.06);letter-spacing:-.04em}
+  .thumb__kw{position:relative;font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--hero-ink);line-height:1.25;text-wrap:balance}
+  .thumb__kw .hl{color:var(--signal)}
+  .card__body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:11px;flex:1}
+  .card__tags{display:flex;gap:7px;flex-wrap:wrap}
+  .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:2px;padding:3px 8px}
+  .tag.ai{color:var(--ink);border-color:#cfcdc5}
+  .card__title{font-family:var(--font-display);font-weight:700;font-size:16.5px;line-height:1.36;letter-spacing:-.01em;margin:0;text-wrap:balance}
+  .card__point{font-size:13px;line-height:1.6;color:var(--muted);margin:0;padding-top:11px;border-top:1px solid var(--line)}
+  .card__point b{color:var(--signal);font-weight:600}
+  .card__src{font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;color:var(--muted);margin-top:auto}
+
+  /* monthly */
+  .monthly{margin:clamp(36px,5vw,60px) 0 0;position:relative;display:block;text-decoration:none;color:inherit;
+    border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--paper-2);
+    padding:clamp(26px,4vw,40px);transition:box-shadow .3s ease,transform .3s ease}
+  .monthly:hover{box-shadow:0 14px 40px -16px rgba(0,0,0,.2);transform:translateY(-2px)}
+  .monthly__ghost{position:absolute;top:-30px;right:10px;font-family:var(--font-display);font-weight:800;font-size:180px;line-height:1;color:rgba(26,27,30,.05);letter-spacing:-.05em}
+  .monthly__k{position:relative;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--signal);margin-bottom:12px}
+  .monthly__h{position:relative;font-family:var(--font-display);font-weight:800;font-size:clamp(22px,3.6vw,32px);line-height:1.14;letter-spacing:-.02em;margin:0;text-wrap:balance}
+  .monthly__sub{position:relative;color:var(--muted);margin-top:12px;font-size:14px}
+  .monthly__arrow{position:relative;display:inline-block;margin-top:18px;font-family:var(--font-mono);font-size:12.5px}
+  .monthly__arrow .sig{color:var(--signal)}
+
+  /* footer */
+  .foot{border-top:1px solid var(--line);margin-top:clamp(34px,5vw,56px);padding:24px 0 46px;
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--muted)}
+  .foot .sig{color:var(--signal)}
+
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+  @media (max-width:760px){
+    .hero{grid-template-columns:1fr}
+    .lead{border-right:0;border-bottom:1px solid var(--hero-line)}
+  }
+  @media (max-width:520px){
+    .lead__fact{flex-direction:column;gap:4px}
+    .grid{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){.wake *{animation:none !important}}
+  .lead__tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}
+  .lead__tags .tag{border-color:var(--hero-line);color:var(--hero-muted)}
+
+</style>
+<div class="wake"><div class="wrap">
+  <header class="mast">
+    <div class="mast__brand">오늘, 세상이<span class="sub">VAAX</span></div>
+    <div class="mast__meta">2026.08.05 &nbsp;·&nbsp; <span class="mast__cad">평일 오전 10시 발행</span></div>
+  </header>
+  <section class="hero">
+    <div class="lead">
+      <div class="lead__eyebrow">오늘의 경종</div>
+      <h1 class="lead__msg">카메라 안경이 사생활의 경계를 흔든다</h1>
+      <div class="lead__fact"><span class="k">대표 뉴스</span><span class="v">메타 스마트 글래스로 주변 사람들을 몰래 촬영한 틱톡커가 경찰 조사를 받았고, 촬영 영상이 계정에 공개됐다.</span></div>
+      <p class="lead__interp">스마트 글래스의 촬영 기능이 일상에 들어오면서 촬영 사실을 알아차리기 어려운 상황이 실제 갈등과 수사로 이어졌다. 웨어러블 기기의 확산은 편의성뿐 아니라 동의와 개인정보 보호 기준도 함께 요구한다.</p>
+      <div class="lead__tags"><span class="tag">스마트글래스</span><span class="tag">개인정보보호</span><span class="tag">몰래촬영</span></div>
+    </div>
+    <aside class="live">
+      <div class="live__head"><h2>오늘의 신호 · 전체</h2><span class="live__badge">LIVE · 08.05</span></div>
+      <div class="live__item"><span class="live__date">08.05</span><span class="live__t">KAIST, 대용량 배터리 전해질 생산시간 67% 단축 기술 개발</span></div>
+<div class="live__item"><span class="live__date">08.05</span><span class="live__t">삼성전자, 미국 FMS 2026에서 차세대 3D 메모리 기술과 AI 메모리 로드맵 공개</span></div>
+<div class="live__item"><span class="live__date">08.05</span><span class="live__t">애플 시리 AI, 퍼블릭 베타 테스트서 개인 데이터 검색 능력 인정</span></div>
+<div class="live__item"><span class="live__date">08.05</span><span class="live__t">대규모 행사에서 휴머노이드 로봇이 안전 문제로 쓰러짐</span></div>
+<div class="live__item"><span class="live__date">08.05</span><span class="live__t">이스트에이드, 국내 첫 AI 요약 기능 &#x27;줌&#x27;으로 포털 시장 진출</span></div>
+<div class="live__item"><span class="live__date">08.04</span><span class="live__t">슈나이더 일렉트릭, 800V DC 아키텍처로 AIDC 전력 공급 구조 혁신</span></div>
+      <div class="live__all">전체 24건</div>
+    </aside>
+  </section>
+  <section class="sec">
+    <div class="sec__head"><span class="sec__eyebrow">Curated signals</span><h2>오늘의 다른 신호</h2><span class="more">2026.08.05 · 큐레이션 5건</span></div>
+    <div class="grid">
+<article class="card"><div class="thumb"><span class="thumb__ghost">01</span><span class="thumb__kw">배터리</span></div><div class="card__body"><div class="card__tags"><span class="tag">배터리</span><span class="tag">데이터센터</span></div><h3 class="card__title">KAIST, 대용량 배터리 전해질 생산시간 67% 단축 기술 개발</h3><p class="card__point"><b>배터리 생산도 AI 인프라다</b></p><div class="card__src">AITIMES.KR</div></div></article>
+<article class="card"><div class="thumb"><span class="thumb__ghost">02</span><span class="thumb__kw">AI데이터센터</span></div><div class="card__body"><div class="card__tags"><span class="tag">AI데이터센터</span><span class="tag">전력</span></div><h3 class="card__title">슈나이더 일렉트릭, 800V DC 아키텍처로 AIDC 전력 공급 구조 혁신</h3><p class="card__point"><b>AI 전쟁은 전력망으로 번진다</b></p><div class="card__src">AITIMES.KR</div></div></article>
+<article class="card"><div class="thumb"><span class="thumb__ghost">03</span><span class="thumb__kw">개방형AI</span></div><div class="card__body"><div class="card__tags"><span class="tag">개방형AI</span><span class="tag">AI안전</span></div><h3 class="card__title">Z.ai의 GLM-5.2, 개방형 AI로 경계선 수준 능력 도달</h3><p class="card__point"><b>개방형 AI의 안전 공백</b></p><div class="card__src">TECHCRUNCH.COM</div></div></article>
+<article class="card"><div class="thumb"><span class="thumb__ghost">04</span><span class="thumb__kw">애플비전프로</span></div><div class="card__body"><div class="card__tags"><span class="tag">애플비전프로</span><span class="tag">의료XR</span></div><h3 class="card__title">애플 비전 프로, 수술 시간 19% 단축</h3><p class="card__point"><b>수술실에 들어온 공간컴퓨팅</b></p><div class="card__src">IPHONE IN CANADA</div></div></article>
+<article class="card"><div class="thumb"><span class="thumb__ghost">05</span><span class="thumb__kw">모바일AR</span></div><div class="card__body"><div class="card__tags"><span class="tag">모바일AR</span><span class="tag">사용자확산</span></div><h3 class="card__title">미국 성인중 38%가 모바일 AR 사용, 83%가 월간 사용자</h3><p class="card__point"><b>AR은 이미 생활 속 사용 기술</b></p><div class="card__src">ARINSIDER.CO</div></div></article>
+    </div>
+  </section>
+  <a class="monthly" href="#" onclick="return false">
+    <span class="monthly__ghost">8</span>
+    <div class="monthly__k">이번 달 총집 · 되돌아보기</div>
+    <h2 class="monthly__h">이번 달, 세상이 이렇게 바뀌었다.</h2>
+    <p class="monthly__sub">한 달치 경종을 하나의 흐름으로 — 변화의 가속을 한눈에.</p>
+    <span class="monthly__arrow">월간 총집 열기 <span class="sig">→</span></span>
+  </a>
+  <footer class="foot">
+    <span>VAAX · 오늘, 세상이</span>
+    <span>평일 오전 10시 <span class="sig">·</span> 웹 본진 <span class="sig">·</span> 텔레그램 티저</span>
+    <span class="sig">xbot LLM 생성(openai/gpt-5.6-luna) · conf 0.93</span>
+  </footer>
+</div></div>
