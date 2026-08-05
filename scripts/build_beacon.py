@@ -20,7 +20,7 @@ import datetime
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from src.v2 import beacon  # noqa: E402
+from src.v2 import beacon, beacon_eval  # noqa: E402
 
 DATA_DIR = os.path.join(ROOT, "data", "beacon")
 OUT_HTML = os.path.join(ROOT, "docs", "v2", "beacon.html")
@@ -45,14 +45,26 @@ def main():
         if len(cands) < 3:
             print(f"[error] 후보 부족: {len(cands)}건 (docs-root 확인)", file=sys.stderr)
             sys.exit(2)
-        gen = beacon.generate_beacon(cands)
+        gen = None
+        for attempt in range(1, 3):  # 검증 게이트: 최대 2회(재생성 1회)
+            gen = beacon.generate_beacon(cands)
+            ev = beacon_eval.evaluate(gen, cands)
+            gen["_eval"] = ev
+            if ev["passed"]:
+                print(f"[eval] 통과 (attempt {attempt})")
+                break
+            print(f"[eval] 실패 (attempt {attempt}): evidence={ev['evidence_issues']} "
+                  f"judge={ev['judge'].get('issues')}", file=sys.stderr)
+        if not gen["_eval"]["passed"]:
+            print("[eval] ⚠ 재생성 후에도 미통과 — degraded 발행(사람 검토 필요)", file=sys.stderr)
         payload = {"date": args.date, "cands": cands, "gen": gen}
         dated = os.path.join(DATA_DIR, f"{args.date.replace('.', '-')}.json")
         for path in (dated, latest):
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(payload, f, ensure_ascii=False, indent=2)
+        verdict = "PASS" if gen["_eval"]["passed"] else "DEGRADED"
         print(f"[generate] 대표='{gen['impact_headline']}' 모델={gen.get('_model')} "
-              f"conf={gen.get('confidence')} → {os.path.relpath(dated, ROOT)}")
+              f"conf={gen.get('confidence')} eval={verdict} → {os.path.relpath(dated, ROOT)}")
 
     if do_render:
         if not os.path.exists(latest):
