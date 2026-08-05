@@ -21,6 +21,7 @@ import datetime
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
 from src.v2 import beacon, beacon_eval  # noqa: E402
+from src.ingest import aiofmodu  # noqa: E402
 
 DATA_DIR = os.path.join(ROOT, "data", "beacon")
 OUT_HTML = os.path.join(ROOT, "docs", "v2", "beacon.html")
@@ -45,9 +46,12 @@ def main():
         if len(cands) < 3:
             print(f"[error] 후보 부족: {len(cands)}건 (docs-root 확인)", file=sys.stderr)
             sys.exit(2)
+        modu = aiofmodu.build_signal()  # 보조 신호(실패해도 계속)
+        print(f"[ingest] 모두의AI 신호 ok={modu['ok']} 헤드라인={len(modu.get('headlines', []))}"
+              + ("" if modu["ok"] else f" ({modu.get('error','')})"))
         gen = None
         for attempt in range(1, 3):  # 검증 게이트: 최대 2회(재생성 1회)
-            gen = beacon.generate_beacon(cands)
+            gen = beacon.generate_beacon(cands, modu_signal=modu)
             ev = beacon_eval.evaluate(gen, cands)
             gen["_eval"] = ev
             if ev["passed"]:
@@ -57,7 +61,7 @@ def main():
                   f"judge={ev['judge'].get('issues')}", file=sys.stderr)
         if not gen["_eval"]["passed"]:
             print("[eval] ⚠ 재생성 후에도 미통과 — degraded 발행(사람 검토 필요)", file=sys.stderr)
-        payload = {"date": args.date, "cands": cands, "gen": gen}
+        payload = {"date": args.date, "cands": cands, "gen": gen, "modu": modu}
         dated = os.path.join(DATA_DIR, f"{args.date.replace('.', '-')}.json")
         for path in (dated, latest):
             with open(path, "w", encoding="utf-8") as f:

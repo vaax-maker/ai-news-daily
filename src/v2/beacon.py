@@ -52,12 +52,23 @@ def load_candidates(docs_root: str) -> list[dict]:
 
 
 # ---------- LLM 생성 ----------
-def _build_user(cands: list[dict]) -> str:
+def _build_user(cands: list[dict], modu_signal: dict | None = None) -> str:
     lines = []
     for i, c in enumerate(cands):
         s = c["summary"][:180].replace("\n", " ")
         lines.append(f'{i}) [{c["category"].upper()}] {c["title"]}  — {s}  (출처 {c["source"]})')
     body = "\n".join(lines)
+    modu = ""
+    if modu_signal and modu_signal.get("ok") and modu_signal.get("headlines"):
+        hl = "\n".join(f"- {h}" for h in modu_signal["headlines"][:6])
+        kw = ", ".join(modu_signal.get("keywords", [])[:15])
+        modu = (
+            "\n\n[참고 신호 · 모두의 AI 오늘 트렌드]\n"
+            "다른 매체가 오늘 주목한 헤드라인이다. **앵글·트렌드 힌트로만** 참고하라.\n"
+            f"{hl}\n" + (f"키워드: {kw}\n" if kw else "") +
+            "지침: 위 트렌드와 겹치는 후보를 우선 고려하되, 사실(fact)은 반드시 위 '후보 뉴스'에서만 "
+            "취하고, 다른 매체의 문장을 그대로 베끼지 마라(우리 문장으로 재작성)."
+        )
     schema = '''
 다음 후보 뉴스들 중에서 작업하라.
 
@@ -79,7 +90,7 @@ C. 대표를 제외한 나머지 중 중요한 5건을 카드로 고르고, 각 
     ... 총 5개 ...
   ]
 }'''
-    return f"[오늘의 후보 뉴스]\n{body}\n{schema}"
+    return f"[오늘의 후보 뉴스]\n{body}\n{schema}{modu}"
 
 
 def _parse_json(raw: str) -> dict:
@@ -104,12 +115,16 @@ def _validate(data: dict, n: int) -> None:
             raise ValueError(f"card index out of range: {ci}")
 
 
-def generate_beacon(cands: list[dict], models: list[str] | None = None) -> dict:
-    """xbot LLM으로 beacon dict 생성(폴백 체인). 맥미니 로컬 전용."""
+def generate_beacon(cands: list[dict], models: list[str] | None = None,
+                    modu_signal: dict | None = None) -> dict:
+    """xbot LLM으로 beacon dict 생성(폴백 체인). 맥미니 로컬 전용.
+
+    modu_signal: 모두의 AI 오늘 트렌드(앵글·키워드 힌트, 04 §4.5). None이면 미사용.
+    """
     if not hermes.container_up():
         raise RuntimeError("hermes-xbot 컨테이너가 실행 중이 아닙니다 (Docker/xbot 확인).")
     models = models or MODELS
-    user = _build_user(cands)
+    user = _build_user(cands, modu_signal)
     last = None
     for model in models:
         try:
