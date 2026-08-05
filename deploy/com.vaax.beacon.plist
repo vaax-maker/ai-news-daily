@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 오늘, 세상이 beacon — 평일(월~금) 10:00 KST 로컬 발행 잡.
+     설치:  cp deploy/com.vaax.beacon.plist ~/Library/LaunchAgents/
+            launchctl load ~/Library/LaunchAgents/com.vaax.beacon.plist
+     해제:  launchctl unload ~/Library/LaunchAgents/com.vaax.beacon.plist
+     로그:  ~/ai-news-daily/data/beacon/run.log (+ launchd.out/err) -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.vaax.beacon</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/woojanghoon/ai-news-daily/deploy/run_beacon.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>0</integer></dict>
+  </array>
+  <key>StandardOutPath</key>
+  <string>/Users/woojanghoon/ai-news-daily/data/beacon/launchd.out</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/woojanghoon/ai-news-daily/data/beacon/launchd.err</string>
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>
