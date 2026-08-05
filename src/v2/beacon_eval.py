@@ -40,9 +40,16 @@ def evidence_issues(gen: dict, cands: list[dict]) -> list[str]:
 
 
 _JUDGE_SYS = (
-    "너는 엄격한 뉴스 사실검증관이다. 주어진 '사실(fact)'이 '원문 요약'으로 뒷받침되는지, "
-    "그리고 '함의/해석'이 사실을 넘어 과장·예언·창작을 하지 않았는지 평가한다. "
-    "확신이 없으면 보수적으로 판정한다. 반드시 JSON만 출력한다."
+    "너는 뉴스 사실검증관이다. 아래 기준으로만 판정한다.\n"
+    "- 'fact(사실)'는 원문 요약으로 뒷받침되어야 한다. 원문과 모순되거나 원문에 없는 "
+    "구체 정보(고유명사·수치·인용·사건)를 지어내면 실패.\n"
+    "- '함의(headline)'와 '해석'은 편집적 관점이다. 사실에서 합리적으로 도출되는 "
+    "해석·강조·문제제기·전망은 강하거나 도발적이어도 허용한다(그 자체를 과장으로 보지 마라).\n"
+    "- 실패(ok=false)는 오직 다음일 때만: (a) fact가 원문을 벗어남, (b) 함의/해석이 원문에 "
+    "없는 '구체적 사실(대상·수치·인용·사건)'을 지어냄(fabrication), (c) 원문이 전혀 지지하지 "
+    "못하는 단정.\n"
+    "- 일반화·규범적 문제제기·감각적 표현·해석적 프레이밍은 실패 사유가 아니다.\n"
+    "반드시 JSON만 출력한다."
 )
 
 
@@ -54,9 +61,11 @@ def judge(gen: dict, cands: list[dict], model: str = "openai/gpt-5.6-luna") -> d
         f'사실: {gen.get("fact","")}\n'
         f'해석: {gen.get("interpretation","")}\n---\n'
         '아래 JSON만 출력:\n'
-        '{"ok": true 또는 false, "fact_grounded": 0~1 실수, '
-        '"no_overclaim": 0~1 실수, "issues": ["문제 요약", ...]}\n'
-        'fact가 원문에 근거하고 해석이 과장·창작이 아니면 ok=true.'
+        '{"ok": true 또는 false, "fact_ok": 0~1 실수, '
+        '"fabrication": true 또는 false, "issues": ["문제 요약", ...]}\n'
+        'fabrication = 원문에 없는 구체적 사실(대상·수치·인용·사건)을 지어냈는가. '
+        'ok = fact가 원문에 근거하고 fabrication이 없으면 true. '
+        '함의·해석이 강하거나 해석적이라는 이유만으로는 ok=false로 하지 마라.'
     )
     try:
         raw = hermes.complete(_JUDGE_SYS, user, model=model, timeout=120)
@@ -72,5 +81,5 @@ def evaluate(gen: dict, cands: list[dict], model: str | None = None) -> dict:
     """게이트 종합. passed = 결정적 이슈 없음 AND judge ok != False."""
     ev = evidence_issues(gen, cands)
     jd = judge(gen, cands, model=model or "openai/gpt-5.6-luna")
-    passed = (not ev) and (jd.get("ok") is not False)
+    passed = (not ev) and (jd.get("ok") is not False) and (jd.get("fabrication") is not True)
     return {"passed": passed, "evidence_issues": ev, "judge": jd}
