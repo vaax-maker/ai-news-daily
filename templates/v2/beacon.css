@@ -107,6 +107,12 @@
   @media (max-width:760px){
     .hero{grid-template-columns:1fr}
     .lead{border-right:0;border-bottom:1px solid var(--hero-line)}
+    /* 마스트헤드: 브랜드/메타 세로 스택(긴 메타 줄바꿈 방지) */
+    .mast{flex-direction:column;align-items:flex-start;gap:6px}
+    .mast__meta{text-align:left}
+    /* 섹션 헤더: eyebrow·제목·우측메타 세로 스택 */
+    .sec__head{flex-direction:column;align-items:flex-start;gap:5px}
+    .sec__head .more{margin-left:0}
   }
   @media (max-width:520px){
     .lead__fact{flex-direction:column;gap:4px}
