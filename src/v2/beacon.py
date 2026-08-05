@@ -142,7 +142,7 @@ def render_html(cands: list[dict], gen: dict, date: str) -> str:
         f'<div class="live__item{" is-today" if i == gen["representative_index"] else ""}">'
         f'<span class="live__date">{_esc(c["date"])}</span>'
         f'<span class="live__t">{_esc(c["title"])}</span></div>'
-        for i, c in enumerate(cands[:12]))
+        for i, c in enumerate(cands[:6]))
 
     cards = []
     for n, card in enumerate(gen.get("cards", []), 1):
