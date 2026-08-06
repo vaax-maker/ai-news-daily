@@ -12,6 +12,10 @@ docs/header_test.html
 blogger_token.pickle
 .worktrees/
 
+# Retired: 회원사 소식 — zbot으로 이관(수동 수집 소스로만 사용, 사이트 미발행)
+docs/members/
+data/members/
+
 # Rollback/Backup artifacts
 backups/
 data/_snapshots/
