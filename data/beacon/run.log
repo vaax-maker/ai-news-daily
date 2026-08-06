@@ -1,0 +1,57 @@
+==== 2026-08-05 16:42:32 beacon run ====
+From https://github.com/vaax-maker/ai-news-daily
+ * branch              main       -> FETCH_HEAD
+From https://github.com/vaax-maker/ai-news-daily
+ * branch              main       -> FETCH_HEAD
+Already up to date.
+[eval] 실패 (attempt 1): evidence=[] judge=['사실은 원문 요약에 직접 근거한다.', '해석의 첫 문장은 대체로 근거가 있지만, 스마트 글래스가 촬영 사실을 드러내지 않는다는 일반화는 원문보다 다소 넓다.', '단일 사건의 경찰 조사만으로 웨어러블 카메라 보급 전 동의·사생활 보호 기준을 먼저 정비해야 한다는 사회적 결론을 ‘보여준다’고 단정한 부분은 과장된 함의다.']
+[eval] 실패 (attempt 2): evidence=[] judge=['사실은 원문 요약에 직접 근거한다.', '해석의 첫 문장은 대체로 근거가 있지만, 스마트 글래스가 촬영 사실을 드러내지 않는다는 일반화는 원문보다 다소 넓다.', '단일 사건의 경찰 조사만으로 웨어러블 카메라 보급 전 동의·사생활 보호 기준을 먼저 정비해야 한다는 사회적 결론을 ‘보여준다’고 단정한 부분은 과장된 함의다.']
+[eval] ⚠ 재생성 후에도 미통과 — degraded 발행(사람 검토 필요)
+[ingest] 모두의AI 신호 ok=True 헤드라인=6
+[generate] 대표='눈앞의 카메라보다 먼저 사라지는 사생활' 모델=openai/gpt-5.6-luna conf=0.94 eval=DEGRADED → data/beacon/2026-08-05.json
+[render] docs/v2/beacon.html (13311 bytes)
+[main df5271a0] beacon: 오늘의 경종 2026-08-05
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+To https://github.com/vaax-maker/ai-news-daily
+   8470e7e1..df5271a0  HEAD -> main
+==== done ====
+==== 2026-08-06 10:00:05 beacon run ====
+From https://github.com/vaax-maker/ai-news-daily
+ * branch              main       -> FETCH_HEAD
+   ec30de7e..2aa7c411  main       -> origin/main
+From https://github.com/vaax-maker/ai-news-daily
+ * branch              main       -> FETCH_HEAD
+Updating ec30de7e..2aa7c411
+Fast-forward
+ data/gov/announcements.json           |    70 +
+ data/latest_key_message.json          |     4 +-
+ data/usage.db                         |   Bin 733184 -> 737280 bytes
+ docs/ai/daily/2026-08-05_081904.html  |   469 +-
+ docs/ai/daily/2026-08-06_081810.html  |   529 +
+ docs/ai/index.html                    |     2 +-
+ docs/briefing.html                    |   251 +-
+ docs/briefing/20260805.html           |   298 +-
+ docs/briefing/20260806.html           |   690 ++
+ docs/briefing/index.html              |    11 +-
+ docs/gov/daily/2026-08-05_081904.html |  2064 ++--
+ docs/gov/daily/2026-08-06_081810.html | 20553 ++++++++++++++++++++++++++++++++
+ docs/gov/index.html                   |  2374 ++--
+ docs/index.html                       |    76 +-
+ docs/last_update.txt                  |     2 +-
+ docs/xr/daily/2026-08-05_081904.html  |   281 +-
+ docs/xr/daily/2026-08-06_081810.html  |   488 +
+ docs/xr/index.html                    |     2 +-
+ 18 files changed, 25774 insertions(+), 2390 deletions(-)
+ create mode 100644 docs/ai/daily/2026-08-06_081810.html
+ create mode 100644 docs/briefing/20260806.html
+ create mode 100644 docs/gov/daily/2026-08-06_081810.html
+ create mode 100644 docs/xr/daily/2026-08-06_081810.html
+[ingest] 모두의AI 신호 ok=True 헤드라인=6
+[eval] 통과 (attempt 1)
+[generate] 대표='AI가 연구의 반복 실험을 맡기 시작했다' 모델=openai/gpt-5.6-luna conf=0.86 eval=PASS → data/beacon/2026-08-06.json
+[render] docs/v2/beacon.html (15906 bytes)
+[main 78f2b44f] beacon: 오늘의 경종 2026-08-06
+ 1 file changed, 21 insertions(+), 21 deletions(-)
+To https://github.com/vaax-maker/ai-news-daily
+   2aa7c411..78f2b44f  HEAD -> main
+==== done ====
