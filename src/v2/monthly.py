@@ -23,7 +23,7 @@ def gather_month(month: str, docs_root: str, per_day: int = 2) -> list[dict]:
     """month='YYYY-MM'. 그달 일간 파일에서 상위 per_day 헤드라인씩 수집."""
     items = []
     for cat in ("ai", "xr"):
-        for path in sorted(glob.glob(os.path.join(docs_root, cat, "daily", f"{month}-*.html"))):
+        for path in sorted(glob.glob(os.path.join(docs_root, cat, "daily", f"{month}-*.html")), reverse=True):
             date = os.path.basename(path)[:10]
             with open(path, encoding="utf-8") as f:
                 soup = BeautifulSoup(f, "html.parser")
@@ -44,7 +44,8 @@ def gather_month(month: str, docs_root: str, per_day: int = 2) -> list[dict]:
         if it["title"] and it["title"] not in seen:
             seen.add(it["title"])
             out.append(it)
-    return out
+    # 노출순서: 가까운 날짜가 위로(최신순) — 합성 재료를 최신→과거로 정렬
+    return sorted(out, key=lambda x: x["date"], reverse=True)
 
 
 _SYS = (
