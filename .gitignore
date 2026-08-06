@@ -19,3 +19,6 @@ data/members/
 # Rollback/Backup artifacts
 backups/
 data/_snapshots/
+
+# OMC 세션 상태(로컬 전용, 커밋 금지)
+.omc/
