@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang='ko'>
+
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>News Dashboard</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YQY3DLR0P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-9YQY3DLR0P');
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/style.css?v=12">
+    
+</head>
+
+<body>
+    <header>
+        <div class="gnb">
+            <!-- Left: Logo -->
+            <a href="./index.html" class="logo-link">
+                <img src="./static/images/logo_new.png?v=4" alt="VAAX" class="header-logo">
+            </a>
+
+            <!-- Right: Slogan & Nav -->
+            <div class="header-right-section">
+                <div class="slogan-container">
+                    <span class="slogan-since">since 2016</span>
+                    <span class="header-slogan-text">
+                        VR-AR-AI-XR <span class="slogan-highlight">기술과 Biz.를 연결하는</span>
+                        성장나눔 <span class="slogan-highlight">커뮤니티</span>
+                    </span>
+                </div>
+                <nav class="nav-links">
+                    <a href="./index.html"
+                        class="active">Home</a>
+                    <a href="./ai/index.html"
+                        class="">AI/XR뉴스</a>
+                    <a href="./quickview/index.html"
+                        class="">퀵뷰</a>
+                    <a href="./gov/index.html"
+                        class="">정부과제</a>
+                    <a href="./board/index.html"
+                        class="">Small Talk</a>
+
+                </nav>
+            </div>
+        </div>
+        <!-- Announcement Message -->
+        <div class="header-announcement"
+            style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <span>이 site는 VAAX의 다양한 활동을 한 곳에 모아서 정보소통을 활성화할 목적으로 바이브코딩으로 제작 중입니다. 필요한 요청사항은 small talk에 남겨주세요</span>
+            <a href="./guide.html"
+                style="font-size: 0.85rem; color: inherit; text-decoration: underline;">[이용가이드]</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+<h1>오늘의 뉴스</h1>
+<p class="subtitle">
+    last update <strong style="color: var(--primary-color);">2026년 08월 06일 08시 22분</strong> (정기update 매일 오전8시/오후4시)
+    <a href="#" id="news-source-btn" class="news-source-link">뉴스소스</a>
+</p>
+
+<!-- News Source Popup Modal -->
+<div id="news-source-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>뉴스 소스 목록</h3>
+            <button class="modal-close" id="modal-close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="source-category">
+                <h4>AI 카테고리</h4>
+                <ul class="source-list">
+                    <li>AI타임스 (aitimes.com)</li>
+                    <li>TechCrunch AI</li>
+                    <li>MIT Technology Review AI</li>
+                    <li>AI타임스 (aitimes.kr)</li>
+                    <li>Two Minute Papers (YouTube)</li>
+                    <li>티타임즈TV (YouTube)</li>
+                    <li>가젯서울 (YouTube)</li>
+                    <li>조코딩 (YouTube)</li>
+                    <li>AI코리아커뮤니티 (YouTube)</li>
+                </ul>
+            </div>
+
+            <div class="source-category">
+                <h4>XR 카테고리</h4>
+                <ul class="source-list">
+                    <li>Road to VR</li>
+                    <li>UploadVR</li>
+                    <li>AR Insider</li>
+                    <li>Skarred Ghost</li>
+                    <li>ThrillSeeker (YouTube)</li>
+                    <li>SadlyItsBradley (YouTube)</li>
+                    <li>MRTV (YouTube)</li>
+                    <li>Google News: 가상휴먼, 버추얼휴먼, 가상아이돌</li>
+                    <li>Google News: virtual influencer, metahuman</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .news-source-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 0.85rem;
+        margin-left: 0.75rem;
+        padding: 0.25rem 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        background: var(--card-bg);
+        transition: all 0.2s;
+    }
+
+    .news-source-link:hover {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background: var(--card-bg, #fff);
+        border-radius: 12px;
+        max-width: 480px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        border: 1px solid var(--border-color);
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+        background: var(--background-color);
+    }
+
+    .modal-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-main);
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        padding: 0;
+        line-height: 1;
+        transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+        color: var(--primary-color);
+    }
+
+    .modal-body {
+        padding: 1.25rem 1.5rem 1.5rem;
+    }
+
+    .source-category {
+        margin-bottom: 1.5rem;
+    }
+
+    .source-category:last-child {
+        margin-bottom: 0;
+    }
+
+    .source-category h4 {
+        margin: 0 0 0.75rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+    .source-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.25rem 1rem;
+    }
+
+    .source-list li {
+        padding: 0.5rem 0;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+
+    @media (max-width: 480px) {
+        .source-list {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .new-badge {
+        display: inline-block;
+        background-color: #ef4444;
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 2px 5px;
+        border-radius: 3px;
+        margin-left: 4px;
+        vertical-align: middle;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btn = document.getElementById('news-source-btn');
+        const modal = document.getElementById('news-source-modal');
+        const closeBtn = document.getElementById('modal-close-btn');
+
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
+
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+<!-- Key Message Section (Replacing Word Cloud) -->
+<section class="card key-message-section">
+    <div class="key-message-content" style="font-size: 1rem; line-height: 1.8; color: var(--text-main);">
+        
+        <ul>
+<li><em>AI</em> 기술이 진화하면 인간의 직무는 어떻게 변화할까?</li>
+<li><em>메타</em>의 대규모 코드베이스 용 AI 에이전트가 산업에 미치는 영향은 무엇일까?</li>
+</ul>
+        
+    </div>
+</section>
+
+<style>
+    /* Styling for Key Message List */
+    .key-message-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        /* Single column layout for 2 items */
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .key-message-content li {
+        margin-bottom: 0px;
+        padding-left: 0;
+        position: relative;
+        /* Typography Update: Larger & Bold */
+        font-size: 1.15rem;
+        /* ~120% of base */
+        font-weight: 700;
+        line-height: 1.5;
+    }
+
+    .key-message-content li::before {
+        content: "•";
+        color: var(--primary-color);
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+    }
+
+    /* Highlight style for emphasized keywords */
+    .key-message-content em {
+        font-style: normal;
+        color: var(--primary-color);
+        font-weight: 800;
+    }
+</style>
+
+<div class="dashboard-grid">
+    <!-- AI Section -->
+    <div class="dashboard-section">
+        <h2>
+            AI 뉴스
+            <a href="ai/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            <li>
+                <span class="preview-date">aitimes.kr 2026-08-06 07:44</span>
+                <a href="https://www.aitimes.kr/news/articleView.html?idxno=41323" target="_blank" class="preview-title">구글 최고과학자로 승격된 데미스 허사비스와 새로운 딥마인드 총괄</a>
+                
+            </li>
+            <li>
+                <span class="preview-date">aitimes.com 2026-08-06 07:00</span>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=213551" target="_blank" class="preview-title">오픈AI 생존 예측 글에 대한 전개</a>
+                
+            </li>
+            <li>
+                <span class="preview-date">news.hada.io 2026-08-05 22:32</span>
+                <a href="https://news.hada.io/topic?id=32187" target="_blank" class="preview-title">구글 디프마인드, 데미스 하사비스 의장 임명 및 제프 딘 퇴사</a>
+                
+            </li>
+            <li>
+                <span class="preview-date">techcrunch.com 2026-08-05 21:21</span>
+                <a href="https://techcrunch.com/2026/08/05/meta-launches-muse-code-an-ai-agent-for-large-code-bases/" target="_blank" class="preview-title">메타, 대규모 코드베이스 용 AI 에이전트 출시</a>
+                
+            </li>
+            <li>
+                <span class="preview-date">aitimes.kr 2026-08-05 20:28</span>
+                <a href="https://www.aitimes.kr/news/articleView.html?idxno=41321" target="_blank" class="preview-title">텐센트, 전문가 혼합 AI 모델 'Hy3' 글로벌 공개</a>
+                
+            </li>
+        </ul>
+    </div>
+
+    <!-- XR Section -->
+    <div class="dashboard-section">
+        <h2>
+            XR 뉴스
+            <a href="xr/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            
+            <li>
+                <span class="preview-date">uploadvr.com 2026-08-05 23:16</span>
+                <a href="https://www.uploadvr.com/g-rebels-review-in-progress-impressive-vr-flight-model-is-clear-for-take-off/" target="_blank" class="preview-title">G-Rebels, 스팀에서 조작감 강화된 비행 시뮬레이션 게임 출시</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">virtual.reality.news 2026-08-05 17:45</span>
+                <a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxNeHhrNk11cTJfUHZFTF9vUFBOUVlQaHhBRVhaRmVvVlJVOFJqeFd0VDZlZlRiaXNma24xdFUyMV83SDBPTkRIdkhPazZGY20yanBLdFFKUmpPMlJYZDVDMWVQTnZDc3dZTE82aTdYQm5Wd3hJcmRfTEQtcGx5dW0yNjJYTW4yUGJfOXEtdlM2RVM5RURqZkE?oc=5" target="_blank" class="preview-title">애플 비전 프로 수술 연구: 샌디에이고 대학교 발견 요약</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">AppleInsider 2026-08-05 16:48</span>
+                <a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNzFpdXA0WGU3b05hWEwxcjhMSTdPZjhsUmtMTE0wQVllclg2SDc2TzgycXdLdnAwcUVDM0psb2EtWHB2Nkw4OUVNTktfV2pyckxnaXdBTXdxQXRNdEtRMFI4dVZHRUtHQnY3c1BSbV9qZFlaWHVoV1k3NUtGeEk5eUp0Z1BldTF4M2hxZGp6TFd0WkY3dHJkQWdORHVZZ0plYnRfam4wRHltZw?oc=5" target="_blank" class="preview-title">수술 전문가, 애플 비전 프로가 가성비가 좋은임을 확신함</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">MacRumors 2026-08-05 15:47</span>
+                <a href="https://news.google.com/rss/articles/CBMifEFVX3lxTFB2UUF3RUg5dEVVODJXY2lJbURoQ25kUlNXSS0wRi1teWlRcFpGNURfTmVpNjBCZk9vVmp4bWhxZVB2THdjN3c4QWpRbEltSFMwdjdDY3V6WVQwNWtwQ0l2UGV1WFhBci00UE1yVEpDOEw0cmJRaDhCXzFiUHE?oc=5" target="_blank" class="preview-title">애플 비전 프로, 수술 시간 약 20% 단축</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">PR Daily 2026-08-05 14:24</span>
+                <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxPcTFoWHB4eTFaRVctYWxRekhQSVZsZ2pMZ2xCN0EycG1MR1Z3a3otWS02OFZpTExPYzI2UUkwb015WHNCeFpwaWJFeTRFVTZ2OHI0ajE3NmQ0bjVXekppdDVYTG9Qamt2VERpQmVaSDR5elBLMzVPcGlHNlV2dm5LZi1wTVJjZFlNOC03N2YxaVM2WDlB?oc=5" target="_blank" class="preview-title">오픈AI, 인플루언서와의 럭셔리 여행 논란에</a>
+                
+            </li>
+            
+        </ul>
+    </div>
+
+    <!-- Gov Section -->
+    <div class="dashboard-section">
+        <h2>
+            정부과제
+            <a href="gov/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            
+            <li>
+                <span class="preview-date">2026-08-05 | 산업통상부</span>
+                <a href="https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000125140" target="_blank" class="preview-title">2026년 한일 IT기업교류회(오키나와 나하) 참가기업 모집 공고</a>
+                <span class="new-badge">NEW</span>
+            </li>
+            
+            <li>
+                <span class="preview-date">2026-08-05 | 충청북도</span>
+                <a href="https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000125109" target="_blank" class="preview-title">[충북] SAVE 충주 탄소중립 그린도시 기술 리빙랩 수요기업 모집 공고</a>
+                <span class="new-badge">NEW</span>
+            </li>
+            
+            <li>
+                <span class="preview-date">2026-08-05 | 충청북도</span>
+                <a href="https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000125106" target="_blank" class="preview-title">[충북] 괴산군 2026년 경쟁력강화산업 육성사업(R&D) 지원 모집공고</a>
+                <span class="new-badge">NEW</span>
+            </li>
+            
+            <li>
+                <span class="preview-date">2026-08-05 | 서울특별시</span>
+                <a href="https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000125099" target="_blank" class="preview-title">2026년 물산업 혁신기술 R&D 지원사업 추가 공고</a>
+                <span class="new-badge">NEW</span>
+            </li>
+            
+            <li>
+                <span class="preview-date">2026-08-05 | 산업통상부</span>
+                <a href="https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000125096" target="_blank" class="preview-title">2026년 2차 AI 응용제품 신속 상용화 지원사업 신규지원 대상과제 공고</a>
+                <span class="new-badge">NEW</span>
+            </li>
+            
+        </ul>
+    </div>
+
+    <!-- Quickview Section -->
+    <div class="dashboard-section">
+        <h2>
+            퀵뷰
+            <a href="quickview/index.html" class="section-more">더보기</a>
+        </h2>
+        <ul class="preview-list">
+            
+            <li>
+                <span class="preview-date">2026년 02월 27일</span>
+                <a href="quickview/2c2nc8o3.html" target="_blank" class="preview-title">[심층 분석] 애플의 차세대 AI 웨어러블 전략: 시각 지능(Visual Intelligence)의 물리적 확장</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026년 02월 22일</span>
+                <a href="quickview/88xby5b6.html" target="_blank" class="preview-title">IT 리포트: Gemini 3.1 Pro & 차세대 AI 기술 트렌드 분석</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026년 02월 13일</span>
+                <a href="quickview/1xtoke10.html" target="_blank" class="preview-title">[심층 리포트] 거대한 파고: AI 에이전트의 시대와 인지 노동의 종말</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026년 02월 12일</span>
+                <a href="quickview/7fd8j0zn.html" target="_blank" class="preview-title">안티그래비티 + 노트북 LM으로 만드는 서브 에이전트 리포트</a>
+                
+            </li>
+            
+            <li>
+                <span class="preview-date">2026년 02월 12일</span>
+                <a href="quickview/rlj71d4g.html" target="_blank" class="preview-title">[분석 리포트] 궤도 AI(Orbital AI)의 경제학: 왜 우주 데이터 센터는 '잔혹한' 비즈니스인가?</a>
+                
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+    </div>
+
+    <footer style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 VAAX rebuild Project by <a href="./admin.html"
+                class="admin-link">Fovea</a>. All rights reserved.</p>
+        <div id="page-visit-counter" style="margin-top: 5px; font-size: 0.8rem; color: var(--primary-color);">
+            <span id="visit-count">Visits: ...</span>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK & Visit Counter -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Reuse config from board.html
+        const firebaseConfig = {
+            apiKey: "AIzaSyANn76u2ZCJ5rq4IOpYaTzFy1JtKoPOM-c",
+            authDomain: "vaax-board.firebaseapp.com",
+            projectId: "vaax-board",
+            storageBucket: "vaax-board.firebasestorage.app",
+            messagingSenderId: "31682907508",
+            appId: "1:31682907508:web:cd3ee4231ec8b3fb75b021",
+            measurementId: "G-9YQY3DLR0P"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function trackVisit() {
+            try {
+                // Determine page ID from URL (e.g., "index.html", "ai/index.html")
+                let path = window.location.pathname;
+
+                // Remove leading slash and repo name if hosted on GitHub Pages
+                // e.g. "/ai-news-daily/ai/index.html" -> "ai/index.html"
+                if (path.startsWith('/ai-news-daily/')) {
+                    path = path.replace('/ai-news-daily/', '');
+                }
+                if (path.startsWith('/')) {
+                    path = path.substring(1);
+                }
+                if (!path || path === "") {
+                    path = "index.html";  // root
+                }
+
+                // Firestore document ID cannot contain slashes. Replace / with _
+                const docId = path.replace(/\//g, '_').replace(/\./g, '_');
+
+                const docRef = doc(db, "page_visits", docId);
+
+                // 1. Get current count (optimistic UI or wait?)
+                // Let's just update and then get, or get then update?
+                // Incrementing blindly is better for performance, then listening or getting.
+
+                // Use setDoc with merge to ensure document exists
+                await setDoc(docRef, {
+                    path: path,
+                    lastVisited: serverTimestamp()
+                }, { merge: true });
+
+                // Increment count
+                await updateDoc(docRef, {
+                    count: increment(1)
+                });
+
+                // Get updated count to display
+                const snap = await getDoc(docRef);
+                if (snap.exists()) {
+                    const data = snap.data();
+                    const countSpan = document.getElementById('visit-count');
+                    if (countSpan && data.count) {
+                        countSpan.textContent = `Total Visits: ${data.count.toLocaleString()}`;
+                    }
+                }
+
+            } catch (e) {
+                console.error("Visit tracking failed:", e);
+            }
+        }
+
+        // Execute tracking
+        trackVisit();
+    </script>
+</body>
+
+</html>

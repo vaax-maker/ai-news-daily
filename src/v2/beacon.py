@@ -257,7 +257,7 @@ def render_html(cands: list[dict], gen: dict, date: str) -> str:
     <span class="monthly__arrow">월간 총집 열기 <span class="sig">→</span></span>
   </a>
   <footer class="foot">
-    <span>VAAX · 오늘, 세상이</span>
+    <span>VAAX · 오늘, 세상이 <span class="sig">·</span> <a href="archive.html" style="color:var(--signal);text-decoration:none">전체 아카이브·검색</a> <span class="sig">·</span> <a href="../old.html" style="color:var(--muted);text-decoration:none">old</a></span>
     <span>평일 오전 10시 <span class="sig">·</span> 웹 본진 <span class="sig">·</span> 텔레그램 티저</span>
     <span class="sig">xbot LLM 생성({_esc(model)}) · conf {_esc(conf)}</span>
   </footer>
