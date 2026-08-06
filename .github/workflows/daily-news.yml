@@ -125,6 +125,11 @@ jobs:
           fi
           echo "✅ 출력 검증 통과"
 
+          # 4. 대문 전환: 루트 index.html → v2 beacon 리다이렉트 (레거시 홈 은퇴).
+          #    index.html>1KB 검증을 통과한 뒤 덮어쓰므로 검증 함정 없음. 수집·하위페이지는 유지.
+          python3 -c "open('docs/index.html','w',encoding='utf-8').write('<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta http-equiv=\"refresh\" content=\"0; url=v2/beacon.html\"><link rel=\"canonical\" href=\"https://vaax-maker.github.io/ai-news-daily/v2/beacon.html\"><title>오늘, 세상이 · VAAX</title></head><body style=\"margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#121417;color:#F1EFEA;font-family:sans-serif\"><a href=\"v2/beacon.html\" style=\"color:#D8452F;font-size:18px;text-decoration:none\">오늘, 세상이 — 페이지 이동 →</a></body></html>')"
+          echo "✅ 대문을 v2 beacon으로 전환"
+
       - name: Commit and Push
         run: |
           git config --global user.name 'github-actions[bot]'
