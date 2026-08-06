@@ -72,11 +72,11 @@
     display:flex;flex-direction:column;transition:box-shadow .25s ease,transform .25s ease}
   .card:hover{box-shadow:0 10px 30px -12px rgba(0,0,0,.18);transform:translateY(-2px)}
   /* 카드뉴스 썸네일 zone */
-  .thumb{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,var(--hero),var(--hero-2));
-    display:flex;align-items:flex-end;padding:14px;overflow:hidden}
-  .thumb__ghost{position:absolute;top:-14px;right:6px;font-family:var(--font-display);font-weight:800;
-    font-size:110px;line-height:1;color:rgba(255,255,255,.06);letter-spacing:-.04em}
-  .thumb__kw{position:relative;font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--hero-ink);line-height:1.25;text-wrap:balance}
+  .thumb{position:relative;height:60px;background:linear-gradient(135deg,var(--hero),var(--hero-2));
+    display:flex;align-items:center;padding:0 16px;overflow:hidden}
+  .thumb__ghost{position:absolute;top:50%;right:8px;transform:translateY(-50%);font-family:var(--font-display);font-weight:800;
+    font-size:42px;line-height:1;color:rgba(255,255,255,.07);letter-spacing:-.04em}
+  .thumb__kw{position:relative;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--hero-ink);line-height:1.2;text-wrap:balance}
   .thumb__kw .hl{color:var(--signal)}
   .card__body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:11px;flex:1}
   .card__tags{display:flex;gap:7px;flex-wrap:wrap}
@@ -134,6 +134,9 @@
 .mhero__k{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--signal);margin-bottom:18px}
 .mhero__h{font-family:var(--font-display);font-weight:800;font-size:clamp(28px,5vw,50px);line-height:1.1;letter-spacing:-.02em;text-wrap:balance;margin:0}
 .mhero__n{color:var(--hero-muted);font-size:16px;line-height:1.75;margin:22px 0 0;max-width:70ch}
+.mhero__pts{list-style:none;margin:22px 0 0;padding:0;max-width:74ch}
+.mhero__pts li{position:relative;padding-left:20px;margin:11px 0;color:var(--hero-ink);font-size:16px;line-height:1.6}
+.mhero__pts li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:var(--signal)}
 .mshifts{list-style:none;padding:clamp(30px,5vw,52px) 0 0;margin:0}
 .mshift{display:grid;grid-template-columns:44px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
 .mshift:first-child{border-top:0}
@@ -153,13 +156,13 @@
   </header>
   <section class="mhero">
     <div class="mhero__k">이번 달, 세상이 이렇게 바뀌었다</div>
-    <h1 class="mhero__h">AI는 가속하고, 현실은 경계를 묻는다</h1>
-    <p class="mhero__n">이달 AI 경쟁은 더 싼 모델을 넘어 최첨단 성능과 대규모 연산 인프라를 누가 확보하느냐로 옮겨갔다. 중국 기업의 모델 경쟁, 문샷의 GPU 클러스터, 아크릴의 GPU 최적화 소프트웨어가 그 속도를 보여주는 가운데, 구글은 재귀적 자기 개선을 투자 명분으로 내세웠고 딥마인드는 리더십을 바꿨다. 동시에 코히어의 한국 법인 설립과 한국AI영화감독협회 출범은 AI가 각국의 산업·창작 생태계 안으로 들어오는 모습을 보였다. XR에서는 스마트 글래스와 비전 프로의 활용이 넓어졌지만, 사생활과 감시, 생성물 투명성 같은 경계선도 함께 선명해졌다.</p>
+    <h1 class="mhero__h">AI는 권력·비용·감각의 경계를 다시 그렸다</h1>
+    <ul class="mhero__pts"><li>AI 주도권을 둘러싼 리더십과 컴퓨팅 경쟁의 재편</li><li>중국의 성능 추격과 소버린 AI의 전면화</li><li>생성형 AI의 제도권 진입과 투명성 요구</li><li>XR의 일상화와 접근성·프라이버시의 충돌</li></ul>
   </section>
   <section class="sec">
     <div class="sec__head"><span class="sec__eyebrow">Key shifts</span><h2>이 달의 결정적 변화</h2><span class="more">2026년 8월 · 24건 헤드라인 응축</span></div>
-    <ul class="mshifts"><li class="mshift"><span class="mshift__i">01</span><div><div class="mshift__t">AI 경쟁의 기준이 가격에서 성능과 연산 인프라로 이동했다.</div><div class="mshift__w">중국 AI 기업들이 짧은 기간에 글로벌 최상위 수준의 모델을 내놓았고, 문샷은 2만 개 엔비디아 GPU 클러스터를 확보했다.</div></div></li><li class="mshift"><span class="mshift__i">02</span><div><div class="mshift__t">AI 투자는 모델 자체보다 자기개선과 효율화 기술을 향하고 있다.</div><div class="mshift__w">구글 딥마인드는 재귀적 자기 개선을 새로운 목표로 제시했고, 아크릴은 GPU 활용률 90%를 목표로 GPU베이스를 내세웠다.</div></div></li><li class="mshift"><span class="mshift__i">03</span><div><div class="mshift__t">AI 산업의 주도권 경쟁이 국가별 생태계 구축으로 번지고 있다.</div><div class="mshift__w">코히어가 한국 법인을 설립해 소버린 AI 시장에 진출했고, 한국AI영화감독협회도 생성형 AI 영화 생태계 조성을 시작했다.</div></div></li><li class="mshift"><span class="mshift__i">04</span><div><div class="mshift__t">AI 기업의 성장 서사와 지속 가능성에 대한 검증이 동시에 커지고 있다.</div><div class="mshift__w">오픈AI의 생존 예측이 다시 검토됐고, 대규모 헤지펀드의 부채와 주가 폭락 사례가 AI 투자 위험과 함께 다뤄졌다.</div></div></li><li class="mshift"><span class="mshift__i">05</span><div><div class="mshift__t">XR 기기는 편의보다 신뢰와 접근성을 먼저 증명해야 하는 단계에 들어섰다.</div><div class="mshift__w">AI 스마트 글라스는 저시력자 지원 가능성을 제시했지만, 스마트 안경의 카메라와 감시 가능성은 사생활 우려를 키웠다.</div></div></li><li class="mshift"><span class="mshift__i">06</span><div><div class="mshift__t">XR 경험이 의료·공연·게임으로 넓어지는 동시에 방어 기술도 등장했다.</div><div class="mshift__w">비전 프로 수술 훈련 연구, 버추얼 아티스트의 공연 데뷔, VR 게임 출판권 거래와 AI 감시를 방어하는 디지털 카모플라주가 함께 나타났다.</div></div></li></ul>
-    <div class="mwatch"><div class="mwatch__k">다음 달 관전 포인트</div><div class="mwatch__row"><span class="mwatch__x">구글의 리더십 개편 뒤 딥마인드와 알파벳의 전략 방향</span><span class="mwatch__x">중국 AI 모델의 성능 경쟁과 GPU·데이터 전송 효율화 기술</span><span class="mwatch__x">스마트 글래스의 개인정보 보호 기준과 AI 생성 콘텐츠 투명성 규정의 적용</span></div></div>
+    <ul class="mshifts"><li class="mshift"><span class="mshift__i">01</span><div><div class="mshift__t">AI 경쟁의 중심이 모델 개발에서 리더십과 전략 통제로 확장</div><div class="mshift__w">구글이 데미스 허사비스를 최고과학자로 승격하고 딥마인드 총괄을 교체</div></div></li><li class="mshift"><span class="mshift__i">02</span><div><div class="mshift__t">AI 인프라가 성능 경쟁의 핵심 전장으로 부상</div><div class="mshift__w">문샷의 2만 개 엔비디아 GPU 클러스터 확보와 아크릴의 GPU 활용률 90% 목표</div></div></li><li class="mshift"><span class="mshift__i">03</span><div><div class="mshift__t">중국 AI가 가격 경쟁을 넘어 최첨단 성능 경쟁으로 이동</div><div class="mshift__w">중국 기업들이 두 달 사이 글로벌 최상위 수준의 모델을 연이어 공개</div></div></li><li class="mshift"><span class="mshift__i">04</span><div><div class="mshift__t">소버린 AI가 글로벌 기업의 현지 시장 진입 전략으로 부상</div><div class="mshift__w">코히어가 한국 법인을 설립하고 국내 정부 주도 사업과의 연계를 추진</div></div></li><li class="mshift"><span class="mshift__i">05</span><div><div class="mshift__t">생성형 AI의 확산과 함께 표시·고지 의무가 제도화</div><div class="mshift__w">EU가 AI 상호작용 고지와 생성 이미지·영상·음성 표시 규정을 시행</div></div></li><li class="mshift"><span class="mshift__i">06</span><div><div class="mshift__t">스마트 글래스가 보조기기를 넘어 감각과 기억을 잇는 플랫폼으로 확장</div><div class="mshift__w">저시력자 지원 기술이 인식·기억·접근성을 연결하고 메타 레이반 제품이 주목받음</div></div></li><li class="mshift"><span class="mshift__i">07</span><div><div class="mshift__t">XR의 확산이 의료·공연·게임으로 넓어지는 동시에 감시와 사생활 논쟁을 심화</div><div class="mshift__w">비전 프로 수술 훈련, 버추얼 아티스트 공연, 스마트 글래스 탐지 앱과 디지털 카모플라주가 등장</div></div></li></ul>
+    <div class="mwatch"><div class="mwatch__k">다음 달 관전 포인트</div><div class="mwatch__row"><span class="mwatch__x">9월 공개 예정인 SPECS의 구체적 사양</span><span class="mwatch__x">리부팅 중인 AltSpace VR의 플랫폼 방향</span><span class="mwatch__x">스마트 글래스의 개인정보 보호와 AI 생성물 투명성 기준</span></div></div>
   </section>
   <footer class="foot">
     <span>VAAX · 오늘, 세상이 · 월간 총집</span>
