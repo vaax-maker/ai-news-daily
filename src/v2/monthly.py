@@ -65,7 +65,7 @@ def generate_monthly(items: list[dict], month: str, models: list[str] | None = N
         f"[{month} 헤드라인]\n{lines}\n\n"
         "작업: 이 달의 변화를 응축하라. 반드시 JSON만:\n"
         '{"headline":"<이 달을 한 문장으로, 40자 이내, 감각적>",'
-        '"narrative":"<한 문단(3~4문장), 이 달의 큰 흐름>",'
+        '"points":["<이 달의 큰 흐름을 개조식으로 한 줄씩, 명사형 종결>", ... 3~4개],'
         '"shifts":[{"impact":"<핵심 변화 함의 한 줄>","why":"<근거 한 줄>"}, ... 5~7개],'
         '"next_watch":["<다음 달 관전 포인트>", ...3개]}'
     )
@@ -89,6 +89,9 @@ _EXTRA_CSS = """
 .mhero__k{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--signal);margin-bottom:18px}
 .mhero__h{font-family:var(--font-display);font-weight:800;font-size:clamp(28px,5vw,50px);line-height:1.1;letter-spacing:-.02em;text-wrap:balance;margin:0}
 .mhero__n{color:var(--hero-muted);font-size:16px;line-height:1.75;margin:22px 0 0;max-width:70ch}
+.mhero__pts{list-style:none;margin:22px 0 0;padding:0;max-width:74ch}
+.mhero__pts li{position:relative;padding-left:20px;margin:11px 0;color:var(--hero-ink);font-size:16px;line-height:1.6}
+.mhero__pts li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:var(--signal)}
 .mshifts{list-style:none;padding:clamp(30px,5vw,52px) 0 0;margin:0}
 .mshift{display:grid;grid-template-columns:44px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
 .mshift:first-child{border-top:0}
@@ -124,7 +127,7 @@ def render_monthly(data: dict, month: str, count: int) -> str:
   <section class="mhero">
     <div class="mhero__k">이번 달, 세상이 이렇게 바뀌었다</div>
     <h1 class="mhero__h">{_esc(data.get("headline",""))}</h1>
-    <p class="mhero__n">{_esc(data.get("narrative",""))}</p>
+    <ul class="mhero__pts">{"".join(f"<li>{_esc(p)}</li>" for p in (data.get("points") or ([data["narrative"]] if data.get("narrative") else [])))}</ul>
   </section>
   <section class="sec">
     <div class="sec__head"><span class="sec__eyebrow">Key shifts</span><h2>이 달의 결정적 변화</h2><span class="more">{_esc(mlabel)} · {count}건 헤드라인 응축</span></div>

@@ -71,11 +71,11 @@
     display:flex;flex-direction:column;transition:box-shadow .25s ease,transform .25s ease}
   .card:hover{box-shadow:0 10px 30px -12px rgba(0,0,0,.18);transform:translateY(-2px)}
   /* 카드뉴스 썸네일 zone */
-  .thumb{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,var(--hero),var(--hero-2));
-    display:flex;align-items:flex-end;padding:14px;overflow:hidden}
-  .thumb__ghost{position:absolute;top:-14px;right:6px;font-family:var(--font-display);font-weight:800;
-    font-size:110px;line-height:1;color:rgba(255,255,255,.06);letter-spacing:-.04em}
-  .thumb__kw{position:relative;font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--hero-ink);line-height:1.25;text-wrap:balance}
+  .thumb{position:relative;height:60px;background:linear-gradient(135deg,var(--hero),var(--hero-2));
+    display:flex;align-items:center;padding:0 16px;overflow:hidden}
+  .thumb__ghost{position:absolute;top:50%;right:8px;transform:translateY(-50%);font-family:var(--font-display);font-weight:800;
+    font-size:42px;line-height:1;color:rgba(255,255,255,.07);letter-spacing:-.04em}
+  .thumb__kw{position:relative;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--hero-ink);line-height:1.2;text-wrap:balance}
   .thumb__kw .hl{color:var(--signal)}
   .card__body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:11px;flex:1}
   .card__tags{display:flex;gap:7px;flex-wrap:wrap}
