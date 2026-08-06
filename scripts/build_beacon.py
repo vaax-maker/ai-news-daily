@@ -85,6 +85,12 @@ def main():
         with open(OUT_HTML, "w", encoding="utf-8") as f:
             f.write(html)
         print(f"[render] {os.path.relpath(OUT_HTML, ROOT)} ({len(html)} bytes)")
+        # vaax-notifier가 읽어갈 티저 메시지(≤400자). 발송은 notifier(백엔드)가 담당.
+        msg = beacon.build_message(p["gen"], p.get("date", args.date))
+        msg_path = os.path.join(os.path.dirname(OUT_HTML), "beacon_message.txt")
+        with open(msg_path, "w", encoding="utf-8") as f:
+            f.write(msg)
+        print(f"[message] {os.path.relpath(msg_path, ROOT)} ({len(msg)}자)")
 
 
 if __name__ == "__main__":

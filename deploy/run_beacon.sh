@@ -33,7 +33,7 @@ mkdir -p "$REPO/data/beacon"
   fi
 
   # 4) 산출물만 커밋·푸시 (data/ 는 gitignore). worktree HEAD=main.
-  git add docs/v2/beacon.html
+  git add docs/v2/beacon.html docs/v2/beacon_message.txt
   if git diff --cached --quiet; then
     echo "변경 없음 → 커밋 스킵"
   else

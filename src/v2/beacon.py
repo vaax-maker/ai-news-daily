@@ -20,6 +20,9 @@ from . import hermes
 # 주력 = OpenRouter GPT-5.6 Luna (사용자 확정), 폴백 순.
 MODELS = ["openai/gpt-5.6-luna", "anthropic/claude-sonnet-4-6", "google/gemini-3.1-flash-lite"]
 
+# 공개 발행 URL(카톡/텔레그램 티저 링크). VAAX 단톡방 발송은 vaax-notifier가 담당.
+BEACON_URL = "https://vaax-maker.github.io/ai-news-daily/v2/beacon.html"
+
 SYSTEM = (
     "너는 VAAX의 'AI·XR 경종 에디터'다. 하루 한 건, 세상의 변화를 독자가 "
     "'정신 차리게' 만드는 대표 메시지를 만든다.\n"
@@ -163,6 +166,31 @@ def _css() -> str:
     path = os.path.join(os.path.dirname(__file__), "..", "..", "templates", "v2", "beacon.css")
     with open(os.path.abspath(path), encoding="utf-8") as f:
         return f.read()
+
+
+_SENT_SPLIT = re.compile(r'(?<=[.!?다요”\'])\s+')
+
+
+def build_message(gen: dict, date: str, url: str = BEACON_URL, limit: int = 400) -> str:
+    """카톡/텔레그램 티저(≤400자). 경종 전문(함의·사실·해석)을 문장별 줄바꿈, 월간 링크 제외.
+    발송은 vaax-notifier(백엔드)가 담당 — 여기서는 텍스트만 생성한다."""
+    head = (gen.get("impact_headline") or "").strip()
+    fact = (gen.get("fact") or "").strip()
+    interp = (gen.get("interpretation") or "").strip()
+    interp_lines = [s.strip() for s in _SENT_SPLIT.split(interp) if s.strip()]
+    notice = "※ AI가 자동 취합·요약·사실검증한 콘텐츠입니다. 정확한 내용은 원문을 확인하세요."
+
+    def compose(ilines: list[str]) -> str:
+        body = "\n".join([head, "", fact, *ilines]).strip()
+        return f"[오늘, 세상이] {date}\n\n{body}\n\n▸ 전문 {url}\n{notice}"
+
+    msg = compose(interp_lines)
+    while len(msg) > limit and interp_lines:      # 초과 시 해석 문장을 뒤에서부터 제거
+        interp_lines = interp_lines[:-1]
+        msg = compose(interp_lines)
+    if len(msg) > limit:                          # 그래도 초과면 함의+링크+고지로 축약
+        msg = f"[오늘, 세상이] {date}\n\n{head}\n\n▸ 전문 {url}\n{notice}"
+    return msg
 
 
 def render_html(cands: list[dict], gen: dict, date: str) -> str:
