@@ -226,13 +226,6 @@
         const actions = document.createElement('div');
         actions.className = 'title-actions';
 
-        // Discussion button
-        const discussLink = document.createElement('a');
-        discussLink.href = `../board/index.html?mode=discuss&title=${encodeURIComponent(article.title)}&link=${encodeURIComponent(article.link)}&source=${encodeURIComponent(article.source || '출처')}`;
-        discussLink.className = 'discuss-btn-sm';
-        discussLink.textContent = '토론';
-        actions.appendChild(discussLink);
-
         // Share button
         const shareBtn = document.createElement('button');
         shareBtn.className = 'discuss-btn-sm';

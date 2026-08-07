@@ -21,8 +21,6 @@
                         NEW</span>{% endif %}
                 </h2>
                 <div class="title-actions">
-                    <a href="../board/index.html?mode=discuss&title={{ article.title|urlencode }}&link={{ article.link|urlencode }}&source={{ article.source_name|urlencode }}"
-                        class="discuss-btn-sm">토론</a>
                     <button onclick="navigator.clipboard.writeText('{{ article.link }}')"
                         class="discuss-btn-sm">공유</button>
                 </div>

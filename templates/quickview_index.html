@@ -405,8 +405,6 @@
                             <a href="{{ page.id }}.html" class="title-text">{{ page.title }}</a>
                         </div>
                         <div class="action-row">
-                            <a href="../board/index.html?mode=discuss&title={{ page.title | urlencode }}&link=https://vaax-maker.github.io/ai-news-daily/quickview/{{ page.id }}.html&source=퀵뷰"
-                                class="action-btn">💬 토론</a>
                             <button type="button" class="action-btn"
                                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/{{ page.id }}.html'); alert('URL이 복사되었습니다!');">🔗
                                 공유</button>
@@ -438,8 +436,6 @@
             </a>
         </h3>
         <div class="action-row" style="margin-top: 1rem;">
-            <a href="../board/index.html?mode=discuss&title={{ page.title | urlencode }}&link=https://vaax-maker.github.io/ai-news-daily/quickview/{{ page.id }}.html&source=퀵뷰"
-                class="action-btn" style="flex:1; text-align:center;">💬 토론</a>
             <button type="button" class="action-btn" style="flex:1;"
                 onclick="navigator.clipboard.writeText(window.location.origin + '/quickview/{{ page.id }}.html'); alert('URL이 복사되었습니다!');">🔗
                 공유</button>

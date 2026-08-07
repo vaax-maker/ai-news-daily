@@ -817,16 +817,8 @@ def main():
         except Exception as e:
             print(f"[WordCloud] Failed: {e}")
 
-    # 3.8 Generate Board Page
-    print("[Board] Generating board page...")
-    try:
-        os.makedirs("docs/board", exist_ok=True)
-        board_html = render_board_page()
-        with open("docs/board/index.html", "w", encoding="utf-8") as f:
-            f.write(board_html)
-        print("[Board] Generated docs/board/index.html")
-    except Exception as e:
-        print(f"[Board] Failed: {e}")
+    # 3.8 Board Page (Small Talk) — 은퇴: 더 이상 렌더/발행하지 않음
+    #     (사이트에서 제거됨. render_board_page는 잔존하나 미호출.)
 
     # === FORCIBLY SYNC GOV DATA TO ENSURE DASHBOARD HAS LATEST ITEMS ===
     try:
