@@ -235,8 +235,6 @@
     <div class="quickview-actions">
         <a href="index.html" class="back-link">← 퀵뷰 목록으로</a>
         <div style="flex: 1;"></div>
-        <a href="../board/index.html?mode=discuss&title={{ title | urlencode }}&link={{ page_url | urlencode }}&source=퀵뷰"
-            class="discuss-btn-sm">토론</a>
         <button type="button" class="discuss-btn-sm"
             onclick="navigator.clipboard.writeText('{{ page_url }}'); alert('URL이 복사되었습니다!');">공유</button>
     </div>

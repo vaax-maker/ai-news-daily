@@ -410,8 +410,6 @@
                             {% if item.is_new %}<span class="new-badge">NEW</span>{% endif %}
                         </div>
                         <div class="title-actions">
-                            <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
-                                class="discuss-btn-sm">토론</a>
                             <button onclick="navigator.clipboard.writeText('{{ item.link }}')"
                                 class="discuss-btn-sm">공유</button>
                         </div>
@@ -452,8 +450,6 @@
                 {% if item.is_new %}<span class="new-badge">NEW</span>{% endif %}
             </div>
             <div class="title-actions">
-                <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
-                    class="discuss-btn-sm">토론</a>
                 <button onclick="navigator.clipboard.writeText('{{ item.link }}')" class="discuss-btn-sm">공유</button>
             </div>
         </div>

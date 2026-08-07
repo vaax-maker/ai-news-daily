@@ -29,8 +29,6 @@
                             <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
                         </div>
                         <div class="title-actions">
-                            <a href="../board/index.html?mode=discuss&title={{ item.title|urlencode }}&link={{ item.link|urlencode }}&source={{ item.source_name|urlencode }}"
-                                class="discuss-btn-sm">토론</a>
                             <button onclick="navigator.clipboard.writeText('{{ item.link }}')"
                                 class="discuss-btn-sm">공유</button>
                         </div>
