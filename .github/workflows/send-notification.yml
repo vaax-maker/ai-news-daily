@@ -10,7 +10,7 @@ on:
 jobs:
   send-notification:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -33,19 +33,7 @@ jobs:
         run: |
           python scripts/process_scheduled.py
 
-      - name: Update Quickview & Dashboard
-        env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}  # Needed for dashboard generation context if used
-        run: |
-          python scripts/update_quickview.py
-
-      - name: Commit and Push
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          
-          git pull --rebase --autostash origin main
-          git add docs/quickview docs/index.html
-          git commit -m "Update Quickview & Dashboard [skip ci]" || echo "No changes to commit"
-          git push origin HEAD:main
+      # (은퇴) 옛 vaax 홈 폐기 — quickview/대시보드 재생성·커밋 스텝 제거(2026-08).
+      #   대문 index.html은 v2 beacon 리다이렉트(정적)로 고정되며, 매 30분 재생성이
+      #   그것을 옛 대시보드로 덮던 문제를 원천 제거. 이 워크플로는 이제 텔레그램 알림
+      #   (process_scheduled)만 수행하고 git 커밋을 하지 않는다.
