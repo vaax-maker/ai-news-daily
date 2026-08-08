@@ -1,0 +1,54 @@
+name: Beacon Telegram Notify
+
+# 오늘, 세상이 beacon 발행 → teaser(beacon_message.txt)를 텔레그램으로 발송.
+# 맥미니 run_beacon.sh 가 docs/v2/beacon_message.txt 를 main 에 push하면 이 워크플로가
+# 감지해 CI에서 발송한다(텔레그램 secret은 GitHub에만 있으므로 맥미니엔 비밀 불필요).
+# 발송기는 기존 briefing과 동일 계약(Telegram Bot API sendMessage, plain text,
+# disable_web_page_preview=true). run_beacon.sh는 내용 변경 시에만 커밋→push하므로
+# path 필터가 자연 디듑(동일 내용 재실행은 push 없음 → 미발송).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/v2/beacon_message.txt"
+  workflow_dispatch: {}   # 수동 재발송(오늘 것 backfill 등)
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Send beacon teaser to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python3 - <<'PY'
+          import os, sys, json, urllib.request, urllib.parse
+          token = os.environ.get("TELEGRAM_BOT_TOKEN")
+          chat = os.environ.get("TELEGRAM_CHAT_ID")
+          if not token or not chat:
+              print("::error::TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID secret 미설정"); sys.exit(1)
+          with open("docs/v2/beacon_message.txt", encoding="utf-8") as f:
+              text = f.read().strip()
+          if not text:
+              print("::error::beacon_message.txt 비어있음"); sys.exit(1)
+          data = urllib.parse.urlencode({
+              "chat_id": chat,
+              "text": text,
+              "disable_web_page_preview": "true",
+          }).encode()
+          req = urllib.request.Request(
+              f"https://api.telegram.org/bot{token}/sendMessage", data=data)
+          with urllib.request.urlopen(req, timeout=20) as r:
+              body = r.read().decode()
+          ok = json.loads(body).get("ok")
+          print("telegram sendMessage ok=", ok)
+          sys.exit(0 if ok else 1)
+          PY
