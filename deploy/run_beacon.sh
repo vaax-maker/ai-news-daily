@@ -1,5 +1,5 @@
 #!/bin/bash
-# 오늘, 세상이 — beacon 로컬 스케줄 러너 (맥미니, 평일 10:00).
+# 오늘, 세상이 — beacon 로컬 스케줄 러너 (맥미니, 매일 10:00).
 # xbot LLM(docker exec) 필요 → 로컬 전용. main 추적 체크아웃에서 생성+렌더 후
 # docs/v2/beacon.html 을 main 에 커밋·푸시(→ GitHub Pages 공개).
 set -uo pipefail
