@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 오늘, 세상이 beacon — 평일(월~금) 10:00 KST 로컬 발행 잡.
+<!-- 오늘, 세상이 beacon — 매일 10:00 KST 로컬 발행 잡.
      설치:  cp deploy/com.vaax.beacon.plist ~/Library/LaunchAgents/
             launchctl load ~/Library/LaunchAgents/com.vaax.beacon.plist
      해제:  launchctl unload ~/Library/LaunchAgents/com.vaax.beacon.plist
@@ -14,14 +14,12 @@
     <string>/bin/bash</string>
     <string>/Users/woojanghoon/ai-news-daily-beacon/deploy/run_beacon.sh</string>
   </array>
+  <!-- 매일 10:00 KST (Weekday 미지정 → 매일) -->
   <key>StartCalendarInterval</key>
-  <array>
-    <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>10</integer><key>Minute</key><integer>0</integer></dict>
-  </array>
+  <dict>
+    <key>Hour</key><integer>10</integer>
+    <key>Minute</key><integer>0</integer>
+  </dict>
   <key>StandardOutPath</key>
   <string>/Users/woojanghoon/ai-news-daily-beacon/data/beacon/launchd.out</string>
   <key>StandardErrorPath</key>
