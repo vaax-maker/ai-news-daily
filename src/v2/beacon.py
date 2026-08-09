@@ -177,11 +177,16 @@ def build_message(gen: dict, date: str, url: str = BEACON_URL, limit: int = 400)
     head = (gen.get("impact_headline") or "").strip()
     fact = (gen.get("fact") or "").strip()
     interp = (gen.get("interpretation") or "").strip()
+    fact_lines = [s.strip() for s in _SENT_SPLIT.split(fact) if s.strip()]
     interp_lines = [s.strip() for s in _SENT_SPLIT.split(interp) if s.strip()]
     notice = "※ AI가 자동 취합·요약·사실검증한 콘텐츠입니다. 정확한 내용은 원문을 확인하세요."
 
     def compose(ilines: list[str]) -> str:
-        body = "\n".join([head, "", fact, *ilines]).strip()
+        # 제목줄은 따옴표(""), 사실·해석은 문장마다 줄바꿈(문장 간 줄넘김 필수 룰).
+        parts = [f'"{head}"' if head else "", ""] + fact_lines
+        if ilines:
+            parts += [""] + ilines
+        body = "\n".join(parts).strip()
         return f"[오늘, 세상이] {date}\n\n{body}\n\n▸ 전문 {url}\n{notice}"
 
     msg = compose(interp_lines)
@@ -189,7 +194,7 @@ def build_message(gen: dict, date: str, url: str = BEACON_URL, limit: int = 400)
         interp_lines = interp_lines[:-1]
         msg = compose(interp_lines)
     if len(msg) > limit:                          # 그래도 초과면 함의+링크+고지로 축약
-        msg = f"[오늘, 세상이] {date}\n\n{head}\n\n▸ 전문 {url}\n{notice}"
+        msg = f'[오늘, 세상이] {date}\n\n"{head}"\n\n▸ 전문 {url}\n{notice}'
     return msg
 
 
@@ -220,9 +225,19 @@ def render_html(cands: list[dict], gen: dict, date: str) -> str:
     month = date.split(".")[1].lstrip("0") if "." in date else ""
     model = gen.get("_model", "xbot")
     conf = gen.get("confidence", "")
-    return f'''<style>
+    return f'''<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>오늘, 세상이 · VAAX — {_esc(date)}</title>
+<style>
+html,body{{margin:0;padding:0}}
 {_css()}
 </style>
+</head>
+<body>
 <div class="wake"><div class="wrap">
   <header class="mast">
     <div class="mast__brand">오늘, 세상이<span class="sub">VAAX</span></div>
@@ -261,4 +276,6 @@ def render_html(cands: list[dict], gen: dict, date: str) -> str:
     <span>매일 오전 10시 <span class="sig">·</span> 웹 본진 <span class="sig">·</span> 텔레그램 티저</span>
     <span class="sig">xbot LLM 생성({_esc(model)}) · conf {_esc(conf)}</span>
   </footer>
-</div></div>'''
+</div></div>
+</body>
+</html>'''
