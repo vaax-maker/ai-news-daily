@@ -923,46 +923,12 @@ def main():
         import traceback
         traceback.print_exc()
 
-    # 5.5 Generate Daily Briefing Page with Key Message (CONDITIONAL)
-    if total_new_items > 0:
-        print(f"[Briefing] Found {total_new_items} new items. Generating daily briefing...")
-        try:
-            from scripts.generate_briefing import generate_briefing
-            briefing_result = generate_briefing()
-            
-            # Extract path and key_message from result
-            if isinstance(briefing_result, dict):
-                briefing_path = briefing_result.get("path")
-                key_message = briefing_result.get("key_message")
-            else:
-                briefing_path = briefing_result
-                key_message = None
-            
-            # Add briefing URL and key_message for notifier
-            dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/briefing.html"
-            if key_message:
-                dashboard_data["key_message"] = key_message
-            print(f"[Briefing] Generated {briefing_path}")
-        except Exception as e:
-            print(f"[Briefing] Failed: {e}")
-            import traceback
-            traceback.print_exc()
-            # Fallback to index if briefing fails
-            dashboard_data["briefing_url"] = "https://vaax-maker.github.io/ai-news-daily/index.html"
-
-        # 6. Send Notifications (Only if new items AND explicitly enabled)
-        # ENABLE_NOTIFICATION must be set to "true" (GitHub Actions sets this)
-        # This prevents accidental notifications during local/manual runs
-        if str_to_bool(os.getenv("ENABLE_NOTIFICATION", "false")):
-            print("[Notifier] Sending daily briefing...")
-            try:
-                send_daily_briefing(dashboard_data)
-            except Exception as e:
-                print(f"[Notifier] Failed: {e}")
-        else:
-            print("[Notifier] Skipped (ENABLE_NOTIFICATION not set). Set ENABLE_NOTIFICATION=true to send.")
-    else:
-        print("[Briefing] No new items found. Skipping briefing generation and notification.")
+    # 5.5 (은퇴) 데일리 briefing 페이지 생성 + 텔레그램 발송 — 2026-08 폐기.
+    #   옛 홈 은퇴 후 briefing은 v2 beacon으로 대체됨. 이 블록의 generate_briefing()
+    #   호출이 남아 삭제한 docs/briefing.html이 매일 되살아나고, 레거시 텔레그램 briefing이
+    #   beacon 알림과 중복 발송되던 문제를 원천 제거(생성+발송 블록 삭제).
+    #   beacon teaser 발송은 beacon-notify.yml(beacon_message.txt push 트리거)가 담당.
+    print(f"[Briefing] 은퇴됨 — 생성·발송 건너뜀 (신규 {total_new_items}건). beacon이 대체.")
 
     # 5.6 Generate Admin Notifier Page (Always generate for admin access)
     print("[Admin] Generating admin notifier page...")
