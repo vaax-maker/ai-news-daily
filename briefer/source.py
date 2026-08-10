@@ -35,7 +35,9 @@ def val(v):
 def clean(s):
     # 소스(모두의AI)에 저장된 깨진 문자 U+FFFD 제거(복구 불가·아티팩트 배포 거부 대응)
     s = (s or "").replace("�", "")
-    return html.unescape(re.sub(r"\s+", " ", s)).strip()
+    # unescape 먼저 → &nbsp;가 \xa0(비분리공백)로 바뀌므로 일반 공백으로 치환(줄바꿈 막힘 방지)
+    s = html.unescape(s).replace("\xa0", " ")
+    return re.sub(r"\s+", " ", s).strip()
 
 
 def _query(body):
