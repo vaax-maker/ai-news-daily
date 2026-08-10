@@ -1,8 +1,8 @@
-# VAAX AI 브리핑 (ai-news-daily v3)
+# VAAX AI 뉴스 (ai-news-daily v3)
 
 ## 개요
 aiofmodu.com(모두의AI) daily-news Firestore 문서를 소스로, 매 평일 오전
-"오늘의 AI 브리핑" 모바일 웹페이지 + 텔레그램 발송을 자동 생성하는 파이프라인.
+"오늘의 AI 뉴스" 모바일 웹페이지 + 텔레그램 발송을 자동 생성하는 파이프라인.
 개조식 요약, 세로 인포그래픽 커버, 검색 가능한 아카이브로 구성된다.
 
 ## 구조
@@ -12,16 +12,16 @@ briefer/
   source.py       # Firestore fetch (fetch_today/fetch_all) + 결정적 파싱(parse_stories)
   outline.py      # OpenRouter(anthropic/claude-sonnet-4-6)로 소스 문장 → 개조식 bullet 변환
   infographic.py  # 맥미니 nlm-infographic API 호출 → 세로 인포그래픽 PNG 생성
-  render.py       # 오늘의 브리핑 HTML(index.html) + 아카이브/검색 HTML(archive.html) 렌더
+  render.py       # 오늘의 뉴스 HTML(index.html) + 아카이브/검색 HTML(archive.html) 렌더
   notify.py       # 텔레그램 sendPhoto(인포그래픽+캡션) 발송
   build.py         # 오케스트레이터 (python3 -m briefer.build)
 deploy/
   run_daily.sh              # 평일 09:00 KST 발행 러너 (fetch→outline→render→push→telegram)
   com.vaax.brief.plist      # launchd 잡 정의 (아직 미설치 — 설치는 별도 승인 필요)
 docs/                        # 빌드 산출물 (GitHub Pages 루트)
-  index.html                # 오늘의 브리핑
+  index.html                # 오늘의 뉴스
   archive.html               # 아카이브 · 검색
-  archive/index.json         # 아카이브 데이터(전체 브리핑, 최신순)
+  archive/index.json         # 아카이브 데이터(전체 뉴스, 최신순)
   infographic.png            # 오늘의 인포그래픽
 ```
 

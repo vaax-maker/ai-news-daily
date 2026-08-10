@@ -20,9 +20,9 @@ DAILY_CSS = """
   --paper:#F1F2F5; --card:#FFFFFF; --card-2:#FAFAF8;
   --ink:#171A21; --ink-dim:#4B525E; --muted:#8B929E;
   --line:rgba(23,26,33,.11); --line-2:rgba(23,26,33,.055);
-  --gold:#4C7E00; --gold-br:#7CC01A;   /* VAAX 진한 연두 (내부 변수명은 레거시) */
-  --mono:ui-monospace,"SF Mono",SFMono-Regular,"JetBrains Mono",Menlo,monospace;
-  --kr:"Apple SD Gothic Neo",Pretendard,-apple-system,system-ui,"Malgun Gothic",sans-serif;
+  --gold:#5F9E00; --gold-br:#7CC01A;   /* VAAX 진한 연두 (내부 변수명은 레거시) */
+  --mono:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+  --kr:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -85,7 +85,7 @@ a{color:inherit;text-decoration:none}
   border-radius:2px;background:var(--gold-br)}
 
 /* why (핵심) */
-.why{background:#EEF4E2;border:1px solid rgba(76,126,0,.24);
+.why{background:#EEF4E2;border:1px solid rgba(95,158,0,.24);
   border-radius:11px;padding:13px 15px}
 .why .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.17em;color:var(--gold);
   text-transform:uppercase;display:block;margin-bottom:9px}
@@ -132,6 +132,7 @@ def _document(title, css, body):
         '<!doctype html>\n<html lang="ko">\n<head>\n'
         '<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">\n'
         f"<title>{html.escape(title)}</title>\n"
         f"<style>{css}</style>\n</head>\n<body>\n{body}\n</body>\n</html>\n"
     )
@@ -155,7 +156,7 @@ def render_daily(brief, stories, infographic_src):
     summary = html.escape(brief.get("summary", ""))
     n = len(stories)
     cover = (f'<div class="cover anim"><img src="{html.escape(infographic_src)}" '
-              'alt="오늘의 AI 브리핑 인포그래픽"/></div>') if infographic_src else ""
+              'alt="오늘의 AI 뉴스 인포그래픽"/></div>') if infographic_src else ""
 
     cards = []
     for s in stories:
@@ -183,8 +184,8 @@ def render_daily(brief, stories, infographic_src):
     body_html = f"""
   <div class="shell">
     <header class="mast">
-      <div class="brand">AI <b>BRIEF</b></div>
-      <div class="live"><span class="dot"></span>오늘의 브리핑</div>
+      <div class="brand">AI <b>NEWS</b></div>
+      <div class="live"><span class="dot"></span>오늘의 뉴스</div>
     </header>
     <section class="hero">
       <div class="dateline anim"><span>{dl}</span><span class="bar"></span></div>
@@ -196,15 +197,15 @@ def render_daily(brief, stories, infographic_src):
       {cards_html}
     </main>
     <footer class="foot">
-      <a class="srchbtn" href="archive.html"><span>지난 브리핑 <b>검색</b> · 아카이브</span><span>→</span></a>
+      <a class="srchbtn" href="archive.html"><span>지난 뉴스 <b>검색</b> · 아카이브</span><span>→</span></a>
       <div class="credit">
-        <span class="tag">VAAX · AI BRIEFING</span><br>
+        <span class="tag">VAAX · AI NEWS</span><br>
         매 평일 오전 발행
       </div>
     </footer>
   </div>"""
 
-    return _document("오늘의 AI 브리핑 · " + date, DAILY_CSS, body_html)
+    return _document("오늘의 AI 뉴스 · " + date, DAILY_CSS, body_html)
 
 
 # ---------------------------------------------------------------------------
@@ -213,9 +214,9 @@ def render_daily(brief, stories, infographic_src):
 
 ARCHIVE_CSS = """
 :root{--paper:#F1F2F5;--card:#FFF;--ink:#171A21;--ink-dim:#4B525E;--muted:#8B929E;
- --line:rgba(23,26,33,.11);--yeon:#4C7E00;--yeon-br:#7CC01A;--yeon-tint:#EEF4E2;
- --mono:"SF Mono",ui-monospace,Menlo,monospace;
- --kr:"Apple SD Gothic Neo",Pretendard,-apple-system,system-ui,sans-serif;}
+ --line:rgba(23,26,33,.11);--yeon:#5F9E00;--yeon-br:#7CC01A;--yeon-tint:#EEF4E2;
+ --mono:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+ --kr:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#E7E8EC;font-family:var(--kr);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 .shell{max-width:640px;margin:0 auto;min-height:100vh;background:var(--paper);
@@ -250,7 +251,7 @@ body{background:#E7E8EC;font-family:var(--kr);color:var(--ink);line-height:1.6;-
 .story:first-child{border-top:none}
 .story .sh{font-size:14.5px;font-weight:700;line-height:1.4}
 .story .sb{font-size:13px;color:var(--ink-dim);margin-top:6px;line-height:1.6}
-.story .why{margin-top:8px;background:var(--yeon-tint);border:1px solid rgba(76,126,0,.2);
+.story .why{margin-top:8px;background:var(--yeon-tint);border:1px solid rgba(95,158,0,.2);
  border-radius:8px;padding:9px 12px;font-size:12.5px;color:var(--ink);line-height:1.55}
 .story .why b{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--yeon);display:block;margin-bottom:4px;text-transform:uppercase}
 .story a.src{font-family:var(--mono);font-size:11px;color:var(--yeon);margin-top:8px;display:inline-block;border-bottom:1px solid var(--yeon)}
@@ -300,11 +301,11 @@ def render_archive(items):
     data_json = json.dumps(items, ensure_ascii=False)
     js = ARCHIVE_JS.replace("__DATA__", data_json)
     body = (f'<div class="shell">'
-            f'<header class="mast"><div class="k">VAAX · AI BRIEFING</div>'
-            f'<h1>아카이브 · 검색</h1><div class="n">지난 브리핑 {len(items)}건</div>'
-            f'<a class="back" href="index.html">← 오늘의 브리핑</a></header>'
+            f'<header class="mast"><div class="k">VAAX · AI NEWS</div>'
+            f'<h1>아카이브 · 검색</h1><div class="n">지난 뉴스 {len(items)}건</div>'
+            f'<a class="back" href="index.html">← 오늘의 뉴스</a></header>'
             f'<div class="search"><input id="q" type="search" placeholder="키워드 검색 (예: 오픈AI, 규제, 로봇)"></div>'
             f'<div class="count" id="count"></div>'
             f'<div class="list" id="list"></div>'
             f'</div>\n<script>{js}</script>')
-    return _document("AI 브리핑 · 아카이브", ARCHIVE_CSS, body)
+    return _document("AI 뉴스 · 아카이브", ARCHIVE_CSS, body)

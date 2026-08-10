@@ -28,7 +28,7 @@ def build_caption(brief):
     title = brief.get("title", "")
     stories = brief.get("stories") or []
     bullets = [f"■ {s.get('headline', '')}" for s in stories[:3] if s.get("headline")]
-    lines = [f"[AI 브리핑] {dl}", "", f"\"{title}\"", ""]
+    lines = [f"[AI 뉴스] {dl}", "", f"\"{title}\"", ""]
     lines.append("\n\n".join(bullets))   # 불릿 사이엔 빈 줄, 마지막 불릿 뒤엔 없음
     lines.append(SITE_URL)
     return "\n".join(lines)

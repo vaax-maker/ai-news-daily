@@ -1,5 +1,5 @@
 #!/bin/bash
-# VAAX AI 브리핑 — 일일 발행 러너 (평일 09:00 KST).
+# VAAX AI 뉴스 — 일일 발행 러너 (평일 09:00 KST).
 # main 추적 체크아웃에서 fetch→outline→render 후 docs/ 를 main 에 커밋·푸시
 # (→ GitHub Pages 공개), 이어서 텔레그램으로 인포그래픽+캡션 발송.
 set -uo pipefail

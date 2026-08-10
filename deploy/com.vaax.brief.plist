@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- VAAX AI 브리핑 — 평일 09:00 KST (=00:00 UTC) 로컬 발행 잡.
+<!-- VAAX AI 뉴스 — 평일 09:00 KST (=00:00 UTC) 로컬 발행 잡.
      주의: launchd StartCalendarInterval의 Hour/Minute은 시스템 로컬시간 기준.
      이 맥의 시스템 시간대가 KST(Asia/Seoul)라면 Hour=9 로 설정하면 된다.
      시스템이 UTC라면 Hour=0 으로 설정할 것 — 설치 전 `date` 로 시간대를 확인하라.

@@ -33,7 +33,7 @@ def _content_and_instruction(brief):
     content = "\n".join(lines)
 
     instruction = (
-        f"제목은 '오늘의 AI 브리핑', 부제로 날짜 '{date}'. "
+        f"제목은 '오늘의 AI 뉴스', 부제로 날짜 '{date}'. "
         "이것은 하루 뉴스의 '내용 요약' 인포그래픽이다(기사 제목 나열이 아님). "
         "핵심 수치·사실을 큰 숫자와 간결한 차트로 제시. "
         "★디자인=모노톤: 전체를 무채색(검정·짙은회색·연회색·흰색)으로만 구성하고, 색상은 오직 "
@@ -48,7 +48,7 @@ def generate(out_path, brief, rich=None):
     """Call the nlm-infographic API and write a portrait PNG to out_path.
 
     rich: 대표기사 원문 종합 dict(article.synthesize_rich). 있으면 원문 기반 content,
-    없으면 브리핑 요약 기반으로 폴백.
+    없으면 뉴스 요약 기반으로 폴백.
     """
     token = open(TOKEN_PATH).read().strip()
     if rich:
