@@ -41,7 +41,8 @@ def main():
 
     infographic_path = os.path.join(docs_root, "infographic.png")
     if args.skip_infographic:
-        shutil.copyfile(args.skip_infographic, infographic_path)
+        if os.path.abspath(args.skip_infographic) != os.path.abspath(infographic_path):
+            shutil.copyfile(args.skip_infographic, infographic_path)
         print(f"[build] infographic: reused {args.skip_infographic} -> {infographic_path}",
               file=sys.stderr)
     else:
