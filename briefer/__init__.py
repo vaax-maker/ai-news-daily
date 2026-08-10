@@ -1,4 +1,4 @@
-"""briefer — production daily AI-briefing pipeline (VAAX AI BRIEFING).
+"""briefer — production daily AI-briefing pipeline (VAAX AI NEWS).
 
 Fetches today's daily-news doc from Firestore, converts it to 개조식 bullets via
 OpenRouter, renders the mobile daily page + searchable archive, and (separately)

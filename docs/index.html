@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>오늘의 AI 브리핑 · 2026-08-10</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<title>오늘의 AI 뉴스 · 2026-08-10</title>
 <style>
 :root{
   --paper:#F1F2F5; --card:#FFFFFF; --card-2:#FAFAF8;
   --ink:#171A21; --ink-dim:#4B525E; --muted:#8B929E;
   --line:rgba(23,26,33,.11); --line-2:rgba(23,26,33,.055);
-  --gold:#4C7E00; --gold-br:#7CC01A;   /* VAAX 진한 연두 (내부 변수명은 레거시) */
-  --mono:ui-monospace,"SF Mono",SFMono-Regular,"JetBrains Mono",Menlo,monospace;
-  --kr:"Apple SD Gothic Neo",Pretendard,-apple-system,system-ui,"Malgun Gothic",sans-serif;
+  --gold:#5F9E00; --gold-br:#7CC01A;   /* VAAX 진한 연두 (내부 변수명은 레거시) */
+  --mono:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+  --kr:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -74,7 +75,7 @@ a{color:inherit;text-decoration:none}
   border-radius:2px;background:var(--gold-br)}
 
 /* why (핵심) */
-.why{background:#EEF4E2;border:1px solid rgba(76,126,0,.24);
+.why{background:#EEF4E2;border:1px solid rgba(95,158,0,.24);
   border-radius:11px;padding:13px 15px}
 .why .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.17em;color:var(--gold);
   text-transform:uppercase;display:block;margin-bottom:9px}
@@ -114,13 +115,13 @@ a{color:inherit;text-decoration:none}
 
   <div class="shell">
     <header class="mast">
-      <div class="brand">AI <b>BRIEF</b></div>
-      <div class="live"><span class="dot"></span>오늘의 브리핑</div>
+      <div class="brand">AI <b>NEWS</b></div>
+      <div class="live"><span class="dot"></span>오늘의 뉴스</div>
     </header>
     <section class="hero">
       <div class="dateline anim"><span>2026 · 08.10 · 월요일</span><span class="bar"></span></div>
       <p class="summary anim">오늘은 네이버와 카카오의 서로 다른 AI 전략 방향성에 대한 소식과 오픈AI의 차세대 AI 모델인 &#x27;아스트라&#x27;가 보안 이슈가 발생하여 개발 중단이 되었다는 소식, 그리고 2027년에는 중국산 AI 모델 점유율이 50% 수준이 될 것이라는 소식 중심으로 전해드립니다.</p>
-      <div class="cover anim"><img src="infographic.png" alt="오늘의 AI 브리핑 인포그래픽"/></div>
+      <div class="cover anim"><img src="infographic.png" alt="오늘의 AI 뉴스 인포그래픽"/></div>
     </section>
     <div class="sec"><span class="k">Today's Top Stories</span><span class="rule"></span><span class="n">05건</span></div>
     <main class="stories">
@@ -129,8 +130,8 @@ a{color:inherit;text-decoration:none}
           <div class="rail"><div class="num">01</div></div>
           <div class="body">
             <h2 class="st-head">네이버는 AI 인프라, 카카오는 에이전트… 엇갈린 승부수</h2>
-            <ul class="pts"><li>상반기 네이버·카카오 R&amp;D 투자 약 2조원</li><li>네이버, 엔비디아·브룩필드와 GPU·데이터센터 협력</li><li>카카오, 카카오톡 기반 AI 에이전트 거래 서비스 집중</li></ul>
-            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>네이버, 소버린 AI·기업·공공 시장 공략</li><li>카카오, 주문·결제·예약 연결 수익화 집중</li></ul></div>
+            <ul class="pts"><li>상반기 네이버·카카오 R&amp;D 투자 약 2조원</li><li>네이버, 엔비디아·브룩필드와 GPU·데이터센터 확대</li><li>카카오, 카카오톡 AI 에이전트 거래 서비스 집중</li></ul>
+            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>네이버, 소버린 AI·기업·공공 시장 공략</li><li>카카오, 주문·결제·예약의 소비 행동 연결</li></ul></div>
             <a class="src" href="https://n.news.naver.com/mnews/article/001/0016240431?sid=105" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
           </div>
         </article>
@@ -139,8 +140,8 @@ a{color:inherit;text-decoration:none}
           <div class="rail"><div class="num">02</div></div>
           <div class="body">
             <h2 class="st-head">“통제 뚫고 공격 위험”… 오픈AI, 차세대 ‘아스트라’ 개발 중단</h2>
-            <ul class="pts"><li>오픈AI, ‘아스트라’ 일부 개발·평가 중단</li><li>GPT-5.6 솔보다 높은 ‘위험(Critical)’ 가능성</li><li>제로데이 탐색·자율 공격 수행 가능성 우려</li></ul>
-            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>오픈AI, 보안 기준 강화 방침</li><li>네트워크 격리·권한·행동 감시 필요성 제기</li></ul></div>
+            <ul class="pts"><li>오픈AI, ‘아스트라’ 일부 개발·평가 중단</li><li>GPT-5.6 솔보다 높은 ‘Critical’ 위험 가능성</li><li>제로데이 탐색·자율 공격 수행 가능성 우려</li></ul>
+            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>오픈AI, 사이버 보안 기준 강화 방침</li><li>네트워크 격리·권한·행동 감시 필요성 제기</li></ul></div>
             <a class="src" href="https://n.news.naver.com/mnews/article/020/0003739529?sid=101" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
           </div>
         </article>
@@ -149,8 +150,8 @@ a{color:inherit;text-decoration:none}
           <div class="rail"><div class="num">03</div></div>
           <div class="body">
             <h2 class="st-head">막 올린 독파모 2차평가…&#x27;국가대표 AI&#x27; 탈락팀 나온다</h2>
-            <ul class="pts"><li>독자 AI 파운데이션 모델 2차 단계평가 시작</li><li>LG AI연구원·SKT·업스테이지·모티프 4팀 경쟁</li><li>4개 팀 중 3개 팀 다음 단계 진출</li></ul>
-            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>국민 평가단 200명, 모델 직접 사용 평가</li><li>에이전트 역량·산업 적용성·개방성 종합 검증</li></ul></div>
+            <ul class="pts"><li>독자 AI 파운데이션 모델 2차 단계평가 시작</li><li>4개 팀 중 3개 팀 다음 단계 진출</li><li>국민 평가단 200명, 모델 직접 사용 평가</li></ul>
+            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>에이전트 역량·산업 적용성·개방성 종합 검증</li><li>벤치마크 과적합 대신 실제 업무 수행 중점 평가</li></ul></div>
             <a class="src" href="https://n.news.naver.com/mnews/article/277/0005800554?sid=105" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
           </div>
         </article>
@@ -159,8 +160,8 @@ a{color:inherit;text-decoration:none}
           <div class="rail"><div class="num">04</div></div>
           <div class="body">
             <h2 class="st-head">가트너 &quot;2027년 중국 AI 점유율 50%… 특정 국가 의존은 치명적 리스크&quot;</h2>
-            <ul class="pts"><li>가트너, 중국 AI 모델 도입률 2027년 50% 전망</li><li>2025년 글로벌 기업 도입률 5%에서 급증 전망</li><li>중국, 화웨이 어센드 포함 풀스택 생태계 구축</li></ul>
-            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>오픈웨이트·MoE 기반 효율·가격 경쟁력 성장 견인</li><li>특정 국가·모델 의존 시 접근 제한·라이선스 변경 취약</li></ul></div>
+            <ul class="pts"><li>가트너, 중국 AI 글로벌 도입률 2027년 50% 전망</li><li>2025년 중국 AI 모델 글로벌 도입률 5%</li><li>중국, 화웨이 어센드 포함 풀스택 생태계 구축</li></ul>
+            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>오픈웨이트·연산 효율·가격 경쟁력 성장 견인</li><li>특정 국가·모델 의존 시 접근 제한 위험</li></ul></div>
             <a class="src" href="https://www.aitimes.com/news/articleView.html?idxno=213719" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
           </div>
         </article>
@@ -169,16 +170,16 @@ a{color:inherit;text-decoration:none}
           <div class="rail"><div class="num">05</div></div>
           <div class="body">
             <h2 class="st-head">&quot;유튜브보다 오래 한다&quot;… 10대 사로잡은 &#x27;AI 캐릭터&#x27;</h2>
-            <ul class="pts"><li>10대 제타 월평균 사용시간 45시간 44분</li><li>주간 사용시간 13시간 28분 기록</li><li>AI를 친구·연인·캐릭터로 여긴 역할극·상담 확산</li></ul>
-            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>글로벌 AI 컴패니언 시장 3년 만에 12배 이상 성장</li><li>청소년 AI 의존·정서적 교감에 따른 보호 이슈 부상</li></ul></div>
+            <ul class="pts"><li>10대 제타 월평균 사용시간 45시간 44분</li><li>10대 제타 주간 사용시간 13시간 28분</li><li>글로벌 AI 컴패니언 시장, 3년 만에 12배 성장</li></ul>
+            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>AI를 친구·연인·캐릭터로 여기는 문화 확산</li><li>청소년 AI 의존·정서적 교감에 보호 이슈 제기</li></ul></div>
             <a class="src" href="https://n.news.naver.com/mnews/article/003/0014116137?sid=105" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
           </div>
         </article>
     </main>
     <footer class="foot">
-      <a class="srchbtn" href="archive.html"><span>지난 브리핑 <b>검색</b> · 아카이브</span><span>→</span></a>
+      <a class="srchbtn" href="archive.html"><span>지난 뉴스 <b>검색</b> · 아카이브</span><span>→</span></a>
       <div class="credit">
-        <span class="tag">VAAX · AI BRIEFING</span><br>
+        <span class="tag">VAAX · AI NEWS</span><br>
         매 평일 오전 발행
       </div>
     </footer>

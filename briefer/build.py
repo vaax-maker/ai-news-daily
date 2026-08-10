@@ -46,7 +46,7 @@ def main():
         print(f"[build] infographic: reused {args.skip_infographic} -> {infographic_path}",
               file=sys.stderr)
     else:
-        # 대표기사 top3 원문 fetch → terra 종합(실패 시 None → 브리핑 요약 폴백)
+        # 대표기사 top3 원문 fetch → terra 종합(실패 시 None → 뉴스 요약 폴백)
         print("[build] 대표기사 원문 fetch + 종합(article)...", file=sys.stderr)
         rich = article.synthesize_rich(today["stories"], top_n=3)
         infographic.generate(infographic_path, today, rich=rich)
@@ -80,7 +80,7 @@ def main():
     print(f"  {infographic_path}    {sz(infographic_path)}", file=sys.stderr)
     print(f"  오늘 제목: {today['title']}", file=sys.stderr)
     print(f"  스토리 수: {len(stories)}  (bullets 생성={n_bullets})", file=sys.stderr)
-    print(f"  아카이브 총 브리핑 수: {len(items)}", file=sys.stderr)
+    print(f"  아카이브 총 뉴스 수: {len(items)}", file=sys.stderr)
     print(f"  아카이브 총 스토리 수: {sum(len(b['stories']) for b in items)}", file=sys.stderr)
 
 

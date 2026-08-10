@@ -1,7 +1,7 @@
 """대표기사 원문 fetch + terra 종합 — 정보 밀도 높은 인포그래픽 content.
 
 top-N 스토리의 원문(source url) 본문을 읽어와 핵심 수치·사실을 LLM(OpenRouter)으로
-종합한다. 원문 fetch/종합 실패 시 None을 반환 → 호출부가 브리핑 요약으로 폴백한다.
+종합한다. 원문 fetch/종합 실패 시 None을 반환 → 호출부가 뉴스 요약으로 폴백한다.
 키: 환경변수 OPENROUTER_API_KEY (없으면 None).
 """
 import gzip
@@ -97,10 +97,10 @@ def rich_content_and_instruction(rich, date):
     """rich 종합 → nlm API용 (content, instruction)."""
     facts = "\n".join(f"{i+1}) {f.get('stat','')} — {f.get('label','')}"
                       for i, f in enumerate(rich.get("facts", [])))
-    content = (f"오늘의 AI 브리핑\n{date}\n\n테마: {rich.get('theme','')}\n\n"
+    content = (f"오늘의 AI 뉴스\n{date}\n\n테마: {rich.get('theme','')}\n\n"
                f"핵심 수치:\n{facts}\n\n시사점: {rich.get('insight','')}")
     instruction = (
-        f"하루 AI 뉴스의 '내용 요약' 인포그래픽(기사 제목 나열 아님). 제목 '오늘의 AI 브리핑', "
+        f"하루 AI 뉴스의 '내용 요약' 인포그래픽(기사 제목 나열 아님). 제목 '오늘의 AI 뉴스', "
         f"날짜 뱃지 '{date}'. 4개 핵심 수치를 큰 숫자와 간결한 차트(막대·라인·도넛)로 제시. "
         "★디자인=모노톤: 전체를 무채색(검정·짙은회색·연회색·흰색)으로만 구성하고, 색상은 오직 "
         "'진한 연두 #5F9E00' 하나만 포인트로 아주 절제해서 사용한다(핵심 수치·강조 요소에만). "
