@@ -1,13 +1,2 @@
-feedparser
-google-generativeai
-deep-translator>=1.11,<2.0
-# Pin to a version that exposes the `Groq` client class used in generate_news.py
-groq>=0.4.2,<1.0
-openai>=1.0.0
-PyYAML
-Jinja2
-requests
-beautifulsoup4
-python-dotenv
-wordcloud
-firebase-admin
+# ai-news-daily-v3 briefer — stdlib + urllib only (no bs4/requests needed; parsing is regex-based).
+# No third-party dependencies required to run `python3 -m briefer.build`.

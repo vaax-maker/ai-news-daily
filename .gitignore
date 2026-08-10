@@ -9,6 +9,7 @@ docs/header_test.html
 !docs/webshare/data_x9k3.json
 !docs/webshare/.blogger_queue_*.json
 !docs/v2/archive.json
+!docs/archive/index.json
 blogger_token.pickle
 .worktrees/
 
