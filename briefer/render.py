@@ -126,6 +126,17 @@ def _li(items):
     return "".join(f"<li>{html.escape(x)}</li>" for x in items)
 
 
+def _document(title, css, body):
+    """Wrap content in a complete, mobile-ready HTML document (viewport + charset)."""
+    return (
+        '<!doctype html>\n<html lang="ko">\n<head>\n'
+        '<meta charset="utf-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        f"<title>{html.escape(title)}</title>\n"
+        f"<style>{css}</style>\n</head>\n<body>\n{body}\n</body>\n</html>\n"
+    )
+
+
 def render_daily(brief, stories, infographic_src):
     """Render the daily mobile HTML page.
 
@@ -193,8 +204,7 @@ def render_daily(brief, stories, infographic_src):
     </footer>
   </div>"""
 
-    page = "<title>오늘의 AI 브리핑 · " + date + "</title>\n<style>" + DAILY_CSS + "</style>\n" + body_html
-    return page
+    return _document("오늘의 AI 브리핑 · " + date, DAILY_CSS, body_html)
 
 
 # ---------------------------------------------------------------------------
@@ -289,8 +299,7 @@ render('');
 def render_archive(items):
     data_json = json.dumps(items, ensure_ascii=False)
     js = ARCHIVE_JS.replace("__DATA__", data_json)
-    return (f"<title>AI 브리핑 · 아카이브</title>\n<style>{ARCHIVE_CSS}</style>\n"
-            f'<div class="shell">'
+    body = (f'<div class="shell">'
             f'<header class="mast"><div class="k">VAAX · AI BRIEFING</div>'
             f'<h1>아카이브 · 검색</h1><div class="n">지난 브리핑 {len(items)}건</div>'
             f'<a class="back" href="index.html">← 오늘의 브리핑</a></header>'
@@ -298,3 +307,4 @@ def render_archive(items):
             f'<div class="count" id="count"></div>'
             f'<div class="list" id="list"></div>'
             f'</div>\n<script>{js}</script>')
+    return _document("AI 브리핑 · 아카이브", ARCHIVE_CSS, body)
