@@ -20,7 +20,7 @@ DAILY_CSS = """
   --paper:#F1F2F5; --card:#FFFFFF; --card-2:#FAFAF8;
   --ink:#171A21; --ink-dim:#4B525E; --muted:#8B929E;
   --line:rgba(23,26,33,.11); --line-2:rgba(23,26,33,.055);
-  --gold:#5F9E00; --gold-br:#7CC01A;   /* VAAX 진한 연두 (내부 변수명은 레거시) */
+  --gold:#059669; --gold-br:#10B981;   /* VAAX 에메랄드 그린 (내부 변수명은 레거시) */
   --mono:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
   --kr:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
 }
@@ -30,7 +30,7 @@ body{background:#E7E8EC;color:var(--ink);font-family:var(--kr);line-height:1.6;
   -webkit-font-smoothing:antialiased;overflow-x:hidden}
 .shell{max-width:520px;margin:0 auto;min-height:100vh;position:relative;
   background:
-    radial-gradient(120% 46% at 86% -8%, rgba(206,155,46,.13), transparent 62%),
+    radial-gradient(120% 46% at 86% -8%, rgba(16,185,129,.13), transparent 62%),
     var(--paper);
   box-shadow:0 0 0 1px var(--line-2), 0 30px 80px -40px rgba(23,26,33,.4)}
 a{color:inherit;text-decoration:none}
@@ -44,7 +44,7 @@ a{color:inherit;text-decoration:none}
 .mast .live{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted);
   display:flex;align-items:center;gap:6px}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-br);animation:pulse 2.4s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(206,155,46,.5)}70%{box-shadow:0 0 0 7px rgba(206,155,46,0)}100%{box-shadow:0 0 0 0 rgba(206,155,46,0)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,.5)}70%{box-shadow:0 0 0 7px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
 
 /* hero */
 .hero{padding:30px 20px 22px}
@@ -85,7 +85,7 @@ a{color:inherit;text-decoration:none}
   border-radius:2px;background:var(--gold-br)}
 
 /* why (핵심) */
-.why{background:#EEF4E2;border:1px solid rgba(95,158,0,.24);
+.why{background:#EEF4E2;border:1px solid rgba(5,150,105,.24);
   border-radius:11px;padding:13px 15px}
 .why .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.17em;color:var(--gold);
   text-transform:uppercase;display:block;margin-bottom:9px}
@@ -214,7 +214,7 @@ def render_daily(brief, stories, infographic_src):
 
 ARCHIVE_CSS = """
 :root{--paper:#F1F2F5;--card:#FFF;--ink:#171A21;--ink-dim:#4B525E;--muted:#8B929E;
- --line:rgba(23,26,33,.11);--yeon:#5F9E00;--yeon-br:#7CC01A;--yeon-tint:#EEF4E2;
+ --line:rgba(23,26,33,.11);--yeon:#059669;--yeon-br:#10B981;--yeon-tint:#EEF4E2;
  --mono:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
  --kr:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -230,7 +230,7 @@ body{background:#E7E8EC;font-family:var(--kr);color:var(--ink);line-height:1.6;-
 .search{padding:16px 22px 4px}
 .search input{width:100%;font-family:var(--kr);font-size:16px;color:var(--ink);
  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;outline:none}
-.search input:focus{border-color:var(--yeon-br);box-shadow:0 0 0 3px rgba(124,192,26,.15)}
+.search input:focus{border-color:var(--yeon-br);box-shadow:0 0 0 3px rgba(16,185,129,.15)}
 .count{font-family:var(--mono);font-size:11px;color:var(--muted);padding:10px 24px 2px;letter-spacing:.05em}
 .list{padding:6px 16px 60px;display:flex;flex-direction:column;gap:12px}
 .item{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
@@ -251,11 +251,11 @@ body{background:#E7E8EC;font-family:var(--kr);color:var(--ink);line-height:1.6;-
 .story:first-child{border-top:none}
 .story .sh{font-size:14.5px;font-weight:700;line-height:1.4}
 .story .sb{font-size:13px;color:var(--ink-dim);margin-top:6px;line-height:1.6}
-.story .why{margin-top:8px;background:var(--yeon-tint);border:1px solid rgba(95,158,0,.2);
+.story .why{margin-top:8px;background:var(--yeon-tint);border:1px solid rgba(5,150,105,.2);
  border-radius:8px;padding:9px 12px;font-size:12.5px;color:var(--ink);line-height:1.55}
 .story .why b{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--yeon);display:block;margin-bottom:4px;text-transform:uppercase}
 .story a.src{font-family:var(--mono);font-size:11px;color:var(--yeon);margin-top:8px;display:inline-block;border-bottom:1px solid var(--yeon)}
-mark{background:rgba(124,192,26,.32);color:inherit;border-radius:2px}
+mark{background:rgba(16,185,129,.32);color:inherit;border-radius:2px}
 .empty{text-align:center;color:var(--muted);padding:50px 20px;font-size:14px}
 """
 

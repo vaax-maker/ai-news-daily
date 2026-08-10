@@ -10,7 +10,7 @@
   --paper:#F1F2F5; --card:#FFFFFF; --card-2:#FAFAF8;
   --ink:#171A21; --ink-dim:#4B525E; --muted:#8B929E;
   --line:rgba(23,26,33,.11); --line-2:rgba(23,26,33,.055);
-  --gold:#5F9E00; --gold-br:#7CC01A;   /* VAAX 진한 연두 (내부 변수명은 레거시) */
+  --gold:#059669; --gold-br:#10B981;   /* VAAX 에메랄드 그린 (내부 변수명은 레거시) */
   --mono:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
   --kr:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
 }
@@ -20,7 +20,7 @@ body{background:#E7E8EC;color:var(--ink);font-family:var(--kr);line-height:1.6;
   -webkit-font-smoothing:antialiased;overflow-x:hidden}
 .shell{max-width:520px;margin:0 auto;min-height:100vh;position:relative;
   background:
-    radial-gradient(120% 46% at 86% -8%, rgba(206,155,46,.13), transparent 62%),
+    radial-gradient(120% 46% at 86% -8%, rgba(16,185,129,.13), transparent 62%),
     var(--paper);
   box-shadow:0 0 0 1px var(--line-2), 0 30px 80px -40px rgba(23,26,33,.4)}
 a{color:inherit;text-decoration:none}
@@ -34,7 +34,7 @@ a{color:inherit;text-decoration:none}
 .mast .live{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted);
   display:flex;align-items:center;gap:6px}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-br);animation:pulse 2.4s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(206,155,46,.5)}70%{box-shadow:0 0 0 7px rgba(206,155,46,0)}100%{box-shadow:0 0 0 0 rgba(206,155,46,0)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,.5)}70%{box-shadow:0 0 0 7px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
 
 /* hero */
 .hero{padding:30px 20px 22px}
@@ -75,7 +75,7 @@ a{color:inherit;text-decoration:none}
   border-radius:2px;background:var(--gold-br)}
 
 /* why (핵심) */
-.why{background:#EEF4E2;border:1px solid rgba(95,158,0,.24);
+.why{background:#EEF4E2;border:1px solid rgba(5,150,105,.24);
   border-radius:11px;padding:13px 15px}
 .why .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.17em;color:var(--gold);
   text-transform:uppercase;display:block;margin-bottom:9px}
@@ -130,8 +130,8 @@ a{color:inherit;text-decoration:none}
           <div class="rail"><div class="num">01</div></div>
           <div class="body">
             <h2 class="st-head">네이버는 AI 인프라, 카카오는 에이전트… 엇갈린 승부수</h2>
-            <ul class="pts"><li>상반기 네이버·카카오 R&amp;D 투자 약 2조원</li><li>네이버, 엔비디아·브룩필드와 GPU·데이터센터 확대</li><li>카카오, 카카오톡 AI 에이전트 거래 서비스 집중</li></ul>
-            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>네이버, 소버린 AI·기업·공공 시장 공략</li><li>카카오, 주문·결제·예약의 소비 행동 연결</li></ul></div>
+            <ul class="pts"><li>상반기 약 2조원 R&amp;D 투자, AI 경쟁력 강화</li><li>네이버, 엔비디아·브룩필드와 GPU·데이터센터 확대</li><li>카카오, 카카오톡 기반 AI 에이전트 서비스 집중</li></ul>
+            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>네이버, 소버린 AI·기업·공공 시장 공략</li><li>카카오, 주문·결제·예약 거래 연결 전략</li></ul></div>
             <a class="src" href="https://n.news.naver.com/mnews/article/001/0016240431?sid=105" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
           </div>
         </article>
@@ -140,8 +140,8 @@ a{color:inherit;text-decoration:none}
           <div class="rail"><div class="num">02</div></div>
           <div class="body">
             <h2 class="st-head">“통제 뚫고 공격 위험”… 오픈AI, 차세대 ‘아스트라’ 개발 중단</h2>
-            <ul class="pts"><li>오픈AI, ‘아스트라’ 일부 개발·평가 중단</li><li>GPT-5.6 솔보다 높은 ‘Critical’ 위험 가능성</li><li>제로데이 탐색·자율 공격 수행 가능성 우려</li></ul>
-            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>오픈AI, 사이버 보안 기준 강화 방침</li><li>네트워크 격리·권한·행동 감시 필요성 제기</li></ul></div>
+            <ul class="pts"><li>오픈AI, ‘아스트라’ 일부 개발·평가 중단</li><li>GPT-5.6 솔보다 높은 ‘위험(Critical)’ 가능성</li><li>제로데이 탐색·자율 공격 수행 가능성 우려</li></ul>
+            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>오픈AI, 보안 기준 강화 방침</li><li>모델·시험환경 전체 보안체계 검증 필요</li></ul></div>
             <a class="src" href="https://n.news.naver.com/mnews/article/020/0003739529?sid=101" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
           </div>
         </article>
@@ -151,7 +151,7 @@ a{color:inherit;text-decoration:none}
           <div class="body">
             <h2 class="st-head">막 올린 독파모 2차평가…&#x27;국가대표 AI&#x27; 탈락팀 나온다</h2>
             <ul class="pts"><li>독자 AI 파운데이션 모델 2차 단계평가 시작</li><li>4개 팀 중 3개 팀 다음 단계 진출</li><li>국민 평가단 200명, 모델 직접 사용 평가</li></ul>
-            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>에이전트 역량·산업 적용성·개방성 종합 검증</li><li>벤치마크 과적합 대신 실제 업무 수행 중점 평가</li></ul></div>
+            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>에이전트 역량·산업 적용성·개방성 종합 검증</li><li>정부, 실제 업무 수행·현장 적용 가능성 중점</li></ul></div>
             <a class="src" href="https://n.news.naver.com/mnews/article/277/0005800554?sid=105" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
           </div>
         </article>
@@ -160,8 +160,8 @@ a{color:inherit;text-decoration:none}
           <div class="rail"><div class="num">04</div></div>
           <div class="body">
             <h2 class="st-head">가트너 &quot;2027년 중국 AI 점유율 50%… 특정 국가 의존은 치명적 리스크&quot;</h2>
-            <ul class="pts"><li>가트너, 중국 AI 글로벌 도입률 2027년 50% 전망</li><li>2025년 중국 AI 모델 글로벌 도입률 5%</li><li>중국, 화웨이 어센드 포함 풀스택 생태계 구축</li></ul>
-            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>오픈웨이트·연산 효율·가격 경쟁력 성장 견인</li><li>특정 국가·모델 의존 시 접근 제한 위험</li></ul></div>
+            <ul class="pts"><li>중국 AI 모델 글로벌 기업 도입률 2027년 50% 전망</li><li>2025년 5%에서 2년 만에 급증 전망</li><li>화웨이 어센드 포함 ‘풀스택’ 생태계 구축</li></ul>
+            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>특정 국가·모델 의존 시 접근 제한·라이선스 취약</li><li>API 미들웨어 기반 멀티모델 전략 필요</li></ul></div>
             <a class="src" href="https://www.aitimes.com/news/articleView.html?idxno=213719" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
           </div>
         </article>
@@ -170,8 +170,8 @@ a{color:inherit;text-decoration:none}
           <div class="rail"><div class="num">05</div></div>
           <div class="body">
             <h2 class="st-head">&quot;유튜브보다 오래 한다&quot;… 10대 사로잡은 &#x27;AI 캐릭터&#x27;</h2>
-            <ul class="pts"><li>10대 제타 월평균 사용시간 45시간 44분</li><li>10대 제타 주간 사용시간 13시간 28분</li><li>글로벌 AI 컴패니언 시장, 3년 만에 12배 성장</li></ul>
-            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>AI를 친구·연인·캐릭터로 여기는 문화 확산</li><li>청소년 AI 의존·정서적 교감에 보호 이슈 제기</li></ul></div>
+            <ul class="pts"><li>10대 제타 월평균 사용시간 45시간 44분</li><li>주간 사용시간 13시간 28분 기록</li><li>글로벌 AI 컴패니언 시장, 3년 만에 12배 성장</li></ul>
+            <div class="why"><span class="lbl">왜 중요한가</span><ul><li>AI와 역할극·고민상담 즐기는 문화 확산</li><li>청소년 AI 의존·정서적 교감에 보호 이슈 부각</li></ul></div>
             <a class="src" href="https://n.news.naver.com/mnews/article/003/0014116137?sid=105" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
           </div>
         </article>
