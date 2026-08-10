@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- VAAX AI 브리핑 — 평일 09:00 KST (=00:00 UTC) 로컬 발행 잡.
+     주의: launchd StartCalendarInterval의 Hour/Minute은 시스템 로컬시간 기준.
+     이 맥의 시스템 시간대가 KST(Asia/Seoul)라면 Hour=9 로 설정하면 된다.
+     시스템이 UTC라면 Hour=0 으로 설정할 것 — 설치 전 `date` 로 시간대를 확인하라.
+     설치:  cp deploy/com.vaax.brief.plist ~/Library/LaunchAgents/
+            launchctl load ~/Library/LaunchAgents/com.vaax.brief.plist
+     해제:  launchctl unload ~/Library/LaunchAgents/com.vaax.brief.plist
+     로그:  ~/ai-news-daily-v3/data/brief/run.log (+ launchd.out/err)
+     ⚠️ 이 파일은 작성만 되어 있으며 아직 로드되지 않았다 (설치는 별도 승인 필요). -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.vaax.brief</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/woojanghoon/ai-news-daily-v3/deploy/run_daily.sh</string>
+  </array>
+  <!-- 평일(월~금) 09:00 KST -->
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict>
+      <key>Weekday</key><integer>1</integer>
+      <key>Hour</key><integer>9</integer>
+      <key>Minute</key><integer>0</integer>
+    </dict>
+    <dict>
+      <key>Weekday</key><integer>2</integer>
+      <key>Hour</key><integer>9</integer>
+      <key>Minute</key><integer>0</integer>
+    </dict>
+    <dict>
+      <key>Weekday</key><integer>3</integer>
+      <key>Hour</key><integer>9</integer>
+      <key>Minute</key><integer>0</integer>
+    </dict>
+    <dict>
+      <key>Weekday</key><integer>4</integer>
+      <key>Hour</key><integer>9</integer>
+      <key>Minute</key><integer>0</integer>
+    </dict>
+    <dict>
+      <key>Weekday</key><integer>5</integer>
+      <key>Hour</key><integer>9</integer>
+      <key>Minute</key><integer>0</integer>
+    </dict>
+  </array>
+  <key>StandardOutPath</key>
+  <string>/Users/woojanghoon/ai-news-daily-v3/data/brief/launchd.out</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/woojanghoon/ai-news-daily-v3/data/brief/launchd.err</string>
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>
