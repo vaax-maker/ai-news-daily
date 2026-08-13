@@ -60,7 +60,13 @@ a{color:inherit;text-decoration:none}
 .sent--sug{background:var(--sug)}.sent--pos{background:var(--pos)}
 .sent--x{background:var(--muted)}
 .fb__issue{font-size:19px;line-height:1.34;font-weight:750;letter-spacing:-.012em;
-  text-wrap:balance;color:#181715;margin-bottom:14px}
+  text-wrap:balance;color:#181715;margin-bottom:12px}
+.fb__meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.fb__meta .mi{font-size:11.5px;color:var(--dim);background:var(--paper);
+  border:1px solid var(--line);border-radius:8px;padding:4px 10px;display:inline-flex;
+  align-items:center;gap:6px;font-variant-numeric:tabular-nums}
+.fb__meta .mi i{font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent-ink)}
 .fb__block{position:relative;padding-left:16px;margin-top:12px}
 .fb__block::before{content:"";position:absolute;left:0;top:3px;bottom:3px;width:3px;border-radius:3px}
 .fb__content::before{background:var(--line)}
@@ -94,28 +100,29 @@ a{color:inherit;text-decoration:none}
   <div class="page">
     <header class="top">
       <div class="kick"><span class="mk"></span>VAAX · 사용자 피드백</div>
-      <h1 class="title">AI 활용은 확산되지만 사용 장벽은 여전</h1>
+      <h1 class="title">직접 써보며 한계와 연동 문제를 확인한 하루</h1>
       <div class="meta">2026.08.13 (목) · AI 실사용자 커뮤니티 대화 기반 · 개인정보 제외</div>
-      <div class="mood"><span class="rd"></span>오늘의 정서 <b>활기</b></div>
+      <div class="mood"><span class="rd"></span>오늘의 정서 <b>혼란</b></div>
     </header>
-    <p class="overview">사용자들은 AI 에이전트와 바이브코딩으로 영상·게임·업무 자동화를 직접 시도하며 높은 기대와 만족을 보였다. 한편 컨텍스트 제한, 사용량 초과, 인증·환불 문제, 외부 서비스 연동의 진입장벽에서는 불편과 혼란이 반복됐다.</p>
-    <div class="seclabel"><span class="t">Voice of Users</span><span class="ln"></span><span class="c">피드백 6건</span></div>
+    <p class="overview">사용자들은 Codex와 ChatGPT의 사용량·컨텍스트 제한, Hermes 봇의 제공자 오류, Teams 연동 과정의 불편을 직접 겪고 있었다. 한편 OpenClaw를 활용한 영상 제작과 로컬모델의 개인정보 보호 가능성에는 관심이 이어졌고, 일부 기능은 실제 사용 사례로 확장되고 있었다.</p>
+    <div class="seclabel"><span class="t">Voice of Users</span><span class="ln"></span><span class="c">피드백 7건</span></div>
     <main class="feed">
 
       <section class="fb">
         <div class="fb__row">
           <span class="fb__no">01</span>
-          <span class="chip chip--cat">만족</span>
-          <span class="chip chip--sent sent--pos">호평</span>
+          <span class="chip chip--cat">성능</span>
+          <span class="chip chip--sent sent--neg">불만</span>
         </div>
-        <h2 class="fb__issue">에이전트 활용 범위가 빠르게 확장</h2>
+        <h2 class="fb__issue">Codex 컨텍스트가 너무 빨리 줄어듦</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Codex</span><span class="mi"><i>조건</i>웹 사용, 클라우드 작업</span></div>
         <div class="fb__block fb__content">
           <span class="fb__lbl">내용</span>
-          <p>사용자들은 에이전트로 이미지와 자막이 포함된 영상을 만들고, 게임을 제작하며, 운동 데이터를 바탕으로 잔소리하는 개인 코치까지 구현했다고 말했다. 코드를 직접 보지 않는 바이브코딩과 다양한 자동화 활용 사례도 공유됐다.</p>
+          <p>Codex 데스크톱 앱에서 컨텍스트가 약 258k 정도로 표시되고 compact가 너무 자주 발생한다는 불편이 나왔다. 재부팅을 해도 문제가 계속된다는 사용자도 있었다.</p>
         </div>
         <div class="fb__block fb__comment">
           <span class="fb__lbl">해설</span>
-          <p>AI가 단순 질의응답 도구를 넘어 창작·업무·취미를 실행하는 도구로 받아들여지고 있다. 결과물의 완성도보다 직접 시도하고 확장하는 경험 자체가 사용자 만족을 이끄는 흐름이다.</p>
+          <p>긴 문서를 다루거나 클라우드 작업을 이어가는 사용자에게 컨텍스트 한도와 compact 빈도는 작업 흐름을 직접 끊는 요인이다. 인증 방식이나 환경에 따른 차이인지 사용자가 스스로 원인을 추적해야 하는 점도 부담으로 보인다.</p>
         </div>
       </section>
 
@@ -125,14 +132,15 @@ a{color:inherit;text-decoration:none}
           <span class="chip chip--cat">성능</span>
           <span class="chip chip--sent sent--neg">불만</span>
         </div>
-        <h2 class="fb__issue">컨텍스트 제한과 잦은 compact 발생</h2>
+        <h2 class="fb__issue">ChatGPT 사용량 제한이 예상보다 빨리 발생</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>ChatGPT</span><span class="mi"><i>조건</i>플러스 요금제에서 프로 요금제로 변경, 주간 사용량 7% 잔여 상태</span></div>
         <div class="fb__block fb__content">
           <span class="fb__lbl">내용</span>
-          <p>웹에서 사용하는 코딩 도구의 컨텍스트가 약 258k 정도로 표시되고 compact가 너무 자주 발생한다는 불편이 나왔다. 재부팅이나 환경 변경을 시도해도 문제가 해결되지 않았다는 반응도 있었다.</p>
+          <p>플러스 요금제에서 주간 사용량이 7% 남았다는 경고를 보고 프로로 바꿨지만, 작업을 조금 진행한 뒤 같은 사용량 초과 메시지가 다시 나타나 작업이 멈췄다는 사례가 있었다.</p>
         </div>
         <div class="fb__block fb__comment">
           <span class="fb__lbl">해설</span>
-          <p>긴 문서와 클라우드 작업을 수행하는 사용자에게 컨텍스트 용량은 작업 지속성을 좌우하는 핵심 요소다. 한도가 명확히 설명되지 않거나 compact가 예고 없이 발생하면 도구의 신뢰성과 생산성이 함께 떨어진다.</p>
+          <p>요금제를 상향했는데도 제한이 즉시 해소되지 않으면 사용자는 과금 기준과 잔여량 표시를 신뢰하기 어렵다. 작업 중단이 발생한 만큼 요금제 변경 후 한도 적용 방식과 안내가 더 명확해야 한다.</p>
         </div>
       </section>
 
@@ -140,16 +148,17 @@ a{color:inherit;text-decoration:none}
         <div class="fb__row">
           <span class="fb__no">03</span>
           <span class="chip chip--cat">비용</span>
-          <span class="chip chip--sent sent--neg">불만</span>
+          <span class="chip chip--sent sent--neg">우려</span>
         </div>
-        <h2 class="fb__issue">사용량 초과와 크레딧 처리 혼란</h2>
+        <h2 class="fb__issue">Manus 전환 과정에서 자료와 환불이 불안함</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Manus</span><span class="mi"><i>조건</i>Google 크레딧으로 결제</span></div>
         <div class="fb__block fb__content">
           <span class="fb__lbl">내용</span>
-          <p>유료 요금제에서 사용량이 남아 있는데도 모델 사용량 초과 안내가 다시 나타나 작업이 중단됐다는 경험이 공유됐다. 충전한 크레딧이 사용되지 않거나 환불 과정에서 크레딧 형태로만 처리되고, 결제 수단에 따라 환불이 어렵다는 반응도 나왔다.</p>
+          <p>회사 변경 시 이전 자료를 백업하지 않으면 삭제될 수 있다는 안내가 공유됐다. Google 크레딧으로 충전한 금액은 환불되지 않거나 크레딧으로만 환불된다는 반응도 이어졌다.</p>
         </div>
         <div class="fb__block fb__comment">
           <span class="fb__lbl">해설</span>
-          <p>사용자는 잔여 사용량과 실제 이용 가능량을 일관되게 이해하지 못하고 있다. 요금제 전환과 환불 정책이 명확하지 않으면 비용 자체보다 예측 불가능성이 더 큰 불만 요인이 된다.</p>
+          <p>서비스 운영 주체가 바뀌는 상황에서 데이터 보존과 결제 잔액 처리가 불명확하면 사용자는 기능보다 서비스 지속성을 먼저 걱정하게 된다. 백업 방법과 환불 범위를 사전에 명확히 안내할 필요가 있다.</p>
         </div>
       </section>
 
@@ -159,48 +168,69 @@ a{color:inherit;text-decoration:none}
           <span class="chip chip--cat">사용성</span>
           <span class="chip chip--sent sent--ask">궁금</span>
         </div>
-        <h2 class="fb__issue">설치와 외부 서비스 연동이 어렵다</h2>
+        <h2 class="fb__issue">Teams 연동은 웹 작동과 설정 난도가 엇갈림</h2>
+        <div class="fb__meta"><span class="mi"><i>조건</i>Microsoft 계정 필요, Teams 앱 등록, 웹 환경에서 작동</span></div>
         <div class="fb__block fb__content">
           <span class="fb__lbl">내용</span>
-          <p>에이전트를 메신저나 협업 도구에 연결하려는 사용자들이 인증 방식, 토큰, 앱 등록 절차를 묻고 있었다. 특정 협업 도구는 계정과 앱 등록이 필요했고 웹에서는 작동했지만 설정 과정이 쉽지 않았다는 경험도 공유됐다.</p>
+          <p>Teams 연동을 시도한 사용자는 Graph API로 메시지를 조회해 답하는 수준까지는 구현했지만 Microsoft 계정이 필요했고, Teams 앱 등록은 해결하지 못했다고 말했다. 웹에서는 작동했다고 설명했다.</p>
         </div>
         <div class="fb__block fb__comment">
           <span class="fb__lbl">해설</span>
-          <p>에이전트의 활용 가능성은 높지만 서비스별 인증과 설정 방식이 달라 초보자의 진입을 막고 있다. 매니페스트나 간편 연결처럼 설정을 줄이는 경험이 확산되면 실제 사용 전환율이 높아질 수 있다.</p>
+          <p>기본적인 메시지 조회·응답은 가능해도 앱 등록과 계정 설정이 진입장벽으로 남아 있다. 연동 기능의 실사용 확대를 위해서는 플랫폼별 설정 절차와 실패 원인을 더 쉽게 안내해야 한다.</p>
         </div>
       </section>
 
       <section class="fb">
         <div class="fb__row">
           <span class="fb__no">05</span>
-          <span class="chip chip--cat">신뢰</span>
-          <span class="chip chip--sent sent--neg">우려</span>
+          <span class="chip chip--cat">기능요청</span>
+          <span class="chip chip--sent sent--ask">궁금</span>
         </div>
-        <h2 class="fb__issue">AI 결과물의 품질과 워터마크 우려</h2>
+        <h2 class="fb__issue">OpenClaw 영상 제작 방식이 궁금함</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>OpenClaw</span><span class="mi"><i>모델</i>GPT</span></div>
         <div class="fb__block fb__content">
           <span class="fb__lbl">내용</span>
-          <p>오픈 모델로 작업을 전환하면 성능이 얼마나 보존될지, 이미지나 텍스트를 다시 작성하는 과정에서 워터마크가 사라질 수 있는지 궁금해하는 반응이 있었다. 텍스트 워터마크가 단어 선택 확률을 조작해 흔적을 남긴다는 설명을 두고도 추가 질문이 이어졌다.</p>
+          <p>OpenClaw와 GPT만으로 영상을 만들 수 있는지, 어떤 스킬이나 AI를 사용했는지 묻는 질문이 나왔다. 사용자는 상황을 주면 이미지를 만들고 자막을 넣어 녹화하는 방식으로 영상을 제작했으며, 생성형 영상이 아니라 화면을 렌더링하는 방식이라고 설명했다.</p>
         </div>
         <div class="fb__block fb__comment">
           <span class="fb__lbl">해설</span>
-          <p>사용자들은 비용 절감이나 생성 편의성뿐 아니라 결과물의 품질과 출처 판별 가능성까지 함께 고려하고 있다. 모델 전환과 재작성 과정에서 품질·투명성·표시 기준을 설명하는 기능이 중요해지고 있다.</p>
+          <p>사용자 관심은 영상 생성 모델 자체보다 기존 에이전트로 이미지·자막·화면 구성을 연결하는 실용적 제작 흐름에 있다. 생성형 영상과 렌더링 기반 영상의 차이를 이해하려는 요구도 함께 나타났다.</p>
         </div>
       </section>
 
       <section class="fb">
         <div class="fb__row">
           <span class="fb__no">06</span>
-          <span class="chip chip--cat">만족</span>
-          <span class="chip chip--sent sent--pos">호평</span>
+          <span class="chip chip--cat">신뢰</span>
+          <span class="chip chip--sent sent--sug">제안</span>
         </div>
-        <h2 class="fb__issue">직접 배우고 함께 만드는 경험이 인기</h2>
+        <h2 class="fb__issue">로컬 얼굴 인식 모델의 개인정보 보호 가능성</h2>
+        <div class="fb__meta"><span class="mi"><i>모델</i>로컬모델</span><span class="mi"><i>조건</i>로컬 사용</span></div>
         <div class="fb__block fb__content">
           <span class="fb__lbl">내용</span>
-          <p>오프라인 워크숍과 스킬톤에 대해 이전 참여자의 만족도가 높았다는 반응과 함께, 동료나 친구와 함께 배우면 좋겠다는 의견이 나왔다. 참가비와 할인, 상품, 음료 제공 같은 조건을 비교하며 참여를 고민하는 모습도 보였다.</p>
+          <p>얼굴을 인식해 모자이크 처리하는 로컬모델을 사용하면 개인정보 유출 우려를 줄일 수 있다는 제안이 나왔다.</p>
         </div>
         <div class="fb__block fb__comment">
           <span class="fb__lbl">해설</span>
-          <p>AI 학습이 온라인 정보 습득을 넘어 공동 제작과 실습 중심의 활동으로 확장되고 있다. 다만 비용과 혜택을 함께 따지는 반응은 사용자가 교육 상품의 실질적인 가치와 참여 부담을 동시에 평가한다는 점을 보여준다.</p>
+          <p>이미지 처리 과정에서 외부 전송을 줄이는 방식이 개인정보 보호 대안으로 받아들여지고 있다. 다만 사용자는 로컬 처리 여부와 실제 데이터 전송 범위를 확인할 수 있어야 안심하고 활용할 수 있다.</p>
+        </div>
+      </section>
+
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">07</span>
+          <span class="chip chip--cat">성능</span>
+          <span class="chip chip--sent sent--neg">우려</span>
+        </div>
+        <h2 class="fb__issue">Hermes 봇 제공자 오류로 작업이 중단됨</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Hermes 봇</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>Hermes 봇에서 “The model provider failed after retries”라는 오류가 반복되는지 묻는 사용자가 있었다. 다른 사용자는 로그를 확인하면 원인을 알 수 있을 것 같다고 답했다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>재시도 후에도 제공자 오류가 노출되면 사용자는 모델 자체 문제인지 서비스 연결 문제인지 판단하기 어렵다. 오류 원인과 복구 방법을 사용자 화면에서 구분해 제공하는 것이 안정적인 실사용에 중요하다.</p>
         </div>
       </section>
     </main>
