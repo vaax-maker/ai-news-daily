@@ -7,7 +7,7 @@
 <title>AI 뉴스 · 아카이브</title>
 <style>
 :root{--paper:#F1F2F5;--card:#FFF;--ink:#171A21;--ink-dim:#4B525E;--muted:#8B929E;
- --line:rgba(23,26,33,.11);--yeon:#059669;--yeon-br:#10B981;--yeon-tint:#EEF4E2;
+ --line:rgba(23,26,33,.19);--yeon:#0E9E7E;--yeon-br:#0E9E7E;--yeon-tint:#EFEFEC;
  --mono:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
  --kr:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -23,7 +23,7 @@ body{background:#E7E8EC;font-family:var(--kr);color:var(--ink);line-height:1.6;-
 .search{padding:16px 22px 4px}
 .search input{width:100%;font-family:var(--kr);font-size:16px;color:var(--ink);
  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;outline:none}
-.search input:focus{border-color:var(--yeon-br);box-shadow:0 0 0 3px rgba(16,185,129,.15)}
+.search input:focus{border-color:var(--yeon-br);box-shadow:0 0 0 3px rgba(14,158,126,.15)}
 .count{font-family:var(--mono);font-size:11px;color:var(--muted);padding:10px 24px 2px;letter-spacing:.05em}
 .list{padding:6px 16px 60px;display:flex;flex-direction:column;gap:12px}
 .item{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
@@ -44,11 +44,11 @@ body{background:#E7E8EC;font-family:var(--kr);color:var(--ink);line-height:1.6;-
 .story:first-child{border-top:none}
 .story .sh{font-size:14.5px;font-weight:700;line-height:1.4}
 .story .sb{font-size:13px;color:var(--ink-dim);margin-top:6px;line-height:1.6}
-.story .why{margin-top:8px;background:var(--yeon-tint);border:1px solid rgba(5,150,105,.2);
+.story .why{margin-top:8px;background:var(--yeon-tint);border:1px solid rgba(23,26,33,.16);
  border-radius:8px;padding:9px 12px;font-size:12.5px;color:var(--ink);line-height:1.55}
 .story .why b{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--yeon);display:block;margin-bottom:4px;text-transform:uppercase}
 .story a.src{font-family:var(--mono);font-size:11px;color:var(--yeon);margin-top:8px;display:inline-block;border-bottom:1px solid var(--yeon)}
-mark{background:rgba(16,185,129,.32);color:inherit;border-radius:2px}
+mark{background:rgba(14,158,126,.32);color:inherit;border-radius:2px}
 .empty{text-align:center;color:var(--muted);padding:50px 20px;font-size:14px}
 </style>
 </head>

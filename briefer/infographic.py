@@ -44,19 +44,47 @@ def _content_and_instruction(brief):
     return content, instruction
 
 
+def _top3_content_and_instruction(brief):
+    """상위 3개 기사를 '기사별 카드'로 채우는 content/instruction (2026-08-14 확정 스타일).
+
+    각 기사 = 헤드라인 + 개조식 본문(body_bullets) + '왜 중요한가'(why_bullets).
+    큰 수치 하나 강조가 아니라 각 기사 공간을 디테일하게 채운다. 세리프 마스트헤드 제목,
+    얼굴 아이콘 없음, 단일 녹색 #0E9E7E 포인트.
+    """
+    date = brief.get("date", "")
+    stories = (brief.get("stories") or [])[:3]
+    secs = []
+    for i, s in enumerate(stories, 1):
+        bb = "\n".join(f"  · {x}" for x in (s.get("body_bullets") or []))
+        wb = "\n".join(f"  → {x}" for x in (s.get("why_bullets") or []))
+        secs.append(f"[{i}] {s.get('headline', '')}\n본문:\n{bb}\n왜 중요:\n{wb}")
+    content = (f"오늘의 AI 뉴스 · {date}\n상위 3개 기사 (위 → 아래로 각 기사 카드)\n\n"
+               + "\n\n".join(secs))
+    instruction = (
+        "'오늘의 AI 뉴스' 상위 3개 기사를 위에서 아래로 3개 섹션(카드)으로 배치. 유튜브 브리프 인포그래픽 "
+        "수준으로 각 기사 공간을 '디테일하게' 채운다 — 큰 수치 하나만 강조하지 말고, 각 기사를 개조식 명사형 "
+        "요점 여러 개 + 관련 수치는 미니 표/카드/작은 차트 + 아이콘·간단 다이어그램으로 고르게 채운다. "
+        "각 섹션 = 번호 + 헤드라인(크게) + 본문 개조식 3~4개 + 수치 표/카드 + '왜 중요한가' 요점 2개. "
+        "표가 어울리는 기사는 순위/모델/점수 표로 정리. 정보량 충분히 담되 과밀하지 않게(여백, 약 80% 밀도). "
+        "★상단 제목 '오늘의 AI 뉴스'는 매우 세련되고 고급스러운 그래픽 워드마크(로고 타입)로 — 정제된 굵은 "
+        "커스텀 레터링, 고급 잡지 마스트헤드 같은 미니멀·프리미엄 감성. 절제된 기하학 포인트 1~2개, 녹색 액센트도 "
+        "딱 한 곳에만 아주 절제. 스우시·장식선·점패턴 남발 금지 — 균형 잡히고 정돈된 타이포그래피 중심. "
+        "★사람 얼굴·인물 실루엣·캐릭터 아이콘은 어디에도 넣지 말 것(도넛 차트 중앙 등 포함). 아이콘은 추상·개념형만. "
+        "★색: 배경·본문·선·아이콘·차트는 무채색(검정/짙은회색/연회색/흰색)으로만, 포인트 컬러는 오직 '녹색 #0E9E7E' "
+        "단일 톤 하나만 일관되게(여러 녹색·명암 편차 금지, 연두·파스텔·저채도 금지). 흰/회색 배경에서 고대비로 또렷이. "
+        "개조식 명사형, 표·다이어그램·카드 우선. 이모지·다색 그래프·그라디언트·과한 장식·로고·워터마크 금지. "
+        f"세로 포맷, 미니멀 에디토리얼. 날짜 뱃지 '{date}'.")
+    return content, instruction
+
+
 def generate(out_path, brief, rich=None):
     """Call the nlm-infographic API and write a portrait PNG to out_path.
 
-    rich: 대표기사 원문 종합 dict(article.synthesize_rich). 있으면 원문 기반 content,
-    없으면 뉴스 요약 기반으로 폴백.
+    2026-08-14: 상위 3개 기사를 '기사별 카드'로 채우는 확정 스타일 사용(rich 무시).
     """
     token = open(TOKEN_PATH).read().strip()
-    if rich:
-        from briefer import article
-        content, instruction = article.rich_content_and_instruction(rich, brief.get("date", ""))
-        print("[infographic] 원문 종합(rich) content 사용", file=sys.stderr)
-    else:
-        content, instruction = _content_and_instruction(brief)
+    content, instruction = _top3_content_and_instruction(brief)
+    print("[infographic] 상위 3기사 카드 스타일 content 사용", file=sys.stderr)
     body = {"method": 1, "content": content, "instruction": instruction,
             "orientation": "세로", "allow_fallback": True, "format": "png"}
     req = urllib.request.Request(URL, data=json.dumps(body).encode(),

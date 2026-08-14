@@ -9,8 +9,8 @@
 :root{
   --paper:#F1F2F5; --card:#FFFFFF; --card-2:#FAFAF8;
   --ink:#171A21; --ink-dim:#4B525E; --muted:#8B929E;
-  --line:rgba(23,26,33,.11); --line-2:rgba(23,26,33,.055);
-  --gold:#059669; --gold-br:#10B981;   /* VAAX 에메랄드 그린 (내부 변수명은 레거시) */
+  --line:rgba(23,26,33,.19); --line-2:rgba(23,26,33,.055);
+  --gold:#0E9E7E; --gold-br:#0E9E7E;   /* VAAX 에메랄드 그린 (내부 변수명은 레거시) */
   --mono:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
   --kr:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
 }
@@ -20,7 +20,7 @@ body{background:#E7E8EC;color:var(--ink);font-family:var(--kr);line-height:1.6;
   -webkit-font-smoothing:antialiased;overflow-x:hidden}
 .shell{max-width:520px;margin:0 auto;min-height:100vh;position:relative;
   background:
-    radial-gradient(120% 46% at 86% -8%, rgba(16,185,129,.13), transparent 62%),
+    radial-gradient(120% 46% at 86% -8%, rgba(14,158,126,.13), transparent 62%),
     var(--paper);
   box-shadow:0 0 0 1px var(--line-2), 0 30px 80px -40px rgba(23,26,33,.4)}
 a{color:inherit;text-decoration:none}
@@ -34,7 +34,7 @@ a{color:inherit;text-decoration:none}
 .mast .live{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted);
   display:flex;align-items:center;gap:6px}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-br);animation:pulse 2.4s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,.5)}70%{box-shadow:0 0 0 7px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(14,158,126,.5)}70%{box-shadow:0 0 0 7px rgba(14,158,126,0)}100%{box-shadow:0 0 0 0 rgba(14,158,126,0)}}
 
 /* hero */
 .hero{padding:30px 20px 22px}
@@ -75,7 +75,7 @@ a{color:inherit;text-decoration:none}
   border-radius:2px;background:var(--gold-br)}
 
 /* why (핵심) */
-.why{background:#EEF4E2;border:1px solid rgba(5,150,105,.24);
+.why{background:#EFEFEC;border:1px solid rgba(23,26,33,.16);
   border-radius:11px;padding:13px 15px}
 .why .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.17em;color:var(--gold);
   text-transform:uppercase;display:block;margin-bottom:9px}
