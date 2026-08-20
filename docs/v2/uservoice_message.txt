@@ -1,12 +1,12 @@
-[AI 보이스] 8월19일(수)
+[AI 보이스] 8월20일(목)
 
-"AI 코딩 확산 속 통제권과 신뢰의 흔들림"
+"AI가 편리함과 통제감을 동시에 흔든다"
 
-■ Claude Code 한도 혜택 연장
+■ Claude 추론 과정 복원 요구
 
-■ Cursor의 모델 전환이 불투명함
+■ Opus가 프로젝트 지시를 무시함
 
-■ Cursor 권한 설정이 계속 초기화됨
+■ Cursor 응답 지연과 모델 과부하
 
 ▸ https://vaax-maker.github.io/ai-news-daily/v2/uservoice.html
 ※ AI 실사용자 커뮤니티 대화 요약(개인정보 제외)
