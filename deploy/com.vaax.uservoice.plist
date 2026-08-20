@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 사용자 피드백 — 매일 09:30 KST 로컬 발행 잡.
+     소스: Reddit·Hacker News·긱뉴스·오픈채팅(에어 GPTers) 최근 24시간 + 날짜간 중복제거.
+     LLM=hermes-xbot(docker), 발행=vaax-maker/ai-news-daily · docs/v2/uservoice.html.
+     설치:  cp deploy/com.vaax.uservoice.plist ~/Library/LaunchAgents/
+            launchctl load ~/Library/LaunchAgents/com.vaax.uservoice.plist
+     해제:  launchctl unload ~/Library/LaunchAgents/com.vaax.uservoice.plist
+     로그:  ~/ai-news-daily-beacon/data/uservoice/run.log (+ launchd.out/err) -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.vaax.uservoice</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/woojanghoon/ai-news-daily-beacon/deploy/run_uservoice.sh</string>
+  </array>
+  <!-- 매일 09:30 KST (Weekday 미지정 → 매일) -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key><integer>9</integer>
+    <key>Minute</key><integer>30</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/woojanghoon/ai-news-daily-beacon/data/uservoice/launchd.out</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/woojanghoon/ai-news-daily-beacon/data/uservoice/launchd.err</string>
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>
