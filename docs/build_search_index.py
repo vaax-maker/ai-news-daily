@@ -236,27 +236,39 @@ def load_individual_reports(webroot):
     return items
 
 
-def reconstruct_briefs(reports):
-    """개별 리포트를 (날짜, 카테고리)로 묶어 일일 브리프(기술)/시황(경제) 집계 항목을 재구성한다.
-    2026-08-21: origin index.html이 AI 데일리 리다이렉트로 바뀌어 카드 소스가 사라짐 → 집계 항목
-    소실. 개별 리포트(파일 스캔)에서 되살린다. summary에 그날 영상 제목을 담아 집계 항목으로도
-    개별 영상이 검색된다. url은 편성페이지(오늘=라이브, 과거=AI 데일리 리다이렉트)."""
-    from collections import defaultdict
-    groups = defaultdict(list)
-    for r in reports:
-        groups[(r["date"], r.get("cat", "tech"))].append(r)
+_BRIEF_FILE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-daily-brief-(ai|econ)\.html$")
+_BTITLE_RE = re.compile(r'class="b-title"[^>]*>(.*?)</', re.S)
+
+
+def load_briefs_from_files(webroot):
+    """브리프(기술)/시황(경제) 집계 = 실제 편성페이지 파일을 진실원천으로 스캔.
+    2026-08-21: 리포트 그룹핑 재구성 방식은 (a)실제 브리프 파일이 없는 날에도 URL을 만들어 404를
+    냈고 (b)실제 존재하는 브리프 일부를 누락했다. 이제 origin의 {date}-daily-brief-{ai|econ}.html
+    파일만 항목으로 만든다 → 죽은 링크·누락 없음. summary는 그 브리프의 b-title(영상 제목)들을
+    이어 개별 영상 제목으로도 검색되게 한다. 리다이렉트 페이지는 제외."""
     out = []
-    for (date, cat), rs in sorted(groups.items(), reverse=True):
-        econ = (cat == "econ")
-        # 편성페이지를 실내용 복원했으므로(2026-08-21) 브리프 항목은 실제 브리프 페이지로 링크한다.
-        slug = f"{date}-daily-brief-{'econ' if econ else 'ai'}"
+    if not os.path.isdir(webroot):
+        return out
+    for fn in sorted(os.listdir(webroot), reverse=True):
+        m = _BRIEF_FILE_RE.match(fn)
+        if not m:
+            continue
+        try:
+            h = open(os.path.join(webroot, fn), encoding="utf-8").read()
+        except Exception:
+            continue
+        if "이전되었습니다" in h:            # 리다이렉트 페이지면 제외(실브리프만)
+            continue
+        econ = (m.group(2) == "econ")
+        titles = [_unescape(re.sub(r"<[^>]+>", "", t)) for t in _BTITLE_RE.findall(h)]
+        titles = [t for t in titles if t]
         out.append({
-            "date": date,
+            "date": m.group(1),
             "pub": "시황" if econ else "브리프",
-            "cat": cat,
-            "title": f"{'시황 브리프' if econ else 'AI·기술 브리프'} · {date}",
-            "summary": (" · ".join(r["title"] for r in rs))[:500],
-            "url": f"{BRIEF_BASE_URL}{slug}.html",
+            "cat": "econ" if econ else "tech",
+            "title": f"{'시황 브리프' if econ else 'AI·기술 브리프'} · {m.group(1)}",
+            "summary": (" · ".join(titles))[:500],
+            "url": f"{BRIEF_BASE_URL}{fn}",
         })
     return out
 
@@ -275,9 +287,9 @@ def main():
     news = load_news(beacon_docs)
     uvoice = load_uservoice(beacon_docs)
     reports = load_individual_reports(webroot)
-    # 브리프(기술)/시황(경제) 집계는 index.html 카드가 리다이렉트로 사라져(2026-08-21),
-    # 개별 리포트를 (날짜, 카테고리)로 묶어 재구성한다(load_daily_briefs는 리다이렉트라 0건).
-    daily_briefs_all = reconstruct_briefs(reports)
+    # 브리프(기술)/시황(경제) 집계 = 실제 편성페이지 파일 스캔(진실원천). 리포트 그룹핑 재구성은
+    # 404·누락을 냈다(2026-08-21 감사) → 실제 존재하는 브리프 파일만 항목화.
+    daily_briefs_all = load_briefs_from_files(webroot)
 
     # url 기준 최종 유일화(안전망) — 편성페이지·개별리포트는 카드가 중복 등록될 수 있어
     # (pub, url) 기준으로 한 번 더 거른다. 뉴스는 날짜별 1건이 모두 같은 archive.html을
