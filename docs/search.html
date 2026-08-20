@@ -65,6 +65,7 @@ a{color:inherit;text-decoration:none}
 .chip[data-pub="개별리포트"]{color:var(--c-report)}
 .chip[data-cat="tech"]{color:var(--c-brief)}
 .chip[data-cat="econ"]{color:var(--c-econ)}
+.datefilter{cursor:pointer;font-weight:700;color:var(--c-brief);text-decoration:underline;text-underline-offset:2px}
 .chip.active{background:var(--ink);color:#fff !important}
 .chip.active .dot{background:#fff;opacity:1}
 .chip .cnt{color:var(--muted);font-weight:500;font-size:11.5px}
@@ -147,6 +148,7 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
   var DATA = [];
   var activePub = 'all';
   var activeCat = null;   // '기술'=tech / '경제'=econ 카테고리 필터(브리프·시황·개별리포트 대상)
+  var dateFilter = null;  // 브리프/시황 드릴다운: 그 날짜만(URL ?date=)
   var listEl = document.getElementById('list');
   var qEl = document.getElementById('q');
   var clearEl = document.getElementById('clear');
@@ -195,6 +197,7 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
     // 칩 카운트는 pub 필터와 무관하게 검색어 기준 전체에서 집계한다.
     var searchScoped = DATA.filter(function(r){ return matches(r, ql); });
     var rows = searchScoped.filter(function(r){
+      if(dateFilter && String(r.date) !== dateFilter) return false;  // 브리프 드릴다운(그 날짜만)
       if(activeCat) return r.cat === activeCat;            // 기술/경제 = 카테고리 필터
       if(activePub !== 'all') return r.pub === activePub;  // 뉴스/보이스 = pub 필터
       return true;
@@ -205,6 +208,7 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
     CHIP_KEYS.forEach(function(p){ document.getElementById('cnt-' + p).textContent = c[p]; });
 
     rescountEl.innerHTML = '<span><b>' + rows.length + '</b>건 결과</span>' +
+      (dateFilter ? '<span class="datefilter" id="datefilter">' + fmtDate(dateFilter) + ' 브리프 ✕</span>' : '') +
       (q ? '<span>"' + esc(q) + '"</span>' : '');
 
     if(!rows.length){
@@ -233,7 +237,13 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
     chip.classList.add('active');
     if(chip.hasAttribute('data-cat')){ activeCat = chip.getAttribute('data-cat'); activePub = 'all'; }
     else { activePub = chip.getAttribute('data-pub') || 'all'; activeCat = null; }
+    dateFilter = null;   // 칩 클릭 시 브리프 드릴다운 해제
     render();
+  });
+
+  // 브리프 드릴다운 날짜 필터 해제(✕)
+  rescountEl.addEventListener('click', function(e){
+    if(e.target.id === 'datefilter'){ dateFilter = null; render(); }
   });
 
   qEl.addEventListener('input', render);
@@ -243,10 +253,27 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
     render();
   });
 
+  // URL 파라미터(?date=&cat=&q=) — 브리프/시황 항목의 드릴다운 진입점.
+  function applyUrlParams(){
+    var p = new URLSearchParams(location.search);
+    var pd = p.get('date'), pc = p.get('cat'), pq = p.get('q');
+    if(pq){ qEl.value = pq; }
+    if(pc){
+      activeCat = pc; activePub = 'all';
+      var tc = chipsEl.querySelector('.chip[data-cat="' + pc + '"]');
+      if(tc){
+        Array.prototype.forEach.call(chipsEl.querySelectorAll('.chip'), function(c){ c.classList.remove('active'); });
+        tc.classList.add('active');
+      }
+    }
+    if(pd){ dateFilter = pd; }
+  }
+
   fetch('search-index.json')
     .then(function(res){ return res.json(); })
     .then(function(data){
       DATA = data || [];
+      applyUrlParams();
       render();
     })
     .catch(function(){
