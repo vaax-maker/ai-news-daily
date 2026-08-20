@@ -161,11 +161,13 @@ def load_daily_briefs(webroot):
 _MD_RE = re.compile(r"MORNING DIGEST · \d{4}-\d{2}-\d{2} · ([^<]+)")
 _TITLE_TAG_RE = re.compile(r"<title>(.*?)</title>", re.S)
 _REPORT_FILE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-.+\.html$")
+_CAT_RE = re.compile(r'class="cat-(econ|tech)"')   # 리포트 body 카테고리(경제/기술)
 
 
 def _scan_report_files(webroot):
-    """webroot의 개별 영상 리포트 파일을 직접 스캔 → (slug, date, title, channel).
-    'MORNING DIGEST · 날짜 · 채널' 마커로 리포트만 선별(비리포트/슬라이드/index 등 제외)."""
+    """webroot의 개별 영상 리포트 파일을 직접 스캔 → (slug, date, title, channel, cat).
+    'MORNING DIGEST · 날짜 · 채널' 마커로 리포트만 선별(비리포트/슬라이드/index 등 제외).
+    카테고리는 body의 class="cat-econ"/"cat-tech"에서 뽑는다(기본=tech)."""
     if not os.path.isdir(webroot):
         return
     for fn in sorted(os.listdir(webroot)):
@@ -184,7 +186,9 @@ def _scan_report_files(webroot):
             continue
         tt = _TITLE_TAG_RE.search(h)
         title = _unescape(tt.group(1).strip()) if tt else slug
-        yield slug, m.group(1), title, _unescape(md.group(1).strip())
+        cm = _CAT_RE.search(h)
+        cat = cm.group(1) if cm else "tech"
+        yield slug, m.group(1), title, _unescape(md.group(1).strip()), cat
 
 
 def load_individual_reports(webroot):
@@ -209,25 +213,51 @@ def load_individual_reports(webroot):
         items.append({
             "date": d.group(1),
             "pub": "개별리포트",
+            "cat": "econ" if CAT_OF_DATACAT.get(dcat) == "econ" else "tech",
             "title": _unescape(t.group(1)) if t else slug,
             "summary": _unescape(s.group(1)) if s else "",
             "url": f"{BRIEF_BASE_URL}{slug}.html",
             "channel": _unescape(b.group(1)) if b else "",
         })
     # 2) 실제 리포트 파일 스캔(카드에 없는 슬러그만) — 07-25 전환 이후 갭 보완
-    for slug, date, title, channel in _scan_report_files(webroot):
+    for slug, date, title, channel, cat in _scan_report_files(webroot):
         if slug in seen:
             continue
         seen.add(slug)
         items.append({
             "date": date,
             "pub": "개별리포트",
+            "cat": cat,
             "title": title,
             "summary": "",
             "url": f"{BRIEF_BASE_URL}{slug}.html",
             "channel": channel,
         })
     return items
+
+
+def reconstruct_briefs(reports):
+    """개별 리포트를 (날짜, 카테고리)로 묶어 일일 브리프(기술)/시황(경제) 집계 항목을 재구성한다.
+    2026-08-21: origin index.html이 AI 데일리 리다이렉트로 바뀌어 카드 소스가 사라짐 → 집계 항목
+    소실. 개별 리포트(파일 스캔)에서 되살린다. summary에 그날 영상 제목을 담아 집계 항목으로도
+    개별 영상이 검색된다. url은 편성페이지(오늘=라이브, 과거=AI 데일리 리다이렉트)."""
+    from collections import defaultdict
+    groups = defaultdict(list)
+    for r in reports:
+        groups[(r["date"], r.get("cat", "tech"))].append(r)
+    out = []
+    for (date, cat), rs in sorted(groups.items(), reverse=True):
+        econ = (cat == "econ")
+        slug = f"{date}-daily-brief-{'econ' if econ else 'ai'}"
+        out.append({
+            "date": date,
+            "pub": "시황" if econ else "브리프",
+            "cat": cat,
+            "title": f"{'시황 브리프' if econ else 'AI·기술 브리프'} · {date}",
+            "summary": (" · ".join(r["title"] for r in rs))[:500],
+            "url": f"{BRIEF_BASE_URL}{slug}.html",
+        })
+    return out
 
 
 def main():
@@ -243,8 +273,10 @@ def main():
 
     news = load_news(beacon_docs)
     uvoice = load_uservoice(beacon_docs)
-    daily_briefs_all = load_daily_briefs(webroot)  # 브리프(ai) + 시황(econ) 혼재
     reports = load_individual_reports(webroot)
+    # 브리프(기술)/시황(경제) 집계는 index.html 카드가 리다이렉트로 사라져(2026-08-21),
+    # 개별 리포트를 (날짜, 카테고리)로 묶어 재구성한다(load_daily_briefs는 리다이렉트라 0건).
+    daily_briefs_all = reconstruct_briefs(reports)
 
     # url 기준 최종 유일화(안전망) — 편성페이지·개별리포트는 카드가 중복 등록될 수 있어
     # (pub, url) 기준으로 한 번 더 거른다. 뉴스는 날짜별 1건이 모두 같은 archive.html을

@@ -63,6 +63,8 @@ a{color:inherit;text-decoration:none}
 .chip[data-pub="브리프"]{color:var(--c-brief)}
 .chip[data-pub="시황"]{color:var(--c-econ)}
 .chip[data-pub="개별리포트"]{color:var(--c-report)}
+.chip[data-cat="tech"]{color:var(--c-brief)}
+.chip[data-cat="econ"]{color:var(--c-econ)}
 .chip.active{background:var(--ink);color:#fff !important}
 .chip.active .dot{background:#fff;opacity:1}
 .chip .cnt{color:var(--muted);font-weight:500;font-size:11.5px}
@@ -128,9 +130,8 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
     <div class="chip active" data-pub="all"><span>전체</span><span class="cnt" id="cnt-all"></span></div>
     <div class="chip" data-pub="뉴스"><span class="dot"></span><span>뉴스</span><span class="cnt" id="cnt-뉴스"></span></div>
     <div class="chip" data-pub="보이스"><span class="dot"></span><span>보이스</span><span class="cnt" id="cnt-보이스"></span></div>
-    <div class="chip" data-pub="브리프"><span class="dot"></span><span>브리프</span><span class="cnt" id="cnt-브리프"></span></div>
-    <div class="chip" data-pub="시황"><span class="dot"></span><span>시황</span><span class="cnt" id="cnt-시황"></span></div>
-    <div class="chip" data-pub="개별리포트"><span class="dot"></span><span>개별리포트</span><span class="cnt" id="cnt-개별리포트"></span></div>
+    <div class="chip" data-cat="tech"><span class="dot"></span><span>기술</span><span class="cnt" id="cnt-기술"></span></div>
+    <div class="chip" data-cat="econ"><span class="dot"></span><span>경제</span><span class="cnt" id="cnt-경제"></span></div>
   </div>
 
   <div class="rescount" id="rescount"></div>
@@ -142,9 +143,10 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
 
 <script>
 (function(){
-  var PUBS = ['뉴스','보이스','브리프','시황','개별리포트'];
+  var CHIP_KEYS = ['뉴스','보이스','기술','경제'];   // 칩 카운트 대상(뉴스·보이스=pub, 기술·경제=cat)
   var DATA = [];
   var activePub = 'all';
+  var activeCat = null;   // '기술'=tech / '경제'=econ 카테고리 필터(브리프·시황·개별리포트 대상)
   var listEl = document.getElementById('list');
   var qEl = document.getElementById('q');
   var clearEl = document.getElementById('clear');
@@ -175,8 +177,13 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
   }
 
   function counts(rows){
-    var c = {'뉴스':0,'보이스':0,'브리프':0,'시황':0,'개별리포트':0};
-    rows.forEach(function(r){ if(c[r.pub] !== undefined) c[r.pub]++; });
+    var c = {'뉴스':0,'보이스':0,'기술':0,'경제':0};
+    rows.forEach(function(r){
+      if(r.pub === '뉴스') c['뉴스']++;
+      else if(r.pub === '보이스') c['보이스']++;
+      if(r.cat === 'tech') c['기술']++;
+      else if(r.cat === 'econ') c['경제']++;
+    });
     return c;
   }
 
@@ -187,11 +194,15 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
 
     // 칩 카운트는 pub 필터와 무관하게 검색어 기준 전체에서 집계한다.
     var searchScoped = DATA.filter(function(r){ return matches(r, ql); });
-    var rows = activePub === 'all' ? searchScoped : searchScoped.filter(function(r){ return r.pub === activePub; });
+    var rows = searchScoped.filter(function(r){
+      if(activeCat) return r.cat === activeCat;            // 기술/경제 = 카테고리 필터
+      if(activePub !== 'all') return r.pub === activePub;  // 뉴스/보이스 = pub 필터
+      return true;
+    });
 
     var c = counts(searchScoped);
     document.getElementById('cnt-all').textContent = searchScoped.length;
-    PUBS.forEach(function(p){ document.getElementById('cnt-' + p).textContent = c[p]; });
+    CHIP_KEYS.forEach(function(p){ document.getElementById('cnt-' + p).textContent = c[p]; });
 
     rescountEl.innerHTML = '<span><b>' + rows.length + '</b>건 결과</span>' +
       (q ? '<span>"' + esc(q) + '"</span>' : '');
@@ -220,7 +231,8 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
     if(!chip) return;
     Array.prototype.forEach.call(chipsEl.querySelectorAll('.chip'), function(c){ c.classList.remove('active'); });
     chip.classList.add('active');
-    activePub = chip.getAttribute('data-pub');
+    if(chip.hasAttribute('data-cat')){ activeCat = chip.getAttribute('data-cat'); activePub = 'all'; }
+    else { activePub = chip.getAttribute('data-pub') || 'all'; activeCat = null; }
     render();
   });
 
