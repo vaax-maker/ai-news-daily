@@ -148,7 +148,9 @@ def render_daily(brief, stories, infographic_src):
     title = html.escape(brief.get("title", ""))
     summary = html.escape(brief.get("summary", ""))
     n = len(stories)
-    cover = (f'<div class="cover anim"><img src="{html.escape(infographic_src)}" '
+    # 캐시버스트(?d=날짜): 파일명이 infographic.png로 고정이라 이게 없으면 브라우저가 어제 이미지를
+    # 캐시로 계속 노출한다(og:image엔 이미 ?d=date가 있으나 화면 img엔 없어 발생). 2026-08-21 수정.
+    cover = (f'<div class="cover anim"><img src="{html.escape(infographic_src)}?d={html.escape(date)}" '
               'alt="오늘의 AI 뉴스 인포그래픽"/></div>') if infographic_src else ""
 
     cards = []
