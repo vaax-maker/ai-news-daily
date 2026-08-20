@@ -81,6 +81,9 @@ a{color:inherit;text-decoration:none}
 .item{display:block;padding:18px 0;border-bottom:1px solid var(--line);transition:opacity .12s ease}
 .item:hover .t{color:var(--accent-ink)}
 .item:hover{opacity:.94}
+/* 브리프/시황 집계 항목 — 회색 하이라이트로 개별 콘텐츠와 구분 */
+.item.brief-item{background:#eef0f4;border-radius:10px;border-bottom:none;padding:15px 16px;margin:4px 0}
+.item.brief-item:hover{opacity:1;background:#e7e9ef}
 .item .top{display:flex;align-items:center;gap:9px;margin-bottom:8px;flex-wrap:wrap}
 .pubtag{font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
 .pubtag.뉴스{color:var(--c-news)}
@@ -218,12 +221,9 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
 
     listEl.innerHTML = rows.map(function(r){
       var channel = r.channel ? '<span class="channel">' + esc(r.channel) + '</span>' : '';
-      // 브리프/시황(url=search.html?…)은 같은 페이지 드릴다운(새 탭 X). 나머지는 외부 링크라 새 탭.
-      var isDrill = (r.url || '').indexOf('search.html?') === 0;
-      var openAttr = isDrill
-        ? ' data-drill="' + esc(r.date) + '|' + esc(r.cat || 'tech') + '"'
-        : ' target="_blank" rel="noopener"';
-      return '<a class="item" href="' + esc(r.url) + '"' + openAttr + '>' +
+      // 브리프/시황 집계 항목은 회색 배경(.brief-item)으로 개별 콘텐츠와 한 화면에서 구분.
+      var cls = 'item' + ((r.pub === '브리프' || r.pub === '시황') ? ' brief-item' : '');
+      return '<a class="' + cls + '" href="' + esc(r.url) + '" target="_blank" rel="noopener">' +
         '<div class="top">' +
           '<span class="pubtag ' + r.pub + '">' + r.pub + '</span>' +
           '<span class="date">' + fmtDate(r.date) + '</span>' +

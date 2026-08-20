@@ -248,15 +248,15 @@ def reconstruct_briefs(reports):
     out = []
     for (date, cat), rs in sorted(groups.items(), reverse=True):
         econ = (cat == "econ")
-        # 편성페이지(과거)는 AI 데일리로 리다이렉트돼 클릭 시 뉴스로 새므로, 브리프 항목은
-        # 검색 자체를 그날·카테고리로 드릴다운(개별 리포트 노출)하게 자기참조 링크로 건다.
+        # 편성페이지를 실내용 복원했으므로(2026-08-21) 브리프 항목은 실제 브리프 페이지로 링크한다.
+        slug = f"{date}-daily-brief-{'econ' if econ else 'ai'}"
         out.append({
             "date": date,
             "pub": "시황" if econ else "브리프",
             "cat": cat,
             "title": f"{'시황 브리프' if econ else 'AI·기술 브리프'} · {date}",
             "summary": (" · ".join(r["title"] for r in rs))[:500],
-            "url": f"search.html?date={date}&cat={cat}",
+            "url": f"{BRIEF_BASE_URL}{slug}.html",
         })
     return out
 
