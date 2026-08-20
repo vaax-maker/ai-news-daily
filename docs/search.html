@@ -218,7 +218,12 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
 
     listEl.innerHTML = rows.map(function(r){
       var channel = r.channel ? '<span class="channel">' + esc(r.channel) + '</span>' : '';
-      return '<a class="item" href="' + esc(r.url) + '" target="_blank" rel="noopener">' +
+      // 브리프/시황(url=search.html?…)은 같은 페이지 드릴다운(새 탭 X). 나머지는 외부 링크라 새 탭.
+      var isDrill = (r.url || '').indexOf('search.html?') === 0;
+      var openAttr = isDrill
+        ? ' data-drill="' + esc(r.date) + '|' + esc(r.cat || 'tech') + '"'
+        : ' target="_blank" rel="noopener"';
+      return '<a class="item" href="' + esc(r.url) + '"' + openAttr + '>' +
         '<div class="top">' +
           '<span class="pubtag ' + r.pub + '">' + r.pub + '</span>' +
           '<span class="date">' + fmtDate(r.date) + '</span>' +
@@ -244,6 +249,20 @@ footer{padding:26px 28px;text-align:center;font-size:10.5px;color:var(--muted);
   // 브리프 드릴다운 날짜 필터 해제(✕)
   rescountEl.addEventListener('click', function(e){
     if(e.target.id === 'datefilter'){ dateFilter = null; render(); }
+  });
+
+  // 브리프/시황 클릭 → 같은 페이지에서 그날·카테고리로 드릴다운(새 탭·이동 없음)
+  listEl.addEventListener('click', function(e){
+    var a = e.target.closest('.item[data-drill]');
+    if(!a) return;
+    e.preventDefault();
+    var p = a.getAttribute('data-drill').split('|');
+    dateFilter = p[0]; activeCat = p[1] || 'tech'; activePub = 'all';
+    Array.prototype.forEach.call(chipsEl.querySelectorAll('.chip'), function(c){ c.classList.remove('active'); });
+    var tc = chipsEl.querySelector('.chip[data-cat="' + activeCat + '"]');
+    if(tc) tc.classList.add('active');
+    window.scrollTo(0, 0);
+    render();
   });
 
   qEl.addEventListener('input', render);
