@@ -15,23 +15,14 @@ SITE_URL = "https://vaax-maker.github.io/ai-news-daily/"
 
 
 def build_caption(brief):
-    """Build the sendPhoto caption from today's brief doc."""
+    """공통 캡션(AI 뉴스) — 룩앤필 통일. URL에 날짜 캐시버스터(?d=날짜)를 붙여 카톡/OG
+    프리뷰가 매일 새로 스크랩되게 함(옛 썸네일 캐시 회피, 2026-08-19)."""
+    from briefer import caption
     date = brief.get("date", "")
-    try:
-        import datetime
-        dobj = datetime.date.fromisoformat(date)
-        wk = ["월", "화", "수", "목", "금", "토", "일"][dobj.weekday()]
-        dl = f"{dobj.month}월{dobj.day}일({wk})"
-    except Exception:
-        dl = date
-
-    title = brief.get("title", "")
     stories = brief.get("stories") or []
-    bullets = [f"■ {s.get('headline', '')}" for s in stories[:3] if s.get("headline")]
-    lines = [f"[AI 뉴스] {dl}", "", f"\"{title}\"", ""]
-    lines.append("\n\n".join(bullets))   # 불릿 사이엔 빈 줄, 마지막 불릿 뒤엔 없음
-    lines.append(SITE_URL)
-    return "\n".join(lines)
+    bullets = [s.get("headline", "") for s in stories[:3] if s.get("headline")]
+    url = f"{SITE_URL}?d={date}" if date else SITE_URL
+    return caption.build("AI 뉴스", date, bullets, url, headline=brief.get("title", ""))
 
 
 def _multipart(fields, filefield, filepath):
