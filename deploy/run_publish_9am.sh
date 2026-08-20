@@ -11,11 +11,16 @@ LOG="$HOME/ai-news-daily-beacon/data/publish-9am.log"
 mkdir -p "$(dirname "$LOG")"
 {
   echo "==================== $(date '+%F %T') 9시 통합 발행 시작 ===================="
-  echo "--- [1/2] AI 뉴스 ---"
+  echo "--- [1/3] AI 뉴스 ---"
   /bin/bash "$HOME/ai-news-daily-v3/deploy/run_daily.sh"
   echo "  (AI 뉴스 rc=$?)"
-  echo "--- [2/2] AI 보이스 ---"
+  echo "--- [2/3] AI 보이스 ---"
   /bin/bash "$HOME/ai-news-daily-beacon/deploy/run_uservoice.sh"
   echo "  (AI 보이스 rc=$?)"
+  # 검색 인덱스 재생성 — 뉴스·보이스(09:00) + 개별 영상 리포트(digest 07:30)를 모두 반영.
+  # 개별 리포트는 origin(wootom/news) 발행본 기준(로컬 드리프트·죽은링크 회피). 8096이 docs/ 직접 서빙 → 즉시 반영.
+  echo "--- [3/3] 검색 인덱스 재생성 (origin 기준) ---"
+  /bin/bash "$HOME/ai-news-daily-beacon/deploy/rebuild_search_index.sh"
+  echo "  (검색 인덱스 rc=$?)"
   echo "==================== $(date '+%F %T') 9시 통합 발행 종료 ===================="
 } >> "$LOG" 2>&1

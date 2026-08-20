@@ -157,13 +157,46 @@ def load_daily_briefs(webroot):
     return items
 
 
-def load_individual_reports(webroot):
-    """개별리포트: 개별 유튜브 영상 리포트 카드 → 카드당 1건(slug 기준 유일).
+# 개별 영상 리포트 파일 판별/추출 — 'MORNING DIGEST · 날짜 · 채널' 마커를 가진 리포트만.
+_MD_RE = re.compile(r"MORNING DIGEST · \d{4}-\d{2}-\d{2} · ([^<]+)")
+_TITLE_TAG_RE = re.compile(r"<title>(.*?)</title>", re.S)
+_REPORT_FILE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-.+\.html$")
 
-    추출 로직은 nlm-infographic/deploy/backfill_calendar_briefs.py의 read_cards를
-    그대로 재사용한다(카드 블록 경계 처리 포함). daily-brief 편성페이지는 제외.
+
+def _scan_report_files(webroot):
+    """webroot의 개별 영상 리포트 파일을 직접 스캔 → (slug, date, title, channel).
+    'MORNING DIGEST · 날짜 · 채널' 마커로 리포트만 선별(비리포트/슬라이드/index 등 제외)."""
+    if not os.path.isdir(webroot):
+        return
+    for fn in sorted(os.listdir(webroot)):
+        m = _REPORT_FILE_RE.match(fn)
+        if not m:
+            continue
+        slug = fn[:-5]
+        if slug.startswith(SKIP_PREFIX) or DAILY_BRIEF_RE.match(slug):
+            continue
+        try:
+            h = open(os.path.join(webroot, fn), encoding="utf-8").read()
+        except Exception:
+            continue
+        md = _MD_RE.search(h)
+        if not md:                 # MORNING DIGEST 마커 없으면 개별 영상 리포트 아님
+            continue
+        tt = _TITLE_TAG_RE.search(h)
+        title = _unescape(tt.group(1).strip()) if tt else slug
+        yield slug, m.group(1), title, _unescape(md.group(1).strip())
+
+
+def load_individual_reports(webroot):
+    """개별리포트: 개별 유튜브 영상 리포트 → slug당 1건.
+
+    2026-08-21: 소스를 index.html 카드 + 실제 리포트 파일 스캔의 **union**으로 확장.
+    07-25 'Daily Youtube Brief 전환'(daybreak_finish.py:8) 이후 개별 카드가 index.html에
+    안 들어가므로, 카드만 읽으면 07-25 이후 리포트가 전부 누락된다. 파일을 직접 스캔해 갭을 메운다.
+    카드가 있는 슬러그는 카드 버전(요약 포함)을 우선하고, 카드에 없는 슬러그만 파일에서 채운다.
     """
     items, seen = [], set()
+    # 1) index.html 카드(옛 리포트 — 파일이 정리돼도 유지, 요약 포함)
     for slug, dcat, block in _read_cards(webroot):
         d = DATE_RE.match(slug)
         if (CAT_OF_DATACAT.get(dcat) is None or not d
@@ -180,6 +213,19 @@ def load_individual_reports(webroot):
             "summary": _unescape(s.group(1)) if s else "",
             "url": f"{BRIEF_BASE_URL}{slug}.html",
             "channel": _unescape(b.group(1)) if b else "",
+        })
+    # 2) 실제 리포트 파일 스캔(카드에 없는 슬러그만) — 07-25 전환 이후 갭 보완
+    for slug, date, title, channel in _scan_report_files(webroot):
+        if slug in seen:
+            continue
+        seen.add(slug)
+        items.append({
+            "date": date,
+            "pub": "개별리포트",
+            "title": title,
+            "summary": "",
+            "url": f"{BRIEF_BASE_URL}{slug}.html",
+            "channel": channel,
         })
     return items
 
