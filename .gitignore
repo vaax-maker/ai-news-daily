@@ -25,8 +25,8 @@ data/_snapshots/
 .omc/
 docs/briefing/
 
-# 개인/계정 식별자(카톡 오픈채팅 ID·SSH 호스트) 포함 → 공개 repo 커밋 금지, 로컬 전용 유지
-# 커밋하려면 식별자를 gitignore된 로컬 설정으로 분리 후 sanitize 필요
-briefer/uservoice.py
+# 개인/계정 식별자(카톡 오픈채팅 ID·SSH 호스트) → 공개 repo 커밋 금지, 로컬 전용
+# uservoice.py 는 sanitize 완료(식별자를 아래 _identifiers.py 로 분리)라 커밋 가능
+briefer/_identifiers.py
 src/
 scripts/
