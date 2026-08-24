@@ -85,6 +85,62 @@ def _top3_content_and_instruction(brief):
     return content, instruction
 
 
+def _hero_content_and_instruction(brief):
+    """Hero(표지) 커버 — 그날의 주요 소식을 '도식화'한 가로 16:6 콘텐츠/지시.
+
+    단순 제목 나열이 아니라 대표 소식의 사실·수치·관계를 도식(흐름도/관계도/비교/타임라인)으로
+    시각화하도록 유도. 통합 '기술 데일리' 표지에 들어가므로 포인트색=accent.tech(#2E5FE0)."""
+    date = brief.get("date", "")
+    title = brief.get("title", "")
+    summary = brief.get("summary", "")
+    stories = (brief.get("stories") or [])[:3]
+    secs = []
+    for i, s in enumerate(stories, 1):
+        fact = s.get("body", "")
+        why = s.get("takeaway") or (s.get("why_bullets") or [""])[0]
+        secs.append(f"[{i}] {s.get('headline', '')}\n  사실: {fact}\n  함의: {why}")
+    content = (f"오늘의 AI 소식 · {date} — 그날의 주요 소식(도식화 대상)\n"
+               f"오늘의 테마: {title}\n{('요약: ' + summary) if summary else ''}\n\n"
+               + "\n\n".join(secs))
+    instruction = (
+        "'오늘의 AI 소식' 통합 표지 히어로 이미지. **가로 와이드 16:6**. "
+        "★그날의 주요 소식을 '도식화'한다 — 기사 제목 단순 나열 절대 금지. "
+        "대표 소식 1건을 화면 중심의 큰 도식(흐름도·관계도·비교·타임라인 중 적합한 형태)으로 시각화하고, "
+        "핵심 수치는 큰 숫자로, 주체·원인·결과의 관계를 화살표/구조로 드러낸다. 나머지 소식은 주변 보조 요소로 작게. "
+        "★디자인=모노톤: 무채색(검정·짙은회색·연회색·흰색) 기반, 포인트 컬러는 오직 '인디고 #2E5FE0' 하나만 "
+        "핵심 수치·강조·화살표에 절제해서. 배경은 따뜻한 종이색 계열(크림·아이보리). "
+        "★사람 얼굴·인물·캐릭터·이모지·일러스트·다색 그래프·그라디언트·로고·워터마크 금지. 아이콘은 추상·개념형만. "
+        f"상단 워드마크 '오늘의 AI 소식', 부제 날짜 '{date}'. 미니멀·여백 넉넉한 프리미엄 에디토리얼. 한국어. "
+        "**가로(16:6) 포맷.**")
+    return content, instruction
+
+
+def generate_hero(out_path, brief):
+    """그날 주요 소식을 도식화한 가로 16:6 Hero 커버 PNG 생성(nlm API, method 1)."""
+    token = open(TOKEN_PATH).read().strip()
+    content, instruction = _hero_content_and_instruction(brief)
+    body = {"method": 1, "content": content, "instruction": instruction,
+            "orientation": "가로", "allow_fallback": True, "format": "png"}
+    req = urllib.request.Request(URL, data=json.dumps(body).encode(),
+            headers={"Content-Type": "application/json", "X-API-Token": token})
+    print("[hero] 도식화 커버 생성 시작(가로 16:6, 브라우저 자동화, 수십 초~수 분)...", file=sys.stderr)
+    try:
+        with urllib.request.urlopen(req, timeout=420) as r:
+            data = r.read()
+            hdr = dict(r.headers)
+    except urllib.error.HTTPError as e:
+        raise RuntimeError(f"hero HTTPError {e.code}: {e.read().decode()[:400]}")
+    open(out_path, "wb").write(data)
+    w = h = 0
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
+        w, h = struct.unpack(">II", data[16:24])
+    print(f"[hero] OK → {out_path} ({len(data)//1024}KB) {w}x{h} "
+          f"method={hdr.get('X-Infographic-Method')} "
+          f"fellback={hdr.get('X-Infographic-Fellback')} "
+          f"elapsed={hdr.get('X-Elapsed-Sec')}s", file=sys.stderr)
+    return out_path
+
+
 def generate(out_path, brief, rich=None):
     """Call the nlm-infographic API and write a portrait PNG to out_path.
 

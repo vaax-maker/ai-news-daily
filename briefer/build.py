@@ -91,6 +91,18 @@ def main():
     with open(archive_json_path, "w", encoding="utf-8") as f:
         json.dump(items, f, ensure_ascii=False, indent=1)
 
+    # Hero 표지(가로 16:6) — 그날 주요소식 '도식화'. 통합 '기술 데일리' 커버용. **맨 마지막에 생성**
+    # (뉴스 확정 후). 통합 페이지 라이브 전까진 대기 에셋(현 페이지는 세로 infographic.png 사용,
+    # 세로 원본은 클릭용으로 유지). 실패해도 뉴스 발행을 막지 않도록 예외를 삼킨다(아직 라이브 미사용).
+    hero_path = os.path.join(docs_root, "hero.png")
+    if not args.skip_infographic:
+        try:
+            infographic.generate_hero(hero_path, today)
+        except Exception as e:
+            print(f"[build] hero 생성 실패(무시, 뉴스 발행엔 영향 없음): {e}", file=sys.stderr)
+    else:
+        print("[build] hero: --skip-infographic → 스킵", file=sys.stderr)
+
     # ---- summary ----
     def sz(p):
         return f"{os.path.getsize(p) / 1024:.1f}KB" if os.path.exists(p) else "MISSING"
