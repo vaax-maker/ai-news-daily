@@ -273,6 +273,69 @@ def load_briefs_from_files(webroot):
     return out
 
 
+# --- 통합 스키마 보강(additive·비파괴) — 2026-08-24 "오늘의 AI 소식" 통합 ---
+# 기존 필드(date, pub, title, summary, url, cat?, channel?)는 그대로 두고, 목표 통합 스키마
+# 필드(id, kind, cat, source, edition)를 추가만 한다. search.html은 pub/cat을 계속 읽으므로 무해.
+#   kind: news | usecase | report   (pub → kind 매핑)
+#   cat : tech | econ                (없으면 pub 기준 채움 — 뉴스/보이스=tech, 시황=econ)
+#   source: 신 용어 피드 라벨(AI뉴스/고객사용기/오늘 유튜브/시황)  ← 제품 갈래 표기
+#   edition: 아침/저녁 (시황 분리 전이라 현재 None)
+_PUB_TO_KIND = {"뉴스": "news", "보이스": "usecase", "브리프": "report",
+                "시황": "report", "개별리포트": "report"}
+_PUB_TO_CAT = {"뉴스": "tech", "보이스": "tech", "브리프": "tech", "시황": "econ"}
+_PUB_TO_SOURCE = {"뉴스": "AI뉴스", "보이스": "고객사용기", "브리프": "오늘 유튜브",
+                  "시황": "시황", "개별리포트": "오늘 유튜브"}
+
+
+def _slug_from_url(url):
+    base = (url or "").rstrip("/").split("/")[-1]
+    return base[:-5] if base.endswith(".html") else base
+
+
+def enrich_unified(items):
+    """각 레코드에 통합 스키마 필드(id·kind·cat·source·edition)를 additive로 채운다.
+    기존 필드는 절대 덮지 않는다(cat은 없을 때만 채움)."""
+    for it in items:
+        pub = it.get("pub", "")
+        if not it.get("cat"):                       # 뉴스/보이스는 cat이 없어 채움
+            it["cat"] = _PUB_TO_CAT.get(pub, "tech")
+        it["kind"] = _PUB_TO_KIND.get(pub, "report")
+        it["source"] = _PUB_TO_SOURCE.get(pub, pub)
+        it.setdefault("edition", None)              # 아침/저녁 분리 전 → None
+        slug = _slug_from_url(it.get("url", ""))
+        if pub in ("뉴스", "보이스"):                # 날짜당 1건 → date로 유일 id
+            it["id"] = f"{_PUB_TO_KIND[pub]}:{it.get('date', '')}"
+        else:
+            it["id"] = f"{_PUB_TO_KIND.get(pub, 'report')}:{slug or it.get('date', '')}"
+    # id 유일성 보장 — 같은 날 중복 뉴스 등 충돌 시 -2, -3 접미(결정적).
+    seen = {}
+    for it in items:
+        base = it["id"]
+        seen[base] = seen.get(base, 0) + 1
+        if seen[base] > 1:
+            it["id"] = f"{base}-{seen[base]}"
+    return items
+
+
+def _news_docs(default_docs):
+    """AI 뉴스 archive의 최신 소스 docs를 고른다.
+    워크트리 분기 대비: 뉴스 생산자는 v3(feat/v3-rebuild)라 beacon(main) 사본이 며칠 뒤처질 수
+    있다. 후보 archive/index.json 중 최신 date가 가장 큰 docs를 쓴다. NEWS_DOCS로 강제 가능."""
+    env = os.environ.get("NEWS_DOCS")
+    if env:
+        return os.path.expanduser(env)
+    best, best_date = default_docs, ""
+    for c in (os.path.expanduser("~/ai-news-daily-v3/docs"), default_docs):
+        try:
+            dd = json.load(open(os.path.join(c, "archive", "index.json"), encoding="utf-8"))
+            mx = max((x.get("date", "") for x in dd), default="")
+            if mx > best_date:
+                best_date, best = mx, c
+        except Exception:
+            continue
+    return best
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--webroot", default=DEFAULT_WEBROOT,
@@ -284,7 +347,10 @@ def main():
     webroot = os.path.expanduser(a.webroot)
     beacon_docs = _HERE
 
-    news = load_news(beacon_docs)
+    news_docs = _news_docs(beacon_docs)
+    if news_docs != beacon_docs:
+        print(f"  [뉴스 소스] 최신 archive = {news_docs} (beacon 사본보다 최신)", file=sys.stderr)
+    news = load_news(news_docs)
     uvoice = load_uservoice(beacon_docs)
     reports = load_individual_reports(webroot)
     # 브리프(기술)/시황(경제) 집계 = 실제 편성페이지 파일 스캔(진실원천). 리포트 그룹핑 재구성은
@@ -314,16 +380,21 @@ def main():
 
     combined.sort(key=lambda x: x.get("date", ""), reverse=True)
 
+    # 통합 스키마 필드(id·kind·cat·source·edition) additive 보강 — 비파괴.
+    enrich_unified(combined)
+
     with open(a.out, "w", encoding="utf-8") as f:
         json.dump(combined, f, ensure_ascii=False, indent=2)
 
+    with_id = sum(1 for x in combined if x.get("id"))
+    with_cat = sum(1 for x in combined if x.get("cat"))
     print(f"[완료] {a.out}")
     print(f"  뉴스     : {len(news)}건")
     print(f"  보이스   : {len(uvoice)}건")
     print(f"  브리프   : {len(briefs)}건")
     print(f"  시황     : {len(econ)}건")
     print(f"  개별리포트: {len(reports)}건")
-    print(f"  합계     : {len(combined)}건")
+    print(f"  합계     : {len(combined)}건  (통합필드: id {with_id}/{len(combined)} · cat {with_cat}/{len(combined)})")
 
 
 if __name__ == "__main__":
