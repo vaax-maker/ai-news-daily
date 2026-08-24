@@ -101,26 +101,58 @@ def load_news(beacon_docs):
 
 
 def load_uservoice(beacon_docs):
-    """AI 보이스: docs/v2/uservoice/manifest.json → 날짜별 1건."""
+    """AI 보이스(고객사용기): manifest.json의 날짜 목록을 훑되, 날짜별로 **개별 피드백 항목**을 방출한다.
+
+    2026-08-24: 종합 1건 → **개별 N건화**. manifest.json은 날짜·제목·정서·건수만 담으므로,
+    각 날짜의 원본 데이터(../data/uservoice/{date}.json → gen.items[])를 읽어 피드백 항목
+    (issue/category/sentiment/content/commentary/sources/refs)을 하나씩 카드로 만든다.
+    개별 파일이 없거나 items가 비면 그 날짜는 manifest 종합 1건으로 **폴백**한다.
+    """
     path = os.path.join(beacon_docs, "v2", "uservoice", "manifest.json")
     if not os.path.exists(path):
         print(f"  [경고] AI 보이스 매니페스트 없음: {path}", file=sys.stderr)
         return []
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
+    # 원본 per-day 파일 디렉터리: beacon_docs(=docs)의 형제 data/uservoice/
+    data_dir = os.path.join(os.path.dirname(beacon_docs), "data", "uservoice")
     items = []
     for d in data:
         date = d.get("date", "")
-        mood = d.get("mood", "")
-        n = d.get("n", "")
-        summary = f"피드백 {n}건 · 정서 {mood}" if (n or mood) else ""
-        items.append({
-            "date": date,
-            "pub": "보이스",
-            "title": d.get("title", ""),
-            "summary": summary,
-            "url": f"{UVOICE_BASE_URL}{date}.html",
-        })
+        gen_items = []
+        day_path = os.path.join(data_dir, f"{date}.json")
+        if os.path.exists(day_path):
+            try:
+                with open(day_path, encoding="utf-8") as gf:
+                    gen_items = (json.load(gf).get("gen") or {}).get("items") or []
+            except Exception as e:
+                print(f"  [경고] 보이스 원본 파싱 실패({date}): {e}", file=sys.stderr)
+                gen_items = []
+        url = f"{UVOICE_BASE_URL}{date}.html"
+        if gen_items:                              # 개별 항목 N건
+            for i, it in enumerate(gen_items):
+                sources = it.get("sources") or []
+                items.append({
+                    "date": date,
+                    "pub": "보이스",
+                    "uv_index": i,                 # id 결정성 확보용
+                    "title": it.get("issue", "") or "",
+                    "summary": it.get("content", "") or "",
+                    "why": it.get("commentary", "") or "",
+                    "url": url,
+                    "channel": " · ".join(s for s in sources if s),
+                })
+        else:                                      # 폴백: manifest 종합 1건
+            mood = d.get("mood", "")
+            n = d.get("n", "")
+            summary = f"피드백 {n}건 · 정서 {mood}" if (n or mood) else ""
+            items.append({
+                "date": date,
+                "pub": "보이스",
+                "title": d.get("title", ""),
+                "summary": summary,
+                "url": url,
+            })
     return items
 
 
@@ -322,8 +354,9 @@ def enrich_unified(items):
         if pub == "뉴스":                            # 개별 기사 → date:n 으로 유일
             n = it.get("n")
             it["id"] = f"news:{it.get('date', '')}" + (f":{n}" if n else "")
-        elif pub == "보이스":                        # 날짜당 1건
-            it["id"] = f"usecase:{it.get('date', '')}"
+        elif pub == "보이스":                        # 날짜당 개별 항목 N건 → date:index 로 유일
+            uvi = it.get("uv_index")
+            it["id"] = f"usecase:{it.get('date', '')}" + (f":{uvi}" if uvi is not None else "")
         else:
             it["id"] = f"{_PUB_TO_KIND.get(pub, 'report')}:{slug or it.get('date', '')}"
     # id 유일성 보장 — 같은 날 중복 뉴스 등 충돌 시 -2, -3 접미(결정적).

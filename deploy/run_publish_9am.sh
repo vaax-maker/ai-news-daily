@@ -11,16 +11,21 @@ LOG="$HOME/ai-news-daily-beacon/data/publish-9am.log"
 mkdir -p "$(dirname "$LOG")"
 {
   echo "==================== $(date '+%F %T') 9시 통합 발행 시작 ===================="
-  echo "--- [1/3] AI 뉴스 ---"
+  echo "--- [1/4] AI 뉴스 ---"
   /bin/bash "$HOME/ai-news-daily-v3/deploy/run_daily.sh"
   echo "  (AI 뉴스 rc=$?)"
-  echo "--- [2/3] AI 보이스 ---"
+  echo "--- [2/4] AI 보이스 ---"
   /bin/bash "$HOME/ai-news-daily-beacon/deploy/run_uservoice.sh"
   echo "  (AI 보이스 rc=$?)"
   # 검색 인덱스 재생성 — 뉴스·보이스(09:00) + 개별 영상 리포트(digest 07:30)를 모두 반영.
   # 개별 리포트는 origin(wootom/news) 발행본 기준(로컬 드리프트·죽은링크 회피). 8096이 docs/ 직접 서빙 → 즉시 반영.
-  echo "--- [3/3] 검색 인덱스 재생성 (origin 기준) ---"
+  echo "--- [3/4] 검색 인덱스 재생성 (origin 기준) ---"
   /bin/bash "$HOME/ai-news-daily-beacon/deploy/rebuild_search_index.sh"
   echo "  (검색 인덱스 rc=$?)"
+  # 통합 페이지(오늘의 AI 소식) — 갱신된 스토어로 기술/경제/경제뉴스/검색 4페이지 렌더 + wootom/news
+  # 발행(공식 사이트). 반드시 [3/4] 뒤(스토어 신선 후). hero.png는 [1/4] build.py가 그날 생성.
+  echo "--- [4/4] 통합 페이지 렌더 + wootom 발행 ---"
+  PUBLISH_UNIFIED_PUSH=1 /bin/bash "$HOME/nlm-infographic/deploy/publish_unified.sh"
+  echo "  (통합 페이지 rc=$?)"
   echo "==================== $(date '+%F %T') 9시 통합 발행 종료 ===================="
 } >> "$LOG" 2>&1

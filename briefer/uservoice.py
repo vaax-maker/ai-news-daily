@@ -147,16 +147,21 @@ UV_TAP_JSONL = os.path.join(os.path.expanduser("~"), ".xbot", "uservoice-rooms.j
 
 
 def load_jsonl_rooms(hours: int = 24, exclude_ids=(GPTERS_CID,),
-                     per_room_chars: int = 6000) -> dict[str, str]:
+                     per_room_chars: int = 6000, seen: dict | None = None):
     """xbot tap JSONL에서 최근 N시간 오픈채팅 메시지를 방별로 읽음(DB 경합 없음).
 
-    GPTers는 에어로 따로 읽으므로 기본 제외. 반환: {방라벨: 정제 텍스트}."""
+    GPTers는 에어로 따로 읽으므로 기본 제외. seen(=이미 발행에 쓴 메시지 지문 dict)이 주어지면
+    메시지 **내용 해시로 날짜간 중복을 제거**한다(24h 창 겹침·재실행에도 같은 대화 재유입 방지).
+    반환: ({방라벨: 정제 텍스트}, [이번에 새로 쓴 메시지 지문 리스트])."""
     import time as _t
+    import hashlib
     if not os.path.exists(UV_TAP_JSONL):
-        return {}
+        return {}, []
     cutoff = _t.time() - hours * 3600
     exclude = {str(x) for x in exclude_ids}
+    seen = seen or {}
     rooms: dict[str, list] = {}
+    new_hashes: list = []
     with open(UV_TAP_JSONL, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
@@ -176,13 +181,18 @@ def load_jsonl_rooms(hours: int = 24, exclude_ids=(GPTERS_CID,),
             txt = (r.get("text") or "").strip()
             if not txt or txt.startswith("{") or _URLONLY.match(txt) or _NOISE.search(txt):
                 continue
+            norm = re.sub(r"\s+", " ", txt)[:280]
+            h = "uv:" + hashlib.md5(norm.encode("utf-8")).hexdigest()[:16]
+            if h in seen:              # 지난 날 발행에 이미 쓴 메시지 → 건너뜀(날짜간 중복 방지)
+                continue
+            new_hashes.append(h)
             label = (r.get("chat_name") or str(r.get("chat_id", "")) or "오픈채팅").strip()[:40]
-            rooms.setdefault(label, []).append(re.sub(r"\s+", " ", txt)[:280])
+            rooms.setdefault(label, []).append(norm)
     out = {}
     for label, lines in rooms.items():
         body = "\n".join(lines)
         out[label] = body[-per_room_chars:] if len(body) > per_room_chars else body
-    return out
+    return out, new_hashes
 
 
 def trim_jsonl(days: int = 5) -> None:
@@ -718,7 +728,7 @@ def main():
     gpters = load_corpus(dump_dir)
     seen_path = os.path.join(data_dir, "seen.json")
     seen = load_seen(seen_path)
-    tap_rooms = load_jsonl_rooms()                   # xbot tap 미니 방(홀딩 목록)
+    tap_rooms, new_msg_hashes = load_jsonl_rooms(seen=seen)   # xbot tap 미니 방 + 메시지 지문 날짜간 중복제거
     corpus, active, new_urls, refmap = build_multi_corpus(gpters, seen=seen, extra_rooms=tap_rooms)
     print(f"[corpus] {len(corpus)}자 · 소스 {active} · 신규 {len(new_urls)}건(중복제거 후)",
           file=sys.stderr)
@@ -772,6 +782,8 @@ def main():
         f.write(build_caption(gen, args.date))
     for u in new_urls:                          # 이번에 쓴 소스 URL 기록 → 내일 중복 제외
         seen[u] = args.date
+    for h in new_msg_hashes:                    # 카톡 방 메시지 지문 기록 → 날짜간 중복 제외
+        seen[h] = args.date
     save_seen(seen_path, seen, args.date)
     trim_jsonl(days=5)                          # tap JSONL 회전(최근 5일 유지)
     verdict = "PASS" if gen["_eval"]["passed"] else "DEGRADED"
