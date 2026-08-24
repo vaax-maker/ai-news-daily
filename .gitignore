@@ -30,3 +30,6 @@ docs/briefing/
 briefer/_identifiers.py
 src/
 scripts/
+
+# 신규 뉴스 소스 지속 중복제거 store(런타임 상태)
+data/extra_seen.json

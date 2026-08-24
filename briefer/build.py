@@ -33,8 +33,32 @@ def main():
     items = source.fetch_all()
     if not items:
         raise SystemExit("[build] daily-news 없음 — fetch_all()이 빈 목록을 반환했습니다")
-    today = items[0]
-    print(f"[build] {len(items)}건 로드, 오늘={today['date']} 「{today['title']}」", file=sys.stderr)
+
+    # "오늘의 AI 소식" 통합: 해외·전문 소스(MIT·CB Insights·aibase·AI타임스)를 aiofmodu에 합류.
+    # 평일 = aiofmodu 오늘분 + 신규 augment. 주말/aiofmodu 공백일 = 신규로 당일 골격 생성.
+    # (com.aidaily.publish는 매일 08:30 실행이라 주말도 돈다 — 골격 분기로 주말 커버.)
+    from briefer import extra_sources
+    import datetime
+    try:
+        from zoneinfo import ZoneInfo
+        _today = datetime.datetime.now(ZoneInfo("Asia/Seoul")).strftime("%Y-%m-%d")
+    except Exception:
+        _today = datetime.date.today().strftime("%Y-%m-%d")
+
+    if items[0].get("date") == _today:            # 평일: aiofmodu 오늘분 존재 → 신규 augment
+        today = items[0]
+        extra_sources.merge_into(today)           # 기본 소스당 2건 + 3층 중복제거
+    else:                                          # 주말/공백: aiofmodu 오늘분 없음 → 신규로 골격
+        _kd = f"{int(_today[5:7])}월 {int(_today[8:10])}일"
+        today = {"date": _today, "newsTime": _kd, "title": "", "summary": "", "stories": []}
+        extra_sources.merge_into(today, limit_per_source=4)   # 주말은 더 깊게
+        if not today["stories"]:
+            raise SystemExit("[build] 오늘 신규 뉴스 없음(주말/공백) — 발행 스킵")
+        today["title"] = today["stories"][0]["headline"]
+        today["summary"] = "해외·전문 소스 기반 오늘의 AI 뉴스(주말·보강)"
+        items = [today] + items                     # 아카이브에 today 편입(기존 이력 보존)
+    print(f"[build] {len(items)}건 로드, 오늘={today['date']} 「{today['title']}」 "
+          f"(스토리 {len(today['stories'])})", file=sys.stderr)
 
     print("[build] outline_stories (OpenRouter)...", file=sys.stderr)
     stories = outline.outline_stories(today["stories"])
