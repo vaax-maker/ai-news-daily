@@ -64,8 +64,16 @@ def _unescape(s):
                     .replace("&quot;", '"').replace("&#x27;", "'").replace("&#39;", "'").strip()
 
 
+def _domain(url):
+    m = re.search(r"https?://([^/]+)", url or "")
+    return m.group(1).replace("www.", "") if m else ""
+
+
 def load_news(beacon_docs):
-    """AI 뉴스: docs/archive/index.json → 날짜별 1건(그날의 종합 타이틀+요약)."""
+    """AI 뉴스: docs/archive/index.json → 그날의 개별 기사(stories[]) 각각 1건.
+
+    2026-08-24: 종합 1건 → **개별 기사 N건화**. 페이지가 'AI뉴스 5건(+신규 소스)'을 개별 카드로
+    노출하도록. url은 기사 원문, channel은 출처 도메인. stories가 없으면 종합 1건으로 폴백."""
     path = os.path.join(beacon_docs, "archive", "index.json")
     if not os.path.exists(path):
         print(f"  [경고] AI 뉴스 인덱스 없음: {path}", file=sys.stderr)
@@ -74,13 +82,21 @@ def load_news(beacon_docs):
         data = json.load(f)
     items = []
     for d in data:
-        items.append({
-            "date": d.get("date", ""),
-            "pub": "뉴스",
-            "title": d.get("title", ""),
-            "summary": d.get("summary", ""),
-            "url": NEWS_ARCHIVE_URL,
-        })
+        date = d.get("date", "")
+        stories = d.get("stories") or []
+        if not stories:                       # 스토리 없으면 종합 1건(폴백)
+            items.append({"date": date, "pub": "뉴스", "title": d.get("title", ""),
+                          "summary": d.get("summary", ""), "url": NEWS_ARCHIVE_URL})
+            continue
+        for s in stories:
+            items.append({
+                "date": date, "pub": "뉴스", "n": s.get("n", ""),
+                "title": s.get("headline", "") or d.get("title", ""),
+                "summary": s.get("body", "") or "",
+                "why": s.get("takeaway", "") or "",
+                "url": s.get("url") or NEWS_ARCHIVE_URL,
+                "channel": _domain(s.get("url", "")),
+            })
     return items
 
 
@@ -303,8 +319,11 @@ def enrich_unified(items):
         it["source"] = _PUB_TO_SOURCE.get(pub, pub)
         it.setdefault("edition", None)              # 아침/저녁 분리 전 → None
         slug = _slug_from_url(it.get("url", ""))
-        if pub in ("뉴스", "보이스"):                # 날짜당 1건 → date로 유일 id
-            it["id"] = f"{_PUB_TO_KIND[pub]}:{it.get('date', '')}"
+        if pub == "뉴스":                            # 개별 기사 → date:n 으로 유일
+            n = it.get("n")
+            it["id"] = f"news:{it.get('date', '')}" + (f":{n}" if n else "")
+        elif pub == "보이스":                        # 날짜당 1건
+            it["id"] = f"usecase:{it.get('date', '')}"
         else:
             it["id"] = f"{_PUB_TO_KIND.get(pub, 'report')}:{slug or it.get('date', '')}"
     # id 유일성 보장 — 같은 날 중복 뉴스 등 충돌 시 -2, -3 접미(결정적).
