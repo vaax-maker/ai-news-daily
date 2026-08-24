@@ -77,8 +77,12 @@ def main():
 
     print("[build] rendering daily page...", file=sys.stderr)
     daily_html = render.render_daily(today, stories, "infographic.png")
-    index_path = os.path.join(docs_root, "index.html")
-    with open(index_path, "w", encoding="utf-8") as f:
+    # Phase 3 컷오버(decouple): 데일리 페이지는 daily.html 로 분리 출력한다.
+    # index.html 은 통합 페이지(wootom 기술.html)로 가는 영구 리다이렉트 자리로 비워 두어야
+    # 하며, 매일 build 가 index.html 을 덮어써서 리다이렉트를 지우는 사고를 막는다.
+    # 데이터(archive/index.json)는 아래에서 계속 기록되어 스토어(검색 인덱스)에 공급된다.
+    daily_path = os.path.join(docs_root, "daily.html")
+    with open(daily_path, "w", encoding="utf-8") as f:
         f.write(daily_html)
 
     print("[build] rendering archive page...", file=sys.stderr)
@@ -110,7 +114,7 @@ def main():
     n_bullets = sum(1 for s in stories if s.get("body_bullets"))
     print("", file=sys.stderr)
     print("=== build summary ===", file=sys.stderr)
-    print(f"  {index_path}          {sz(index_path)}", file=sys.stderr)
+    print(f"  {daily_path}          {sz(daily_path)}", file=sys.stderr)
     print(f"  {archive_path}        {sz(archive_path)}", file=sys.stderr)
     print(f"  {archive_json_path}   {sz(archive_json_path)}", file=sys.stderr)
     print(f"  {infographic_path}    {sz(infographic_path)}", file=sys.stderr)

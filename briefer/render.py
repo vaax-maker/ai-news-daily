@@ -311,7 +311,7 @@ def render_archive(items):
     body = (f'<div class="shell">'
             f'<header class="mast"><div class="k">VAAX · AI NEWS</div>'
             f'<h1>아카이브 · 검색</h1><div class="n">지난 뉴스 {len(items)}건</div>'
-            f'<a class="back" href="index.html">← 오늘의 뉴스</a></header>'
+            f'<a class="back" href="daily.html">← 오늘의 뉴스</a></header>'
             f'<div class="search"><input id="q" type="search" placeholder="키워드 검색 (예: 오픈AI, 규제, 로봇)"></div>'
             f'<div class="count" id="count"></div>'
             f'<div class="list" id="list"></div>'

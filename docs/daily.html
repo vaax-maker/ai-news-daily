@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<title>오늘의 AI 뉴스 · 2026-08-24</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="통신 3사, AI 데이터센터에 승부 건다">
+<meta property="og:description" content="오늘은 통신 3사가 새로운 성장축으로 AI 데이터센터에 승부를 걸었다는 소식과 국내 포털 1위인 네이버가 &#x27;모두의 AI&#x27;에 불참한 속내, 그리고 엔비디아가 메모리 가격 폭등을 이유로 서버 가격을 15% 올린다는 소식 중심으로 전해드립니다.">
+<meta property="og:image" content="https://vaax-maker.github.io/ai-news-daily/infographic.png?d=2026-08-24">
+<meta property="og:url" content="https://vaax-maker.github.io/ai-news-daily/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://vaax-maker.github.io/ai-news-daily/infographic.png?d=2026-08-24">
+<style>
+:root{
+  --paper:#F7F5F1; --card:#FFFFFF; --ink:#1C1B19; --dim:#55514B; --muted:#928C83;
+  --line:rgba(28,27,25,.12); --line-2:rgba(28,27,25,.06);
+  --accent:#3450E0; --accent-ink:#25379E; --tint:#EEF0FC; --tint-line:rgba(52,80,224,.22);
+  --kr:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#EDEAE4;color:var(--ink);font-family:var(--kr);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+.shell{max-width:620px;margin:0 auto;min-height:100vh;position:relative;background:
+  radial-gradient(130% 40% at 100% -6%, rgba(52,80,224,.10), transparent 60%), var(--paper);
+  box-shadow:0 0 0 1px var(--line-2),0 30px 80px -44px rgba(28,27,25,.42)}
+a{color:inherit;text-decoration:none}
+
+/* masthead */
+.mast{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;background:rgba(247,245,241,.86);backdrop-filter:blur(14px) saturate(1.1);
+  border-bottom:1px solid var(--line)}
+.brand{font-weight:800;letter-spacing:.02em;font-size:13px}
+.brand b{color:var(--accent-ink);font-weight:800}
+.mast .live{font-size:11px;letter-spacing:.05em;color:var(--muted);
+  display:flex;align-items:center;gap:6px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,80,224,.5)}70%{box-shadow:0 0 0 7px rgba(52,80,224,0)}100%{box-shadow:0 0 0 0 rgba(52,80,224,0)}}
+
+/* hero */
+.hero{padding:34px 24px 22px;border-bottom:1px solid var(--line)}
+.kick{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.kick .mk{display:inline-block;width:16px;height:2px;background:var(--accent);vertical-align:middle;margin-right:8px;border-radius:2px}
+.hero h1{margin-top:14px;font-size:clamp(26px,7vw,34px);line-height:1.18;font-weight:800;
+  letter-spacing:-.022em;text-wrap:balance;color:#191816}
+.meta{margin-top:14px;font-size:12px;letter-spacing:.01em;color:var(--muted)}
+.summary{margin-top:16px;color:var(--dim);font-size:15.5px;line-height:1.74}
+.cover{margin:20px 0 2px;border-radius:16px;overflow:hidden;
+  border:1px solid var(--line);background:var(--card);
+  box-shadow:0 1px 2px rgba(28,27,25,.05),0 18px 34px -22px rgba(28,27,25,.32)}
+.cover img{width:100%;height:auto;display:block}
+
+/* section label */
+.seclabel{padding:20px 24px 4px;display:flex;align-items:baseline;gap:12px}
+.seclabel .t{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.seclabel .ln{height:1px;flex:1;background:var(--line)}
+.seclabel .c{font-size:11px;color:var(--accent);letter-spacing:.06em}
+
+/* stories */
+.stories{padding:6px 16px 8px}
+.story{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;
+  margin:12px 0;box-shadow:0 1px 2px rgba(28,27,25,.04),0 16px 30px -26px rgba(28,27,25,.4)}
+.st-row{display:flex;align-items:center;gap:8px;margin-bottom:11px}
+.st-no{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.04em;
+  font-variant-numeric:tabular-nums}
+.st-head{font-size:19px;line-height:1.34;font-weight:750;letter-spacing:-.012em;
+  text-wrap:balance;color:#181715;margin-bottom:12px}
+
+/* 개조식 bullets */
+.pts{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.pts li{position:relative;padding-left:16px;font-size:14.5px;line-height:1.6;color:var(--dim)}
+.pts li::before{content:"";position:absolute;left:1px;top:.66em;width:7px;height:2px;
+  border-radius:2px;background:var(--accent)}
+
+/* why (핵심) */
+.why{margin-top:12px;padding:13px 15px;background:var(--tint);border:1px solid var(--tint-line);
+  border-radius:11px}
+.why .lbl{display:block;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent-ink);margin-bottom:9px}
+.why ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.why li{position:relative;padding-left:15px;font-size:13.5px;line-height:1.56;color:#3f3a34}
+.why li::before{content:"\203A";position:absolute;left:2px;top:-.02em;color:var(--accent);font-weight:700}
+.src{margin-top:13px;display:inline-flex;align-items:center;gap:7px;
+  font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--accent-ink);
+  border-bottom:1px solid var(--tint-line);padding-bottom:2px}
+.src .arw{transition:transform .2s}
+.src:active .arw,.src:hover .arw{transform:translateX(3px)}
+
+/* footer */
+.foot{padding:26px 24px 46px;border-top:1px solid var(--line);margin-top:10px}
+.srchbtn{display:flex;align-items:center;justify-content:space-between;width:100%;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 16px;
+  font-size:12.5px;letter-spacing:.02em;color:var(--dim);
+  box-shadow:0 1px 2px rgba(28,27,25,.04),0 10px 24px -18px rgba(28,27,25,.3)}
+.srchbtn b{color:var(--accent-ink);font-weight:700}
+.credit{margin-top:20px;font-size:11.5px;letter-spacing:.02em;color:var(--muted);line-height:1.95}
+.credit .tag{color:var(--dim);font-weight:700}
+
+@media (prefers-reduced-motion:no-preference){
+  .anim{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero .anim{animation-delay:.05s}
+  .story{opacity:0;transform:translateY(12px);animation:rise .6s cubic-bezier(.2,.7,.2,1) forwards}
+  .story:nth-child(1){animation-delay:.10s}.story:nth-child(2){animation-delay:.17s}
+  .story:nth-child(3){animation-delay:.24s}.story:nth-child(4){animation-delay:.31s}
+  .story:nth-child(5){animation-delay:.38s}
+  @keyframes rise{to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+
+  <div class="shell">
+    <header class="mast">
+      <div class="brand">AI <b>데일리</b></div>
+      <div class="live"><span class="dot"></span>오늘의 뉴스</div>
+    </header>
+    <section class="hero">
+      <div class="kick"><span class="mk"></span>VAAX · 오늘의 AI 뉴스</div>
+      <h1 class="anim">통신 3사, AI 데이터센터에 승부 건다</h1>
+      <div class="meta">2026 · 08.24 · 월요일</div>
+      <p class="summary anim">오늘은 통신 3사가 새로운 성장축으로 AI 데이터센터에 승부를 걸었다는 소식과 국내 포털 1위인 네이버가 &#x27;모두의 AI&#x27;에 불참한 속내, 그리고 엔비디아가 메모리 가격 폭등을 이유로 서버 가격을 15% 올린다는 소식 중심으로 전해드립니다.</p>
+      <div class="cover anim"><img src="infographic.png?d=2026-08-24" alt="오늘의 AI 뉴스 인포그래픽"/></div>
+    </section>
+    <div class="seclabel"><span class="t">Today's Top Stories</span><span class="ln"></span><span class="c">5건</span></div>
+    <main class="stories">
+      
+      <article class="story">
+        <div class="st-row"><span class="st-no">01</span></div>
+        <h2 class="st-head">무선 성장 멈추자 AI로… 통신 3사, AIDC에 승부 건다</h2>
+        <ul class="pts"><li>무선통신 매출·ARPU 성장 정체, AIDC 부상</li><li>2분기 AIDC/DC 매출 3사 모두 두 자릿수 성장</li><li>3사, 대규모 증설·전력·부지 확보 경쟁</li></ul>
+        <div class="why"><span class="lbl">왜 중요한가</span><ul><li>AIDC 승부처, 전력·부지·고밀도 냉각·고객 확보</li><li>AI 인프라 투자 재원, 무선사업 현금흐름 의존</li></ul></div>
+        <a class="src" href="https://n.news.naver.com/mnews/article/001/0016265114?sid=105" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
+      </article>
+
+      <article class="story">
+        <div class="st-row"><span class="st-no">02</span></div>
+        <h2 class="st-head">네이버가 ‘모두의 AI’에 불참한 속내</h2>
+        <ul class="pts"><li>‘모두의 AI’ 공모에 6개사 참여, 네이버 불참</li><li>네이버, 하이퍼클로바X 기반 ‘AI 탭’ 이미 운영</li><li>타사 AI 모델 일정 비율 활용 조건, 참여 유인 저하</li></ul>
+        <div class="why"><span class="lbl">왜 중요한가</span><ul><li>무료 여부보다 추론 정확도·서비스 품질이 선택 기준</li><li>국산 AI 협업과 글로벌 수준 성능 구현이 관건</li></ul></div>
+        <a class="src" href="https://n.news.naver.com/mnews/article/023/0003994391?sid=105" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
+      </article>
+
+      <article class="story">
+        <div class="st-row"><span class="st-no">03</span></div>
+        <h2 class="st-head">&quot;AI 붐 청구서 도착&quot;…엔비디아 서버값 15% 오른다</h2>
+        <ul class="pts"><li>엔비디아, AI 서버 가격 15% 이상 인상 통보</li><li>내년 초 출하 베라 루빈·그레이스 블랙웰 대상</li><li>HBM·D램·낸드 수요 폭증, 메모리 협상력 상승</li></ul>
+        <div class="why"><span class="lbl">왜 중요한가</span><ul><li>AI 산업 병목, GPU에서 메모리 공급망으로 이동</li><li>서버값 약 17% 상승 시 1GW 센터비 최소 50억달러 증가</li></ul></div>
+        <a class="src" href="https://n.news.naver.com/mnews/article/015/0005323565?sid=105" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
+      </article>
+
+      <article class="story">
+        <div class="st-row"><span class="st-no">04</span></div>
+        <h2 class="st-head">&quot;예쁜 보고서보다 AI가 읽는 보고서&quot;...행안부 &#x27;AI 친화 문서&#x27; 도입</h2>
+        <ul class="pts"><li>행안부, ‘AI 친화적 보고서 작성 방식’ 전면 도입</li><li>복잡한 표·셀 병합·과도한 꾸미기 축소</li><li>서술형 문장·표준 구조 적용, 실·국장 보고까지 확대</li></ul>
+        <div class="why"><span class="lbl">왜 중요한가</span><ul><li>문서 기준, 사람이 보기 좋은 형식에서 AI 이해 중심 이동</li><li>시범운영서 작성시간 단축·AI 요약·PPT 정확도 개선</li></ul></div>
+        <a class="src" href="https://n.news.naver.com/mnews/article/092/0002434766?sid=105" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
+      </article>
+
+      <article class="story">
+        <div class="st-row"><span class="st-no">05</span></div>
+        <h2 class="st-head">“모두의 평등”이라던 AI…현실은 그들만의 잔치?</h2>
+        <ul class="pts"><li>AI 확산, 부와 기회의 부유층·대도시 집중 우려</li><li>AI 주가 상승 혜택, 주식 보유 상위 계층 집중</li><li>자동화, 중산층 사무직·전문직까지 위협</li></ul>
+        <div class="why"><span class="lbl">왜 중요한가</span><ul><li>AI 생산성과 부의 소유·분배가 핵심 문제</li><li>조세·재분배·교육·고용 정책이 결과 좌우</li></ul></div>
+        <a class="src" href="https://n.news.naver.com/mnews/article/056/0012242640?sid=105" target="_blank" rel="noopener">원문 기사 <span class="arw">→</span></a>
+      </article>
+    </main>
+    <footer class="foot">
+      <a class="srchbtn" href="archive.html"><span>지난 뉴스 <b>검색</b> · 아카이브</span><span>→</span></a>
+      <div class="credit">
+        <span class="tag">VAAX · AI 데일리</span><br>
+        매 평일 오전 발행 · AI 자동 요약
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
