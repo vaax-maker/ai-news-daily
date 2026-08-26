@@ -1,12 +1,12 @@
-[AI 보이스] 8월26일(수)
+[AI 보이스] 8월27일(목)
 
-"사용 한도와 비용 부담 속 활용법 탐색"
+"AI 도구의 속도·비용·응답 품질 점검"
 
-■ Claude 답변이 지나치게 장황함
+■ Claude가 확인 없이 실행함
 
-■ ChatGPT 사용 한도 재등장
+■ Claude의 장황하고 부자연스러운 말투
 
-■ 에이전트 토큰 비용 통제
+■ Claude 요금제 간 사용량 가치 비교
 
 ▸ https://vaax-maker.github.io/ai-news-daily/v2/uservoice.html
 ※ AI 실사용자 커뮤니티 대화 요약(개인정보 제외)
