@@ -69,6 +69,24 @@ def _domain(url):
     return m.group(1).replace("www.", "") if m else ""
 
 
+# 출처 도메인 → 알아보기 쉬운 소스 이름(기사 출처 명시용). 신규 4개 소스 + 네이버.
+# 매핑에 없으면 도메인 그대로. (2026-08-26 우장훈: "기사는 출처를 명시해야" — MIT/CB 등이
+# technologyreview.com 도메인으로만 보여 인식 안 됨 → 소스명으로 표기)
+_SOURCE_NAME = {
+    "technologyreview.com": "MIT Tech Review",
+    "cbinsights.com": "CB Insights",
+    "aibase.com": "aibase",
+    "aitimes.com": "AI타임스",
+    "n.news.naver.com": "네이버뉴스",
+    "news.naver.com": "네이버뉴스",
+}
+
+
+def _source_name(url):
+    """기사 url → 출처 표기명(신규 소스는 브랜드명, 그 외는 도메인)."""
+    return _SOURCE_NAME.get(_domain(url), _domain(url))
+
+
 def load_news(beacon_docs):
     """AI 뉴스: docs/archive/index.json → 그날의 개별 기사(stories[]) 각각 1건.
 
@@ -95,7 +113,7 @@ def load_news(beacon_docs):
                 "summary": s.get("body", "") or "",
                 "why": s.get("takeaway", "") or "",
                 "url": s.get("url") or NEWS_ARCHIVE_URL,
-                "channel": _domain(s.get("url", "")),
+                "channel": _source_name(s.get("url", "")),
             })
     return items
 
