@@ -765,6 +765,17 @@ def main():
             gen["overview"] = "오늘 실사용자 사이에서는 " + ", ".join(heads) + " 등이 화두였습니다."
         print("[eval] ⚠ 미통과 → 보수 폴백(개관 재구성, 사람 검토)", file=sys.stderr)
 
+    # 각 항목의 대표 원문 URL(refs→refmap) 해석 — 통합 카드가 아카이브 페이지가 아니라
+    # 원문(Reddit/HN/긱뉴스)으로 바로 링크되게. refs 없는 항목(오픈채팅 등)은 "" → 폴백.
+    for it in gen.get("items", []):
+        purl = ""
+        for rid in (it.get("refs") or []):
+            ref = refmap.get(str(rid).strip())
+            if ref and ref.get("url"):
+                purl = ref["url"]
+                break
+        it["primary_url"] = purl
+
     payload = {"date": args.date, "corpus_len": len(corpus), "sources": active, "gen": gen}
     for path in (os.path.join(data_dir, f"{args.date}.json"), os.path.join(data_dir, "latest.json")):
         with open(path, "w", encoding="utf-8") as f:

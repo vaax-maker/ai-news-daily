@@ -157,7 +157,8 @@ def load_uservoice(beacon_docs):
                     "title": it.get("issue", "") or "",
                     "summary": it.get("content", "") or "",
                     "why": it.get("commentary", "") or "",
-                    "url": url,
+                    # 원문(Reddit/HN/긱뉴스) 직링크; 없으면(오픈채팅 등) 그날 아카이브 폴백.
+                    "url": it.get("primary_url") or url,
                     "channel": " · ".join(s for s in sources if s),
                 })
         else:                                      # 폴백: manifest 종합 1건
