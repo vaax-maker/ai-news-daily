@@ -1,12 +1,12 @@
-[AI 보이스] 8월28일(금)
+[AI 보이스] 8월29일(토)
 
-"AI 성능은 기대, 비용·접근성은 혼란"
+"AI의 장황함과 비용·신뢰 문제가 부상"
 
-■ Claude 성능 급상승 체감
+■ Claude가 간단한 수정도 장황하게 설명
 
-■ Claude 쿼터 소진 원인 파악 어려움
+■ Cursor 사용량과 초과 청구가 불안정
 
-■ 윈도우 Claude 디스패치가 안 보임
+■ Cursor 요금제와 모델 설정이 혼란스러움
 
 ▸ https://vaax-maker.github.io/ai-news-daily/v2/uservoice.html
 ※ AI 실사용자 커뮤니티 대화 요약(개인정보 제외)
