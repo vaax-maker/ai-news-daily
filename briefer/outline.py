@@ -25,7 +25,7 @@ def _call(stories):
             "messages": [{"role": "system", "content": SYS},
                          {"role": "user", "content": user}]}
     req = urllib.request.Request(URL, data=json.dumps(body).encode(),
-            headers={"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"})
+            headers={"Authorization": f"Bearer {KEY}", "Content-Type": "application/json", "HTTP-Referer": "https://ai-news-daily.local", "X-Title": "ai-news-daily-beacon"})
     with urllib.request.urlopen(req, timeout=90) as r:
         res = json.loads(r.read().decode())
     return res["choices"][0]["message"]["content"]
