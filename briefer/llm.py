@@ -60,7 +60,7 @@ def complete(system, user, models=None, temperature=0.2, timeout=90, retries=2,
                 req = urllib.request.Request(
                     URL, data=json.dumps(body).encode(),
                     headers={"Authorization": f"Bearer {KEY}",
-                             "Content-Type": "application/json", "HTTP-Referer": "https://ai-news-daily.local", "X-Title": "ai-news-daily-beacon"})
+                             "Content-Type": "application/json", "HTTP-Referer": "https://ai-news-daily.local", "X-Title": "aidaily"})
                 with urllib.request.urlopen(req, timeout=timeout) as r:
                     res = json.loads(r.read().decode())
                 txt = res["choices"][0]["message"]["content"]

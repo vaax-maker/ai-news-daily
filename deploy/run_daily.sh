@@ -3,7 +3,7 @@
 # main 추적 체크아웃에서 fetch→outline→render 후 docs/ 를 main 에 커밋·푸시
 # (→ GitHub Pages 공개), 이어서 텔레그램으로 인포그래픽+캡션 발송.
 set -uo pipefail
-REPO="$HOME/ai-news-daily-v3"             # main 추적 체크아웃(git worktree)
+REPO="$HOME/ai-news-daily-beacon"             # main 추적 체크아웃(git worktree)
 PY="/opt/homebrew/bin/python3"
 export PATH="/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:$PATH"
 LOG="$REPO/data/brief/run.log"

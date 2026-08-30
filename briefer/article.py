@@ -80,7 +80,7 @@ def synthesize_rich(stories, top_n=3):
     try:
         req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions",
                 data=json.dumps(body).encode(),
-                headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json", "HTTP-Referer": "https://ai-news-daily.local", "X-Title": "ai-news-daily-beacon"})
+                headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json", "HTTP-Referer": "https://ai-news-daily.local", "X-Title": "aidaily"})
         with urllib.request.urlopen(req, timeout=120) as r:
             txt = json.loads(r.read().decode())["choices"][0]["message"]["content"]
         txt = re.sub(r"```(json)?", "", txt).replace("```", "").strip()
