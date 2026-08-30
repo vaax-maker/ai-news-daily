@@ -12,7 +12,7 @@ mkdir -p "$(dirname "$LOG")"
 {
   echo "==================== $(date '+%F %T') 9시 통합 발행 시작 ===================="
   echo "--- [1/4] AI 뉴스 ---"
-  /bin/bash "$HOME/ai-news-daily-v3/deploy/run_daily.sh"
+  /bin/bash "$HOME/ai-news-daily-beacon/deploy/run_daily.sh"
   echo "  (AI 뉴스 rc=$?)"
   echo "--- [2/4] AI 보이스 ---"
   /bin/bash "$HOME/ai-news-daily-beacon/deploy/run_uservoice.sh"

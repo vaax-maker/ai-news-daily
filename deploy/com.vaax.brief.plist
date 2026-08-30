@@ -6,7 +6,7 @@
      설치:  cp deploy/com.vaax.brief.plist ~/Library/LaunchAgents/
             launchctl load ~/Library/LaunchAgents/com.vaax.brief.plist
      해제:  launchctl unload ~/Library/LaunchAgents/com.vaax.brief.plist
-     로그:  ~/ai-news-daily-v3/data/brief/run.log (+ launchd.out/err)
+     로그:  ~/ai-news-daily-beacon/data/brief/run.log (+ launchd.out/err)
      ⚠️ 이 파일은 작성만 되어 있으며 아직 로드되지 않았다 (설치는 별도 승인 필요). -->
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -16,7 +16,7 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/woojanghoon/ai-news-daily-v3/deploy/run_daily.sh</string>
+    <string>/Users/woojanghoon/ai-news-daily-beacon/deploy/run_daily.sh</string>
   </array>
   <!-- 평일(월~금) 09:00 KST -->
   <key>StartCalendarInterval</key>
@@ -48,9 +48,9 @@
     </dict>
   </array>
   <key>StandardOutPath</key>
-  <string>/Users/woojanghoon/ai-news-daily-v3/data/brief/launchd.out</string>
+  <string>/Users/woojanghoon/ai-news-daily-beacon/data/brief/launchd.out</string>
   <key>StandardErrorPath</key>
-  <string>/Users/woojanghoon/ai-news-daily-v3/data/brief/launchd.err</string>
+  <string>/Users/woojanghoon/ai-news-daily-beacon/data/brief/launchd.err</string>
   <key>RunAtLoad</key>
   <false/>
 </dict>
