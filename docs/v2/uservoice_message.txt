@@ -1,12 +1,12 @@
-[AI 보이스] 9월5일(토)
+[AI 보이스] 9월6일(일)
 
-"AI는 강해졌지만 현장 제약은 늘었다"
+"고성능 AI의 대가, 비용과 통제"
 
-■ Astra 접근과 리셋권이 혼란스럽다
+■ Astra는 모호한 지시를 과하게 확장
 
-■ Claude 세션 원격 접근이 불안하다
+■ Astra가 작업 두 개 만에 토큰 소진
 
-■ Suno 다운로드 제한에 우회법이 필요하다
+■ Fable 5.1 사용량이 너무 빨리 소진
 
 ▸ https://vaax-maker.github.io/ai-news-daily/v2/uservoice.html
 ※ AI 실사용자 커뮤니티 대화 요약(개인정보 제외)
