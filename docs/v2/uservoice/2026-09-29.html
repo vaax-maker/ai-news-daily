@@ -89,6 +89,10 @@ a{color:inherit;text-decoration:none}
   align-items:center;gap:5px}
 .fb__src a .ext{font-size:10px;opacity:.7}
 .fb__src .noext{font-size:12px;color:var(--muted)}
+.source-group{margin:22px 0 30px}
+.source-group__head{display:flex;align-items:baseline;gap:9px;padding:0 4px 9px;border-bottom:1px solid var(--line)}
+.source-group__name{font-size:13px;font-weight:800;color:var(--accent-ink);letter-spacing:-.01em}
+.source-group__note{font-size:10.5px;color:var(--muted);font-weight:650}
 
 /* footer */
 .foot{padding:26px 24px 46px;border-top:1px solid var(--line);margin-top:10px;
@@ -117,8 +121,11 @@ a{color:inherit;text-decoration:none}
       <div class="mood"><span class="rd"></span>오늘의 정서 <b>탐색</b></div>
     </header>
     <p class="overview">사용자들은 AI를 실제 작업에 연결하며 보안 권한, 결과 검증, 생성물의 일관성, 사용량과 비용 같은 운영 문제를 따져봤습니다. 특히 에이전트가 통제를 우회할 가능성에 대한 우려와, 영상·코딩 도구를 목적에 맞게 조합하려는 실용적 질문이 두드러졌습니다.</p>
-    <div class="seclabel"><span class="t">Voice of Users</span><span class="ln"></span><span class="c">피드백 8건</span></div>
+    <div class="seclabel"><span class="t">Voice by Source</span><span class="ln"></span><span class="c">출처별 주요 주제 · 최대 4개</span></div>
     <main class="feed">
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">HN</span><span class="source-group__note">주요 주제 1개</span></div>
 
       <section class="fb">
         <div class="fb__row">
@@ -137,12 +144,16 @@ a{color:inherit;text-decoration:none}
           <span class="fb__lbl">해설</span>
           <p>에이전트의 능력보다 권한 경계와 감독 방식을 먼저 설계해야 한다는 사용자 관심이 드러납니다. 사용자가 실제로 겪은 사고와 훈련·평가 사례는 구분해 해석할 필요가 있습니다.</p>
         </div>
-        <div class="fb__src"><span class="fb__srclbl">출처</span><a href="https://news.ycombinator.com/item?id=49873303" target="_blank" rel="noopener">HN <span class="ext">↗</span></a></div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><a href="https://news.ycombinator.com/item?id=49873303" target="_blank" rel="noopener">관련 출처 <span class="ext">↗</span></a></div>
       </section>
+      </section>
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">긱뉴스</span><span class="source-group__note">주요 주제 1개</span></div>
 
       <section class="fb">
         <div class="fb__row">
-          <span class="fb__no">02</span>
+          <span class="fb__no">01</span>
           <span class="chip chip--cat">신뢰</span>
           <span class="chip chip--sent sent--neg">우려</span>
           <span class="chip chip--src">긱뉴스</span><span class="chip chip--src">오픈채팅</span>
@@ -157,12 +168,16 @@ a{color:inherit;text-decoration:none}
           <span class="fb__lbl">해설</span>
           <p>생성 속도가 빨라져도 결과를 이해하고 검증하는 비용은 사라지지 않습니다. 팀의 이해와 별도 검수 절차를 제품·개발 과정에 포함해야 한다는 신호입니다.</p>
         </div>
-        <div class="fb__src"><span class="fb__srclbl">출처</span><a href="https://news.hada.io/topic?id=34439" target="_blank" rel="noopener">긱뉴스 <span class="ext">↗</span></a><a href="https://news.hada.io/topic?id=34435" target="_blank" rel="noopener">긱뉴스 <span class="ext">↗</span></a></div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><a href="https://news.hada.io/topic?id=34439" target="_blank" rel="noopener">관련 출처 <span class="ext">↗</span></a></div>
       </section>
+      </section>
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">오픈채팅</span><span class="source-group__note">주요 주제 4개</span></div>
 
       <section class="fb">
         <div class="fb__row">
-          <span class="fb__no">03</span>
+          <span class="fb__no">01</span>
           <span class="chip chip--cat">성능</span>
           <span class="chip chip--sent sent--neg">불만</span>
           <span class="chip chip--src">오픈채팅</span><span class="chip chip--src">오픈채팅</span>
@@ -179,10 +194,9 @@ a{color:inherit;text-decoration:none}
         </div>
         <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 비공개 대화</span></div>
       </section>
-
       <section class="fb">
         <div class="fb__row">
-          <span class="fb__no">04</span>
+          <span class="fb__no">02</span>
           <span class="chip chip--cat">비용</span>
           <span class="chip chip--sent sent--neg">불만</span>
           <span class="chip chip--src">오픈채팅</span><span class="chip chip--src">오픈채팅</span>
@@ -199,10 +213,9 @@ a{color:inherit;text-decoration:none}
         </div>
         <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 비공개 대화</span></div>
       </section>
-
       <section class="fb">
         <div class="fb__row">
-          <span class="fb__no">05</span>
+          <span class="fb__no">03</span>
           <span class="chip chip--cat">사용성</span>
           <span class="chip chip--sent sent--ask">궁금</span>
           <span class="chip chip--src">오픈채팅</span><span class="chip chip--src">오픈채팅</span>
@@ -219,10 +232,9 @@ a{color:inherit;text-decoration:none}
         </div>
         <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 비공개 대화</span></div>
       </section>
-
       <section class="fb">
         <div class="fb__row">
-          <span class="fb__no">06</span>
+          <span class="fb__no">04</span>
           <span class="chip chip--cat">사용성</span>
           <span class="chip chip--sent sent--ask">궁금</span>
           <span class="chip chip--src">오픈채팅</span>
@@ -239,50 +251,11 @@ a{color:inherit;text-decoration:none}
         </div>
         <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 비공개 대화</span></div>
       </section>
-
-      <section class="fb">
-        <div class="fb__row">
-          <span class="fb__no">07</span>
-          <span class="chip chip--cat">사용성</span>
-          <span class="chip chip--sent sent--ask">궁금</span>
-          <span class="chip chip--src">오픈채팅</span><span class="chip chip--src">오픈채팅</span>
-        </div>
-        <h2 class="fb__issue">Muse를 한국에서 설치할 수 있는지 묻다</h2>
-        <div class="fb__meta"><span class="mi"><i>서비스</i>Muse</span><span class="mi"><i>조건</i>한국에서 설치 시도, 미국 VPN 사용</span></div>
-        <div class="fb__block fb__content">
-          <span class="fb__lbl">내용</span>
-          <p>사용자들은 Muse를 어떻게 설치하는지, 미국 VPN으로 접속하면 되는지 물었습니다. 한 대화에서는 미국·캐나다 외 지역에서의 접근 제한과 VPN 또는 앱스토어 국가 변경 방법이 안내됐습니다.</p>
-        </div>
-        <div class="fb__block fb__comment">
-          <span class="fb__lbl">해설</span>
-          <p>관심 있는 서비스라도 지역 제한이 있으면 국내 사용자는 설치 단계부터 비공식 우회 방법을 찾게 됩니다. 이용 가능 지역과 정식 지원 범위를 명확히 알리는 것이 혼란을 줄입니다.</p>
-        </div>
-        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 비공개 대화</span></div>
-      </section>
-
-      <section class="fb">
-        <div class="fb__row">
-          <span class="fb__no">08</span>
-          <span class="chip chip--cat">사용성</span>
-          <span class="chip chip--sent sent--ask">궁금</span>
-          <span class="chip chip--src">오픈채팅</span><span class="chip chip--src">오픈채팅</span>
-        </div>
-        <h2 class="fb__issue">AI 교육을 무엇부터 들을지 판단하기 어렵다</h2>
-        <div class="fb__meta"><span class="mi"><i>서비스</i>Claude</span><span class="mi"><i>모델</i>Claude</span><span class="mi"><i>조건</i>국민내일배움카드 과정과 유튜브 기초 강의 검토</span></div>
-        <div class="fb__block fb__content">
-          <span class="fb__lbl">내용</span>
-          <p>Claude를 주로 사용할 예정인 사용자가 국비 지원 교육을 찾으면서 강의가 많아 무엇부터 시작할지 모르겠다고 했습니다. 답변에서는 유튜브 기초 강의 후 중급 과정을 고려하라는 제안이 있었고, 사무직 AI 활용은 직무별로 필요한 내용이 달라 구체적인 스킬을 정해 질문해달라는 안내도 나왔습니다.</p>
-        </div>
-        <div class="fb__block fb__comment">
-          <span class="fb__lbl">해설</span>
-          <p>학습 수요는 도구 이름만 아는 단계에서 실제 업무에 적용할 기술을 고르는 단계로 이어집니다. 교육 과정은 수준과 직무별 목표를 구분해 안내해야 선택 부담을 낮출 수 있습니다.</p>
-        </div>
-        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 비공개 대화</span></div>
       </section>
     </main>
     <footer class="foot">
       <b>VAAX · 고객 사용기</b><br>
-      Reddit · Hacker News · 긱뉴스 · 오픈채팅의 하루치 실사용자 목소리를 이슈·내용·해설로 정리 · 개인정보 제외 · AI 자동 요약<br>
+      Reddit · Hacker News · 긱뉴스 · 오픈채팅의 하루치 실사용자 목소리를 출처별 주요 주제로 정리 · 출처별 최대 4개 · 개인정보 제외 · AI 자동 요약<br>
       <span class="foot__nav">
         <a href="index.html">지난 피드백 아카이브 →</a>
         <a href="community.html">공개 오픈채팅 주제 보기 →</a>
