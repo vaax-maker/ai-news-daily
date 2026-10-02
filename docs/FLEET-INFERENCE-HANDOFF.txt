@@ -1,0 +1,14 @@
+AI Daily 담당 세션 인계 · 지침 1.0.0 · 2026-10-01
+
+담당: mini1 aidaily 세션. 담당자의 읽기 확인은 대기.
+기존 프로젝트 지침/발행 경로를 유지하고 ~/.abot-guidance/POLICY.txt 및
+  CONTRACT.json을 읽어 docs/fleet-inference-acceptance.json에 확인을 기록한다.
+정본 상태: _abot/docs/inference-adoption/aidaily.json
+
+Qwen 내부 API의 mini1 호출은 검증됐으나 AI Daily 콘텐츠 파이프라인 연결은 미구현이다.
+프로젝트 모든 텍스트 호출이 integrations.openrouter를 통과하는 기존 구조는 유지한다.
+담당 세션은 이 공통 진입점 안에서 편대 클라이언트 local-first/조건부 fallback을 구현하여
+  기능 패키지별 중복 HTTP를 만들지 않는다. 현재 프로세스나 발행 자동화를 중단하지 않는다.
+콘텐츠 생성 → publishing → notifications 순서, 이력, 공개 URL과 기존 태깅을 보존한다.
+생성 품질/형식, 중단 재개, 중복 발행/과금, 장애를 확인하고 프로젝트 요구 검증을 따른다.
+이 지침 배포에서 실제 LLM 요청, Telegram 전송, Git push 또는 자동 발행을 수행하지 않는다.
