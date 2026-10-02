@@ -1,0 +1,9 @@
+# Customer Stories evaluation resume / 2026-10-02
+
+User directed the repair of local quality evaluation completion and resume.
+- Existing Qwen evaluator jobs 8bbaae14-b916-4d8b-8aa5-f71127235e6e and 8c3c9dce-c735-4a31-a442-eea7a93e0b64 were already succeeded on Pro. GET-only recovery updated both project receipts to succeeded. No new local or paid submissions were issued.
+- Checkpoints live privately in data/customer_stories/checkpoints/<date>.json (0600). Original corpus, sources, reference mapping, generation output, feedback and evaluator phase survive exit/retry. Resume reaches the saved evaluator before collecting or generating again, preserving the same content-derived request ID.
+- Earlier unfinished dates resume before new-day collection. Per-date flock prevents overlapping writers; checkpoint writes use fsync and atomic replacement. Completed daily runs are reused. --new-run explicitly starts fresh only after completion; active/pending work cannot be discarded.
+- Malformed/unknown evaluator verdicts block output. Pending evaluation still prevents customer output and downstream AI News/publishing/notifications. Existing completed-quality policies remain.
+- The two legacy runs did not persist full collection snapshots. Recovered evaluator inputs/results and matching generation receipts are in data/customer_stories/recovered-evaluations/. They are private recovery evidence; they were not used to mark a recollected, different candidate as evaluated or automatically publish anything.
+- Runtime recovery did not send Telegram, push Git, regenerate paid bodies or restart owner sessions. Owner may resume the normal pipeline under its publication policy; new interrupted runs have complete snapshots. Live external publication remains a separate product operation.
