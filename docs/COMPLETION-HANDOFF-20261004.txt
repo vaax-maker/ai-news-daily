@@ -1,0 +1,15 @@
+편대 미진행사항 후속 적용 인계 — 2026-10-04
+
+수행자: Codex /root, Pro abot 관리 후속 작업. 사용자의 전체 미진행사항 코딩·검증 완료 지시 범위에서 해당 파일을 수정했다. 기존 tmux 담당 대화가 새 지침을 읽었다고 기록하지 않는다.
+공통 계약 1.1.1 설치/정본 해시 및 공용 웹 5대 응답 확인. 유료 API 신규 호출 0, Telegram/메시지 발송 0.
+
+1. abot1 (mini1): _abot1 소스 동기화·충돌 보존·운영 문서. 한국어 로컬 ASR/Qwen 이해/TTS→명시적 실행→Codex 격리 코드 작성 3개 시험. 실제 재시작/같은 요청 회수. Node15+sync5 PASS. 물리 마이크의 실제 사용자 음질은 별도.
+2. AI Daily (mini1): 고객사용기 접수2건의 완료 회수와 기존 입력고정 소스를 재확인했다(2026-10-02의 실제 GET 회수 증거, 기존 원수집 전체 스냅샷은 없음). 장기 보존된 자막 입력을 재실행 때 그대로 사용하고, 전체38,959자/7구간/원문 인용을 처리한다. 근거·수치·연락처·이름·로컬 의미 검수 및 2회 이내 문장별 보정을 통과해야 발행한다. 로컬-only 장문 단계. 116시험/컴파일/각shell문법 PASS. 실발행·Telegram 없음. 독립 사람/전체 업무 corpus 품질은 별도.
+3. Genvi (mini2): 9개 세부 제작 주제로 5,500–7,000자 확장. 실제6,846자, 10초·고정화면·대사1회·native voice/현장음·별도 음악/자막 보존.106시험(2환경skip). 25DB테이블/9,102원본파일 불변, com.genvi 재시작후HTTP200. 실제 완성영상 품질은 별도.
+4. Vibecut (Pro/mini2): 편집 MP4 길이10–120초의 별도 ACE-Step BGM. 실제30초48k스테레오/$0, 같은 요청 회수. python -m vibecut.bgm_generate EDIT.mp4 --output MUSIC.wav --style STYLE. 기존영상·편집·mix·golden 무변경. 77후보/61중복없는검수대상/36자막보정제안은 Pro /p/abot-quality/vibecut.html. 프로젝트 AGENTS의 사람 승인 전제에 따라 제안은 자동적용하지 않았다. Native Windows 미시험(win1/win2Linux). 박자 동기화·자동mix 미구현.
+5. xbot/zbot: 실제제품함수6개 대표입력 근거·개인정보 검사PASS. 기존프로세스/설정/전체private자료 보존. 메시지/게시 없음. 전체privatecorpus사람검수별도.
+6. 장애: 로컬 접수 직후 실제TCP응답단절→같은ID회수/POST1회/유료0. 실제 원격 registry쓰기후응답상실→5대+Drive 재개, 중복0. 소스양쪽충돌보존/음성서비스재시작기록보존.
+
+검증 정본 _abot/verification-results/completion-20261003/metadata/, 프로젝트별최신기록 docs/inference-adoption/<project>.json의 completion_20261004. 과거기록을 최신검증으로 덮어 완료범위를 확대하지 않는다.
+검수웹 Pro /p/abot-quality/; 음성운영 mini1 /p/abot1-operations/. 관리자 인증 필요.
+복구: AI Daily ~/abot-inference/reviews/completion-20261003/aidaily-before/; Genvi ~/genvi/backups/completion-20261003/; 음성data/backups/completion-20261003 또는20261004/; 공통 _abot/verification-results/completion-20261003/common-before 및호스트동일review폴더. 원복은 현재hash/활성작업/다른세션변경을 확인후 개별diff로 한다.
