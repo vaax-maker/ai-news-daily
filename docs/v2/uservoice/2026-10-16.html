@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<title>고객 사용기 · VAAX — 2026-10-16</title>
+<style>
+:root{
+  --paper:#F7F5F1; --card:#FFFFFF; --ink:#1C1B19; --dim:#55514B; --muted:#928C83;
+  --line:rgba(28,27,25,.12); --line-2:rgba(28,27,25,.06);
+  --accent:#E0532E; --accent-ink:#B23D1C; --accent-soft:#FBE;
+  --tint:#FBF2ED; --tint-line:rgba(224,83,46,.22);
+  --neg:#C6412B; --ask:#2F6FB0; --sug:#B5731A; --pos:#2E8B57;
+  --kr:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#EDEAE4;color:var(--ink);font-family:var(--kr);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+.page{max-width:620px;margin:0 auto;min-height:100vh;background:
+  radial-gradient(130% 40% at 100% -6%, rgba(224,83,46,.10), transparent 60%), var(--paper);
+  box-shadow:0 0 0 1px var(--line-2),0 30px 80px -44px rgba(28,27,25,.42)}
+a{color:inherit;text-decoration:none}
+
+/* header */
+.top{padding:34px 24px 22px;border-bottom:1px solid var(--line)}
+.kick{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.kick .mk{display:inline-block;width:16px;height:2px;background:var(--accent);vertical-align:middle;margin-right:8px;border-radius:2px}
+.title{margin-top:14px;font-size:clamp(26px,7vw,34px);line-height:1.18;font-weight:800;
+  letter-spacing:-.022em;text-wrap:balance;color:#191816}
+.meta{margin-top:14px;font-size:12px;letter-spacing:.01em;color:var(--muted)}
+.mood{margin-top:16px;display:inline-flex;align-items:center;gap:9px;font-size:12.5px;color:var(--dim);
+  background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.mood b{color:var(--accent-ink);font-weight:750}
+.mood .rd{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+/* overview */
+.overview{padding:22px 24px 6px;font-size:15.5px;line-height:1.74;color:var(--dim)}
+
+/* section label */
+.seclabel{padding:20px 24px 4px;display:flex;align-items:baseline;gap:12px}
+.seclabel .t{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.seclabel .ln{height:1px;flex:1;background:var(--line)}
+.seclabel .c{font-size:11px;color:var(--accent);letter-spacing:.06em}
+
+/* feedback items */
+.feed{padding:6px 16px 8px}
+.fb{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;
+  margin:12px 0;box-shadow:0 1px 2px rgba(28,27,25,.04),0 16px 30px -26px rgba(28,27,25,.4)}
+.fb__row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:11px}
+.fb__no{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.04em;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.chip{font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:4px 9px;border-radius:999px;
+  border:1px solid var(--line)}
+.chip--cat{color:var(--dim);background:var(--paper)}
+.chip--src{color:var(--accent-ink);background:var(--tint);border-color:var(--tint-line);
+  font-weight:750;letter-spacing:.02em}
+.chip--sent{color:#fff}
+.sent--neg{background:var(--neg)}.sent--ask{background:var(--ask)}
+.sent--sug{background:var(--sug)}.sent--pos{background:var(--pos)}
+.sent--x{background:var(--muted)}
+.fb__issue{font-size:19px;line-height:1.34;font-weight:750;letter-spacing:-.012em;
+  text-wrap:balance;color:#181715;margin-bottom:12px}
+.fb__meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.fb__meta .mi{font-size:11.5px;color:var(--dim);background:var(--paper);
+  border:1px solid var(--line);border-radius:8px;padding:4px 10px;display:inline-flex;
+  align-items:center;gap:6px;font-variant-numeric:tabular-nums}
+.fb__meta .mi i{font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent-ink)}
+.fb__block{position:relative;padding-left:16px;margin-top:12px}
+.fb__block::before{content:"";position:absolute;left:0;top:3px;bottom:3px;width:3px;border-radius:3px}
+.fb__content::before{background:var(--line)}
+.fb__lbl{display:block;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:5px}
+.fb__block p{font-size:14.5px;line-height:1.66;color:var(--dim)}
+.fb__comment{margin-top:13px;padding:13px 15px;background:var(--tint);border:1px solid var(--tint-line);
+  border-radius:11px}
+.fb__comment::before{display:none}
+.fb__comment .fb__lbl{color:var(--accent-ink)}
+.fb__comment p{color:#3f3a34}
+.fb__src{margin-top:13px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  padding-top:12px;border-top:1px solid var(--line-2)}
+.fb__srclbl{font-size:9.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted)}
+.fb__src a{font-size:12px;font-weight:700;color:var(--accent-ink);background:var(--tint);
+  border:1px solid var(--tint-line);border-radius:8px;padding:4px 10px;display:inline-flex;
+  align-items:center;gap:5px}
+.fb__src a .ext{font-size:10px;opacity:.7}
+.fb__src .noext{font-size:12px;color:var(--muted)}
+.source-group{margin:22px 0 30px}
+.source-group__head{display:flex;align-items:baseline;gap:9px;padding:0 4px 9px;border-bottom:1px solid var(--line)}
+.source-group__name{font-size:13px;font-weight:800;color:var(--accent-ink);letter-spacing:-.01em}
+.source-group__note{font-size:10.5px;color:var(--muted);font-weight:650}
+
+/* footer */
+.foot{padding:26px 24px 46px;border-top:1px solid var(--line);margin-top:10px;
+  font-size:11.5px;letter-spacing:.02em;color:var(--muted);line-height:1.95}
+.foot b{color:var(--dim);font-weight:700}
+.foot__nav{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px}
+.foot a{color:var(--accent-ink);border-bottom:1px solid var(--tint-line)}
+
+@media (prefers-reduced-motion:no-preference){
+  .fb{opacity:0;transform:translateY(12px);animation:rise .6s cubic-bezier(.2,.7,.2,1) forwards}
+  .fb:nth-child(1){animation-delay:.05s}.fb:nth-child(2){animation-delay:.11s}
+  .fb:nth-child(3){animation-delay:.17s}.fb:nth-child(4){animation-delay:.23s}
+  .fb:nth-child(5){animation-delay:.29s}.fb:nth-child(6){animation-delay:.35s}
+  .fb:nth-child(7){animation-delay:.41s}
+  @keyframes rise{to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+
+  <div class="page">
+    <header class="top">
+      <div class="kick"><span class="mk"></span>VAAX · 고객 사용기</div>
+      <h1 class="title">활용 정보 · GPT가 만드는 프롬프트가 영어로 나옴</h1>
+      <div class="meta">2026.10.16 (금) · 최근 24시간 · Reddit · Hacker News · 긱뉴스 · 오픈채팅 · 개인정보 제외</div>
+      <div class="mood"><span class="rd"></span>오늘의 정서 <b>실용</b></div>
+    </header>
+    <p class="overview">단톡방에서 공유된 활용 정보는 GPT가 만드는 프롬프트가 영어로 나옴, 블로그 원고를 키워드별로 나눠 생성, 원하는 결과 전까지 이해를 재확인입니다.</p>
+    <div class="seclabel"><span class="t">Voice by Source</span><span class="ln"></span><span class="c">출처별 주요 주제 · 최대 4개</span></div>
+    <main class="feed">
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">ai the astra</span><span class="source-group__note">주요 주제 4개</span></div>
+        
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">01</span>
+          <span class="chip chip--cat">사용성</span>
+          <span class="chip chip--sent sent--neg">불만</span>
+          <span class="chip chip--src">ai the astra</span>
+        </div>
+        <h2 class="fb__issue">GPT가 만드는 프롬프트가 영어로 나옴</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>ChatGPT</span><span class="mi"><i>조건</i>상황을 설명한 뒤 AI 생성용 프롬프트 작성</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>사용자는 ChatGPT에 상황을 설명하고 생성용 프롬프트를 요청하지만, 결과가 영어로만 나와 불편하다고 말했습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>한국어로 설명하고도 프롬프트를 다른 생성 도구에 옮길 때 영어를 처리해야 하는 번거로움이 생깁니다. 원하는 출력 언어를 명시하는 과정이 실제 활용의 마찰로 나타났습니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">ai the astra · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">02</span>
+          <span class="chip chip--cat">사용성</span>
+          <span class="chip chip--sent sent--sug">제안</span>
+          <span class="chip chip--src">ai the astra</span>
+        </div>
+        <h2 class="fb__issue">블로그 원고를 키워드별로 나눠 생성</h2>
+        <div class="fb__meta"><span class="mi"><i>조건</i>네이버 블로그 정보성 원고 작성·발행</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>공유된 프롬프트는 작품·인물·배우·방송 키워드를 각각 별도 원고로 작성하도록 설계됐습니다. 사용자는 정보형 원고를 생성한 뒤 필요한 부분을 수정·제거·추가해 발행하며, 분량은 대략 800~1,500자라고 설명했습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>키워드별 산출물을 분리하고 사람이 편집한 뒤 발행하는 작업 흐름이 공유됐습니다. 초안 생성과 최종 게시를 구분하는 실무 방식입니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">ai the astra · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">03</span>
+          <span class="chip chip--cat">사용성</span>
+          <span class="chip chip--sent sent--sug">제안</span>
+          <span class="chip chip--src">ai the astra</span>
+        </div>
+        <h2 class="fb__issue">원하는 결과 전까지 이해를 재확인</h2>
+        <div class="fb__meta"><span class="mi"><i>조건</i>프롬프트를 다듬어 최종 생성 요청을 만들 때</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>한 참여자는 처음 설명한 뒤 모델이 알아서 이해하길 기대하기보다, 어디까지 이해했는지 계속 물으라고 조언했습니다. 원하는 방향을 요구하고 잘못 이해한 부분을 지적해 수정한 뒤 최종 프롬프트를 만들며, 재확인은 5번 이상을 권했습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>결과물 품질을 한 번의 프롬프트에 맡기기보다 중간 확인과 수정으로 맞춰가는 방식입니다. 요구사항이 구체적이거나 결과의 분위기가 중요한 작업에서 유용한 팁입니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">ai the astra · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">04</span>
+          <span class="chip chip--cat">성능</span>
+          <span class="chip chip--sent sent--neg">불만</span>
+          <span class="chip chip--src">ai the astra</span>
+        </div>
+        <h2 class="fb__issue">로컬 에이전트에 맡기면 인물 일관성 저하</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>로컬 LLM 에이전트</span><span class="mi"><i>조건</i>로컬 환경을 설정하며 작업 전체를 에이전트에 맡김</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>로컬 환경을 설정 중인 사용자는 작업을 전부 에이전트에 맡겼을 때 인물의 일관성이 잘 유지되지 않는다고 말했습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>작업을 통째로 위임하는 방식이 캐릭터 일관성을 보장하지는 않는다는 체감입니다. 결과를 나눠 확인하거나 인물 기준을 반복해 제공해야 할 가능성이 있지만, 대화에서는 해결 방법이 확인되지 않았습니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">ai the astra · 비공개 대화</span></div>
+      </section>
+      </section>
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">김효율의 AI개발단</span><span class="source-group__note">주요 주제 4개</span></div>
+        
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">01</span>
+          <span class="chip chip--cat">사용성</span>
+          <span class="chip chip--sent sent--pos">호평</span>
+          <span class="chip chip--src">김효율의 AI개발단</span>
+        </div>
+        <h2 class="fb__issue">셀프호스트 Argo는 SSH 터널로 접속</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Argo</span><span class="mi"><i>조건</i>호스팅어 VPS 셀프호스트, 로컬 PC에서 접속</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>셀프호스트 Argo는 설치 시 127.0.0.1:3001에만 바인드되므로 VPS 공인 IP의 3001 포트로 직접 접속할 수 없다는 답변이 나왔습니다. PC에서 SSH 터널을 열고 브라우저에서 http://localhost:3001로 접속하는 방법이 안내됐습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>공인 IP로 접속되지 않는 현상이 설치 오류가 아니라 기본 바인딩 설정 때문일 수 있습니다. SSH 터널을 이용하면 서비스를 외부에 직접 노출하지 않고 로컬 브라우저에서 접근할 수 있습니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">김효율의 AI개발단 · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">02</span>
+          <span class="chip chip--cat">사용성</span>
+          <span class="chip chip--sent sent--ask">궁금</span>
+          <span class="chip chip--src">김효율의 AI개발단</span>
+        </div>
+        <h2 class="fb__issue">Argo 일정 연동은 버전과 실행 조건 확인</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Argo 오피스</span><span class="mi"><i>조건</i>크루가 실행되는 컴퓨터의 Argo 본체 버전 확인</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>답변에 따르면 일정 연동은 Argo v0.1.92부터 들어갔으며, 크루가 개인 일정과 조직의 일정을 만들거나 수정할 수 있습니다. 남의 일정은 읽기만 가능하고, 손님이 시킨 턴에서는 일정을 보지 않는다고 안내됐습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>캘린더 등록이 설정으로 켜는 옵션이 아니라 버전과 실행 조건에 따라 동작하는 기능이라고 설명됐습니다. 연동이 되지 않을 때는 크루가 실행되는 컴퓨터의 Argo 버전부터 확인할 수 있습니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">김효율의 AI개발단 · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">03</span>
+          <span class="chip chip--cat">신뢰</span>
+          <span class="chip chip--sent sent--sug">제안</span>
+          <span class="chip chip--src">김효율의 AI개발단</span>
+        </div>
+        <h2 class="fb__issue">회사 대화 자료를 위키화하기 전 마스킹</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>LLM</span><span class="mi"><i>조건</i>회사 카카오톡 대화로 지식 위키 구성</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>회사 대화 자료를 LLM 위키로 만들 때 Raw, Wiki, Conversations의 3단으로 나누고, 원본 대화는 날짜나 주제 단위로 관리하라는 안내가 나왔습니다. 업로드 전에 전화번호·계좌·고객 실명 등 민감 정보를 가리고, 어떤 AI에 올릴지 사내 규정부터 확인하라고 했습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>자료 구조화와 개인정보 보호를 함께 준비하는 절차입니다. 사내 대화를 AI에 넣기 전에 민감 정보 제거와 사용 가능 도구 확인을 우선해야 한다는 점이 실무적으로 중요합니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">김효율의 AI개발단 · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">04</span>
+          <span class="chip chip--cat">사용성</span>
+          <span class="chip chip--sent sent--sug">제안</span>
+          <span class="chip chip--src">김효율의 AI개발단</span>
+        </div>
+        <h2 class="fb__issue">옵시디언 저장 규칙을 모델에 맞게 개정</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Obsidian</span><span class="mi"><i>조건</i>에이전트가 위키에 내용을 저장하는 규칙 설정</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>기존의 5가지 가치 필터를 모두 만족해야 저장하도록 하면 거의 아무것도 남지 않을 수 있다는 문제가 나왔습니다. 답변자는 당시 모델에는 통했지만 모델이 좋아진 뒤 키워드를 나누고 정제하도록 규칙과 구조를 개선했다고 설명했습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>저장 규칙은 한 번 만들고 고정하기보다 모델의 처리 능력과 실제 저장량에 맞춰 조정할 필요가 있습니다. 지나치게 엄격한 조건은 지식 축적 자체를 막을 수 있습니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">김효율의 AI개발단 · 비공개 대화</span></div>
+      </section>
+      </section>
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">코난쌤 오픈채팅방</span><span class="source-group__note">주요 주제 2개</span></div>
+        
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">01</span>
+          <span class="chip chip--cat">사용성</span>
+          <span class="chip chip--sent sent--neg">불만</span>
+          <span class="chip chip--src">코난쌤 오픈채팅방</span>
+        </div>
+        <h2 class="fb__issue">Gemini Argon의 업무 글쓰기 평가는 엇갈림</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Gemini</span><span class="mi"><i>모델</i>Gemini 4 Argon</span><span class="mi"><i>조건</i>업무 문서 작성 및 거래처 메시지 다듬기</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>Gemini 4 Argon이 Claude보다 글을 잘 쓴다는 평가에 대해, 참여자들은 업무 전반에서는 아직 만족스럽지 않다는 반응을 보였습니다. 반면 거래처에 보낼 메시지 문구를 다듬는 용도는 괜찮다는 의견이 나왔습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>글쓰기 성능은 업무 전반과 짧은 문구 수정에서 다르게 체감됐습니다. 모델 간 우열을 일반화하기보다, 실제로 맡길 작업 유형을 나눠 비교할 필요가 있습니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">코난쌤 오픈채팅방 · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">02</span>
+          <span class="chip chip--cat">사용성</span>
+          <span class="chip chip--sent sent--neg">불만</span>
+          <span class="chip chip--src">코난쌤 오픈채팅방</span>
+        </div>
+        <h2 class="fb__issue">거래처 문구 수정은 유용하지만 업무 글쓰기는 아쉬움</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Gemini</span><span class="mi"><i>모델</i>Gemini 4 Argon</span><span class="mi"><i>조건</i>업무 글쓰기와 거래처 메시지 다듬기</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>Gemini 4 Argon의 글쓰기 성능을 두고, 일상 대화와 달리 업무용 글쓰기에서는 아직 부족하다는 반응이 나왔습니다. 거래처 메시지 문구를 다듬는 작업은 괜찮다는 의견도 함께 공유됐습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>업무 글쓰기라는 넓은 범위에서는 기대에 못 미치더라도, 짧은 문장 교정에는 쓸 만하다는 구분입니다. 실제 업무에 적용할 때는 작업 단위별로 적합성을 확인하는 편이 현실적입니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">코난쌤 오픈채팅방 · 비공개 대화</span></div>
+      </section>
+      </section>
+    </main>
+    <footer class="foot">
+      <b>VAAX · 고객 사용기</b><br>
+      Reddit · Hacker News · 긱뉴스 · 오픈채팅의 하루치 실사용자 목소리를 출처별 주요 주제로 정리 · 출처별 최대 4개 · 개인정보 제외 · AI 자동 요약<br>
+      <span class="foot__nav">
+        <a href="index.html">지난 피드백 아카이브 →</a>
+        <a href="community.html">공개 오픈채팅 주제 보기 →</a>
+        <a href="../uservoice.html">오늘 편 →</a>
+        <a href="../../index.html">오늘의 AI 뉴스 →</a>
+      </span>
+    </footer>
+  </div>
+</body>
+</html>
