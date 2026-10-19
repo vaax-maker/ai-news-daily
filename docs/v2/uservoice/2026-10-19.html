@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<title>고객 사용기 · VAAX — 2026-10-19</title>
+<style>
+:root{
+  --paper:#F7F5F1; --card:#FFFFFF; --ink:#1C1B19; --dim:#55514B; --muted:#928C83;
+  --line:rgba(28,27,25,.12); --line-2:rgba(28,27,25,.06);
+  --accent:#E0532E; --accent-ink:#B23D1C; --accent-soft:#FBE;
+  --tint:#FBF2ED; --tint-line:rgba(224,83,46,.22);
+  --neg:#C6412B; --ask:#2F6FB0; --sug:#B5731A; --pos:#2E8B57;
+  --kr:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#EDEAE4;color:var(--ink);font-family:var(--kr);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+.page{max-width:620px;margin:0 auto;min-height:100vh;background:
+  radial-gradient(130% 40% at 100% -6%, rgba(224,83,46,.10), transparent 60%), var(--paper);
+  box-shadow:0 0 0 1px var(--line-2),0 30px 80px -44px rgba(28,27,25,.42)}
+a{color:inherit;text-decoration:none}
+
+/* header */
+.top{padding:34px 24px 22px;border-bottom:1px solid var(--line)}
+.kick{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.kick .mk{display:inline-block;width:16px;height:2px;background:var(--accent);vertical-align:middle;margin-right:8px;border-radius:2px}
+.title{margin-top:14px;font-size:clamp(26px,7vw,34px);line-height:1.18;font-weight:800;
+  letter-spacing:-.022em;text-wrap:balance;color:#191816}
+.meta{margin-top:14px;font-size:12px;letter-spacing:.01em;color:var(--muted)}
+.mood{margin-top:16px;display:inline-flex;align-items:center;gap:9px;font-size:12.5px;color:var(--dim);
+  background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.mood b{color:var(--accent-ink);font-weight:750}
+.mood .rd{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+/* overview */
+.overview{padding:22px 24px 6px;font-size:15.5px;line-height:1.74;color:var(--dim)}
+
+/* section label */
+.seclabel{padding:20px 24px 4px;display:flex;align-items:baseline;gap:12px}
+.seclabel .t{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.seclabel .ln{height:1px;flex:1;background:var(--line)}
+.seclabel .c{font-size:11px;color:var(--accent);letter-spacing:.06em}
+
+/* feedback items */
+.feed{padding:6px 16px 8px}
+.fb{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;
+  margin:12px 0;box-shadow:0 1px 2px rgba(28,27,25,.04),0 16px 30px -26px rgba(28,27,25,.4)}
+.fb__row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:11px}
+.fb__no{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.04em;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.chip{font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:4px 9px;border-radius:999px;
+  border:1px solid var(--line)}
+.chip--cat{color:var(--dim);background:var(--paper)}
+.chip--src{color:var(--accent-ink);background:var(--tint);border-color:var(--tint-line);
+  font-weight:750;letter-spacing:.02em}
+.chip--sent{color:#fff}
+.sent--neg{background:var(--neg)}.sent--ask{background:var(--ask)}
+.sent--sug{background:var(--sug)}.sent--pos{background:var(--pos)}
+.sent--x{background:var(--muted)}
+.fb__issue{font-size:19px;line-height:1.34;font-weight:750;letter-spacing:-.012em;
+  text-wrap:balance;color:#181715;margin-bottom:12px}
+.fb__meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.fb__meta .mi{font-size:11.5px;color:var(--dim);background:var(--paper);
+  border:1px solid var(--line);border-radius:8px;padding:4px 10px;display:inline-flex;
+  align-items:center;gap:6px;font-variant-numeric:tabular-nums}
+.fb__meta .mi i{font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent-ink)}
+.fb__block{position:relative;padding-left:16px;margin-top:12px}
+.fb__block::before{content:"";position:absolute;left:0;top:3px;bottom:3px;width:3px;border-radius:3px}
+.fb__content::before{background:var(--line)}
+.fb__lbl{display:block;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:5px}
+.fb__block p{font-size:14.5px;line-height:1.66;color:var(--dim)}
+.fb__comment{margin-top:13px;padding:13px 15px;background:var(--tint);border:1px solid var(--tint-line);
+  border-radius:11px}
+.fb__comment::before{display:none}
+.fb__comment .fb__lbl{color:var(--accent-ink)}
+.fb__comment p{color:#3f3a34}
+.fb__src{margin-top:13px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  padding-top:12px;border-top:1px solid var(--line-2)}
+.fb__srclbl{font-size:9.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted)}
+.fb__src a{font-size:12px;font-weight:700;color:var(--accent-ink);background:var(--tint);
+  border:1px solid var(--tint-line);border-radius:8px;padding:4px 10px;display:inline-flex;
+  align-items:center;gap:5px}
+.fb__src a .ext{font-size:10px;opacity:.7}
+.fb__src .noext{font-size:12px;color:var(--muted)}
+.source-group{margin:22px 0 30px}
+.source-group__head{display:flex;align-items:baseline;gap:9px;padding:0 4px 9px;border-bottom:1px solid var(--line)}
+.source-group__name{font-size:13px;font-weight:800;color:var(--accent-ink);letter-spacing:-.01em}
+.source-group__note{font-size:10.5px;color:var(--muted);font-weight:650}
+
+/* footer */
+.foot{padding:26px 24px 46px;border-top:1px solid var(--line);margin-top:10px;
+  font-size:11.5px;letter-spacing:.02em;color:var(--muted);line-height:1.95}
+.foot b{color:var(--dim);font-weight:700}
+.foot__nav{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px}
+.foot a{color:var(--accent-ink);border-bottom:1px solid var(--tint-line)}
+
+@media (prefers-reduced-motion:no-preference){
+  .fb{opacity:0;transform:translateY(12px);animation:rise .6s cubic-bezier(.2,.7,.2,1) forwards}
+  .fb:nth-child(1){animation-delay:.05s}.fb:nth-child(2){animation-delay:.11s}
+  .fb:nth-child(3){animation-delay:.17s}.fb:nth-child(4){animation-delay:.23s}
+  .fb:nth-child(5){animation-delay:.29s}.fb:nth-child(6){animation-delay:.35s}
+  .fb:nth-child(7){animation-delay:.41s}
+  @keyframes rise{to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+
+  <div class="page">
+    <header class="top">
+      <div class="kick"><span class="mk"></span>VAAX · 고객 사용기</div>
+      <h1 class="title">활용 정보 · Codex 앱이 충돌 덤프를 쌓음</h1>
+      <div class="meta">2026.10.19 (월) · 최근 24시간 · Reddit · Hacker News · 긱뉴스 · 오픈채팅 · 개인정보 제외</div>
+      <div class="mood"><span class="rd"></span>오늘의 정서 <b>분주</b></div>
+    </header>
+    <p class="overview">실제 원문에서 확인된 활용 정보는 Codex 앱이 충돌 덤프를 쌓음, DB 조회는 LLM 없이 빠르게 처리, 단체방 봇은 응답 속도가 체감 품질을 좌우입니다.</p>
+    <div class="seclabel"><span class="t">Voice by Source</span><span class="ln"></span><span class="c">출처별 주요 주제 · 최대 4개</span></div>
+    <main class="feed">
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">긱뉴스</span><span class="source-group__note">주요 주제 1개</span></div>
+        
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">01</span>
+          <span class="chip chip--cat">성능</span>
+          <span class="chip chip--sent sent--neg">불만</span>
+          <span class="chip chip--src">긱뉴스</span>
+        </div>
+        <h2 class="fb__issue">Codex 앱이 충돌 덤프를 쌓음</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Codex Desktop</span><span class="mi"><i>조건</i>macOS</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>macOS Codex Desktop에서 앱을 계속 쓸 수 있는데도 백그라운드 충돌 덤프가 쌓여 디스크를 소모한다는 보고가 있었다. 일부 환경에서는 browser_crashpad_handler의 충돌과 재시작도 반복됐다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>화면상 앱이 정상 작동해도 저장공간과 백그라운드 프로세스에 문제가 생길 수 있어, 보이지 않는 오류가 운영 환경에 부담을 준다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><a href="https://news.hada.io/topic?id=35565" target="_blank" rel="noopener">관련 출처 <span class="ext">↗</span></a></div>
+      </section>
+      </section>
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">오픈채팅 · 모임 2</span><span class="source-group__note">주요 주제 3개</span></div>
+        
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">01</span>
+          <span class="chip chip--cat">성능</span>
+          <span class="chip chip--sent sent--pos">호평</span>
+          <span class="chip chip--src">오픈채팅 · 모임 2</span>
+        </div>
+        <h2 class="fb__issue">DB 조회는 LLM 없이 빠르게 처리</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>카카오톡 봇</span><span class="mi"><i>조건</i>상품·매출 데이터 자체 DB 조회</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>봇을 LLM을 거쳐 답하는 방식과 자체 DB에서 바로 조회하는 방식으로 나눴다. 재고나 월 매출처럼 DB에서 바로 얻을 수 있는 답은 LLM을 거치지 않아 0.1~0.5초 만에 응답한다고 했다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>추론이 필요 없는 조회까지 매번 LLM에 맡기지 않으면 응답 지연을 줄일 수 있다. 자연어 조건을 검색기에 추가할수록 예외와 오류가 생길 수 있다는 경험도 함께 공유됐다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 모임 2 · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">02</span>
+          <span class="chip chip--cat">사용성</span>
+          <span class="chip chip--sent sent--neg">불만</span>
+          <span class="chip chip--src">오픈채팅 · 모임 2</span>
+        </div>
+        <h2 class="fb__issue">단체방 봇은 응답 속도가 체감 품질을 좌우</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>카카오톡 봇</span><span class="mi"><i>조건</i>수백 명이 모인 단체방</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>사람처럼 보이도록 답을 30초 뒤에 보내도록 설정한 사례가 있었지만, 단체방에서는 답이 늦는 동안 대화가 이어지고 추가 질문도 쌓여 봇 응답이 더 밀린다고 했다. 답이 늦으면 답변 내용이 좋아도 느리다는 불만을 산다는 체감도 나왔다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>단체 대화에서는 정확도뿐 아니라 응답 지연과 후속 질문의 누적이 사용 경험을 좌우한다. 자연스러운 응답 지연과 실제 처리 속도 사이의 균형이 필요하다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 모임 2 · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">03</span>
+          <span class="chip chip--cat">사용성</span>
+          <span class="chip chip--sent sent--sug">제안</span>
+          <span class="chip chip--src">오픈채팅 · 모임 2</span>
+        </div>
+        <h2 class="fb__issue">블렌더 브릿지 없이 생성 기능 연결</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Higgsfield MCP, Blender</span><span class="mi"><i>조건</i>Blender 브릿지 없이 별도 연결</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>Blender 브릿지를 연결하지 않고 별도로 실행하는 방식에 대해, Higgsfield MCP가 에이전트에 생성 기능을 직접 제공하므로 브릿지가 필수는 아니라는 답변이 나왔다. 브릿지는 열려 있는 Blender 장면을 다루는 별도 연결이며, OAuth 인증 문제도 언급됐다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>생성 기능 연결과 열린 3D 장면 조작을 분리할 수 있어, 필요한 기능만 연결하는 구성이 가능하다. 브릿지 인증이나 요청 제한이 걸리는 환경에서는 대안이 될 수 있다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 모임 2 · 비공개 대화</span></div>
+      </section>
+      </section>
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">오픈채팅 · 모임 5</span><span class="source-group__note">주요 주제 4개</span></div>
+        
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">01</span>
+          <span class="chip chip--cat">성능</span>
+          <span class="chip chip--sent sent--neg">불만</span>
+          <span class="chip chip--src">오픈채팅 · 모임 5</span>
+        </div>
+        <h2 class="fb__issue">생성 영상에서 얼굴 일관성 유지가 어려움</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>GPT</span><span class="mi"><i>모델</i>2.5 subant, 2.0</span><span class="mi"><i>조건</i>API 사용</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>장면마다 인물이 달라지는 문제를 줄이려고 레퍼런스 이미지를 넣고, GPT나 Grok에 상황을 설명해 영상 프롬프트를 만들었다. 한 참여자는 API의 2.5 subant에서는 잘 되지만 2.0에서는 잘 안 된다고 비교했다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>캐릭터 외형을 장면마다 유지하려면 참조 이미지와 프롬프트 설계뿐 아니라 사용 모델 버전도 결과에 영향을 줄 수 있다는 현장 비교다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 모임 5 · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">02</span>
+          <span class="chip chip--cat">비용</span>
+          <span class="chip chip--sent sent--ask">궁금</span>
+          <span class="chip chip--src">오픈채팅 · 모임 5</span>
+        </div>
+        <h2 class="fb__issue">영상 생성 모델별 크레딧 비교</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Topview</span><span class="mi"><i>모델</i>Seedance 2.5, Kling 4, MiniMax, Wan 3</span><span class="mi"><i>조건</i>30초 생성 기준 및 크레딧 요금</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>Topview에서 Seedance 2.5는 30초 생성에 36크레딧, Kling 4는 30크레딧이라고 비교했다. MiniMax는 15초 4.5크레딧, Wan 3는 30초 12크레딧이라는 정보와 1크레딧 약 140원이라는 설명도 나왔다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>같은 길이의 영상도 모델에 따라 소비 크레딧이 다르다. 생성 길이와 품질뿐 아니라 크레딧 단가를 함께 따져 도구를 선택할 필요가 있다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 모임 5 · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">03</span>
+          <span class="chip chip--cat">신뢰</span>
+          <span class="chip chip--sent sent--neg">불만</span>
+          <span class="chip chip--src">오픈채팅 · 모임 5</span>
+        </div>
+        <h2 class="fb__issue">유튜브 도용 영상 신고 절차 확인</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>YouTube</span><span class="mi"><i>조건</i>저작권 침해 신고</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>영상 제목과 썸네일, 멘트가 유사한 콘텐츠가 올라온 상황에서 신고 방법을 논의했다. 안내된 절차는 영상 메뉴에서 신고한 뒤 ‘내 권리 침해’와 ‘저작권 침해 문제’를 선택하거나, 별도 신고 양식에 원본·상대 영상 링크와 도용 시간대를 적는 것이다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>창작자는 유사한 영상이 발견돼도 어떤 신고 경로를 써야 할지 막힐 수 있다. 원본과 상대 영상의 구체적인 비교 자료를 준비하는 것이 대응의 출발점이다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 모임 5 · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">04</span>
+          <span class="chip chip--cat">성능</span>
+          <span class="chip chip--sent sent--neg">우려</span>
+          <span class="chip chip--src">오픈채팅 · 모임 5</span>
+        </div>
+        <h2 class="fb__issue">무제한 영상 생성도 대기열이 길 수 있음</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Versein</span><span class="mi"><i>조건</i>월간 퀄리티 플랜, 무제한 이용</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>무제한 플랜이어도 플랫폼에 따라 영상 한 편을 만드는 데 몇 시간씩 기다릴 수 있다는 경험이 공유됐다. 연간 결제 전에 월간 퀄리티 플랜으로 먼저 이용해 보라는 제안도 나왔다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>생성 횟수 제한이 없다는 조건만으로 실제 처리량을 판단하기 어렵다. 대기열과 사용 가능 기간을 확인한 뒤 장기 결제를 결정하는 편이 안전하다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 모임 5 · 비공개 대화</span></div>
+      </section>
+      </section>
+    </main>
+    <footer class="foot">
+      <b>VAAX · 고객 사용기</b><br>
+      Reddit · Hacker News · 긱뉴스 · 오픈채팅의 하루치 실사용자 목소리를 출처별 주요 주제로 정리 · 출처별 최대 4개 · 개인정보 제외 · AI 자동 요약<br>
+      <span class="foot__nav">
+        <a href="index.html">지난 피드백 아카이브 →</a>
+        <a href="community.html">공개 오픈채팅 주제 보기 →</a>
+        <a href="../uservoice.html">오늘 편 →</a>
+        <a href="../../index.html">오늘의 AI 뉴스 →</a>
+      </span>
+    </footer>
+  </div>
+</body>
+</html>
