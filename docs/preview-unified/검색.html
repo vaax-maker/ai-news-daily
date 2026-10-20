@@ -161,6 +161,7 @@ function setDate(d){ state.date=d; window.scrollTo(0,0); render(); }
 // ?date= support
 (function(){ try{ var p=new URLSearchParams(location.search); var pd=p.get('date'); if(pd&&/^\d{4}-\d{2}-\d{2}$/.test(pd)) state.date=pd; var pc=p.get('cat'); if(pc&&/^(tech|econ)$/.test(pc)) state.cat=pc; var pq=p.get('q'); if(pq){ state.q=pq; document.getElementById('q').value=pq; } }catch(e){} render(); })();
 </script>
+
 <script id="aidaily-pv">(()=>{
 if(!['wootom.github.io','vaax-maker.github.io'].includes(location.hostname))return;
 const endpoint="https://macmini.tail884f5f.ts.net:8443/aidaily-events/pixel.gif";let last='';const pending=new Set();
@@ -171,7 +172,8 @@ function view(){try{
  const page=u.origin+u.pathname;const key=page+'|'+date;if(key===last)return;last=key;
  const id=globalThis.crypto?.randomUUID?.()||Date.now().toString(36)+'_'+Math.random().toString(36).slice(2);
  const q=new URL(endpoint);q.searchParams.set('event_id',id);q.searchParams.set('page',page);if(date)q.searchParams.set('date',date);
- const pixel=new Image();pixel.crossOrigin='anonymous';pixel.referrerPolicy='origin';pending.add(pixel);pixel.onload=pixel.onerror=()=>pending.delete(pixel);pixel.src=q.href;
+ const frame=document.createElement('iframe');frame.hidden=true;frame.setAttribute('aria-hidden','true');frame.title='';frame.setAttribute('sandbox','allow-same-origin');frame.setAttribute('allow',"local-network-access 'none'; local-network 'none'; loopback-network 'none'");
+ frame.srcdoc='<img crossorigin="anonymous" referrerpolicy="origin" src="'+q.href.replaceAll('&','&amp;').replaceAll('"','&quot;')+'">';pending.add(frame);const cleanup=()=>{frame.remove();pending.delete(frame);};frame.onload=()=>setTimeout(cleanup,1000);setTimeout(cleanup,30000);document.body.append(frame);
 }catch{}}
 for(const method of ['pushState','replaceState']){const original=history[method];history[method]=function(...args){const result=original.apply(this,args);queueMicrotask(view);return result;};}
 addEventListener('popstate',view);document.addEventListener('visibilitychange',view);view();
