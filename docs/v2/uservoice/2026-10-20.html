@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<title>고객 사용기 · VAAX — 2026-10-20</title>
+<style>
+:root{
+  --paper:#F7F5F1; --card:#FFFFFF; --ink:#1C1B19; --dim:#55514B; --muted:#928C83;
+  --line:rgba(28,27,25,.12); --line-2:rgba(28,27,25,.06);
+  --accent:#E0532E; --accent-ink:#B23D1C; --accent-soft:#FBE;
+  --tint:#FBF2ED; --tint-line:rgba(224,83,46,.22);
+  --neg:#C6412B; --ask:#2F6FB0; --sug:#B5731A; --pos:#2E8B57;
+  --kr:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#EDEAE4;color:var(--ink);font-family:var(--kr);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+.page{max-width:620px;margin:0 auto;min-height:100vh;background:
+  radial-gradient(130% 40% at 100% -6%, rgba(224,83,46,.10), transparent 60%), var(--paper);
+  box-shadow:0 0 0 1px var(--line-2),0 30px 80px -44px rgba(28,27,25,.42)}
+a{color:inherit;text-decoration:none}
+
+/* header */
+.top{padding:34px 24px 22px;border-bottom:1px solid var(--line)}
+.kick{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.kick .mk{display:inline-block;width:16px;height:2px;background:var(--accent);vertical-align:middle;margin-right:8px;border-radius:2px}
+.title{margin-top:14px;font-size:clamp(26px,7vw,34px);line-height:1.18;font-weight:800;
+  letter-spacing:-.022em;text-wrap:balance;color:#191816}
+.meta{margin-top:14px;font-size:12px;letter-spacing:.01em;color:var(--muted)}
+.mood{margin-top:16px;display:inline-flex;align-items:center;gap:9px;font-size:12.5px;color:var(--dim);
+  background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.mood b{color:var(--accent-ink);font-weight:750}
+.mood .rd{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+/* overview */
+.overview{padding:22px 24px 6px;font-size:15.5px;line-height:1.74;color:var(--dim)}
+
+/* section label */
+.seclabel{padding:20px 24px 4px;display:flex;align-items:baseline;gap:12px}
+.seclabel .t{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.seclabel .ln{height:1px;flex:1;background:var(--line)}
+.seclabel .c{font-size:11px;color:var(--accent);letter-spacing:.06em}
+
+/* feedback items */
+.feed{padding:6px 16px 8px}
+.fb{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;
+  margin:12px 0;box-shadow:0 1px 2px rgba(28,27,25,.04),0 16px 30px -26px rgba(28,27,25,.4)}
+.fb__row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:11px}
+.fb__no{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.04em;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.chip{font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:4px 9px;border-radius:999px;
+  border:1px solid var(--line)}
+.chip--cat{color:var(--dim);background:var(--paper)}
+.chip--src{color:var(--accent-ink);background:var(--tint);border-color:var(--tint-line);
+  font-weight:750;letter-spacing:.02em}
+.chip--sent{color:#fff}
+.sent--neg{background:var(--neg)}.sent--ask{background:var(--ask)}
+.sent--sug{background:var(--sug)}.sent--pos{background:var(--pos)}
+.sent--x{background:var(--muted)}
+.fb__issue{font-size:19px;line-height:1.34;font-weight:750;letter-spacing:-.012em;
+  text-wrap:balance;color:#181715;margin-bottom:12px}
+.fb__meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.fb__meta .mi{font-size:11.5px;color:var(--dim);background:var(--paper);
+  border:1px solid var(--line);border-radius:8px;padding:4px 10px;display:inline-flex;
+  align-items:center;gap:6px;font-variant-numeric:tabular-nums}
+.fb__meta .mi i{font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent-ink)}
+.fb__block{position:relative;padding-left:16px;margin-top:12px}
+.fb__block::before{content:"";position:absolute;left:0;top:3px;bottom:3px;width:3px;border-radius:3px}
+.fb__content::before{background:var(--line)}
+.fb__lbl{display:block;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:5px}
+.fb__block p{font-size:14.5px;line-height:1.66;color:var(--dim)}
+.fb__comment{margin-top:13px;padding:13px 15px;background:var(--tint);border:1px solid var(--tint-line);
+  border-radius:11px}
+.fb__comment::before{display:none}
+.fb__comment .fb__lbl{color:var(--accent-ink)}
+.fb__comment p{color:#3f3a34}
+.fb__src{margin-top:13px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  padding-top:12px;border-top:1px solid var(--line-2)}
+.fb__srclbl{font-size:9.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted)}
+.fb__src a{font-size:12px;font-weight:700;color:var(--accent-ink);background:var(--tint);
+  border:1px solid var(--tint-line);border-radius:8px;padding:4px 10px;display:inline-flex;
+  align-items:center;gap:5px}
+.fb__src a .ext{font-size:10px;opacity:.7}
+.fb__src .noext{font-size:12px;color:var(--muted)}
+.source-group{margin:22px 0 30px}
+.source-group__head{display:flex;align-items:baseline;gap:9px;padding:0 4px 9px;border-bottom:1px solid var(--line)}
+.source-group__name{font-size:13px;font-weight:800;color:var(--accent-ink);letter-spacing:-.01em}
+.source-group__note{font-size:10.5px;color:var(--muted);font-weight:650}
+
+/* footer */
+.foot{padding:26px 24px 46px;border-top:1px solid var(--line);margin-top:10px;
+  font-size:11.5px;letter-spacing:.02em;color:var(--muted);line-height:1.95}
+.foot b{color:var(--dim);font-weight:700}
+.foot__nav{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px}
+.foot a{color:var(--accent-ink);border-bottom:1px solid var(--tint-line)}
+
+@media (prefers-reduced-motion:no-preference){
+  .fb{opacity:0;transform:translateY(12px);animation:rise .6s cubic-bezier(.2,.7,.2,1) forwards}
+  .fb:nth-child(1){animation-delay:.05s}.fb:nth-child(2){animation-delay:.11s}
+  .fb:nth-child(3){animation-delay:.17s}.fb:nth-child(4){animation-delay:.23s}
+  .fb:nth-child(5){animation-delay:.29s}.fb:nth-child(6){animation-delay:.35s}
+  .fb:nth-child(7){animation-delay:.41s}
+  @keyframes rise{to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+
+  <div class="page">
+    <header class="top">
+      <div class="kick"><span class="mk"></span>VAAX · 고객 사용기</div>
+      <h1 class="title">활용 정보 · Claude Code가 악성 도구를 설치</h1>
+      <div class="meta">2026.10.20 (화) · 최근 24시간 · Reddit · Hacker News · 긱뉴스 · 오픈채팅 · 개인정보 제외</div>
+      <div class="mood"><span class="rd"></span>오늘의 정서 <b>경계</b></div>
+    </header>
+    <p class="overview">공개 자료와 단톡방에서 공유된 활용 정보는 Claude Code가 악성 도구를 설치, 승인·순차 실행을 줄인 Claude Code 플러그인, 로컬 영상 생성에 5~6시간 소요입니다.</p>
+    <div class="seclabel"><span class="t">Voice by Source</span><span class="ln"></span><span class="c">출처별 주요 주제 · 최대 4개</span></div>
+    <main class="feed">
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">Reddit</span><span class="source-group__note">주요 주제 1개</span></div>
+        
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">01</span>
+          <span class="chip chip--cat">신뢰</span>
+          <span class="chip chip--sent sent--neg">불만</span>
+          <span class="chip chip--src">Reddit</span>
+        </div>
+        <h2 class="fb__issue">Claude Code가 악성 도구를 설치</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Claude Code</span><span class="mi"><i>조건</i>오래된 게임을 역공학·재구현하는 작업 중</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>사용자는 Claude Code와 역공학 도구를 이용해 작업하던 중, 설치된 도구가 Expiro 바이러스였다고 보고했습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>에이전트가 작업에 필요한 도구를 가져오거나 설치하는 흐름은 편리하지만 공급 경로와 파일의 안전성을 확인해야 합니다. 자동화된 개발 작업에서도 설치 단계가 신뢰의 취약 지점이 될 수 있습니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><a href="https://www.reddit.com/r/ClaudeAI/comments/1xa1ds8/claude_code_installed_tooling_which_was_actually/" target="_blank" rel="noopener">Reddit <span class="ext">↗</span></a></div>
+      </section>
+      </section>
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">긱뉴스</span><span class="source-group__note">주요 주제 1개</span></div>
+        
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">01</span>
+          <span class="chip chip--cat">사용성</span>
+          <span class="chip chip--sent sent--sug">제안</span>
+          <span class="chip chip--src">긱뉴스</span>
+        </div>
+        <h2 class="fb__issue">승인·순차 실행을 줄인 Claude Code 플러그인</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Claude Code·Superlite</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>Superlite는 명세를 받아 계획, 병렬 구현, 테스트와 리뷰까지 진행하는 플러그인으로 소개됐습니다. 사람이 계획을 한 번 승인하는 방식과 AI가 스스로 결정하는 방식을 선택할 수 있습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>반복 승인과 순차 작업을 줄이는 대신, 사람이 어느 지점에서 통제할지 선택하는 접근입니다. 실제 적용에서는 속도뿐 아니라 자율 진행 범위와 검토 부담이 중요한 판단 기준이 됩니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><a href="https://news.hada.io/topic?id=35647" target="_blank" rel="noopener">긱뉴스 <span class="ext">↗</span></a></div>
+      </section>
+      </section>
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">오픈채팅 · 모임 5</span><span class="source-group__note">주요 주제 3개</span></div>
+        
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">01</span>
+          <span class="chip chip--cat">성능</span>
+          <span class="chip chip--sent sent--neg">우려</span>
+          <span class="chip chip--src">오픈채팅 · 모임 5</span>
+        </div>
+        <h2 class="fb__issue">로컬 영상 생성에 5~6시간 소요</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>ComfyUI·Claude</span><span class="mi"><i>모델</i>MiniMax H3·Opus 5.5</span><span class="mi"><i>조건</i>Mac Studio M5 Max 로컬 실행, 24컷·약 121초 영상</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>사용자는 Mac Studio M5 Max에서 MiniMax H3로 2분가량의 짧은 드라마를 만들며, 대사 한 줄을 한 컷으로 나눠 24컷을 ComfyUI 큐에 넣었습니다. 예상 처리 시간은 5~6시간이며, 큐가 순차 실행돼 밤사이 Claude 사용량은 들지 않는다고 공유했습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>로컬 생성은 클라우드 사용량을 줄일 수 있지만, 긴 처리 시간을 감수해야 하는 작업 방식입니다. 컷 단위로 나누고 큐에 맡기는 운영 방식이 대기 시간을 관리하는 실용적 대안으로 나타났습니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 모임 5 · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">02</span>
+          <span class="chip chip--cat">성능</span>
+          <span class="chip chip--sent sent--sug">제안</span>
+          <span class="chip chip--src">오픈채팅 · 모임 5</span>
+        </div>
+        <h2 class="fb__issue">Mac 로컬 생성의 GPU·메모리 조정</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>ComfyUI</span><span class="mi"><i>모델</i>MiniMax H3</span><span class="mi"><i>조건</i>Mac Studio M5 Max 로컬 환경</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>영상 생성이 느리다는 상황에 GPU 사용 제한을 확인해 보라는 제안이 나왔고, 로컬 모델 간 간섭을 줄이도록 allocator나 spill 기능으로 조정하라는 조언도 이어졌습니다. ComfyUI 워크플로에서 모델을 한꺼번에 올리는 구조가 단점으로 언급됐습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>로컬 생성의 병목은 모델 자체뿐 아니라 GPU 제한과 메모리 배치 방식에서도 생길 수 있습니다. 실행 환경과 워크플로 구성을 함께 점검해야 처리 속도와 결과 품질을 개선할 가능성이 있습니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 모임 5 · 비공개 대화</span></div>
+      </section>
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">03</span>
+          <span class="chip chip--cat">성능</span>
+          <span class="chip chip--sent sent--sug">제안</span>
+          <span class="chip chip--src">오픈채팅 · 모임 5</span>
+        </div>
+        <h2 class="fb__issue">전신·2인 장면에서 얼굴이 뭉개짐</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>ComfyUI</span><span class="mi"><i>조건</i>20스텝 생성, 미디엄샷과 2인 전신샷 비교</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>사용자는 20스텝에서 미디엄샷은 또렷하지만 2인 전신샷에서는 얼굴이 뭉개진다고 했습니다. 이에 캐릭터 시트를 단순화하거나 여러 상황의 캐릭터 장면을 참조하는 refmod 확장 노드를 쓰라는 조언이 나왔습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>구도와 인물 수가 바뀌면 얼굴 표현이 흔들릴 수 있고, 같은 캐릭터 레퍼런스라도 입력 구성에 따라 결과가 달라질 수 있음을 보여줍니다. 시트 단순화와 장면별 참조 방식이 품질 개선을 위한 구체적 점검 지점입니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 모임 5 · 비공개 대화</span></div>
+      </section>
+      </section>
+
+      <section class="source-group">
+        <div class="source-group__head"><span class="source-group__name">오픈채팅 · 모임 3</span><span class="source-group__note">주요 주제 1개</span></div>
+        
+      <section class="fb">
+        <div class="fb__row">
+          <span class="fb__no">01</span>
+          <span class="chip chip--cat">사용성</span>
+          <span class="chip chip--sent sent--sug">제안</span>
+          <span class="chip chip--src">오픈채팅 · 모임 3</span>
+        </div>
+        <h2 class="fb__issue">Claude Code에 Gemini Argon을 글쓰기용으로 연결</h2>
+        <div class="fb__meta"><span class="mi"><i>서비스</i>Claude Code</span><span class="mi"><i>모델</i>Gemini Argon</span><span class="mi"><i>조건</i>한국어 글쓰기 및 문장 다듬기</span></div>
+        <div class="fb__block fb__content">
+          <span class="fb__lbl">내용</span>
+          <p>Gemini Argon을 Agy -p로 Claude Code에 연결해 한국어 글쓰기용으로 쓴다는 경험이 공유됐습니다. 특히 Claude Code의 글쓰기 문체를 보완하는 용도로 언급됐습니다.</p>
+        </div>
+        <div class="fb__block fb__comment">
+          <span class="fb__lbl">해설</span>
+          <p>모델 하나로 모든 작업을 처리하기보다, 한국어 글쓰기처럼 특정 용도에 다른 모델을 연결해 보완하는 사용 방식입니다. 다만 대화에서는 성능 비교나 구체적인 설정 절차까지 제시되지는 않았습니다.</p>
+        </div>
+        <div class="fb__src"><span class="fb__srclbl">출처</span><span class="noext">오픈채팅 · 모임 3 · 비공개 대화</span></div>
+      </section>
+      </section>
+    </main>
+    <footer class="foot">
+      <b>VAAX · 고객 사용기</b><br>
+      Reddit · Hacker News · 긱뉴스 · 오픈채팅의 하루치 실사용자 목소리를 출처별 주요 주제로 정리 · 출처별 최대 4개 · 개인정보 제외 · AI 자동 요약<br>
+      <span class="foot__nav">
+        <a href="index.html">지난 피드백 아카이브 →</a>
+        <a href="community.html">공개 오픈채팅 주제 보기 →</a>
+        <a href="../uservoice.html">오늘 편 →</a>
+        <a href="../../index.html">오늘의 AI 뉴스 →</a>
+      </span>
+    </footer>
+  </div>
+</body>
+</html>
