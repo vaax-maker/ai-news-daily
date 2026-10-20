@@ -445,5 +445,19 @@ a{color:inherit;text-decoration:none}
       </span>
     </footer>
   </div>
-</body>
+<script id="aidaily-pv">(()=>{
+if(!['wootom.github.io','vaax-maker.github.io'].includes(location.hostname))return;
+const endpoint="https://macmini.tail884f5f.ts.net:8443/aidaily-events/pixel.gif";let last='';const pending=new Set();
+function view(){try{
+ if(document.visibilityState==='hidden'||document.prerendering)return;
+ const u=new URL(location.href);let date=u.searchParams.get('date')||'';
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(date)){const m=u.pathname.match(/(\d{4}-\d{2}-\d{2})/);const label=(document.getElementById('dailyDateLabel')?.textContent||'').match(/\d{4}\.\d{2}\.\d{2}/);date=m?m[1]:label?label[0].replaceAll('.','-'):'';}
+ const page=u.origin+u.pathname;const key=page+'|'+date;if(key===last)return;last=key;
+ const id=globalThis.crypto?.randomUUID?.()||Date.now().toString(36)+'_'+Math.random().toString(36).slice(2);
+ const q=new URL(endpoint);q.searchParams.set('event_id',id);q.searchParams.set('page',page);if(date)q.searchParams.set('date',date);
+ const pixel=new Image();pixel.crossOrigin='anonymous';pixel.referrerPolicy='origin';pending.add(pixel);pixel.onload=pixel.onerror=()=>pending.delete(pixel);pixel.src=q.href;
+}catch{}}
+for(const method of ['pushState','replaceState']){const original=history[method];history[method]=function(...args){const result=original.apply(this,args);queueMicrotask(view);return result;};}
+addEventListener('popstate',view);document.addEventListener('visibilitychange',view);view();
+})();</script></body>
 </html>
