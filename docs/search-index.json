@@ -231,6 +231,20 @@
   },
   {
     "date": "2026-10-31",
+    "pub": "브리프",
+    "cat": "tech",
+    "title": "AI·기술 브리프 · 2026-10-31",
+    "summary": "Claude와 Spline 연동으로 코드 없이 3D 애니메이션 웹사이트 제작 가능 · 무료 오픈소스 깃허브 저장소 9개로 AI 작업부터 앱 제작과 구직까지 확장하는 방법을 소개한다 · AI 고숙련자에게 업무가 집중되는 구조적 리스크와 AI 네이티브 전환 전략 · Claude에 ‘더 낫게’를 100번 요청하자 개선은 기능 과잉과 사용자 경험 훼손으로 번졌다. · 2027년 AI 컨설턴트로서 월 12,373달러를 벌기 위한 RACE 기반 자동화 전략 · 픽셀 아바타와 AI 음성·에이전트를 결합해 저비용 무얼굴 영상 제작 과정을 시연한다 · GPT 6.1 Terra는 코딩 실험에서 속도·비용 우위를 보였지만 3D 작업은 Opus가 앞섰다. · 어도비 PDF 스페이스로 업무 문서 통합 관리 및 원문 근거 기반 AI 분석",
+    "url": "https://wootom.github.io/news/2026-10-31-daily-brief-ai.html",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [],
+    "id": "youtube_summary:2026-10-31-daily-brief-ai",
+    "uid": "e2e1d4016ca063b5cc1c9423472d157de9c41d1bbb8bffa4bfd962ce714a0aca"
+  },
+  {
+    "date": "2026-10-31",
     "pub": "개별리포트",
     "cat": "tech",
     "title": "Claude와 Spline 연동으로 코드 없이 3D 애니메이션 웹사이트 제작 가능",
