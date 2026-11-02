@@ -123,68 +123,24 @@
   {
     "date": "2026-11-02",
     "pub": "고객사용기",
-    "customer_story_index": 5,
-    "title": "한국어 STT, 속도 이점이 뚜렷하지 않음",
-    "summary": "직접 돌려본 사용자는 Notesoop STT-Ko-v1이 정확도에서 차이가 컸고, Whisper 배치 연산을 쓰면 속도도 별 차이가 없었다고 전했습니다.",
+    "customer_story_index": "grok-bot-handoff-explainer-20261102",
+    "story_id": "grok-bot-handoff-explainer-20261102",
+    "title": "개인 AI 비서는 무엇을 해주나…Grok Bot 공식 설명으로 살펴본 선택 기준",
+    "summary": "어떤 비서를 고를지 고민하기 전에 맡길 작업과 완료 기준을 구체화하는 방법을 살펴봅니다.",
     "summary_bullets": [
-      "직접 돌려본 사용자는 Notesoop STT-Ko-v1이 정확도에서 차이가 컸고, Whisper 배치 연산을 쓰면 속도도 별 차이가 없었다고 전했습니다."
+      "어떤 비서를 고를지 고민하기 전에 맡길 작업과 완료 기준을 구체화하는 방법을 살펴봅니다."
     ],
-    "why": "속도를 내세운 모델을 실제로 비교했을 때, 배치 처리 환경에서는 기대한 시간 이점이 뚜렷하지 않았다는 평가입니다. 한국어 STT 도구 선택 시 속도 주장만으로 판단하기 어렵다는 점을 보여줍니다.",
-    "url": "https://vaax-maker.github.io/ai-news-daily/v2/uservoice/2026-11-02.html",
-    "channel": "오픈채팅 · 모임 3",
+    "why": "첫 과제는 기능 이름보다 끝났는지 확인할 수 있는 일로 정하는 편이 낫다. 예를 들어 자료를 어디서 모으고 어떤 형태로 정리해 누구에게 검토받을지까지 정하면 비서의 작업 범위가 구체적이 된다. 공식 설명은 이런 위임 방식을 제시하지만, 실제 업무의 성공률이나 다른 도구와의 성능 차이는 별도의 실행 결과로 판단해야 한다.",
+    "url": "https://vaax-maker.github.io/ai-news-daily/v2/uservoice/2026-11-02.html#story-21680a4ea011b6f97efc",
+    "channel": "오픈채팅 · 모임 2 · 오픈채팅 · 모임 1",
+    "article_kind": "explainer",
     "cat": "tech",
     "kind": "customer_story",
     "source": "고객사용기",
     "edition": null,
-    "highlights": [
-      "속도도 별 차이가 없었다고 전했습니다"
-    ],
-    "id": "customer_story:2026-11-02:5",
-    "uid": "d7bd0676672e8406a96494ecbbdb9411b435f18038a828f6ff93d26927d8a189"
-  },
-  {
-    "date": "2026-11-02",
-    "pub": "고객사용기",
-    "customer_story_index": 6,
-    "title": "MUSE 영상의 블러와 움직임 품질",
-    "summary": "사용자는 생성된 영상이 흐릿해 실사용하기 어렵다고 했고, 움직임이 있는 장면에서는 정적이거나 느린 움직임 정도가 가능할 것 같다고 체감했습니다.",
-    "summary_bullets": [
-      "사용자는 생성된 영상이 흐릿해 실사용하기 어렵다고 했고, 움직임이 있는 장면에서는 정적이거나 느린 움직임 정도가 가능할 것 같다고 체감했습니다."
-    ],
-    "why": "영상 생성의 결과물이 보기에는 흥미로워도 블러와 움직임 품질이 실제 활용을 막을 수 있다는 피드백입니다. 특히 결과물의 왜곡을 보정하는 기능에 대한 기대가 드러납니다.",
-    "url": "https://vaax-maker.github.io/ai-news-daily/v2/uservoice/2026-11-02.html",
-    "channel": "오픈채팅 · 모임 5",
-    "cat": "tech",
-    "kind": "customer_story",
-    "source": "고객사용기",
-    "edition": null,
-    "highlights": [
-      "움직임 정도가 가능할 것 같다고 체감했습니다"
-    ],
-    "id": "customer_story:2026-11-02:6",
-    "uid": "9d7ffbbdab29862492ae808e3df91a8915346939e19a7c41678f837d855f7d94"
-  },
-  {
-    "date": "2026-11-02",
-    "pub": "고객사용기",
-    "customer_story_index": 7,
-    "title": "교통사고 장면 생성이 우회됨",
-    "summary": "교통사고 장면을 프리비즈로 만들려던 사용자는 사람이 등장하면 차가 감속하거나 다른 장면으로 바꾸려는 결과를 반복해서 경험했다고 했습니다.",
-    "summary_bullets": [
-      "교통사고 장면을 프리비즈로 만들려던 사용자는 사람이 등장하면 차가 감속하거나 다른 장면으로 바꾸려는 결과를 반복해서 경험했다고 했습니다."
-    ],
-    "why": "장면의 의도가 사고 연출이어도 사람과 차량의 충돌 묘사가 우회될 수 있어, 서사상 필요한 장면을 구현하기 어렵다는 사례입니다. 창작 목적과 생성 결과 사이의 제어 가능성이 핵심 불편으로 나타납니다.",
-    "url": "https://vaax-maker.github.io/ai-news-daily/v2/uservoice/2026-11-02.html",
-    "channel": "오픈채팅 · 모임 5",
-    "cat": "tech",
-    "kind": "customer_story",
-    "source": "고객사용기",
-    "edition": null,
-    "highlights": [
-      "바꾸려는 결과를 반복해서 경험했다고 했습니다"
-    ],
-    "id": "customer_story:2026-11-02:7",
-    "uid": "1d7504a5a503e7a4e4ef507a1270134e133e8253332c605bf2ffbc2227a9602d"
+    "highlights": [],
+    "id": "customer_story:2026-11-02:grok-bot-handoff-explainer-20261102",
+    "uid": "3dd60273d9c00e1f4dfde6cd986d50e853c6c89c732f45b225044075e3e5a0ba"
   },
   {
     "date": "2026-11-02",
