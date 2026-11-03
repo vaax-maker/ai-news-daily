@@ -1,0 +1,22 @@
+name: AIDAILY006 read-only government API check
+on:
+  push:
+    branches: [aidaily006-api-probe-20261104]
+    paths: [.github/workflows/aidaily006-api-probe.yml]
+permissions:
+  contents: read
+jobs:
+  api-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: One authenticated GET; no publication
+        env:
+          BIZINFO_API_KEY: ${{ secrets.BIZINFO_API_KEY }}
+        run: python3 .github/scripts/aidaily006-api-probe.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aidaily006-api-receipt
+          path: receipt.json
+          retention-days: 7
