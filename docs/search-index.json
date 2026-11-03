@@ -184,11 +184,13 @@
       "background": [
         {
           "text": "OpenAI는 12월부터 Plus·Pro·Business의 ChatGPT와 Codex 사용량을 합산한다고 안내했다. Work의 에이전트 기능을 ChatGPT에 통합하는 과정의 변경이며, Instant 채팅은 이 사용량에서 차감하지 않는다.",
-          "label": "공식 공지"
+          "label": "공식 공지",
+          "url": "https://help.openai.com/en/articles/20001625-understanding-chatgpt-and-codex-usage-limits"
         },
         {
           "text": "사용량은 토큰으로 측정되며 선택한 모델과 작업의 복잡도에 따라 소모량이 달라진다. 공식 안내는 설정의 Usage에서 통합 잔여량과 초기화 시점을 확인할 수 있게 된다고 설명한다.",
-          "label": "공식 공지"
+          "label": "공식 공지",
+          "url": "https://help.openai.com/en/articles/20001625-understanding-chatgpt-and-codex-usage-limits"
         }
       ],
       "voices": [
