@@ -1,0 +1,27 @@
+name: AIDAILY006 government snapshot
+run-name: AIDAILY006-${{ inputs.request_id }}
+on:
+  workflow_dispatch:
+    inputs:
+      request_id:
+        description: Stable request ID
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Fetch once
+        env:
+          BIZINFO_API_KEY: ${{ secrets.BIZINFO_API_KEY }}
+        run: python3 .github/scripts/aidaily006-gov-fetch.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: aidaily006-gov-snapshot
+          path: gov-snapshot.json
+          retention-days: 7
