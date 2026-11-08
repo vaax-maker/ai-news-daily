@@ -142,6 +142,105 @@
   },
   {
     "date": "2026-11-08",
+    "pub": "고객사용기",
+    "customer_story_index": "stt-notesoop-whisper-batch-test-20261102",
+    "story_id": "stt-notesoop-whisper-batch-test-20261102",
+    "title": "빠르다고 소개된 STT 모델을 Whisper와 비교했을 때 사용자가 체감한 정확도와 처리 속도 차이",
+    "summary": "빠르다고 알려진 Notesoop-STT-Ko-v1을 시험한 한 참여자는 정확도 차이를 크게 느꼈다고 전했다. Whisper의 배치 연산도 돌려 비교했을 때는 속도 차이가 크지 않았다고 했다. 어느 모델의 정확도가 더 높았는지와 구체적인 시험 조건은 확인되지 않았다.",
+    "summary_bullets": [
+      "빠르다고 알려진 Notesoop-STT-Ko-v1을 시험한 한 참여자는 정확도 차이를 크게 느꼈다고 전했다. Whisper의 배치 연산도 돌려 비교했을 때는 속도 차이가 크지 않았다고 했다. 어느 모델의 정확도가 더 높았는지와 구체적인 시험 조건은 확인되지 않았다."
+    ],
+    "why": "한 참여자의 시험 경험으로, 모델 간 우열이나 다른 입력 조건에서의 성능을 판단할 근거는 아니다.",
+    "url": "https://wootom.github.io/news/%EA%B8%B0%EC%88%A0.html?date=2026-11-08&item=customer_story%3A2026-11-08%3Astt-notesoop-whisper-batch-test-20261102",
+    "channel": "오픈채팅 · 모임 99",
+    "story_content": {
+      "commentary": "한 참여자의 시험 경험으로, 모델 간 우열이나 다른 입력 조건에서의 성능을 판단할 근거는 아니다.",
+      "background": [
+        {
+          "text": "OpenAI는 Whisper가 여러 언어의 음성 인식과 번역을 지원하며, 68만 시간의 다국어 지도 데이터로 훈련됐다고 소개했다.",
+          "label": "Whisper 공식 소개",
+          "url": "https://openai.com/ko-KR/index/whisper/"
+        }
+      ],
+      "voices": [
+        {
+          "text": "빠르다고 알려진 Notesoop-STT-Ko-v1을 시험한 한 참여자는 정확도 차이를 크게 느꼈다고 전했다. Whisper의 배치 연산도 돌려 비교했을 때는 속도 차이가 크지 않았다고 했다. 어느 모델의 정확도가 더 높았는지와 구체적인 시험 조건은 확인되지 않았다.",
+          "date": "2026-11-02 수집 관찰일",
+          "source": "오픈채팅 · 모임 99"
+        }
+      ],
+      "timeline": [
+        {
+          "text": "참여자는 빠르다고 소개된 Notesoop-STT-Ko-v1을 시험했다.",
+          "stage": "상황"
+        },
+        {
+          "text": "정확도를 비교하고 Whisper의 배치 연산도 실행해 속도를 살펴봤다.",
+          "stage": "진행"
+        },
+        {
+          "text": "정확도 차이는 크게 느꼈지만, 배치 처리한 Whisper와의 속도 차이는 크지 않았다고 전했다.",
+          "stage": "결과"
+        }
+      ],
+      "related_links": []
+    },
+    "cat": "tech",
+    "kind": "customer_story",
+    "source": "고객사용기",
+    "edition": null,
+    "highlights": [
+      "비교했을 때는 속도 차이가 크지 않았다고 했다"
+    ],
+    "id": "customer_story:2026-11-08:stt-notesoop-whisper-batch-test-20261102",
+    "uid": "67057b5b8d26e2730560ce350599b6393b41e5b64040efc07921e9880b20fbe1"
+  },
+  {
+    "date": "2026-11-08",
+    "pub": "고객사용기",
+    "customer_story_index": "vc-bench-agent-version-control-20261108",
+    "story_id": "vc-bench-agent-version-control-20261108",
+    "title": "코딩 에이전트의 버전 관리 작업에서 Git, Jujutsu, GitButler를 비교한 실험 결과",
+    "summary": "",
+    "summary_bullets": [],
+    "why": "시험은 미리 준비된 저장소의 버전 관리 작업에 한정됐다. 코드 작성이나 작업 환경 준비를 포함한 모든 개발 작업의 우열을 뜻하지 않는다.",
+    "url": "https://wootom.github.io/news/%EA%B8%B0%EC%88%A0.html?date=2026-11-08&item=customer_story%3A2026-11-08%3Avc-bench-agent-version-control-20261108",
+    "channel": "",
+    "story_content": {
+      "commentary": "시험은 미리 준비된 저장소의 버전 관리 작업에 한정됐다. 코드 작성이나 작업 환경 준비를 포함한 모든 개발 작업의 우열을 뜻하지 않는다.",
+      "background": [],
+      "voices": [],
+      "timeline": [
+        {
+          "text": "vc-bench는 Claude Code와 Codex에 같은 버전 관리 작업을 맡기고 Git, Jujutsu, GitButler를 비교했다.",
+          "stage": "상황"
+        },
+        {
+          "text": "총 360회 시험에서 사용한 명령이 아니라 최종 Git 이력과 작업 트리가 요구사항에 맞는지를 기준으로 성공 여부를 판정했다.",
+          "stage": "진행"
+        },
+        {
+          "text": "359회가 성공했다. 기본 Git과 GitButler는 각각 120회 모두 통과했고 Jujutsu에서는 한 번 실패했다. 이 실험에서 GitButler는 Git보다 작업 시간이 약 65% 짧고 실행 명령은 약 78% 적었다.",
+          "stage": "결과"
+        }
+      ],
+      "related_links": [
+        {
+          "label": "관련 자료",
+          "url": "https://news.hada.io/topic?id=36759&utm_source=geeknews&utm_medium=rss&utm_campaign=news"
+        }
+      ]
+    },
+    "cat": "tech",
+    "kind": "customer_story",
+    "source": "고객사용기",
+    "edition": null,
+    "highlights": [],
+    "id": "customer_story:2026-11-08:vc-bench-agent-version-control-20261108",
+    "uid": "39a94cb63d09cfbadb3537564b26c7f87bd737b65efba22c31a5c2a98821ceb4"
+  },
+  {
+    "date": "2026-11-08",
     "pub": "시황",
     "cat": "econ",
     "title": "시황 브리프 · 2026-11-08",
