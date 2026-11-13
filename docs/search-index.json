@@ -141,6 +141,86 @@
     "uid": "827be4f68898b0773dd2c49d989f69cb881677d142e177970cf64c5372481fcd"
   },
   {
+    "date": "2026-11-14",
+    "pub": "시황",
+    "cat": "econ",
+    "title": "시황 브리프 · 2026-11-14",
+    "summary": "젠슨 황의 퇴진이 AI 반도체 공급망과 기업 권력의 재편을 부를 수 있다고 전망한다",
+    "url": "https://wootom.github.io/news/2026-11-14-daily-brief-econ.html",
+    "kind": "market_summary",
+    "source": "시황",
+    "edition": null,
+    "highlights": [],
+    "id": "market_summary:2026-11-14-daily-brief-econ",
+    "uid": "4fa07c700948882a1dd567ef572f6c2aa574abe222a7ffe5eca9264e1cbb5e60"
+  },
+  {
+    "date": "2026-11-14",
+    "pub": "브리프",
+    "cat": "tech",
+    "title": "AI·기술 브리프 · 2026-11-14",
+    "summary": "Aside의 아이폰 미러링으로 카카오톡과 당근마켓 작업을 자동화하는 방법을 소개한다.",
+    "url": "https://wootom.github.io/news/2026-11-14-daily-brief-ai.html",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "당근마켓 작업을 자동화하는 방법을 소개한다"
+    ],
+    "id": "youtube_summary:2026-11-14-daily-brief-ai",
+    "uid": "f06bd888b5032a71381e3c5f1abe8ab8331ab0015dfdb8f00f96cd5eafa5b8d7"
+  },
+  {
+    "date": "2026-11-14",
+    "pub": "개별리포트",
+    "cat": "econ",
+    "title": "젠슨 황의 퇴진이 AI 반도체 공급망과 기업 권력의 재편을 부를 수 있다고 전망한다",
+    "summary": "영상은 NVIDIA가 AI 모델의 학습·운영에 쓰이는 GPU를 공급하고, 지난 분기 약 1,000억 달러의 매출 가운데 약 900억 달러가 데이터센터 구축에서 나왔다고 설명한다. 영상이 제시한 비교에서 OpenAI의 컴퓨팅은 거의 100% NVIDIA에 의존하며, 약 1년 전 젠슨 황도 OpenAI가 하는 일은 사실상 모두 NVIDIA에서 돌아간다고 말했다. 영상은 앞으로 Anthropic과 OpenAI 같은 기업이 자체 칩을 만들며 수직 통합에 나설 것으로 전망한다. Anthropic은 이미 이 작업을 시작했으며, OpenAI도 NVIDIA 시장 신뢰나 대만과의 관계가 흔들릴 경우 서둘러야 할 수 있다고 덧붙인다. 영상은 NVIDIA가 계속 막대한 수요를 받더라도 앞으로는 기본 선택지로서의 지위를 잃을 수 있다고 전망한다. Anthropic의 컴퓨팅 약정만 해도 약 1조 달러 규모라고 언급한다.",
+    "summary_bullets": [
+      "영상은 NVIDIA가 AI 모델의 학습·운영에 쓰이는 GPU를 공급하고, 지난 분기 약 1,000억 달러의 매출 가운데 약 900억 달러가 데이터센터 구축에서 나왔다고 설명한다.",
+      "영상이 제시한 비교에서 OpenAI의 컴퓨팅은 거의 100% NVIDIA에 의존하며, 약 1년 전 젠슨 황도 OpenAI가 하는 일은 사실상 모두 NVIDIA에서 돌아간다고 말했다.",
+      "영상은 앞으로 Anthropic과 OpenAI 같은 기업이 자체 칩을 만들며 수직 통합에 나설 것으로 전망한다. Anthropic은 이미 이 작업을 시작했으며, OpenAI도 NVIDIA 시장 신뢰나 대만과의 관계가 흔들릴 경우 서둘러야 할 수 있다고 덧붙인다.",
+      "영상은 NVIDIA가 계속 막대한 수요를 받더라도 앞으로는 기본 선택지로서의 지위를 잃을 수 있다고 전망한다. Anthropic의 컴퓨팅 약정만 해도 약 1조 달러 규모라고 언급한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-14-nicksaraev-jensen-huang-nvidia.html",
+    "channel": "Nick Saraev",
+    "source_title": "Jensen Just Popped The AI Bubble",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "수직 통합에 나설 것으로 전망한다",
+      "지위를 잃을 수 있다고 전망한다"
+    ],
+    "id": "youtube_summary:2026-11-14-nicksaraev-jensen-huang-nvidia",
+    "uid": "20bc08c0f443844b2af601741060220c886e43181f91e46be07045eae6031789"
+  },
+  {
+    "date": "2026-11-14",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "Aside의 아이폰 미러링으로 카카오톡과 당근마켓 작업을 자동화하는 방법을 소개한다.",
+    "summary": "맥에서 Aside를 열고 아이폰 미러링을 허용한 뒤, 카카오톡에서 ‘배움의 달인’ 단톡방을 찾아 오늘 올라온 내용을 정리해 달라고 요청한다. 오늘 단톡방 내용을 카드 뉴스로 만들어 달라고 요청하고, 이미지 생성 모델은 Codex Image 2를 사용하도록 지정한다. 진행자는 Aside 설정에서 이미지 생성 모델을 별도로 선택할 수 있다고 설명한다. 아이폰 미러링으로 당근마켓을 열고 ‘아이폰 듀오 미개봉’ 매물을 저가순으로 찾아 달라고 요청한다. Aside가 화면을 조작하며 매물을 열어 확인하고 목록을 만든다. 카카오톡 내용을 읽고 카드 뉴스를 만드는 작업이 성공한 뒤, 이를 매일 저녁 10시에 실행하는 루틴으로 만들어 달라고 요청한다.",
+    "summary_bullets": [
+      "맥에서 Aside를 열고 아이폰 미러링을 허용한 뒤, 카카오톡에서 ‘배움의 달인’ 단톡방을 찾아 오늘 올라온 내용을 정리해 달라고 요청한다.",
+      "오늘 단톡방 내용을 카드 뉴스로 만들어 달라고 요청하고, 이미지 생성 모델은 Codex Image 2를 사용하도록 지정한다. 진행자는 Aside 설정에서 이미지 생성 모델을 별도로 선택할 수 있다고 설명한다.",
+      "아이폰 미러링으로 당근마켓을 열고 ‘아이폰 듀오 미개봉’ 매물을 저가순으로 찾아 달라고 요청한다. Aside가 화면을 조작하며 매물을 열어 확인하고 목록을 만든다.",
+      "카카오톡 내용을 읽고 카드 뉴스를 만드는 작업이 성공한 뒤, 이를 매일 저녁 10시에 실행하는 루틴으로 만들어 달라고 요청한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-14-uciiuquk-aside-iphone-mirroring.html",
+    "channel": "배움의 달인 (AI·자동화)",
+    "source_title": "아직도 아이폰 직접 만지세요? Aside로 편하게 쓰는 법!",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "Codex Image 2를 사용하도록 지정한다",
+      "아이폰 듀오 미개봉’ 매물을 저가순으로 찾아 달라고 요청한다"
+    ],
+    "id": "youtube_summary:2026-11-14-uciiuquk-aside-iphone-mirroring",
+    "uid": "31776b9c2234245bf49c040690032616572df474e49475d61871d9191eeaf742"
+  },
+  {
     "date": "2026-11-13",
     "pub": "뉴스",
     "n": "01",
