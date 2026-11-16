@@ -20,16 +20,28 @@ data/members/
 # Rollback/Backup artifacts
 backups/
 data/_snapshots/
+data/e2e/
 
 # OMC 세션 상태(로컬 전용, 커밋 금지)
 .omc/
+.agent/
 docs/briefing/
 
+# launchd/runner 런타임 로그
+data/*.log
+data/**/*.log
+data/**/*.out
+data/**/*.err
+data/**/*.bak
+
 # 개인/계정 식별자(카톡 오픈채팅 ID·SSH 호스트) → 공개 repo 커밋 금지, 로컬 전용
-# uservoice.py 는 sanitize 완료(식별자를 아래 _identifiers.py 로 분리)라 커밋 가능
-briefer/_identifiers.py
+# Customer Stories identifiers remain local-only.
+aidaily/customer_stories/_identifiers.py
 src/
 scripts/
 
 # 신규 뉴스 소스 지속 중복제거 store(런타임 상태)
-data/extra_seen.json
+data/ai_news/extra_seen.json
+
+.venv-youtube/
+data/admin/*.sqlite*

@@ -3,14 +3,19 @@
 
 기존 `python -m http.server`는 Cache-Control을 안 보내 브라우저가 search.html·search-index.json을
 휴리스틱 캐싱 → 갱신 후에도 하드새로고침으로 안 지워지는 문제(2026-08-21). 매 응답에 no-store를
-붙여 항상 최신본을 받게 한다. docroot = ~/ai-news-daily-beacon/docs.
+붙여 항상 최신본을 받게 한다. 경로와 포트는 공통 설정/서비스 레지스트리에서 읽는다.
 """
 import http.server
-import os
 import socketserver
+import sys
+import urllib.parse
+from pathlib import Path
 
-DOCROOT = os.path.expanduser("~/ai-news-daily-beacon/docs")
-PORT = 8096
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from aidaily import config  # noqa: E402
+
+DOCROOT = str(config.DOCS_ROOT)
+PORT = urllib.parse.urlsplit(config.SEARCH_SERVICE_URL).port or 8096
 
 
 class NoCacheHandler(http.server.SimpleHTTPRequestHandler):

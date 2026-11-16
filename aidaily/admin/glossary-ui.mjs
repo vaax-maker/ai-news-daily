@@ -1,0 +1,30 @@
+export function glossaryPanel(){return String.raw`
+<section class="panel" id="p-glossary"><div class="card glossary-card">
+<h2>단어장</h2><p class="subtitle">자막·전사 교정본과 요약의 제품명 표기를 통일합니다. 원문은 보존합니다.</p>
+<div class="glossary-toolbar"><label>용어 검색 <input id="gl-search" type="search" placeholder="공식 표기 또는 변형 표기"></label><button type="button" id="gl-new">용어 추가</button><button type="button" id="gl-reload">새로 불러오기</button></div>
+<p id="gl-status" role="status" aria-live="polite">단어장을 불러오는 중…</p><div id="gl-list"></div>
+<form id="gl-form" hidden><h3 id="gl-form-title">용어 추가</h3>
+<label>공식 표기 <input id="gl-canonical" required maxlength="100" autocomplete="off"></label>
+<label>변형 표기 <textarea id="gl-aliases" rows="3" placeholder="한 줄에 하나씩 입력하세요"></textarea></label>
+<label>설명 <textarea id="gl-description" rows="2" maxlength="1000"></textarea></label>
+<label>공식 출처 URL <input id="gl-source" type="url" maxlength="1000" placeholder="https://"></label>
+<label>문맥 조건 <textarea id="gl-context" rows="2" placeholder="한 줄에 하나씩 입력하세요. 비워두면 문맥 제한 없이 적용합니다."></textarea></label>
+<p class="subtitle">조건을 입력하면 해당 단어 중 하나가 있는 자료에서만 교정합니다. 숫자·버전·URL은 변경하지 않습니다.</p>
+<label class="gl-check"><input id="gl-enabled" type="checkbox" checked> 교정에 사용</label>
+<div class="glossary-toolbar"><button type="submit" id="gl-save">저장</button><button type="button" id="gl-cancel">닫기</button></div></form>
+<p class="subtitle">저장한 단어장은 다음 처리부터 적용됩니다. 기존 기사 재발행이나 알림 송출은 실행하지 않습니다.</p>
+</div></section>
+<style>.glossary-toolbar{display:flex;gap:10px;align-items:end;flex-wrap:wrap}.glossary-card label{display:block;margin:10px 0}.glossary-card input:not([type=checkbox]),.glossary-card textarea{display:block;width:100%;box-sizing:border-box;font:inherit;padding:9px;border:1px solid #b8c1ce;border-radius:6px}.glossary-card textarea{resize:vertical}.glossary-card #gl-form{max-width:720px;border-top:1px solid #d5dbe3;margin-top:18px;padding-top:10px}.gl-term{display:flex;gap:12px;align-items:center;justify-content:space-between;border-bottom:1px solid #d5dbe3;padding:12px 0}.gl-term p{margin:5px 0;overflow-wrap:anywhere}.gl-term small{color:#586474}.gl-check{display:flex!important;align-items:center;gap:8px}.glossary-card button{min-height:40px}.glossary-card [hidden]{display:none!important}@media(max-width:600px){.gl-term{align-items:start}.glossary-toolbar label{width:100%}.glossary-card textarea{font-size:16px}}</style>
+<script>(()=>{
+const el=id=>document.getElementById(id);let state=null,editing=null,busy=false,dirty=false;
+const status=(text,error=false)=>{el('gl-status').textContent=text;el('gl-status').style.color=error?'#b42318':'#344054';};
+const messages={revision_conflict:'다른 곳에서 단어장이 변경되었습니다. 새로 불러온 뒤 다시 저장해 주세요.',dictionary_busy:'다른 저장이 진행 중입니다. 잠시 후 다시 저장해 주세요.',duplicate_canonical:'같은 공식 표기가 이미 있습니다.',duplicate_alias:'다른 용어에서 사용 중인 표기입니다.',invalid_url:'공식 출처에는 http 또는 https 주소를 입력해 주세요.',invalid_term:'공식 표기를 입력해 주세요.'};
+async function request(method,body){const response=await fetch('/aidaily/api/glossary',{method,headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});let value;try{value=await response.json();}catch{throw Error('로그인 상태 또는 서버 연결을 확인해 주세요.');}if(!response.ok||value.ok===false)throw Error(messages[value.error]||'저장하지 못했습니다. 입력을 확인하고 다시 시도해 주세요.');return value;}
+function render(){const list=el('gl-list');list.replaceChildren();const q=el('gl-search').value.trim().toLocaleLowerCase();const terms=state.terms.filter(t=>[t.canonical,...t.aliases].some(v=>v.toLocaleLowerCase().includes(q)));if(!terms.length){list.textContent='표시할 용어가 없습니다.';return;}for(const term of terms){const row=document.createElement('div');row.className='gl-term';const text=document.createElement('div'),name=document.createElement('strong'),aliases=document.createElement('p'),enabled=document.createElement('small'),button=document.createElement('button');name.textContent=term.canonical;aliases.textContent=term.aliases.join(' · ')||'변형 표기 없음';enabled.textContent=term.enabled?'사용 중':'비활성';button.type='button';button.textContent='편집';button.setAttribute('aria-label',term.canonical+' 편집');button.onclick=()=>open(term);text.append(name,aliases,enabled);row.append(text,button);list.append(row);}}
+function open(term){if(busy)return;if(dirty&&!confirm('저장하지 않은 입력을 닫을까요?'))return;editing=term?.id||null;el('gl-form').hidden=false;el('gl-form-title').textContent=term?'용어 편집':'용어 추가';el('gl-canonical').value=term?.canonical||'';el('gl-aliases').value=term?.aliases.join('\n')||'';el('gl-description').value=term?.description||'';el('gl-source').value=term?.source_url||'';el('gl-context').value=term?.context.join('\n')||'';el('gl-enabled').checked=term?.enabled??true;dirty=false;el('gl-canonical').focus();}
+async function load(){if(busy)return;busy=true;status('단어장을 불러오는 중…');try{state=await request('GET');render();status(dirty?'최신 목록을 불러왔습니다. 입력은 유지했습니다. 변경 내용을 확인한 후 저장해 주세요.':'단어장을 불러왔습니다.');}catch(e){status(e.message,true);}finally{busy=false;}}
+el('gl-form').oninput=()=>dirty=true;el('gl-search').oninput=()=>state&&render();el('gl-new').onclick=()=>state&&open(null);el('gl-reload').onclick=load;
+el('gl-cancel').onclick=()=>{if(!dirty||confirm('저장하지 않은 입력을 닫을까요?')){el('gl-form').hidden=true;dirty=false;}};
+el('gl-form').onsubmit=async event=>{event.preventDefault();if(busy||!state)return;const lines=id=>el(id).value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);const term={id:editing||crypto.randomUUID(),canonical:el('gl-canonical').value.trim(),aliases:lines('gl-aliases'),description:el('gl-description').value.trim(),source_url:el('gl-source').value.trim(),context:lines('gl-context'),enabled:el('gl-enabled').checked};const terms=state.terms.filter(t=>t.id!==term.id);terms.push(term);busy=true;el('gl-save').disabled=true;status('저장 중…');try{state=await request('POST',{revision:state.revision,terms});editing=term.id;dirty=false;render();status('저장했습니다.');}catch(e){status(e.message,true);}finally{busy=false;el('gl-save').disabled=false;}};
+load();
+})();</script>`;}

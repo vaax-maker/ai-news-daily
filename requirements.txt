@@ -1,2 +1,2 @@
-# ai-news-daily-v3 briefer — stdlib + urllib only (no bs4/requests needed; parsing is regex-based).
-# No third-party dependencies required to run `python3 -m briefer.build`.
+# AI Daily core uses Python's standard library. Optional transcript backends may
+# require their own tools, such as yt-dlp or local speech-to-text packages.

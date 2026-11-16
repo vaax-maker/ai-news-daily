@@ -1,0 +1,47 @@
+:root, [data-theme="light"] {
+  --bg: #ffffff;
+  --subtle: #f5f7fa;
+  --line: #e6e9ee;
+  --line-strong: #d2d8e0;
+  --text: #141c27;
+  --text-2: #4a5566;
+  --text-3: #6b7685;
+  --accent: #1e6ef4;
+  --accent-ink: #ffffff;
+  --accent-soft: #eaf2fe;
+  --danger: #c4321f;
+  --panel: var(--subtle);
+  --row-selected: var(--accent-soft);
+}
+[data-theme="dark"] {
+  --bg: #0f141b;
+  --subtle: #171e28;
+  --line: #232c38;
+  --line-strong: #323d4b;
+  --text: #e8edf3;
+  --text-2: #aab4c2;
+  --text-3: #8592a3;
+  --accent: #5aa2ff;
+  --accent-ink: #0b1220;
+  --accent-soft: #15243b;
+  --danger: #f2877d;
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --radius-control: 4px;
+  --radius-dot: 50%;
+  --row: 32px;
+  --row-lg: 36px;
+  --sidebar: 220px;
+  --inspector: 320px;
+  --bp-tablet: 900px;
+  --bp-mobile: 600px;
+  --touch: 44px;
+  --font-sans: Pretendard, system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
