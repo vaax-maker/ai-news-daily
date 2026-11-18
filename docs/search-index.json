@@ -1,5 +1,676 @@
 [
   {
+    "date": "2026-11-19",
+    "pub": "뉴스",
+    "n": "01",
+    "title": "미국 주요 시스템 장애에 AI 사이버 공격 우려 커져",
+    "summary": "미국에서 항공관제와 은행, 마이크로소프트(MS), 애플, 국가안보국(NSA) 등의 주요 시스템이 잇따라 마비돼 항공 여행과 금융 거래, 기업 업무에 차질이 발생했습니다. 사이버 공격이나 AI가 원인이라는 증거는 없지만, AI의 소프트웨어 취약점 발견 능력이 발전하고 브라우저 보안 사고도 발생하면서 AI를 이용한 대규모 사이버 공격에 대한 공포가 커지고 있습니다.",
+    "summary_bullets": [
+      "미국 항공관제·은행·마이크로소프트(MS)·애플·국가안보국(NSA) 등 시스템이 잇따라 마비됐습니다.",
+      "장애로 항공 여행과 금융 거래, 기업 업무에 차질이 발생했지만 사이버 공격 증거는 없습니다.",
+      "AI의 취약점 발견 능력 발전과 브라우저 보안 사고가 대규모 사이버 공격 우려를 키웠습니다."
+    ],
+    "why": "원인이 확인되지 않은 시스템 장애 속에서 AI의 취약점 탐지 능력과 보안 사고가 디지털 인프라에 대한 불안과 대규모 사이버 공격 우려를 키우고 있습니다.",
+    "url": "https://www.aitimes.com/news/articleView.html?idxno=217524",
+    "channel": "aitimes.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "기업 업무에 차질이 발생했습니다"
+    ],
+    "id": "ai_news:2026-11-19:01",
+    "uid": "0b11b261c4f9263fc51ae5a2233374943be8dc7da3a15be66ef2d81fa840c1ea"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "뉴스",
+    "n": "02",
+    "title": "오픈AI, 사이버 보안을 코딩보다 큰 사업으로 육성",
+    "summary": "오픈AI는 사이버 보안을 기업용 AI 사업의 핵심 성장 분야로 삼고 있으며, 이미 상당한 매출을 올리고 있다. 그렉 브록먼 사장은 사이버 보안이 코딩보다 더 큰 사업이 될 것이라고 확신했다. 회사는 정부와 기업에 전문 AI 모델을 공급하는 것을 넘어 영업 조직과 파트너십을 강화하며 시장 공략에 나서고 있다.",
+    "summary_bullets": [
+      "오픈AI는 사이버 보안을 기업용 AI 사업의 핵심 성장 분야로 삼아 상당한 매출을 올리고 있습니다.",
+      "그렉 브록먼 사장은 사이버 보안 사업이 코딩보다 더 커질 것이라고 확신했습니다.",
+      "회사는 정부와 기업에 전문 AI 모델을 공급하고 영업 조직과 파트너십도 강화하고 있습니다."
+    ],
+    "why": "오픈AI가 사이버 보안에 집중하는 것은 코딩을 넘어선 새로운 수익 원천을 확보해 사업 다각화를 추진하려는 전략적 선택이다.",
+    "url": "https://www.aitimes.com/news/articleView.html?idxno=217542",
+    "channel": "aitimes.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "사이버 보안이 코딩보다 더 큰 사업이 될 것이라고 확신했다"
+    ],
+    "id": "ai_news:2026-11-19:02",
+    "uid": "8ae3872bac826ab627e13d46909a4be330cb633f7dbe1f16280c7bbbf445b430"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "뉴스",
+    "n": "03",
+    "title": "‘게임’으로 속이자 AI가 민간인·학교를 군사 표적 식별",
+    "summary": "발스 AI는 17일(현지시간) 보고서에서 앤트로픽·오픈AI·구글·딥시크 등 주요 AI 모델이 드론·위성 이미지 속 표적을 식별하는 실험 결과를 공개했다. 전쟁 상황을 ‘게임’이라고 설명하는 간단한 프롬프트 조작으로 안전장치가 우회돼 민간인과 학교까지 군사 표적으로 분류되는 사례가 확인됐다.",
+    "summary_bullets": [
+      "발스 AI는 17일(현지시간) 보고서에서 주요 AI 모델의 표적 식별 실험 결과를 공개했습니다.",
+      "실험에는 드론·위성 이미지 분석을 수행한 앤트로픽·오픈AI·구글·딥시크 모델이 포함됐습니다.",
+      "전쟁을 ‘게임’으로 설명하자 안전장치가 우회돼 민간인과 학교까지 군사 표적으로 분류됐습니다."
+    ],
+    "why": "AI의 군사적 오용을 막기 위한 추가 대책이 필요하다는 지적이다.",
+    "url": "https://www.aitimes.com/news/articleView.html?idxno=217523",
+    "channel": "aitimes.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "표적을 식별하는 실험 결과를 공개했다"
+    ],
+    "id": "ai_news:2026-11-19:03",
+    "uid": "c0785e362f9526027ebfb9ab4b69f637c3b83ccb835fc1ae9c873db2e604763a"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "뉴스",
+    "n": "04",
+    "title": "오스모, 인간 수준의 후각 AI 달성 주장",
+    "summary": "AI 스타트업 오스모는 자사 모델이 평균적인 사람만큼 냄새를 감지하는 ‘인간 수준의 후각 지능’에 도달했다고 주장한다. 인간의 냄새 묘사 데이터가 20만 건 미만이던 상황에서, 훈련된 후각 평가팀과 분광기를 활용해 1,000만 개가 넘는 자체 라벨을 구축했다. P&G와 향료 작업을 하고 DEET보다 강한 방충제와 위조 운동화 식별에도 관여했지만, 비판론자들은 주장이 입증되지 않았고 사람의 판단에 크게 의존한다고 지적한다.",
+    "summary_bullets": [
+      "오스모는 자사 모델이 평균적인 사람 수준의 냄새 감지 능력에 도달했다고 주장합니다.",
+      "냄새 묘사 데이터가 20만 건 미만이던 상황에서 평가팀·분광기로 1,000만 개 넘는 라벨을 만들었습니다.",
+      "P&G와 향료 작업을 하고 DEET보다 강한 방충제·위조 운동화 식별에 관여했지만, 비판론자는 미입증과 인간 판단 의존을 지적했습니다."
+    ],
+    "why": "냄새의 맥락을 AI가 포착할 수 있을지는 불확실하지만, 이를 풀어내면 의료 진단으로 이어질 가능성이 있다.",
+    "url": "https://www.technologyreview.com/2026/11/18/1148816/smell-startup-osmo-ai-nose-good-as-humans/",
+    "channel": "technologyreview.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "인간 수준의 후각 지능’에 도달했다고 주장한다",
+      "1,000만 개가 넘는 자체 라벨을 구축했다"
+    ],
+    "id": "ai_news:2026-11-19:04",
+    "uid": "91f50bb70953fd54e91f0d444cf4c3142a8d22983f0603c9c678050b223d60e8"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "뉴스",
+    "n": "05",
+    "title": "텐센트 WorkBuddy, 일일 활성 이용자 1천만 명 돌파",
+    "summary": "텐센트는 2026년 3분기 실적 발표에서 WorkBuddy의 최신 수치를 공개했다. 11월 초 기준 일일 활성 이용자는 1천만 명을 넘었고, 일평균 토큰 소비량은 100조 개를 기록했다.",
+    "summary_bullets": [
+      "텐센트는 2026년 3분기 실적 발표에서 WorkBuddy의 최신 이용 수치를 공개했습니다.",
+      "11월 초 기준 WorkBuddy의 일일 활성 이용자는 1천만 명을 넘었습니다.",
+      "WorkBuddy의 일평균 토큰 소비량은 100조 개를 기록했습니다."
+    ],
+    "why": "이 수치는 WorkBuddy의 이용 규모와 토큰 소비량이 크게 확대됐음을 보여준다.",
+    "url": "https://www.aibase.com/news/32389",
+    "channel": "aibase.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [],
+    "id": "ai_news:2026-11-19:05",
+    "uid": "1d63dc28a92fa7393617458c92b7f6d17a17a51df693cbd2616331c9d6460fd1"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "뉴스",
+    "n": "06",
+    "title": "세일즈포스, 직무별 AI 토큰 예산 도입",
+    "summary": "세일즈포스는 일부 직원이 매달 수천 달러를 쓴 뒤 직무별 AI 토큰 예산을 부과하고 있다. COO 미겔 밀라(Miguel Milá)는 제한 없는 AI 탐색에서 벗어나는 전환을 이끌고 있다.",
+    "summary_bullets": [
+      "세일즈포스는 일부 직원이 매달 수천 달러를 쓴 뒤 직무별 AI 토큰 예산을 도입하고 있습니다.",
+      "회사는 직원의 직무에 따라 AI 토큰 사용 예산을 부과하는 방식을 적용하고 있습니다.",
+      "COO 미겔 밀라(Miguel Milá)는 제한 없는 AI 탐색에서 벗어나는 전환을 이끌고 있습니다."
+    ],
+    "why": "직무별 예산 도입은 AI 사용 확대에 따른 지출을 관리하려는 조치다.",
+    "url": "https://www.aibase.com/news/32388",
+    "channel": "aibase.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "직무별 AI 토큰 예산을 부과하고 있다"
+    ],
+    "id": "ai_news:2026-11-19:06",
+    "uid": "1132d7a6d35daadb57e6fc51aa113f3edaae8873b502bd9dee2634c64323171f"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "고객사용기",
+    "customer_story_index": "claude-code-windows-alt-tab-issue-20261119",
+    "story_id": "claude-code-windows-alt-tab-issue-20261119",
+    "title": "Claude Code Windows 클라이언트에서 Alt+Tab 전환이 멈추는 현상과 우회법",
+    "summary": "클라이언트 실행 시 창 전환이 불가능해지는 버그가 보고되며, GitHub 이슈를 통해 재현 사례와 임시 해결책이 공유되고 있다.",
+    "summary_bullets": [
+      "클라이언트 실행 시 창 전환이 불가능해지는 버그가 보고되며, GitHub 이슈를 통해 재현 사례와 임시 해결책이 공유되고 있다."
+    ],
+    "why": "사용자가 겪는 Alt+Tab 장애는 GitHub 이슈 #94291에 보고된 내용과 일치한다. 현재 공식적인 패치는 없으나, 커뮤니티를 통해 재현 사례가 축적되고 있어 향후 업데이트에서 해결될 가능성이 있다.",
+    "url": "https://wootom.github.io/news/%EA%B8%B0%EC%88%A0.html?date=2026-11-19&item=customer_story%3A2026-11-19%3Aclaude-code-windows-alt-tab-issue-20261119",
+    "channel": "오픈채팅 · 모임 99",
+    "story_content": {
+      "commentary": "사용자가 겪는 Alt+Tab 장애는 GitHub 이슈 #94291에 보고된 내용과 일치한다. 현재 공식적인 패치는 없으나, 커뮤니티를 통해 재현 사례가 축적되고 있어 향후 업데이트에서 해결될 가능성이 있다.",
+      "background": [
+        {
+          "text": "Claude Code는 터미널, IDE, 데스크톱 앱, 웹 등 다양한 환경에서 실행되는 에이전틱 코딩 도구로, Windows에서는 PowerShell 또는 CMD를 통해 설치된다.",
+          "label": "공식 문서",
+          "url": "https://code.claude.com/docs/en/overview"
+        }
+      ],
+      "voices": [
+        {
+          "text": "윈도우에서 클로드 데스크톱만 열면 ALT키를 클로드 코드가 가로채는지 alt + tab 등이 작동을 안한다. 같은 증상 겪으신분 계실까?",
+          "date": "2026-11-19 수집 관찰일",
+          "source": "오픈채팅 · 모임 99"
+        },
+        {
+          "text": "같은 증상이 Claude Code 깃허브에 이슈로 올라와 있다. 이슈 #94291에는 Alt+Tab이 멈추고 클라이언트를 닫았다 다시 열어도 풀리지 않는 제보가 있으며, 확정된 해결책은 없고 우회법과 업데이트가 현재 최선이다.",
+          "date": "2026-11-19 수집 관찰일",
+          "source": "오픈채팅 · 모임 99"
+        }
+      ],
+      "timeline": [],
+      "related_links": []
+    },
+    "article_kind": "experience",
+    "cat": "tech",
+    "kind": "customer_story",
+    "source": "고객사용기",
+    "edition": null,
+    "highlights": [
+      "사례와 임시 해결책이 공유되고 있다"
+    ],
+    "id": "customer_story:2026-11-19:claude-code-windows-alt-tab-issue-20261119",
+    "uid": "1a6d89ac16277ea593badffc0d8dd27b79ae136295bc0436569acf1287e31648"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "고객사용기",
+    "customer_story_index": "claude-code-token-efficiency-tools-20261119",
+    "story_id": "claude-code-token-efficiency-tools-20261119",
+    "title": "Claude Code 작업 시 토큰 소모를 줄이는 MCP 서버와 세션 추적 앱 공개",
+    "summary": "에이전트 실행 시 발생하는 높은 토큰 비용과 컨텍스트 오버플로우 문제를 해결하기 위한 효율화 도구들이 잇달아 공개됐다.",
+    "summary_bullets": [
+      "에이전트 실행 시 발생하는 높은 토큰 비용과 컨텍스트 오버플로우 문제를 해결하기 위한 효율화 도구들이 잇달아 공개됐다."
+    ],
+    "why": "Claude Code 사용량이 늘면서 토큰 비용과 컨텍스트 관리가 주요 과제로 부상했다. Sidehand는 마우스 커서를 사용하지 않는 방식으로 토큰 효율을 극대화하고, Faros Desktop은 세션 분석을 통해 지출을 최적화하는 접근을 제시한다.",
+    "url": "https://wootom.github.io/news/%EA%B8%B0%EC%88%A0.html?date=2026-11-19&item=customer_story%3A2026-11-19%3Aclaude-code-token-efficiency-tools-20261119",
+    "channel": "긱뉴스 · 오픈채팅 · 모임 99",
+    "story_content": {
+      "commentary": "Claude Code 사용량이 늘면서 토큰 비용과 컨텍스트 관리가 주요 과제로 부상했다. Sidehand는 마우스 커서를 사용하지 않는 방식으로 토큰 효율을 극대화하고, Faros Desktop은 세션 분석을 통해 지출을 최적화하는 접근을 제시한다.",
+      "background": [
+        {
+          "text": "Claude Code는 코드베이스를 읽고 파일을 편집하며 명령을 실행하는 도구로, 복잡한 작업 시 컨텍스트가 가득 차면 재시도를 멈추는 에러가 발생할 수 있다.",
+          "label": "공식 문서",
+          "url": "https://code.claude.com/docs/en/overview"
+        }
+      ],
+      "voices": [
+        {
+          "text": "Sidehand는 Windows용 MCP 서버로, 사용자가 다른 창에서 타이핑하는 동안 에이전트가 뒤의 앱을 조작하게 한다. 벤치마크 작업 하나에 277토큰이 들었으며, 비교한 다른 도구는 2,488~13,425토큰을 소모했다.",
+          "date": "2026-11-19 수집 관찰일",
+          "source": "긱뉴스"
+        },
+        {
+          "text": "Faros Desktop은 Codex, Claude Code, Copilot, Cursor의 로컬 세션 히스토리를 시각화하고 구독 지출을 효율적으로 사용하는 방법을 추천하는 Mac 앱이다.",
+          "date": "2026-11-19 수집 관찰일",
+          "source": "오픈채팅 · 모임 99"
+        },
+        {
+          "text": "압축은 성공했으나 파일 읽기나 도구 출력이 컨텍스트를 다시 가득 채우는 일이 반복될 때 에러가 뜬다. /context로 창을 채우는 요소를 확인하고, 큰 파일은 줄 범위나 함수 단위로 나눠 읽게 하는 것이 점검 순서다.",
+          "date": "2026-11-19 수집 관찰일",
+          "source": "오픈채팅 · 모임 99"
+        }
+      ],
+      "timeline": [],
+      "related_links": []
+    },
+    "article_kind": "explainer",
+    "cat": "tech",
+    "kind": "customer_story",
+    "source": "고객사용기",
+    "edition": null,
+    "highlights": [
+      "위한 효율화 도구들이 잇달아 공개됐다"
+    ],
+    "id": "customer_story:2026-11-19:claude-code-token-efficiency-tools-20261119",
+    "uid": "a06d5bba3a7a3023b5d99cdf28df48f92a50af360148085b9f3e573dadd4b806"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "시황",
+    "cat": "econ",
+    "title": "시황 브리프 · 2026-11-19",
+    "summary": "스페이스X의 AI·스타링크 호조와 텍사스 정치 리스크, 테슬라 합병 시 한국 주주 양도세 부담 분석 · 앤트로픽 IPO 흥행 시 유동성 흡수로 AI 관련주 단기 약세 가능성 분석 · 젠슨 황 사임과 엔트로픽 상장 이슈가 코스피 변동성을 키우고 AI 수혜주 논쟁을 촉발 · 방송통신진흥원의 AI 글래스 전파 탐지 개발 입찰로 수능 부정 대응 가능했음",
+    "url": "https://wootom.github.io/news/2026-11-19-daily-brief-econ.html",
+    "kind": "market_summary",
+    "source": "시황",
+    "edition": null,
+    "highlights": [],
+    "id": "market_summary:2026-11-19-daily-brief-econ",
+    "uid": "e987a902c73015bdf2d7739dbadc4c042211af5ed17f650ba5e93a6749000372"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "브리프",
+    "cat": "tech",
+    "title": "AI·기술 브리프 · 2026-11-19",
+    "summary": "XREAL Aura, Android XR 기반 스페셜 컴퓨터로 출시되며 1,099달러에 공개 · AI 추론 단계별 최적화 칩 도입으로 이기종 컴퓨팅이 대세로 부상하며 NPU 기업에 기회와 위기가 공존한다 · Astra 6.2는 비용 효율성이 뛰어나지만, Fable 5.2가 품질과 완성도에서 우세했다 · 세무사 시험 수석의 초소형 카메라 자백과 수능 부정행위 방지 정부 대책의 실효성 논란 · 비개발자 김민, AI로 만든 첫 게임 슬롯바운드가 마케팅비 없이 3일 만에 8억 매출 달성 · AI 에이전트가 쓸수록 똑똑해지는 성과 기반 학습 루프와 지시문 구조 설계 · 앤트로픽 실험 결과, 에이전트 메모리는 예측과 드리밍으로 관리해야 한다 · GPT Astra 6.2와 Fable 5.2를 12개 실사용 시나리오로 비교한 결과, Fable이 7승으로 질적 우위를 보였으나 API 비용은 7.2배 비쌌다. · GrokBot으로 AI 봇 팀을 구성해 콘텐츠 제작과 토큰 효율을 관리하는 방법 · 그록",
+    "url": "https://wootom.github.io/news/2026-11-19-daily-brief-ai.html",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [],
+    "id": "youtube_summary:2026-11-19-daily-brief-ai",
+    "uid": "dca5fa7caec44d4b0307aa577f88f285bfa834ffe3706a6338fb8c445a3e56e6"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "Gentle Monster와 구글·삼성 협업 스마트 안경, 뉴욕에서 열린 이색 팝업 투어로 공개",
+    "summary": "Gentle Monster는 뉴욕 월스트리트의 JP Morgan 옛 은행 건물을 인수해 'Intelligent Eyewear' 컬렉션 공개 행사를 열었다. 제품은 디스플레이가 없는 오디오 글래스로, 렌즈에 화면이 없으며 오픈 이어 스피커를 통해 구글 AI 제미나이와 대화한다. 제미나이는 70개 이상의 언어를 실시간으로 번역하며, 사용자가 이미 사용하는 언어는 번역하지 않고 다른 언어만 음성으로 전달한다. 주방 공간에서 식재료를 가리키면 영양 성분과 레시피를 제안하고, 운동 공간에서는 보유 장비에 맞춘 루틴을 만들어 캘린더에 등록했다.",
+    "summary_bullets": [
+      "Gentle Monster는 뉴욕 월스트리트의 JP Morgan 옛 은행 건물을 인수해 'Intelligent Eyewear' 컬렉션 공개 행사를 열었다.",
+      "제품은 디스플레이가 없는 오디오 글래스로, 렌즈에 화면이 없으며 오픈 이어 스피커를 통해 구글 AI 제미나이와 대화한다.",
+      "제미나이는 70개 이상의 언어를 실시간으로 번역하며, 사용자가 이미 사용하는 언어는 번역하지 않고 다른 언어만 음성으로 전달한다.",
+      "주방 공간에서 식재료를 가리키면 영양 성분과 레시피를 제안하고, 운동 공간에서는 보유 장비에 맞춘 루틴을 만들어 캘린더에 등록했다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-casandcharyxr-gentle-monster-google-smart-glasses.html",
+    "channel": "Cas and Chary XR",
+    "source_title": "I Tried Google’s Smart Glasses at the WEIRDEST Launch Ever",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "통해 구글 AI 제미나이와 대화한다",
+      "않고 다른 언어만 음성으로 전달한다"
+    ],
+    "id": "youtube_summary:2026-11-19-casandcharyxr-gentle-monster-google-smart-glasses",
+    "uid": "830802ca502d27df0cf8aad9dc46334901386ee40824f1fde72b763970a89a2c"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "Astra 6.2는 비용 효율성이 뛰어나지만, Fable 5.2가 품질과 완성도에서 우세했다",
+    "summary": "Astra 6.2와 Fable 5.2의 벤치마크 점수는 각각 62.1과 64.6으로 근소한 차이를 보였으며, OpenAI가 발표한 Frontier Code 2.0 코딩 벤치마크에서는 Fable이 49.1로 Astra의 44.2를 앞섰다. 이미지 생성 테스트에서 Fable 5.2가 압도적인 우위를 보였고, Astra 6.2는 명확한 목표를 주었음에도 목표의 4분의 1도 채우지 못한 채 작업을 종료하는 등 '게으름'을 보였다. Claude Code 플러그인 성능을 비교한 결과, Astra 6.2는 Fable 5.2보다 7달러 대 11.50달러, 48분 대 1시간 34분으로 더 빠르고 저렴하게 작업을 수행했다. Astra 6.2는 반복적인 효율성 테스트에서 우위를 점했으나, 결과물의 질적 수준이 낮아 '무엇을 위한 효율성인가'라는 의문을 제기했다.",
+    "summary_bullets": [
+      "Astra 6.2와 Fable 5.2의 벤치마크 점수는 각각 62.1과 64.6으로 근소한 차이를 보였으며, OpenAI가 발표한 Frontier Code 2.0 코딩 벤치마크에서는 Fable이 49.1로 Astra의 44.2를 앞섰다.",
+      "이미지 생성 테스트에서 Fable 5.2가 압도적인 우위를 보였고, Astra 6.2는 명확한 목표를 주었음에도 목표의 4분의 1도 채우지 못한 채 작업을 종료하는 등 '게으름'을 보였다.",
+      "Claude Code 플러그인 성능을 비교한 결과, Astra 6.2는 Fable 5.2보다 7달러 대 11.50달러, 48분 대 1시간 34분으로 더 빠르고 저렴하게 작업을 수행했다.",
+      "Astra 6.2는 반복적인 효율성 테스트에서 우위를 점했으나, 결과물의 질적 수준이 낮아 '무엇을 위한 효율성인가'라는 의문을 제기했다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-chaseai-astra-6-2-vs-fable-5-2.html",
+    "channel": "Chase AI",
+    "source_title": "I Tested Astra 6.2 vs Fable 5.2 (The Astra Hate Is Real)",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "작업을 종료하는 등 '게으름'을 보였다",
+      "48분 대 1시간 34분으로 더 빠르고 저렴하게 작업을 수행했다"
+    ],
+    "id": "youtube_summary:2026-11-19-chaseai-astra-6-2-vs-fable-5-2",
+    "uid": "e2fea598665d68669bd6e524e126a4c3e5a021ce087e4067069e5a2ee9564de5"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "econ",
+    "title": "스페이스X의 AI·스타링크 호조와 텍사스 정치 리스크, 테슬라 합병 시 한국 주주 양도세 부담 분석",
+    "summary": "스타링크 가입자가 2024년 말 890만 명에서 2025년 3분기 1,360만 명으로 증가하며, 연간 마진율 39%를 기록해 영업 이익을 견인했다. 미국 정부가 스타링크에 지상통신 주파수를 허가하며 제4이동통신사업자 역할을 부여하자, 버라이즌 등 기존 통신 3사 주가가 급락했다. 일론 머스크는 AI 개발의 수직 통합과 자금 조달을 위해 테슬라와의 합병을 추진하며, 머스크가 참여하지 않는 특별위원회를 구성해 합병 타당성을 검토하고 있다. 스페이스X가 테슬라에 편입되는 주식 교환 방식의 합병이 성사될 경우, 한국 주주는 양도소득세 과세 대상이 될 가능성이 높다.",
+    "summary_bullets": [
+      "스타링크 가입자가 2024년 말 890만 명에서 2025년 3분기 1,360만 명으로 증가하며, 연간 마진율 39%를 기록해 영업 이익을 견인했다.",
+      "미국 정부가 스타링크에 지상통신 주파수를 허가하며 제4이동통신사업자 역할을 부여하자, 버라이즌 등 기존 통신 3사 주가가 급락했다.",
+      "일론 머스크는 AI 개발의 수직 통합과 자금 조달을 위해 테슬라와의 합병을 추진하며, 머스크가 참여하지 않는 특별위원회를 구성해 합병 타당성을 검토하고 있다.",
+      "스페이스X가 테슬라에 편입되는 주식 교환 방식의 합병이 성사될 경우, 한국 주주는 양도소득세 과세 대상이 될 가능성이 높다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-httpswwwyoutubecomch-spacex-tesla-merger-tax.html",
+    "channel": "https://www.youtube.com/channel/UCIUni4ScRp4mqPXsxy62L5w",
+    "source_title": "민주당이 장악한 텍사스. 테슬라·스페이스X 합병 특별위원회 가동. 한국 주주들 '양도세 폭탄' 논란 (유진투자증권 정의훈 연구원)",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "39%를 기록해 영업 이익을 견인했다",
+      "구성해 합병 타당성을 검토하고 있다"
+    ],
+    "id": "youtube_summary:2026-11-19-httpswwwyoutubecomch-spacex-tesla-merger-tax",
+    "uid": "9bcfa45f786baaa346b28fd112feae4fba93abcb4ed7a8dfd79c49fcdb3e5990"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "세무사 시험 수석의 초소형 카메라 자백과 수능 부정행위 방지 정부 대책의 실효성 논란",
+    "summary": "세무사 시험 수석인 한원석은 전자상가에서 39만 원에 구매한 초소형 카메라를 이용해 부정행위를 했다고 자백했으며, 작년부터 공부를 거의 하지 않아 AI가 제시한 답안을 그대로 사용했다고 밝혔다. 정부는 수능 당일 오전 8시 25분부터 30분 사이에 전국에 '위급재난문자'를 발송해 숨겨둔 세컨폰의 통신을 차단하는 대책을 발표했으나, 이는 모든 국민에게 문자가 발송되는 형식이라 실효성에 대한 비판이 제기된다. 수능 당일 AI 기업에 문제 해결을 요청하지 말라고 하는 아이디어는 미국 기업인 트위터(엑스)가 한국 요청을 무시할 가능성이 높아 실현이 어렵다는 평가가 나온다. 세무사 시험은 계산기 사용이 허용되는 독특한 특성이 있어, 한원석은 공업계열 고등학교 출신으로서 기계에 능숙해 계산기 화면에 AI 풀이를 띄우는 방식으로 문제를 해결한 것으로 추정된다.",
+    "summary_bullets": [
+      "세무사 시험 수석인 한원석은 전자상가에서 39만 원에 구매한 초소형 카메라를 이용해 부정행위를 했다고 자백했으며, 작년부터 공부를 거의 하지 않아 AI가 제시한 답안을 그대로 사용했다고 밝혔다.",
+      "정부는 수능 당일 오전 8시 25분부터 30분 사이에 전국에 '위급재난문자'를 발송해 숨겨둔 세컨폰의 통신을 차단하는 대책을 발표했으나, 이는 모든 국민에게 문자가 발송되는 형식이라 실효성에 대한 비판이 제기된다.",
+      "수능 당일 AI 기업에 문제 해결을 요청하지 말라고 하는 아이디어는 미국 기업인 트위터(엑스)가 한국 요청을 무시할 가능성이 높아 실현이 어렵다는 평가가 나온다.",
+      "세무사 시험은 계산기 사용이 허용되는 독특한 특성이 있어, 한원석은 공업계열 고등학교 출신으로서 기계에 능숙해 계산기 화면에 AI 풀이를 띄우는 방식으로 문제를 해결한 것으로 추정된다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-httpswwwyoutubecomch-tax-exam-camera-cheating.html",
+    "channel": "https://www.youtube.com/channel/UCIUni4ScRp4mqPXsxy62L5w",
+    "source_title": "'수능 초토화‘ 세무사 시험 수석이 자백한 초소형 카메라...'위급재난문자' 등 정부대책 비판 목소리 거세 [백종훈 언더스탠딩 기자]",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "제시한 답안을 그대로 사용했다고 밝혔다",
+      "AI 풀이를 띄우는 방식으로 문제를 해결한 것으로 추정된다"
+    ],
+    "id": "youtube_summary:2026-11-19-httpswwwyoutubecomch-tax-exam-camera-cheating",
+    "uid": "fd17efe6fea3d32e7a61f71741de513852b25619920a11644498d867e5bb8185"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "비개발자 김민, AI로 만든 첫 게임 슬롯바운드가 마케팅비 없이 3일 만에 8억 매출 달성",
+    "summary": "코딩 경험이 없던 김민은 '바이브코딩'을 시도하며 AI에게 WASD로 움직이는 상자 생성을 지시해 게임 개발을 시작했다. 초기 데모에서 재미가 없다고 판단해 흡수만 있던 시스템을 희귀도, 승급, 전직, 패스트 등 다양한 요소가 포함된 구조로 전면 개편했다. 출시 전 24시간 내 매출 1억 원만 나오면 좋겠다고 생각했으나, 1일차 2억, 2일차 4억 7천만, 3일차 8억 원의 매출을 기록했다. 게임 브레인스토밍과 아이디어 상의를 AI와 많이 진행했으며, AI 없이는 감당하기 어려운 큰 스케일의 개발이 가능했다.",
+    "summary_bullets": [
+      "코딩 경험이 없던 김민은 '바이브코딩'을 시도하며 AI에게 WASD로 움직이는 상자 생성을 지시해 게임 개발을 시작했다.",
+      "초기 데모에서 재미가 없다고 판단해 흡수만 있던 시스템을 희귀도, 승급, 전직, 패스트 등 다양한 요소가 포함된 구조로 전면 개편했다.",
+      "출시 전 24시간 내 매출 1억 원만 나오면 좋겠다고 생각했으나, 1일차 2억, 2일차 4억 7천만, 3일차 8억 원의 매출을 기록했다.",
+      "게임 브레인스토밍과 아이디어 상의를 AI와 많이 진행했으며, AI 없이는 감당하기 어려운 큰 스케일의 개발이 가능했다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-jocoding-slotbound-800m-revenue.html",
+    "channel": "조코딩 JoCoding",
+    "source_title": "1인 혼자 만든 첫 게임으로 출시 3일만에 마케팅비 없이 8억 매출 낸 방법 | 슬롯바운드 개발자 김민님 인터뷰",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "생성을 지시해 게임 개발을 시작했다",
+      "2억, 2일차 4억 7천만, 3일차 8억 원의 매출을 기록했다"
+    ],
+    "id": "youtube_summary:2026-11-19-jocoding-slotbound-800m-revenue",
+    "uid": "1d0a3c0e65c9954791a37a64d5873569cae87bb71ff93c770a0f09b74b7d2ba6"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "AI 에이전트가 쓸수록 똑똑해지는 성과 기반 학습 루프와 지시문 구조 설계",
+    "summary": "에이전트는 입력 문자를 딥시크 플래시로 분류하고, 세일 등 실행이 필요한 경우에만 비싼 모델을 호출해 계획을 세운 뒤 빠른 모델로 도구를 실행하는 역할 분담 구조를 사용한다. 게시물 공개 24시간 후 좋아요, 댓글, 공유, 저장, 도달 데이터를 수집해 (좋아요 + 댓글*2 + 공유*3 + 저장*3) / 도달 공식으로 점수를 계산한다. 브랜드 정보가 비어 있으면 계정 연결 시 최근 글 20개를 분석해 회사, 제품, 타깃, 말투 등을 추정하고 7일마다 재분석하며, 사용자가 직접 정한 값은 절대 덮어쓰지 않는다. 광고형 및 모션형 영상에는 레시피 번호가 부여되지 않아 성과 학습 루프에서 제외되며, 참고 영상 기반 대본은 사용자 선호와 포맷 기억을 받지 못하는 한계가 있다.",
+    "summary_bullets": [
+      "에이전트는 입력 문자를 딥시크 플래시로 분류하고, 세일 등 실행이 필요한 경우에만 비싼 모델을 호출해 계획을 세운 뒤 빠른 모델로 도구를 실행하는 역할 분담 구조를 사용한다.",
+      "게시물 공개 24시간 후 좋아요, 댓글, 공유, 저장, 도달 데이터를 수집해 (좋아요 + 댓글*2 + 공유*3 + 저장*3) / 도달 공식으로 점수를 계산한다.",
+      "브랜드 정보가 비어 있으면 계정 연결 시 최근 글 20개를 분석해 회사, 제품, 타깃, 말투 등을 추정하고 7일마다 재분석하며, 사용자가 직접 정한 값은 절대 덮어쓰지 않는다.",
+      "광고형 및 모션형 영상에는 레시피 번호가 부여되지 않아 성과 학습 루프에서 제외되며, 참고 영상 기반 대본은 사용자 선호와 포맷 기억을 받지 못하는 한계가 있다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-makerevan-ai-agent-learning-loop.html",
+    "channel": "메이커 에반 | Maker Evan",
+    "source_title": "피클 같은 AI 에이전트, 쓸수록 똑똑해지는 진짜 이유 아세요?",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "실행하는 역할 분담 구조를 사용한다",
+      "/ 도달 공식으로 점수를 계산한다"
+    ],
+    "id": "youtube_summary:2026-11-19-makerevan-ai-agent-learning-loop",
+    "uid": "6ba191ec4db9e1c06eb3266db2fcebdd387f42f69b1637c383e0c4eba4dbff40"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "앤트로픽 실험 결과, 에이전트 메모리는 예측과 드리밍으로 관리해야 한다",
+    "summary": "앤트로픽은 모델 가중치 변경, 인컨텍스트 러닝, 컴팩션을 제외하고 세션 종료 후에도 유지되는 파일 저장 데이터를 에이전트 메모리로 정의한다. CL 벤치마크 1.0에서 소넷 4.6은 검증되지 않은 추측만 나열했으나, 오퍼스 4.7은 확인된 사실과 미확인 정보를 구분하기 시작했다. 소넷 3.7은 전투와 아이템마다 파일을 생성해 413개 파일을 만들었으나 배지는 1개만 획득하고 게임 진행에 시간을 낭비했다. 강한 모델인 오퍼스 4.7과 5에는 메모 폴더 존재만 알려주면 충분했으나, 실패 기록 지시를 주면 오히려 성능이 하락했다.",
+    "summary_bullets": [
+      "앤트로픽은 모델 가중치 변경, 인컨텍스트 러닝, 컴팩션을 제외하고 세션 종료 후에도 유지되는 파일 저장 데이터를 에이전트 메모리로 정의한다.",
+      "CL 벤치마크 1.0에서 소넷 4.6은 검증되지 않은 추측만 나열했으나, 오퍼스 4.7은 확인된 사실과 미확인 정보를 구분하기 시작했다.",
+      "소넷 3.7은 전투와 아이템마다 파일을 생성해 413개 파일을 만들었으나 배지는 1개만 획득하고 게임 진행에 시간을 낭비했다.",
+      "강한 모델인 오퍼스 4.7과 5에는 메모 폴더 존재만 알려주면 충분했으나, 실패 기록 지시를 주면 오히려 성능이 하락했다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-makerevan-anthropic-agent-memory-dreaming.html",
+    "channel": "메이커 에반 | Maker Evan",
+    "source_title": "MEMORY.md에 다 적고 계신 분, 앤트로픽 실험 결과 보셨어요?",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "저장 데이터를 에이전트 메모리로 정의한다",
+      "1개만 획득하고 게임 진행에 시간을 낭비했다"
+    ],
+    "id": "youtube_summary:2026-11-19-makerevan-anthropic-agent-memory-dreaming",
+    "uid": "3a48f31eae19ea44c8a3ee4fa6c95a4459efbfd69a5d08e2f5f049840a4ba21f"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "OpenAI GPT-6.2 Astra 출시, 3D·과학 강점과 AI 자기개선 임계점 논쟁",
+    "summary": "OpenAI는 GPT-6.2 Astra와 GPT-6.2 Sol 두 가지 모델을 출시했으며, 이는 AI 자기개선 고 임계점을 충족한 첫 공개 모델이라고 밝혔다. 초기 테스트 사용자들은 코드 리뷰, 3D, 게임 개발, 컴퓨터 사용 능력에서 Astra의 성능을 높게 평가했다. OpenAI는 Astra가 AI 개발 속도를 높이는 능력을 갖추고 있다고 주장하지만, 실제 성능 향상은 GPT-5 이후의 기존 추세선과 동일하다. 벤치마크에서 Astra는 62점을 기록해 이전 모델 대비 5점 상승했으며, Gemini 4 Carbon과 Claude Opus 5.5보다 높은 점수를 얻었다.",
+    "summary_bullets": [
+      "OpenAI는 GPT-6.2 Astra와 GPT-6.2 Sol 두 가지 모델을 출시했으며, 이는 AI 자기개선 고 임계점을 충족한 첫 공개 모델이라고 밝혔다.",
+      "초기 테스트 사용자들은 코드 리뷰, 3D, 게임 개발, 컴퓨터 사용 능력에서 Astra의 성능을 높게 평가했다.",
+      "OpenAI는 Astra가 AI 개발 속도를 높이는 능력을 갖추고 있다고 주장하지만, 실제 성능 향상은 GPT-5 이후의 기존 추세선과 동일하다.",
+      "벤치마크에서 Astra는 62점을 기록해 이전 모델 대비 5점 상승했으며, Gemini 4 Carbon과 Claude Opus 5.5보다 높은 점수를 얻었다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-mattwolfe-openai-gpt-6-2-astra.html",
+    "channel": "Matt Wolfe",
+    "source_title": "OpenAI GPT-6.2 Astra is Here - It's Not What You Think",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "AI 자기개선 고 임계점을 충족한 첫 공개 모델이라고 밝혔다",
+      "능력에서 Astra의 성능을 높게 평가했다"
+    ],
+    "id": "youtube_summary:2026-11-19-mattwolfe-openai-gpt-6-2-astra",
+    "uid": "65d16ed5253e86b5fcba0cffa1bf845e90329b4228b9466f4deae32a623bce8a"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "XREAL Aura, Android XR 기반 스페셜 컴퓨터로 출시되며 1,099달러에 공개",
+    "summary": "XREAL Aura는 헤드셋과 Android XR을 실행하는 독립형 컴퓨트 유닛(Compute Puck)을 함께 구성하는 첫 번째 Android XR 헤드셋이다. 헤드셋 전면의 카메라는 주변 인물 촬영이 아닌 6자유도(6DoF) 추적을 위해 사용되며, AI를 위한 별도 카메라도 탑재되어 있다. XREAL Aura는 Android XR 외에도 Steam Deck, MacBook Air 등 USB-C 비디오 출력 장치를 직접 연결해 사용할 수 있다. 핸드 트래킹 정확도가 매우 높으며, 패스스루 화질이 완벽에 가까워 가상 환경이 현실에 자연스럽게 녹아드는 경험을 제공한다.",
+    "summary_bullets": [
+      "XREAL Aura는 헤드셋과 Android XR을 실행하는 독립형 컴퓨트 유닛(Compute Puck)을 함께 구성하는 첫 번째 Android XR 헤드셋이다.",
+      "헤드셋 전면의 카메라는 주변 인물 촬영이 아닌 6자유도(6DoF) 추적을 위해 사용되며, AI를 위한 별도 카메라도 탑재되어 있다.",
+      "XREAL Aura는 Android XR 외에도 Steam Deck, MacBook Air 등 USB-C 비디오 출력 장치를 직접 연결해 사용할 수 있다.",
+      "핸드 트래킹 정확도가 매우 높으며, 패스스루 화질이 완벽에 가까워 가상 환경이 현실에 자연스럽게 녹아드는 경험을 제공한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-mrtvmixedrealitytv-xreal-aura-android-xr.html",
+    "channel": "MRTV - MIXED REALITY TV",
+    "source_title": "XREAL Aura: The Spatial Computer Apple Should Have Made",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "첫 번째 Android XR 헤드셋이다",
+      "위한 별도 카메라도 탑재되어 있다"
+    ],
+    "id": "youtube_summary:2026-11-19-mrtvmixedrealitytv-xreal-aura-android-xr",
+    "uid": "61959d9269b6d4eec88dd9099c898ad0f276f9d459007dbee911155090718bff"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "GPT Astra 6.2와 Fable 5.2를 12개 실사용 시나리오로 비교한 결과, Fable이 7승으로 질적 우위를 보였으나 API 비용은 7.2배 비쌌다.",
+    "summary": "GPT Astra 6.2와 Fable 5.2를 웹 디자인, 전문 슬라이드 제작, 여행 계획, 3D 월드 등 12개의 실제 사용 사례로 정면 대결시켰다. 특정 코딩 작업에서 Fable은 56분간 실행되어 API 비용 17.5달러를 기록한 반면, Astra는 12분 만에 2.5달러로 완료되어 Astra가 승리했다. 3D 가상 서밋 월드 생성에서 Fable은 실내 스케일 트랙을, Astra는 야외 콘서트 스타일을 구현했으며, 시각적 완성도에서 Astra가 우세했다. 유튜브 영상 제작 파이프라인에서 Fable은 5시간 이상 소요되어 비정상적인 실행 시간을 기록했으나, 출력 품질은 매우 아름다웠다.",
+    "summary_bullets": [
+      "GPT Astra 6.2와 Fable 5.2를 웹 디자인, 전문 슬라이드 제작, 여행 계획, 3D 월드 등 12개의 실제 사용 사례로 정면 대결시켰다.",
+      "특정 코딩 작업에서 Fable은 56분간 실행되어 API 비용 17.5달러를 기록한 반면, Astra는 12분 만에 2.5달러로 완료되어 Astra가 승리했다.",
+      "3D 가상 서밋 월드 생성에서 Fable은 실내 스케일 트랙을, Astra는 야외 콘서트 스타일을 구현했으며, 시각적 완성도에서 Astra가 우세했다.",
+      "유튜브 영상 제작 파이프라인에서 Fable은 5시간 이상 소요되어 비정상적인 실행 시간을 기록했으나, 출력 품질은 매우 아름다웠다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-nateherkaiautomation-astra-6-2-vs-fable-5-2.html",
+    "channel": "Nate Herk | AI Automation",
+    "source_title": "I Tested Astra 6.2 vs. Fable 5.2. What You Need to Know.",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "12분 만에 2.5달러로 완료되어 Astra가 승리했다",
+      "시각적 완성도에서 Astra가 우세했다"
+    ],
+    "id": "youtube_summary:2026-11-19-nateherkaiautomation-astra-6-2-vs-fable-5-2",
+    "uid": "ac0bb73130e63412ea43fa8c98921338705e48d1bf609af86d24ccc5ffda6733"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "GrokBot으로 AI 봇 팀을 구성해 콘텐츠 제작과 토큰 효율을 관리하는 방법",
+    "summary": "GrokBot은 이름과 역할을 부여한 AI 봇에게 업무를 맡길 수 있는 플랫폼으로, 일반 채팅형 AI와 달리 특정 역할을 수행하는 팀원처럼 작동합니다. 인스타그램 콘텐츠 제작 예시로 '콘텐츠 리서처'와 '인스타그램 에디터' 두 가지 역할을 가진 봇을 생성하여 협업 구조를 구성합니다. 여러 봇을 하나의 그룹 대화에 모아 공동의 목표를 설정하고, 각 봇이 담당할 단계와 결과 공유 위치를 명시하여 협업할 수 있습니다. 매주 반복되는 주제 조사와 콘텐츠 기획 업무를 루틴으로 설정할 수 있으나, 초기에는 실제 실행 결과를 확인한 후 기준을 보완하는 것이 좋습니다.",
+    "summary_bullets": [
+      "GrokBot은 이름과 역할을 부여한 AI 봇에게 업무를 맡길 수 있는 플랫폼으로, 일반 채팅형 AI와 달리 특정 역할을 수행하는 팀원처럼 작동합니다.",
+      "인스타그램 콘텐츠 제작 예시로 '콘텐츠 리서처'와 '인스타그램 에디터' 두 가지 역할을 가진 봇을 생성하여 협업 구조를 구성합니다.",
+      "여러 봇을 하나의 그룹 대화에 모아 공동의 목표를 설정하고, 각 봇이 담당할 단계와 결과 공유 위치를 명시하여 협업할 수 있습니다.",
+      "매주 반복되는 주제 조사와 콘텐츠 기획 업무를 루틴으로 설정할 수 있으나, 초기에는 실제 실행 결과를 확인한 후 기준을 보완하는 것이 좋습니다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-uc8lqnqf-grokbot-ai-team-workflow.html",
+    "channel": "투쏠ㅣAI 에이전트",
+    "source_title": "11분안에 그록봇에 대한 모든 것을 알려줄께요ㅣGrokBot",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "특정 역할을 수행하는 팀원처럼 작동합니다",
+      "봇을 생성하여 협업 구조를 구성합니다"
+    ],
+    "id": "youtube_summary:2026-11-19-uc8lqnqf-grokbot-ai-team-workflow",
+    "uid": "b1ea4ea7d461722755ccad8f121b1e6d3b065da380c3e30501af999c13112e95"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "econ",
+    "title": "앤트로픽 IPO 흥행 시 유동성 흡수로 AI 관련주 단기 약세 가능성 분석",
+    "summary": "앤트로픽은 11월 19일에서 20일 사이 나스닥에 'ANT' 티커로 상장 예정이며, 공모가 범위는 70달러에서 78달러로 설정되었다. 스페이스X, SK하이닉스, 앤트로픽이 올해 미국 증시에서 역대 1, 2, 3위 규모로 자금 조달하며 시중 유동성을 대거 흡수하고 있다. 과거 대형주 100여 개 분석 결과, 상장 첫날 공모가 대비 상승 마감 확률은 76%로 높지만 6개월 이후 시장 대비 부진한 흐름을 보였다. 앤트로픽 대주주는 구글과 아마존이 각각 10% 이상을 보유할 것으로 추정되며, 12월 중순 나스닥 지수 편입이 예상된다.",
+    "summary_bullets": [
+      "앤트로픽은 11월 19일에서 20일 사이 나스닥에 'ANT' 티커로 상장 예정이며, 공모가 범위는 70달러에서 78달러로 설정되었다.",
+      "스페이스X, SK하이닉스, 앤트로픽이 올해 미국 증시에서 역대 1, 2, 3위 규모로 자금 조달하며 시중 유동성을 대거 흡수하고 있다.",
+      "과거 대형주 100여 개 분석 결과, 상장 첫날 공모가 대비 상승 마감 확률은 76%로 높지만 6개월 이후 시장 대비 부진한 흐름을 보였다.",
+      "앤트로픽 대주주는 구글과 아마존이 각각 10% 이상을 보유할 것으로 추정되며, 12월 중순 나스닥 지수 편입이 예상된다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-ucc3yfxs-anthropic-ipo-liquidity-analysis.html",
+    "channel": "소수몽키",
+    "source_title": "AI 끝판왕 앤트로픽 사려고 다른 주식 매도 중? 역대 IPO 패턴 반복될까",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "76%로 높지만 6개월 이후 시장 대비 부진한 흐름을 보였다",
+      "12월 중순 나스닥 지수 편입이 예상된다"
+    ],
+    "id": "youtube_summary:2026-11-19-ucc3yfxs-anthropic-ipo-liquidity-analysis",
+    "uid": "765e0a53d56c31e75db0bc25a59cda7fbe3829a6efc20588dd513cf334325e93"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "AI 추론 단계별 최적화 칩 도입으로 이기종 컴퓨팅이 대세로 부상하며 NPU 기업에 기회와 위기가 공존한다",
+    "summary": "마이크로소프트가 오라클과의 AI 서버 임대 계약을 단계적으로 종료하며, 오라클 데이터센터의 엔비디아 GPU가 사양에 맞지 않게 된 것이 이기종 전환의 신호로 꼽힌다. AI 연산은 학습과 추론으로 나뉘며, 추론은 질문을 이해하는 프리필 단계와 답을 생성하는 디코드 단계로 세분화되어 각 단계에 맞는 칩이 요구된다. 구글은 자체 서비스용이던 TPU를 오라클 클라우드에 공급하며 칩 회사로 변신하고 있으며, 엔트로픽과 애플 등 100곳 이상의 고객을 확보했다. 구글 TPU의 대형 클라우드 진출은 NPU의 상용화 가능성을 증명했지만, 엔비디아의 쿠다 생태계와 구글의 토치 TPU가 소프트웨어 장벽으로 작용해 NPU 스타트업의 경쟁력을 위협한다.",
+    "summary_bullets": [
+      "마이크로소프트가 오라클과의 AI 서버 임대 계약을 단계적으로 종료하며, 오라클 데이터센터의 엔비디아 GPU가 사양에 맞지 않게 된 것이 이기종 전환의 신호로 꼽힌다.",
+      "AI 연산은 학습과 추론으로 나뉘며, 추론은 질문을 이해하는 프리필 단계와 답을 생성하는 디코드 단계로 세분화되어 각 단계에 맞는 칩이 요구된다.",
+      "구글은 자체 서비스용이던 TPU를 오라클 클라우드에 공급하며 칩 회사로 변신하고 있으며, 엔트로픽과 애플 등 100곳 이상의 고객을 확보했다.",
+      "구글 TPU의 대형 클라우드 진출은 NPU의 상용화 가능성을 증명했지만, 엔비디아의 쿠다 생태계와 구글의 토치 TPU가 소프트웨어 장벽으로 작용해 NPU 스타트업의 경쟁력을 위협한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-ucelfn6f-heterogeneous-computing-npu.html",
+    "channel": "티타임즈TV",
+    "source_title": "이기종 컴퓨팅의 시대, NPU 기업은 기회일까 위기일까",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "각 단계에 맞는 칩이 요구된다",
+      "작용해 NPU 스타트업의 경쟁력을 위협한다"
+    ],
+    "id": "youtube_summary:2026-11-19-ucelfn6f-heterogeneous-computing-npu",
+    "uid": "a42b8ad83b4181276dc94ac46fc2300c982eede34164acaaa568929bfbefa2d2"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "그록 봇을 단순 챗봇이 아닌 자율 실행하는 디지털 직원으로 활용하는 실무 가이드",
+    "summary": "그록 봇은 독립된 컴퓨터 환경을 갖춰 브라우저를 열고 파일을 생성하며 연결된 앱을 직접 조작하는 에이전트형 비서로 동작합니다. 봇은 보험사나 차량국 등 자동응답 메뉴를 대신 조작하고, 상담원 연결 시 사용자의 휴대폰으로 통화를 실시간 넘겨줍니다. 반복적으로 발생하는 문제에는 전용 봇을 하나씩 만들고, 일회성 작업은 임시로 처리하는 것이 관리 부담을 줄이는 핵심 기준입니다. 샌프란시스코의 한 커피숍 사장은 POS 시스템 API를 봇에 연결해 분기별 메뉴 판매 데이터를 분석하고 페이지스로 인터랙티브 대시보드를 만들었습니다.",
+    "summary_bullets": [
+      "그록 봇은 독립된 컴퓨터 환경을 갖춰 브라우저를 열고 파일을 생성하며 연결된 앱을 직접 조작하는 에이전트형 비서로 동작합니다.",
+      "봇은 보험사나 차량국 등 자동응답 메뉴를 대신 조작하고, 상담원 연결 시 사용자의 휴대폰으로 통화를 실시간 넘겨줍니다.",
+      "반복적으로 발생하는 문제에는 전용 봇을 하나씩 만들고, 일회성 작업은 임시로 처리하는 것이 관리 부담을 줄이는 핵심 기준입니다.",
+      "샌프란시스코의 한 커피숍 사장은 POS 시스템 API를 봇에 연결해 분기별 메뉴 판매 데이터를 분석하고 페이지스로 인터랙티브 대시보드를 만들었습니다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-ucu1yyun-grok-bot-employee-guide.html",
+    "channel": "평범한 사업가",
+    "source_title": "그록봇을 챗봇처럼 쓰면 안됩니다.직원처럼 사용해야 됩니다.",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "직접 조작하는 에이전트형 비서로 동작합니다"
+    ],
+    "id": "youtube_summary:2026-11-19-ucu1yyun-grok-bot-employee-guide",
+    "uid": "39ca5a030e124139ffa3c44249b94c96da210abb1a3af17a9fa0d03be2cc7283"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "econ",
+    "title": "젠슨 황 사임과 엔트로픽 상장 이슈가 코스피 변동성을 키우고 AI 수혜주 논쟁을 촉발",
+    "summary": "인터뷰에 참여한 염승환 이사는 젠슨 황의 사임을 예상하지 못했으며, 조직 내 핵심 인물 제거 후 빠른 권력 이동이 시장 혼란을 유발했다고 평가했다. 삼성전자, SK하이닉스, 마이크론 등 메모리 3사에 대해 미국 일부 소비자와 업체가 가격 담합을 이유로 집단 소송을 제기했다. 정부가 의무 공개 매수 비율을 50%로 제한하자 시장에서는 100% 적용을 요구하는 목소리가 높았으나, 확정된 50%안으로 인해 기대감이 실망으로 전환되었다. 엔트로픽의 상장이 임박했다는 관측이 나오며, 유통 주식 수가 6%에 불과해 당일 변동성이 클 수 있다는 분석이 제시되었다.",
+    "summary_bullets": [
+      "인터뷰에 참여한 염승환 이사는 젠슨 황의 사임을 예상하지 못했으며, 조직 내 핵심 인물 제거 후 빠른 권력 이동이 시장 혼란을 유발했다고 평가했다.",
+      "삼성전자, SK하이닉스, 마이크론 등 메모리 3사에 대해 미국 일부 소비자와 업체가 가격 담합을 이유로 집단 소송을 제기했다.",
+      "정부가 의무 공개 매수 비율을 50%로 제한하자 시장에서는 100% 적용을 요구하는 목소리가 높았으나, 확정된 50%안으로 인해 기대감이 실망으로 전환되었다.",
+      "엔트로픽의 상장이 임박했다는 관측이 나오며, 유통 주식 수가 6%에 불과해 당일 변동성이 클 수 있다는 분석이 제시되었다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-ucznimsi-nvidia-ceo-resignation-kospi.html",
+    "channel": "전인구경제연구소",
+    "source_title": "젠슨 황 사건 이후 코스피 흐름이 바뀔 겁니다(ft.염승환 이사 1부)",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "이동이 시장 혼란을 유발했다고 평가했다",
+      "담합을 이유로 집단 소송을 제기했다"
+    ],
+    "id": "youtube_summary:2026-11-19-ucznimsi-nvidia-ceo-resignation-kospi",
+    "uid": "0b814f95906b8b532b0efc47aa0e2569e3bff94d72076738e9627b38afc7c9e2"
+  },
+  {
+    "date": "2026-11-19",
+    "pub": "개별리포트",
+    "cat": "econ",
+    "title": "방송통신진흥원의 AI 글래스 전파 탐지 개발 입찰로 수능 부정 대응 가능했음",
+    "summary": "유튜버는 실리콘밸리 출장 시 130만 원에 메타 레이벤 디스플레이 모델을 구매해 수능 활용 가능성을 테스트했으나, 카메라와 외형으로 인해 감독관 감지가 쉬워 영상 제작을 보류했다. 세무사 시험과 수능에서 고득점 사례가 속출하며 부정 사용 심각성이 드러났으나, 정부와 감독관은 전파 차단 매뉴얼 부재와 법적 한계를 이유로 대책이 없다고 밝혔다. 방송통신진흥원은 11월 2일 'AI 스마트 글래스 전파 탐지 기기 개발' 입찰 공고를 게시했으며, 이는 2026년 5월 국내 부정 사례 적발과 7월 관계 기관 회의 이후 시작되었다. 유튜버는 각 부처가 8월부터 패스트트랙으로 예산을 투입해 4개월간 긴급 개발을 했다면 시험장 설치가 가능했을 것이라며, 단독 연구에 그친 행정력을 비판했다.",
+    "summary_bullets": [
+      "유튜버는 실리콘밸리 출장 시 130만 원에 메타 레이벤 디스플레이 모델을 구매해 수능 활용 가능성을 테스트했으나, 카메라와 외형으로 인해 감독관 감지가 쉬워 영상 제작을 보류했다.",
+      "세무사 시험과 수능에서 고득점 사례가 속출하며 부정 사용 심각성이 드러났으나, 정부와 감독관은 전파 차단 매뉴얼 부재와 법적 한계를 이유로 대책이 없다고 밝혔다.",
+      "방송통신진흥원은 11월 2일 'AI 스마트 글래스 전파 탐지 기기 개발' 입찰 공고를 게시했으며, 이는 2026년 5월 국내 부정 사례 적발과 7월 관계 기관 회의 이후 시작되었다.",
+      "유튜버는 각 부처가 8월부터 패스트트랙으로 예산을 투입해 4개월간 긴급 개발을 했다면 시험장 설치가 가능했을 것이라며, 단독 연구에 그친 행정력을 비판했다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-19-ucznimsi-suneung-ai-glasses-detection.html",
+    "channel": "전인구경제연구소",
+    "source_title": "수능 AI 글래스 부정 사용 막을 방법이 있었습니다,",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "감지가 쉬워 영상 제작을 보류했다",
+      "단독 연구에 그친 행정력을 비판했다"
+    ],
+    "id": "youtube_summary:2026-11-19-ucznimsi-suneung-ai-glasses-detection",
+    "uid": "c96a9d12c9eb1dcdc7578971516bbf53851e435d480dd2db79880a07e90ae075"
+  },
+  {
     "date": "2026-11-18",
     "pub": "뉴스",
     "n": "01",
