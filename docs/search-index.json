@@ -1,5 +1,565 @@
 [
   {
+    "date": "2026-11-20",
+    "pub": "뉴스",
+    "n": "01",
+    "title": "아모데이, IPO 후에도 AI 안전 위해 개발 속도 조절",
+    "summary": "다리오 아모데이 앤트로픽 CEO는 19일 뉴욕 나스닥 상장 기념행사에서 AI 안전을 최우선으로 삼겠다고 밝혔다. 그는 사업적·정치적 압력에 굴복하지 않고, 시스템의 안전성과 통제력을 확신할 때까지 훈련 및 배포 속도를 조절하겠다고 강조했다.",
+    "summary_bullets": [
+      "다리오 아모데이 CEO는 19일 나스닥 상장 기념행사에서 AI 안전을 최우선 가치로 삼겠다고 공식 선언했습니다.",
+      "그는 사업적 및 정치적 압력에 굴복하지 않고, 시스템의 안전성과 통제력을 확신할 때까지 훈련 속도를 조절하겠다고 강조했습니다.",
+      "배포 단계에서도 안전 기준을 엄격히 적용하여, 기술 개발의 속도보다 통제력 확보를 우선시하는 원칙을 명확히 했습니다."
+    ],
+    "why": "기업공개 이후에도 AI 안전 원칙을 고수하겠다는 선언은 기술 개발 속도와 안전성 간 균형에 대한 업계 기준을 제시한다.",
+    "url": "https://www.aitimes.com/news/articleView.html?idxno=217596",
+    "channel": "aitimes.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "AI 안전을 최우선으로 삼겠다고 밝혔다"
+    ],
+    "id": "ai_news:2026-11-20:01",
+    "uid": "108d8d7a8dac6f613b79ce09a66bfe32904d75f25d1573c4d756604a3e36a131"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "뉴스",
+    "n": "02",
+    "title": "오픈AI 창업진, 앤트로픽 IPO 앞두고 견제구 던져",
+    "summary": "오픈AI의 샘 알트먼 CEO와 그렉 브록먼 사장은 18일 뉴욕타임스 딜북 서밋에서 약 40분간 대담을 진행했습니다. 이들은 앤트로픽의 강점을 겨냥한 발언과 함께 오픈AI의 차별성을 강조하며 AI 산업 주도권에 대한 자신감을 드러냈습니다.",
+    "summary_bullets": [
+      "오픈AI의 샘 알트먼 CEO와 그렉 브록먼 사장은 18일 뉴욕타임스 딜북 서밋에서 약 40분간 대담을 진행했습니다.",
+      "이들은 앤트로픽의 강점을 겨냥한 발언과 함께 오픈AI의 차별성을 강조하며 AI 산업 주도권에 대한 자신감을 드러냈습니다."
+    ],
+    "why": "앤트로픽의 기업공개(IPO)를 앞두고 오픈AI가 경쟁사 견제와 함께 시장 주도권 확보 의지를 명확히 했다는 점에서 AI 업계 경쟁 구도가 격화될 전망입니다.",
+    "url": "https://www.aitimes.com/news/articleView.html?idxno=217561",
+    "channel": "aitimes.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [],
+    "id": "ai_news:2026-11-20:02",
+    "uid": "982fa72a1f1eeb8559240df4f312381e16fa32e1d6a6db7580109d3ea531574a"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "뉴스",
+    "n": "03",
+    "title": "미국, 중국 반도체 수출 허가 강화…삼성·TSMC 일부 출하 중단",
+    "summary": "미국이 중국에 공급하는 일부 첨단 반도체에 대한 수출 허가 예외를 폐지했다. 이에 따라 삼성전자와 TSMC는 미국 정부의 승인 절차가 진행되는 동안 해당 제품의 출하를 중단했다.",
+    "summary_bullets": [
+      "미국이 중국에 공급하는 일부 첨단 반도체에 대한 수출 허가 예외를 폐지했다.",
+      "이에 따라 삼성전자와 TSMC는 미국 정부의 승인 절차가 진행되는 동안 해당 제품의 출하를 중단했다."
+    ],
+    "why": "미국 정부의 승인 요건 강화로 중국 기업들의 자체 AI 반도체 개발에 차질이 예상된다.",
+    "url": "https://www.aitimes.com/news/articleView.html?idxno=217595",
+    "channel": "aitimes.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "동안 해당 제품의 출하를 중단했다"
+    ],
+    "id": "ai_news:2026-11-20:03",
+    "uid": "f8a63a1e68a8b1843c100bab09512e0398252b10859fa699679246134183151c"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "뉴스",
+    "n": "04",
+    "title": "머스크, 테슬라 휴머노이드 로봇 Optimus 데모 영상 1~2개월 내 공개 예고",
+    "summary": "테슬라 CEO 일론 머스크는 휴머노이드 로봇 Optimus의 연구개발이 순조롭게 진행되고 있다고 밝혔다. 머스크는 향후 1~2개월 내 실제 데모 영상을 공개할 예정이며, 내년에는 더러운 그릇을 치우고 쓰레기를 버리는 등 가정 내 시나리오를 수행할 수 있을 것이라고 언급했다.",
+    "summary_bullets": [
+      "테슬라 CEO 일론 머스크는 휴머노이드 로봇 Optimus의 연구개발이 순조롭게 진행되고 있다고 밝혔다.",
+      "머스크는 향후 1~2개월 내 실제 데모 영상을 공개할 예정이며,",
+      "내년에는 더러운 그릇을 치우고 쓰레기를 버리는 등 가정 내 시나리오를 수행할 수 있을 것이라고 언급했다."
+    ],
+    "why": "가사 노동 자동화 가능성이 구체화되며, 테슬라의 로봇 사업이 가정 시장으로 확장될지 주목된다.",
+    "url": "https://www.aibase.com/news/32416",
+    "channel": "aibase.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "로봇 Optimus의 연구개발이 순조롭게 진행되고 있다고 밝혔다"
+    ],
+    "id": "ai_news:2026-11-20:04",
+    "uid": "bda60bb907d4afc6f57d8315cf07339dd13d12c1ff22713522b0c89e63a36a5d"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "뉴스",
+    "n": "05",
+    "title": "MS, Ignite서 'Copilot이 Claude·ChatGPT보다 저렴하고 우수' 공개 선언",
+    "summary": "블룸버그 보도에 따르면 마이크로소프트 상무사업부 CEO 알토프는 화요일 Ignite 컨퍼런스에서 Claude나 ChatGPT가 수행할 수 있는 모든 작업은 Copilot이 더 잘하고 더 낮은 비용으로 수행할 수 있다고 밝혔다. 이는 마이크로소프트가 경쟁사 AI 모델 대비 자사 Copilot의 비용 효율성과 성능 우위를 강조한 발언이다.",
+    "summary_bullets": [
+      "블룸버그 보도에 따르면 마이크로소프트 상무사업부 CEO 알토프는 화요일 Ignite 컨퍼런스에서 Claude나 ChatGPT가 수행할 수 있는 모든 작업은 Copilot이 더 잘하고 더 낮은 비용으로 수행할 수 있다고 밝혔다.",
+      "이는 마이크로소프트가 경쟁사 AI 모델 대비 자사 Copilot의 비용 효율성과 성능 우위를 강조한 발언이다."
+    ],
+    "why": "AI 에이전트 시장 경쟁이 성능과 비용이라는 실질적 지표로 확대되며, 기업 도입 전략에 직접적 영향을 미칠 수 있다.",
+    "url": "https://www.aibase.com/news/32415",
+    "channel": "aibase.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "비용으로 수행할 수 있다고 밝혔다"
+    ],
+    "id": "ai_news:2026-11-20:05",
+    "uid": "7011a634916f826c5e8df665b64516151c3fbb9d495ec852c52ead21a19d437f"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "고객사용기",
+    "customer_story_index": "claude-code-security-guardrail-block-20261120",
+    "story_id": "claude-code-security-guardrail-block-20261120",
+    "title": "Claude Code 안전장치가 보안 취약점 수정 작업을 차단한 사례",
+    "summary": "보안 점검 중 Claude Code가 취약점 수정을 막아 예외 승인 절차를 거쳐야 했다. 승인 대기·신분증 제출 등 부담이 크고, 공개 공격 코드 검증도 차단됐다.",
+    "summary_bullets": [
+      "보안 점검 중 Claude Code가 취약점 수정을 막아 예외 승인 절차를 거쳐야 했다. 승인 대기·신분증 제출 등 부담이 크고, 공개 공격 코드 검증도 차단됐다."
+    ],
+    "why": "Claude Code의 안전장치는 악용을 막기 위한 장치이지만, 정당한 보안 점검·취약점 수정 작업까지 차단할 수 있다. 예외 승인 절차가 수일 대기·신분증 제출 등 부담이 크고, 공개 공격 코드 검증도 막히면 방어자가 공격자보다 불리한 위치에 놓인다. 보안 엔지니어가 Claude Code를 사용할 때 안전장치 예외 승인 절차와 대안을 사전에 확인하는 것이 필요하다.",
+    "url": "https://wootom.github.io/news/%EA%B8%B0%EC%88%A0.html?date=2026-11-20&item=customer_story%3A2026-11-20%3Aclaude-code-security-guardrail-block-20261120",
+    "channel": "긱뉴스",
+    "story_content": {
+      "commentary": "Claude Code의 안전장치는 악용을 막기 위한 장치이지만, 정당한 보안 점검·취약점 수정 작업까지 차단할 수 있다. 예외 승인 절차가 수일 대기·신분증 제출 등 부담이 크고, 공개 공격 코드 검증도 막히면 방어자가 공격자보다 불리한 위치에 놓인다. 보안 엔지니어가 Claude Code를 사용할 때 안전장치 예외 승인 절차와 대안을 사전에 확인하는 것이 필요하다.",
+      "background": [
+        {
+          "text": "Claude Code는 코드베이스를 읽고 파일을 편집하며 명령을 실행하는 에이전틱 코딩 도구로, 터미널·IDE·데스크톱·웹에서 동작한다.",
+          "label": "Claude Code 공식 문서",
+          "url": "https://code.claude.com/docs/en/overview"
+        }
+      ],
+      "voices": [
+        {
+          "text": "자신이 관리하는 제품의 보안을 점검하던 시니어 제품 엔지니어가 Claude Code의 안전장치에 가로막혀, 한 줄로 고칠 수 있는 취약점 수정 작업을 중단당했다. 보안 작업 예외 승인에는 영업일 기준 수일의 대기, 데이터 보존 예외 포기, 신분증이나 여권 제출이 필요하며, 신청해도 승인받지 못할 수 있다. 자신의 기술 스택에 해당하는 공개 공격 개념증명 코드로 자체 서비스를 공격할 수 있는지 확인하는 작업도 차단됐으며, 이전 모델을 사용하라는 안내도 해결책이 되지 못했다. 공격자는 안전장치 없는 모델을 사용할 수 있는데 방어자는 안전장치에 막혀 있다.",
+          "date": "2026-11-20 수집 관찰일",
+          "source": "긱뉴스"
+        }
+      ],
+      "timeline": [],
+      "related_links": []
+    },
+    "article_kind": "experience",
+    "cat": "tech",
+    "kind": "customer_story",
+    "source": "고객사용기",
+    "edition": null,
+    "highlights": [
+      "공개 공격 코드 검증도 차단됐다"
+    ],
+    "id": "customer_story:2026-11-20:claude-code-security-guardrail-block-20261120",
+    "uid": "98cc1e320da12a4aad1e7d9162ec5970e648fe2f7152ec1d18cb9f3eb3b77a94"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "시황",
+    "cat": "econ",
+    "title": "시황 브리프 · 2026-11-20",
+    "summary": "야구 비디오 판독과 방폐장 유치 사례로 본 메커니즘 디자인의 진실 규명 원리 · 알리바바 자금으로 엔비디아 GPU 5만장 중국 밀수 의혹, 엔비디아 매출 기준 변경과 수사 개입 논란 · AI 롤업 전략으로 전통 서비스 기업 인수해 기업가치 재평가",
+    "url": "https://wootom.github.io/news/2026-11-20-daily-brief-econ.html",
+    "kind": "market_summary",
+    "source": "시황",
+    "edition": null,
+    "highlights": [],
+    "id": "market_summary:2026-11-20-daily-brief-econ",
+    "uid": "d13f2401f42aa3994d705800789944840cb07c01f2be7fb3accdacbd5803a871"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "브리프",
+    "cat": "tech",
+    "title": "AI·기술 브리프 · 2026-11-20",
+    "summary": "구글 스마트글래스 완판과 애플 신제품의 아이폰 제어 기능 공개 · Anthropic의 실험적 Code Mode가 Claude Code 토큰 소모를 최대 71% 절감한다 · AI 에이전트 배포 전 Evals 기반 테스트로 안정성과 비용을 검증하는 방법 · Claude Code 실험 기능 Code Mode가 도구 호출을 JavaScript 코드로 전환해 효율을 높인다 · 엔터프라이즈 RAG 실서비스 실패의 원인은 모델이 아닌 데이터 엔지니어링 부재 · RAG·CAG·KAG는 세대별 기술이 아니라 서로 다른 문제를 해결하는 독립된 축이다 · AI 모델 출시 후 성능 저하 원인은 모델 자체보다 설정값 변경 때문 · VPS에 Claude Code를 설치하고 Telegram으로 원격 제어하는 10분 가이드 · Grok 봇으로 GTA 6 클립 자동화 계정 구축 및 24시간 운영 전략 · 오픈AI GPT-6.2 아스트라가 3D 웹과 공간 컴퓨팅 시대를 열며 힉스필드와 연동된다 · 실리콘밸리 AI ",
+    "url": "https://wootom.github.io/news/2026-11-20-daily-brief-ai.html",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [],
+    "id": "youtube_summary:2026-11-20-daily-brief-ai",
+    "uid": "1927bdcf86ab745cb2cf9c57ccbed5572ecdcd1a6b41512f05eca62f5601a424"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "Anthropic의 실험적 Code Mode가 Claude Code 토큰 소모를 최대 71% 절감한다",
+    "summary": "Code Mode는 도구 호출을 순차적으로 수행하던 기존 방식 대신, 도구 호출을 동시에 실행하는 작은 JavaScript 프로그램을 작성하여 처리한다. FastAPI 파일 1,200개 이상에서 docstring이 없는 함수를 카운트하는 검색 작업에서 Code Mode 사용 시 컨텍스트 윈도우가 37% 작아지고 읽은 토큰이 250K에서 93K로 줄었다. Code Mode는 현재 터미널 환경에서만 작동하며, Claude Code 데스크톱 앱에서는 적용되지 않고 computer use 및 원격 제어 기능과 호환되지 않는다. 이 프로그램이 도구 호출 결과에서 불필요한 정보를 필터링하여 Claude에게 필요한 데이터만 전달함으로써 컨텍스트 윈도우 채움 속도를 늦춘다.",
+    "summary_bullets": [
+      "Code Mode는 도구 호출을 순차적으로 수행하던 기존 방식 대신, 도구 호출을 동시에 실행하는 작은 JavaScript 프로그램을 작성하여 처리한다.",
+      "FastAPI 파일 1,200개 이상에서 docstring이 없는 함수를 카운트하는 검색 작업에서 Code Mode 사용 시 컨텍스트 윈도우가 37% 작아지고 읽은 토큰이 250K에서 93K로 줄었다.",
+      "Code Mode는 현재 터미널 환경에서만 작동하며, Claude Code 데스크톱 앱에서는 적용되지 않고 computer use 및 원격 제어 기능과 호환되지 않는다.",
+      "이 프로그램이 도구 호출 결과에서 불필요한 정보를 필터링하여 Claude에게 필요한 데이터만 전달함으로써 컨텍스트 윈도우 채움 속도를 늦춘다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-chaseai-claude-code-code-mode.html",
+    "channel": "Chase AI",
+    "source_title": "This Experimental Feature Is Claude Code's BIGGEST Upgrade of 2026",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "작은 JavaScript 프로그램을 작성하여 처리한다"
+    ],
+    "id": "youtube_summary:2026-11-20-chaseai-claude-code-code-mode",
+    "uid": "ee96de6bc3a2dfb7fb5e8e8afe25b9ff59a6fd556361efec08cb02b8c06c2dac"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "econ",
+    "title": "야구 비디오 판독과 방폐장 유치 사례로 본 메커니즘 디자인의 진실 규명 원리",
+    "summary": "야구 심판의 판정 오류율은 약 7%로, 비디오 판독 시스템 도입 전 홈팀 승률은 약 55% 수준이었다. 인공지능과 인간의 협업 과정에서 인간이 AI의 판단을 무조건 수용하거나 반박하는 과정에서 조직 내 역동성이 변화할 수 있다. 2007년 노벨경제학상을 수상한 메커니즘 디자인은 참여자가 자신의 진실을 밝히도록 유도하는 학문 분야이다. 클락-그로브즈 메커니즘은 공공사업의 필요성을 판단할 때 각 개인의 진술을 기반으로 비용을 분배하는 방식이다.",
+    "summary_bullets": [
+      "야구 심판의 판정 오류율은 약 7%로, 비디오 판독 시스템 도입 전 홈팀 승률은 약 55% 수준이었다.",
+      "인공지능과 인간의 협업 과정에서 인간이 AI의 판단을 무조건 수용하거나 반박하는 과정에서 조직 내 역동성이 변화할 수 있다.",
+      "2007년 노벨경제학상을 수상한 메커니즘 디자인은 참여자가 자신의 진실을 밝히도록 유도하는 학문 분야이다.",
+      "클락-그로브즈 메커니즘은 공공사업의 필요성을 판단할 때 각 개인의 진술을 기반으로 비용을 분배하는 방식이다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-httpswwwyoutubecomch-mechanism-design-bangpyeol.html",
+    "channel": "https://www.youtube.com/channel/UCIUni4ScRp4mqPXsxy62L5w",
+    "source_title": "[한순구의 노벨경제학 3부] 결사반대하던 방폐장이 찬성 90%로 뒤집힌 비결. 야구 비디오 판독 도입했더니 홈팀 승률이 왜 올랐을까 (연세대 경제학과 한순구 교수)",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "내 역동성이 변화할 수 있다",
+      "진실을 밝히도록 유도하는 학문 분야이다"
+    ],
+    "id": "youtube_summary:2026-11-20-httpswwwyoutubecomch-mechanism-design-bangpyeol",
+    "uid": "13f8d7efb7141287aa5966c2ea761e0a644139a39218e5d08abb0ed349980865"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "econ",
+    "title": "알리바바 자금으로 엔비디아 GPU 5만장 중국 밀수 의혹, 엔비디아 매출 기준 변경과 수사 개입 논란",
+    "summary": "알리바바 계열사 아펙스가 메가스피드에 29억 달러(약 4조 원)를 투입해 엔비디아 GPU 구매에 사용된 것으로 조사됐다. 엔비디아는 2025년 7월 매출 인식 기준을 본사 소재지 기준으로 변경해, OEM 서버 업체가 싱가포르로 보낸 GPU를 해당 국가 매출로 잡기 시작했다. 메가스피드가 구매한 13만 장의 GPU 중 약 8만 장은 데이터 센터에 사용된 반면, 나머지 5만 장의 행방은 불분명하다. 엔비디아는 사전 판매 심사, 라이선스 소프트웨어 모니터링, 펌웨어 업데이트 IP 추적 등을 통해 GPU 위치를 파악할 수 있었음에도 문제를 방치했다는 지적이 나온다.",
+    "summary_bullets": [
+      "알리바바 계열사 아펙스가 메가스피드에 29억 달러(약 4조 원)를 투입해 엔비디아 GPU 구매에 사용된 것으로 조사됐다.",
+      "엔비디아는 2025년 7월 매출 인식 기준을 본사 소재지 기준으로 변경해, OEM 서버 업체가 싱가포르로 보낸 GPU를 해당 국가 매출로 잡기 시작했다.",
+      "메가스피드가 구매한 13만 장의 GPU 중 약 8만 장은 데이터 센터에 사용된 반면, 나머지 5만 장의 행방은 불분명하다.",
+      "엔비디아는 사전 판매 심사, 라이선스 소프트웨어 모니터링, 펌웨어 업데이트 IP 추적 등을 통해 GPU 위치를 파악할 수 있었음에도 문제를 방치했다는 지적이 나온다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-httpswwwyoutubecomch-nvidia-gpu-smuggling-alibaba.html",
+    "channel": "https://www.youtube.com/channel/UCIUni4ScRp4mqPXsxy62L5w",
+    "source_title": "싱가포르로 간 엔비디아 GPU 5만장 어디로 사라졌나, 알리바바 4조 자금과 메가스피드 우회 밀수 의혹(언더스탠딩 김상훈 기자)",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "4조 원)를 투입해 엔비디아 GPU 구매에 사용된 것으로 조사됐다",
+      "국가 매출로 잡기 시작했다"
+    ],
+    "id": "youtube_summary:2026-11-20-httpswwwyoutubecomch-nvidia-gpu-smuggling-alibaba",
+    "uid": "fc1d59c9a98ba8d3d8f644497152b0ec493de0ce379d8dba31c9f6ff7bb20f70"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "AI 에이전트 배포 전 Evals 기반 테스트로 안정성과 비용을 검증하는 방법",
+    "summary": "에이전트는 일반 소프트웨어와 달리 샘플링과 정답의 다양성, 도구 선택의 자율성으로 인해 같은 입력에도 매번 다른 출력이 나올 수 있다. 테스트 케이스는 실제 지원 티켓이나 채팅 로그에서 추출한 실패 사례를 기반으로 하며, 작업별로 '필수', '금지', '유지' 세 가지를 커버해야 한다. 채점 우선순위는 코드(규칙 기반), 모델 저지(판단 기반), 인간 순이며, 코드로는 도구 호출, 인자, 기록 생성, 인용 표시를 확인한다. 경로가 자유로운 작업은 최종 결과만 평가하지만, 순서가 약속된 작업(자격 확인, 결제 등)은 단계별 비율로 검증해야 한다.",
+    "summary_bullets": [
+      "에이전트는 일반 소프트웨어와 달리 샘플링과 정답의 다양성, 도구 선택의 자율성으로 인해 같은 입력에도 매번 다른 출력이 나올 수 있다.",
+      "테스트 케이스는 실제 지원 티켓이나 채팅 로그에서 추출한 실패 사례를 기반으로 하며, 작업별로 '필수', '금지', '유지' 세 가지를 커버해야 한다.",
+      "채점 우선순위는 코드(규칙 기반), 모델 저지(판단 기반), 인간 순이며, 코드로는 도구 호출, 인자, 기록 생성, 인용 표시를 확인한다.",
+      "경로가 자유로운 작업은 최종 결과만 평가하지만, 순서가 약속된 작업(자격 확인, 결제 등)은 단계별 비율로 검증해야 한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-makerevan-ai-agent-evals-testing.html",
+    "channel": "메이커 에반 | Maker Evan",
+    "source_title": "AI 에이전트 감으로 고르시는 분, 이 영상 보고 테스트부터 짜세요",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "다른 출력이 나올 수 있다",
+      "유지' 세 가지를 커버해야 한다"
+    ],
+    "id": "youtube_summary:2026-11-20-makerevan-ai-agent-evals-testing",
+    "uid": "91783d34811c2bba9bf258dcea008942f9f798a9ab05de6cee813d9884d4f285"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "Claude Code 실험 기능 Code Mode가 도구 호출을 JavaScript 코드로 전환해 효율을 높인다",
+    "summary": "기존 방식은 도구를 하나씩 호출할 때마다 모델이 결과를 읽고 다시 판단하는 왕복 구조로, 반복 작업 시 컨텍스트 소모와 시간이 길어진다. 여러 파일에 걸친 반복 수정, 검색 결과 필터링, 린트나 테스트 등 상관없는 명령의 동시 실행에 Code Mode가 효과적이다. Claude Code 2.1.323 이상 버전에서 환경변수 CLAUDE_CODE_EXPERIMENTAL_CODE_MODE를 1로 설정하면 활성화되며, 프로젝트 설정 파일에서는 무시된다. auto 모드에서는 코드 조각을 통째로 검사하지만 실행 중 계산되는 값은 확인 불가하므로, 필수 차단 대상은 규칙이나 훅으로 별도로 관리해야 한다.",
+    "summary_bullets": [
+      "기존 방식은 도구를 하나씩 호출할 때마다 모델이 결과를 읽고 다시 판단하는 왕복 구조로, 반복 작업 시 컨텍스트 소모와 시간이 길어진다.",
+      "여러 파일에 걸친 반복 수정, 검색 결과 필터링, 린트나 테스트 등 상관없는 명령의 동시 실행에 Code Mode가 효과적이다.",
+      "Claude Code 2.1.323 이상 버전에서 환경변수 CLAUDE_CODE_EXPERIMENTAL_CODE_MODE를 1로 설정하면 활성화되며, 프로젝트 설정 파일에서는 무시된다.",
+      "auto 모드에서는 코드 조각을 통째로 검사하지만 실행 중 계산되는 값은 확인 불가하므로, 필수 차단 대상은 규칙이나 훅으로 별도로 관리해야 한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-makerevan-claude-code-code-mode.html",
+    "channel": "메이커 에반 | Maker Evan",
+    "source_title": "클로드 코드 쓰시는 분, 도구 호출이 코드로 바뀐 거 아세요? 코드 모드 총정리",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "동시 실행에 Code Mode가 효과적이다",
+      "프로젝트 설정 파일에서는 무시된다"
+    ],
+    "id": "youtube_summary:2026-11-20-makerevan-claude-code-code-mode",
+    "uid": "1222d695f940eab8c60662db1a53f3679697ac2ed57ab9b97b313cb5ab8736fe"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "엔터프라이즈 RAG 실서비스 실패의 원인은 모델이 아닌 데이터 엔지니어링 부재",
+    "summary": "PDF를 청크로 자르고 임베딩 벡터를 생성해 벡터 DB에 저장하는 5단계 과정은 30분 내 데모 구현이 가능합니다. 문서 개정 시 이전 버전 청크가 벡터 DB에 잔존하면 폐기된 규정을 근거로 답변하는 오류가 발생하며, 이는 프롬프트 수정으로 해결할 수 없습니다. 수십만 개 문서 규모에서 전체 재임베딩은 비효율적이므로 수정 시각 기준 증분 적재를 사용하지만, 삭제된 행은 수정 시각으로 감지되지 않는 함정이 있습니다. 원본 데이터 소스의 필드 구조 변경 시 파이프라인이 멈추지 않고 빈 컬럼으로 적재되면 검색 품질이 조용히 저하되는 장애가 발생합니다.",
+    "summary_bullets": [
+      "PDF를 청크로 자르고 임베딩 벡터를 생성해 벡터 DB에 저장하는 5단계 과정은 30분 내 데모 구현이 가능합니다.",
+      "문서 개정 시 이전 버전 청크가 벡터 DB에 잔존하면 폐기된 규정을 근거로 답변하는 오류가 발생하며, 이는 프롬프트 수정으로 해결할 수 없습니다.",
+      "수십만 개 문서 규모에서 전체 재임베딩은 비효율적이므로 수정 시각 기준 증분 적재를 사용하지만, 삭제된 행은 수정 시각으로 감지되지 않는 함정이 있습니다.",
+      "원본 데이터 소스의 필드 구조 변경 시 파이프라인이 멈추지 않고 빈 컬럼으로 적재되면 검색 품질이 조용히 저하되는 장애가 발생합니다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-makerevan-enterprise-rag-data-engineering.html",
+    "channel": "메이커 에반 | Maker Evan",
+    "source_title": "RAG 데모는 됐는데 실서비스에서 무너지신 분, 모델 문제가 아닙니다",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "30분 내 데모 구현이 가능합니다",
+      "프롬프트 수정으로 해결할 수 없습니다"
+    ],
+    "id": "youtube_summary:2026-11-20-makerevan-enterprise-rag-data-engineering",
+    "uid": "a81e5bb03ba80fa775a5e4cfea61ab5737558bbc981f3d406b3b4353d48cc915"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "RAG·CAG·KAG는 세대별 기술이 아니라 서로 다른 문제를 해결하는 독립된 축이다",
+    "summary": "세 기술은 위아래 관계가 아닌 서로 다른 문제를 해결하며, RAG는 외부 지식 검색, CAG는 안정적 지식 재사용, KAG는 관계 추론에 초점을 둔다. 2020년 메타 연구진이 제안한 RAG는 문서를 청킹하고 임베딩하여 벡터 DB에 저장한 뒤, 질문과 유사한 청크만 프롬프트에 결합하는 방식이다. 2024년 12월 논문 'RAG를 하지 마라'는 지식이 작고 안정적일 때 문서 전체를 문맥에 올리고 KV 캐시를 재사용하여 검색 단계를 제거하는 방식을 제시한다. 2024년 9월 앤트 그룹 논문은 벡터 유사도의 한계를 극복하기 위해 엔티티와 관계를 지식 그래프로 구조화하여 멀티홉 추론을 수행한다.",
+    "summary_bullets": [
+      "세 기술은 위아래 관계가 아닌 서로 다른 문제를 해결하며, RAG는 외부 지식 검색, CAG는 안정적 지식 재사용, KAG는 관계 추론에 초점을 둔다.",
+      "2020년 메타 연구진이 제안한 RAG는 문서를 청킹하고 임베딩하여 벡터 DB에 저장한 뒤, 질문과 유사한 청크만 프롬프트에 결합하는 방식이다.",
+      "2024년 12월 논문 'RAG를 하지 마라'는 지식이 작고 안정적일 때 문서 전체를 문맥에 올리고 KV 캐시를 재사용하여 검색 단계를 제거하는 방식을 제시한다.",
+      "2024년 9월 앤트 그룹 논문은 벡터 유사도의 한계를 극복하기 위해 엔티티와 관계를 지식 그래프로 구조화하여 멀티홉 추론을 수행한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-makerevan-rag-cag-kag-architecture.html",
+    "channel": "메이커 에반 | Maker Evan",
+    "source_title": "RAG·CAG·KAG를 세대 순서로 알고 계신 분, 그거 틀렸습니다",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "유사한 청크만 프롬프트에 결합하는 방식이다",
+      "검색 단계를 제거하는 방식을 제시한다"
+    ],
+    "id": "youtube_summary:2026-11-20-makerevan-rag-cag-kag-architecture",
+    "uid": "92ce1666a0567274e29e8c3060cd4383d36bf5500cbfe459d876ae2a011bd693"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "AI 모델 출시 후 성능 저하 원인은 모델 자체보다 설정값 변경 때문",
+    "summary": "Anthropic은 Claude가 수 주 동안 성능이 저하되었다는 사후 분석 보고서를 공개하며, 내부 평가가 사용자 보고한 성능 저하를 포착하지 못했다고 인정했다. 모델의 가중치를 반올림하여 파일 크기와 실행 비용을 줄이는 양자화(Quantization)가 성능 저하 원인일 수 있다는 추측이 있으나, 이를 증명하는 하드한 증거나 기업 측 인정은 아직 없다. 첫 번째 다이얼인 Effort(노력도)는 모델이 답변 전까지 얼마나 깊이 생각하는지를 결정하며, Anthropic은 Claude Code의 기본 노력도를 high에서 medium으로 낮추어 속도를 높였으나 이는 잘못된 트레이드오프였다고 인정했다. GPT-5 출시 24시간 만에 API 트래픽이 약 2배로 증가하는 등 출시 직후 폭발적인 수요로 인해, 기업은 컴퓨트 비용을 절감하기 위해 모델의 노력도나 라우팅 등 주변 설정을 낮추는 인센티브를 가진다.",
+    "summary_bullets": [
+      "Anthropic은 Claude가 수 주 동안 성능이 저하되었다는 사후 분석 보고서를 공개하며, 내부 평가가 사용자 보고한 성능 저하를 포착하지 못했다고 인정했다.",
+      "모델의 가중치를 반올림하여 파일 크기와 실행 비용을 줄이는 양자화(Quantization)가 성능 저하 원인일 수 있다는 추측이 있으나, 이를 증명하는 하드한 증거나 기업 측 인정은 아직 없다.",
+      "첫 번째 다이얼인 Effort(노력도)는 모델이 답변 전까지 얼마나 깊이 생각하는지를 결정하며, Anthropic은 Claude Code의 기본 노력도를 high에서 medium으로 낮추어 속도를 높였으나 이는 잘못된 트레이드오프였다고 인정했다.",
+      "GPT-5 출시 24시간 만에 API 트래픽이 약 2배로 증가하는 등 출시 직후 폭발적인 수요로 인해, 기업은 컴퓨트 비용을 절감하기 위해 모델의 노력도나 라우팅 등 주변 설정을 낮추는 인센티브를 가진다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-nateherkaiautomation-ai-model-nerf-dials.html",
+    "channel": "Nate Herk | AI Automation",
+    "source_title": "Claude and GPT Get Nerfed After Launch (They Admitted It)",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "성능 저하를 포착하지 못했다고 인정했다",
+      "기업 측 인정은 아직 없다"
+    ],
+    "id": "youtube_summary:2026-11-20-nateherkaiautomation-ai-model-nerf-dials",
+    "uid": "a379a0b3197d746ff42da5d8b7d86d8852728b239eb7cffc2e1ec24a5db080cc"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "VPS에 Claude Code를 설치하고 Telegram으로 원격 제어하는 10분 가이드",
+    "summary": "VPS는 가상 사설 서버로, Claude Code를 24시간 구동시켜 Telegram을 통해 언제 어디서나 접속할 수 있게 하는 역할을 한다. Telegram의 BotFather를 통해 새 봇을 생성하고, 발급받은 토큰을 VPS의 Claude Code 설정에 입력하여 계정을 페어링한다. VPS 재부팅 시에도 Claude Code가 Tmux 세션에서 자동으로 실행되도록 시스템 부팅 스크립트를 설정한다. 클라우드코드 설치된 VPS를 제공하거나 10% 할인 쿠폰으로 연간 100달러에 368달러 상당의 리소스를 확보하는 방법을 소개한다.",
+    "summary_bullets": [
+      "VPS는 가상 사설 서버로, Claude Code를 24시간 구동시켜 Telegram을 통해 언제 어디서나 접속할 수 있게 하는 역할을 한다.",
+      "Telegram의 BotFather를 통해 새 봇을 생성하고, 발급받은 토큰을 VPS의 Claude Code 설정에 입력하여 계정을 페어링한다.",
+      "VPS 재부팅 시에도 Claude Code가 Tmux 세션에서 자동으로 실행되도록 시스템 부팅 스크립트를 설정한다.",
+      "클라우드코드 설치된 VPS를 제공하거나 10% 할인 쿠폰으로 연간 100달러에 368달러 상당의 리소스를 확보하는 방법을 소개한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-nateherkaiautomation-claude-code-vps-telegram.html",
+    "channel": "Nate Herk | AI Automation",
+    "source_title": "How to Put Claude Code on a VPS in 10 Minutes",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "Claude Code 설정에 입력하여 계정을 페어링한다",
+      "100달러에 368달러 상당의 리소스를 확보하는 방법을 소개한다"
+    ],
+    "id": "youtube_summary:2026-11-20-nateherkaiautomation-claude-code-vps-telegram",
+    "uid": "35cc3f4a60fbbdee9f8fc80eb572387e765dcf54b19ce9c7484e00e15ec3a7c7"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "Grok 봇으로 GTA 6 클립 자동화 계정 구축 및 24시간 운영 전략",
+    "summary": "Grok 봇은 TikTok, X, Instagram, Twitch에서 GTA 6 관련 콘텐츠를 검색하며, 특히 Twitch가 가장 많은 시청수를 가진 소스로 확인된다. 게시 후 1시간 내 20회 재생에 못 미치면 '뷰 제이일(View Jail)' 또는 플랫폼 속도 저하로 판단하고, 이에 따라 게시 빈도를 조절한다. 봇이 타인에게 결제 요청, DM 전송, 프로필 편집을 수행하지 않도록 설정하여 의심스러운 행위를 방지하고, 특정 시간대 내 게시를 제한한다. 검색된 클립 중 가장 주목을 끌 수 있는 순간을 찾아내어 앞부분에 자막을 추가하고, 기존 클립을 단순히 재업로드하지 않도록 편집을 수행한다.",
+    "summary_bullets": [
+      "Grok 봇은 TikTok, X, Instagram, Twitch에서 GTA 6 관련 콘텐츠를 검색하며, 특히 Twitch가 가장 많은 시청수를 가진 소스로 확인된다.",
+      "게시 후 1시간 내 20회 재생에 못 미치면 '뷰 제이일(View Jail)' 또는 플랫폼 속도 저하로 판단하고, 이에 따라 게시 빈도를 조절한다.",
+      "봇이 타인에게 결제 요청, DM 전송, 프로필 편집을 수행하지 않도록 설정하여 의심스러운 행위를 방지하고, 특정 시간대 내 게시를 제한한다.",
+      "검색된 클립 중 가장 주목을 끌 수 있는 순간을 찾아내어 앞부분에 자막을 추가하고, 기존 클립을 단순히 재업로드하지 않도록 편집을 수행한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-nateherkaiautomation-grok-gta6-clipping-automation.html",
+    "channel": "Nate Herk | AI Automation",
+    "source_title": "I Turned Grok Bot Into a 24/7 GTA 6 Clipping Machine",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "많은 시청수를 가진 소스로 확인된다",
+      "이에 따라 게시 빈도를 조절한다"
+    ],
+    "id": "youtube_summary:2026-11-20-nateherkaiautomation-grok-gta6-clipping-automation",
+    "uid": "a356689d94454bf9ca8e17daba94bd47710a5e2e44a0eed3358cb02eb6615d04"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "econ",
+    "title": "AI 롤업 전략으로 전통 서비스 기업 인수해 기업가치 재평가",
+    "summary": "미국 방범 회사 ADT가 스라이브 홀딩스에 부채 포함 총 153억 달러(약 20.5조 원)에 인수되는 계약이 발표되었습니다. AI 롤업은 인건비 비중이 높고 이익률이 낮은 서비스 기업들을 다수 인수해 AI를 도입하는 투자 전략입니다. 2023년 설립된 회계법인 네트워크 크레테에는 30개 이상의 회계법인이 참여하며 미국 최대 회계법인 중 하나로 성장했습니다. 롱레이크는 2년 반 동안 주택 단지 관리 등 다양한 서비스업 기업 40곳을 인수하며 세계 최초의 AI 지주회사로 자칭합니다.",
+    "summary_bullets": [
+      "미국 방범 회사 ADT가 스라이브 홀딩스에 부채 포함 총 153억 달러(약 20.5조 원)에 인수되는 계약이 발표되었습니다.",
+      "AI 롤업은 인건비 비중이 높고 이익률이 낮은 서비스 기업들을 다수 인수해 AI를 도입하는 투자 전략입니다.",
+      "2023년 설립된 회계법인 네트워크 크레테에는 30개 이상의 회계법인이 참여하며 미국 최대 회계법인 중 하나로 성장했습니다.",
+      "롱레이크는 2년 반 동안 주택 단지 관리 등 다양한 서비스업 기업 40곳을 인수하며 세계 최초의 AI 지주회사로 자칭합니다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-ucelfn6f-ai-rollup-adt-creed.html",
+    "channel": "티타임즈TV",
+    "source_title": "AX 안된 회사 인수해, AI로 기업가치 올리는 ‘AI 롤업’",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "최대 회계법인 중 하나로 성장했습니다",
+      "기업 40곳을 인수하며 세계 최초의 AI 지주회사로 자칭합니다"
+    ],
+    "id": "youtube_summary:2026-11-20-ucelfn6f-ai-rollup-adt-creed",
+    "uid": "857c5d91830b126bb67e196c3acff7c50e4c3c22bd1ce44c9994d1ae7945a383"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "오픈AI GPT-6.2 아스트라가 3D 웹과 공간 컴퓨팅 시대를 열며 힉스필드와 연동된다",
+    "summary": "오픈AI는 11월 17일 GPT-6.2 아스트라 모델을 출시하며 전문 작업의 새로운 기준을 제시했다. 아스트라는 건물 재료 적용, 극장 시야각, 바닷속 물고기 등 다양한 3D 시뮬레이션을 실시간으로 구현한다. 블렌더를 활용한 오프라인 렌더링 방식은 실시간보다 높은 퀄리티의 광고용 영상을 생성한다. GPT 자체에는 이미지 생성 모델이 없어 힉스필드와 같은 외부 이미지 생성 모델과의 연동이 필수적이다. 아스트라는 저렴한 비용으로 향상된 성능을 내며 특히 게임 및 3D 디자인 분야에서 강점을 보인다. 3D 웹사이트 구현은 증강현실과 가상현실 등 공간 컴퓨팅 기술의 재유행을 시사한다.",
+    "summary_bullets": [
+      "오픈AI는 11월 17일 GPT-6.2 아스트라 모델을 출시하며 전문 작업의 새로운 기준을 제시했다.",
+      "아스트라는 건물 재료 적용, 극장 시야각, 바닷속 물고기 등 다양한 3D 시뮬레이션을 실시간으로 구현한다. 블렌더를 활용한 오프라인 렌더링 방식은 실시간보다 높은 퀄리티의 광고용 영상을 생성한다.",
+      "GPT 자체에는 이미지 생성 모델이 없어 힉스필드와 같은 외부 이미지 생성 모델과의 연동이 필수적이다.",
+      "아스트라는 저렴한 비용으로 향상된 성능을 내며 특히 게임 및 3D 디자인 분야에서 강점을 보인다. 3D 웹사이트 구현은 증강현실과 가상현실 등 공간 컴퓨팅 기술의 재유행을 시사한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-ucgmur5l-gpt-6-2-astra-higgsfield.html",
+    "channel": "오후다섯씨",
+    "source_title": "🔥 드디어 시작이다! ChatGPT GPT-6.2 Astra X Higgsfield, 3D Web AI영상  실화? | 오후다섯씨",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "아스트라 모델을 출시하며 전문 작업의 새로운 기준을 제시했다",
+      "공간 컴퓨팅 기술의 재유행을 시사한다"
+    ],
+    "id": "youtube_summary:2026-11-20-ucgmur5l-gpt-6-2-astra-higgsfield",
+    "uid": "3f533d78dc5a30aed98d0f857357a7049a5712683297b6895bcac28f823425fd"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "실리콘밸리 AI 팀원 서비스의 운영 원칙과 신뢰 단계별 위임 전략",
+    "summary": "AI 팀원 서비스는 로렌 탄과 로만 우가르테가 7주 만에 출시했으며, 로렌은 한 달에 4,000개 이상의 코드 변경을 생성하는 엔지니어로 활동한다. 봇은 만능 비서 형태가 아니라 각자 특정 문제를 책임지는 작은 팀으로 구성되며, 해당 분야 전문가가 견습생을 키우듯 관리한다. 일손이 넘쳐나는 환경에서는 실행 능력보다 '무엇을 왜 할 것인가'를 정하는 의도 전달 능력과 좋은 결과를 정의하는 안목이 핵심 역량으로 부상한다. 기업 내 AI 봇 운영은 '봇이 일의 중심에 있고, 사람과 같은 도구를 사용하며, 항상 켜져 있다'는 세 가지 원칙을 기반으로 한다.",
+    "summary_bullets": [
+      "AI 팀원 서비스는 로렌 탄과 로만 우가르테가 7주 만에 출시했으며, 로렌은 한 달에 4,000개 이상의 코드 변경을 생성하는 엔지니어로 활동한다.",
+      "봇은 만능 비서 형태가 아니라 각자 특정 문제를 책임지는 작은 팀으로 구성되며, 해당 분야 전문가가 견습생을 키우듯 관리한다.",
+      "일손이 넘쳐나는 환경에서는 실행 능력보다 '무엇을 왜 할 것인가'를 정하는 의도 전달 능력과 좋은 결과를 정의하는 안목이 핵심 역량으로 부상한다.",
+      "기업 내 AI 봇 운영은 '봇이 일의 중심에 있고, 사람과 같은 도구를 사용하며, 항상 켜져 있다'는 세 가지 원칙을 기반으로 한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-uciiuquk-yc-ai-coworker-trust.html",
+    "channel": "배움의 달인 (AI·자동화)",
+    "source_title": "AI가 내 동료가 된다면? 실리콘밸리에서 이미 시작된 ‘AI 동료' 시대 (YC 팟캐스트 8분 요약)",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "4,000개 이상의 코드 변경을 생성하는 엔지니어로 활동한다",
+      "정의하는 안목이 핵심 역량으로 부상한다"
+    ],
+    "id": "youtube_summary:2026-11-20-uciiuquk-yc-ai-coworker-trust",
+    "uid": "9e3f7a24ce757f1e08ab3e94a41bf38e2c50d005f011f0adffb1564cc4db094b"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "전화 예약부터 결제까지 실행하는 피클, Dots, Muse 등 능동형 AI 에이전트 경쟁 구도 분석",
+    "summary": "AI가 단순 질의응답을 넘어 식당 예약, 항공권 검색 및 결제 등 실제 업무를 수행하는 능동형 에이전트 시대가 열렸다. 에이전틱 AI의 동작은 인터페이스, 계획 수립, 도구 접근, 권한 및 결제, 보안 등 5가지 레이어로 구성된다. AI 경쟁의 핵심 지표는 모델의 추론 능력(IQ)에서 실제 업무 실행 능력으로 확장되고 있다. 한국계 스타트업 피클(Pickle), 메타의 Muse, 오픈AI의 Dots, xAI의 Grok Bots, 구글의 Spark 등 빅테크와 스타트업이 에이전틱 AI를 발표했다.",
+    "summary_bullets": [
+      "AI가 단순 질의응답을 넘어 식당 예약, 항공권 검색 및 결제 등 실제 업무를 수행하는 능동형 에이전트 시대가 열렸다.",
+      "에이전틱 AI의 동작은 인터페이스, 계획 수립, 도구 접근, 권한 및 결제, 보안 등 5가지 레이어로 구성된다.",
+      "AI 경쟁의 핵심 지표는 모델의 추론 능력(IQ)에서 실제 업무 실행 능력으로 확장되고 있다.",
+      "한국계 스타트업 피클(Pickle), 메타의 Muse, 오픈AI의 Dots, xAI의 Grok Bots, 구글의 Spark 등 빅테크와 스타트업이 에이전틱 AI를 발표했다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-ucnniibh-pickle-dots-muse-agentic-ai.html",
+    "channel": "혁신전파사",
+    "source_title": "직접 전화를 걸어 상담을 하고 티켓까지 결제하는 AI가 등장했다? 피클 vs. Dots vs. Muse 직접 행동하는 퍼스널 AI 에이전트 시대가 열린다!",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "보안 등 5가지 레이어로 구성된다",
+      "빅테크와 스타트업이 에이전틱 AI를 발표했다"
+    ],
+    "id": "youtube_summary:2026-11-20-ucnniibh-pickle-dots-muse-agentic-ai",
+    "uid": "e18a232f867552e925917d8d401dd23b6803374ed04fe928f329b965a85b1687"
+  },
+  {
+    "date": "2026-11-20",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "구글 스마트글래스 완판과 애플 신제품의 아이폰 제어 기능 공개",
+    "summary": "Android XR는 2D 앱에 볼륨을 추가하는 스페이셜 컨테이너 지원을 도입하여 여러 앱이 동시에 실행되도록 허용한다. 구글과 제너럴 몬스터가 협력해 출시한 스마트글래스 사전주문 물량이 4일 만에 모두 매진되었다. 애플의 스마트글래스는 애플 워치 기반 칩셋을 사용해 높은 효율성을 확보하며, 예상 가격은 600달러 이상으로 추정된다. 카메라 센서는 사진·영상용 고화질 센서와 시리(Siri) 전용 저전력 센서로 구성된다. 메타의 AI 에이전트 '뮤즈(Muse)'는 출시 후 미국 앱스토어 무료 앱 1위 자리를 약 4주간 유지했다.",
+    "summary_bullets": [
+      "Android XR는 2D 앱에 볼륨을 추가하는 스페이셜 컨테이너 지원을 도입하여 여러 앱이 동시에 실행되도록 허용한다.",
+      "구글과 제너럴 몬스터가 협력해 출시한 스마트글래스 사전주문 물량이 4일 만에 모두 매진되었다.",
+      "애플의 스마트글래스는 애플 워치 기반 칩셋을 사용해 높은 효율성을 확보하며, 예상 가격은 600달러 이상으로 추정된다. 카메라 센서는 사진·영상용 고화질 센서와 시리(Siri) 전용 저전력 센서로 구성된다.",
+      "메타의 AI 에이전트 '뮤즈(Muse)'는 출시 후 미국 앱스토어 무료 앱 1위 자리를 약 4주간 유지했다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-20-uploadvr-google-glasses-sellout-apple-siri.html",
+    "channel": "UploadVR",
+    "source_title": "VR Download: Google-Powered Smart Glasses Sell Out, Apple Glasses Will Control iPhone",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "지원을 도입하여 여러 앱이 동시에 실행되도록 허용한다",
+      "예상 가격은 600달러 이상으로 추정된다"
+    ],
+    "id": "youtube_summary:2026-11-20-uploadvr-google-glasses-sellout-apple-siri",
+    "uid": "33f4ea29a677dd5690ee7539ebcefa251e657866328e36640e4703ccaa7aee2e"
+  },
+  {
     "date": "2026-11-19",
     "pub": "뉴스",
     "n": "01",
