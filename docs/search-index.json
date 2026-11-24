@@ -1,5 +1,568 @@
 [
   {
+    "date": "2026-11-25",
+    "pub": "뉴스",
+    "n": "01",
+    "title": "AI 업계, 초지능 개발 제한 방안 제시",
+    "summary": "메타 최고AI책임자와 오픈AI 핵심 연구진이 초지능의 위험성을 경고하고 개발 속도를 조절할 구체적인 방안을 제안하고 있습니다. 다리오 아모데이 앤트로픽 CEO와 샘 알트먼 오픈AI CEO 등은 2027년이면 재귀적 자기 개선(RSI)을 통해 지능 폭발이 시작될 수 있다는 전망을 내놓았습니다.",
+    "summary_bullets": [
+      "메타 최고AI책임자와 오픈AI 핵심 연구진은 초지능 위험을 경고하고 개발 속도 조절 방안을 제안했다.",
+      "다리오 아모데이 앤트로픽 CEO와 샘 알트먼 오픈AI CEO 등은 2027년 전망을 내놨다.",
+      "이들은 재귀적 자기 개선(RSI)을 거쳐 지능 폭발이 시작될 수 있다고 전망했다."
+    ],
+    "why": "개발 제한 기준과 인간의 통제권 유지 방안이 미국 정치권의 AI 안전 규제 논의에 영향을 미칠지 주목됩니다.",
+    "url": "https://www.aitimes.com/news/articleView.html?idxno=217724",
+    "channel": "aitimes.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "경고하고 개발 속도를 조절할 구체적인 방안을 제안하고 있습니다"
+    ],
+    "id": "ai_news:2026-11-25:01",
+    "uid": "99f4c1130b93fbe1e68f26a63a66edacce18ecc8461f32780acd4484dc7a576e"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "뉴스",
+    "n": "02",
+    "title": "젠슨 황, 복귀 후 첫 회의서 행동 강령 위반 사과",
+    "summary": "젠슨 황 엔비디아 CEO는 복귀 후 첫 전 직원회의에서 회사 행동 강령 위반을 인정하고 사과했다. 그는 심리 치료와 경영 방식 개선 등 재발 방지 대책을 공개하며, 복귀가 이사회의 판단에 따른 결정임을 강조했다.",
+    "summary_bullets": [
+      "젠슨 황 엔비디아 CEO는 복귀 후 첫 전 직원회의에서 행동 강령 위반을 인정하고 사과했다.",
+      "그는 심리 치료와 경영 방식 개선을 재발 방지 대책으로 공개했다.",
+      "그는 복귀가 이사회의 판단에 따른 결정이라고 회의에서 강조했다."
+    ],
+    "why": "CEO의 공개 사과와 제도적 개선 약속은 엔비디아의 내부 신뢰 회복과 거버넌스 투명성 확보에 중요한 의미를 갖는다.",
+    "url": "https://www.aitimes.com/news/articleView.html?idxno=217752",
+    "channel": "aitimes.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "행동 강령 위반을 인정하고 사과했다"
+    ],
+    "id": "ai_news:2026-11-25:02",
+    "uid": "6c72890293e540ca2afa89f16ba330f7128816d251768eaee7fab0595a6f0faf"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "뉴스",
+    "n": "03",
+    "title": "앤트로픽, 코드 검토부터 승인까지 자동화하는 '클로드 십' 베타 출시",
+    "summary": "앤트로픽은 23일 AI가 작성한 코드를 검토하고 수정하는 데 이어 팀 규칙에 따라 승인 여부까지 판단하는 개발 자동화 도구 '클로드 십'을 베타 버전으로 출시했다. 이 도구는 풀 리퀘스트를 대상으로 기존 코드 리뷰 기능에 수정 도구 'PR 스튜어드'와 승인 도구 '클로드 어프루벌스'를 결합해 코드 반영 요청 과정을 처리한다. 앤트로픽은 이를 통해 코드 생성 이후 검토와 승인에 걸리는 시간을 줄여 개발 속도를 높이겠다는 전략을 밝혔다.",
+    "summary_bullets": [
+      "앤트로픽은 23일 AI 작성 코드를 검토·수정하고 승인 여부도 판단하는 '클로드 십' 베타를 출시했다.",
+      "도구는 풀 리퀘스트에 기존 코드 리뷰와 'PR 스튜어드', '클로드 어프루벌스'를 결합해 처리한다.",
+      "앤트로픽은 검토와 승인 시간을 줄여 개발 속도를 높이겠다는 전략을 밝혔다."
+    ],
+    "why": "코드 검토와 승인 단계의 자동화는 개발 워크플로우의 병목을 해소하고 소프트웨어 배포 주기를 단축하는 데 기여할 것으로 보인다.",
+    "url": "https://www.aitimes.com/news/articleView.html?idxno=217729",
+    "channel": "aitimes.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "클로드 십'을 베타 버전으로 출시했다",
+      "클로드 어프루벌스'를 결합해 코드 반영 요청 과정을 처리한다"
+    ],
+    "id": "ai_news:2026-11-25:03",
+    "uid": "bb474681c00bb506d7e13a1dd2b1ea60bad17f007a3ff41121875ceef9e5c3f8"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "뉴스",
+    "n": "04",
+    "title": "AI 에이전트, 인간 대비 450% 많은 네트워크 트래픽 유발",
+    "summary": "기업 네트워크는 AI 도입으로 심각한 부하를 겪고 있으며, 특히 에이전틱 AI는 동일한 작업을 수행할 때 인간보다 450% 많은 트래픽을 발생시킨다. 최근 조사에 따르면 기업 중 절반만이 현재 네트워크가 AI의 대역폭 및 지연 요구사항을 충족한다고 답했다.",
+    "summary_bullets": [
+      "AI 도입으로 기업 네트워크가 부하를 겪고 있으며 에이전틱 AI는 트래픽을 크게 늘린다.",
+      "같은 작업에서 에이전틱 AI는 인간보다 450% 많은 네트워크 트래픽을 발생시킨다.",
+      "최근 조사에서 기업 중 절반만 현재 네트워크가 AI의 대역폭·지연 요구를 충족한다고 답했다."
+    ],
+    "why": "AI 처리가 실시간 애플리케이션으로 이동하면서, 네트워크 현대화를 일회성 프로젝트가 아닌 지속적 전략으로 전환해야 한다.",
+    "url": "https://www.technologyreview.com/2026/11/24/1148091/raising-the-stakes-for-enterprise-networks-with-ai-modernization/",
+    "channel": "technologyreview.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "및 지연 요구사항을 충족한다고 답했다"
+    ],
+    "id": "ai_news:2026-11-25:04",
+    "uid": "08b78f9c71632c06dce0e3be3e93ca6fe470d37cb5edd6c6377e997566128110"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "뉴스",
+    "n": "05",
+    "title": "텐센트, 번역 모델 Hy MT3 공개·오픈소스화",
+    "summary": "Tencent Hunyuan이 3세대 번역 모델 Hy MT3를 공개하고 오픈소스화했다. Hy MT3는 1.8B, 7B, 30B-A3B(MoE) 크기로 제공되며 PC, 휴대전화, 스마트 기기에서의 온디바이스 사용을 지원한다.",
+    "summary_bullets": [
+      "Tencent Hunyuan은 3세대 번역 모델 Hy MT3를 공개하고 오픈소스화했다.",
+      "Hy MT3는 1.8B, 7B, 30B-A3B(MoE) 세 크기로 제공된다.",
+      "모델은 PC와 휴대전화, 스마트 기기에서 온디바이스 사용을 지원한다."
+    ],
+    "why": "다양한 크기와 기기 환경을 지원하는 번역 모델이 공개돼 활용 선택지가 넓어질 수 있다.",
+    "url": "https://www.aibase.com/news/32503",
+    "channel": "aibase.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "번역 모델 Hy MT3를 공개하고 오픈소스화했다"
+    ],
+    "id": "ai_news:2026-11-25:05",
+    "uid": "7cb61b75f8229a7a01a84dad0bef9aee9a43d768c930aafcdc112e0b4e0b8ca0"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "뉴스",
+    "n": "06",
+    "title": "바이두, ERNIE 5.5 Flash Preview 오픈소스 공개",
+    "summary": "바이두는 ERNIE 5.5 Flash Preview를 Apache 2.0 라이선스로 공개했으며, 가중치는 Hugging Face와 ModelScope에서 제공한다. 이 모델은 MoE 구조의 대규모 파라미터·소규모 활성화 모델로 비용 효율성 기준을 재편하는 것을 목표로 한다.",
+    "summary_bullets": [
+      "바이두는 ERNIE 5.5 Flash Preview를 Apache 2.0 라이선스로 공개했다.",
+      "모델 가중치는 Hugging Face와 ModelScope에서 제공된다.",
+      "MoE 구조로 대규모 파라미터와 소규모 활성화를 갖추고 비용 효율성 기준 재편을 목표로 한다."
+    ],
+    "why": "라이선스와 가중치가 공개돼 개발자가 모델을 활용하고 검토할 수 있다.",
+    "url": "https://www.aibase.com/news/32502",
+    "channel": "aibase.com",
+    "cat": "tech",
+    "kind": "ai_news",
+    "source": "AI뉴스",
+    "edition": null,
+    "highlights": [
+      "기준을 재편하는 것을 목표로 한다"
+    ],
+    "id": "ai_news:2026-11-25:06",
+    "uid": "9d46774a57b18917c7db03def9b38a6421bf107ed2543adf989c3cb5025d429d"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "고객사용기",
+    "customer_story_index": "claude-code-music-skill-auth-boundary-20261125",
+    "story_id": "claude-code-music-skill-auth-boundary-20261125",
+    "title": "Bandcamp 검색 API 인증 절차에 막힌 음악 탐색 스킬에서 Claude가 우회 지원을 거절한 반면, 같은 스킬은 요청에 따라 유튜브 곡 다운로드도 할 수 있었다는 사용자 경험",
+    "summary": "인증 장벽과 다운로드 기능 사이에서 드러난 에이전트의 대응 차이",
+    "summary_bullets": [
+      "인증 장벽과 다운로드 기능 사이에서 드러난 에이전트의 대응 차이"
+    ],
+    "why": "이는 한 사용자가 전한 특정 스킬의 사례다. 이 경험만으로 Claude Code의 일반적인 정책이나 다른 서비스에서의 동작까지 단정할 수는 없다.",
+    "url": "https://wootom.github.io/news/%EA%B8%B0%EC%88%A0.html?date=2026-11-25&item=customer_story%3A2026-11-25%3Aclaude-code-music-skill-auth-boundary-20261125",
+    "channel": "긱뉴스",
+    "story_content": {
+      "commentary": "이는 한 사용자가 전한 특정 스킬의 사례다. 이 경험만으로 Claude Code의 일반적인 정책이나 다른 서비스에서의 동작까지 단정할 수는 없다.",
+      "background": [
+        {
+          "text": "Claude Code는 코드베이스를 읽고 파일을 수정하거나 명령을 실행하는 에이전트형 도구다.",
+          "label": "공식 설명",
+          "url": "https://code.claude.com/docs/en/overview"
+        }
+      ],
+      "voices": [
+        {
+          "text": "상황: 사용자는 Claude Code로 음악 탐색 스킬을 만들었다. 진행: Bandcamp 검색 API의 인증 절차에 막히자 Claude가 우회는 돕지 않겠다고 먼저 알렸다. 사용자는 우회를 시도하거나 요청하지 않았다. 결과: 같은 스킬은 요청하면 유튜브에서 곡을 다운로드할 수 있었다고 전해, 음악을 찾고 얻는 과정에서 대응이 엇갈렸다.",
+          "date": "2026-11-25 수집 관찰일",
+          "source": "긱뉴스"
+        }
+      ],
+      "timeline": [],
+      "related_links": []
+    },
+    "article_kind": "experience",
+    "cat": "tech",
+    "kind": "customer_story",
+    "source": "고객사용기",
+    "edition": null,
+    "highlights": [],
+    "id": "customer_story:2026-11-25:claude-code-music-skill-auth-boundary-20261125",
+    "uid": "eaba71cb8d55e20fedda4d42e4ab19c691a3da9c8a8c8bb04600263e415df9e4"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "시황",
+    "cat": "econ",
+    "title": "시황 브리프 · 2026-11-25",
+    "summary": "중국 전기차의 유럽 진출이 철강·부품 산업에 새로운 수요를 창출하는 현상 분석 · NVIDIA가 11일 만에 젠슨 황을 복직시키며 주가가 30% 급등했다 · 2018년과 유사한 5가지 공통점으로 본 증시 바닥과 트럼프 시그널의 중요성 · 신현욱 작가는 AI 반도체 중소형주와 엔터주 매수 타이밍을 제시하며",
+    "url": "https://wootom.github.io/news/2026-11-25-daily-brief-econ.html",
+    "kind": "market_summary",
+    "source": "시황",
+    "edition": null,
+    "highlights": [],
+    "id": "market_summary:2026-11-25-daily-brief-econ",
+    "uid": "045ee4cca1f99eb412219d74bcfe7dd3427c820b454358a3da9e88a709b2e4c8"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "브리프",
+    "cat": "tech",
+    "title": "AI·기술 브리프 · 2026-11-25",
+    "summary": "Pimax Dream Air가 비행 시뮬레이터용 VR 헤드셋으로 최상위 평가를 받는 이유 · 메타가 퀘스트 스토어에서 호라이즌 월드를 제거하고 앱 문제를 해결하며 VR 생태계 개편을 단행한다 · Jack Roberts가 Gemini 4 Neon과 Claude Opus 5.5를 7단계 실전 테스트로 비교 분석 · 앤트로픽의 제품 확장 및 AI 네이티브 전환이 소프트웨어 시장 구조를 재편한다 · 미국 F-22 퇴역과 무인기 1천대 도입 전략 및 KF-21 국산화 성과 분석 · 구글 Gemini 4 Neon이 경쟁 모델 대비 가성비와 성능에서 우위를 점했다 · 메타 알렉산더 왕의 초지능 경고와 리만 가설 증명 관련 논쟁 정리 · Claude Code 실험적 Code Mode가 토큰 사용량 절감과 속도 저하 트레이드오프를 보여준다 · 클로드 페이블 5.2와 힉스필드 MCP로 시를 15초 영상으로 전환하는 워크플로우 공개 · Claude Code에서 Gemini 4 Neon으로 읽기 작업을 ",
+    "url": "https://wootom.github.io/news/2026-11-25-daily-brief-ai.html",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [],
+    "id": "youtube_summary:2026-11-25-daily-brief-ai",
+    "uid": "dcb7eee4ea427f4ed2db3a90901a67e1ce25627dd7ccb70459f2e5d2b0edec1d"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "econ",
+    "title": "중국 전기차의 유럽 진출이 철강·부품 산업에 새로운 수요를 창출하는 현상 분석",
+    "summary": "BMW의 중국 판매량은 5년간 42% 감소하여 작년 62만대에서 올해 50만대 미만으로 전망되며, 전성기인 2021년 당시 84만대 수준에서 크게 하락했다. 유럽은 탄소 배출을 줄이기 위해 수소 환원 제철 방식을 도입하고 있으나, 재생 에너지 사용으로 인해 일반 철보다 생산 비용이 높은 구조를 가지고 있다. 중국 자동차 제조업체들이 유럽 철강 산업에 생명수를 공급하며, 유럽 자동차 업체에 납품하던 철강사들이 중국차 생산으로 매출을 회복하고 있다. 프랑스 부품 업체 포비아는 2024년 BYD와 샤오미와 부품 공급 계약을 체결하며, 유럽 완성차 의존도를 낮추고 중국차 수요로 매출을 다변화했다.",
+    "summary_bullets": [
+      "BMW의 중국 판매량은 5년간 42% 감소하여 작년 62만대에서 올해 50만대 미만으로 전망되며, 전성기인 2021년 당시 84만대 수준에서 크게 하락했다.",
+      "유럽은 탄소 배출을 줄이기 위해 수소 환원 제철 방식을 도입하고 있으나, 재생 에너지 사용으로 인해 일반 철보다 생산 비용이 높은 구조를 가지고 있다.",
+      "중국 자동차 제조업체들이 유럽 철강 산업에 생명수를 공급하며, 유럽 자동차 업체에 납품하던 철강사들이 중국차 생산으로 매출을 회복하고 있다.",
+      "프랑스 부품 업체 포비아는 2024년 BYD와 샤오미와 부품 공급 계약을 체결하며, 유럽 완성차 의존도를 낮추고 중국차 수요로 매출을 다변화했다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-httpswwwyoutubecomch-china-ev-europe-steel-impact.html",
+    "channel": "https://www.youtube.com/channel/UCIUni4ScRp4mqPXsxy62L5w",
+    "source_title": "독일 BMW 판매 42% 감소시킨 중국 전기차, 유럽 철강과 부품 공장은 중국차 덕에 살아나나 (해담경제연구소 어예진 소장)",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "전성기인 2021년 당시 84만대 수준에서 크게 하락했다",
+      "유럽 완성차 의존도를 낮추고 중국차 수요로 매출을 다변화했다"
+    ],
+    "id": "youtube_summary:2026-11-25-httpswwwyoutubecomch-china-ev-europe-steel-impact",
+    "uid": "7af1e75f011a1cfb345456684970cc7696b505ae6a3040dabc7b629b7ed341c9"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "미국 F-22 퇴역과 무인기 1천대 도입 전략 및 KF-21 국산화 성과 분석",
+    "summary": "2세대 전투기인 미그 21과 F-10은 애프터버너를 활용해 속도를 높이는 것이 특징이며, 1960년대부터 레이더 기술 발전으로 항공기에도 레이더가 탑재되기 시작했다. KF-21 개발의 핵심 4대 요소 중 첫 번째인 레이더를 국산화하는 데 성공했으며, 이는 전투기의 '눈' 역할을 수행한다. 미 공군은 현존 최강인 F-22를 점차 퇴역시키고, 차세대 유인 전투기 F-47 약 135대와 무인 전투기 1,000대를 결합하는 방향으로 전환 중이다. 스페이스X 스타십의 정밀 착륙 사례처럼 AI 기술 발전으로 역추진을 통한 원위치 복귀가 가능해졌으며, 이는 군용 반도체와 컴퓨팅 성능 향상 덕분이다.",
+    "summary_bullets": [
+      "2세대 전투기인 미그 21과 F-10은 애프터버너를 활용해 속도를 높이는 것이 특징이며, 1960년대부터 레이더 기술 발전으로 항공기에도 레이더가 탑재되기 시작했다.",
+      "KF-21 개발의 핵심 4대 요소 중 첫 번째인 레이더를 국산화하는 데 성공했으며, 이는 전투기의 '눈' 역할을 수행한다.",
+      "미 공군은 현존 최강인 F-22를 점차 퇴역시키고, 차세대 유인 전투기 F-47 약 135대와 무인 전투기 1,000대를 결합하는 방향으로 전환 중이다.",
+      "스페이스X 스타십의 정밀 착륙 사례처럼 AI 기술 발전으로 역추진을 통한 원위치 복귀가 가능해졌으며, 이는 군용 반도체와 컴퓨팅 성능 향상 덕분이다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-httpswwwyoutubecomch-f22-retirement-kf21-ai.html",
+    "channel": "https://www.youtube.com/channel/UCIUni4ScRp4mqPXsxy62L5w",
+    "source_title": "[채승병의 밀리터리 과학 2부] 현존 최강 F-22 퇴역시키고 무인기 1천대 띄우는 속내. 미국이 거절한 핵심 기술 뚫어낸 KF-21 (한양대 기술경영전문대학원 채승병 겸임교수)",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "발전으로 항공기에도 레이더가 탑재되기 시작했다",
+      "반도체와 컴퓨팅 성능 향상 덕분이다"
+    ],
+    "id": "youtube_summary:2026-11-25-httpswwwyoutubecomch-f22-retirement-kf21-ai",
+    "uid": "c4946996a39b6d6dced543beb7137bcf76f97b1e4e14a1c9edbc169ac8afd436"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "Jack Roberts가 Gemini 4 Neon과 Claude Opus 5.5를 7단계 실전 테스트로 비교 분석",
+    "summary": "속도, 품질, 비용 세 가지 기준을 중심으로 Google의 신규 모델 Gemini 4 Neon과 Claude Opus 5.5를 비교했다. 블랙홀 설명 모션 그래픽 생성 과제에서 Claude Opus 5.5가 9.8분, 4.11달러에 첫 시도 성공으로 더 역동적인 결과를 냈다. 8개 도시 10년 데이터 바 차트 레이스 생성 과제에서 Claude Opus 5.5가 5.9분, 3달러에 첫 시도 성공했다. Google 모델군 중 Carbon은 가장 강력, Neon은 균형, Hydrogen은 빠르고 가벼운 모델로 포지셔닝했다.",
+    "summary_bullets": [
+      "속도, 품질, 비용 세 가지 기준을 중심으로 Google의 신규 모델 Gemini 4 Neon과 Claude Opus 5.5를 비교했다.",
+      "블랙홀 설명 모션 그래픽 생성 과제에서 Claude Opus 5.5가 9.8분, 4.11달러에 첫 시도 성공으로 더 역동적인 결과를 냈다.",
+      "8개 도시 10년 데이터 바 차트 레이스 생성 과제에서 Claude Opus 5.5가 5.9분, 3달러에 첫 시도 성공했다.",
+      "Google 모델군 중 Carbon은 가장 강력, Neon은 균형, Hydrogen은 빠르고 가벼운 모델로 포지셔닝했다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-jackroberts-gemini-4-neon-vs-claude-opus-5-5.html",
+    "channel": "Jack Roberts",
+    "source_title": "I Tested Google’s “Claude Killer”… Here’s What Happened.",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "Gemini 4 Neon과 Claude Opus 5.5를 비교했다",
+      "Opus 5.5가 5.9분, 3달러에 첫 시도 성공했다"
+    ],
+    "id": "youtube_summary:2026-11-25-jackroberts-gemini-4-neon-vs-claude-opus-5-5",
+    "uid": "a3683e06b4406fcd6f5eb35b6bc0f0f9be0a172060b0202643a293744373edd6"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "구글 Gemini 4 Neon이 경쟁 모델 대비 가성비와 성능에서 우위를 점했다",
+    "summary": "구글은 9월 30일 Argon, 10월 28일 Carbon, 11월 12일 Hydrogen, 11월 18일 Neon을 순차적으로 출시하며 7주 동안 프런티어급 모델 4개를 공개했다. Artificial Analysis 지수에서 Neon은 61점으로 Claude Opus 5.5(59점)와 GPT-6.2 Sol(57점)을 상회하며, 같은 계열의 Carbon(60점)보다도 높은 점수를 기록했다. 구글이 직접 측정한 SWE-sweep 벤치마크는 39%였으나, 일반 하네스로 재측정 시 12.8%로 나타나 평가 방식에 따른 편차가 존재한다. Opus 5.5는 여전히 터미널 기반 장기 코딩 작업에서 근소하게 앞서지만, Neon은 같은 성능 대역에서 절반의 비용으로 제공되어 가성비 선택지로 부상했다.",
+    "summary_bullets": [
+      "구글은 9월 30일 Argon, 10월 28일 Carbon, 11월 12일 Hydrogen, 11월 18일 Neon을 순차적으로 출시하며 7주 동안 프런티어급 모델 4개를 공개했다.",
+      "Artificial Analysis 지수에서 Neon은 61점으로 Claude Opus 5.5(59점)와 GPT-6.2 Sol(57점)을 상회하며, 같은 계열의 Carbon(60점)보다도 높은 점수를 기록했다.",
+      "구글이 직접 측정한 SWE-sweep 벤치마크는 39%였으나, 일반 하네스로 재측정 시 12.8%로 나타나 평가 방식에 따른 편차가 존재한다.",
+      "Opus 5.5는 여전히 터미널 기반 장기 코딩 작업에서 근소하게 앞서지만, Neon은 같은 성능 대역에서 절반의 비용으로 제공되어 가성비 선택지로 부상했다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-makerevan-gemini-4-neon-cost-analysis.html",
+    "channel": "메이커 에반 | Maker Evan",
+    "source_title": "왜 다들 제미나이 4 Neon 얘기만 할까? 숫자 직접 따져봤습니다",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "출시하며 7주 동안 프런티어급 모델 4개를 공개했다",
+      "12.8%로 나타나 평가 방식에 따른 편차가 존재한다"
+    ],
+    "id": "youtube_summary:2026-11-25-makerevan-gemini-4-neon-cost-analysis",
+    "uid": "b0234759d68933036dc145efa5972857909d9d14d83422efa9bcb18136bd7b90"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "메타 알렉산더 왕의 초지능 경고와 리만 가설 증명 관련 논쟁 정리",
+    "summary": "앤트로픽 수학자 레벤트 알푀게가 11월 21일 클로드와 함께 리만 가설 증명을 찾았다고 발표했으며, 이는 1859년 제기된 미해결 문제이다. 메타 초지능 연구소 책임자 알렉산더 왕은 11월 22일 '초지능이 오고 있다'는 제목의 글을 올려 통제 난이도를 경고했다. 일론 머스크는 같은 날 리만 증명 소식에 '특이점에 오신 걸 환영한다'고 답글을 남겨 '특이점 선언'이라는 오해를 불러일으켰다. 비판자들은 수학 증명 하나만으로 모든 분야를 넘어선다고 단정할 수 없으며, 구체적 행동 계획이 부재하다고 지적한다.",
+    "summary_bullets": [
+      "앤트로픽 수학자 레벤트 알푀게가 11월 21일 클로드와 함께 리만 가설 증명을 찾았다고 발표했으며, 이는 1859년 제기된 미해결 문제이다.",
+      "메타 초지능 연구소 책임자 알렉산더 왕은 11월 22일 '초지능이 오고 있다'는 제목의 글을 올려 통제 난이도를 경고했다.",
+      "일론 머스크는 같은 날 리만 증명 소식에 '특이점에 오신 걸 환영한다'고 답글을 남겨 '특이점 선언'이라는 오해를 불러일으켰다.",
+      "비판자들은 수학 증명 하나만으로 모든 분야를 넘어선다고 단정할 수 없으며, 구체적 행동 계획이 부재하다고 지적한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-makerevan-meta-alexander-wang-singularity.html",
+    "channel": "메이커 에반 | Maker Evan",
+    "source_title": "메타가 특이점 선언했다는 뉴스 보신 분, 원문은 달랐습니다",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "발표했으며, 이는 1859년 제기된 미해결 문제이다",
+      "글을 올려 통제 난이도를 경고했다"
+    ],
+    "id": "youtube_summary:2026-11-25-makerevan-meta-alexander-wang-singularity",
+    "uid": "561d46e892eb28ea2608a8e0b04ae0dbd516300e1d5bf9f9252d90f873faf8e2"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "Pimax Dream Air가 비행 시뮬레이터용 VR 헤드셋으로 최상위 평가를 받는 이유",
+    "summary": "화자자는 Pimax Dream Air가 현재 비행 시뮬레이터용 최고의 VR 헤드셋이라고 주장하며, Microsoft Flight Simulator 2024에서 레이캬비크 상공을 비행하는 장면을 통해 이를 입증했습니다. X-Real Aura는 시야각이 너무 작고, Steam Frame과 Quest 3는 견딜 만하지만 Dream Air에 비해 시각적 품질이 떨어지는 것으로 평가되었습니다. 블랙 프라이데이 기간 동안 Pimax Dream Air를 구매하면 더 나은 딜을 받을 수 있으며, Pimax가 더 나은 가격을 제시할 경우 차액을 환불해 주는 정책이 적용됩니다. 이 헤드셋은 엣지 투 엣지 선명도와 최소한의 글레어(반사)를 제공하는 파네이크 렌즈와 소니의 4K 마이크로 OLED 패널을 결합하여 개별 픽셀이 보이지 않는 사진 같은 현실감을 구현합니다.",
+    "summary_bullets": [
+      "화자자는 Pimax Dream Air가 현재 비행 시뮬레이터용 최고의 VR 헤드셋이라고 주장하며, Microsoft Flight Simulator 2024에서 레이캬비크 상공을 비행하는 장면을 통해 이를 입증했습니다.",
+      "X-Real Aura는 시야각이 너무 작고, Steam Frame과 Quest 3는 견딜 만하지만 Dream Air에 비해 시각적 품질이 떨어지는 것으로 평가되었습니다.",
+      "블랙 프라이데이 기간 동안 Pimax Dream Air를 구매하면 더 나은 딜을 받을 수 있으며, Pimax가 더 나은 가격을 제시할 경우 차액을 환불해 주는 정책이 적용됩니다.",
+      "이 헤드셋은 엣지 투 엣지 선명도와 최소한의 글레어(반사)를 제공하는 파네이크 렌즈와 소니의 4K 마이크로 OLED 패널을 결합하여 개별 픽셀이 보이지 않는 사진 같은 현실감을 구현합니다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-mrtvmixedrealitytv-pimax-dream-air-flight-sim.html",
+    "channel": "MRTV - MIXED REALITY TV",
+    "source_title": "Pimax Dream Air - Still the KING of VR Flight Simming?",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "비행하는 장면을 통해 이를 입증했습니다",
+      "차액을 환불해 주는 정책이 적용됩니다"
+    ],
+    "id": "youtube_summary:2026-11-25-mrtvmixedrealitytv-pimax-dream-air-flight-sim",
+    "uid": "7075909fe51296f63db738ed2a107441a4b73d2051643aea101408e9e1783372"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "Claude Code 실험적 Code Mode가 토큰 사용량 절감과 속도 저하 트레이드오프를 보여준다",
+    "summary": "기존 Claude Code는 파일 읽기 등 각 단계마다 도구 호출을 수행하며 읽은 모든 내용이 세션 내 메모리에 누적되는 순차적 에이전트 루프를 사용한다. Anthropic 엔지니어는 약 1년 전 Google Drive에서 Salesforce로 회의록을 첨부하는 작업에서 코드 작성 방식으로 토큰을 150,000개에서 2,000개로 줄이는 효과를 확인했다. 주문 파일 분석, 깨진 링크 확인, 웹사이트 수정, 단일 파일 질문 등 4가지 작업을 Code Mode 온/오프로 각각 실행해 정확도는 모두 동일하게 유지되었다. Code Mode는 빠른 질문과 일부 주문 작업에서는 더 빠랐으나, 나머지 3가지 작업에서는 느렸으며 깨진 링크 작업은 27초에서 3분으로 증가했다.",
+    "summary_bullets": [
+      "기존 Claude Code는 파일 읽기 등 각 단계마다 도구 호출을 수행하며 읽은 모든 내용이 세션 내 메모리에 누적되는 순차적 에이전트 루프를 사용한다.",
+      "Anthropic 엔지니어는 약 1년 전 Google Drive에서 Salesforce로 회의록을 첨부하는 작업에서 코드 작성 방식으로 토큰을 150,000개에서 2,000개로 줄이는 효과를 확인했다.",
+      "주문 파일 분석, 깨진 링크 확인, 웹사이트 수정, 단일 파일 질문 등 4가지 작업을 Code Mode 온/오프로 각각 실행해 정확도는 모두 동일하게 유지되었다.",
+      "Code Mode는 빠른 질문과 일부 주문 작업에서는 더 빠랐으나, 나머지 3가지 작업에서는 느렸으며 깨진 링크 작업은 27초에서 3분으로 증가했다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-nateherkaiautomation-claude-code-mode-token-savings.html",
+    "channel": "Nate Herk | AI Automation",
+    "source_title": "Claude Code Just Silently Released a Cheaper Mode",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "누적되는 순차적 에이전트 루프를 사용한다",
+      "150,000개에서 2,000개로 줄이는 효과를 확인했다"
+    ],
+    "id": "youtube_summary:2026-11-25-nateherkaiautomation-claude-code-mode-token-savings",
+    "uid": "204349e163d9245607627f7ffd4215812ec789a0859207843476228508b05e32"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "econ",
+    "title": "NVIDIA가 11일 만에 젠슨 황을 복직시키며 주가가 30% 급등했다",
+    "summary": "뉴욕타임즈가 미국 당국이 NVIDIA 칩 구매 기업과 중국 정보기관 연결을 의심한다고 보도한 후, 젠슨 황은 11월 12일 사임했다. NVIDIA는 11월 17일 분기 매출 1,158억 달러를 발표하며 전년 대비 2배 이상 성장했으나, 주가는 7주 연속 하락하며 2조 6,000억 달러의 시가총액이 증발했다. Claude를 개발한 Anthropic은 11월 19일 NVIDIA 혼란 속에서 IPO를 진행했으며, NVIDIA는 약 100억 달러 규모의 Anthropic 주식을 인수했다. 단일 벤더에 의존하지 말아야 하며, 가장 중요한 워크플로우를 두 번째 모델로 실행하여 시스템이 정상 작동하는지 확인하는 것이 중요하다.",
+    "summary_bullets": [
+      "뉴욕타임즈가 미국 당국이 NVIDIA 칩 구매 기업과 중국 정보기관 연결을 의심한다고 보도한 후, 젠슨 황은 11월 12일 사임했다.",
+      "NVIDIA는 11월 17일 분기 매출 1,158억 달러를 발표하며 전년 대비 2배 이상 성장했으나, 주가는 7주 연속 하락하며 2조 6,000억 달러의 시가총액이 증발했다.",
+      "Claude를 개발한 Anthropic은 11월 19일 NVIDIA 혼란 속에서 IPO를 진행했으며, NVIDIA는 약 100억 달러 규모의 Anthropic 주식을 인수했다.",
+      "단일 벤더에 의존하지 말아야 하며, 가장 중요한 워크플로우를 두 번째 모델로 실행하여 시스템이 정상 작동하는지 확인하는 것이 중요하다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-nateherkaiautomation-nvidia-jensen-huang-rehire.html",
+    "channel": "Nate Herk | AI Automation",
+    "source_title": "Jensen is back",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "젠슨 황은 11월 12일 사임했다",
+      "2조 6,000억 달러의 시가총액이 증발했다"
+    ],
+    "id": "youtube_summary:2026-11-25-nateherkaiautomation-nvidia-jensen-huang-rehire",
+    "uid": "17ee7fd1c88c34c6d2abec98afa8c0d9e29c0cf65790e421c41b63c755e182cb"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "econ",
+    "title": "2018년과 유사한 5가지 공통점으로 본 증시 바닥과 트럼프 시그널의 중요성",
+    "summary": "중간 선거에서 민주당이 탈란하며 정치 구도가 바뀌었고, 이후 연준 위원들이 금리 인상 필요성을 강조하는 긴축 기조가 강화되었다. 연준의 원러 이사와 제퍼슨 부의장, 리사 쿡 이사가 물가 안정을 위해 시장에게 충격을 줘야 한다고 발언하며 긴축 우려를 부각시켰다. 2018년 루비오가 화웨이 재무 담당자 체포를 주도했던 것처럼, 현재 국무장관인 루비오가 엔비디아 경영진 교체 및 대중 강경 노선을 사실상 주도하는 것으로 평가받고 있다. 2018년 12월 크리스마스 전후로 트럼프 대통령의 '주식 사세요' 발언과 연준의 긴축 완화 시그널이 겹치며 강력한 랠리가 시작되었던 사례가 언급되었다.",
+    "summary_bullets": [
+      "중간 선거에서 민주당이 탈란하며 정치 구도가 바뀌었고, 이후 연준 위원들이 금리 인상 필요성을 강조하는 긴축 기조가 강화되었다.",
+      "연준의 원러 이사와 제퍼슨 부의장, 리사 쿡 이사가 물가 안정을 위해 시장에게 충격을 줘야 한다고 발언하며 긴축 우려를 부각시켰다.",
+      "2018년 루비오가 화웨이 재무 담당자 체포를 주도했던 것처럼, 현재 국무장관인 루비오가 엔비디아 경영진 교체 및 대중 강경 노선을 사실상 주도하는 것으로 평가받고 있다.",
+      "2018년 12월 크리스마스 전후로 트럼프 대통령의 '주식 사세요' 발언과 연준의 긴축 완화 시그널이 겹치며 강력한 랠리가 시작되었던 사례가 언급되었다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-ucc3yfxs-trump-2018-parallels-market-bottom.html",
+    "channel": "소수몽키",
+    "source_title": "결국 증시 바닥은 트럼프의 입에서 나온다? 트럼프 1기 평행이론 적중할까",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "사실상 주도하는 것으로 평가받고 있다"
+    ],
+    "id": "youtube_summary:2026-11-25-ucc3yfxs-trump-2018-parallels-market-bottom",
+    "uid": "5b2fc04dc7551e3b525471ba8a36468aa754d32bf0c07e00da993b40d8814c41"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "앤트로픽의 제품 확장 및 AI 네이티브 전환이 소프트웨어 시장 구조를 재편한다",
+    "summary": "앤트로픽의 최근 상장 및 클로드 시트 출시가 마이크로소프트 주가에 영향을 미칠 정도로 큰 변화를 가져왔다. 기업들은 내부 시스템을 MCP로 만들어 클로드에 연동하고, 문서 작성 및 데이터 정리 등 업무를 AI에 위임하는 구조로 전환 중이다. 메타는 뮤즈(Muse) 모델의 상업적 성공을 위해 GPU 자원을 집중 투입하고 있으며, 개인용 AI 에이전트 시장 선점을 노리고 있다. 개인 AI 에이전트 시장에서 메타와 클로드 간의 경쟁이 관전 포인트로 부상하고 있다. 프롬프트 인젝션 등 AI 에이전트 보안 문제가 해결되지 않으면 개인 및 업무용 AI의 신뢰도가 떨어진다.",
+    "summary_bullets": [
+      "앤트로픽의 최근 상장 및 클로드 시트 출시가 마이크로소프트 주가에 영향을 미칠 정도로 큰 변화를 가져왔다.",
+      "기업들은 내부 시스템을 MCP로 만들어 클로드에 연동하고, 문서 작성 및 데이터 정리 등 업무를 AI에 위임하는 구조로 전환 중이다.",
+      "메타는 뮤즈(Muse) 모델의 상업적 성공을 위해 GPU 자원을 집중 투입하고 있으며, 개인용 AI 에이전트 시장 선점을 노리고 있다. 개인 AI 에이전트 시장에서 메타와 클로드 간의 경쟁이 관전 포인트로 부상하고 있다.",
+      "프롬프트 인젝션 등 AI 에이전트 보안 문제가 해결되지 않으면 개인 및 업무용 AI의 신뢰도가 떨어진다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-ucelfn6f-anthropic-claude-mcp-ai-native.html",
+    "channel": "티타임즈TV",
+    "source_title": "AI 만드는 앤트로픽과 앤트로픽의 손·발을 만드는 회사만 결국엔 남는다 (박종천 지란지교소프트 CAIO)",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "개인용 AI 에이전트 시장 선점을 노리고 있다",
+      "클로드 간의 경쟁이 관전 포인트로 부상하고 있다"
+    ],
+    "id": "youtube_summary:2026-11-25-ucelfn6f-anthropic-claude-mcp-ai-native",
+    "uid": "7e29d1b27d5b6ac2b0db2d264e82849818d3516a77f95c746e4b75d0015abe7e"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "클로드 페이블 5.2와 힉스필드 MCP로 시를 15초 영상으로 전환하는 워크플로우 공개",
+    "summary": "창작자는 10년간 이어온 단편 영화 작업의 바탕인 이상 시인의 시 '건축 무한 육면각체'를 소재로 15초짜리 영화 예고편을 제작했습니다. 텍스트 프롬프트만으로는 특정 장소나 의상 등 세부 요소가 의도와 다르게 생성되는 문제를 해결하기 위해 참조 이미지를 사용했습니다. 두 인물이 엇갈리며 한 몸처럼 모이는 착시 효과를 표현하는 컷에서 영상 모델은 텍스트 지시를 반복해도 동일한 결과만 내놓았습니다. 새 대화에서 시의 앞부분 8줄과 영화 컨셉, 캐릭터 시트, 장소 참조 이미지 4장을 입력하고 계획 수립을 요청했습니다.",
+    "summary_bullets": [
+      "창작자는 10년간 이어온 단편 영화 작업의 바탕인 이상 시인의 시 '건축 무한 육면각체'를 소재로 15초짜리 영화 예고편을 제작했습니다.",
+      "텍스트 프롬프트만으로는 특정 장소나 의상 등 세부 요소가 의도와 다르게 생성되는 문제를 해결하기 위해 참조 이미지를 사용했습니다.",
+      "두 인물이 엇갈리며 한 몸처럼 모이는 착시 효과를 표현하는 컷에서 영상 모델은 텍스트 지시를 반복해도 동일한 결과만 내놓았습니다.",
+      "새 대화에서 시의 앞부분 8줄과 영화 컨셉, 캐릭터 시트, 장소 참조 이미지 4장을 입력하고 계획 수립을 요청했습니다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-ucgmur5l-claude-fable-52-higgsfield-workflow.html",
+    "channel": "오후다섯씨",
+    "source_title": "AI 특이점 시작! 말로하면 꿈이 현실이 된다! 워크플로우 공개! 이상 건축무한육면각체 오감도 | Claude Fable 5.2 X Higgsfield | 오후다섯씨",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "소재로 15초짜리 영화 예고편을 제작했습니다",
+      "해결하기 위해 참조 이미지를 사용했습니다"
+    ],
+    "id": "youtube_summary:2026-11-25-ucgmur5l-claude-fable-52-higgsfield-workflow",
+    "uid": "88ccb300053dc45e645fc76c072096655fc78173c8b0209417dddf843005e3e1"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "Claude Code에서 Gemini 4 Neon으로 읽기 작업을 분리해 토큰 사용량 절감 실험",
+    "summary": "Claude Code는 매 턴마다 이전 대화 내용을 다시 전송하여 입력 토큰이 빠르게 쌓이는 구조를 가진다. Google Antigravity CLI(AGY)와 HY Step 플러그인을 사용하여 Claude Code에서 Gemini 4 Neon을 호출하는 환경을 구성했다. 가상 회의록 300개에서 변경된 결정을 찾는 과제를 수행했으며, 두 방식 모두 69건의 정답을 정확히 찾아내 정확도는 동일했다. 전체 입력 토큰은 실행 횟수에 따라 25% 감소하거나 4% 증가하는 등 일관된 절감 효과를 보이지 않았다.",
+    "summary_bullets": [
+      "Claude Code는 매 턴마다 이전 대화 내용을 다시 전송하여 입력 토큰이 빠르게 쌓이는 구조를 가진다.",
+      "Google Antigravity CLI(AGY)와 HY Step 플러그인을 사용하여 Claude Code에서 Gemini 4 Neon을 호출하는 환경을 구성했다.",
+      "가상 회의록 300개에서 변경된 결정을 찾는 과제를 수행했으며, 두 방식 모두 69건의 정답을 정확히 찾아내 정확도는 동일했다.",
+      "전체 입력 토큰은 실행 횟수에 따라 25% 감소하거나 4% 증가하는 등 일관된 절감 효과를 보이지 않았다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-uciiuquk-claude-gemini-neon-token-saving.html",
+    "channel": "배움의 달인 (AI·자동화)",
+    "source_title": "Claude가 너무 많이 읽나요? Gemini 4 Neon으로 토큰 아끼기",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "Code에서 Gemini 4 Neon을 호출하는 환경을 구성했다",
+      "두 방식 모두 69건의 정답을 정확히 찾아내 정확도는 동일했다"
+    ],
+    "id": "youtube_summary:2026-11-25-uciiuquk-claude-gemini-neon-token-saving",
+    "uid": "a7a02d32cfded2828150c04b4827260a775cd490602eccef74a004c7d1d0319f"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "econ",
+    "title": "신현욱 작가는 AI 반도체 중소형주와 엔터주 매수 타이밍을 제시하며",
+    "summary": "AI 관련주가 급락한 현재 시점을 바닥 구간으로 판단하여, 추가 매수 여력이 있다면 반도체 중소형주를 노려야 한다고 주장한다. 내년 페노메논 국가 정책 및 서울시 창동 아레나 등 공연장 건설로 엔터 산업이 성장할 것으로 보고, AI 외 섹터로 엔터를 추천한다. 누리호 발사나 엔터픽 상장 등 구체적 이벤트가 발표되기 전까지만 매매하고, 발표 시점에는 재료 소멸로 인한 하락을 예상하여 포지션을 정리한다. 과거 미장 투자를 하지 않은 것을 후회하며, 글로벌 시장 기회를 놓치지 않기 위해 국장 수익의 일부를 미장 대형주 투자에 분배할 계획이다.",
+    "summary_bullets": [
+      "AI 관련주가 급락한 현재 시점을 바닥 구간으로 판단하여, 추가 매수 여력이 있다면 반도체 중소형주를 노려야 한다고 주장한다.",
+      "내년 페노메논 국가 정책 및 서울시 창동 아레나 등 공연장 건설로 엔터 산업이 성장할 것으로 보고, AI 외 섹터로 엔터를 추천한다.",
+      "누리호 발사나 엔터픽 상장 등 구체적 이벤트가 발표되기 전까지만 매매하고, 발표 시점에는 재료 소멸로 인한 하락을 예상하여 포지션을 정리한다.",
+      "과거 미장 투자를 하지 않은 것을 후회하며, 글로벌 시장 기회를 놓치지 않기 위해 국장 수익의 일부를 미장 대형주 투자에 분배할 계획이다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-ucznimsi-ai-semi-entertainment-stock.html",
+    "channel": "전인구경제연구소",
+    "source_title": "오히려 지금은 이 주식을 노립니다(ft.신현욱 작가 2부)",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "추가 매수 여력이 있다면 반도체 중소형주를 노려야 한다고 주장한다",
+      "AI 외 섹터로 엔터를 추천한다"
+    ],
+    "id": "youtube_summary:2026-11-25-ucznimsi-ai-semi-entertainment-stock",
+    "uid": "136953a23973199bfee6fcbadf19aef0b8a21c4155dfce8fe62460876c0b79ec"
+  },
+  {
+    "date": "2026-11-25",
+    "pub": "개별리포트",
+    "cat": "tech",
+    "title": "메타가 퀘스트 스토어에서 호라이즌 월드를 제거하고 앱 문제를 해결하며 VR 생태계 개편을 단행한다",
+    "summary": "퀘스트 커뮤니티와 개발자들은 오랫동안 호라이즌 월드가 스토어에서 다른 게임을 압도하여 게임 발견(discoverability)을 방해한다고 불만을 제기해 왔다. 올해는 역대 가장 많은 게임이 출시되는 해로, 넥스트 페스트(Next Fest)에는 7,000개의 게임이 참여하여 사상 최대 규모를 기록했다. 게임 트레일러에 헤드셋을 착용한 인물을 포함하는 버전과 그렇지 않은 버전을 A/B 테스트한 결과, 헤드셋 착용 버전이 더 높은 클릭률과 위시리스트 등록률을 보였다. 실제 배우와 장면을 활용한 VR 게임 트레일러는 VR 게임에서는 보기 드문 높은 프로덕션 밸류를 제공한다.",
+    "summary_bullets": [
+      "퀘스트 커뮤니티와 개발자들은 오랫동안 호라이즌 월드가 스토어에서 다른 게임을 압도하여 게임 발견(discoverability)을 방해한다고 불만을 제기해 왔다.",
+      "올해는 역대 가장 많은 게임이 출시되는 해로, 넥스트 페스트(Next Fest)에는 7,000개의 게임이 참여하여 사상 최대 규모를 기록했다.",
+      "게임 트레일러에 헤드셋을 착용한 인물을 포함하는 버전과 그렇지 않은 버전을 A/B 테스트한 결과, 헤드셋 착용 버전이 더 높은 클릭률과 위시리스트 등록률을 보였다.",
+      "실제 배우와 장면을 활용한 VR 게임 트레일러는 VR 게임에서는 보기 드문 높은 프로덕션 밸류를 제공한다."
+    ],
+    "url": "https://wootom.github.io/news/2026-11-25-uploadvr-meta-quest-horizon-removal.html",
+    "channel": "UploadVR",
+    "source_title": "VR Gamescast: Meta Finally Fixing Its VR App & Removing Horizon Worlds",
+    "kind": "youtube_summary",
+    "source": "오늘 유튜브",
+    "edition": null,
+    "highlights": [
+      "7,000개의 게임이 참여하여 사상 최대 규모를 기록했다",
+      "VR 게임에서는 보기 드문 높은 프로덕션 밸류를 제공한다"
+    ],
+    "id": "youtube_summary:2026-11-25-uploadvr-meta-quest-horizon-removal",
+    "uid": "8af47e81d34e2e86a8f62be59d6aaf001bee2cb07eb01fc5cb7e3aecad35e1ea"
+  },
+  {
     "date": "2026-11-24",
     "pub": "뉴스",
     "n": "01",
